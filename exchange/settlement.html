@@ -3,92 +3,237 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Settlement Ledger — 4ormEx</title>
+<title>Settlement Ledger — 4ormEx · Tetra Trust</title>
+<meta name="description" content="4ormEx Settlement Ledger — T+0 atomic DvP settlements, settlement corridors, immutable audit trail. Persona: Tetra Trust." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+<link rel="stylesheet" href="../assets/exchange.css" />
 <style>
-:root{--bg:#FFFFFF;--bg-2:#F4F7FB;--surface:#FFFFFF;--border:#E3E9F2;--border-strong:#CCD6E4;--text:#142036;--text-2:#46556E;--text-3:#5E6E88;--brand:#2E6BF2;--brand-700:#1B4ABE;--brand-50:#EAF1FE;--brand-100:#CFE0FD;--gold:#E7C76C;--gold-2:#C49A3A;--gold-ink:#8A6712;--gold-50:#FBF3DC;--gold-100:#F1E2B4;--success:#0E8A5F;--success-bg:#E3F6EE;--shadow-sm:0 1px 2px rgba(16,32,64,.06);--shadow:0 8px 26px rgba(16,32,64,.09);--font-sans:'Inter',-apple-system,sans-serif;--font-mono:ui-monospace,'SF Mono',Menlo,monospace;--maxw:1240px}
-*{box-sizing:border-box}body{margin:0;font-family:var(--font-sans);color:var(--text);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
-a{color:var(--brand);text-decoration:none}a:hover{color:var(--brand-700)}
-.sbx-banner{background:var(--brand-50);border-bottom:1px solid var(--border);font-size:.82rem;color:var(--text-2);text-align:center;padding:9px 16px}.sbx-banner b{color:var(--brand-700)}
-.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:var(--maxw);margin:0 auto;padding:10px 28px;min-height:70px;display:flex;align-items:center;gap:12px 18px;flex-wrap:nowrap}
-.brand{display:flex;align-items:center;gap:12px;flex:none;color:var(--text)}.brand-logo{height:40px}
-.brand .sub{font-weight:600;font-size:.72rem;color:var(--text-3);letter-spacing:.18em;text-transform:uppercase;padding-left:12px;border-left:1px solid var(--border)}
-@media (max-width:680px){.brand .sub{display:none}}
-.nav-links{display:flex;margin-left:auto;gap:4px;align-items:center;flex-wrap:nowrap}
-.nav-links a{padding:7px 11px;border-radius:8px;color:var(--text-2);font-weight:600;font-size:.9rem}.nav-links a:hover{background:var(--bg-2);color:var(--text)}
-.nav-sep{width:1px;height:18px;background:var(--border);margin:0 5px}
-.nav-links a.nav-auth{margin-left:8px;padding:8px 16px;border-radius:99px;border:1px solid var(--brand-100);background:var(--brand-50);color:var(--brand-700);font-weight:700}
-.nav-links a.nav-exchange{display:inline-flex;flex-direction:column;align-items:center;padding:5px 14px 6px;border-radius:12px;line-height:1;border:1px solid var(--gold-2);background:linear-gradient(180deg,var(--gold) 0%,var(--gold-50) 100%);margin-left:4px}
-.nav-links a.nav-exchange .ex-eye{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:1px}
-.nav-links a.nav-exchange .ex-main{font-size:.96rem;font-weight:800;letter-spacing:-.02em;color:var(--text)}
-.subnav{background:#0B1220;border-bottom:1px solid #1c2740;position:sticky;top:70px;z-index:49}
-.subnav-inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;align-items:center;overflow-x:auto}
-.subnav-inner a{display:inline-flex;align-items:center;gap:8px;padding:14px 18px;color:rgba(255,255,255,.6);font-size:.85rem;font-weight:600;border-bottom:2px solid transparent;white-space:nowrap}
-.subnav-inner a:hover{color:#fff;background:rgba(255,255,255,.04)}.subnav-inner a.active{color:#FFD9A8;border-bottom-color:#FFD9A8}
-.subnav-inner .sn-num{font-family:var(--font-mono);font-size:.66rem;color:rgba(255,217,168,.6);letter-spacing:.1em;font-weight:700}
-.subnav-inner a.active .sn-num{color:#FFD9A8}
-.hero{padding:88px 0 64px}.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-.eyebrow{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:14px;display:inline-flex;align-items:center;gap:10px}
-.eyebrow .num{font-size:.66rem;color:var(--text-3)}
-h1{margin:0;font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.03em;font-weight:800;line-height:1.06}
-h1 em{color:var(--brand);font-style:normal}
-.lede{margin:18px 0 0;font-size:1.05rem;color:var(--text-2);max-width:62ch;line-height:1.6}
-.coming{margin:48px 0 0;background:linear-gradient(135deg,var(--gold-50),var(--bg-2));border:1px solid var(--gold-100);border-radius:18px;padding:40px;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center}
-@media (max-width:760px){.coming{grid-template-columns:1fr;gap:14px}}
-.coming .icon{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--gold),var(--gold-2));display:grid;place-items:center;color:#15233F;flex:none;box-shadow:var(--shadow)}
-.coming .icon svg{width:32px;height:32px}
-.coming .body h3{margin:0;font-size:1.2rem;font-weight:800;letter-spacing:-.01em;color:var(--text)}
-.coming .body p{margin:6px 0 0;font-size:.95rem;color:var(--text-2);line-height:1.55;max-width:60ch}
-.coming .cta{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
-@media (max-width:760px){.coming .cta{align-items:flex-start}}
-.coming .cta a{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.88rem;padding:9px 16px;border:1px solid var(--border-strong);border-radius:99px;color:var(--text)}
-.coming .cta a.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
-.coming .cta a.primary:hover{background:var(--brand-700);color:#fff}
-.pre{margin:32px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:18px;overflow:hidden}
-@media (max-width:780px){.pre{grid-template-columns:1fr}}
-.pre .cell{background:#fff;padding:24px}
-.pre .cell h4{margin:0;font-size:.95rem;font-weight:800;letter-spacing:-.01em;color:var(--text)}
-.pre .cell .n{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:8px}
-.pre .cell p{margin:6px 0 0;font-size:.88rem;color:var(--text-2);line-height:1.5}
-.foot{margin-top:96px;border-top:1px solid var(--border);background:var(--bg-2);padding:32px 0;font-family:var(--font-mono);font-size:.72rem;color:var(--text-3);letter-spacing:.04em}
-.foot .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.dvp{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;padding:18px 0}
+.dvp .leg{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px}
+.dvp .leg .t{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);font-weight:700;margin-bottom:4px}
+.dvp .leg.cash{border-left:3px solid var(--brand)}
+.dvp .leg.asset{border-left:3px solid var(--gold-2)}
+.dvp .leg .from{font-size:.82rem;color:var(--text-2)}
+.dvp .leg .amt{font-family:var(--font-mono);font-size:1.05rem;font-weight:800;color:var(--text);margin:4px 0}
+.dvp .leg .to{font-size:.82rem;color:var(--text-2)}
+.dvp .swap{width:48px;height:48px;border-radius:50%;background:#0B1220;color:#FFD9A8;display:grid;place-items:center;font-weight:800;font-size:1.4rem;box-shadow:var(--shadow)}
+.corridor{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;padding:12px 0;align-items:center;border-bottom:1px dashed var(--border)}
+.corridor:last-child{border-bottom:none}
+.corridor .end{display:flex;flex-direction:column;gap:2px;font-size:.85rem}
+.corridor .end .nm{font-weight:800;color:var(--text)}
+.corridor .end .sub{font-size:.72rem;color:var(--text-3);font-family:var(--font-mono);letter-spacing:.06em}
+.corridor .end.r{text-align:right}
+.corridor .arr{font-family:var(--font-mono);font-size:.78rem;color:var(--brand);font-weight:700;display:flex;align-items:center;gap:8px}
 </style>
 </head>
-<body>
-<div class="sbx-banner"><b>4ormEx · Sandbox preview</b> · Settlement Ledger module is in development · Q3 2026 target</div>
-<header class="nav"><div class="nav-inner">
-  <a href="../" class="brand" aria-label="4orm Finance home"><img src="../assets/4orm-logo.png" alt="4orm Finance" class="brand-logo" /><span class="sub">RWA Exchange</span></a>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="../#platform">Platform</a><a href="../#who">Who we serve</a><a href="../#market">Market</a><a href="../#regulatory">Regulatory</a><a href="../#team">Leadership</a><a href="../#faq">FAQ</a>
-    <span class="nav-sep"></span>
-    <a href="./" class="nav-exchange"><span class="ex-eye">Exchange</span><span class="ex-main">4ormEx</span></a>
-    <a href="../#waitlist" class="nav-auth">Request access</a>
-  </nav>
-</div></header>
-<div class="subnav"><div class="subnav-inner">
-  <a href="./"><span class="sn-num">01</span> Overview</a>
-  <a href="./marketplace.html"><span class="sn-num">02</span> Marketplace</a>
-  <a href="./issuer.html"><span class="sn-num">03</span> Issuer Portal</a>
-  <a href="./investor.html"><span class="sn-num">04</span> Investor Portal</a>
-  <a href="./compliance.html"><span class="sn-num">05</span> Compliance</a>
-  <a href="./settlement.html" class="active"><span class="sn-num">06</span> Settlement</a>
-  <a href="./admin.html"><span class="sn-num">07</span> Admin &amp; Audit</a>
-</div></div>
-<section class="hero"><div class="wrap">
-  <div class="eyebrow"><span class="num">06</span> · Settlement Ledger</div>
-  <h1>Settlement Ledger — <em>in development.</em></h1>
-  <p class="lede">This module is part of the 4ormEx roadmap and is being built out next. The marketplace is live in sandbox today; the rest of the platform is rolling out module-by-module through 2026.</p>
-  <div class="coming">
-    <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-    <div class="body">
-      <h3>Coming next · Q3 2026</h3>
-      <p>Want early access to Settlement Ledger? Join the institutional waitlist on the main site and tell us which module matters most to your team — we prioritize the roadmap by demand.</p>
+<body class="app-body">
+
+<div class="sbx-banner"><b>4ormEx · Sandbox preview</b> · Settlement Ledger · Persona: Tetra Trust · Simulated data only</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="../" class="brand" aria-label="4orm Finance home">
+      <img src="../assets/4orm-logo.png" alt="4orm Finance" class="brand-logo" />
+      <span class="sub">RWA Exchange</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../platform.html">Platform</a>
+      <a href="../who.html">Who we serve</a>
+      <a href="../market.html">Market</a>
+      <a href="../regulatory.html">Regulatory</a>
+      <a href="../leadership.html">Leadership</a>
+      <a href="../#faq">FAQ</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a href="./" class="nav-exchange"><span class="ex-eye">Exchange</span><span class="ex-main">4ormEx</span></a>
+      <a href="../#waitlist" class="nav-auth">Request access</a>
+    </nav>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="./"><span class="sn-num">01</span> Overview</a>
+    <a href="./marketplace.html"><span class="sn-num">02</span> Marketplace</a>
+    <a href="./issuer.html"><span class="sn-num">03</span> Issuer Portal</a>
+    <a href="./investor.html"><span class="sn-num">04</span> Investor Portal</a>
+    <a href="./compliance.html"><span class="sn-num">05</span> Compliance</a>
+    <a href="./settlement.html" class="active"><span class="sn-num">06</span> Settlement</a>
+    <a href="./admin.html"><span class="sn-num">07</span> Admin &amp; Audit</a>
+  </div>
+</div>
+
+<div class="app">
+  <div class="phead">
+    <div class="pavatar gold">TT</div>
+    <div class="pinfo">
+      <div class="role">06 · Settlement Ledger</div>
+      <h2>Tetra Trust</h2>
+      <div class="ctx">Qualified digital asset custodian · Calgary, AB · Settlement counterparty · CIRO Custody Framework Tier-2</div>
     </div>
-    <div class="cta">
-      <a class="primary" href="../#waitlist">Request access →</a>
-      <a href="./marketplace.html">Try the live marketplace →</a>
+    <div class="pact">
+      <button class="switcher">↻ Switch persona</button>
+      <span class="status live" style="padding:6px 12px">● Network online · 4orm-EVM</span>
     </div>
   </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">Settled today</div><div class="v">847</div><div class="delta">C$ 312.4M notional</div></div>
+    <div class="kpi"><div class="label">In flight</div><div class="v">3</div><div class="delta neutral">Avg ~8s remaining</div></div>
+    <div class="kpi"><div class="label">Failed · 7d</div><div class="v">0</div><div class="delta">100% atomic success</div></div>
+    <div class="kpi"><div class="label">Avg finality</div><div class="v">11.4<span class="u">s</span></div><div class="delta">vs T+2 legacy</div></div>
+  </div>
+
+  <!-- DvP visualization for the most recent settlement -->
+  <div class="panel" style="margin-bottom:16px">
+    <div class="panel-h"><h3>Latest atomic DvP · <span class="mono" style="color:var(--brand)">0x7a3f8e21…</span></h3><span class="ph-meta">Settled 14:22:31 EST · 11.7s</span></div>
+    <div class="panel-b">
+      <div class="dvp">
+        <div class="leg cash">
+          <div class="t">Cash leg · QCAD</div>
+          <div class="from"><strong>Bay Street Investments</strong></div>
+          <div class="amt">C$ 5,000,000.00</div>
+          <div class="to">→ Alpha Capital · Tetra Trust</div>
+        </div>
+        <div class="swap">⇄</div>
+        <div class="leg asset">
+          <div class="t">Asset leg · tACP-VII</div>
+          <div class="from"><strong>Alpha Capital</strong></div>
+          <div class="amt">5,000 tokens</div>
+          <div class="to">→ Bay Street · Tetra Trust</div>
+        </div>
+      </div>
+
+      <div class="steps" style="margin-top:14px">
+        <div class="step"><span class="sn">✓</span><div class="body"><h5>Pre-trade compliance</h5><p>KYC · NI 45-106 · jurisdiction · custody → all passed</p></div><div class="meta">+ 0.0s</div></div>
+        <div class="step"><span class="sn">✓</span><div class="body"><h5>Order matched</h5><p>CLOB match · price discovery · limit order filled</p></div><div class="meta">+ 0.3s</div></div>
+        <div class="step"><span class="sn">✓</span><div class="body"><h5>Settlement lock</h5><p>Both legs locked in escrow on 4orm-EVM</p></div><div class="meta">+ 2.1s</div></div>
+        <div class="step"><span class="sn">✓</span><div class="body"><h5>Atomic swap</h5><p>DvP execution · cash and asset transferred simultaneously</p></div><div class="meta">+ 9.8s</div></div>
+        <div class="step"><span class="sn">✓</span><div class="body"><h5>Custody update</h5><p>Tetra Trust balances updated · audit record anchored</p></div><div class="meta">+ 11.4s</div></div>
+        <div class="step"><span class="sn">✓</span><div class="body"><h5>Compliance attestation</h5><p>Per-step receipt issued · LCTR not triggered</p></div><div class="meta">+ 11.7s</div></div>
+      </div>
+
+      <div class="cmp-strip" style="margin-top:14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Atomic DvP completed in 11.7s · audit hash anchored to 4orm-EVM block #18,247,381</div>
+    </div>
+  </div>
+
+  <!-- Recent settlements -->
+  <div class="panel" style="margin-bottom:16px">
+    <div class="panel-h"><h3>Recent settlements</h3><span class="ph-meta">Today · live</span></div>
+    <div class="panel-b pad-0 dtable">
+      <table>
+        <thead><tr><th>Time</th><th>Asset</th><th>Cash leg</th><th class="r">Notional</th><th>Buyer custodian</th><th>Seller custodian</th><th class="r">Finality</th><th>Tx</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">14:22:31</span></td><td><span class="ticker">tACP-VII</span> · 5,000</td><td>QCAD</td><td class="r strong">C$ 5,000,000</td><td>Tetra Trust</td><td>Tetra Trust</td><td class="r"><span class="up">11.7s</span></td><td><span class="hash">0x7a3f8e…</span></td></tr>
+          <tr><td><span class="mono">14:21:18</span></td><td><span class="ticker">tGCB</span> · 25,000</td><td>QCAD</td><td class="r strong">C$ 2,495,250</td><td>Tetra Trust</td><td>Balance Trust</td><td class="r"><span class="up">9.4s</span></td><td><span class="hash">0x5e1c2b…</span></td></tr>
+          <tr><td><span class="mono">14:19:55</span></td><td><span class="ticker">tABP28</span> · 1,000</td><td>RBC tCAD deposit</td><td class="r strong">C$ 102,410</td><td>Tetra Trust</td><td>Tetra Trust</td><td class="r"><span class="up">12.1s</span></td><td><span class="hash">0x9c44a3…</span></td></tr>
+          <tr><td><span class="mono">14:18:42</span></td><td><span class="ticker">tAUC</span> · 500</td><td>QCAD</td><td class="r strong">C$ 48,090</td><td>Brane Trust</td><td>Tetra Trust</td><td class="r"><span class="up">10.8s</span></td><td><span class="hash">0x2f81d7…</span></td></tr>
+          <tr><td><span class="mono">14:17:11</span></td><td><span class="ticker">tEDC25</span> · 200</td><td>QCAD</td><td class="r strong">C$ 20,236</td><td>Balance Trust</td><td>Tetra Trust</td><td class="r"><span class="up">13.2s</span></td><td><span class="hash">0xa3e5f1…</span></td></tr>
+          <tr><td><span class="mono">14:15:48</span></td><td><span class="ticker">tACP-VIII</span> · 30</td><td>QCAD</td><td class="r strong">C$ 30,000</td><td>Tetra Trust</td><td>Tetra Trust</td><td class="r"><span class="up">11.0s</span></td><td><span class="hash">0x6b219a…</span></td></tr>
+          <tr><td><span class="mono">14:14:22</span></td><td><span class="ticker">tCRE-CGY1</span> · 100</td><td>BMO tCAD deposit</td><td class="r strong">C$ 52,400</td><td>Balance Trust</td><td>Balance Trust</td><td class="r"><span class="up">14.6s</span></td><td><span class="hash">0xd8f02e…</span></td></tr>
+          <tr><td><span class="mono">14:12:55</span></td><td><span class="ticker">tPMP-A</span> · 5,000</td><td>QCAD</td><td class="r strong">C$ 5,200</td><td>Brane Trust</td><td>Brane Trust</td><td class="r"><span class="up">9.1s</span></td><td><span class="hash">0x4a7e93…</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="cols-2">
+    <!-- Settlement corridors -->
+    <div class="panel">
+      <div class="panel-h"><h3>Active settlement corridors</h3><span class="ph-meta">9 bank-custodian pairs</span></div>
+      <div class="panel-b">
+        <div class="corridor">
+          <div class="end"><span class="nm">RBC</span><span class="sub">Schedule I · Tier-1</span></div>
+          <div class="arr">⇄ <span class="status live">Live</span></div>
+          <div class="end r"><span class="nm">Tetra Trust</span><span class="sub">Tier-2 custody</span></div>
+        </div>
+        <div class="corridor">
+          <div class="end"><span class="nm">TD</span><span class="sub">Schedule I · Tier-1</span></div>
+          <div class="arr">⇄ <span class="status live">Live</span></div>
+          <div class="end r"><span class="nm">Tetra Trust</span><span class="sub">Tier-2 custody</span></div>
+        </div>
+        <div class="corridor">
+          <div class="end"><span class="nm">BMO</span><span class="sub">Schedule I · Tier-1</span></div>
+          <div class="arr">⇄ <span class="status live">Live</span></div>
+          <div class="end r"><span class="nm">Balance Trust</span><span class="sub">Tier-2 custody</span></div>
+        </div>
+        <div class="corridor">
+          <div class="end"><span class="nm">EDC</span><span class="sub">Crown corporation</span></div>
+          <div class="arr">⇄ <span class="status live">Live</span></div>
+          <div class="end r"><span class="nm">Tetra Trust</span><span class="sub">Tier-2 custody</span></div>
+        </div>
+        <div class="corridor">
+          <div class="end"><span class="nm">Stablecorp · QCAD</span><span class="sub">Settlement asset issuer</span></div>
+          <div class="arr">⇄ <span class="status live">Live</span></div>
+          <div class="end r"><span class="nm">All custodians</span><span class="sub">Default cash leg</span></div>
+        </div>
+        <div class="corridor">
+          <div class="end"><span class="nm">CIBC</span><span class="sub">Schedule I · Tier-1</span></div>
+          <div class="arr">⇄ <span class="status pending">Onboarding</span></div>
+          <div class="end r"><span class="nm">Brane Trust</span><span class="sub">Tier-2 custody</span></div>
+        </div>
+        <div class="corridor">
+          <div class="end"><span class="nm">Scotiabank</span><span class="sub">Schedule I · Tier-1</span></div>
+          <div class="arr">⇄ <span class="status pending">Onboarding</span></div>
+          <div class="end r"><span class="nm">Tetra Trust</span><span class="sub">Tier-2 custody</span></div>
+        </div>
+        <div class="corridor">
+          <div class="end"><span class="nm">National Bank</span><span class="sub">Schedule I · Tier-1</span></div>
+          <div class="arr">⇄ <span class="status warn">In discovery</span></div>
+          <div class="end r"><span class="nm">Pending</span><span class="sub">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custodian balances -->
+    <div class="panel">
+      <div class="panel-h"><h3>Tetra Trust · custody balances</h3><span class="ph-meta">Snapshot 14:22 EST</span></div>
+      <div class="panel-b">
+        <div class="kv">
+          <div class="k">Total assets under custody</div><div class="v" style="color:var(--brand);font-weight:800"><span class="mono">C$ 624,182,500</span></div>
+          <div class="k">Sovereign bonds (tGCB family)</div><div class="v"><span class="mono">C$ 187,420,000</span></div>
+          <div class="k">Sub-sovereign (tABP, tEDC)</div><div class="v"><span class="mono">C$ 142,640,000</span></div>
+          <div class="k">Private credit (tACP, tPMP)</div><div class="v"><span class="mono">C$ 168,240,000</span></div>
+          <div class="k">Commodities (tAUC)</div><div class="v"><span class="mono">C$ 76,140,000</span></div>
+          <div class="k">Real estate (tCRE)</div><div class="v"><span class="mono">C$ 28,180,000</span></div>
+          <div class="k">QCAD cash leg</div><div class="v"><span class="mono">C$ 21,562,500</span></div>
+        </div>
+        <div class="cmp-strip" style="margin-top:14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Proof of reserves attested · last anchor 14:22 EST · auditor verified</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reconciliation panel -->
+  <div class="panel" style="margin-top:16px">
+    <div class="panel-h"><h3>Reconciliation · today</h3><span class="ph-meta">Self-reconciling · zero exceptions</span></div>
+    <div class="panel-b pad-0 dtable">
+      <table>
+        <thead><tr><th>Counterparty</th><th>Asset class</th><th class="r">Trades</th><th class="r">Notional</th><th class="r">Net position</th><th>Reconciled</th></tr></thead>
+        <tbody>
+          <tr><td><span class="nm">Bay Street Investments</span></td><td>Multi-asset</td><td class="r">38</td><td class="r">C$ 24,182,400</td><td class="r up">+ C$ 18,420,000</td><td><span class="status live">Auto</span></td></tr>
+          <tr><td><span class="nm">Alpha Capital</span></td><td>Private credit</td><td class="r">14</td><td class="r">C$ 12,800,000</td><td class="r dn">− C$ 12,800,000</td><td><span class="status live">Auto</span></td></tr>
+          <tr><td><span class="nm">Mercer Family Office</span></td><td>Multi-asset</td><td class="r">8</td><td class="r">C$ 4,520,000</td><td class="r up">+ C$ 4,520,000</td><td><span class="status live">Auto</span></td></tr>
+          <tr><td><span class="nm">Cascade Pension Plan</span></td><td>Sovereign · sub-sov</td><td class="r">22</td><td class="r">C$ 18,640,000</td><td class="r up">+ C$ 18,640,000</td><td><span class="status live">Auto</span></td></tr>
+          <tr><td><span class="nm">Athabasca Capital</span></td><td>Commodity · CRE</td><td class="r">11</td><td class="r">C$ 8,210,000</td><td class="r up">+ C$ 6,180,000</td><td><span class="status live">Auto</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="grid">
+      <div class="brand-blk"><h5>4ormEx · The 4orm Exchange</h5><p>The institutional trading layer of 4orm Finance. Sandbox preview · v0.1.</p></div>
+      <div><h6>Exchange</h6><ul><li><a href="./">Overview</a></li><li><a href="./marketplace.html">Marketplace</a></li><li><a href="./issuer.html">Issuer portal</a></li><li><a href="./investor.html">Investor portal</a></li></ul></div>
+      <div><h6>Operations</h6><ul><li><a href="./compliance.html">Compliance</a></li><li><a href="./settlement.html">Settlement</a></li><li><a href="./admin.html">Admin &amp; audit</a></li></ul></div>
+      <div><h6>4orm Finance</h6><ul><li><a href="../">Main site</a></li><li><a href="../regulatory.html">Regulatory</a></li><li><a href="../#waitlist">Request access</a></li></ul></div>
+    </div>
+    <div class="lr"><div>© 2026 4orm Finance</div><div>Sandbox preview · simulated data only</div></div>
+  </div>
+</footer>
+
+</body>
+</html>
