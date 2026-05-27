@@ -51,16 +51,23 @@ a:hover{color:var(--brand-700)}
 .nav-links a{padding:7px 11px;border-radius:8px;color:var(--text-2);white-space:nowrap;font-weight:600;font-size:.9rem;transition:background .15s, color .15s}
 .nav-links a:hover{background:var(--surface-2);color:var(--text)}
 .nav-sep{width:1px;height:18px;background:var(--border);margin:0 5px;flex:none}
-.nav-links a.nav-auth{margin-left:8px;padding:8px 16px;border-radius:99px;border:1px solid var(--brand-100);background:var(--brand-50);color:var(--brand-700);font-weight:700;font-size:.9rem}
+.nav-links a.nav-auth{
+  order:-2;margin-right:auto;margin-left:14px;
+  padding:9px 18px;border-radius:99px;border:1px solid var(--brand-100);
+  background:var(--brand-50);color:var(--brand-700);font-weight:700;font-size:.9rem;
+}
 .nav-links a.nav-auth:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
 .nav-links a.nav-exchange{
-  display:inline-flex;flex-direction:column;align-items:center;gap:0;
-  padding:5px 14px 6px;border-radius:12px;line-height:1;
-  border:1px solid var(--gold-2);background:linear-gradient(180deg,var(--gold) 0%,var(--gold-50) 100%);
-  color:var(--text);margin-left:4px;
+  display:inline-flex;flex-direction:column;align-items:center;gap:1px;
+  padding:8px 20px 9px;border-radius:14px;line-height:1;
+  border:1.5px solid var(--gold-2);background:linear-gradient(180deg,var(--gold) 0%,var(--gold-50) 100%);
+  color:var(--text);margin-left:6px;
+  box-shadow:0 2px 8px rgba(196,154,58,.22);
+  transition:all .15s ease;
 }
-.nav-links a.nav-exchange .ex-eye{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:1px}
-.nav-links a.nav-exchange .ex-main{font-size:.96rem;font-weight:800;letter-spacing:-.02em;color:var(--text)}
+.nav-links a.nav-exchange:hover{background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 100%);transform:translateY(-1px);box-shadow:0 4px 14px rgba(196,154,58,.35)}
+.nav-links a.nav-exchange .ex-eye{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:800;margin-bottom:2px}
+.nav-links a.nav-exchange .ex-main{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:var(--text);display:inline-flex;align-items:center;gap:4px}
 
 /* Sub-nav */
 .subnav{background:#0B1220;border-bottom:1px solid #1c2740;position:sticky;top:70px;z-index:49}
@@ -584,10 +591,24 @@ document.querySelectorAll('.ticket .otabs button').forEach(b => {
   });
 });
 
+// Push event to shared audit log (localStorage) so Admin & Audit picks it up
+function pushAuditEvent(evt){
+  try {
+    const key = '4ormex_audit_events';
+    const arr = JSON.parse(localStorage.getItem(key) || '[]');
+    arr.unshift(evt);
+    localStorage.setItem(key, JSON.stringify(arr.slice(0, 50)));
+  } catch(e){}
+}
+
 document.getElementById('ticket-form').addEventListener('submit', (e) => {
   e.preventDefault();
   const px = parseFloat($price.value);
   const qty = parseFloat($qty.value);
+  const notional = px * qty;
+  const hash = '0x' + Math.random().toString(16).slice(2,10);
+
+  // Append to "Your open orders"
   const tbody = document.getElementById('orders-body');
   const row = document.createElement('tr');
   row.innerHTML = `
@@ -599,6 +620,19 @@ document.getElementById('ticket-form').addEventListener('submit', (e) => {
     <td><span style="font-family:var(--font-sans);font-size:.66rem;background:var(--success-bg);color:var(--success);padding:2px 8px;border-radius:99px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">Submitted</span></td>
     <td><button style="background:none;border:1px solid var(--border-strong);color:var(--text-2);padding:3px 8px;border-radius:6px;font:inherit;font-size:.7rem;cursor:pointer">Cancel</button></td>`;
   tbody.prepend(row);
+
+  // Persist to admin audit log
+  pushAuditEvent({
+    block: '#' + (18247400 + Math.floor(Math.random()*200)),
+    time:  new Date().toTimeString().slice(0,8),
+    eventType: 'Order placed',
+    eventSub:  `CLOB ${side} · ${active.tk}`,
+    actor:     'Bay Street Investments',
+    subject:   `${qty.toLocaleString('en-CA')} @ ${fmtPx(px, active.px)} · C$ ${notional.toLocaleString('en-CA',{maximumFractionDigits:0})}`,
+    hash:      hash + '…',
+    status:    'live',
+    statusLabel: '✓ Anchored'
+  });
 });
 
 // ───────────────────────── Boot + live refresh ─────────────────────────

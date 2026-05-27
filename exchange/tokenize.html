@@ -469,7 +469,21 @@ function goStep(n){
     document.getElementById('r-min').textContent = parseFloat(document.getElementById('f-min').value).toLocaleString('en-CA');
     document.getElementById('r-lock').textContent = document.getElementById('f-lock').value;
   }
-  window.scrollTo({top:0, behavior:'smooth'});
+  // Scroll the new pane's footer (Next button) into view, not back to top
+  requestAnimationFrame(() => {
+    const f = document.querySelector(`[data-pane="${n}"] .wiz-pane-f`);
+    if (f) f.scrollIntoView({behavior:'smooth', block:'end'});
+  });
+}
+
+// Push event to shared audit log (localStorage)
+function pushAuditEvent(evt){
+  try {
+    const key = '4ormex_audit_events';
+    const arr = JSON.parse(localStorage.getItem(key) || '[]');
+    arr.unshift(evt);
+    localStorage.setItem(key, JSON.stringify(arr.slice(0, 50)));
+  } catch(e){ console.warn('audit push failed', e); }
 }
 // Click on sidebar to navigate
 document.querySelectorAll('.wiz-step').forEach(s => s.addEventListener('click', () => goStep(parseInt(s.dataset.step))));
@@ -478,11 +492,28 @@ document.querySelectorAll('.template').forEach(t => t.addEventListener('click', 
   document.querySelectorAll('.template').forEach(x => x.classList.remove('selected'));
   t.classList.add('selected');
 }));
-// Submit
+// Submit — write to audit log + show success
 function submitForm(){
   const hash = '0x' + Array.from({length:24},()=>Math.floor(Math.random()*16).toString(16)).join('');
+  const ticker = document.getElementById('f-ticker').value;
+  const name   = document.getElementById('f-name').value;
+  const supply = document.getElementById('f-supply').value;
+  const target = document.getElementById('f-target').value;
   document.getElementById('success-hash').textContent = hash + '…';
-  document.getElementById('success-ticker').textContent = document.getElementById('f-ticker').value;
+  document.getElementById('success-ticker').textContent = ticker;
+
+  pushAuditEvent({
+    block: '#' + (18247400 + Math.floor(Math.random()*200)),
+    time:  new Date().toTimeString().slice(0,8),
+    eventType: 'Token mint',
+    eventSub:  `New offering · ${ticker}`,
+    actor:     'Alpha Capital · CCO sign-off pending',
+    subject:   `${parseFloat(supply||0).toLocaleString('en-CA')} tokens · C$ ${parseFloat(target||0).toLocaleString('en-CA')}`,
+    hash:      hash.slice(0,10) + '…',
+    status:    'pending',
+    statusLabel: '⧗ Pending CCO'
+  });
+
   goStep(6);
 }
 </script>

@@ -61,16 +61,23 @@ a:hover{color:var(--brand-700)}
 .nav-links a{padding:7px 11px;border-radius:8px;color:var(--text-2);white-space:nowrap;font-weight:600;font-size:.9rem;transition:background .15s, color .15s}
 .nav-links a:hover{background:var(--surface-2);color:var(--text)}
 .nav-sep{width:1px;height:18px;background:var(--border);margin:0 5px;flex:none}
-.nav-links a.nav-auth{margin-left:8px;padding:8px 16px;border-radius:99px;border:1px solid var(--brand-100);background:var(--brand-50);color:var(--brand-700);font-weight:700;font-size:.9rem}
+.nav-links a.nav-auth{
+  order:-2;margin-right:auto;margin-left:14px;
+  padding:9px 18px;border-radius:99px;border:1px solid var(--brand-100);
+  background:var(--brand-50);color:var(--brand-700);font-weight:700;font-size:.9rem;
+}
 .nav-links a.nav-auth:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
 .nav-links a.nav-exchange{
-  display:inline-flex;flex-direction:column;align-items:center;gap:0;
-  padding:5px 14px 6px;border-radius:12px;line-height:1;
-  border:1px solid var(--gold-2);background:linear-gradient(180deg,var(--gold) 0%,var(--gold-50) 100%);
-  color:var(--text);margin-left:4px;
+  display:inline-flex;flex-direction:column;align-items:center;gap:1px;
+  padding:8px 20px 9px;border-radius:14px;line-height:1;
+  border:1.5px solid var(--gold-2);background:linear-gradient(180deg,var(--gold) 0%,var(--gold-50) 100%);
+  color:var(--text);margin-left:6px;
+  box-shadow:0 2px 8px rgba(196,154,58,.22);
+  transition:all .15s ease;
 }
-.nav-links a.nav-exchange .ex-eye{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:1px}
-.nav-links a.nav-exchange .ex-main{font-size:.96rem;font-weight:800;letter-spacing:-.02em;color:var(--text);display:inline-flex;align-items:center;gap:4px}
+.nav-links a.nav-exchange:hover{background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 100%);transform:translateY(-1px);box-shadow:0 4px 14px rgba(196,154,58,.35)}
+.nav-links a.nav-exchange .ex-eye{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:800;margin-bottom:2px}
+.nav-links a.nav-exchange .ex-main{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:var(--text);display:inline-flex;align-items:center;gap:4px}
 
 /* Exchange sub-nav */
 .subnav{background:#0B1220;border-bottom:1px solid #1c2740;position:sticky;top:74px;z-index:49}
@@ -201,6 +208,38 @@ a:hover{color:var(--brand-700)}
 @media (max-width:520px){.footer .grid{grid-template-columns:1fr}}
 
 ::selection{background:var(--brand);color:#fff}
+/* NYSE-style ticker tape attached to bottom of dark hero */
+.tape{background:#070C16;border-top:1px solid rgba(255,255,255,.08);overflow:hidden;position:relative;z-index:2}
+.tape::before,.tape::after{content:"";position:absolute;top:0;bottom:0;width:60px;z-index:3;pointer-events:none}
+.tape::before{left:0;background:linear-gradient(90deg,#070C16,transparent)}
+.tape::after{right:0;background:linear-gradient(-90deg,#070C16,transparent)}
+.tape .tape-track{display:flex;gap:0;padding:10px 0;white-space:nowrap;animation:tape-slide 80s linear infinite;font-family:var(--font-mono);font-size:.84rem;color:#fff;font-weight:600}
+.tape .tk-item{display:inline-flex;align-items:center;gap:8px;padding:0 22px;border-right:1px solid rgba(255,255,255,.08)}
+.tape .tk-item .tk{color:#FFD9A8;font-weight:800;letter-spacing:-.01em}
+.tape .tk-item .px{color:#fff;font-variant-numeric:tabular-nums}
+.tape .tk-item .ch{font-size:.78rem;font-weight:700}
+.tape .tk-item .ch.up{color:#5dd6a0}
+.tape .tk-item .ch.dn{color:#ff7a8a}
+.tape .tk-item .ar{font-size:.7rem;opacity:.6}
+@keyframes tape-slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* Hero feature row */
+.hero-feature{background:#0B1220;border-bottom:1px solid var(--border);padding:34px 0;position:relative;z-index:1}
+.hero-feature .wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:780px){.hero-feature .wrap{grid-template-columns:1fr}}
+.hero-feature a{text-decoration:none;color:inherit;display:flex;gap:20px;align-items:center;border-radius:var(--r-lg);padding:24px;transition:transform .15s,box-shadow .2s ease,background .2s}
+.hero-feature .feat-gold{background:linear-gradient(135deg,#FFD9A8,#E7C76C);color:#0B1220;box-shadow:0 4px 20px rgba(255,217,168,.25)}
+.hero-feature .feat-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,217,168,.4)}
+.hero-feature .feat-blue{background:linear-gradient(135deg,#15233F,#1F3CA8);color:#fff;box-shadow:0 4px 20px rgba(31,60,168,.25)}
+.hero-feature .feat-blue:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(31,60,168,.45)}
+.hero-feature .feat-ico{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;font-size:1.9rem;font-weight:800;flex:none}
+.hero-feature .feat-gold .feat-ico{background:rgba(11,18,32,.18);color:#0B1220}
+.hero-feature .feat-blue .feat-ico{background:rgba(255,217,168,.22);color:#FFD9A8}
+.hero-feature .feat-eye{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;margin-bottom:4px;opacity:.85}
+.hero-feature .feat-blue .feat-eye{color:#FFD9A8;opacity:1}
+.hero-feature h3{margin:0 0 6px;font-size:1.18rem;font-weight:800;letter-spacing:-.01em;color:inherit}
+.hero-feature p{margin:0;font-size:.86rem;line-height:1.5;opacity:.85}
+.hero-feature .feat-go{margin-top:10px;font-size:.85rem;font-weight:800;display:inline-flex;align-items:center;gap:4px}
+
 </style>
 </head>
 <body>
@@ -267,6 +306,61 @@ a:hover{color:var(--brand-700)}
       <a class="dhero-btn ghost" href="./lifecycle.html">⚡ Run the lifecycle</a>
       <a class="dhero-btn ghost" href="../">← Back to 4orm Finance</a>
     </div>
+  </div>
+</section>
+
+<!-- NYSE-style ticker tape -->
+<div class="tape" aria-hidden="true">
+  <div class="tape-track">
+    <span class="tk-item"><span class="tk">tGCB</span><span class="px">C$ 99.82</span><span class="ch up">▲ 0.03%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tABP28</span><span class="px">C$ 102.41</span><span class="ch up">▲ 0.18%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tACP-VII</span><span class="px">C$ 1,041.20</span><span class="ch up">▲ 4.12%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tPMP-A</span><span class="px">C$ 1.0400</span><span class="ch up">▲ 0.42%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tAUC</span><span class="px">C$ 96.18</span><span class="ch dn">▼ 0.27%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tCRE-CGY1</span><span class="px">C$ 524.00</span><span class="ch up">▲ 1.12%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">QCAD</span><span class="px">C$ 1.0000</span><span class="ch up">▲ 0.00%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tMMF-RBC</span><span class="px">C$ 10.0021</span><span class="ch up">▲ 0.01%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tEDC25</span><span class="px">C$ 101.18</span><span class="ch up">▲ 0.07%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tCRE-EDM2</span><span class="px">C$ 287.50</span><span class="ch up">▲ 0.62%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tAGL-SK1</span><span class="px">C$ 1,200.00</span><span class="ch up">▲ 0.08%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tHQI32</span><span class="px">C$ 99.91</span><span class="ch dn">▼ 0.04%</span><span class="ar">|</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="tk-item"><span class="tk">tGCB</span><span class="px">C$ 99.82</span><span class="ch up">▲ 0.03%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tABP28</span><span class="px">C$ 102.41</span><span class="ch up">▲ 0.18%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tACP-VII</span><span class="px">C$ 1,041.20</span><span class="ch up">▲ 4.12%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tPMP-A</span><span class="px">C$ 1.0400</span><span class="ch up">▲ 0.42%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tAUC</span><span class="px">C$ 96.18</span><span class="ch dn">▼ 0.27%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tCRE-CGY1</span><span class="px">C$ 524.00</span><span class="ch up">▲ 1.12%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">QCAD</span><span class="px">C$ 1.0000</span><span class="ch up">▲ 0.00%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tMMF-RBC</span><span class="px">C$ 10.0021</span><span class="ch up">▲ 0.01%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tEDC25</span><span class="px">C$ 101.18</span><span class="ch up">▲ 0.07%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tCRE-EDM2</span><span class="px">C$ 287.50</span><span class="ch up">▲ 0.62%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tAGL-SK1</span><span class="px">C$ 1,200.00</span><span class="ch up">▲ 0.08%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tHQI32</span><span class="px">C$ 99.91</span><span class="ch dn">▼ 0.04%</span><span class="ar">|</span></span>
+  </div>
+</div>
+
+<!-- Hero feature row: Tokenize + Lifecycle (the two interactive workflows) -->
+<section class="hero-feature">
+  <div class="wrap">
+    <a href="/exchange/tokenize.html" class="feat-gold">
+      <div class="feat-ico">⚙</div>
+      <div>
+        <div class="feat-eye">Tokenization Engine</div>
+        <h3>Create a new tokenized asset</h3>
+        <p>5-step wizard · asset details → economics → distribution rules → compliance → mint. ERC-3643. CCO sign-off.</p>
+        <div class="feat-go">Open the wizard →</div>
+      </div>
+    </a>
+    <a href="/exchange/lifecycle.html" class="feat-blue">
+      <div class="feat-ico">⚡</div>
+      <div>
+        <div class="feat-eye">Transaction Lifecycle</div>
+        <h3>Run the 8-step atomic flow</h3>
+        <p>KYC → AML → Tokenize → Trade → Attestation → Settle → Audit → Report. End-to-end in 12 seconds, sandboxed.</p>
+        <div class="feat-go">Run the lifecycle →</div>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -454,27 +548,6 @@ a:hover{color:var(--brand-700)}
       </a>
     </div>
 
-    <!-- Feature row: Tokenize + Lifecycle (the two interactive workflows) -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px">
-      <a href="/exchange/tokenize.html" style="background:linear-gradient(135deg,var(--gold-50),#fff);border:1px solid var(--gold-100);border-radius:var(--r-lg);padding:28px;text-decoration:none;color:inherit;display:flex;gap:20px;align-items:center;box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .2s">
-        <div style="width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#15233F;display:grid;place-items:center;font-size:2rem;font-weight:800;flex:none;box-shadow:var(--shadow)">⚙</div>
-        <div>
-          <div style="font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:4px">Tokenization Engine</div>
-          <h3 style="margin:0 0 6px;font-size:1.2rem;font-weight:800;letter-spacing:-.01em">Create a new tokenized asset</h3>
-          <p style="margin:0;font-size:.88rem;color:var(--text-2);line-height:1.5">5-step wizard · asset details → economics → distribution rules → compliance → mint. ERC-3643. CCO sign-off required.</p>
-          <div style="margin-top:10px;font-size:.85rem;font-weight:700;color:var(--gold-ink)">Open the wizard →</div>
-        </div>
-      </a>
-      <a href="/exchange/lifecycle.html" style="background:linear-gradient(135deg,#0B1220,#15233F);color:#fff;border:1px solid #1c2740;border-radius:var(--r-lg);padding:28px;text-decoration:none;display:flex;gap:20px;align-items:center;box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .2s">
-        <div style="width:64px;height:64px;border-radius:16px;background:#FFD9A8;color:#0B1220;display:grid;place-items:center;font-size:2rem;font-weight:800;flex:none;box-shadow:0 4px 16px rgba(255,217,168,.3)">⚡</div>
-        <div>
-          <div style="font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#FFD9A8;font-weight:700;margin-bottom:4px">Transaction Lifecycle</div>
-          <h3 style="margin:0 0 6px;font-size:1.2rem;font-weight:800;letter-spacing:-.01em;color:#fff">Run the 8-step atomic flow</h3>
-          <p style="margin:0;font-size:.88rem;color:rgba(255,255,255,.78);line-height:1.5">KYC → AML → Tokenize → Trade → Attestation → Settle → Audit → Report. End-to-end in 12 seconds, sandboxed.</p>
-          <div style="margin-top:10px;font-size:.85rem;font-weight:700;color:#FFD9A8">Run the lifecycle →</div>
-        </div>
-      </a>
-    </div>
   </div>
 </section>
 

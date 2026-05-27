@@ -168,40 +168,43 @@ a:hover{color:var(--brand-700)}
 }
 .nav-links a:hover{background:var(--surface-2);color:var(--text)}
 .nav-links a.active{color:var(--brand-700);background:var(--brand-50)}
+/* Request access: pulled to the LEFT side of nav */
 .nav-links a.nav-auth{
-  margin-left:8px;padding:8px 16px;border-radius:99px;
+  order:-2;margin-right:auto;margin-left:14px;
+  padding:9px 18px;border-radius:99px;
   border:1px solid var(--brand-100);background:var(--brand-50);color:var(--brand-700);font-weight:700;font-size:.9rem;
 }
 .nav-links a.nav-auth:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
 
-/* Exchange entry — stacked label, gold-accented pill */
+/* Exchange entry — BIGGER stacked label, gold-accented pill on the right */
 .nav-links a.nav-exchange{
-  display:inline-flex;flex-direction:column;align-items:center;gap:0;
-  padding:5px 14px 6px;border-radius:12px;line-height:1;
-  border:1px solid var(--gold-100);background:linear-gradient(180deg,var(--gold-50) 0%,#fff 100%);
+  display:inline-flex;flex-direction:column;align-items:center;gap:1px;
+  padding:8px 20px 9px;border-radius:14px;line-height:1;
+  border:1.5px solid var(--gold-2);background:linear-gradient(180deg,var(--gold) 0%,var(--gold-50) 100%);
   color:var(--text);transition:all .15s ease;
-  margin-left:4px;
+  margin-left:6px;box-shadow:0 2px 8px rgba(196,154,58,.22);
 }
 .nav-links a.nav-exchange .ex-eye{
-  font-family:var(--font-mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold-ink);font-weight:700;margin-bottom:1px;
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold-ink);font-weight:800;margin-bottom:2px;
 }
 .nav-links a.nav-exchange .ex-main{
-  font-size:.96rem;font-weight:800;letter-spacing:-.02em;color:var(--text);
+  font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:var(--text);
   display:inline-flex;align-items:center;gap:4px;
 }
-.nav-links a.nav-exchange .ex-arr{font-size:.7rem;color:var(--gold-2);transition:transform .15s ease}
+.nav-links a.nav-exchange .ex-arr{font-size:.78rem;color:var(--gold-ink);transition:transform .15s ease}
 .nav-links a.nav-exchange:hover{
-  border-color:var(--gold-2);background:linear-gradient(180deg,#fff 0%,var(--gold-50) 100%);
-  box-shadow:0 4px 14px rgba(196,154,58,.18);transform:translateY(-1px);
+  background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 100%);
+  box-shadow:0 4px 14px rgba(196,154,58,.35);transform:translateY(-1px);
 }
 .nav-links a.nav-exchange:hover .ex-arr{transform:translate(2px,-2px)}
 
 @media (max-width:760px){
   .nav-links{flex-wrap:wrap;gap:4px}
   .nav-links a{padding:6px 9px;font-size:.85rem}
-  .nav-links a.nav-exchange{padding:4px 11px 5px}
-  .nav-links a.nav-exchange .ex-main{font-size:.88rem}
+  .nav-links a.nav-auth{order:0;margin-right:0;margin-left:4px}
+  .nav-links a.nav-exchange{padding:6px 14px 7px}
+  .nav-links a.nav-exchange .ex-main{font-size:.96rem}
 }
 
 /* --------------------------------------------------- Buttons */
