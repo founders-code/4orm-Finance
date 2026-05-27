@@ -204,5 +204,63 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 @media (max-width:880px){.footer .grid{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.footer .grid{grid-template-columns:1fr}}
 
+/* =====================================================================
+   4ormEx dropdown — small floating menu opened by the gold nav button
+   ===================================================================== */
+.nav-links a.nav-exchange.is-open{
+  background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 60%,#FFE39E 100%);
+  box-shadow:0 5px 16px rgba(196,154,58,.45),inset 0 1px 0 rgba(255,255,255,.5);
+}
+.ex-dropdown{
+  position:fixed;top:0;left:0;
+  min-width:280px;max-width:340px;
+  background:#0B1220;color:#fff;
+  border:1px solid #1c2740;border-radius:14px;
+  box-shadow:0 24px 64px rgba(8,16,32,.55),0 4px 14px rgba(8,16,32,.35);
+  padding:10px;z-index:1000;
+  font-family:var(--font-sans);
+  animation:exddIn .14s ease-out;
+}
+.ex-dropdown[hidden]{display:none}
+@keyframes exddIn{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.ex-dd-head{
+  display:flex;flex-direction:column;gap:8px;
+  padding:8px 10px 12px;border-bottom:1px solid #1c2740;margin-bottom:6px;
+}
+.ex-dd-eye{
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;
+  color:#FFD9A8;text-transform:uppercase;font-weight:800;
+}
+.ex-dd-open{
+  display:inline-flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:8px 12px;border-radius:9px;
+  background:rgba(255,217,168,.12);color:#FFD9A8 !important;
+  border:1px solid rgba(255,217,168,.28);
+  font-weight:700;font-size:.84rem;text-decoration:none;
+  transition:background .15s,border-color .15s;
+}
+.ex-dd-open:hover{background:rgba(255,217,168,.22);border-color:rgba(255,217,168,.5);color:#FFD9A8 !important}
+.ex-dd-nav{display:flex;flex-direction:column;gap:1px}
+.ex-dd-nav a{
+  display:flex;align-items:center;gap:12px;
+  padding:9px 10px;border-radius:8px;
+  color:rgba(255,255,255,.82) !important;
+  font-weight:600;font-size:.88rem;text-decoration:none;
+  transition:background .12s,color .12s;
+}
+.ex-dd-nav a:hover{background:rgba(255,255,255,.06);color:#fff !important}
+.ex-dd-nav a.active{
+  background:rgba(255,217,168,.10);color:#FFD9A8 !important;
+}
+.ex-dd-nav .sn-num{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:700;
+  color:rgba(255,217,168,.55);letter-spacing:.08em;
+  min-width:22px;flex:none;
+}
+.ex-dd-nav a.active .sn-num{color:#FFD9A8}
+
 /* Selection */
 ::selection{background:var(--brand);color:#fff}
