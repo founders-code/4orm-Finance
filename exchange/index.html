@@ -261,7 +261,8 @@ a:hover{color:var(--brand-700)}
     </div>
     <div class="dhero-actions">
       <a class="dhero-btn gold" href="./marketplace.html">Enter the marketplace →</a>
-      <a class="dhero-btn ghost" href="./issuer.html">Open issuer portal</a>
+      <a class="dhero-btn ghost" href="./tokenize.html">⚙ Tokenize an asset</a>
+      <a class="dhero-btn ghost" href="./lifecycle.html">⚡ Run the lifecycle</a>
       <a class="dhero-btn ghost" href="../">← Back to 4orm Finance</a>
     </div>
   </div>
@@ -448,6 +449,28 @@ a:hover{color:var(--brand-700)}
           <li>Export to CSV/PDF</li>
         </ul>
         <span class="mgo">Open admin console →</span>
+      </a>
+    </div>
+
+    <!-- Feature row: Tokenize + Lifecycle (the two interactive workflows) -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px">
+      <a href="./tokenize.html" style="background:linear-gradient(135deg,var(--gold-50),#fff);border:1px solid var(--gold-100);border-radius:var(--r-lg);padding:28px;text-decoration:none;color:inherit;display:flex;gap:20px;align-items:center;box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .2s">
+        <div style="width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#15233F;display:grid;place-items:center;font-size:2rem;font-weight:800;flex:none;box-shadow:var(--shadow)">⚙</div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:4px">Tokenization Engine</div>
+          <h3 style="margin:0 0 6px;font-size:1.2rem;font-weight:800;letter-spacing:-.01em">Create a new tokenized asset</h3>
+          <p style="margin:0;font-size:.88rem;color:var(--text-2);line-height:1.5">5-step wizard · asset details → economics → distribution rules → compliance → mint. ERC-3643. CCO sign-off required.</p>
+          <div style="margin-top:10px;font-size:.85rem;font-weight:700;color:var(--gold-ink)">Open the wizard →</div>
+        </div>
+      </a>
+      <a href="./lifecycle.html" style="background:linear-gradient(135deg,#0B1220,#15233F);color:#fff;border:1px solid #1c2740;border-radius:var(--r-lg);padding:28px;text-decoration:none;display:flex;gap:20px;align-items:center;box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .2s">
+        <div style="width:64px;height:64px;border-radius:16px;background:#FFD9A8;color:#0B1220;display:grid;place-items:center;font-size:2rem;font-weight:800;flex:none;box-shadow:0 4px 16px rgba(255,217,168,.3)">⚡</div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#FFD9A8;font-weight:700;margin-bottom:4px">Transaction Lifecycle</div>
+          <h3 style="margin:0 0 6px;font-size:1.2rem;font-weight:800;letter-spacing:-.01em;color:#fff">Run the 8-step atomic flow</h3>
+          <p style="margin:0;font-size:.88rem;color:rgba(255,255,255,.78);line-height:1.5">KYC → AML → Tokenize → Trade → Attestation → Settle → Audit → Report. End-to-end in 12 seconds, sandboxed.</p>
+          <div style="margin-top:10px;font-size:.85rem;font-weight:700;color:#FFD9A8">Run the lifecycle →</div>
+        </div>
       </a>
     </div>
   </div>

@@ -23,9 +23,11 @@ No build step. Static HTML + CSS + JS. Drop into any static host.
 │   ├── site.css                ← shared site styles (all landing pages)
 │   └── exchange.css            ← shared exchange app styles
 ├── exchange/                   ← 4ormEx sandbox preview
-│   ├── index.html              ← Exchange overview (6 modules, 5 personas, listings table)
+│   ├── index.html              ← Exchange overview (6 modules + Tokenize + Lifecycle features)
 │   ├── marketplace.html        ← LIVE sandbox order book (ticks every 4s, trade ticket works)
-│   ├── issuer.html             ← Alpha Capital — offerings, distribution rules, new-offering modal
+│   ├── tokenize.html           ← 5-step Tokenization Engine wizard (NEW)
+│   ├── lifecycle.html          ← 8-step transaction lifecycle visualization (NEW)
+│   ├── issuer.html             ← Alpha Capital — offerings, distribution rules, links to tokenize
 │   ├── investor.html           ← Bay Street — portfolio, custody balances, open subscriptions
 │   ├── compliance.html         ← Compliance Officer — KYC queue, AML alerts, pre-trade log
 │   ├── settlement.html         ← Tetra Trust — atomic DvP, corridors, reconciliation
