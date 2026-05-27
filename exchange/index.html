@@ -62,22 +62,24 @@ a:hover{color:var(--brand-700)}
 .nav-links a:hover{background:var(--surface-2);color:var(--text)}
 .nav-sep{width:1px;height:18px;background:var(--border);margin:0 5px;flex:none}
 .nav-links a.nav-auth{
-  order:-2;margin-left:6px;margin-right:0;
+  margin-left:auto;
   padding:9px 18px;border-radius:99px;border:1px solid var(--brand-100);
   background:var(--brand-50);color:var(--brand-700);font-weight:700;font-size:.9rem;
 }
 .nav-links a.nav-auth:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
 .nav-links a.nav-exchange{
-  display:inline-flex;flex-direction:column;align-items:center;gap:1px;
-  padding:8px 20px 9px;border-radius:14px;line-height:1;
-  border:1.5px solid var(--gold-2);background:linear-gradient(180deg,var(--gold) 0%,var(--gold-50) 100%);
-  color:var(--text);margin-left:auto;
-  box-shadow:0 2px 8px rgba(196,154,58,.22);
+  order:-2;margin-left:6px;margin-right:0;
+  display:inline-flex;flex-direction:column;align-items:center;gap:2px;
+  padding:12px 22px 13px;border-radius:14px;line-height:1;
+  border:1.5px solid var(--gold-2);
+  background:linear-gradient(180deg,#FFE39E 0%,var(--gold) 38%,var(--gold-2) 100%);
+  color:#15233F;
+  box-shadow:0 3px 10px rgba(196,154,58,.32),inset 0 1px 0 rgba(255,255,255,.5);
   transition:all .15s ease;
 }
-.nav-links a.nav-exchange:hover{background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 100%);transform:translateY(-1px);box-shadow:0 4px 14px rgba(196,154,58,.35)}
+.nav-links a.nav-exchange:hover{background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 60%,#FFE39E 100%);transform:translateY(-1px);box-shadow:0 5px 16px rgba(196,154,58,.45),inset 0 1px 0 rgba(255,255,255,.5)}
 .nav-links a.nav-exchange .ex-eye{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:800;margin-bottom:2px}
-.nav-links a.nav-exchange .ex-main{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:var(--text);display:inline-flex;align-items:center;gap:4px}
+.nav-links a.nav-exchange .ex-main{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;color:#15233F;display:inline-flex;align-items:center;gap:4px}
 
 /* Exchange sub-nav */
 .subnav{background:#0B1220;border-bottom:1px solid #1c2740;position:sticky;top:74px;z-index:49}
