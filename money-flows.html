@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Money Flows, 4orm Finance</title>
+<meta name="description" content="See how money of any size moves through Canadian banking rails and where it gets stuck, then watch atomic settlement free it. Built by KCS Capital." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .mf-hero { padding: 52px 0 36px; background: linear-gradient(180deg, #F1F6FF 0%, #fff 80%); border-bottom: 1px solid var(--border); }
+  .mf-hero h1 { margin-top: 10px; max-width: 16em; }
+  .mf-hero .lead { font-size: 1.1rem; color: var(--text-2); max-width: 46em; margin-top: 10px; }
+
+  /* COMPRESS THE HERO so the slider + Run/Replay buttons are visible above the fold on initial load. */
+  .dhero { padding: 32px 0 22px; }
+  .dhero h1 { font-size: 1.85rem; margin: 0 0 10px; }
+  .dhero p.dhero-sub { font-size: .98rem; margin: 0 0 16px; }
+  .dhero-pills { margin: 0 0 6px; }
+  /* Tighten the section padding above the dark control band */
+  section.section.tight { padding-top: 14px; }
+  /* Tighten the dark control band's top padding so the slider lifts up */
+  .mf-dark-band { padding-top: 18px; padding-bottom: 18px; }
+
+  .scn-tabs { display:flex; gap:10px; flex-wrap:wrap; }
+  .scn-tab { border:1px solid var(--border-strong); background:var(--surface); border-radius:11px;
+    padding:12px 16px; cursor:pointer; font-family:inherit; text-align:left; min-width:190px; transition:all .15s; color: var(--text); }
+  .scn-tab:hover { background:var(--surface-2); }
+  .scn-tab.active { border-color:var(--brand); background:var(--brand-50); box-shadow:0 0 0 3px var(--brand-50); }
+  .scn-tab b { display:block; font-size:.96rem; } .scn-tab small { color:var(--text-3); font-size:.8rem; }
+
+  /* ---- INFO BUBBLE (above the dark control band) ---- */
+  .mf-info-bubble { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; background: linear-gradient(135deg, #F2F6FF 0%, #E8EEF8 100%); border: 1px solid var(--brand-100); border-left: 4px solid var(--brand); border-radius: 12px; box-shadow: 0 2px 8px rgba(15,40,90,.05); font-size: .92rem; line-height: 1.55; color: var(--text); }
+  .mf-info-bubble b { color: var(--brand-700); }
+  .mf-info-bubble .mf-info-icon { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 800; font-style: italic; font-family: Georgia, serif; box-shadow: 0 2px 6px rgba(46,107,242,.30); }
+
+  /* ---- DARK CONTROLS BAND (scenario tabs + amount + run/replay) ---- */
+  .mf-dark-band { background: linear-gradient(180deg, #0B1220 0%, #15233F 100%); border-radius: var(--r-lg); margin: 16px 0 28px; padding: 28px 4px 26px; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .mf-dark-band::before { content:''; position:absolute; top:-30%; right:-15%; width:50vw; height:50vw; max-width:520px; max-height:520px; background: radial-gradient(circle, rgba(247,196,102,.06) 0%, transparent 60%); pointer-events:none; }
+  .mf-dark-band .mf-dark-inner { padding: 0 24px; position: relative; z-index: 1; }
+  .mf-dark-band .scn-tab { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); color: #fff; }
+  .mf-dark-band .scn-tab:hover { background: rgba(255,255,255,.10); }
+  .mf-dark-band .scn-tab b { color: #fff; }
+  .mf-dark-band .scn-tab small { color: rgba(255,255,255,.65); }
+  .mf-dark-band .scn-tab.active { background: rgba(46,107,242,.22); border-color: #5A93FF; box-shadow: 0 0 0 3px rgba(46,107,242,.15); }
+  .mf-dark-band .amt-card.card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); color: #fff; box-shadow: none; }
+  .mf-dark-band .amt-read .lab { color: rgba(255,255,255,.65); }
+  .mf-dark-band .amt-read .val { color: #fff; }
+  .mf-dark-band .amt-card .lab { color: rgba(255,255,255,.65); }
+  .mf-dark-band .amt-input { background: rgba(255,255,255,.10); color: #fff; border: 1.5px solid rgba(255,255,255,.22); }
+  .mf-dark-band .preset { background: rgba(255,255,255,.08); color: rgba(255,255,255,.78); border-color: rgba(255,255,255,.18); }
+  .mf-dark-band .preset:hover { background: rgba(255,255,255,.14); }
+  .mf-dark-band .preset.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+  .mf-dark-band .ladder .tk .lb { color: rgba(255,255,255,.55); }
+  .mf-dark-band .ladder .tk.hit .lb { color: #FF8095; }
+  .mf-dark-band .amt-caption { color: rgba(255,255,255,.78); }
+  .mf-dark-band .amt-caption b { color: #fff; }
+  .mf-dark-band .amt-caption .pc { color: #FF8095; }
+  .mf-dark-band .amt-caption .gc { color: #9AB6FF; }
+  .mf-dark-band input[type=range].slider { background: rgba(255,255,255,.15); }
+  .mf-dark-band .btn-ghost { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.30); }
+  .mf-dark-band .btn-ghost:hover { background: rgba(255,255,255,.16); }
+
+  .amt-card { padding:22px 24px; }
+  .amt-top { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .amt-read .lab { font-size:.74rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-3); font-weight:700; }
+  .amt-read .val { font-size:2.4rem; font-weight:800; letter-spacing:-.03em; color:var(--text); line-height:1.05; }
+  .amt-input { width:170px; }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; align-items: center; }
+  .presets::before { content: 'Quick set:'; font-size:.74rem; text-transform:uppercase; letter-spacing:.08em; color:var(--text-3); font-weight:800; margin-right: 6px; }
+  .preset { border:1px solid var(--border-strong); background:var(--surface); border-radius:99px; padding:6px 14px;
+    font-family:inherit; font-size:.84rem; font-weight:700; color:var(--text-2); cursor:pointer; transition: all .15s; }
+  .preset:hover { background:var(--surface-2); transform: translateY(-1px); }
+  .preset.active { background:var(--brand); color:#fff; border-color:var(--brand); box-shadow: 0 4px 12px rgba(46,107,242,.30); }
+  /* When a preset is clicked, smoothly transition the slider thumb position so the snap is visible */
+  input[type=range].slider { transition: background .2s; }
+  input[type=range].slider::-webkit-slider-thumb { transition: background .15s, transform .15s; }
+  input[type=range].slider:active::-webkit-slider-thumb { transform: scale(1.15); }
+
+  input[type=range].slider { -webkit-appearance:none; appearance:none; width:100%; height:8px; border-radius:99px;
+    background:var(--surface-3); margin:20px 0 6px; outline:none; }
+  input[type=range].slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:24px; height:24px;
+    border-radius:50%; background:var(--brand); border:3px solid #fff; box-shadow:var(--shadow); cursor:pointer; }
+  input[type=range].slider::-moz-range-thumb { width:22px; height:22px; border-radius:50%; background:var(--brand);
+    border:3px solid #fff; box-shadow:var(--shadow); cursor:pointer; }
+
+  .ladder { position:relative; height:34px; margin-top:6px; }
+  .ladder .tk { position:absolute; top:0; transform:translateX(-50%); text-align:center; }
+  .ladder .tk .pip { width:2px; height:9px; background:var(--border-strong); margin:0 auto 3px; }
+  .ladder .tk .lb { font-size:.68rem; color:var(--text-3); font-weight:600; white-space:nowrap; }
+  .ladder .tk.hit .pip { background:var(--danger); } .ladder .tk.hit .lb { color:var(--danger); }
+  .amt-caption { font-size:.9rem; color:var(--text-2); margin-top:6px; }
+  .amt-caption b { color:var(--text); }
+  .amt-caption .pc { color:var(--danger); font-weight:700; } .amt-caption .gc { color:var(--brand-700); font-weight:700; }
+
+  .race { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  @media (max-width:860px){ .race { grid-template-columns:1fr; } }
+  .track { border:1px solid var(--border); border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow-sm); overflow:hidden; }
+  .track .t-head { padding:16px 18px; border-bottom:1px solid var(--border); }
+  .track.legacy .t-head { background:var(--danger-bg); } .track.chain .t-head { background:var(--brand-50); }
+  .t-head .tag { font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; font-weight:700; }
+  .track.legacy .t-head .tag { color:var(--danger); } .track.chain .t-head .tag { color:var(--brand); }
+  .t-head h3 { margin:3px 0 0; font-size:1.12rem; }
+  .meters { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+  .meter { background:rgba(255,255,255,.05); border:1px solid var(--border); border-radius:10px; padding:8px 10px; }
+  .meter .mlab { font-size:.64rem; text-transform:uppercase; letter-spacing:.04em; color:var(--text-3); }
+  .meter .mval { font-family:var(--font-mono); font-weight:800; font-size:1.02rem; letter-spacing:-.02em; margin-top:1px; }
+  .track.legacy .meter .mval { color:var(--danger); } .track.chain .meter .mval { color:var(--brand-700); }
+  .t-bar { height:6px; background:var(--surface-3); }
+  .t-bar>i { display:block; height:100%; width:0%; transition:width .3s ease; }
+  .track.legacy .t-bar>i { background:linear-gradient(90deg,#E0697A,var(--danger)); }
+  .track.chain .t-bar>i { background:linear-gradient(90deg,var(--brand),#6A6FF0); }
+
+  .stages { list-style:none; margin:0; padding:12px 16px; min-height:300px; }
+  .stages li { display:flex; align-items:center; gap:11px; padding:8px 0; border-bottom:1px dashed var(--border);
+    opacity:.4; transition:opacity .3s; font-size:.9rem; }
+  .stages li:last-child { border-bottom:none; }
+  .stages li.active, .stages li.done { opacity:1; }
+  .stages li .sic { width:19px; height:19px; flex:none; display:grid; place-items:center; color:var(--text-3); }
+  .stages li.done .sic { color:var(--success); } .track.legacy .stages li.done .sic { color:var(--danger); }
+  .stages li .sname { flex:1; } .stages li.done .sname { color:var(--text); font-weight:600; }
+  .stages li .gate { font-size:.64rem; font-weight:700; color:var(--danger); background:var(--danger-bg);
+    border-radius:99px; padding:1px 7px; margin-left:6px; }
+  .stages li .sdur { font-family:var(--font-mono); font-size:.75rem; color:var(--text-3); opacity:0; transition:opacity .3s; }
+  .stages li.done .sdur { opacity:1; }
+  .stages li.lock .sname::after { content:" · held"; color:var(--danger); font-size:.74rem; font-weight:600; }
+
+  .verdict { margin-top:22px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:760px){ .verdict { grid-template-columns:1fr; } }
+  .vcard { padding:20px; text-align:center; }
+  .vcard .vrow { display:flex; align-items:baseline; justify-content:center; gap:10px; }
+  .vcard .vleg { color:var(--danger); font-weight:800; font-size:1.5rem; }
+  .vcard .vch { color:var(--brand-700); font-weight:800; font-size:1.5rem; }
+  .vcard .arrow { color:var(--text-3); } .vcard .lab { color:var(--text-3); font-size:.82rem; margin-top:6px; }
+  .liq-note { font-size:.82rem; color:var(--text-3); }
+
+  .why { background:linear-gradient(135deg,#15233F,#2440B5); border-radius:var(--r-xl); color:#fff; padding:40px; }
+  .why h2 { color:#fff; } .why p { color:rgba(255,255,255,.84); }
+  .why .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px; }
+  @media (max-width:760px){ .why .grid3 { grid-template-columns:1fr; } }
+  .why .wc { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:var(--r); padding:16px; }
+  .why .wc b { display:block; margin-bottom:5px; } .why .src { font-size:.76rem; color:rgba(255,255,255,.6); margin-top:18px; }
+  .why .src a { color:#9AA0FF; }
+
+  /* ---- pipeline ---- */
+  .pipe-card { border:1px solid var(--border); border-radius:var(--r-lg); box-shadow:var(--shadow-sm); padding:16px 18px; overflow:hidden; }
+  .pipe-card.legacy { background:linear-gradient(180deg,#1B1622,#141C2B); }
+  .pipe-card.chain  { background:linear-gradient(180deg,#121F38,#131C2C); }
+  .pipe-head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:2px; }
+  .pipe-head .tag { font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; font-weight:800; }
+  .pipe-card.legacy .tag { color:var(--danger); } .pipe-card.chain .tag { color:var(--brand); }
+  .pipe-head h3 { margin:3px 0 0; font-size:1.0rem; }
+  .pipe-meters { display:flex; gap:20px; }
+  .pm-l { font-size:.62rem; text-transform:uppercase; letter-spacing:.04em; color:var(--text-3); }
+  .pm-v { font-family:var(--font-mono); font-weight:800; font-size:1.05rem; letter-spacing:-.02em; }
+  .pipe-card.legacy .pm-v { color:var(--danger); } .pipe-card.chain .pm-v { color:var(--brand-700); }
+  .pipe-svg { width:100%; height:auto; display:block; overflow:visible; }
+
+  .pipe-outer { fill:none; stroke:#2A3A57; stroke-width:26; stroke-linecap:round; stroke-linejoin:round; }
+  .pipe-inner { fill:none; stroke-width:15; stroke-linecap:round; stroke-linejoin:round; }
+  .pipe-sheen { fill:none; stroke:#ffffff; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; opacity:.35;
+    transform:translateY(-4px); }
+  .pipe-flow { fill:none; stroke:#ffffff; stroke-width:6; stroke-linecap:round; stroke-dasharray:1.5 21; opacity:.55;
+    animation:flow 1.15s linear infinite; }
+  .pipe-card.chain .pipe-flow { animation-duration:.6s; opacity:.7; }
+  @keyframes flow { to { stroke-dashoffset:-45; } }
+
+  .gate-box { fill:#FBFCFE; stroke-width:2.5; }
+  .gate-box.legacy { stroke:var(--danger); } .gate-box.chain { stroke:var(--brand); }
+  .gate-ic { fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .gate-ic.legacy { stroke:var(--danger); } .gate-ic.chain { stroke:var(--brand); }
+  .gate-badge { stroke-width:1.5; }
+  .gate-badge.legacy { fill:#fff; stroke:var(--danger); }
+  .gate-num { font-family:var(--font-mono); font-weight:800; font-size:10px; fill:var(--danger); text-anchor:middle; dominant-baseline:central; }
+  .gate-num.arrived { fill:var(--gold-2); }
+  .gate-lab { font-size:11px; fill:#EAF1FE; stroke:#141C2B; stroke-width:3px; paint-order:stroke; font-weight:700; text-anchor:middle; }
+  .gate-pulse { fill:none; stroke-width:2.5; opacity:0; transform-box:fill-box; transform-origin:center; }
+  .gate-pulse.legacy { stroke:var(--danger); } .gate-pulse.chain { stroke:var(--brand); }
+  .gate-pulse.on { animation:gpulse .7s ease-out infinite; }
+  @keyframes gpulse { 0%{opacity:.75; transform:scale(1);} 100%{opacity:0; transform:scale(2.6);} }
+
+  .pbank-body { fill:var(--surface-2); stroke-width:2; } .pbank-body.legacy { stroke:var(--danger); } .pbank-body.chain { stroke:var(--brand-600); }
+  .pbank-roof.legacy { fill:var(--danger); } .pbank-roof.chain { fill:var(--brand); }
+  .pbank-col { stroke:#aab4c8; stroke-width:2; }
+  .pblab { font-size:11px; fill:var(--text-3); font-weight:600; text-anchor:middle; }
+
+  .bridge-box { fill:url(#bridgeGrad); }
+  .bridge-mark { fill:#ffffff; opacity:.16; }
+  .bridge-name { fill:#ffffff; font-weight:800; font-size:13px; text-anchor:middle; dominant-baseline:central; }
+  .bridge-sub { fill:var(--brand-700); font-size:11px; font-weight:700; text-anchor:middle; }
+  .bridge-glow { fill:none; stroke:var(--brand); stroke-width:2.5; opacity:0; transform-box:fill-box; transform-origin:center; }
+  .bridge-glow.on { animation:gpulse .7s ease-out infinite; }
+
+  .coin-halo { opacity:.30; } .coin-halo.legacy { fill:var(--danger); } .coin-halo.chain { fill:var(--brand); }
+  .coin-body { stroke:#ffffff; stroke-width:1.5; }
+  .coin-d { fill:#ffffff; font-weight:800; font-size:11px; font-family:var(--font-mono); text-anchor:middle; dominant-baseline:central; }
+
+  .toast { position: fixed; left:50%; bottom: 26px; transform: translateX(-50%) translateY(20px);
+    background: var(--surface-2); color: var(--text); padding: 11px 18px; border-radius: 10px; font-size:.9rem; border: 1px solid var(--border-strong);
+    box-shadow: var(--shadow-lg); opacity:0; transition: opacity .25s, transform .25s; z-index: 100; pointer-events:none; }
+  .toast.show { opacity:1; transform: translateX(-50%) translateY(0); }
+
+  /* pipes row */
+  .pipes { display:grid; gap:16px; }
+</style>
+</head>
+<body>
+
+
+<!-- Top utility bar — links demo site back to main 4orm Finance marketing site -->
+<div class="top-utility">
+  <div class="wrap">
+    <a class="back-link" href="https://www.4ormfinance.com">← Back to 4orm Finance</a>
+    <span class="utility-eye"><span class="pulse"></span>LIVE INSTITUTIONAL DEMO · NO SIGNUP</span>
+    <a class="utility-cta" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+  </div>
+</div>
+<div class="sbx-banner"><b>Sandbox environment</b>, simulated data only, all amounts in <b>CAD</b>. Identifiers, hashes and balances are generated for demonstration.</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <nav class="nav-links">
+            <a href="https://www.4ormfinance.com/exchange/" class="nav-exchange" target="_blank" rel="noopener" aria-label="Open the 4ormEx Exchange"><span class="ex-main">4ormEx</span><span class="ex-eye">Exchange</span></a>
+<a href="index.html">Overview</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="primer.html">Field Guide</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="sandbox.html">Sandbox</a>
+      <a href="money-flows.html">Money Flows</a>
+      <a href="cost-analysis-bank.html">What It Saves</a>
+      <a href="institution-summary.html">Institutional Summary</a>
+      <div class="nav-drop">
+        <span class="nav-drop-trigger" tabindex="0" role="button" aria-haspopup="true">How We Protect You <span class="caret">&#9662;</span></span>
+        <div class="nav-drop-menu">
+          <a href="risk-compliance.html">Risk &amp; Compliance</a>
+          <a href="supervision.html">Supervision</a>
+          <a href="institutions.html">The Network</a>
+        </div>
+      </div>
+      <a href="education.html">How We Teach You</a>
+      <a href="login.html" class="nav-auth">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO (dark) -->
+<section class="dhero">
+  <div class="dhero-inner">
+    <div class="dhero-eyebrow">Money flows, legacy vs ledger</div>
+    <h1>Watch the money move, and <span class="accent">where it gets stuck.</span></h1>
+    <p class="dhero-sub">In Canada, the larger the payment, the more holds and checkpoints it hits: cheque holds over C$1,500, an LCTR at C$10,000<sup class="ref"><a href="#s-fintrac" style="color:#FFD9A8;">1</a></sup>, enhanced due diligence past C$100,000, and treasury collateral above C$1,000,000. Dial in an amount below and watch the legacy path grow while time, intermediaries and <b>trapped liquidity</b> climb. Then watch 4orm settle atomically in seconds, at any amount.</p>
+    <div class="dhero-pills">
+      <span class="dhero-pill gold">Interactive scenario</span>
+      <span class="dhero-pill">FINTRAC-aware thresholds</span>
+      <span class="dhero-pill">CAD only</span>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="moneyflows">
+  <div class="wrap">
+
+    <!-- Info bubble: tells the user what to do BEFORE they touch any controls -->
+    <div class="mf-info-bubble mt16">
+      <span class="mf-info-icon">i</span>
+      <div>
+        <b>How to use this.</b>
+        Pick a scenario below (Domestic transfer, Bank-to-bank settlement, or Branch-to-branch).
+        Dial in an amount, then press <b>Run this amount</b> to watch the legacy and 4orm rails race
+        side-by-side. The bigger the amount, the more checkpoints the legacy path hits.
+      </div>
+    </div>
+
+    <!-- DARK CONTROLS BAND: scenario tabs + amount card + run/replay buttons -->
+    <div class="mf-dark-band mt16">
+      <div class="mf-dark-inner">
+
+        <!-- scenario -->
+        <div class="scn-tabs" id="scnTabs">
+          <button class="scn-tab active" data-scn="domestic"><b>Domestic transfer</b><small>Bank to bank, in-country</small></button>
+          <button class="scn-tab" data-scn="interbank"><b>Bank-to-bank settlement</b><small>Community bank via a clearer</small></button>
+          <button class="scn-tab" data-scn="branch"><b>Branch-to-branch</b><small>Same bank, two branches</small></button>
+        </div>
+
+        <!-- amount -->
+        <div class="card amt-card mt16">
+          <div class="amt-top">
+            <div class="amt-read">
+              <div class="lab">Amount to send</div>
+              <div class="val" id="amtVal">C$25,000</div>
+            </div>
+            <label class="field mb0"><span class="lab" style="font-size:.74rem;">Type an exact amount (CAD)</span>
+              <input class="input amt-input" type="number" id="amtInput" min="100" max="50000000" step="100" value="25000"></label>
+          </div>
+          <input type="range" class="slider" id="amtSlider" aria-label="Transaction amount" min="0" max="1000" value="0">
+          <div class="ladder" id="ladder"></div>
+          <div class="presets" id="presets"></div>
+          <div class="amt-caption" id="amtCaption"></div>
+        </div>
+
+        <div class="btn-row mt16">
+          <button class="btn btn-primary btn-lg" id="startBtn">&#9654; Run this amount</button>
+          <button class="btn btn-ghost btn-lg" id="replayBtn" disabled>Replay</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- tracks -->
+    <div class="race mt24">
+      <div class="track legacy" id="trackLegacy">
+        <div class="t-head">
+          <div class="tag">Legacy bank rails</div>
+          <h3 id="legacyTitle">Today's process</h3>
+          <div class="meters">
+            <div class="meter"><div class="mlab">Elapsed</div><div class="mval" id="legacyTime">·</div></div>
+            <div class="meter"><div class="mlab">Checkpoints</div><div class="mval" id="legacyCp">0</div></div>
+            <div class="meter"><div class="mlab">Liquidity locked</div><div class="mval" id="legacyLiq">C$0</div></div>
+          </div>
+        </div>
+        <div class="t-bar"><i id="legacyBar"></i></div>
+        <ul class="stages" id="legacyStages"></ul>
+      </div>
+
+      <div class="track chain" id="trackChain">
+        <div class="t-head">
+          <div class="tag">On 4orm, shared ledger</div>
+          <h3 id="chainTitle">Atomic settlement</h3>
+          <div class="meters">
+            <div class="meter"><div class="mlab">Elapsed</div><div class="mval" id="chainTime">·</div></div>
+            <div class="meter"><div class="mlab">Checkpoints</div><div class="mval" id="chainCp">0</div></div>
+            <div class="meter"><div class="mlab">Liquidity locked</div><div class="mval" id="chainLiq">C$0</div></div>
+          </div>
+        </div>
+        <div class="t-bar"><i id="chainBar"></i></div>
+        <ul class="stages" id="chainStages"></ul>
+      </div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="pipes mt24">
+      <div class="pipe-card legacy">
+        <div class="pipe-head">
+          <div><span class="tag">Legacy bank rails &middot; deferred-net batch</span><h3 style="color:#fff;">Stops, waits and buffers at every gate</h3></div>
+          <div class="pipe-meters">
+            <div><div class="pm-l">Elapsed</div><div class="pm-v" id="pipeLegTime">0 min</div></div>
+            <div><div class="pm-l">Gates</div><div class="pm-v" id="pipeLegStops">0</div></div>
+          </div>
+        </div>
+        <svg class="pipe-svg" id="legSvg" viewBox="0 0 980 260" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Legacy bank payment pipeline"></svg>
+      </div>
+
+      <div class="pipe-card chain">
+        <div class="pipe-head">
+          <div><span class="tag">Tokenized deposits · atomic</span><h3 style="color:#fff;">4orm settles in tokenized bank deposits, one move, no stops</h3></div>
+          <div class="pipe-meters">
+            <div><div class="pm-l">Elapsed</div><div class="pm-v" id="pipeChTime">0.0 s</div></div>
+            <div><div class="pm-l">Gates</div><div class="pm-v" id="pipeChStops">0</div></div>
+          </div>
+        </div>
+        <svg class="pipe-svg" id="chSvg" viewBox="0 0 980 180" preserveAspectRatio="xMidYMid meet" role="img" aria-label="4orm atomic transfer pipeline"></svg>
+      </div>
+
+      <p class="t2 center" style="max-width:50em; margin:16px auto 0;"><b>Same money.</b> One pipe stops at every gate; the other flows straight through 4orm Finance, at any amount.</p>
+    </div>
+
+    <div class="verdict" id="verdict" style="display:none;">
+      <div class="card vcard"><div class="vrow"><span class="vleg" id="vTimeL">·</span><span class="arrow">to</span><span class="vch" id="vTimeC">·</span></div><div class="lab">Time to final settlement</div></div>
+      <div class="card vcard"><div class="vrow"><span class="vleg" id="vCpL">·</span><span class="arrow">to</span><span class="vch">0</span></div><div class="lab">Checkpoints and intermediaries</div></div>
+      <div class="card vcard"><div class="vrow"><span class="vleg" id="vLiqL">·</span><span class="arrow">to</span><span class="vch">freed</span></div><div class="lab">Peak liquidity trapped in transit</div></div>
+    </div>
+
+    <p class="liq-note mt16">"Liquidity locked" is money that has left one party but not yet arrived at the other: funds in transit,
+      prefunded settlement balances and pledged collateral held until the next-morning net settlement<sup class="ref"><a href="#s-acss">5</a></sup>. On a shared ledger,
+      delivery-versus-payment (DvP) means delivery and payment move together, so it is never trapped regardless of size. Compliance still runs on 4orm, as
+      embedded, instant policy checks rather than multi-day manual holds.</p>
+  </div>
+</section>
+
+<!-- WHY CANADA -->
+<section class="section tight">
+  <div class="wrap">
+    <div class="why">
+      <span class="eyebrow" style="color:#9AA0FF;">Why this matters in Canada</span>
+      <h2 style="max-width:18em;">Community banks are carrying the cost of trapped liquidity.</h2>
+      <p style="max-width:46em;">Smaller and regional institutions clear through the deferred-net ACSS (Automated Clearing Settlement System), often via a tier-one
+        "Group Clearer", pledging collateral and prefunding settlement balances that sit idle until the next morning<sup class="ref"><a href="#s-acss">5</a></sup>. The same
+        institutions have the deepest client relationships but the least innovation capacity. A shared-ledger marketplace lets them
+        settle atomically, free that liquidity, and connect to tokenization projects without building it all in-house.</p>
+      <div class="grid3">
+        <div class="wc"><b>The rail is late</b>Canada's Real-Time Rail finished its build in Q3 2025 but is not expected live until 2026 to 2027, and it covers faster payments, not atomic settlement.<sup class="ref"><a href="#s-rtr">6</a></sup></div>
+        <div class="wc"><b>Atomic is proven</b>JPMorgan's Kinexys has cleared C$2T+ with intraday repo; Project Samara settled a C$100M tokenized bond instantly on a dual cash/bond ledger.<sup class="ref"><a href="#s-kinexys">7</a></sup><sup class="ref"><a href="#s-samara">8</a></sup></div>
+        <div class="wc"><b>The pieces exist</b>Regulated CAD stablecoins, licensed Canadian custodians and a federal Stablecoin Framework mean the Canadian building blocks are now in place.<sup class="ref"><a href="#s-qcad">9</a></sup></div>
+      </div>
+      <div class="src" style="margin-top:18px;">References: <a href="#s-kinexys">Kinexys</a> · <a href="#s-samara">Project Samara</a> · <a href="#s-qcad">CAD settlement assets / Stablecoin Framework</a></div>
+    </div>
+    <div class="btn-row mt24">
+      <a class="btn btn-primary btn-lg" href="cost-analysis-bank.html">See what it saves &rarr;</a>
+      <a class="btn btn-ghost btn-lg" href="sandbox.html">Run the 8-step lifecycle &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="section tight" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sources">
+      <div class="src-top">
+        <span class="vbadge"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Verified sources</span>
+        <h3>Sources &amp; methodology</h3>
+        <a href="methodology.html" style="margin-left:auto; font-weight:650; font-size:.9rem;">Full methodology &amp; all sources &rarr;</a>
+      </div>
+      <p class="src-meth">The thresholds, hold durations, and settlement mechanics illustrated here are drawn from the primary regulatory and industry sources below.
+        The animation and timing are representative and time-compressed for demonstration; they are not exact figures. All amounts are illustrative (CAD).</p>
+      <ul class="src-list">
+        <li id="s-fintrac"><span class="sn">1</span><span class="sbody"><a href="https://fintrac-canafe.canada.ca/guidance-directives/transaction-operation/lctr-doie/lctr-doie-eng" target="_blank" rel="noopener">Large cash transaction reporting (LCTR), C$10,000 threshold</a> <span class="pub">· FINTRAC</span></span></li>
+        <li id="s-24h"><span class="sn">2</span><span class="sbody"><a href="https://fintrac-canafe.canada.ca/guidance-directives/transaction-operation/24hour/1-eng" target="_blank" rel="noopener">The 24-hour aggregation rule</a> <span class="pub">· FINTRAC</span></span></li>
+        <li id="s-eftr"><span class="sn">3</span><span class="sbody"><a href="https://fintrac-canafe.canada.ca/guidance-directives/transaction-operation/eft-dt/eft-dt-eng" target="_blank" rel="noopener">Electronic funds transfer reporting (EFTR)</a> <span class="pub">· FINTRAC</span></span></li>
+        <li id="s-cheque"><span class="sn">4</span><span class="sbody"><a href="https://www.canada.ca/en/financial-consumer-agency/services/banking/cashing-cheques.html" target="_blank" rel="noopener">Cheque holds and access to funds</a> <span class="pub">· FCAC / Access to Funds Regs (SOR/2012-24)</span></span></li>
+        <li id="s-acss"><span class="sn">5</span><span class="sbody"><a href="https://www.payments.ca/systems-services/payment-systems/retail-batch-payment-system" target="_blank" rel="noopener">Retail batch system (ACSS), deferred net settlement</a> <span class="pub">· Payments Canada</span></span></li>
+        <li id="s-rtr"><span class="sn">6</span><span class="sbody"><a href="https://www.payments.ca/real-time-rail-build-track-completion-q3-2025" target="_blank" rel="noopener">Real-Time Rail, build and status</a> <span class="pub">· Payments Canada</span></span></li>
+        <li id="s-kinexys"><span class="sn">7</span><span class="sbody"><a href="https://www.jpmorgan.com/insights/payments/blockchain-digital-assets/introducing-kinexys" target="_blank" rel="noopener">Kinexys, $2T+ notional, intraday repo</a> <span class="pub">· J.P. Morgan</span></span></li>
+        <li id="s-samara"><span class="sn">8</span><span class="sbody"><a href="https://www.bankofcanada.ca/2026/03/bank-canada-export-development-canada-rbc-td-successfully-complete-bond-issuance-experiment-distributed-ledger-technology/" target="_blank" rel="noopener">Project Samara, C$100M tokenized bond, instant settlement</a> <span class="pub">· Bank of Canada (Mar 2026)</span></span></li>
+        <li id="s-qcad"><span class="sn">9</span><span class="sbody">Regulated CAD stablecoins (example: <a href="https://stablecorp.ca/" target="_blank" rel="noopener">Stablecorp QCAD</a>) and licensed Canadian custodians (example: <a href="https://tetratrust.ca/" target="_blank" rel="noopener">Tetra Trust</a>), market examples; 4orm is provider-neutral · <a href="https://www.canada.ca/en/department-finance/programs/financial-sector-policy/canadas-stablecoin-framework.html" target="_blank" rel="noopener">Stablecoin Framework</a> <span class="pub">· Dept. of Finance</span></span></li>
+      </ul>
+      <p class="src-disc">Sandbox / education only. Figures are illustrative and not financial advice.</p>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============================================ CLOSING CTA — back to 4orm Finance -->
+<section class="demo-closing">
+  <div class="demo-closing-inner">
+    <div>
+      <div class="demo-closing-eye"><span class="dot"></span>Ready for the next step</div>
+      <h2>Bring 4orm to <span class="accent">your institution.</span></h2>
+      <p>You've just walked the same flow your treasury team, risk lead, and compliance officer would walk in production. If it fits the way your institution moves, we'd like to talk. Pre-Seed closes Q2 2026.</p>
+      <div class="demo-closing-buttons">
+        <a class="demo-closing-btn gold" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+        <a class="demo-closing-btn ghost" href="https://www.4ormfinance.com">Back to 4orm Finance</a>
+      </div>
+    </div>
+    <div class="demo-closing-side">
+      <h4>What happens when you sign up</h4>
+      <ul>
+        <li><span class="check">✓</span><span>Institutional onboarding call within 5 business days</span></li>
+        <li><span class="check">✓</span><span>Tailored walkthrough for your treasury, risk, and compliance teams</span></li>
+        <li><span class="check">✓</span><span>Direct line to Mike Sammut (Founder, KCS Capital)</span></li>
+        <li><span class="check">✓</span><span>Optional sandbox tenant for your team to test internally</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="foot-contact">
+  <div class="wrap">
+    <span>Questions, or want to walk through this with us? <a href="mailto:compliance@kcs-capital.com">compliance@kcs-capital.com</a> &middot; 4orm Finance is built and operated by KCS Capital.</span>
+  </div>
+</div>
+<footer class="footer">
+  <div class="wrap">
+    <p class="small mb0" style="max-width:48em;">4orm Finance is an early-stage platform in development (sandbox-stage), not a licensed exchange or dealer.
+      All identifiers, hashes, prices, balances and outcomes here are simulated and do not represent live systems, real assets or real counterparties.
+      Educational only; not an offer or solicitation of securities and not financial, legal or tax advice. Third parties named are not affiliated with 4orm unless stated.</p>
+    <a class="btn btn-ghost btn-sm" href="index.html">&larr; Back to overview</a>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+/* ===================================================================
+   Money Flows engine, fully scoped IIFE
+   =================================================================== */
+(function(){
+'use strict';
+
+var SCN = {
+  domestic: {
+    name:'Domestic transfer', legacyTitle:'Legacy bank rails · deferred net (ACSS)', chainTitle:'Atomic transfer · T+0',
+    core:[
+      {name:'Funds debited and held in transit', dur:'5 min', min:5, lm:1, cp:true, lock:true},
+      {name:'Cut-off / batch window wait', dur:'6 h', min:360, lm:1, cp:true, lock:true},
+      {name:'ACSS deferred-net exchange', dur:'1 h', min:60, lm:1, cp:true, lock:true},
+      {name:'Overnight net settlement (Bank of Canada)', dur:'15 h', min:900, lm:1, cp:true, lock:true}
+    ],
+    closeout:[ {name:'Beneficiary posted and reconciled', dur:'2 h', min:120, lm:0, cp:false} ],
+    chain:[
+      {name:'Payment initiated and verified', dur:'1.0 s', sec:1.0},
+      {name:'Embedded policy checks (AML, limits, sanctions)', dur:'0.8 s', sec:0.8},
+      {name:'Atomic transfer on shared ledger (T+0)', dur:'1.0 s', sec:1.0},
+      {name:'Auto-reconciled record written', dur:'0.5 s', sec:0.5}
+    ]
+  },
+  interbank: {
+    name:'Bank-to-bank settlement', legacyTitle:'Correspondent / Group Clearer · ACSS', chainTitle:'Peer-to-peer atomic settlement',
+    core:[
+      {name:'Routed via Group Clearer (correspondent)', dur:'20 min', min:20, lm:0.2, cp:true, lock:true},
+      {name:'Prefunded settlement balance drawn', dur:'10 min', min:10, lm:1.4, cp:true, lock:true},
+      {name:'Multilateral netting (ACSS)', dur:'1 h', min:60, lm:1.4, cp:true, lock:true},
+      {name:'Overnight net settlement (BoC accounts)', dur:'15 h', min:900, lm:1.6, cp:true, lock:true}
+    ],
+    closeout:[ {name:'Correspondent fees and reconciliation', dur:'3 h', min:180, lm:0, cp:false} ],
+    chain:[
+      {name:'Banks transact peer-to-peer (no clearer)', dur:'1.2 s', sec:1.2},
+      {name:'Embedded policy checks (AML, limits, sanctions)', dur:'0.8 s', sec:0.8},
+      {name:'Atomic gross settlement in tokenized bank deposits', dur:'1.2 s', sec:1.2},
+      {name:'Prefunding released, liquidity freed', dur:'0.5 s', sec:0.5}
+    ]
+  },
+  branch: {
+    name:'Branch-to-branch (same bank)', legacyTitle:'Internal core banking · suspense', chainTitle:'One shared internal ledger',
+    core:[
+      {name:'Core banking debit (Branch A ledger)', dur:'10 min', min:10, lm:1, cp:true, lock:true},
+      {name:'Inter-branch suspense account', dur:'20 min', min:20, lm:1, cp:true, lock:true},
+      {name:'Overnight batch posting', dur:'14 h', min:840, lm:1, cp:true, lock:true}
+    ],
+    closeout:[
+      {name:'Branch B credit posts', dur:'1 h', min:60, lm:0, cp:false},
+      {name:'End-of-day reconciliation', dur:'1 h', min:60, lm:0, cp:true}
+    ],
+    chain:[
+      {name:'Single shared ledger, one source of truth', dur:'1.0 s', sec:1.0},
+      {name:'Embedded policy checks', dur:'0.6 s', sec:0.6},
+      {name:'Atomic move (debit + credit, same instant)', dur:'0.9 s', sec:0.9}
+    ]
+  }
+};
+
+/* Tick marks on the slider align EXACTLY with the Quick-set buttons below,
+   so clicking any preset snaps the slider to its matching red tick. */
+var THRESHOLDS = [
+  { v:500,      lb:'C$500' },
+  { v:5000,     lb:'C$5K' },
+  { v:25000,    lb:'C$25K' },
+  { v:250000,   lb:'C$250K' },
+  { v:5000000,  lb:'C$5M' },
+  { v:50000000, lb:'C$50M' }
+];
+var AMT_MIN=100, AMT_MAX=50000000;
+var senderLabel='Sender bank', beneLabel='Beneficiary';
+
+function buildLegacy(scn, amt){
+  var S = SCN[scn], out = [];
+  out.push({name:'Payment initiated', dur:'2 min', min:2, lm:0, cp:false});
+  out.push({name:'Fraud and risk screening', dur:'35 min', min:35, lm:0, cp:true});
+  if (amt > 1500)  out.push({name:'Verification hold', gate:'over C$1,500', dur:'4 h', min:240, lm:1, cp:true, lock:true});
+  if (amt > 3000)  out.push({name:'Exceeds instant-transfer limit, routed to wire transfer', gate:'over C$3,000', dur:'30 min', min:30, lm:0, cp:true});
+  if (amt >= 10000){
+    out.push({name:'FINTRAC large-value transfer report filed', gate:'over C$10,000', dur:'1 h', min:60, lm:1, cp:true, lock:true});
+    out.push({name:'Enhanced screening · 24-hour aggregation rule', gate:'over C$10,000', dur:'2 h', min:120, lm:1, cp:true, lock:true});
+  }
+  if (amt >= 100000) out.push({name:'Enhanced due diligence (EDD) + source-of-funds review', gate:'over C$100K', dur:'1 day', min:1440, lm:1, cp:true, lock:true});
+  S.core.forEach(function(st){ out.push(Object.assign({}, st)); });
+  if (amt >= 1000000){
+    out.push({name:'Treasury liquidity and collateral management', gate:'over C$1M', dur:'3 h', min:180, lm:1.5, cp:true, lock:true});
+    out.push({name:'Senior / CAMLO (Chief Anti-Money Laundering Officer) approval', gate:'over C$1M', dur:'4 h', min:240, lm:1.5, cp:true, lock:true});
+  }
+  S.closeout.forEach(function(st){ out.push(Object.assign({}, st)); });
+  return out;
+}
+
+var state = { scn:'domestic', amt:25000, running:false };
+
+function tickSvg(){ return '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'; }
+function dotSvg(){ return '<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>'; }
+function money(n){ return 'C$' + Math.round(n).toLocaleString('en-US'); }
+function fmtMin(min){
+  if (min<=0) return '0 min';
+  if (min<60) return Math.round(min)+' min';
+  if (min<1440){ return (Math.round(min/6)/10)+' h'; }
+  return (Math.round(min/144)/10)+' d';
+}
+
+function sliderToAmt(v){
+  var lo=Math.log10(AMT_MIN), hi=Math.log10(AMT_MAX);
+  var a=Math.pow(10, lo + (v/1000)*(hi-lo));
+  if (a<1000) return Math.round(a/10)*10;
+  var e=Math.pow(10, Math.floor(Math.log10(a))-1);
+  return Math.round(a/e)*e;
+}
+function amtToSliderPct(a){
+  a=Math.min(AMT_MAX,Math.max(AMT_MIN,a));
+  var lo=Math.log10(AMT_MIN), hi=Math.log10(AMT_MAX);
+  return (Math.log10(a)-lo)/(hi-lo)*100;
+}
+
+function renderLadder(){
+  document.getElementById('ladder').innerHTML = THRESHOLDS.map(function(t){
+    var hit = state.amt >= t.v;
+    return '<div class="tk'+(hit?' hit':'')+'" style="left:'+amtToSliderPct(t.v).toFixed(1)+'%"><div class="pip"></div><div class="lb">'+t.lb+'</div></div>';
+  }).join('');
+}
+
+var PRESETS = [ {v:500,lb:'C$500'}, {v:5000,lb:'C$5K'}, {v:25000,lb:'C$25K'}, {v:250000,lb:'C$250K'}, {v:5000000,lb:'C$5M'}, {v:50000000,lb:'C$50M'} ];
+function renderPresets(){
+  document.getElementById('presets').innerHTML = PRESETS.map(function(p){
+    return '<button class="preset'+(state.amt===p.v?' active':'')+'" data-v="'+p.v+'">'+p.lb+'</button>';
+  }).join('');
+  document.querySelectorAll('#presets .preset').forEach(function(b){
+    b.addEventListener('click', function(){ if(!state.running){ setAmount(Number(b.getAttribute('data-v'))); } });
+  });
+}
+
+function summary(){
+  var leg = buildLegacy(state.scn, state.amt);
+  var cp = leg.filter(function(s){ return s.cp; }).length;
+  var min = leg.reduce(function(a,s){ return a+s.min; }, 0);
+  var ch = SCN[state.scn].chain.reduce(function(a,s){ return a+s.sec; }, 0);
+  return { cp:cp, min:min, sec:ch };
+}
+function renderCaption(){
+  var s = summary();
+  document.getElementById('amtCaption').innerHTML =
+    'At <b>'+money(state.amt)+'</b>, the legacy path runs <span class="pc">'+s.cp+' checkpoints</span> and reaches final settlement in '+
+    '<span class="pc">~'+fmtMin(s.min)+'</span>. On 4orm: <span class="gc">0 checkpoints</span>, '+
+    '<span class="gc">~'+(Math.round(s.sec*10)/10)+' s</span>, at any amount.';
+}
+
+function renderStages(){
+  var leg = buildLegacy(state.scn, state.amt);
+  document.getElementById('legacyStages').innerHTML = leg.map(function(st){
+    return '<li class="'+(st.lock?'lock':'')+'"><span class="sic">'+dotSvg()+'</span><span class="sname">'+st.name+
+      (st.gate?'<span class="gate">'+st.gate+'</span>':'')+'</span><span class="sdur">'+st.dur+'</span></li>';
+  }).join('');
+  document.getElementById('chainStages').innerHTML = SCN[state.scn].chain.map(function(st){
+    return '<li><span class="sic">'+dotSvg()+'</span><span class="sname">'+st.name+'</span><span class="sdur">'+st.dur+'</span></li>';
+  }).join('');
+}
+function resetMeters(){
+  document.getElementById('legacyTime').textContent='0 min';
+  document.getElementById('chainTime').textContent='0.0 s';
+  document.getElementById('legacyCp').textContent='0';
+  document.getElementById('chainCp').textContent='0';
+  document.getElementById('legacyLiq').textContent='C$0';
+  document.getElementById('chainLiq').textContent='C$0';
+  document.getElementById('legacyBar').style.width='0%';
+  document.getElementById('chainBar').style.width='0%';
+  document.getElementById('verdict').style.display='none';
+}
+function refreshAll(){
+  document.getElementById('amtVal').textContent = money(state.amt);
+  document.getElementById('legacyTitle').textContent = SCN[state.scn].legacyTitle;
+  document.getElementById('chainTitle').textContent = SCN[state.scn].chainTitle;
+  renderLadder(); renderStages(); resetMeters(); renderCaption();
+  if (window.pipeSync) window.pipeSync();
+}
+
+function setAmount(a, fromSlider){
+  a = Math.min(AMT_MAX, Math.max(AMT_MIN, Math.round(a)));
+  state.amt = a;
+  document.getElementById('amtInput').value = a;
+  if (!fromSlider){
+    var lo=Math.log10(AMT_MIN), hi=Math.log10(AMT_MAX);
+    document.getElementById('amtSlider').value = Math.round((Math.log10(a)-lo)/(hi-lo)*1000);
+  }
+  renderPresets();
+  refreshAll();
+}
+
+function selectScenario(scn){
+  state.scn = scn;
+  document.querySelectorAll('#scnTabs .scn-tab').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-scn')===scn); });
+  refreshAll();
+}
+
+async function runLegacy(){
+  var leg = buildLegacy(state.scn, state.amt);
+  document.getElementById('legacyStages').innerHTML = leg.map(function(st){
+    return '<li class="'+(st.lock?'lock':'')+'"><span class="sic">'+dotSvg()+'</span><span class="sname">'+st.name+
+      (st.gate?'<span class="gate">'+st.gate+'</span>':'')+'</span><span class="sdur">'+st.dur+'</span></li>';
+  }).join('');
+  var lis = document.querySelectorAll('#legacyStages li');
+  var elapsed=0, cp=0, peak=0;
+  for (var i=0;i<leg.length;i++){
+    var li=lis[i], st=leg[i];
+    li.classList.add('active'); li.querySelector('.sic').innerHTML='<span class="spinner"></span>';
+    await F.sleep(620 + Math.random()*420);
+    li.classList.remove('active'); li.classList.add('done'); li.querySelector('.sic').innerHTML=tickSvg();
+    elapsed += st.min; if (st.cp) cp++;
+    var locked = state.amt*st.lm; if (locked>peak) peak=locked;
+    document.getElementById('legacyTime').textContent = fmtMin(elapsed);
+    document.getElementById('legacyCp').textContent = cp;
+    document.getElementById('legacyLiq').textContent = money(locked);
+    document.getElementById('legacyBar').style.width = ((i+1)/leg.length*100)+'%';
+  }
+  return { time:elapsed, cp:cp, peak:peak };
+}
+async function runChain(){
+  var stages = SCN[state.scn].chain;
+  var lis = document.querySelectorAll('#chainStages li');
+  var elapsed=0;
+  for (var i=0;i<stages.length;i++){
+    var li=lis[i], st=stages[i];
+    li.classList.add('active'); li.querySelector('.sic').innerHTML='<span class="spinner"></span>';
+    await F.sleep(320);
+    li.classList.remove('active'); li.classList.add('done'); li.querySelector('.sic').innerHTML=tickSvg();
+    elapsed += st.sec;
+    document.getElementById('chainTime').textContent = (Math.round(elapsed*10)/10)+' s';
+    document.getElementById('chainBar').style.width = ((i+1)/stages.length*100)+'%';
+  }
+  return { time:elapsed };
+}
+async function start(){
+  if (state.running) return; state.running=true;
+  document.getElementById('startBtn').disabled=true; document.getElementById('replayBtn').disabled=true;
+  renderStages(); resetMeters();
+  if (window.pipeRun) window.pipeRun();
+  var rL = runLegacy(), rC = runChain();
+  var resL = await rL, resC = await rC;
+  document.getElementById('vTimeL').textContent = fmtMin(resL.time) + (resL.time>=600?' (next day)':'');
+  document.getElementById('vTimeC').textContent = (Math.round(resC.time*10)/10)+' s';
+  document.getElementById('vCpL').textContent = resL.cp;
+  document.getElementById('vLiqL').textContent = money(resL.peak);
+  document.getElementById('verdict').style.display='grid';
+  document.getElementById('replayBtn').disabled=false; state.running=false;
+}
+
+document.querySelectorAll('#scnTabs .scn-tab').forEach(function(b){
+  b.addEventListener('click', function(){ if(!state.running) selectScenario(b.getAttribute('data-scn')); });
+});
+document.getElementById('amtSlider').addEventListener('input', function(){
+  if (state.running) return;
+  setAmount(sliderToAmt(Number(this.value)), true);
+});
+document.getElementById('amtInput').addEventListener('input', function(){
+  if (state.running) return;
+  var v = Number(this.value); if (!isFinite(v)||v<=0) return;
+  setAmount(v, false);
+});
+document.getElementById('startBtn').addEventListener('click', start);
+document.getElementById('replayBtn').addEventListener('click', start);
+
+renderPresets();
+setAmount(25000, false);
+
+/* ===================== pipeline (SVG animated, amount-driven) ===================== */
+(function(){
+  var SVGNS='http://www.w3.org/2000/svg';
+  function el(t,a){ var e=document.createElementNS(SVGNS,t); for(var k in a) e.setAttribute(k,a[k]); return e; }
+  function rounded(pts,r){
+    var d='M'+pts[0].x+','+pts[0].y;
+    for(var i=1;i<pts.length-1;i++){
+      var p0=pts[i-1],p1=pts[i],p2=pts[i+1];
+      var v1x=p0.x-p1.x,v1y=p0.y-p1.y,v2x=p2.x-p1.x,v2y=p2.y-p1.y;
+      var l1=Math.hypot(v1x,v1y)||1,l2=Math.hypot(v2x,v2y)||1;
+      var r1=Math.min(r,l1/2),r2=Math.min(r,l2/2);
+      d+=' L'+(p1.x+v1x/l1*r1)+','+(p1.y+v1y/l1*r1)+' Q'+p1.x+','+p1.y+' '+(p1.x+v2x/l2*r2)+','+(p1.y+v2y/l2*r2);
+    }
+    var L=pts[pts.length-1]; d+=' L'+L.x+','+L.y; return d;
+  }
+  function fmtMinP(m){ if(m<=0)return '0 min'; if(m<60)return Math.round(m)+' min'; if(m<1440)return (Math.round(m/6)/10)+' h'; return (Math.round(m/144)/10)+' d'; }
+  function shortLabel(s){ s=String(s||''); return s.length>20 ? s.slice(0,19)+'...' : s; }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function shortGate(n){ n=(n||'').toLowerCase();
+    if(n.indexOf('fraud')>=0)return 'Fraud';
+    if(n.indexOf('aml')>=0||n.indexOf('sanction')>=0)return 'AML';
+    if(n.indexOf('verification hold')>=0)return 'Hold';
+    if(n.indexOf('instant-transfer')>=0)return 'Reroute';
+    if(n.indexOf('fintrac')>=0)return 'FINTRAC';
+    if(n.indexOf('enhanced screening')>=0||n.indexOf('24-hour')>=0)return 'Screen';
+    if(n.indexOf('due diligence')>=0||n.indexOf('source-of-funds')>=0)return 'EDD';
+    if(n.indexOf('debited')>=0)return 'Debit hold';
+    if(n.indexOf('clearer')>=0||n.indexOf('correspondent')>=0)return 'Clearer';
+    if(n.indexOf('prefunded')>=0)return 'Prefund';
+    if(n.indexOf('netting')>=0)return 'Netting';
+    if(n.indexOf('collateral')>=0&&n.indexOf('treasury')<0)return 'Collateral';
+    if(n.indexOf('cut-off')>=0)return 'Cut-off';
+    if(n.indexOf('overnight')>=0)return 'Overnight';
+    if(n.indexOf('core banking')>=0)return 'Core debit';
+    if(n.indexOf('suspense')>=0)return 'Suspense';
+    if(n.indexOf('treasury')>=0)return 'Treasury';
+    if(n.indexOf('senior')>=0||n.indexOf('camlo')>=0)return 'Approval';
+    if(n.indexOf('reconcil')>=0)return 'Reconcile';
+    return (n.charAt(0).toUpperCase()+n.slice(1)).slice(0,9);
+  }
+  function legacyGates(){
+    var stages=(typeof buildLegacy==='function')?buildLegacy(state.scn,state.amt):[];
+    return stages.filter(function(s){return s.cp;}).map(function(s){return {name:shortGate(s.name),min:s.min};});
+  }
+  /* map each gate to a small recognizable icon so the steps read at a glance */
+  function gateKind(label){ var n=(label||'').toLowerCase();
+    if(n.indexOf('fraud')>=0) return 'shield';
+    if(n.indexOf('aml')>=0||n.indexOf('screen')>=0||n.indexOf('edd')>=0) return 'search';
+    if(n.indexOf('hold')>=0||n.indexOf('debit')>=0) return 'pause';
+    if(n.indexOf('reroute')>=0) return 'reroute';
+    if(n.indexOf('fintrac')>=0) return 'doc';
+    if(n.indexOf('clearer')>=0||n.indexOf('treasury')>=0) return 'bank';
+    if(n.indexOf('prefund')>=0) return 'coins';
+    if(n.indexOf('collateral')>=0) return 'lock';
+    if(n.indexOf('netting')>=0) return 'net';
+    if(n.indexOf('cut-off')>=0) return 'clock';
+    if(n.indexOf('overnight')>=0) return 'moon';
+    if(n.indexOf('core')>=0||n.indexOf('suspense')>=0) return 'server';
+    if(n.indexOf('approval')>=0) return 'check';
+    if(n.indexOf('reconcile')>=0) return 'refresh';
+    return 'clock';
+  }
+  function gateIcon(svg,cx,cy,kind){
+    var P={
+      shield:'<path d="M12 3 20 6 V11 C20 16 16 20 12 21 C8 20 4 16 4 11 V6 Z"/><path d="M12 9 V13"/><path d="M12 15.4 V16.2"/>',
+      search:'<circle cx="10" cy="10" r="6"/><path d="M14.5 14.5 20 20"/>',
+      pause:'<path d="M9 5 V19"/><path d="M15 5 V19"/>',
+      reroute:'<path d="M3 12 H13"/><path d="M13 12 19 6"/><path d="M13 12 19 18"/>',
+      doc:'<path d="M7 3 H14 L18 7 V21 H7 Z"/><path d="M14 3 V7 H18"/><path d="M9 12 H15"/><path d="M9 16 H15"/>',
+      bank:'<path d="M4 9 12 4 20 9"/><path d="M6 9 V18 M10 9 V18 M14 9 V18 M18 9 V18"/><path d="M3 18 H21"/>',
+      coins:'<ellipse cx="12" cy="7" rx="7" ry="3"/><path d="M5 7 V13 C5 14.7 8.1 16 12 16 C15.9 16 19 14.7 19 13 V7"/>',
+      lock:'<path d="M7 11 V8 A5 5 0 0 1 17 8 V11"/><rect x="5" y="11" width="14" height="9" rx="2"/>',
+      net:'<path d="M4 8 H15"/><path d="M12 5 15 8 12 11"/><path d="M20 16 H9"/><path d="M12 13 9 16 12 19"/>',
+      clock:'<circle cx="12" cy="12" r="8"/><path d="M12 8 V12 L15 14"/>',
+      moon:'<path d="M20 14 A8 8 0 1 1 10 4 A6 6 0 0 0 20 14 Z"/>',
+      server:'<rect x="4" y="5" width="16" height="6" rx="1.5"/><rect x="4" y="13" width="16" height="6" rx="1.5"/><path d="M7.4 8 H7.6 M7.4 16 H7.6"/>',
+      check:'<path d="M5 13 10 18 19 6"/>',
+      refresh:'<path d="M5 10 A7 7 0 0 1 17 6.5 M18 3 V7 H14"/><path d="M19 14 A7 7 0 0 1 7 17.5 M6 21 V17 H10"/>'
+    };
+    var g=el('g',{transform:'translate('+(cx-7.5)+','+(cy-7.5)+') scale(0.625)','class':'gate-ic legacy'});
+    g.innerHTML = P[kind]||P.clock;
+    svg.appendChild(g);
+  }
+
+  function defsFor(svg,cls,gradId){
+    var defs=el('defs',{});
+    var lg=el('linearGradient',{id:gradId,x1:'0',y1:'0',x2:'1',y2:'0'});
+    lg.appendChild(el('stop',{offset:'0%','stop-color':cls==='legacy'?'#E0697A':'#3B43E6'}));
+    lg.appendChild(el('stop',{offset:'100%','stop-color':cls==='legacy'?'#CE2237':'#6A6FF0'}));
+    defs.appendChild(lg);
+    var cg=el('radialGradient',{id:gradId+'Coin'});
+    cg.appendChild(el('stop',{offset:'0%','stop-color':cls==='legacy'?'#F0A23A':'#7DE0C0'}));
+    cg.appendChild(el('stop',{offset:'100%','stop-color':cls==='legacy'?'#D77A12':'#1E9E86'}));
+    defs.appendChild(cg);
+    if(cls==='chain'){
+      var bg=el('linearGradient',{id:'bridgeGrad',x1:'0',y1:'0',x2:'1',y2:'1'});
+      bg.appendChild(el('stop',{offset:'0%','stop-color':'#3B43E6'}));
+      bg.appendChild(el('stop',{offset:'100%','stop-color':'#6A6FF0'}));
+      defs.appendChild(bg);
+    }
+    svg.appendChild(defs);
+  }
+  function bankNode(svg,x,y,label,cls){
+    var g=el('g',{});
+    g.appendChild(el('path',{d:'M'+(x-26)+','+(y-5)+' L'+x+','+(y-22)+' L'+(x+26)+','+(y-5)+' Z','class':'pbank-roof '+cls}));
+    g.appendChild(el('rect',{x:x-22,y:y-5,width:44,height:22,rx:3,'class':'pbank-body '+cls}));
+    [-12,-4,4,12].forEach(function(dx){ g.appendChild(el('line',{x1:x+dx,y1:y-1,x2:x+dx,y2:y+13,'class':'pbank-col'})); });
+    var t=el('text',{x:x,y:y+32,'class':'pblab'}); t.textContent=label; g.appendChild(t);
+    svg.appendChild(g);
+  }
+  function bridgeNode(svg,x,y){
+    var g=el('g',{});
+    var glow=el('rect',{x:x-60,y:y-22,width:120,height:44,rx:13,'class':'bridge-glow'}); g.appendChild(glow);
+    g.appendChild(el('rect',{x:x-60,y:y-22,width:120,height:44,rx:13,'class':'bridge-box'}));
+    var nm=el('text',{x:x,y:y+1,'class':'bridge-name'}); nm.textContent='4orm Finance'; g.appendChild(nm);
+    var sub=el('text',{x:x,y:y+38,'class':'bridge-sub'}); sub.textContent='Atomic Settle · T+0'; g.appendChild(sub);
+    svg.appendChild(g); return glow;
+  }
+  function coin(svg,cls,gradId){
+    var g=el('g',{'class':'coin'});
+    g.appendChild(el('circle',{cx:0,cy:0,r:16,'class':'coin-halo '+cls}));
+    g.appendChild(el('circle',{cx:0,cy:0,r:9,'class':'coin-body',fill:'url(#'+gradId+'Coin)'}));
+    var t=el('text',{x:0,y:0,'class':'coin-d'}); t.textContent='$'; g.appendChild(t);
+    svg.appendChild(g); return g;
+  }
+  function moveCoin(pipe,L){ if(!pipe||!pipe.coinG)return; try{ var p=pipe.inner.getPointAtLength(L); pipe.coinG.setAttribute('transform','translate('+p.x+','+p.y+')'); }catch(e){} }
+  async function travel(pipe,a,b,ms){ var steps=Math.max(5,Math.round(ms/28)); for(var s=1;s<=steps;s++){ moveCoin(pipe,a+(b-a)*(s/steps)); await F.sleep(28); } }
+
+  function buildLegacyPipe(){
+    var svg=document.getElementById('legSvg'); svg.innerHTML='';
+    defsFor(svg,'legacy','gLeg');
+    var pts=[{x:55,y:72},{x:915,y:72},{x:915,y:180},{x:65,y:180}];
+    var d=rounded(pts,28);
+    svg.appendChild(el('path',{d:d,'class':'pipe-outer'}));
+    var inner=el('path',{d:d,'class':'pipe-inner',stroke:'url(#gLeg)'}); svg.appendChild(inner);
+    svg.appendChild(el('path',{d:d,'class':'pipe-flow'}));
+    var total=0; try{ total=inner.getTotalLength(); }catch(e){ total=0; }
+    var pipe={inner:inner,total:total,ready:total>0,lens:[],mins:[],pulses:[],nums:[],coinG:null};
+    var gates=legacyGates();
+    document.getElementById('pipeLegStops').textContent=gates.length;
+    if(pipe.ready){
+      var N=gates.length, f0=0.12, f1=0.88;
+      gates.forEach(function(gt,i){
+        var frac = N<=1 ? 0.5 : f0+(f1-f0)*i/(N-1);
+        var L=total*frac, p=inner.getPointAtLength(L); pipe.lens.push(L); pipe.mins.push(gt.min);
+        var pulse=el('circle',{cx:p.x,cy:p.y,r:16,'class':'gate-pulse legacy'}); svg.appendChild(pulse); pipe.pulses.push(pulse);
+        svg.appendChild(el('rect',{x:p.x-15,y:p.y-15,width:30,height:30,rx:8,'class':'gate-box legacy'}));
+        gateIcon(svg,p.x,p.y,gateKind(gt.name));
+        svg.appendChild(el('circle',{cx:p.x-15,cy:p.y-15,r:8,'class':'gate-badge legacy'}));
+        var num=el('text',{x:p.x-15,y:p.y-15,'class':'gate-num'}); num.textContent=(i+1); svg.appendChild(num); pipe.nums.push(num);
+        var up=(i%2===0), ly=up?p.y-28:p.y+36;
+        var lab=el('text',{x:p.x,y:ly,'class':'gate-lab'}); lab.textContent=gt.name; svg.appendChild(lab);
+      });
+      bankNode(svg,55,72,shortLabel(senderLabel),'legacy');
+      bankNode(svg,65,180,shortLabel(beneLabel),'legacy');
+      pipe.coinG=coin(svg,'legacy','gLeg'); moveCoin(pipe,0);
+    }
+    return pipe;
+  }
+  function buildChainPipe(){
+    var svg=document.getElementById('chSvg'); svg.innerHTML='';
+    defsFor(svg,'chain','gCh');
+    var pts=[{x:55,y:95},{x:925,y:95}];
+    var d=rounded(pts,10);
+    svg.appendChild(el('path',{d:d,'class':'pipe-outer'}));
+    var inner=el('path',{d:d,'class':'pipe-inner',stroke:'url(#gCh)'}); svg.appendChild(inner);
+    svg.appendChild(el('path',{d:d,'class':'pipe-flow'}));
+    var total=0; try{ total=inner.getTotalLength(); }catch(e){ total=0; }
+    var pipe={inner:inner,total:total,ready:total>0,coinG:null,bridgeGlow:null};
+    document.getElementById('pipeChStops').textContent='0';
+    if(pipe.ready){
+      var mid=inner.getPointAtLength(total*0.5);
+      bankNode(svg,55,95,shortLabel(senderLabel),'chain');
+      bankNode(svg,925,95,shortLabel(beneLabel),'chain');
+      pipe.bridgeGlow=bridgeNode(svg,mid.x,mid.y);
+      pipe.coinG=coin(svg,'chain','gCh'); moveCoin(pipe,0);
+    }
+    return pipe;
+  }
+
+  var legPipe=null, chPipe=null, GEN=0;
+
+  function resetLeg(){ if(!legPipe||!legPipe.ready)return; moveCoin(legPipe,0);
+    legPipe.pulses.forEach(function(p){p.classList.remove('on');}); legPipe.nums.forEach(function(n){n.classList.remove('arrived');});
+    document.getElementById('pipeLegTime').textContent='0 min'; }
+  function resetCh(){ if(!chPipe||!chPipe.ready)return; moveCoin(chPipe,0);
+    if(chPipe.bridgeGlow)chPipe.bridgeGlow.classList.remove('on'); document.getElementById('pipeChTime').textContent='0.0 s'; }
+
+  async function runLeg(g){
+    if(!legPipe||!legPipe.ready)return; resetLeg();
+    var clock=0, prev=0;
+    for(var i=0;i<legPipe.lens.length;i++){
+      if(g!==GEN)return;
+      await travel(legPipe,prev,legPipe.lens[i], reduce?0:520);
+      if(g!==GEN)return;
+      legPipe.pulses[i].classList.add('on'); legPipe.nums[i].classList.add('arrived');
+      clock+=legPipe.mins[i]||0; document.getElementById('pipeLegTime').textContent=fmtMinP(clock);
+      await F.sleep(reduce?0:640);
+      legPipe.pulses[i].classList.remove('on');
+      prev=legPipe.lens[i];
+    }
+    if(g!==GEN)return;
+    await travel(legPipe,prev,legPipe.total, reduce?0:520);
+  }
+  async function runCh(g){
+    if(!chPipe||!chPipe.ready)return; resetCh();
+    await travel(chPipe,0,chPipe.total*0.5, reduce?0:360);
+    if(g!==GEN)return;
+    if(chPipe.bridgeGlow)chPipe.bridgeGlow.classList.add('on');
+    document.getElementById('pipeChTime').textContent='2.4 s';
+    await F.sleep(reduce?0:300);
+    if(chPipe.bridgeGlow)chPipe.bridgeGlow.classList.remove('on');
+    await travel(chPipe,chPipe.total*0.5,chPipe.total, reduce?0:360);
+  }
+  async function loop(g){
+    if(reduce){ await Promise.all([runLeg(g),runCh(g)]); return; }
+    while(g===GEN){
+      await Promise.all([runLeg(g),runCh(g)]);
+      if(g!==GEN)break;
+      await F.sleep(1000);
+    }
+  }
+  function restart(){ GEN++; loop(GEN); }
+
+  legPipe=buildLegacyPipe(); chPipe=buildChainPipe();
+  restart();
+
+  var syncT;
+  window.pipeSync=function(){ clearTimeout(syncT); syncT=setTimeout(function(){ legPipe=buildLegacyPipe(); restart(); },200); };
+  window.pipeRun=function(){ restart(); };
+  window.pipeRebuildAll=function(){ legPipe=buildLegacyPipe(); chPipe=buildChainPipe(); restart(); };
+})();
+
+})();
+</script>
+</body>
+</html>

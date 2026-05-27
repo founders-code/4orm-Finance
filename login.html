@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign in, 4orm Finance</title>
+<meta name="description" content="Sign in to 4orm Finance with a one-time email link." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .login-wrap { min-height: 100vh; display: grid; place-items: center; padding: 40px 20px;
+    background: radial-gradient(1200px 600px at 50% -10%, var(--brand-50), var(--bg)); }
+  .login-card { width: 100%; max-width: 480px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-xl); box-shadow: var(--shadow-lg); padding: 36px 34px 28px; text-align: center; }
+  .login-logo { height: 64px; width: auto; display: block; margin: 0 auto 22px; }
+  .login-card h1 { font-size: 1.4rem; margin: 0 0 6px; letter-spacing: -.02em; }
+  .login-card .sub { color: var(--text-2); font-size: .94rem; margin: 0 0 22px; }
+  .login-field { text-align: left; margin-bottom: 14px; }
+  .login-field label { display: block; font-size: .8rem; font-weight: 700; color: var(--text-2); margin-bottom: 6px; }
+  .login-field input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border-strong); border-radius: 10px;
+    font-family: inherit; font-size: 1rem; color: var(--text); background: var(--surface); }
+  .login-field input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-50); }
+  .login-btn { width: 100%; justify-content: center; }
+  .login-msg { font-size: .9rem; border-radius: 10px; padding: 12px 14px; margin-top: 16px; display: none; text-align: left; }
+  .login-msg.show { display: block; }
+  .login-msg.ok { background: var(--success-bg); color: var(--success); border: 1px solid rgba(14,138,95,.3); }
+  .login-msg.no { background: var(--warn-bg); color: var(--warn); border: 1px solid rgba(180,120,20,.3); }
+  .login-msg.err { background: #FCE8EA; color: var(--danger); border: 1px solid rgba(206,34,55,.3); }
+  .login-msg a { font-weight: 700; }
+  .login-info { margin-top: 18px; padding: 14px 16px; background: var(--brand-50); border: 1px solid var(--brand-100);
+    border-radius: 10px; font-size: .85rem; color: var(--text-2); text-align: left; line-height: 1.55; }
+  .login-info b { color: var(--brand-700); display: block; margin-bottom: 4px; font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; }
+  .login-info ul { margin: 0; padding-left: 18px; }
+  .login-info li { padding: 2px 0; }
+  .login-foot { font-size: .8rem; color: var(--text-3); margin-top: 20px; line-height: 1.55; }
+  .login-foot a { font-weight: 650; }
+  .login-back { display: inline-block; margin-top: 6px; font-size: .85rem; font-weight: 650; }
+</style>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-card">
+    <img class="login-logo" src="assets/4orm-logo.png" alt="4orm Finance" />
+    <h1>Sign in</h1>
+    <p class="sub">Enter your email. We will send a one-time link to sign you in.</p>
+
+    <form id="loginForm" novalidate>
+      <div class="login-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@yourinstitution.ca" autocomplete="email" required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg login-btn" id="loginBtn">Send sign-in link</button>
+    </form>
+
+    <div class="login-msg" id="loginMsg"></div>
+
+    <div class="login-info">
+      <b>How sign-in works</b>
+      <ul>
+        <li>We email you a one-time link, valid for 15 minutes.</li>
+        <li>Clicking it signs you in for 30 days on this device, so you only see this page about once a month.</li>
+        <li>No password to remember and nothing to install.</li>
+      </ul>
+    </div>
+
+    <p class="login-foot">
+      Need access? Contact
+      <a href="mailto:compliance@kcs-capital.com?subject=4orm%20Finance%20access%20request">compliance@kcs-capital.com</a>.
+      <br /><a class="login-back" href="index.html">&larr; Back to the overview</a>
+    </p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var qs = new URLSearchParams(location.search);
+  var form = document.getElementById('loginForm');
+  var btn = document.getElementById('loginBtn');
+  var msg = document.getElementById('loginMsg');
+  var emailEl = document.getElementById('email');
+
+  function show(kind, html) {
+    msg.className = 'login-msg show ' + kind;
+    msg.innerHTML = html;
+  }
+
+  if (qs.get('error') === 'expired') {
+    show('err', 'That sign-in link expired or is invalid. Enter your email to get a fresh one.');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = (emailEl.value || '').trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      show('err', 'Please enter a valid email address.');
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Sending...';
+    var next = qs.get('next') || '';
+    fetch('/api/request-link', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, next: next })
+    }).then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (d) {
+        btn.disabled = false; btn.textContent = 'Send sign-in link';
+        if (d && d.allowed) {
+          show('ok', 'Sign-in link sent. Check your inbox at <b>' + email + '</b> in the next minute or two. The link is valid for 15 minutes.');
+          form.style.display = 'none';
+        } else {
+          show('no', 'We do not see <b>' + email + '</b> on the access list. If you should have access, contact ' +
+            '<a href="mailto:compliance@kcs-capital.com?subject=4orm%20Finance%20access%20request">compliance@kcs-capital.com</a>.');
+        }
+      })
+      .catch(function () {
+        btn.disabled = false; btn.textContent = 'Send sign-in link';
+        show('err', 'Something went wrong sending your link. Please try again, or email compliance@kcs-capital.com.');
+      });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bank-to-Bank Cost Analysis, 4orm Finance</title>
+<meta name="description" content="Pick a sender and receiver institution and see what each bank saves on a transfer with 4orm, compliance, correspondent fees, trapped liquidity and reconciliation." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .seg { display:inline-flex; border:1px solid var(--border-strong); border-radius:9px; overflow:hidden; }
+  .seg button { border:none; background:var(--surface); padding:9px 16px; font-family:inherit; font-weight:600;
+    font-size:.88rem; color:var(--text-2); cursor:pointer; }
+  .seg button.active { background:var(--brand); color:#fff; }
+  .pick-row { display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:end; }
+  @media (max-width:760px){ .pick-row { grid-template-columns:1fr; } .pick-arrow{ display:none; } }
+  .pick-arrow { font-size:1.4rem; color:var(--text-3); padding-bottom:8px; }
+  .ctrl { margin-bottom:16px; }
+  .ctrl .top { display:flex; justify-content:space-between; align-items:baseline; }
+  .ctrl .lab { font-size:.82rem; font-weight:650; color:var(--text-2); }
+  .ctrl .val { font-family:var(--font-mono); font-weight:800; color:var(--brand-700); }
+  input[type=range].slider { -webkit-appearance:none; appearance:none; width:100%; height:7px; border-radius:99px; background:var(--surface-3); margin:9px 0 0; outline:none; }
+  input[type=range].slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:22px; height:22px; border-radius:50%; background:var(--brand); border:3px solid #fff; box-shadow:var(--shadow); cursor:pointer; }
+  input[type=range].slider::-moz-range-thumb { width:20px; height:20px; border-radius:50%; background:var(--brand); border:3px solid #fff; cursor:pointer; }
+  .mini-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+  .headline { text-align:center; padding:26px; background:linear-gradient(135deg,#15233F,#2440B5); color:#fff; border-radius:var(--r-lg); }
+  .headline .big { font-size:2.7rem; font-weight:800; letter-spacing:-.03em; line-height:1; }
+  .headline .sub { color:rgba(255,255,255,.82); margin-top:8px; } .headline .pct { color:#7BE3B0; font-weight:800; }
+
+  .ab-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ab-grid.single { grid-template-columns:1fr; max-width:560px; margin-left:auto; margin-right:auto; }
+  @media (max-width:760px){ .ab-grid { grid-template-columns:1fr; } }
+  .side { padding:20px; }
+  .side .who { font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; font-weight:800; color:var(--text-3); }
+  .side h3 { margin:3px 0 4px; font-size:1.15rem; }
+  .side .chips .chip { margin-right:6px; }
+  .side .save { margin:14px 0 6px; }
+  .side .save .n { font-size:1.9rem; font-weight:800; letter-spacing:-.02em; color:var(--brand-700); }
+  .side .save .l { font-size:.8rem; color:var(--text-3); }
+  table.bt { width:100%; border-collapse:collapse; font-size:.88rem; margin-top:8px; }
+  table.bt th, table.bt td { padding:8px 6px; border-bottom:1px solid var(--border); text-align:right; }
+  table.bt th:first-child, table.bt td:first-child { text-align:left; color:var(--text-2); }
+  table.bt th { font-size:.68rem; text-transform:uppercase; letter-spacing:.05em; color:var(--text-3); }
+  table.bt td.leg { color:var(--danger); font-family:var(--font-mono); font-weight:600; }
+  table.bt td.ch { color:var(--brand-700); font-family:var(--font-mono); font-weight:600; }
+  table.bt tr.tot td { border-top:2px solid var(--border-strong); border-bottom:none; font-weight:800; padding-top:10px; }
+  .flowline { font-size:.86rem; color:var(--text-3); margin-top:6px; }
+  .statgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:760px){ .statgrid { grid-template-columns:1fr; } }
+  .statc { padding:18px; } .statc .n { font-size:1.5rem; font-weight:800; color:var(--brand-700); } .statc .l { font-size:.82rem; color:var(--text-2); margin-top:4px; }
+  .assume-note { font-size:.78rem; color:var(--text-3); margin-top:14px; }
+
+  /* ---- "what 4orm does" pallet ---- */
+  .pallet { background:linear-gradient(135deg,#15233F,#2440B5); color:#fff; border-radius:var(--r-lg); padding:26px 28px; }
+  .pallet h3 { color:#fff; margin:0 0 4px; }
+  .pallet .psub { color:rgba(255,255,255,.78); font-size:.9rem; margin:0 0 18px; max-width:52em; }
+  .pallet-metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  @media (max-width:760px){ .pallet-metrics { grid-template-columns:repeat(2,1fr); } }
+  .pallet .pm { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:var(--r); padding:14px 16px; }
+  .pallet .pm .n { font-size:1.5rem; font-weight:800; letter-spacing:-.02em; }
+  .pallet .pm .n .hl { color:#7BE3B0; }
+  .pallet .pm .l { font-size:.74rem; color:rgba(255,255,255,.7); margin-top:3px; }
+  .pallet-does { display:grid; grid-template-columns:repeat(2,1fr); gap:12px 26px; margin-top:18px; }
+  @media (max-width:760px){ .pallet-does { grid-template-columns:1fr; } }
+  .pallet .doh { font-size:.88rem; color:rgba(255,255,255,.84); display:flex; gap:9px; align-items:flex-start; }
+  .pallet .doh::before { content:''; width:7px; height:7px; border-radius:50%; background:#7BE3B0; margin-top:7px; flex:none; }
+  .pallet .doh b { color:#fff; }
+
+  /* ---- embedded Manual vs 4orm race ---- */
+  .race { display:grid; grid-template-columns: 1fr 1fr; gap:22px; }
+  @media (max-width: 820px){ .race { grid-template-columns: 1fr; } }
+  .track { border:1px solid var(--border); border-radius: var(--r-lg); background: var(--surface);
+    box-shadow: var(--shadow-sm); overflow:hidden; }
+  .track .t-head { padding:18px 20px; border-bottom:1px solid var(--border); }
+  .track.manual .t-head { background: var(--danger-bg); }
+  .track.chain  .t-head { background: var(--brand-50); }
+  .t-head .tag { font-size:.74rem; text-transform:uppercase; letter-spacing:.1em; font-weight:700; }
+  .track.manual .t-head .tag { color: var(--danger); }
+  .track.chain  .t-head .tag { color: var(--brand); }
+  .t-head h3 { margin:4px 0 0; }
+  .t-clock { font-family: var(--font-mono); font-weight:800; font-size:1.7rem; margin-top:8px; letter-spacing:-.02em; }
+  .track.manual .t-clock { color: var(--danger); }
+  .track.chain  .t-clock { color: var(--brand-700); }
+  .t-clock small { font-weight:600; font-size:.8rem; color: var(--text-3); font-family: var(--font-sans); }
+  .t-bar { height:6px; background: var(--surface-3); }
+  .t-bar > i { display:block; height:100%; width:0%; transition: width .3s ease; }
+  .track.manual .t-bar > i { background: linear-gradient(90deg, #E0697A, var(--danger)); }
+  .track.chain  .t-bar > i { background: linear-gradient(90deg, var(--brand), #6A6FF0); }
+  .stages { list-style:none; margin:0; padding:14px 18px; }
+  .stages li { display:flex; align-items:center; gap:11px; padding:9px 0; border-bottom:1px dashed var(--border);
+    opacity:.45; transition: opacity .3s; font-size:.92rem; }
+  .stages li:last-child { border-bottom:none; }
+  .stages li.active, .stages li.done { opacity:1; }
+  .stages li .sic { width:20px; height:20px; flex:none; display:grid; place-items:center; color: var(--text-3); }
+  .stages li.done .sic { color: var(--success); }
+  .track.manual .stages li.done .sic { color: var(--danger); }
+  .stages li .sname { flex:1; } .stages li.done .sname { color: var(--text); font-weight:600; }
+  .stages li .sdur { font-family: var(--font-mono); font-size:.78rem; color: var(--text-3); opacity:0; transition:opacity .3s; }
+  .stages li.done .sdur { opacity:1; }
+  .t-foot { padding:14px 18px; border-top:1px solid var(--border); font-size:.86rem; min-height:20px; }
+  .t-foot .done-chip { display:none; }
+  .track.finished .t-foot .done-chip { display:inline-flex; }
+  .cmp-verdict { margin-top:24px; display:grid; grid-template-columns: repeat(4,1fr); gap:16px; }
+  @media (max-width:900px){ .cmp-verdict { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width:500px){ .cmp-verdict { grid-template-columns:1fr; } }
+  .cmp-verdict .vc { text-align:center; padding:22px; }
+  .cmp-verdict .vc .big { font-size:2rem; font-weight:800; letter-spacing:-.02em; }
+  .cmp-verdict .vc .lab { color: var(--text-3); font-size:.85rem; }
+  .cmp-verdict .vc.hl { background: var(--brand); color:#fff; border-color: var(--brand); }
+  .cmp-verdict .vc.hl .lab { color: rgba(255,255,255,.8); }
+  .cmp-table td.good { color: var(--success); font-weight:650; }
+  .cmp-table td.bad  { color: var(--danger); font-weight:650; }
+  .cmp-table th:first-child { width:30%; }
+
+  /* ---- institution-profile presets ---- */
+  .steplab { font-size:.74rem; text-transform:uppercase; letter-spacing:.08em; font-weight:800; color:var(--text-3); margin-bottom:9px; }
+  .profiles { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  @media (max-width:680px){ .profiles { grid-template-columns:repeat(2,1fr); } }
+  .profile { border:1px solid var(--border-strong); background:var(--surface); border-radius:11px; padding:12px 14px;
+    cursor:pointer; font-family:inherit; text-align:left; transition:all .15s; }
+  .profile:hover { background:var(--surface-2); }
+  .profile.active { border-color:var(--brand); background:var(--brand-50); box-shadow:0 0 0 3px var(--brand-50); }
+  .profile b { display:block; font-size:.95rem; color:var(--text); } .profile small { color:var(--text-3); font-size:.78rem; }
+  .advanced { margin-top:18px; border-top:1px solid var(--border); padding-top:6px; }
+  .advanced > summary { cursor:pointer; font-weight:650; font-size:.9rem; color:var(--brand-700); list-style:none; padding:8px 0; }
+  .advanced > summary::-webkit-details-marker { display:none; }
+  .advanced > summary::before { content:'▸'; color:var(--text-3); margin-right:7px; display:inline-block; }
+  .advanced[open] > summary::before { content:'▾'; }
+
+  /* ---- compare-with toggle (rail toggle) ---- */
+  .rail-toggle { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:18px; }
+  .rail-toggle .rt-label { font-size:.74rem; text-transform:uppercase; letter-spacing:.08em; font-weight:800; color:var(--text-3); margin-right:4px; }
+  .rt-check { display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border:1px solid var(--border-strong);
+    border-radius:9px; cursor:pointer; font-family:inherit; font-size:.88rem; font-weight:600; color:var(--text-2);
+    background:var(--surface); transition:all .15s; user-select:none; }
+  .rt-check input { accent-color:var(--brand); width:16px; height:16px; cursor:pointer; }
+  .rt-check.on { border-color:var(--brand); background:var(--brand-50); color:var(--brand-700); }
+  .rt-check.rtr.on { border-color:#7C5CC6; background:#F3EEFF; color:#5A3FA0; }
+  .rt-check.four.on { border-color:var(--brand); background:var(--brand-50); color:var(--brand-700); }
+
+  /* ---- three-track race ---- */
+  .race3 { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:900px){ .race3 { grid-template-columns:1fr; } }
+  .track.rtr .t-head { background:#F3EEFF; }
+  .track.rtr .t-head .tag { color:#7C5CC6; }
+  .track.rtr .t-clock { color:#5A3FA0; }
+  .track.rtr .t-bar > i { background:linear-gradient(90deg,#B497EA,#7C5CC6); }
+  .rtr-note { background:#F3EEFF; border:1px solid #D8C8F5; border-radius:var(--r); padding:14px 18px;
+    font-size:.86rem; color:#4A3077; margin-top:14px; line-height:1.55; }
+
+  /* ---- ALIGN THE T-HEAD BARS across all 3 race cards ---- */
+  /* Force consistent t-head height so the red, purple, and blue bottom bars line up evenly across the three cards. */
+  .race3 .track .t-head {
+    height: 180px;              /* fixed height so all three cards have identical head height */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-bottom: 14px;
+  }
+  .race3 .track .t-head .tag { flex: none; }
+  .race3 .track .t-head h3 { flex: none; }
+  /* Push the clock to the bottom of the head, leaving open space above where the values are short */
+  .race3 .track .t-head .t-clock {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  /* Force "elapsed" to its own line so every card's t-clock has the same vertical footprint */
+  .race3 .track .t-head .t-clock small {
+    display: block;
+    margin-top: 4px;
+    font-size: .78rem;
+    color: var(--text-3);
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
+  /* The colored bar sits directly under the head so it lines up automatically once t-head is uniform */
+  .race3 .track .t-bar { margin-top: 0; }
+
+  /* ---- DARK BACKDROP for the whole "The same transaction" / race / difference section ---- */
+  .compare-dark {
+    background: linear-gradient(180deg, #0B1220 0%, #15233F 60%, #1B2B52 100%);
+    color: #fff;
+    padding-bottom: 60px !important;
+    position: relative;
+    overflow: hidden;
+  }
+  .compare-dark::before { content:''; position:absolute; top:-200px; left:-200px; width:600px; height:600px; background: radial-gradient(circle, rgba(123,180,255,.08) 0%, transparent 60%); pointer-events:none; }
+  .compare-dark .eyebrow { color: #9AB6FF !important; }
+  .compare-dark > .wrap > h2 { color: #fff; }
+  .compare-dark > .wrap > p,
+  .compare-dark > .wrap > p.t2,
+  .compare-dark > .wrap p.muted { color: rgba(255,255,255,.78) !important; }
+  .compare-dark .steplab { color: rgba(255,255,255,.65); }
+  .compare-dark .scn-hint, .compare-dark #scnHint { color: rgba(255,255,255,.65) !important; }
+  /* Scenario segmented control on dark backdrop */
+  .compare-dark .seg { border-color: rgba(255,255,255,.20); }
+  .compare-dark .seg button { background: rgba(255,255,255,.06); color: rgba(255,255,255,.78); }
+  .compare-dark .seg button.active { background: var(--brand); color: #fff; }
+  /* Rail-toggle pill checkboxes on dark backdrop */
+  .compare-dark .rail-toggle .rt-label { color: rgba(255,255,255,.65); }
+  .compare-dark .rt-check { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); color: rgba(255,255,255,.78); }
+  .compare-dark .rt-check.on { background: rgba(46,107,242,.18); border-color: #5A93FF; color: #DCE9FF; }
+  .compare-dark .rt-check.rtr.on { background: rgba(124,92,198,.20); border-color: #B497EA; color: #E6D9FF; }
+  .compare-dark .rt-check.four.on { background: rgba(46,107,242,.22); border-color: #5A93FF; color: #DCE9FF; }
+  /* Buttons row, pull away from the race cards */
+  .compare-dark .btn-row { margin-bottom: 22px; }
+  .compare-dark .race3 { margin-top: 36px !important; }
+  /* The race cards themselves stay LIGHT (charcoal/white) so the colors inside still pop */
+  /* The "Where the difference comes from" header */
+  .compare-dark > .wrap > h3 { color: #fff; margin-top: 42px !important; }
+  /* The comparison table: dark backdrop card with light text */
+  .compare-dark .cmp-table { background: transparent; }
+  .compare-dark .card.pad {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.10);
+    color: #fff;
+  }
+  .compare-dark .cmp-table thead th { color: rgba(255,255,255,.65); border-bottom-color: rgba(255,255,255,.15); }
+  .compare-dark .cmp-table tbody td { border-bottom-color: rgba(255,255,255,.10); color: rgba(255,255,255,.85); }
+  .compare-dark .cmp-table tbody tr:hover td { background: rgba(255,255,255,.03); }
+  .compare-dark .cmp-table td.bad { color: #FF8095 !important; }
+  .compare-dark .cmp-table td.good { color: #7BE3B0 !important; }
+  /* The rtr-note pill: keep purple but darken backing */
+  .compare-dark .rtr-note { background: rgba(124,92,198,.10); border-color: rgba(180,151,234,.45); color: #DCC9FF; }
+  /* The verdict bar (4 cards) */
+  .compare-dark .cmp-verdict .vc { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); color: #fff; }
+  .compare-dark .cmp-verdict .vc .lab { color: rgba(255,255,255,.7); }
+  .compare-dark .cmp-verdict .vc.hl { background: var(--brand); border-color: var(--brand); }
+  /* "How to read this" footnote */
+  .compare-dark > .wrap > p.muted a { color: #9AB6FF; }
+
+  /* Race cards: make the inactive stages clearly readable BEFORE the user clicks Start (instead of nearly invisible at opacity .45). They still brighten to full opacity 1 when active/done. */
+  .compare-dark .race3 .stages li { opacity: .75; }
+  .compare-dark .race3 .stages li.active,
+  .compare-dark .race3 .stages li.done { opacity: 1; }
+  /* Always show the duration as a placeholder so the card looks populated */
+  .compare-dark .race3 .stages li .sdur { opacity: .55; }
+  .compare-dark .race3 .stages li.done .sdur { opacity: 1; }
+
+  /* Vibrating yellow "Press to start the race" button to draw attention */
+  @keyframes cmp-start-vibrate {
+    0%, 100% { transform: translate(0, 0) rotate(0); }
+    10%      { transform: translate(-1px, 0) rotate(-.5deg); }
+    20%      { transform: translate(1px, 0) rotate(.5deg); }
+    30%      { transform: translate(-1px, 1px) rotate(-.4deg); }
+    40%      { transform: translate(1px, -1px) rotate(.4deg); }
+    50%      { transform: translate(0, 0) rotate(0); }
+  }
+  @keyframes cmp-start-glow {
+    0%, 100% { box-shadow: 0 4px 14px rgba(247,196,102,.45), 0 0 0 0 rgba(247,196,102,.40); }
+    50%      { box-shadow: 0 6px 20px rgba(247,196,102,.55), 0 0 0 10px rgba(247,196,102,0); }
+  }
+  .cmp-start-vibrate {
+    background: linear-gradient(135deg, #FFD56B 0%, #F4B731 100%) !important;
+    color: #1F2937 !important;
+    border: 2px solid #C99B1B !important;
+    font-weight: 800;
+    letter-spacing: .02em;
+    animation: cmp-start-vibrate 1.6s ease-in-out infinite, cmp-start-glow 1.6s ease-in-out infinite;
+    transform-origin: center;
+  }
+  .cmp-start-vibrate:hover {
+    background: linear-gradient(135deg, #FFE08A 0%, #F8C455 100%) !important;
+    transform: translateY(-2px);
+    animation-play-state: paused;
+  }
+  .cmp-start-vibrate:disabled {
+    animation: none;
+    background: rgba(244,183,49,.25) !important;
+    color: rgba(31,41,55,.45) !important;
+    border-color: rgba(201,155,27,.3) !important;
+    cursor: not-allowed;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cmp-start-vibrate { animation: none; }
+  }
+
+  /* ---- CALCULATOR CONTROLS DARK BAND (institution profile picker, mode segment, dropdowns, assumption sliders) ---- */
+  .calc-dark-band {
+    background: linear-gradient(180deg, #0B1220 0%, #15233F 100%);
+    border-radius: var(--r-lg);
+    margin: 24px 0 0;
+    padding: 30px 32px 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
+  .calc-dark-band::before { content:''; position:absolute; top:-30%; right:-15%; width:50vw; height:50vw; max-width:520px; max-height:520px; background: radial-gradient(circle, rgba(247,196,102,.06) 0%, transparent 60%); pointer-events:none; }
+  .calc-dark-band > * { position: relative; z-index: 1; }
+  .calc-dark-band .steplab { color: rgba(255,255,255,.65); }
+  /* Profile picker buttons -> translucent charcoal cards */
+  .calc-dark-band .profile { background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.18); color: #fff; }
+  .calc-dark-band .profile:hover { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.30); }
+  .calc-dark-band .profile.active { background: rgba(46,107,242,.22); border-color: #5A93FF; box-shadow: 0 0 0 3px rgba(46,107,242,.15); }
+  .calc-dark-band .profile b { color: #fff; }
+  .calc-dark-band .profile small { color: rgba(255,255,255,.65); }
+  /* Mode segmented control */
+  .calc-dark-band .seg { border-color: rgba(255,255,255,.22); }
+  .calc-dark-band .seg button { background: rgba(255,255,255,.06); color: rgba(255,255,255,.78); }
+  .calc-dark-band .seg button.active { background: var(--brand); color: #fff; }
+  /* Mode hint */
+  .calc-dark-band #modeHint, .calc-dark-band .muted { color: rgba(255,255,255,.65) !important; }
+  /* Sender/receiver dropdowns */
+  .calc-dark-band .field .lab { color: rgba(255,255,255,.7); }
+  .calc-dark-band .input, .calc-dark-band select.input {
+    background: rgba(255,255,255,.10);
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,.22);
+  }
+  .calc-dark-band select.input option { color: #1F2937; background: #fff; }
+  .calc-dark-band .pick-arrow { color: rgba(255,255,255,.55); }
+  /* Advanced details (assumption sliders) */
+  .calc-dark-band .advanced { border-top-color: rgba(255,255,255,.18); }
+  .calc-dark-band .advanced > summary { color: #9AB6FF; }
+  .calc-dark-band .advanced > summary::before { color: rgba(255,255,255,.55); }
+  .calc-dark-band .ctrl .lab { color: rgba(255,255,255,.7); }
+  .calc-dark-band .ctrl .val { color: #FFD9A8; }
+  .calc-dark-band input[type=range].slider { background: rgba(255,255,255,.15); }
+  .calc-dark-band .assume-note { color: rgba(255,255,255,.65); }
+
+  /* ---- DARK PAGE BACKDROP for the entire calculator section
+         (from "Pick your institution" through the Cost of joining panel).
+         "Why both sides pay today" and below stays white. ---- */
+  .calc-dark-page {
+    background: linear-gradient(180deg, #0B1220 0%, #15233F 55%, #1B2B52 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    padding: 54px 0 64px !important;
+  }
+  .calc-dark-page::before { content:''; position:absolute; top:-200px; right:-200px; width:600px; height:600px; background: radial-gradient(circle, rgba(123,180,255,.06) 0%, transparent 60%); pointer-events:none; }
+  .calc-dark-page::after  { content:''; position:absolute; bottom:-200px; left:-200px; width:520px; height:520px; background: radial-gradient(circle, rgba(247,196,102,.05) 0%, transparent 60%); pointer-events:none; }
+  .calc-dark-page > .wrap { position: relative; z-index: 1; }
+  .calc-dark-page .eyebrow { color: #9AB6FF !important; }
+  .calc-dark-page > .wrap > h2 { color: #fff; }
+  .calc-dark-page > .wrap > p,
+  .calc-dark-page > .wrap > p.t2 { color: rgba(255,255,255,.78) !important; }
+  /* The calc-dark-band sits inside; it already has its own dark styling and stays as-is */
+  /* Sender/receiver result cards: translucent navy */
+  .calc-dark-page .ab-grid .card.side {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.14);
+    color: #fff;
+  }
+  .calc-dark-page .ab-grid .card.side .who { color: rgba(255,255,255,.62); }
+  .calc-dark-page .ab-grid .card.side h3 { color: #fff; }
+  .calc-dark-page .ab-grid .card.side .chip {
+    background: rgba(255,255,255,.08);
+    color: rgba(255,255,255,.82);
+    border: 1px solid rgba(255,255,255,.14);
+  }
+  .calc-dark-page .ab-grid .card.side .save .n { color: #FFD9A8; }
+  .calc-dark-page .ab-grid .card.side .save .l { color: rgba(255,255,255,.65); }
+  .calc-dark-page .ab-grid .card.side table.bt th { color: rgba(255,255,255,.55); border-bottom-color: rgba(255,255,255,.14); }
+  .calc-dark-page .ab-grid .card.side table.bt td { color: rgba(255,255,255,.85); border-bottom-color: rgba(255,255,255,.10); }
+  .calc-dark-page .ab-grid .card.side table.bt th:first-child,
+  .calc-dark-page .ab-grid .card.side table.bt td:first-child { color: rgba(255,255,255,.78); }
+  .calc-dark-page .ab-grid .card.side table.bt td.leg { color: #FF8095; }
+  .calc-dark-page .ab-grid .card.side table.bt td.ch  { color: #9AB6FF; }
+  .calc-dark-page .ab-grid .card.side table.bt tr.tot td { border-top-color: rgba(255,255,255,.30); }
+  .calc-dark-page .ab-grid .card.side .flowline { color: rgba(255,255,255,.55); }
+  /* "Where the savings come from" card */
+  .calc-dark-page .card.pad {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.12);
+    color: #fff;
+  }
+  .calc-dark-page .card.pad .steplab { color: rgba(255,255,255,.65); }
+  .calc-dark-page .card.pad p { color: rgba(255,255,255,.75) !important; }
+  .calc-dark-page .card.pad .sbar-leg { color: rgba(255,255,255,.82); }
+  .calc-dark-page .card.pad .sbar-leg span[id^="sbLab"] { color: #FFD9A8 !important; }
+  /* Cost of joining panel: dark translucent */
+  .calc-dark-page .coj-panel {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.14);
+  }
+  .calc-dark-page .coj-left .coj-title { color: rgba(255,255,255,.65); }
+  .calc-dark-page .coj-left p { color: rgba(255,255,255,.82); }
+  .calc-dark-page .coj-left b { color: #FFD9A8; }
+  .calc-dark-page .coj-right .coj-net { color: #7BE3B0; }
+  .calc-dark-page .coj-right .coj-sub { color: rgba(255,255,255,.62); }
+  /* Assume note text */
+  .calc-dark-page .assume-note { color: rgba(255,255,255,.55); }
+  /* Export PDF button: lighter ghost on dark */
+  .calc-dark-page .btn.btn-ghost {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.22);
+    color: #fff;
+  }
+  .calc-dark-page .btn.btn-ghost:hover {
+    background: rgba(255,255,255,.12);
+    border-color: rgba(255,255,255,.35);
+  }
+  /* Citation refs */
+  .calc-dark-page sup.ref a { color: #9AB6FF; background: rgba(154,182,255,.10); }
+  .calc-dark-page sup.ref a:hover { color: #fff; background: var(--brand); }
+
+  /* ---- stacked bar chart ---- */
+  .sbar-wrap { margin-top:20px; }
+  .sbar-track { display:flex; height:38px; border-radius:8px; overflow:hidden; width:100%; }
+  .sbar-seg { height:100%; transition:flex .4s ease; position:relative; cursor:default; min-width:0; }
+  .sbar-seg:hover .sbar-tip { display:block; }
+  .sbar-tip { display:none; position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%);
+    background:#142036; color:#fff; font-size:.78rem; padding:7px 11px; border-radius:7px; white-space:nowrap;
+    z-index:10; pointer-events:none; line-height:1.4; box-shadow:0 4px 12px rgba(0,0,0,.18); }
+  .sbar-tip::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+    border:5px solid transparent; border-top-color:#142036; }
+  .sbar-labels { display:flex; gap:14px; flex-wrap:wrap; margin-top:12px; }
+  .sbar-leg { display:flex; align-items:center; gap:6px; font-size:.78rem; color:var(--text-2); }
+  .sbar-dot { width:11px; height:11px; border-radius:3px; flex:none; }
+
+  /* ---- cost-of-joining panel ---- */
+  .coj-panel { background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-lg);
+    padding:20px 24px; margin-top:18px; display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center; }
+  @media (max-width:600px){ .coj-panel { grid-template-columns:1fr; } }
+  .coj-left .coj-title { font-size:.78rem; font-weight:800; text-transform:uppercase; letter-spacing:.07em; color:var(--text-3); }
+  .coj-left p { font-size:.9rem; color:var(--text-2); margin:.5em 0 0; }
+  .coj-right { text-align:right; }
+  .coj-right .coj-net { font-size:1.45rem; font-weight:800; color:var(--success); letter-spacing:-.02em; }
+  .coj-right .coj-sub { font-size:.78rem; color:var(--text-3); margin-top:2px; }
+
+  /* ---- print / export ---- */
+  .print-btn-row { display:flex; justify-content:flex-end; margin-top:14px; }
+  #printSummary { display:none; }
+  @media print {
+    body > *:not(#printSummary) { display:none !important; }
+    #printSummary { display:block !important; padding:28px 36px; font-family:Inter,sans-serif; color:#142036; }
+    #printSummary h1 { font-size:1.4rem; margin:0 0 4px; }
+    #printSummary .ps-meta { font-size:.8rem; color:#7A8AA3; margin-bottom:18px; }
+    #printSummary .ps-big { font-size:2.2rem; font-weight:800; color:#1B4ABE; margin:18px 0 6px; }
+    #printSummary table { width:100%; border-collapse:collapse; font-size:.85rem; margin:14px 0; }
+    #printSummary th, #printSummary td { padding:7px 8px; border-bottom:1px solid #E3E9F2; text-align:left; }
+    #printSummary th { font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:#7A8AA3; }
+    #printSummary .ps-bar-row { display:flex; height:22px; border-radius:5px; overflow:hidden; margin:12px 0 6px; width:100%; }
+    #printSummary .ps-bar-row > span { height:100%; }
+    #printSummary .ps-foot { font-size:.72rem; color:#7A8AA3; margin-top:24px; border-top:1px solid #E3E9F2; padding-top:10px; }
+    #printSummary .ps-para { font-size:.86rem; color:#46556E; margin:14px 0; line-height:1.6; }
+    #printSummary .ps-cite { font-size:.74rem; color:#7A8AA3; margin-top:8px; }
+  }
+</style>
+</head>
+<body>
+
+
+<!-- Top utility bar — links demo site back to main 4orm Finance marketing site -->
+<div class="top-utility">
+  <div class="wrap">
+    <a class="back-link" href="https://www.4ormfinance.com">← Back to 4orm Finance</a>
+    <span class="utility-eye"><span class="pulse"></span>LIVE INSTITUTIONAL DEMO · NO SIGNUP</span>
+    <a class="utility-cta" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+  </div>
+</div>
+<div class="sbx-banner"><b>What it saves</b>, illustrative model in CAD. Pick an institution profile; the numbers prefill from published Canadian benchmarks. No data entry required.</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <nav class="nav-links">
+            <a href="https://www.4ormfinance.com/exchange/" class="nav-exchange" target="_blank" rel="noopener" aria-label="Open the 4ormEx Exchange"><span class="ex-main">4ormEx</span><span class="ex-eye">Exchange</span></a>
+<a href="index.html">Overview</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="primer.html">Field Guide</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="sandbox.html">Sandbox</a>
+      <a href="money-flows.html">Money Flows</a>
+      <a href="cost-analysis-bank.html">What It Saves</a>
+      <a href="institution-summary.html">Institutional Summary</a>
+      <div class="nav-drop">
+        <span class="nav-drop-trigger" tabindex="0" role="button" aria-haspopup="true">How We Protect You <span class="caret">&#9662;</span></span>
+        <div class="nav-drop-menu">
+          <a href="risk-compliance.html">Risk &amp; Compliance</a>
+          <a href="supervision.html">Supervision</a>
+          <a href="institutions.html">The Network</a>
+        </div>
+      </div>
+      <a href="education.html">How We Teach You</a>
+      <a href="login.html" class="nav-auth">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO (dark) -->
+<section class="dhero">
+  <div class="dhero-inner">
+    <div class="dhero-eyebrow">What it saves</div>
+    <h1>Days and dollars: <span class="accent">what 4orm saves you.</span></h1>
+    <p class="dhero-sub">The same institutional transaction runs in roughly <b>12 business days</b> on legacy rails versus <b>seconds</b> on 4orm, and that time is money. Watch three rails race side by side, then pick your institution profile to put a dollar figure on it. Every assumption is adjustable on the page.</p>
+    <div class="dhero-pills">
+      <span class="dhero-pill gold">Illustrative model</span>
+      <span class="dhero-pill">CAD</span>
+      <span class="dhero-pill">v2 methodology</span>
+      <span class="dhero-pill">Every assumption adjustable</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ FIVE-DRIVER DECOMPOSITION (illustrative, compact) -->
+<style>
+  /* Five drivers section: dark charcoal backdrop with translucent driver cards (matches institution-summary treatment) */
+  .fd-section { padding: 40px 0 48px; background: linear-gradient(180deg, #0B1220 0%, #15233F 60%, #1B2B52 100%); color: #fff; position: relative; overflow: hidden; }
+  .fd-section::before { content:''; position:absolute; top:-20%; right:-10%; width: 60vw; height: 60vw; max-width: 700px; max-height: 700px; background: radial-gradient(circle, rgba(123,180,255,.08) 0%, transparent 60%); pointer-events: none; }
+  .fd-wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+  .fd-kicker { font-size:.74rem; text-transform:uppercase; letter-spacing:.14em; color: #9AB6FF; font-weight:800; }
+  .fd-wrap h2 { margin: 4px 0 6px; letter-spacing:-.01em; font-size:1.55rem; color: #fff; }
+  .fd-wrap .lead { color: rgba(255,255,255,.78); font-size:.95rem; line-height: 1.6; max-width: 56em; margin: 0 0 18px; }
+  .fd-wrap .lead b { color: #fff; }
+  .fd-bar { display: flex; width: 100%; height: 42px; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,.30); border: 1px solid rgba(255,255,255,.10); }
+  .fd-bar .seg { display: flex; align-items: center; justify-content: center; color: #15233F;
+    font-weight: 800; font-size: .82rem; min-width: 0; padding: 0 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .fd-bar .seg.alt { color: #fff; }
+  .fd-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 10px; font-size: .78rem; color: rgba(255,255,255,.72); }
+  .fd-legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+  .fd-total { margin-top: 12px; font-size: .92rem; color: #fff; }
+  .fd-total .n { font-size: 1.45rem; font-weight: 800; color: #FFD9A8; letter-spacing: -.02em; }
+  .fd-total .lab { color: rgba(255,255,255,.55); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; margin-left: 8px; }
+  .fd-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; margin-top: 24px; }
+  @media (max-width: 1100px){ .fd-cards { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 720px){ .fd-cards { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px){ .fd-cards { grid-template-columns: 1fr; } }
+  .fd-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-top: 3px solid var(--brand);
+    border-radius: 12px; padding: 14px 16px; transition: background .2s, border-color .2s, transform .2s; color: #fff; }
+  .fd-card:hover { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22); transform: translateY(-2px); }
+  .fd-card.gold { border-top-color: #E7C76C; }
+  .fd-card.gold-d { border-top-color: #C49A3A; }
+  .fd-card.blue-m { border-top-color: #1F57D6; }
+  .fd-card.blue-d { border-top-color: #1B4ABE; }
+  .fd-card h3 { margin: 0 0 2px; font-size: .85rem; letter-spacing: -.005em; line-height: 1.25; color: #fff; }
+  .fd-card .amt { font-size: 1.15rem; font-weight: 800; color: #FFD9A8; letter-spacing: -.01em; margin: 4px 0 8px; }
+  .fd-card .why { font-size: .8rem; color: rgba(255,255,255,.75); line-height: 1.5; margin: 0; }
+  .fd-card .why b { color: #fff; }
+  .fd-callout { margin-top: 16px; padding: 12px 18px; background: rgba(46,107,242,.14); border: 1px solid rgba(123,180,255,.30);
+    border-left: 3px solid #5A93FF; border-radius: 8px; font-size: .88rem; color: rgba(255,255,255,.85); line-height: 1.5; }
+  .fd-callout b { color: #9AB6FF; }
+  .fd-math-link { display:inline-block; margin-top:10px; font-size:.88rem; font-weight:800; color: #FFD9A8; }
+  .fd-math-link:hover { color: #FFE6C0; }
+</style>
+
+<section class="fd-section" id="five-drivers">
+  <div class="fd-wrap">
+    <div class="fd-kicker">Where the savings live</div>
+    <h2>Five drivers. $1.42M CAD. One illustrative mid-size regional bank.</h2>
+    <p class="lead"><b>What you are looking at.</b> An illustrative Canadian mid-size regional bank: roughly $2B to $6B in assets, 150,000 cross-bank payments a month at ~$4,000 average value, two-day ACSS settlement window today, 4% blended cost of funds. The five bars below show where 4orm produces savings against the modelled legacy cost on the same activity. Ordered from the most defensible (trapped liquidity, mathematical) to the most adoption-dependent (KYC reuse, scales with the network). Removal percentages were revised downward from earlier versions because Canadian banks already auto-screen and auto-match; the honest savings live in the manual tail, the liquidity float, and the correspondent layer.</p>
+
+    <div class="fd-total"><span class="n">$1,420,000 CAD</span><span class="lab">Illustrative annual saving · mid-size regional bank profile</span></div>
+
+    <!-- stacked horizontal bar, 5 segments, widths proportional to C$ values -->
+    <div class="fd-bar" role="img" aria-label="Stacked bar showing five savings drivers totalling $1,420,000 CAD" style="margin-top:14px;">
+      <div class="seg"     style="background:#E7C76C; width:36.6%;" title="Trapped liquidity freed: $520,000 CAD">Liquidity $520K</div>
+      <div class="seg"     style="background:#C49A3A; width:23.9%;" title="Correspondent fees eliminated: $340,000 CAD">Fees $340K</div>
+      <div class="seg alt" style="background:#2E6BF2; width:16.2%;" title="Compliance labour: $230,000 CAD">Compliance $230K</div>
+      <div class="seg alt" style="background:#1F57D6; width:12.7%;" title="Reconciliation labour: $180,000 CAD">Recon $180K</div>
+      <div class="seg alt" style="background:#1B4ABE; width:10.6%;" title="KYC duplication: $150,000 CAD">KYC $150K</div>
+    </div>
+
+    <div class="fd-cards">
+      <div class="fd-card gold">
+        <h3>1. Trapped liquidity freed</h3>
+        <div class="amt">$520K CAD</div>
+        <p class="why">Idle prefunding 1-2 days at 3.5% cost-of-funds. Atomic T+0 DvP removes ~95% of settlement float.</p>
+      </div>
+      <div class="fd-card gold-d">
+        <h3>2. Correspondent fees</h3>
+        <div class="amt">$340K CAD</div>
+        <p class="why">$0.15-0.25 CAD per interbank payment, zero on 4orm. 100% removal on on-platform flows only.</p>
+      </div>
+      <div class="fd-card">
+        <h3>3. Compliance labour</h3>
+        <div class="amt">$230K CAD</div>
+        <p class="why">Rail-level canonical sanctions check cuts the manual disposition tail ~45%, not the auto-screening layer.</p>
+      </div>
+      <div class="fd-card blue-m">
+        <h3>4. Reconciliation labour</h3>
+        <div class="amt">$180K CAD</div>
+        <p class="why">Same on-ledger record on both sides means fewer breaks. Honest removal 55%, not 95%.</p>
+      </div>
+      <div class="fd-card blue-d">
+        <h3>5. KYC duplication</h3>
+        <div class="amt">$150K CAD</div>
+        <p class="why">Shared signed credential replaces per-institution KYC. Scales with adoption; smallest at single-bank deployment.</p>
+      </div>
+    </div>
+
+    <div class="fd-callout">
+      <b>About these numbers.</b> Illustrative model, not measured. Every assumption is adjustable below. Your CFO's mileage will vary; we want them to challenge it.
+      <a class="fd-math-link" href="methodology.html" style="margin-left:8px;">Show the math &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- D4 ============================================ WHAT THESE SAVINGS PRESERVE (four-pillar) -->
+<style>
+  /* "What these savings preserve" section: dark navy backdrop, white cards with color accent on top */
+  .pp-section { padding: 54px 0 60px; background: linear-gradient(180deg, #0B1220 0%, #15233F 100%); color: #fff; position: relative; overflow: hidden; }
+  .pp-section::before { content:''; position:absolute; top:-180px; right:-180px; width:520px; height:520px; background: radial-gradient(circle, rgba(123,180,255,.06) 0%, transparent 60%); pointer-events:none; }
+  .pp-wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+  .pp-kicker { font-size:.74rem; text-transform:uppercase; letter-spacing:.12em; color:#9AB6FF; font-weight:800; }
+  .pp-wrap h2 { margin: 6px 0 6px; letter-spacing:-.01em; color: #fff; }
+  .pp-wrap .lead { color: rgba(255,255,255,.78); font-size: 1rem; line-height: 1.6; max-width: 56em; font-style: italic; margin: 0 0 22px; }
+  .pp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 1020px){ .pp-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px){ .pp-grid { grid-template-columns: 1fr; } }
+  .pp-card { background: var(--surface); border: 1px solid var(--border); border-top: 4px solid var(--brand);
+    border-radius: 12px; padding: 18px 20px; box-shadow: var(--shadow-sm); }
+  .pp-card.gold { border-top-color: var(--gold); }
+  .pp-card.green { border-top-color: var(--success); }
+  .pp-card.purple { border-top-color: #7C5CC6; }
+  .pp-card .ic { width:36px; height:36px; border-radius:10px; background:var(--brand-50); color:var(--brand-700);
+    display:grid; place-items:center; margin-bottom:10px; }
+  .pp-card.gold .ic { background: var(--gold-50); color: var(--gold-ink); }
+  .pp-card.green .ic { background: var(--success-bg); color: var(--success); }
+  .pp-card.purple .ic { background: rgba(124,92,198,.14); color: #5B40A8; }
+  .pp-card .ic svg { width:20px; height:20px; }
+  .pp-card h3 { margin: 0 0 6px; font-size: 1rem; letter-spacing: -.01em; }
+  .pp-card p { font-size: .88rem; color: var(--text-2); line-height: 1.55; margin: 0; }
+  .pp-close { margin-top: 20px; font-size: .94rem; color: rgba(255,255,255,.78); font-style: italic; }
+  .pp-close b { color: #FFD9A8; font-style: normal; }
+</style>
+<section class="pp-section" aria-labelledby="pp-heading">
+  <div class="pp-wrap">
+    <div class="pp-kicker">What these savings preserve</div>
+    <h2 id="pp-heading">The same controls, at a fraction of the labour.</h2>
+    <p class="lead">The model above produces savings without losing any of the controls your CAMLO and CFO require. Specifically:</p>
+
+    <div class="pp-grid">
+      <div class="pp-card">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v6c0 4-3 7-8 8-5-1-8-4-8-8V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Supply integrity</h3>
+        <p>Total supply of every token remains accurate and verifiable. Redemptions burn tokens; issuance mints them; the canonical registry is always reconciled.</p>
+      </div>
+      <div class="pp-card gold">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M3 12h18M3 19h18"/><circle cx="6" cy="5" r="1.5"/><circle cx="11" cy="12" r="1.5"/><circle cx="16" cy="19" r="1.5"/></svg></div>
+        <h3>Ownership traceability</h3>
+        <p>Clear and complete record of ownership from issuance to redemption, immutably hash-recorded for audit and supervisory review.</p>
+      </div>
+      <div class="pp-card green">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M2 12h20"/></svg></div>
+        <h3>Supervisory auditability</h3>
+        <p>Transparent audit trail accessible to regulators and internal oversight. Aggregate read-only visibility is continuous; customer-detail access is gated through lawful production order.</p>
+      </div>
+      <div class="pp-card purple">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v6H4zM4 14h16v6H4z"/></svg></div>
+        <h3>Regulated payout governance</h3>
+        <p>Fiat payouts at redemption follow institutional and regulatory requirements. Settlement finality requires treasury, custody, and canonical ledger confirmation, not blockchain alone.</p>
+      </div>
+    </div>
+
+    <p class="pp-close"><b>The same controls,</b> at a fraction of the labour.</p>
+  </div>
+</section>
+
+<!-- ============================================ THE RACE (headline comparison) -->
+<section class="section tight compare-dark" id="compare" style="padding-top:36px;">
+  <div class="wrap">
+    <span class="eyebrow">The whole point</span>
+    <h2 style="max-width:16em;">The same transaction, three rails.</h2>
+    <p class="t2" style="max-width:46em;">One trade, onboard, screen, trade, settle, reconcile, report, run the way your
+      operations team runs it today versus the way it runs on 4orm. <b>Pick the scenario that fits</b>, since the timeline depends on whether the
+      counterparty is new, established, or internal. It plays automatically; press replay to watch again.</p>
+    <div class="flex aic wrapf gap12 mt16" style="margin-bottom:2px;">
+      <span class="steplab" style="margin:0;">Scenario</span>
+      <span class="seg" id="scnSeg">
+        <button data-scn="new" class="active">New counterparty</button>
+        <button data-scn="established">Established</button>
+        <button data-scn="internal">Internal (same bank)</button>
+      </span>
+      <span class="muted" id="scnHint" style="font-size:.84rem;"></span>
+    </div>
+
+    <div class="rail-toggle mt16">
+      <span class="rt-label">Compare with</span>
+      <label class="rt-check on" id="rtManualLabel">
+        <input type="checkbox" id="rtManual" checked> Manual today
+      </label>
+      <label class="rt-check rtr on" id="rtRTRLabel">
+        <input type="checkbox" id="rtRTR" checked> Real-Time Rail (RTR, when launched)
+      </label>
+      <label class="rt-check four on" id="rtFourmLabel">
+        <input type="checkbox" id="rtFourm" checked> 4orm
+      </label>
+    </div>
+
+    <div class="btn-row mt12">
+      <button class="btn btn-lg cmp-start-vibrate" id="cmpStart">&#9654; Press to start the race</button>
+      <button class="btn btn-ghost btn-lg" id="cmpReplay" disabled>Replay</button>
+    </div>
+
+    <div class="race3 mt28" id="raceGrid">
+      <!-- MANUAL -->
+      <div class="track manual" id="trackManual" style="">
+        <div class="t-head">
+          <div class="tag">Your process today</div>
+          <h3>Manual, multi-party</h3>
+          <div class="t-clock" id="clockManual">0<small> elapsed</small></div>
+        </div>
+        <div class="t-bar"><i id="barManual"></i></div>
+        <ul class="stages" id="stagesManual"></ul>
+        <div class="t-foot"><span class="muted" id="footManual">Phones, email, spreadsheets, custodians and clearing.</span>
+          <span class="chip chip-danger done-chip"><span class="dot"></span> Settled &amp; reconciled</span></div>
+      </div>
+      <!-- RTR -->
+      <div class="track rtr" id="trackRTR" style="">
+        <div class="t-head">
+          <div class="tag">Real-Time Rail (RTR)</div>
+          <h3>Faster payments rail</h3>
+          <div class="t-clock" id="clockRTR">0<small> elapsed</small></div>
+        </div>
+        <div class="t-bar"><i id="barRTR"></i></div>
+        <ul class="stages" id="stagesRTR"></ul>
+        <div class="t-foot"><span class="muted" id="footRTR">Payments Canada RTR, expected launch 2026 to 2027.</span>
+          <span class="chip done-chip" style="background:#F3EEFF;color:#5A3FA0;border-color:#D8C8F5;"><span class="dot" style="background:#7C5CC6;"></span> Payment received</span></div>
+      </div>
+      <!-- 4ORM -->
+      <div class="track chain" id="trackChain" style="">
+        <div class="t-head">
+          <div class="tag">On 4orm</div>
+          <h3>Atomic, on-chain</h3>
+          <div class="t-clock" id="clockChain">0<small> elapsed</small></div>
+        </div>
+        <div class="t-bar"><i id="barChain"></i></div>
+        <ul class="stages" id="stagesChain"></ul>
+        <div class="t-foot"><span class="muted" id="footChain">One programmable rail with a permanent record.</span>
+          <span class="chip chip-success done-chip"><span class="dot"></span> Settled &amp; reported</span></div>
+      </div>
+    </div>
+
+    <div class="rtr-note mt14" id="rtrNote">
+      <b>Real-Time Rail (RTR) is faster payments, not atomic settlement.</b> RTR moves money in seconds end-to-end, but trapped liquidity, compliance labour and reconciliation costs persist on RTR; they are removed on 4orm. RTR does not provide delivery-versus-payment (DvP), shared audit trail, or embedded AML screening. Source: Payments Canada RTR programme documentation.<sup class="ref"><a href="#bs-rtr">8</a></sup>
+    </div>
+
+    <div class="cmp-verdict" id="cmpVerdict" style="display:none;">
+      <div class="card vc"><div class="big" id="vManual" style="color:var(--danger);">&#183;</div><div class="lab">Manual lifecycle</div></div>
+      <div class="card vc" style="border-color:#D8C8F5;background:#F9F5FF;"><div class="big" id="vRTR" style="color:#5A3FA0;">&#183;</div><div class="lab">Real-Time Rail (RTR)</div></div>
+      <div class="card vc hl"><div class="big" id="vChain">&#183;</div><div class="lab">On 4orm</div></div>
+      <div class="card vc"><div class="big" id="vMult" style="color:var(--brand-700);">&#183;</div><div class="lab">4orm vs. manual, end to end</div></div>
+    </div>
+
+    <h3 class="mt32">Where the difference comes from</h3>
+    <div class="card pad mt16" style="overflow-x:auto;">
+      <table class="table cmp-table">
+        <thead><tr><th>Dimension</th><th>Manual process</th><th>On 4orm</th></tr></thead>
+        <tbody>
+          <tr><td>Onboarding / KYC</td><td class="bad">Repeated per counterparty, 3 to 5 days</td><td class="good">Reusable credential, seconds</td></tr>
+          <tr><td>Settlement cycle</td><td class="bad">T+2 (days of exposure)<sup class="ref"><a href="#bs-acss">1</a></sup></td><td class="good">T+0 atomic (instant)<sup class="ref"><a href="#bs-samara">6</a></sup></td></tr>
+          <tr><td>Counterparty risk</td><td class="bad">Open until settled</td><td class="good">Eliminated, delivery-vs-payment</td></tr>
+          <tr><td>Failed trades / breaks</td><td class="bad">Manual chase &amp; repair</td><td class="good">Atomic, settles fully or not at all</td></tr>
+          <tr><td>Reconciliation</td><td class="bad">Each side keeps its own books</td><td class="good">One shared, self-reconciling ledger</td></tr>
+          <tr><td>Audit trail</td><td class="bad">Reassembled on request, weeks</td><td class="good">Always-on, queryable instantly</td></tr>
+          <tr><td>Compliance reporting</td><td class="bad">Manual export &amp; reconciliation</td><td class="good">Auto-compiled from the record</td></tr>
+          <tr><td>Transparency</td><td class="bad">Fragmented across parties</td><td class="good">Single source of truth</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted mt16" style="font-size:.84rem;">How to read this: the timeline shown is the <b>scenario selected above</b>. Manual durations reflect typical
+      institutional benchmarks, counterparty onboarding/KYC 3 to 5 days, AML 1 to 2 days, and DvP settlement at <b>T+2</b>, the ACSS deferred-net standard<sup class="ref"><a href="#bs-acss">1</a></sup>, and are illustrative, not a quote. <b>Larger amounts add enhanced due diligence and holds</b>; model those by dollar amount in the sandbox's
+      <a href="money-flows.html">Money Flows</a> view. The 4orm side is what the <a href="sandbox.html">sandbox</a> produces.</p>
+  </div>
+</section>
+
+<!-- ============================================ THE CALCULATOR (dark page backdrop) -->
+<section class="section tight calc-dark-page" style="padding-top:0;">
+  <div class="wrap">
+    <span class="eyebrow">Now put a number on it</span>
+    <h2 class="mb0" style="max-width:18em;">Pick your institution. See the cost.</h2>
+    <p class="t2" style="max-width:48em; margin-top:6px;">No spreadsheets, no data entry, choose a profile and the model prefills realistic Canadian benchmarks.</p>
+
+    <!-- CONTROLS, on a dark band so the picker boxes go gray and the result cards below pop -->
+    <div class="calc-dark-band">
+      <div class="steplab">Step 1, pick an institution profile</div>
+      <div class="profiles" id="profileRow">
+        <button class="profile" data-p="community"><b>Community bank</b><small>under C$1B assets</small></button>
+        <button class="profile" data-p="creditunion"><b>Credit union</b><small>regional, member-owned</small></button>
+        <button class="profile active" data-p="regional"><b>Mid-size regional</b><small>C$1 to 10B assets</small></button>
+        <button class="profile" data-p="tier1"><b>Tier-1 bank</b><small>national scale</small></button>
+      </div>
+
+      <div class="flex between aic wrapf gap16" style="margin:18px 0 14px;">
+        <div>
+          <div class="steplab" style="margin-bottom:6px;">Step 2, who's sending &amp; receiving</div>
+          <span class="seg" id="modeSeg">
+            <button data-mode="interbank" class="active">Bank → Bank</button>
+            <button data-mode="internal">Internal (same bank)</button>
+          </span>
+        </div>
+        <span class="muted" id="modeHint" style="font-size:.84rem;"></span>
+      </div>
+
+      <div class="pick-row">
+        <label class="field mb0"><span class="lab" id="senderLab">Sending institution</span>
+          <select class="input" id="sender"></select></label>
+        <div class="pick-arrow">→</div>
+        <label class="field mb0" id="receiverWrap"><span class="lab">Receiving institution</span>
+          <select class="input" id="receiver"></select></label>
+      </div>
+
+      <details class="advanced" id="adv">
+        <summary>Adjust the assumptions (optional)</summary>
+        <div class="grid grid-2 mt16">
+          <div>
+            <div class="ctrl"><div class="top"><span class="lab">Payments / month (count)</span><span class="val" id="vVol">150,000</span></div>
+              <input type="range" class="slider" id="vol" aria-label="Payments per month (count)" min="50000" max="50000000" step="50000" value="150000"></div>
+            <div class="ctrl"><div class="top"><span class="lab">Average payment value</span><span class="val" id="vAval">C$4,000</span></div>
+              <input type="range" class="slider" id="aval" aria-label="Average payment value (CAD)" min="500" max="500000" step="500" value="4000"></div>
+            <div class="ctrl"><div class="top"><span class="lab">Settlement delay (days in transit)</span><span class="val" id="vDelay">2.0</span></div>
+              <input type="range" class="slider" id="delay" aria-label="Settlement delay (days in transit)" min="0" max="5" step="0.5" value="2"></div>
+          </div>
+          <div>
+            <div class="ctrl"><div class="top"><span class="lab">Cost of funds / opportunity rate</span><span class="val" id="vFund">4.0%</span></div>
+              <input type="range" class="slider" id="fund" aria-label="Cost of funds / opportunity rate (percent)" min="0" max="10" step="0.25" value="4"></div>
+            <div class="ctrl"><div class="top"><span class="lab">Payments triggering a manual check</span><span class="val" id="vAlert">2%</span></div>
+              <input type="range" class="slider" id="alert" aria-label="Payments triggering a manual compliance check (percent)" min="0.5" max="15" step="0.5" value="2"></div>
+            <div class="mini-row">
+              <label class="field"><span class="lab">Min / check</span><input class="input" type="number" id="minPer" value="12" min="1" max="120"></label>
+              <label class="field"><span class="lab">Correspondent fee / pmt</span><input class="input" type="number" step="0.01" id="corr" value="0.25" min="0" max="5"></label>
+            </div>
+          </div>
+        </div>
+        <p class="assume-note">Loaded compliance cost C$60/hr. Sender carries correspondent/clearing fees and prefunding; receiver carries
+          delayed-availability funding. 4orm embeds compliance at the rail (rail-level canonical sanctions screening removes the manual disposition tail, ~45% of total compliance labour per the v2 methodology), removes correspondents, and settles atomically (T+0).</p>
+      </details>
+    </div>
+
+    <!-- HEADLINE -->
+    <div class="headline mt24">
+      <div class="big" id="hSave">C$0</div>
+      <div class="sub"><span id="hSubText">combined annual saving across both institutions</span>, <span class="pct" id="hPct">0%</span> lower</div>
+    </div>
+
+    <!-- SIDES -->
+    <div class="ab-grid mt24">
+      <div class="card side" id="panelSender"></div>
+      <div class="card side" id="panelReceiver"></div>
+    </div>
+
+    <!-- SAVINGS BREAKDOWN BAR (moved above pallet, leads with where the savings come from) -->
+    <div class="card pad mt24">
+      <div class="steplab" style="margin-bottom:4px;">Where the savings come from</div>
+      <p style="font-size:.85rem;color:var(--text-2);margin:0 0 10px;">Combined annual saving across sender and receiver, broken into four drivers. Hover each segment for details.</p>
+      <div class="sbar-wrap">
+        <div class="sbar-track" id="sbarTrack">
+          <div class="sbar-seg" id="sb0" style="background:#2E6BF2;flex:1;">
+            <div class="sbar-tip" id="sbTip0">Compliance labour<br><span id="sbV0">C$0</span></div>
+          </div>
+          <div class="sbar-seg" id="sb1" style="background:#1B4ABE;flex:0;">
+            <div class="sbar-tip" id="sbTip1">Correspondent / clearing fees<br><span id="sbV1">C$0</span></div>
+          </div>
+          <div class="sbar-seg" id="sb2" style="background:#7C5CC6;flex:0;">
+            <div class="sbar-tip" id="sbTip2">Trapped liquidity freed<br><span id="sbV2">C$0</span></div>
+          </div>
+          <div class="sbar-seg" id="sb3" style="background:#0E8A5F;flex:0;">
+            <div class="sbar-tip" id="sbTip3">Reconciliation overhead<br><span id="sbV3">C$0</span></div>
+          </div>
+        </div>
+        <div class="sbar-labels">
+          <span class="sbar-leg"><span class="sbar-dot" style="background:#2E6BF2;"></span> Compliance labour saved <span id="sbLab0" style="font-family:var(--font-mono);font-weight:700;color:var(--brand-700);margin-left:4px;">C$0</span></span>
+          <span class="sbar-leg"><span class="sbar-dot" style="background:#1B4ABE;"></span> Correspondent / clearing fees removed <span id="sbLab1" style="font-family:var(--font-mono);font-weight:700;color:var(--brand-700);margin-left:4px;">C$0</span></span>
+          <span class="sbar-leg"><span class="sbar-dot" style="background:#7C5CC6;"></span> Trapped liquidity freed (x cost of funds) <span id="sbLab2" style="font-family:var(--font-mono);font-weight:700;color:var(--brand-700);margin-left:4px;">C$0</span></span>
+          <span class="sbar-leg"><span class="sbar-dot" style="background:#0E8A5F;"></span> Reconciliation overhead reduced <span id="sbLab3" style="font-family:var(--font-mono);font-weight:700;color:var(--brand-700);margin-left:4px;">C$0</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT 4ORM DOES (pallet, now appears after the savings breakdown) -->
+    <div class="pallet mt24" id="pallet">
+      <h3>What 4orm does for this transfer</h3>
+      <p class="psub">The same payment, settled on a shared ledger, here is what changes, updated live with the profile above.</p>
+      <div class="pallet-metrics">
+        <div class="pm"><div class="n" id="pSave">C$0</div><div class="l">combined saved / year</div></div>
+        <div class="pm"><div class="n">T+2 → <span class="hl">T+0</span></div><div class="l">settlement time<sup class="ref"><a href="#bs-acss">1</a></sup></div></div>
+        <div class="pm"><div class="n" id="pLiq">C$0</div><div class="l">liquidity freed (in transit)</div></div>
+        <div class="pm"><div class="n" id="pHours">0</div><div class="l">staff-hours reclaimed / year</div></div>
+      </div>
+      <div class="pallet-does">
+        <div class="doh"><span><b>Embeds compliance.</b> Rail-level canonical sanctions screening removes the manual disposition tail, about 45% of total compliance labour.<sup class="ref"><a href="#bs-fp">4</a></sup></span></div>
+        <div class="doh"><span><b>Removes the correspondent.</b> Banks settle peer-to-peer, no tier-one Group Clearer in the middle.<sup class="ref"><a href="#bs-acss">1</a></sup></span></div>
+        <div class="doh"><span><b>Settles atomically (T+0).</b> Delivery-versus-payment in seconds, no overnight float.<sup class="ref"><a href="#bs-samara">6</a></sup></span></div>
+        <div class="doh"><span><b>Frees trapped liquidity.</b> Prefunding and pledged collateral released for both sides.</span></div>
+      </div>
+    </div>
+
+    <!-- COST OF JOINING -->
+    <div class="coj-panel" id="cojPanel">
+      <div class="coj-left">
+        <div class="coj-title">Cost of joining 4orm</div>
+        <p id="cojDesc">Estimated platform cost: <b id="cojFee">C$X</b> per month for an institution this size. Annual platform cost: <b id="cojAnnual">C$Y</b>.</p>
+      </div>
+      <div class="coj-right">
+        <div class="coj-net" id="cojNet">C$0</div>
+        <div class="coj-sub">net annual saving after platform fees</div>
+      </div>
+    </div>
+    <p class="assume-note" style="margin-top:8px;">Platform cost ranges are indicative placeholder estimates only; actual pricing is not yet set. Net saving = modelled gross saving minus the annual platform fee range shown above.</p>
+
+    <p class="assume-note">"Trapped liquidity" = funds in transit plus prefunded settlement balances and collateral, held until next-morning
+      net settlement. On a shared ledger delivery and payment move together, so it is freed, for both banks, at any size.</p>
+
+    <!-- EXPORT BUTTON -->
+    <div class="print-btn-row">
+      <button class="btn btn-ghost" id="exportPdfBtn">&#9109; Export PDF summary</button>
+    </div>
+  </div>
+</section>
+
+<!-- HIDDEN PRINT NODE -->
+<div id="printSummary">
+  <h1 id="psTitle">Modelled annual savings</h1>
+  <div class="ps-meta" id="psMeta"></div>
+  <div class="ps-big" id="psBig">C$0</div>
+  <div style="font-size:.88rem;color:#46556E;" id="psBigSub">combined annual saving, before platform fees</div>
+  <table>
+    <thead><tr><th>Input</th><th>Value</th></tr></thead>
+    <tbody id="psInputs"></tbody>
+  </table>
+  <div style="font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#7A8AA3;margin-top:14px;">Savings breakdown</div>
+  <div class="ps-bar-row" id="psBarRow"></div>
+  <table>
+    <thead><tr><th>Driver</th><th>Annual saving</th></tr></thead>
+    <tbody id="psBreakdown"></tbody>
+  </table>
+  <div style="font-size:.82rem;font-weight:700;color:#0E8A5F;margin-top:10px;">Net annual saving after platform fees: <span id="psNet">C$0</span></div>
+  <p class="ps-para" id="psPara"></p>
+  <div class="ps-cite" id="psCite"></div>
+  <div class="ps-foot">Built by KCS Capital · Illustrative model in CAD · Not financial advice · compliance@kcs-capital.com</div>
+</div>
+
+<!-- CONTEXT -->
+<section class="section tight">
+  <div class="wrap">
+    <h2>Why both sides pay today</h2>
+    <div class="statgrid mt16">
+      <div class="card statc"><div class="n">T+1 / T+2</div><div class="l">deferred net settlement in the ACSS, liquidity locked overnight on both sides<sup class="ref"><a href="#bs-acss">1</a></sup></div></div>
+      <div class="card statc"><div class="n">C$23M+</div><div class="l">in FINTRAC penalties to Canadian banks &amp; credit unions (2021 to 25), the burden falls hardest on smaller institutions<sup class="ref"><a href="methodology.html#m-aml-burden">▸</a></sup></div></div>
+      <div class="card statc"><div class="n">90 to 95%</div><div class="l">of compliance alerts are false positives, paid for in staff time at each bank<sup class="ref"><a href="#bs-fp">4</a></sup></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="section tight" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sources">
+      <div class="src-top">
+        <span class="vbadge"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Verified sources</span>
+        <h3>Sources &amp; methodology</h3>
+        <a href="methodology.html" style="margin-left:auto; font-weight:650; font-size:.9rem;">Full methodology &amp; all sources →</a>
+      </div>
+      <p class="src-meth">This is an illustrative model in CAD: every input above is a control you can change. Per-side savings split compliance labour
+        (loaded at C$60/hr), correspondent/clearing fees, prefunding and delayed-availability liquidity, and reconciliation. The liquidity figure dominates and
+        scales with value flowing × your cost-of-funds rate. Benchmarks are drawn from the primary sources below.</p>
+      <ul class="src-list">
+        <li id="bs-acss"><span class="sn">1</span><span class="sbody"><a href="https://www.payments.ca/systems-services/payment-systems/retail-batch-payment-system" target="_blank" rel="noopener">Retail batch system (ACSS), deferred net settlement &amp; Group Clearers</a> <span class="pub">· Payments Canada</span></span></li>
+        <li id="bs-lynx"><span class="sn">2</span><span class="sbody"><a href="https://www.bankofcanada.ca/core-functions/monetary-policy/lynx/" target="_blank" rel="noopener">Lynx high-value payment system</a> <span class="pub">· Bank of Canada</span></span></li>
+        <li id="bs-aml"><span class="sn">3</span><span class="sbody"><a href="https://www.csbs.org/too-small-scale-what-10-years-data-say-about-community-bank-compliance-costs" target="_blank" rel="noopener">Community-bank compliance costs, small banks up to 0.83% of assets vs 0.08%</a> <span class="pub">· CSBS</span></span></li>
+        <li id="bs-fp"><span class="sn">4</span><span class="sbody"><a href="https://www.fourthline.com/blog/how-much-do-banks-spend-on-compliance" target="_blank" rel="noopener">How much banks spend on compliance · 90 to 95% false positives</a> <span class="pub">· Fourthline (2025)</span></span></li>
+        <li id="bs-fincen"><span class="sn">5</span><span class="sbody"><a href="https://www.fincen.gov/survey-costs-amlcft-compliance" target="_blank" rel="noopener">Survey of the costs of AML/CFT compliance</a> <span class="pub">· FinCEN</span></span></li>
+        <li id="bs-samara"><span class="sn">6</span><span class="sbody"><a href="https://www.bankofcanada.ca/2026/03/bank-canada-export-development-canada-rbc-td-successfully-complete-bond-issuance-experiment-distributed-ledger-technology/" target="_blank" rel="noopener">Project Samara, $100M tokenized bond, instant settlement</a> <span class="pub">· Bank of Canada (Mar 2026)</span></span></li>
+        <li id="bs-rate"><span class="sn">7</span><span class="sbody"><a href="https://www.bankofcanada.ca/2026/04/fad-press-release-2026-04-29/" target="_blank" rel="noopener">Policy interest rate held at 2.25% (Apr 2026)</a> <span class="pub">· Bank of Canada</span></span></li>
+        <li id="bs-rtr"><span class="sn">8</span><span class="sbody"><a href="https://www.payments.ca/real-time-rail-build-track-completion-q3-2025" target="_blank" rel="noopener">Real-Time Rail (RTR), build track completion Q3 2025, launch expected 2026 to 2027</a> <span class="pub">· Payments Canada</span></span></li>
+      </ul>
+      <p class="src-disc">Illustrative cost model in CAD. Not financial advice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ CLOSING CTA — back to 4orm Finance -->
+<section class="demo-closing">
+  <div class="demo-closing-inner">
+    <div>
+      <div class="demo-closing-eye"><span class="dot"></span>Ready for the next step</div>
+      <h2>Bring 4orm to <span class="accent">your institution.</span></h2>
+      <p>You've just walked the same flow your treasury team, risk lead, and compliance officer would walk in production. If it fits the way your institution moves, we'd like to talk. Pre-Seed closes Q2 2026.</p>
+      <div class="demo-closing-buttons">
+        <a class="demo-closing-btn gold" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+        <a class="demo-closing-btn ghost" href="https://www.4ormfinance.com">Back to 4orm Finance</a>
+      </div>
+    </div>
+    <div class="demo-closing-side">
+      <h4>What happens when you sign up</h4>
+      <ul>
+        <li><span class="check">✓</span><span>Institutional onboarding call within 5 business days</span></li>
+        <li><span class="check">✓</span><span>Tailored walkthrough for your treasury, risk, and compliance teams</span></li>
+        <li><span class="check">✓</span><span>Direct line to Mike Sammut (Founder, KCS Capital)</span></li>
+        <li><span class="check">✓</span><span>Optional sandbox tenant for your team to test internally</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="foot-contact">
+  <div class="wrap">
+    <span>Questions, or want to walk through this with us? <a href="mailto:compliance@kcs-capital.com">compliance@kcs-capital.com</a> &middot; 4orm Finance is built and operated by KCS Capital.</span>
+  </div>
+</div>
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <p class="small mb0" style="max-width:48em;">Illustrative cost model in CAD; benchmarks from public Canadian sources (FINTRAC, Payments Canada, Bank of Canada) and labelled global benchmarks, see the
+      <a href="methodology.html">methodology</a>. 4orm Finance is an early-stage platform in development (sandbox-stage); educational only, not an offer of securities and not financial advice.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script src="institutions.js"></script>
+<script>
+var DATA=(window.INSTITUTIONS||[]).slice().sort(function(a,b){return (a.name||'').localeCompare(b.name||'');});
+var BY={}; DATA.forEach(function(d){ BY[d.name]=d; });
+var PROVN={AB:'Alberta',BC:'British Columbia',SK:'Saskatchewan',MB:'Manitoba',ON:'Ontario',QC:'Quebec',NS:'Nova Scotia',NB:'New Brunswick',NL:'Newfoundland & Labrador',PE:'Prince Edward Island'};
+function money(n){ return 'C$'+Math.round(n).toLocaleString('en-US'); }
+function moneyC(n){ if(n>=1e9)return 'C$'+(n/1e9).toFixed(2)+'B'; if(n>=1e6)return 'C$'+(n/1e6).toFixed(2)+'M'; if(n>=1e3)return 'C$'+Math.round(n/1e3)+'K'; return 'C$'+Math.round(n); }
+
+var state={mode:'interbank'};
+function fillSelect(id,def){ var s=document.getElementById(id); s.innerHTML=DATA.map(function(d){return '<option value="'+d.name.replace(/"/g,'&quot;')+'">'+d.name+' · '+d.prov+'</option>';}).join('');
+  if(def && BY[def]) s.value=def; }
+
+function compute(){
+  var pm=+document.getElementById('vol').value, avg=+document.getElementById('aval').value,
+      delay=+document.getElementById('delay').value, fund=+document.getElementById('fund').value,
+      alert=+document.getElementById('alert').value, minPer=+document.getElementById('minPer').value||0,
+      corr=+document.getElementById('corr').value||0, rate=60;
+  document.getElementById('vVol').textContent=pm.toLocaleString();
+  document.getElementById('vAval').textContent=money(avg);
+  document.getElementById('vDelay').textContent=delay.toFixed(1);
+  document.getElementById('vFund').textContent=fund.toFixed(2)+'%';
+  document.getElementById('vAlert').textContent=alert+'%';
+
+  var annualPayments=pm*12, annualValue=annualPayments*avg, dailyValue=annualValue/365, float=dailyValue*delay;
+  var recon=annualPayments*0.12;
+  var laborOut=annualPayments*(alert/100)*(minPer/60)*rate;
+  var laborIn=laborOut*0.8;
+  var inter = state.mode==='interbank';
+
+  // sender buckets [legacy, 4orm]
+  var S={ comp:[laborOut, laborOut*0.10],
+          fee:[ inter? annualPayments*corr : 0, 0 ],
+          liq:[ float*fund/100, float*fund/100*0.02 ],
+          rec:[ recon, recon*0.05 ] };
+  // receiver buckets
+  var R={ comp:[laborIn, laborIn*0.10],
+          fee:[ 0, 0 ],
+          liq:[ float*fund/100, float*fund/100*0.02 ],
+          rec:[ recon, recon*0.05 ] };
+
+  function tot(o,idx){ return o.comp[idx]+o.fee[idx]+o.liq[idx]+o.rec[idx]; }
+  var sLeg=tot(S,0), s4=tot(S,1), rLeg=tot(R,0), r4=tot(R,1);
+  var save, legAll;
+  if (inter){ save=(sLeg-s4)+(rLeg-r4); legAll=sLeg+rLeg; }
+  else { save=(sLeg-s4); legAll=sLeg; }   /* internal = one bank, counted once (no double-count) */
+  var pct=legAll>0?save/legAll*100:0;
+  document.getElementById('hSubText').textContent = inter
+    ? 'combined annual saving across both institutions'
+    : 'annual saving for the bank, across both branches';
+
+  document.getElementById('hSave').textContent=moneyC(save);
+  document.getElementById('hPct').textContent=Math.round(pct)+'%';
+
+  /* pallet metrics */
+  var hoursReclaimed = (annualPayments*(alert/100)*(minPer/60))*(inter?1.8:1)*0.9; // both sides for interbank; one bank for internal
+  var pSaveEl=document.getElementById('pSave'); if(pSaveEl) pSaveEl.textContent=moneyC(save);
+  var pLiqEl=document.getElementById('pLiq'); if(pLiqEl) pLiqEl.textContent=moneyC(float);
+  var pHoursEl=document.getElementById('pHours'); if(pHoursEl) pHoursEl.textContent=Math.round(hoursReclaimed).toLocaleString();
+
+  var sName=document.getElementById('sender').value;
+  var rName= inter ? document.getElementById('receiver').value : sName;
+  var sInst=BY[sName], rInst=BY[rName];
+
+  function chips(inst, branch){
+    if(!inst) return '';
+    var a='<span class="chip chip-neutral">'+(PROVN[inst.prov]||inst.prov)+'</span>';
+    var b= inst.assets? '<span class="chip chip-brand">'+inst.assets+'</span>':'';
+    var c= branch? '<span class="chip chip-neutral">'+branch+'</span>':'';
+    return '<div class="chips">'+a+b+c+'</div>';
+  }
+  function rows(o){
+    function r(lab,b){ return '<tr><td>'+lab+'</td><td class="leg">'+moneyC(b[0])+'</td><td class="ch">'+moneyC(b[1])+'</td></tr>'; }
+    return r('Compliance labour',o.comp)+r('Correspondent fees',o.fee)+r('Trapped liquidity',o.liq)+r('Reconciliation',o.rec)+
+      '<tr class="tot"><td>Annual total</td><td class="leg">'+moneyC(tot(o,0))+'</td><td class="ch">'+moneyC(tot(o,1))+'</td></tr>';
+  }
+  function panel(who, inst, branch, o){
+    var name = inst? inst.name : '·';
+    return '<div class="who">'+who+'</div><h3>'+name+'</h3>'+chips(inst,branch)+
+      '<div class="save"><div class="n">'+moneyC(tot(o,0)-tot(o,1))+'</div><div class="l">saved per year vs the legacy process</div></div>'+
+      '<table class="bt"><thead><tr><th>Cost</th><th>Legacy</th><th>On 4orm</th></tr></thead><tbody>'+rows(o)+'</tbody></table>';
+  }
+  var abGrid = document.querySelector('.ab-grid');
+  var recvEl = document.getElementById('panelReceiver');
+  if (inter){
+    if (abGrid) abGrid.classList.remove('single');
+    recvEl.style.display = '';
+    document.getElementById('panelSender').innerHTML = panel('Sender', sInst, null, S);
+    recvEl.innerHTML = panel('Receiver', rInst, null, R);
+  } else {
+    if (abGrid) abGrid.classList.add('single');
+    recvEl.style.display = 'none';
+    document.getElementById('panelSender').innerHTML = panel('The bank · both branches', sInst, 'internal transfer', S);
+  }
+
+  document.getElementById('modeHint').textContent = inter
+    ? annualPayments.toLocaleString()+' payments/yr · '+moneyC(annualValue)+' flowing · '+moneyC(float)+' in transit'
+    : 'Same institution, branch to branch · '+annualPayments.toLocaleString()+' transfers/yr';
+
+  /* ---- Task 3: savings breakdown stacked bar ---- */
+  var mult = inter ? 1.8 : 1;
+  var sbComp = (laborOut - laborOut*0.10)*mult;
+  var sbFee  = inter ? annualPayments*corr : 0;
+  var sbLiq  = (float*fund/100)*(inter?2:1) * (1 - 0.02);
+  var sbRec  = (recon - recon*0.05)*(inter?2:1);
+  var sbTotal= sbComp + sbFee + sbLiq + sbRec;
+  function sbarFlex(v){ return sbTotal>0 ? Math.max(v/sbTotal*100, 0) : 0; }
+  var sb0El=document.getElementById('sb0'), sb1El=document.getElementById('sb1'),
+      sb2El=document.getElementById('sb2'), sb3El=document.getElementById('sb3');
+  if(sb0El){ sb0El.style.flex=sbarFlex(sbComp).toFixed(1); }
+  if(sb1El){ sb1El.style.flex=sbarFlex(sbFee).toFixed(1); }
+  if(sb2El){ sb2El.style.flex=sbarFlex(sbLiq).toFixed(1); }
+  if(sb3El){ sb3El.style.flex=sbarFlex(sbRec).toFixed(1); }
+  var sbIds=[['sbV0','sbLab0',sbComp],['sbV1','sbLab1',sbFee],['sbV2','sbLab2',sbLiq],['sbV3','sbLab3',sbRec]];
+  sbIds.forEach(function(row){
+    var ve=document.getElementById(row[0]), le=document.getElementById(row[1]);
+    var txt=moneyC(row[2]);
+    if(ve) ve.textContent=txt;
+    if(le) le.textContent=txt;
+  });
+
+  /* ---- Task 4: cost of joining panel ---- */
+  var COJ = {
+    community:   { monthly: 1500,  label: 'C$1,000 to C$2,000' },
+    creditunion: { monthly: 2500,  label: 'C$2,000 to C$3,000' },
+    regional:    { monthly: 6000,  label: 'C$4,000 to C$8,000' },
+    tier1:       { monthly: 18000, label: 'C$12,000 to C$25,000' }
+  };
+  var activeProfileKey = (function(){
+    var active = document.querySelector('#profileRow .profile.active');
+    return active ? active.getAttribute('data-p') : 'regional';
+  })();
+  var cojData = COJ[activeProfileKey] || COJ.regional;
+  var cojAnnual = cojData.monthly * 12;
+  var cojNet = save - cojAnnual;
+  var cojFeeEl=document.getElementById('cojFee'), cojAnnualEl=document.getElementById('cojAnnual'),
+      cojNetEl=document.getElementById('cojNet'), cojDescEl=document.getElementById('cojDesc');
+  if(cojFeeEl) cojFeeEl.textContent = cojData.label;
+  if(cojAnnualEl) cojAnnualEl.textContent = moneyC(cojData.monthly*12)+' (midpoint)';
+  if(cojNetEl){ cojNetEl.textContent = moneyC(Math.max(cojNet,0)); cojNetEl.style.color = cojNet>=0 ? 'var(--success)' : 'var(--danger)'; }
+
+  /* expose for print */
+  window._lastCompute = {
+    save: save, pct: pct, sbComp: sbComp, sbFee: sbFee, sbLiq: sbLiq, sbRec: sbRec,
+    cojNet: Math.max(cojNet,0), cojFee: cojData.label, cojAnnual: cojAnnual,
+    pm: pm, avg: avg, delay: delay, fund: fund, alert: alert, minPer: minPer, corr: corr,
+    sName: document.getElementById('sender').value, rName: inter ? document.getElementById('receiver').value : null,
+    profileKey: activeProfileKey
+  };
+}
+
+function setMode(m){
+  state.mode=m;
+  document.querySelectorAll('#modeSeg button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-mode')===m); });
+  var inter=m==='interbank';
+  document.getElementById('receiverWrap').style.display = inter? 'block':'none';
+  document.getElementById('senderLab').textContent = inter? 'Sending institution':'Institution (both branches)';
+  compute();
+}
+
+/* ---- institution-profile presets (prefill the model) ---- */
+var PROFILES = {
+  community:   { vol:50000,    aval:2500,  delay:2,   fund:4, alert:2,   minPer:12, corr:0.25 },
+  creditunion: { vol:100000,   aval:3000,  delay:2,   fund:4, alert:2,   minPer:12, corr:0.25 },
+  regional:    { vol:150000,   aval:4000,  delay:2.0, fund:4.0, alert:2.0, minPer:12, corr:0.25 },
+  tier1:       { vol:2000000,  aval:8000,  delay:1.5, fund:4, alert:1.5, minPer:12, corr:0.20 }
+};
+var TIER_REF_M = { tier1:50000, regional:4000, creditunion:2500, community:600 }; /* representative assets ($M) per profile */
+
+function applyProfile(key){
+  var p = PROFILES[key]; if(!p) return;
+  document.getElementById('vol').value   = p.vol;
+  document.getElementById('aval').value  = p.aval;
+  document.getElementById('delay').value = p.delay;
+  document.getElementById('fund').value  = p.fund;
+  document.getElementById('alert').value = p.alert;
+  document.getElementById('minPer').value= p.minPer;
+  document.getElementById('corr').value  = p.corr;
+  document.querySelectorAll('#profileRow .profile').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-p')===key); });
+  compute();
+}
+
+/* parse an assets string like "$60.4B (FY24)" or "$500M" to a number in $M */
+function parseAssetsM(a){
+  if(!a) return 0;
+  var m=String(a).match(/([\d.]+)\s*([BM])/i);
+  if(!m) return 0;
+  return parseFloat(m[1]) * (m[2].toUpperCase()==='B' ? 1000 : 1);
+}
+/* which profile an institution belongs to, keeps the profile and the institution consistent */
+function profileForInstitution(inst){
+  if(!inst || !inst.tier) return 'regional';
+  if(inst.tier==='T1') return 'tier1';
+  if(inst.tier==='T2') return 'regional';
+  return /credit union|caisse|cooperative/i.test(inst.type||'') ? 'creditunion' : 'community';
+}
+/* apply the matching profile for an institution, then scale monthly volume by its real assets */
+function applyProfileForInstitution(inst){
+  var key = profileForInstitution(inst);
+  applyProfile(key);
+  var am = parseAssetsM(inst && inst.assets);
+  if(am){
+    var ref = TIER_REF_M[key] || am;
+    var ratio = Math.min(Math.max(am/ref, 0.4), 2.5);
+    var base = PROFILES[key].vol;
+    document.getElementById('vol').value = Math.max(1000, Math.round(base*ratio/1000)*1000);
+    compute();
+  }
+}
+/* selecting an institution drives the profile and scale, so the two can never contradict */
+function syncFromSender(){
+  var inst = BY[document.getElementById('sender').value];
+  if(inst) applyProfileForInstitution(inst); else compute();
+}
+/* clicking a profile picks a representative institution of that profile, so they stay in sync */
+function onProfileClick(key){
+  var pool = DATA.filter(function(d){ return profileForInstitution(d)===key; });
+  if(pool.length){
+    pool.sort(function(a,b){ return parseAssetsM(b.assets)-parseAssetsM(a.assets); });
+    document.getElementById('sender').value = pool[0].name;
+    document.getElementById('receiver').value = (pool[1]||pool[0]).name;
+    applyProfileForInstitution(pool[0]);
+  } else {
+    applyProfile(key);
+  }
+}
+
+/* wire */
+['vol','aval','delay','fund','alert','minPer','corr'].forEach(function(id){
+  var e=document.getElementById(id); ['input','change'].forEach(function(ev){ e.addEventListener(ev,compute); });
+});
+document.getElementById('sender').addEventListener('change', syncFromSender);
+document.getElementById('receiver').addEventListener('change', compute);
+document.querySelectorAll('#modeSeg button').forEach(function(b){ b.addEventListener('click',function(){ setMode(b.getAttribute('data-mode')); }); });
+document.querySelectorAll('#profileRow .profile').forEach(function(b){
+  b.addEventListener('click', function(){ onProfileClick(b.getAttribute('data-p')); });
+});
+
+/* boot: pick default institutions, then let the institution drive the profile + scale */
+if(!DATA.length){ document.getElementById('hSave').textContent='·'; }
+fillSelect('sender','ATB Financial'); fillSelect('receiver','Coast Capital Savings');
+setMode('interbank');
+onProfileClick('regional');  /* default to a believable mid-size regional case (sender + profile stay consistent) */
+
+/* ===================================================================
+   Race, scoped IIFE (Manual + RTR + 4orm three-track)
+   =================================================================== */
+(function(){
+  var MANUAL_SCN = {
+    'new': [
+      { name:'KYC / counterparty onboarding', dur:'3 to 5 days', min: 4*1440, wall: 1.4 },
+      { name:'AML / sanctions screening', dur:'1 to 2 days', min: 1.5*1440, wall: 1.1 },
+      { name:'Asset & account setup', dur:'2 days', min: 2*1440, wall: 1.1 },
+      { name:'Trade agreed (phone / email)', dur:'2 hours', min: 120, wall: 0.8 },
+      { name:'Confirmation & matching', dur:'4 hours', min: 240, wall: 0.9 },
+      { name:'Settlement (T+2, ACSS deferred net)', dur:'2 days', min: 2*1440, wall: 1.4 },
+      { name:'Reconciliation', dur:'1 day', min: 1440, wall: 1.0 },
+      { name:'Compliance report', dur:'1 to 2 days', min: 1.5*1440, wall: 1.1 }
+    ],
+    'established': [
+      { name:'Trade agreed (phone / email)', dur:'2 hours', min: 120, wall: 0.9 },
+      { name:'Confirmation & matching', dur:'4 hours', min: 240, wall: 1.0 },
+      { name:'Settlement (T+2, ACSS deferred net)', dur:'2 days', min: 2*1440, wall: 1.5 },
+      { name:'Reconciliation', dur:'1 day', min: 1440, wall: 1.1 },
+      { name:'Compliance report', dur:'1 day', min: 1440, wall: 1.0 }
+    ],
+    'internal': [
+      { name:'Transfer booked (core banking)', dur:'1 hour', min: 60, wall: 0.8 },
+      { name:'Inter-branch / suspense posting', dur:'overnight', min: 1440, wall: 1.2 },
+      { name:'End-of-day reconciliation', dur:'0.5 day', min: 720, wall: 1.0 },
+      { name:'Internal compliance log', dur:'0.5 day', min: 720, wall: 1.0 }
+    ]
+  };
+  /* RTR stages: fast payment leg, but compliance and reconciliation remain */
+  var RTR_SCN = {
+    'new': [
+      { name:'KYC / counterparty onboarding', dur:'3 to 5 days', min: 4*1440, wall: 1.2 },
+      { name:'AML screening (manual)', dur:'1 to 2 days', min: 1.5*1440, wall: 0.9 },
+      { name:'Payment instruction sent', dur:'seconds', sec: 3, wall: 0.5 },
+      { name:'RTR network routing', dur:'seconds', sec: 4, wall: 0.5 },
+      { name:'Recipient bank credits account', dur:'seconds', sec: 3, wall: 0.4 },
+      { name:'Manual reconciliation', dur:'1 day', min: 1440, wall: 0.9 },
+      { name:'Compliance labour review', dur:'1 day', min: 1440, wall: 0.9 }
+    ],
+    'established': [
+      { name:'Payment instruction sent', dur:'seconds', sec: 3, wall: 0.5 },
+      { name:'RTR network routing', dur:'seconds', sec: 4, wall: 0.5 },
+      { name:'Recipient bank credits account', dur:'seconds', sec: 3, wall: 0.4 },
+      { name:'Manual reconciliation', dur:'1 day', min: 1440, wall: 0.9 },
+      { name:'Compliance labour review', dur:'1 day', min: 1440, wall: 0.9 }
+    ],
+    'internal': [
+      { name:'Internal transfer instruction', dur:'minutes', sec: 60, wall: 0.5 },
+      { name:'Core banking credit', dur:'seconds', sec: 5, wall: 0.4 },
+      { name:'End-of-day reconciliation', dur:'0.5 day', min: 720, wall: 0.8 }
+    ]
+  };
+  var CHAIN = [
+    { name:'KYC credential presented', dur:'1.6s', sec:1.6, wall:0.42 },
+    { name:'AML screening (embedded)', dur:'1.1s', sec:1.1, wall:0.36 },
+    { name:'Asset tokenized', dur:'2.0s', sec:2.0, wall:0.46 },
+    { name:'Trade matched', dur:'0.4s', sec:0.4, wall:0.3 },
+    { name:'Attestation signed', dur:'0.6s', sec:0.6, wall:0.3 },
+    { name:'Atomic settlement (T+0)', dur:'3.1s', sec:3.1, wall:0.5 },
+    { name:'Audit record written', dur:'instant', sec:0.2, wall:0.28 },
+    { name:'Report auto-compiled', dur:'0.5s', sec:0.5, wall:0.32 }
+  ];
+  var scn = 'new';
+  function manualStages(){ return MANUAL_SCN[scn]; }
+  function rtrStages(){ return RTR_SCN[scn]; }
+
+  /* rail visibility state */
+  var showManual = true, showRTR = true, showFourm = true;
+  function syncRailVisibility(){
+    var tm = document.getElementById('trackManual');
+    var tr = document.getElementById('trackRTR');
+    var tc = document.getElementById('trackChain');
+    var rg = document.getElementById('raceGrid');
+    if(tm) tm.style.display = showManual ? '' : 'none';
+    if(tr) tr.style.display = showRTR ? '' : 'none';
+    if(tc) tc.style.display = showFourm ? '' : 'none';
+    var visible = [showManual, showRTR, showFourm].filter(Boolean).length;
+    if(rg){
+      rg.style.gridTemplateColumns = visible === 1 ? '1fr' : visible === 2 ? '1fr 1fr' : 'repeat(3,1fr)';
+    }
+    var rtrNote = document.getElementById('rtrNote');
+    if(rtrNote) rtrNote.style.display = showRTR ? '' : 'none';
+  }
+  function updateToggleLabel(cbId, labelId, onClass){
+    var cb = document.getElementById(cbId);
+    var lb = document.getElementById(labelId);
+    if(!cb || !lb) return;
+    lb.classList.toggle(onClass, cb.checked);
+  }
+  document.getElementById('rtManual').addEventListener('change', function(){
+    showManual = this.checked;
+    updateToggleLabel('rtManual','rtManualLabel','on');
+    syncRailVisibility();
+  });
+  document.getElementById('rtRTR').addEventListener('change', function(){
+    showRTR = this.checked;
+    updateToggleLabel('rtRTR','rtRTRLabel','on');
+    syncRailVisibility();
+  });
+  document.getElementById('rtFourm').addEventListener('change', function(){
+    showFourm = this.checked;
+    updateToggleLabel('rtFourm','rtFourmLabel','on');
+    syncRailVisibility();
+  });
+
+  function tick(){ return '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'; }
+  function dot(){ return '<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>'; }
+  function buildStages(elId, stages){
+    var el = document.getElementById(elId);
+    if(!el) return;
+    el.innerHTML = stages.map(function(s){
+      return '<li><span class="sic">'+dot()+'</span><span class="sname">'+s.name+'</span><span class="sdur">'+s.dur+'</span></li>';
+    }).join('');
+  }
+  function fmtDays(min){
+    var days = min/1440;
+    if (days >= 1) return (Math.round(days*10)/10) + ' business days';
+    var hrs = min/60;
+    return (Math.round(hrs*10)/10) + ' hours';
+  }
+  function fmtRTR(stages){
+    /* RTR has mix of min and sec fields */
+    var totalMin = 0, totalSec = 0;
+    stages.forEach(function(s){
+      if(s.min) totalMin += s.min;
+      else if(s.sec) totalSec += s.sec;
+    });
+    if(totalMin >= 60) return fmtDays(totalMin);
+    if(totalMin > 0) return (Math.round(totalMin*10)/10)+' min + ~'+Math.round(totalSec)+'s payment';
+    return Math.round(totalSec)+'s payment (+ reconciliation)';
+  }
+  var running = false;
+  function sleep(ms){ return new Promise(function(res){ setTimeout(res, ms); }); }
+  async function runTrack(elId, barId, clockId, stages, mode){
+    /* mode: 'manual' | 'rtr' | 'chain' */
+    var lis = document.querySelectorAll('#'+elId+' li');
+    var bar = document.getElementById(barId);
+    var clock = document.getElementById(clockId);
+    if(!bar || !clock) return 0;
+    var accMin = 0, accSec = 0;
+    for (var i=0;i<stages.length;i++){
+      var li = lis[i];
+      if(!li) continue;
+      li.classList.add('active');
+      li.querySelector('.sic').innerHTML = '<span class="spinner"></span>';
+      await sleep(stages[i].wall*1000);
+      li.classList.remove('active'); li.classList.add('done');
+      li.querySelector('.sic').innerHTML = tick();
+      if(mode === 'chain'){
+        accSec += stages[i].sec;
+        clock.innerHTML = (Math.round(accSec*10)/10)+'s<small> elapsed</small>';
+      } else if(mode === 'rtr'){
+        if(stages[i].min) accMin += stages[i].min;
+        else if(stages[i].sec) accSec += stages[i].sec;
+        if(accMin >= 60) clock.innerHTML = fmtDays(accMin)+'<small> elapsed</small>';
+        else if(accMin > 0) clock.innerHTML = fmtDays(accMin)+'<small> elapsed</small>';
+        else clock.innerHTML = Math.round(accSec)+'s<small> elapsed</small>';
+      } else {
+        accMin += stages[i].min;
+        clock.innerHTML = fmtDays(accMin)+'<small> elapsed</small>';
+      }
+      bar.style.width = ((i+1)/stages.length*100)+'%';
+    }
+    return mode === 'chain' ? accSec : accMin;
+  }
+  async function startRace(){
+    if (running) return; running = true;
+    document.getElementById('cmpStart').disabled = true;
+    document.getElementById('cmpReplay').disabled = true;
+    document.getElementById('cmpVerdict').style.display = 'none';
+    ['trackManual','trackRTR','trackChain'].forEach(function(t){ var el=document.getElementById(t); if(el) el.classList.remove('finished'); });
+    buildStages('stagesManual', manualStages());
+    buildStages('stagesRTR', rtrStages());
+    buildStages('stagesChain', CHAIN);
+    ['barManual','barRTR','barChain'].forEach(function(id){ var el=document.getElementById(id); if(el) el.style.width='0%'; });
+    document.getElementById('clockManual').innerHTML='0 hours<small> elapsed</small>';
+    document.getElementById('clockRTR').innerHTML='0.0s<small> elapsed</small>';
+    document.getElementById('clockChain').innerHTML='0.0s<small> elapsed</small>';
+    var pManual = runTrack('stagesManual','barManual','clockManual', manualStages(), 'manual').then(function(min){
+      document.getElementById('trackManual').classList.add('finished'); return min;
+    });
+    var pRTR = runTrack('stagesRTR','barRTR','clockRTR', rtrStages(), 'rtr').then(function(min){
+      document.getElementById('trackRTR').classList.add('finished'); return min;
+    });
+    var pChain = runTrack('stagesChain','barChain','clockChain', CHAIN, 'chain').then(function(sec){
+      document.getElementById('trackChain').classList.add('finished'); return sec;
+    });
+    var results = await Promise.all([pManual, pRTR, pChain]);
+    var manualMin = results[0], rtrMin = results[1], chainSec = results[2];
+    document.getElementById('vManual').textContent = fmtDays(manualMin);
+    document.getElementById('vRTR').textContent = fmtRTR(rtrStages());
+    document.getElementById('vChain').textContent = (Math.round(chainSec*10)/10)+' seconds';
+    var manualSec = manualMin*60;
+    function round1sig(n){ if (n<=0) return 0; var e = Math.pow(10, Math.floor(Math.log10(n))); return Math.round(n/e)*e; }
+    var multV = round1sig(manualSec / chainSec);
+    document.getElementById('vMult').textContent = '~' + multV.toLocaleString() + 'x';
+    document.getElementById('cmpVerdict').style.display = 'grid';
+    document.getElementById('cmpReplay').disabled = false;
+    running = false;
+  }
+  document.getElementById('cmpStart').addEventListener('click', startRace);
+  document.getElementById('cmpReplay').addEventListener('click', startRace);
+  var SCN_HINT = {
+    'new': 'First trade with a new counterparty, includes onboarding & screening.',
+    'established': 'Repeat trade between already-onboarded parties, no re-onboarding.',
+    'internal': 'Same bank, branch to branch, no external settlement or onboarding.'
+  };
+  function setScn(s){
+    scn = s;
+    document.querySelectorAll('#scnSeg button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-scn')===s); });
+    var hint = document.getElementById('scnHint'); if (hint) hint.textContent = SCN_HINT[s] || '';
+    running = false;
+    /* Switching scenarios only rebuilds the stages list, it does NOT auto-start the race */
+    buildStages('stagesManual', manualStages());
+    buildStages('stagesRTR', rtrStages());
+    buildStages('stagesChain', CHAIN);
+    /* Reset the time displays to 0 so the cards show a populated placeholder, not blank */
+    ['clockManual','clockRTR','clockChain'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.innerHTML = '0<small> elapsed</small>';
+    });
+    ['barManual','barRTR','barChain'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.style.width = '0%';
+    });
+    /* Enable the Start the race button so the user can run the new scenario */
+    var startBtn = document.getElementById('cmpStart');
+    if (startBtn) startBtn.disabled = false;
+  }
+  document.querySelectorAll('#scnSeg button').forEach(function(b){
+    b.addEventListener('click', function(){ setScn(b.getAttribute('data-scn')); });
+  });
+  document.getElementById('scnHint').textContent = SCN_HINT[scn];
+  buildStages('stagesManual', manualStages());
+  buildStages('stagesRTR', rtrStages());
+  buildStages('stagesChain', CHAIN);
+  syncRailVisibility();
+  /* No auto-start. The race runs only when the user clicks "Start the race". */
+})();
+
+/* ===================================================================
+   Task 5: Export PDF summary via window.print()
+   =================================================================== */
+(function(){
+  var PROFILE_LABELS = {
+    community: 'Community bank (under C$1B assets)',
+    creditunion: 'Credit union (regional, member-owned)',
+    regional: 'Mid-size regional (C$1 to 10B assets)',
+    tier1: 'Tier-1 bank (national scale)'
+  };
+  function moneyC2(n){ if(n>=1e9)return 'C$'+(n/1e9).toFixed(2)+'B'; if(n>=1e6)return 'C$'+(n/1e6).toFixed(2)+'M'; if(n>=1e3)return 'C$'+Math.round(n/1e3)+'K'; return 'C$'+Math.round(n); }
+  function populatePrint(){
+    var d = window._lastCompute || {};
+    var profile = PROFILE_LABELS[d.profileKey] || 'Mid-size regional (C$1 to 10B assets)';
+    var now = new Date();
+    var dateStr = now.getFullYear()+'-'+(now.getMonth()+1 < 10 ? '0' : '')+(now.getMonth()+1)+'-'+(now.getDate()<10?'0':'')+now.getDate();
+    document.getElementById('psTitle').textContent = 'Modelled annual savings for ' + profile;
+    document.getElementById('psMeta').textContent = 'Generated ' + dateStr + ' · Illustrative model in CAD · 4orm Finance · KCS Capital';
+    document.getElementById('psBig').textContent = moneyC2(d.save || 0);
+    document.getElementById('psNet').textContent = moneyC2(d.cojNet || 0);
+    var inputRows = [
+      ['Institution profile', profile],
+      ['Sending institution', d.sName || ''],
+      ['Receiving institution', d.rName || '(same)'],
+      ['Payments per month', (d.pm || 0).toLocaleString()],
+      ['Average payment value', 'C$'+(d.avg||0).toLocaleString()],
+      ['Settlement delay', (d.delay||0).toFixed(1)+' days'],
+      ['Cost of funds / opportunity rate', (d.fund||0).toFixed(2)+'%'],
+      ['Payments triggering manual check', (d.alert||0)+'%'],
+      ['Compliance labour', 'C$60/hr loaded cost'],
+      ['Platform fee (estimated range)', d.cojFee || 'N/A']
+    ];
+    document.getElementById('psInputs').innerHTML = inputRows.map(function(r){
+      return '<tr><td>'+r[0]+'</td><td><b>'+r[1]+'</b></td></tr>';
+    }).join('');
+    var segs = [
+      { label:'Compliance labour saved', val: d.sbComp||0, color:'#2E6BF2' },
+      { label:'Correspondent / clearing fees removed', val: d.sbFee||0, color:'#1B4ABE' },
+      { label:'Trapped liquidity freed (x cost of funds)', val: d.sbLiq||0, color:'#7C5CC6' },
+      { label:'Reconciliation overhead reduced', val: d.sbRec||0, color:'#0E8A5F' }
+    ];
+    var totalSave = (d.save || 1);
+    document.getElementById('psBarRow').innerHTML = segs.map(function(s){
+      return '<span style="flex:'+(s.val/totalSave*100).toFixed(1)+';background:'+s.color+';height:100%;"></span>';
+    }).join('');
+    document.getElementById('psBreakdown').innerHTML = segs.map(function(s){
+      return '<tr><td>'+s.label+'</td><td><b>'+moneyC2(s.val)+'</b></td></tr>';
+    }).join('');
+    var sName = d.sName || 'your institution';
+    document.getElementById('psPara').textContent =
+      'Based on the inputs above, the model estimates that ' + sName + ' and its counterparty could save ' +
+      moneyC2(d.save||0) + ' per year by migrating ' + (d.pm||0).toLocaleString() + ' payments per month onto the 4orm rail. ' +
+      'The dominant driver is trapped liquidity: with C$' + (d.avg||0).toLocaleString() + ' average payment value, ' + (d.delay||0).toFixed(1) + ' days of settlement delay, ' +
+      'and a ' + (d.fund||0).toFixed(2) + '% cost of funds, the float cost is material. ' +
+      'Compliance labour (roughly ' + (d.alert||0) + '% of payments triggering a manual review at C$60/hr loaded cost) and ' +
+      'correspondent clearing fees add further savings. ' +
+      'After estimated platform fees (' + (d.cojFee||'') + '/month), the net annual saving is approximately ' + moneyC2(d.cojNet||0) + '. ' +
+      'These figures are illustrative and modelled, not a quote or guaranteed outcome.';
+    document.getElementById('psCite').innerHTML =
+      'Methodology citations: ACSS deferred-net settlement / Payments Canada (source 1); ' +
+      'C$60/hr loaded compliance cost (Fourthline 2025); ' +
+      '90 to 95% false-positive rate on compliance alerts (Fourthline 2025, source 4); ' +
+      'Bank of Canada policy rate 2.25% (Apr 2026, source 7). ' +
+      'All figures in CAD. Model date: ' + dateStr + '.';
+  }
+  document.getElementById('exportPdfBtn').addEventListener('click', function(){
+    populatePrint();
+    window.print();
+  });
+})();
+</script>
+</body>
+</html>

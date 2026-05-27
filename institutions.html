@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Canadian Institutions, 4orm Finance</title>
+<meta name="description" content="A directory of Canadian community banks and credit unions, the institutions a shared-ledger marketplace can connect and free from trapped liquidity." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* -- stats row -- */
+  .stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  @media (max-width:760px){ .stat-row { grid-template-columns:repeat(2,1fr); } }
+  .stat { padding:18px 20px; } .stat .n { font-size:1.9rem; font-weight:800; letter-spacing:-.02em; }
+  .stat .l { color:var(--text-3); font-size:.84rem; }
+
+  /* -- filters -- */
+  .filters { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; }
+  .filters .field { margin-bottom:0; } .filters .input { min-width:150px; }
+  .prov-bars { display:flex; gap:4px; flex-wrap:wrap; margin-top:6px; }
+  .prov-bar { font-size:.74rem; color:var(--text-2); background:var(--surface-2); border:1px solid var(--border);
+    border-radius:99px; padding:3px 10px; cursor:pointer; }
+  .prov-bar.active { background:var(--brand); color:#fff; border-color:var(--brand); }
+
+  /* -- badges & tiers -- */
+  .badge {
+    display: inline-flex; align-items: center;
+    padding: 3px 10px; border-radius: 99px;
+    font-size: .73rem; font-weight: 650;
+    white-space: nowrap; line-height: 1.4;
+  }
+  .b-cu    { background: #13243F; color: #7FB0FF; }
+  .b-bank  { background: #0F2A22; color: #34CF98; }
+  .b-crown { background: #241433; color: #C99BF0; }
+  .b-other { background: var(--surface-2); color: var(--text-2); }
+  .tier { font-family: var(--font-mono); font-size: .78rem; font-weight: 700; }
+  .tier.t1 { color: var(--brand-700); }
+  .tier.t2 { color: var(--warn); }
+  .tier.t3 { color: var(--text-3); }
+
+  /* -- table polish -- */
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: var(--brand); }
+  th .arr { font-size: .7rem; }
+  .tbl-wrap {
+    max-height: 620px; overflow: auto;
+    border: 1px solid var(--border); border-radius: var(--r-lg);
+  }
+  .tbl-wrap table { margin: 0; }
+  /* Sticky header with clean white background and hairline shadow */
+  .tbl-wrap thead th {
+    position: sticky; top: 0; background: var(--surface); z-index: 2;
+    box-shadow: 0 1px 0 var(--border);
+    padding: 10px 14px;
+    vertical-align: middle;
+  }
+  /* White rows, dark text, comfortable padding, hairline separators */
+  .tbl-wrap tbody tr { background: var(--surface); }
+  .tbl-wrap tbody tr:hover { background: var(--surface-2); }
+  .tbl-wrap .table th,
+  .tbl-wrap .table td {
+    padding: 11px 14px;
+    vertical-align: middle;
+    color: var(--text-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .tbl-wrap .table tr:last-child td { border-bottom: none; }
+  /* Institution name column: bold, dark, wraps cleanly */
+  .tbl-wrap .table tbody td:first-child b {
+    color: var(--text);
+    font-weight: 600;
+    line-height: 1.4;
+    display: block;
+  }
+  /* Province and city: slightly muted */
+  .tbl-wrap .table tbody td:nth-child(3),
+  .tbl-wrap .table tbody td:nth-child(4) {
+    color: var(--text-3);
+    white-space: nowrap;
+  }
+  /* Assets column */
+  .tbl-wrap .table tbody td:nth-child(5) {
+    color: var(--text-2);
+    white-space: nowrap;
+  }
+
+  .count { font-size: .86rem; color: var(--text-3); }
+  a.web { font-size: .86rem; color: var(--brand); text-decoration: none; }
+  a.web:hover { text-decoration: underline; }
+
+  /* -- skeleton loader -- */
+  .skel-row td { background:var(--surface-2); }
+  .skel-cell { display:inline-block; height:.85em; border-radius:4px; background:linear-gradient(90deg,var(--border) 25%,var(--surface-2) 50%,var(--border) 75%);
+    background-size:200% 100%; animation:shimmer 1.2s infinite; }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+  /* -- empty state -- */
+  .empty-state { padding:40px 24px; text-align:center; color:var(--text-3); }
+  .empty-state svg { width:40px; height:40px; opacity:.35; margin-bottom:12px; }
+  .empty-state p { margin:0; font-size:.95rem; }
+
+  /* -- tier info panel -- */
+  .tier-info-wrap { position:relative; display:inline-block; }
+  .tier-info-btn { background:none; border:1px solid var(--border); border-radius:99px; padding:2px 11px;
+    font-size:.8rem; color:var(--brand); cursor:pointer; font-weight:600; line-height:1.6; margin-left:8px; }
+  .tier-info-btn:hover { background:var(--brand-50); }
+  .tier-panel { display:none; position:absolute; top:calc(100% + 6px); left:0; width:340px; max-width:90vw;
+    background:var(--surface); border:1px solid var(--border-strong); border-radius:var(--r-lg);
+    box-shadow:0 8px 28px rgba(0,0,0,.10); padding:18px 20px; z-index:20; }
+  .tier-panel.open { display:block; }
+  .tier-panel h4 { margin:0 0 12px; font-size:.9rem; color:var(--text); }
+  .tier-panel dl { margin:0; display:grid; gap:10px; }
+  .tier-panel dt { font-family:var(--font-mono); font-weight:700; font-size:.8rem; }
+  .tier-panel dt.t1 { color:var(--brand-700); } .tier-panel dt.t2 { color:var(--warn); } .tier-panel dt.t3 { color:var(--text-3); }
+  .tier-panel dd { margin:2px 0 0 0; font-size:.82rem; color:var(--text-2); line-height:1.5; }
+  .tier-panel .tp-close { position:absolute; top:10px; right:12px; background:none; border:none; font-size:1rem; cursor:pointer; color:var(--text-3); }
+
+  /* -- view toggle -- */
+  .view-toggle { display:inline-flex; border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+  .view-toggle button { background:none; border:none; padding:6px 14px; font-size:.85rem; font-weight:600; cursor:pointer;
+    color:var(--text-2); transition:background .15s, color .15s; }
+  .view-toggle button.active { background:var(--brand); color:#fff; }
+  .view-toggle button:hover:not(.active) { background:var(--surface-2); }
+
+  /* -- map view -- */
+  #mapView { display:none; }
+  #mapView.visible { display:block; }
+  #tableView.hidden { display:none; }
+  .map-container { border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; background:var(--surface-2); padding:12px; }
+  .map-container svg.canada-map { width:100%; max-height:520px; display:block; }
+  .map-legend { display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:14px; font-size:.82rem; }
+  .map-legend-item { display:flex; align-items:center; gap:6px; }
+  .map-legend-dot { width:10px; height:10px; border-radius:50%; flex:none; }
+
+  /* -- savings column -- */
+  .saving-link { font-size:.82rem; font-weight:600; color:var(--brand); text-decoration:none; }
+  .saving-link:hover { text-decoration:underline; }
+  .saving-label { font-size:.74rem; color:var(--text-3); display:block; }
+
+  /* -- formula note -- */
+  .formula-note { font-size:.8rem; color:var(--text-3); line-height:1.55; padding:10px 14px;
+    background:var(--surface-2); border-radius:var(--r); border-left:3px solid var(--gold); margin-top:12px; }
+  .formula-note b { color:var(--text-2); }
+
+  /* -- mobile card view -- */
+  @media (max-width:680px){
+    .tbl-wrap { border:none; border-radius:0; max-height:none; overflow:visible; }
+    .tbl-wrap table, .tbl-wrap thead, .tbl-wrap tbody, .tbl-wrap tr, .tbl-wrap td, .tbl-wrap th { display:block; }
+    .tbl-wrap thead { display:none; }
+    .tbl-wrap tbody tr { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg);
+      margin-bottom:10px; padding:12px 14px; }
+    .tbl-wrap tbody td { padding:3px 0; font-size:.88rem; }
+    .tbl-wrap tbody td:before { content:attr(data-label); font-size:.74rem; color:var(--text-3); display:block; margin-bottom:1px; }
+    .tbl-wrap tbody td:first-child:before { display:none; }
+    .tbl-wrap tbody td:first-child { font-weight:700; font-size:.96rem; margin-bottom:4px; }
+  }
+</style>
+</head>
+<body>
+
+
+<!-- Top utility bar — links demo site back to main 4orm Finance marketing site -->
+<div class="top-utility">
+  <div class="wrap">
+    <a class="back-link" href="https://www.4ormfinance.com">← Back to 4orm Finance</a>
+    <span class="utility-eye"><span class="pulse"></span>LIVE INSTITUTIONAL DEMO · NO SIGNUP</span>
+    <a class="utility-cta" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+  </div>
+</div>
+<div class="sbx-banner"><b>Institution directory</b>, public, institution-level data only (name, type, province, assets, HQ). No personal contact details are shown.</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <nav class="nav-links">
+            <a href="https://www.4ormfinance.com/exchange/" class="nav-exchange" target="_blank" rel="noopener" aria-label="Open the 4ormEx Exchange"><span class="ex-main">4ormEx</span><span class="ex-eye">Exchange</span></a>
+<a href="index.html">Overview</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="primer.html">Field Guide</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="sandbox.html">Sandbox</a>
+      <a href="money-flows.html">Money Flows</a>
+      <a href="cost-analysis-bank.html">What It Saves</a>
+      <a href="institution-summary.html">Institutional Summary</a>
+      <div class="nav-drop">
+        <span class="nav-drop-trigger" tabindex="0" role="button" aria-haspopup="true">How We Protect You <span class="caret">&#9662;</span></span>
+        <div class="nav-drop-menu">
+          <a href="risk-compliance.html">Risk &amp; Compliance</a>
+          <a href="supervision.html">Supervision</a>
+          <a href="institutions.html">The Network</a>
+        </div>
+      </div>
+      <a href="education.html">How We Teach You</a>
+      <a href="login.html" class="nav-auth">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO (dark) -->
+<section class="dhero">
+  <div class="dhero-inner">
+    <div class="dhero-eyebrow">The Canadian opportunity</div>
+    <h1>The institutions a <span class="accent">shared ledger can connect.</span></h1>
+    <p class="dhero-sub">Canada's community banks and credit unions hold the deepest local relationships but the least innovation capacity. They sit on the most trapped liquidity per dollar of assets, because they clear through deferred-net settlement and tier-one correspondent banks with no shared rail of their own. Every one is a candidate to settle atomically, free that liquidity, and plug into a Canada-first marketplace.</p>
+    <div class="dhero-pills">
+      <span class="dhero-pill gold">186 institutions</span>
+      <span class="dhero-pill">10 provinces &amp; territories</span>
+      <span class="dhero-pill">Public, institution-level data only</span>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" style="padding-top:36px;">
+  <div class="wrap">
+    <div class="stat-row">
+      <div class="card stat"><div class="n" id="stTotal">·</div><div class="l">institutions</div></div>
+      <div class="card stat"><div class="n" id="stProv">·</div><div class="l">provinces &amp; territories</div></div>
+      <div class="card stat"><div class="n" id="stCU">·</div><div class="l">credit unions</div></div>
+      <div class="card stat"><div class="n" id="stT1">·</div><div class="l">Tier-1 priority targets</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" style="padding-top:0;">
+  <div class="wrap">
+    <div class="card pad">
+      <div class="filters">
+        <label class="field"><span class="lab">Search</span><input class="input" id="fSearch" placeholder="Institution or city..."></label>
+        <label class="field"><span class="lab">Province</span><select class="input" id="fProv"></select></label>
+        <label class="field"><span class="lab">Type</span><select class="input" id="fType"></select></label>
+        <label class="field" style="position:relative;">
+          <span class="lab" style="display:flex;align-items:center;">
+            Tier
+            <span class="tier-info-wrap">
+              <button class="tier-info-btn" id="tierInfoBtn" aria-expanded="false" aria-controls="tierPanel">What is this?</button>
+              <div class="tier-panel" id="tierPanel" role="tooltip">
+                <button class="tp-close" id="tierPanelClose" aria-label="Close">&#x2715;</button>
+                <h4>Tier classification (T1 / T2 / T3)</h4>
+                <dl>
+                  <div>
+                    <dt class="t1">T1 · Large / Priority</dt>
+                    <dd>Assets above C$5B, or institutions of national or large regional systemic importance (e.g. Desjardins, Equitable Bank, Manulife Bank, major provincial credit unions). Directly regulated by OSFI (federally chartered) or large enough that provincial regulators publish detailed annual data. First-wave onboarding targets for 4orm.</dd>
+                  </div>
+                  <div>
+                    <dt class="t2">T2 · Mid-tier</dt>
+                    <dd>Assets roughly C$500M to C$5B. Regional credit unions, mid-size Schedule I banks, and caisse populaires with meaningful clearing volumes. Good business case for shared-ledger settlement, typically partner-regulated through Central 1 or provincial credit-union leagues.</dd>
+                  </div>
+                  <div>
+                    <dt class="t3">T3 · Community</dt>
+                    <dd>Assets below C$500M. Community credit unions and small chartered banks. Clearing costs represent a larger share of operating expense, so the per-dollar saving from atomic settlement is proportionally highest, but onboarding complexity also requires aggregator or network approach.</dd>
+                  </div>
+                </dl>
+              </div>
+            </span>
+          </span>
+          <select class="input" id="fTier"><option value="">All</option><option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option></select>
+        </label>
+        <button class="btn btn-ghost btn-sm" id="fReset">Reset</button>
+      </div>
+      <div class="prov-bars" id="provBars"></div>
+
+      <div class="flex between aic mt16" style="margin-bottom:8px;gap:12px;flex-wrap:wrap;">
+        <span class="count" id="count">Loading...</span>
+        <div class="view-toggle">
+          <button id="btnTable" class="active" aria-pressed="true">Table</button>
+          <button id="btnMap" aria-pressed="false">Map</button>
+        </div>
+      </div>
+
+      <!-- TABLE VIEW -->
+      <div id="tableView">
+        <div class="tbl-wrap" id="tblWrap">
+          <table class="table">
+            <thead><tr>
+              <th class="sortable" data-k="name">Institution <span class="arr" id="arr-name"></span></th>
+              <th>Type</th><th>Prov.</th><th>HQ city</th>
+              <th class="sortable" data-k="assets">Assets (CAD) <span class="arr" id="arr-assets"></span></th>
+              <th>Tier</th>
+              <th>Modelled saving <span style="font-weight:400;font-size:.74rem;">(illus.)</span></th>
+              <th>Website</th>
+            </tr></thead>
+            <tbody id="rows">
+              <!-- skeleton rows injected by JS -->
+            </tbody>
+          </table>
+        </div>
+        <div id="emptyState" class="empty-state" style="display:none;">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p>No institutions match your filters. <button style="background:none;border:none;color:var(--brand);cursor:pointer;font-weight:600;font-size:.95rem;" id="emptyReset">Clear filters</button></p>
+        </div>
+      </div>
+
+      <!-- MAP VIEW -->
+      <div id="mapView">
+        <div class="map-container">
+          <svg class="canada-map" id="canadaMap" viewBox="0 0 760 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of Canada showing institution locations by province">
+            <!-- Simplified province shapes (approximate outlines) -->
+            <!-- BC -->
+            <path id="mp-BC" d="M 55 120 L 100 110 L 120 130 L 130 170 L 115 210 L 95 230 L 75 240 L 60 220 L 48 190 L 42 160 Z" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="80" y="190" font-size="11" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">BC</text>
+            <!-- AB -->
+            <path id="mp-AB" d="M 130 120 L 175 118 L 178 230 L 132 232 L 120 210 L 130 170 Z" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="154" y="182" font-size="11" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">AB</text>
+            <!-- SK -->
+            <path id="mp-SK" d="M 178 118 L 225 118 L 226 232 L 179 232 Z" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="202" y="180" font-size="11" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">SK</text>
+            <!-- MB -->
+            <path id="mp-MB" d="M 226 118 L 272 120 L 276 175 L 268 230 L 228 232 Z" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="250" y="180" font-size="11" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">MB</text>
+            <!-- ON -->
+            <path id="mp-ON" d="M 272 120 L 340 100 L 380 115 L 390 155 L 370 195 L 340 215 L 310 225 L 290 235 L 268 230 L 276 175 Z" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="330" y="178" font-size="11" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">ON</text>
+            <!-- QC -->
+            <path id="mp-QC" d="M 380 80 L 450 65 L 490 85 L 500 130 L 480 175 L 445 200 L 405 205 L 390 155 L 380 115 Z" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="438" y="148" font-size="11" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">QC</text>
+            <!-- NB -->
+            <path id="mp-NB" d="M 500 190 L 530 180 L 545 200 L 535 225 L 510 230 L 498 215 Z" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="520" y="210" font-size="10" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">NB</text>
+            <!-- NS -->
+            <path id="mp-NS" d="M 545 210 L 572 200 L 582 215 L 575 235 L 555 240 L 540 230 Z" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="560" y="225" font-size="10" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">NS</text>
+            <!-- PE (small island) -->
+            <ellipse id="mp-PE" cx="568" cy="192" rx="14" ry="7" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="568" y="196" font-size="9" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">PE</text>
+            <!-- NL -->
+            <path id="mp-NL" d="M 560 90 L 610 70 L 650 90 L 660 130 L 630 160 L 590 165 L 560 140 Z" fill="#e8f0fc" stroke="#c5d5ee" stroke-width="1.5"/>
+            <text x="608" y="125" font-size="10" fill="#46556E" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600">NL</text>
+            <!-- YT -->
+            <path id="mp-YT" d="M 42 55 L 90 50 L 100 75 L 100 110 L 55 120 L 38 95 Z" fill="#f0f4fa" stroke="#c5d5ee" stroke-width="1"/>
+            <text x="68" y="90" font-size="9" fill="#7A8AA3" text-anchor="middle" font-family="Inter,sans-serif">YT</text>
+            <!-- NT -->
+            <path id="mp-NT" d="M 90 50 L 180 44 L 210 80 L 180 118 L 130 120 L 100 110 L 100 75 Z" fill="#f0f4fa" stroke="#c5d5ee" stroke-width="1"/>
+            <text x="148" y="88" font-size="9" fill="#7A8AA3" text-anchor="middle" font-family="Inter,sans-serif">NT</text>
+            <!-- NU -->
+            <path id="mp-NU" d="M 210 44 L 370 30 L 420 50 L 400 80 L 380 80 L 340 100 L 272 120 L 226 118 L 225 80 L 210 80 Z" fill="#f0f4fa" stroke="#c5d5ee" stroke-width="1"/>
+            <text x="310" y="72" font-size="9" fill="#7A8AA3" text-anchor="middle" font-family="Inter,sans-serif">NU</text>
+
+            <!-- Institution dots rendered by JS -->
+            <g id="mapDots"></g>
+          </svg>
+          <div class="map-legend" id="mapLegend">
+            <div class="map-legend-item"><div class="map-legend-dot" style="background:#34CF98;"></div>Bank</div>
+            <div class="map-legend-item"><div class="map-legend-dot" style="background:#7FB0FF;"></div>Credit Union</div>
+            <div class="map-legend-item"><div class="map-legend-dot" style="background:#C99BF0;"></div>Crown / Cooperative</div>
+            <div class="map-legend-item"><div class="map-legend-dot" style="background:#F2A94A;"></div>Other</div>
+            <div class="map-legend-item"><div class="map-legend-dot" style="background:var(--brand-700);opacity:.9;width:14px;height:14px;border-radius:2px;"></div>T1</div>
+            <div class="map-legend-item"><div class="map-legend-dot" style="background:var(--text-3);width:8px;height:8px;"></div>T2/T3</div>
+          </div>
+          <p style="font-size:.78rem;color:var(--text-3);margin-top:8px;">Dots are jittered within each province region. Hover for institution name. No external map libraries used.</p>
+        </div>
+      </div>
+
+      <div class="formula-note mt16">
+        <b>Illustrative saving formula:</b> Modelled annual saving on 4orm is calculated as:
+        <code>saving = assets_numeric * rate</code>, where <code>rate = 0.030%</code> for T1 (C$5B+),
+        <code>0.045%</code> for T2, and <code>0.060%</code> for T3.
+        Basis: atomic settlement eliminates intraday overdraft fees, correspondent float, and deferred-net settlement risk capital.
+        T3 institutions bear a higher rate as a share of assets because clearing cost is proportionally larger relative to balance sheet.
+        All figures are <b>illustrative only</b>; actual savings depend on payment volumes and configuration.
+        Source: KCS Capital internal model. <a href="cost-analysis-bank.html">See full cost analysis.</a>
+      </div>
+    </div>
+
+    <p class="muted mt16" style="font-size:.84rem;">Source: This directory and the site itself are built and maintained by KCS Capital, the engineering and research firm developing the 4orm Finance platform. Institution-level public data only; no personal contacts.
+      Run any institution through the <a href="sandbox.html">sandbox</a> or model its flows in the <a href="money-flows.html">Money Flows</a> section.</p>
+    <div class="btn-row mt16">
+      <a class="btn btn-primary btn-lg" href="sandbox.html">Open the sandbox</a>
+      <a class="btn btn-ghost btn-lg" href="money-flows.html">See money flows</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="section tight" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sources">
+      <div class="src-top">
+        <span class="vbadge"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Data provenance</span>
+        <h3>Sources &amp; methodology</h3>
+        <a href="methodology.html" style="margin-left:auto; font-weight:650; font-size:.9rem;">Full methodology &amp; all sources</a>
+      </div>
+      <p class="src-meth">Institution-level fields (name, type, province, HQ city, approximate assets, tier) are compiled from public regulatory
+        registries and the institutions' own disclosures, OSFI (the Office of the Superintendent of Financial Institutions) for federally regulated banks, provincial credit-union regulators and Central 1,
+        and published financial statements, and maintained in the KCS Capital institution directory. Asset figures are approximate and point-in-time.
+        <b>No personal contact data is shown on this site.</b> The trapped-liquidity and clearing dynamics referenced above are drawn from the sources below.</p>
+      <ul class="src-list">
+        <li id="in-acss"><span class="sn">1</span><span class="sbody"><a href="https://www.payments.ca/systems-services/payment-systems/retail-batch-payment-system" target="_blank" rel="noopener">Retail batch system (ACSS), deferred net settlement &amp; Group Clearers</a> <span class="pub">· Payments Canada</span></span></li>
+        <li id="in-lynx"><span class="sn">2</span><span class="sbody"><a href="https://www.bankofcanada.ca/core-functions/monetary-policy/lynx/" target="_blank" rel="noopener">Lynx high-value payment system</a> <span class="pub">· Bank of Canada</span></span></li>
+        <li id="in-osfi"><span class="sn">3</span><span class="sbody"><a href="https://www.osfi-bsif.gc.ca/en/who-we-regulate" target="_blank" rel="noopener">Who we regulate, federally regulated financial institutions</a> <span class="pub">· OSFI</span></span></li>
+      </ul>
+      <p class="src-disc">This directory and the site itself are built and maintained by KCS Capital, the engineering and research firm developing the 4orm Finance platform. Institution-level public data only · no personal contacts · a listing is not an endorsement · modelled savings are illustrative · not financial advice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ CLOSING CTA — back to 4orm Finance -->
+<section class="demo-closing">
+  <div class="demo-closing-inner">
+    <div>
+      <div class="demo-closing-eye"><span class="dot"></span>Ready for the next step</div>
+      <h2>Bring 4orm to <span class="accent">your institution.</span></h2>
+      <p>You've just walked the same flow your treasury team, risk lead, and compliance officer would walk in production. If it fits the way your institution moves, we'd like to talk. Pre-Seed closes Q2 2026.</p>
+      <div class="demo-closing-buttons">
+        <a class="demo-closing-btn gold" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+        <a class="demo-closing-btn ghost" href="https://www.4ormfinance.com">Back to 4orm Finance</a>
+      </div>
+    </div>
+    <div class="demo-closing-side">
+      <h4>What happens when you sign up</h4>
+      <ul>
+        <li><span class="check">✓</span><span>Institutional onboarding call within 5 business days</span></li>
+        <li><span class="check">✓</span><span>Tailored walkthrough for your treasury, risk, and compliance teams</span></li>
+        <li><span class="check">✓</span><span>Direct line to Mike Sammut (Founder, KCS Capital)</span></li>
+        <li><span class="check">✓</span><span>Optional sandbox tenant for your team to test internally</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="foot-contact">
+  <div class="wrap">
+    <span>Questions, or want to walk through this with us? <a href="mailto:compliance@kcs-capital.com">compliance@kcs-capital.com</a> &middot; 4orm Finance is built and operated by KCS Capital.</span>
+  </div>
+</div>
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <p class="small mb0" style="max-width:48em;">Institution-level public data only; no personal contacts. Listing is not an endorsement or an existing relationship. 4orm Finance is an early-stage platform
+      in development (sandbox-stage); educational only, not an offer of securities and not financial advice.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script src="institutions.js"></script>
+<script>
+(function() {
+  'use strict';
+  var DATA = (window.INSTITUTIONS || []).slice();
+  var PROVN = { AB:'Alberta', BC:'British Columbia', SK:'Saskatchewan', MB:'Manitoba', ON:'Ontario',
+    QC:'Quebec', NB:'New Brunswick', NS:'Nova Scotia', NL:'Newfoundland and Labrador', PE:'Prince Edward Island',
+    YT:'Yukon', NT:'Northwest Territories', NU:'Nunavut' };
+
+  /* Province centre coordinates on our SVG viewBox (approx) */
+  var PROV_XY = {
+    BC:  { x: 80,  y: 175 },
+    AB:  { x: 154, y: 180 },
+    SK:  { x: 202, y: 178 },
+    MB:  { x: 250, y: 180 },
+    ON:  { x: 325, y: 170 },
+    QC:  { x: 435, y: 145 },
+    NB:  { x: 520, y: 208 },
+    NS:  { x: 560, y: 222 },
+    PE:  { x: 568, y: 192 },
+    NL:  { x: 608, y: 122 },
+    YT:  { x: 65,  y: 85  },
+    NT:  { x: 148, y: 85  },
+    NU:  { x: 310, y: 68  }
+  };
+
+  /* Dot colours by type */
+  function dotColor(type) {
+    var s = (type || '').toLowerCase();
+    if (s.indexOf('crown') >= 0 || s.indexOf('cooperative') >= 0) return '#C99BF0';
+    if (s.indexOf('credit union') >= 0 || s.indexOf('caisse') >= 0) return '#7FB0FF';
+    if (s.indexOf('bank') >= 0 || s.indexOf('trust') >= 0) return '#34CF98';
+    return '#F2A94A';
+  }
+
+  var sortKey = 'assets', sortDir = -1;
+
+  function parseAssets(a) {
+    if (!a) return 0;
+    var s = String(a).replace(/[^0-9.BMbm~<>+]/g, '');
+    var m = String(a).match(/([\d.]+)\s*([BM])/i);
+    if (!m) return 0;
+    return parseFloat(m[1]) * (m[2].toUpperCase() === 'B' ? 1e9 : 1e6);
+  }
+
+  /* Illustrative saving formula: assets * rate by tier */
+  function modelledSaving(d) {
+    var av = parseAssets(d.assets);
+    if (!av) return null;
+    var rate;
+    if (d.tier === 'T1') { rate = 0.00030; }
+    else if (d.tier === 'T2') { rate = 0.00045; }
+    else { rate = 0.00060; }
+    return av * rate;
+  }
+
+  function fmtSaving(v) {
+    if (v === null) return null;
+    if (v >= 1e9) return 'C$' + (v / 1e9).toFixed(1) + 'B';
+    if (v >= 1e6) return 'C$' + (v / 1e6).toFixed(1) + 'M';
+    if (v >= 1e3) return 'C$' + Math.round(v / 1e3) + 'K';
+    return 'C$' + Math.round(v);
+  }
+
+  function typeBadge(t) {
+    var c = 'b-other'; var s = (t || '').toLowerCase();
+    if (s.indexOf('crown') >= 0) c = 'b-crown';
+    else if (s.indexOf('credit union') >= 0 || s.indexOf('caisse') >= 0 || s.indexOf('cooperative') >= 0) c = 'b-cu';
+    else if (s.indexOf('bank') >= 0 || s.indexOf('trust') >= 0) c = 'b-bank';
+    return '<span class="badge ' + c + '">' + (t || '') + '</span>';
+  }
+
+  function uniq(key) {
+    var s = {};
+    DATA.forEach(function(d) { if (d[key]) s[d[key]] = 1; });
+    return Object.keys(s).sort();
+  }
+
+  function initFilters() {
+    var fp = document.getElementById('fProv');
+    fp.innerHTML = '<option value="">All provinces</option>' +
+      uniq('prov').map(function(p) { return '<option value="' + p + '">' + (PROVN[p] || p) + '</option>'; }).join('');
+    var ft = document.getElementById('fType');
+    ft.innerHTML = '<option value="">All types</option>' +
+      uniq('type').map(function(t) { return '<option value="' + t + '">' + t + '</option>'; }).join('');
+    /* province quick bars */
+    var counts = {};
+    DATA.forEach(function(d) { counts[d.prov] = (counts[d.prov] || 0) + 1; });
+    document.getElementById('provBars').innerHTML = Object.keys(counts).sort(function(a, b) { return counts[b] - counts[a]; })
+      .map(function(p) { return '<span class="prov-bar" data-p="' + p + '">' + p + ' · ' + counts[p] + '</span>'; }).join('');
+    document.querySelectorAll('.prov-bar').forEach(function(b) {
+      b.addEventListener('click', function() {
+        var p = b.getAttribute('data-p');
+        document.getElementById('fProv').value = (document.getElementById('fProv').value === p) ? '' : p;
+        render();
+      });
+    });
+  }
+
+  function stats() {
+    document.getElementById('stTotal').textContent = DATA.length;
+    var provs = {}; DATA.forEach(function(d) { provs[d.prov] = 1; });
+    document.getElementById('stProv').textContent = Object.keys(provs).length;
+    document.getElementById('stCU').textContent = DATA.filter(function(d) { return /credit union|caisse|cooperative/i.test(d.type || ''); }).length;
+    document.getElementById('stT1').textContent = DATA.filter(function(d) { return d.tier === 'T1'; }).length;
+  }
+
+  function filtered() {
+    var q = (document.getElementById('fSearch').value || '').toLowerCase().trim();
+    var pv = document.getElementById('fProv').value;
+    var ty = document.getElementById('fType').value;
+    var tr = document.getElementById('fTier').value;
+    var out = DATA.filter(function(d) {
+      if (pv && d.prov !== pv) return false;
+      if (ty && d.type !== ty) return false;
+      if (tr && d.tier !== tr) return false;
+      if (q) { var hay = ((d.name || '') + ' ' + (d.city || '')).toLowerCase(); if (hay.indexOf(q) < 0) return false; }
+      return true;
+    });
+    out.sort(function(a, b) {
+      var av, bv;
+      if (sortKey === 'assets') { av = parseAssets(a.assets); bv = parseAssets(b.assets); }
+      else { av = (a.name || '').toLowerCase(); bv = (b.name || '').toLowerCase(); }
+      if (av < bv) return -1 * sortDir;
+      if (av > bv) return 1 * sortDir;
+      return 0;
+    });
+    return out;
+  }
+
+  /* Skeleton loader rows */
+  function skeletonRows(n) {
+    var html = '';
+    for (var i = 0; i < n; i++) {
+      var w1 = (80 + (i * 17) % 60) + 'px';
+      var w2 = (40 + (i * 11) % 40) + 'px';
+      html += '<tr class="skel-row"><td><span class="skel-cell" style="width:' + w1 + '"></span></td>' +
+        '<td><span class="skel-cell" style="width:' + w2 + '"></span></td>' +
+        '<td><span class="skel-cell" style="width:28px"></span></td>' +
+        '<td><span class="skel-cell" style="width:60px"></span></td>' +
+        '<td><span class="skel-cell" style="width:50px"></span></td>' +
+        '<td><span class="skel-cell" style="width:22px"></span></td>' +
+        '<td><span class="skel-cell" style="width:55px"></span></td>' +
+        '<td><span class="skel-cell" style="width:70px"></span></td></tr>';
+    }
+    return html;
+  }
+
+  function render() {
+    /* sync prov bars */
+    var pv = document.getElementById('fProv').value;
+    document.querySelectorAll('.prov-bar').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-p') === pv);
+    });
+
+    var rows = filtered();
+    var countEl = document.getElementById('count');
+    var tbody = document.getElementById('rows');
+    var emptyState = document.getElementById('emptyState');
+
+    if (!DATA.length) {
+      countEl.textContent = 'Institution data could not be loaded.';
+      tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><p>No institution data found. Please reload the page.</p></div></td></tr>';
+      return;
+    }
+
+    countEl.textContent = 'Showing ' + rows.length + ' of ' + DATA.length + ' institutions';
+
+    if (!rows.length) {
+      tbody.innerHTML = '';
+      emptyState.style.display = 'block';
+    } else {
+      emptyState.style.display = 'none';
+      tbody.innerHTML = rows.map(function(d) {
+        var web = d.web
+          ? '<a class="web" href="https://' + String(d.web).replace(/^https?:\/\//, '') + '" target="_blank" rel="noopener">' + d.web + '</a>'
+          : '<span class="muted">·</span>';
+        var sv = modelledSaving(d);
+        var svHtml = sv !== null
+          ? '<a class="saving-link" href="cost-analysis-bank.html?tier=' + (d.tier || '') + '">' + fmtSaving(sv) + '/yr</a>'
+          : '<span class="muted" title="Assets not quantified">·</span>';
+        var tierLabel = d.tier || '·';
+        var tierClass = (d.tier || '').toLowerCase();
+        return '<tr>' +
+          '<td data-label="Institution"><b>' + (d.name || '') + '</b></td>' +
+          '<td data-label="Type">' + typeBadge(d.type) + '</td>' +
+          '<td data-label="Prov.">' + (d.prov || '·') + '</td>' +
+          '<td data-label="HQ city">' + (d.city || '·') + '</td>' +
+          '<td data-label="Assets (CAD)">' + (d.assets || '·') + '</td>' +
+          '<td data-label="Tier"><span class="tier ' + tierClass + '">' + tierLabel + '</span></td>' +
+          '<td data-label="Modelled saving">' + svHtml + '</td>' +
+          '<td data-label="Website">' + web + '</td>' +
+          '</tr>';
+      }).join('');
+    }
+
+    document.getElementById('arr-name').textContent = sortKey === 'name' ? (sortDir > 0 ? '▲' : '▼') : '';
+    document.getElementById('arr-assets').textContent = sortKey === 'assets' ? (sortDir > 0 ? '▲' : '▼') : '';
+
+    renderMap(rows);
+  }
+
+  /* Map rendering */
+  var mapJitter = {};
+  function getJitter(id) {
+    if (!mapJitter[id]) { mapJitter[id] = [(Math.random() - 0.5) * 28, (Math.random() - 0.5) * 22]; }
+    return mapJitter[id];
+  }
+
+  function renderMap(rows) {
+    var g = document.getElementById('mapDots');
+    if (!g) return;
+    var counters = {};
+    var html = '';
+    rows.forEach(function(d, idx) {
+      var pxy = PROV_XY[d.prov];
+      if (!pxy) return;
+      var key = d.prov + '_' + idx;
+      var jitter = getJitter(key);
+      /* Stack dots within province by offsetting them */
+      counters[d.prov] = (counters[d.prov] || 0) + 1;
+      var ci = counters[d.prov];
+      var col = 3; /* dots per row within province band */
+      var ox = ((ci - 1) % col) * 9 - 9;
+      var oy = Math.floor((ci - 1) / col) * 9 - 4;
+      var cx = pxy.x + ox + jitter[0] * 0.4;
+      var cy = pxy.y + oy + jitter[1] * 0.4;
+      var r = d.tier === 'T1' ? 6 : d.tier === 'T2' ? 4 : 3;
+      var fill = dotColor(d.type);
+      var stroke = d.tier === 'T1' ? '#1B4ABE' : '#fff';
+      var sw = d.tier === 'T1' ? 1.5 : 0.8;
+      var opacity = d.tier === 'T1' ? '1' : d.tier === 'T2' ? '0.82' : '0.65';
+      var safeName = (d.name || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      html += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + r + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + sw + '" opacity="' + opacity + '">' +
+        '<title>' + safeName + ' (' + (d.prov || '') + ', ' + (d.tier || '') + ')</title></circle>';
+    });
+    g.innerHTML = html;
+  }
+
+  /* View toggle */
+  var tableView = document.getElementById('tableView');
+  var mapView = document.getElementById('mapView');
+  var btnTable = document.getElementById('btnTable');
+  var btnMap = document.getElementById('btnMap');
+
+  btnTable.addEventListener('click', function() {
+    tableView.classList.remove('hidden');
+    mapView.classList.remove('visible');
+    btnTable.classList.add('active');
+    btnTable.setAttribute('aria-pressed', 'true');
+    btnMap.classList.remove('active');
+    btnMap.setAttribute('aria-pressed', 'false');
+  });
+
+  btnMap.addEventListener('click', function() {
+    tableView.classList.add('hidden');
+    mapView.classList.add('visible');
+    btnMap.classList.add('active');
+    btnMap.setAttribute('aria-pressed', 'true');
+    btnTable.classList.remove('active');
+    btnTable.setAttribute('aria-pressed', 'false');
+    renderMap(filtered());
+  });
+
+  /* Tier info panel toggle */
+  var tierInfoBtn = document.getElementById('tierInfoBtn');
+  var tierPanel = document.getElementById('tierPanel');
+  var tierPanelClose = document.getElementById('tierPanelClose');
+
+  tierInfoBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = tierPanel.classList.toggle('open');
+    tierInfoBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  tierPanelClose.addEventListener('click', function() {
+    tierPanel.classList.remove('open');
+    tierInfoBtn.setAttribute('aria-expanded', 'false');
+  });
+  document.addEventListener('click', function(e) {
+    if (!tierPanel.contains(e.target) && e.target !== tierInfoBtn) {
+      tierPanel.classList.remove('open');
+      tierInfoBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  /* Filters */
+  document.getElementById('fSearch').addEventListener('input', render);
+  document.getElementById('fProv').addEventListener('change', render);
+  document.getElementById('fType').addEventListener('change', render);
+  document.getElementById('fTier').addEventListener('change', render);
+
+  function resetFilters() {
+    document.getElementById('fSearch').value = '';
+    document.getElementById('fProv').value = '';
+    document.getElementById('fType').value = '';
+    document.getElementById('fTier').value = '';
+    render();
+  }
+  document.getElementById('fReset').addEventListener('click', resetFilters);
+  document.getElementById('emptyReset').addEventListener('click', resetFilters);
+
+  document.querySelectorAll('th.sortable').forEach(function(th) {
+    th.addEventListener('click', function() {
+      var k = th.getAttribute('data-k');
+      if (sortKey === k) { sortDir = -sortDir; } else { sortKey = k; sortDir = (k === 'assets') ? -1 : 1; }
+      render();
+    });
+  });
+
+  /* Boot: show skeleton, then render real data */
+  document.getElementById('rows').innerHTML = skeletonRows(8);
+  document.getElementById('count').textContent = 'Loading...';
+
+  if (DATA.length) {
+    setTimeout(function() {
+      stats();
+      initFilters();
+      render();
+    }, 0);
+  } else {
+    document.getElementById('count').textContent = 'Institution data not found. Please reload.';
+    document.getElementById('rows').innerHTML = '<tr><td colspan="8"><div class="empty-state"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><p>No institution data found.</p></div></td></tr>';
+  }
+})();
+</script>
+</body>
+</html>

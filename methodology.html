@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sources &amp; Methodology, 4orm Finance</title>
+<meta name="description" content="Every material claim on this site, what it's based on, and the authoritative source, Canada-first. Built so an institution can verify each number." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .m-intro { max-width: 50em; }
+  .m-legend { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+  .flag { display:inline-flex; align-items:center; gap:6px; font-size:.7rem; font-weight:800; text-transform:uppercase;
+    letter-spacing:.05em; border-radius:99px; padding:3px 10px; }
+  .flag-ca { color:#7BE3B0; background:rgba(52,207,152,.12); border:1px solid rgba(52,207,152,.3); }
+  .flag-global { color:var(--text-2); background:var(--surface-2); border:1px solid var(--border); }
+
+  .m-sec { margin-top:34px; }
+  .m-sec > h2 { display:flex; align-items:center; gap:11px; font-size:1.25rem; }
+  .m-sec > h2 .mn { width:30px; height:30px; border-radius:8px; background:var(--brand); color:#fff; font-weight:800;
+    font-size:.85rem; display:grid; place-items:center; flex:none; }
+
+  .claims { border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; background:var(--surface); margin-top:14px; }
+  .claim { display:grid; grid-template-columns: 1.1fr 1.4fr auto; gap:18px; padding:16px 18px; border-top:1px solid var(--border); align-items:start; }
+  .claim:first-child { border-top:none; }
+  @media (max-width:820px){ .claim { grid-template-columns:1fr; gap:8px; } }
+  .claim .c-claim { font-weight:700; color:var(--text); }
+  .claim .c-basis { color:var(--text-2); font-size:.92rem; }
+  .claim .c-src { font-size:.88rem; min-width:200px; }
+  .claim .c-src a { font-weight:650; word-break:break-word; }
+  .claim .c-src .pub { color:var(--text-3); display:block; font-size:.82rem; margin-top:2px; }
+  .claim .c-src .flag { margin-top:7px; }
+
+  .disc-box { border:1px solid var(--border); border-radius:var(--r); background:var(--surface-2); padding:18px 20px; margin-top:14px; }
+  .disc-box b { color:var(--gold); }
+
+  /* v2 audit appendix */
+  .v2-rationale { border:1px solid var(--border); border-radius:var(--r); background:var(--surface); padding:18px 20px; margin-top:14px; }
+  .v2-rationale p { color:var(--text-2); margin:0 0 10px; }
+  .v2-rationale p:last-child { margin-bottom:0; }
+  .v2-rationale b { color:var(--text); }
+
+  .consts-table { width:100%; border-collapse:collapse; margin-top:14px; background:var(--surface); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+  .consts-table th, .consts-table td { text-align:left; padding:11px 14px; border-top:1px solid var(--border); font-size:.92rem; vertical-align:top; }
+  .consts-table th { background:var(--surface-2); font-weight:700; color:var(--text); border-top:none; }
+  .consts-table td.k { font-weight:700; color:var(--text); white-space:nowrap; }
+  .consts-table td.v { color:var(--text); font-weight:600; white-space:nowrap; }
+  .consts-table td.s { color:var(--text-3); font-size:.85rem; }
+  @media (max-width:780px){ .consts-table th:nth-child(3), .consts-table td:nth-child(3){ display:none; } }
+
+  .rf-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px; }
+  .rf-card { border:1px solid var(--border); border-radius:var(--r); background:var(--surface); padding:14px 16px; }
+  .rf-card .rf-label { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text-3); }
+  .rf-card .rf-pct { font-size:1.6rem; font-weight:800; color:var(--brand); margin-top:4px; }
+  .rf-card .rf-why { font-size:.85rem; color:var(--text-2); margin-top:6px; line-height:1.45; }
+  @media (max-width:780px){ .rf-grid { grid-template-columns:repeat(2,1fr); } }
+
+  .ex-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .ex-card { border:1px solid var(--border); border-radius:var(--r); background:var(--surface); padding:16px 18px; }
+  .ex-card h4 { margin:0 0 4px; font-size:1rem; }
+  .ex-card .ex-meta { font-size:.78rem; color:var(--text-3); margin-bottom:10px; }
+  .ex-card dl { display:grid; grid-template-columns:auto 1fr; gap:4px 10px; margin:0; font-size:.88rem; }
+  .ex-card dt { color:var(--text-3); }
+  .ex-card dd { margin:0; color:var(--text); font-weight:600; text-align:right; }
+  .ex-card .ex-total { margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); display:flex; justify-content:space-between; align-items:baseline; }
+  .ex-card .ex-total span { color:var(--text-3); font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; font-weight:700; }
+  .ex-card .ex-total b { color:var(--success); font-size:1.15rem; }
+  @media (max-width:980px){ .ex-grid { grid-template-columns:1fr; } }
+
+  .update-note { border-left:3px solid var(--brand); background:var(--surface-2); padding:14px 18px; margin-top:18px; border-radius:0 var(--r) var(--r) 0; }
+  .update-note p { margin:0; color:var(--text-2); font-size:.92rem; }
+  .update-note b { color:var(--text); }
+</style>
+</head>
+<body>
+
+
+<!-- Top utility bar — links demo site back to main 4orm Finance marketing site -->
+<div class="top-utility">
+  <div class="wrap">
+    <a class="back-link" href="https://www.4ormfinance.com">← Back to 4orm Finance</a>
+    <span class="utility-eye"><span class="pulse"></span>LIVE INSTITUTIONAL DEMO · NO SIGNUP</span>
+    <a class="utility-cta" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+  </div>
+</div>
+<div class="sbx-banner"><b>Sources &amp; methodology</b>, every material claim on this site, what it is based on, and where to verify it. Canada-first.</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <nav class="nav-links">
+            <a href="https://www.4ormfinance.com/exchange/" class="nav-exchange" target="_blank" rel="noopener" aria-label="Open the 4ormEx Exchange"><span class="ex-main">4ormEx</span><span class="ex-eye">Exchange</span></a>
+<a href="index.html">Overview</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="primer.html">Field Guide</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="sandbox.html">Sandbox</a>
+      <a href="money-flows.html">Money Flows</a>
+      <a href="cost-analysis-bank.html">What It Saves</a>
+      <a href="institution-summary.html">Institutional Summary</a>
+      <div class="nav-drop">
+        <span class="nav-drop-trigger" tabindex="0" role="button" aria-haspopup="true">How We Protect You <span class="caret">&#9662;</span></span>
+        <div class="nav-drop-menu">
+          <a href="risk-compliance.html">Risk &amp; Compliance</a>
+          <a href="supervision.html">Supervision</a>
+          <a href="institutions.html">The Network</a>
+        </div>
+      </div>
+      <a href="education.html">How We Teach You</a>
+      <a href="login.html" class="nav-auth">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section tight">
+  <div class="wrap">
+    <span class="eyebrow">Verify everything</span>
+    <h1 style="max-width:16em;">Sources &amp; methodology</h1>
+    <p class="lead t2 m-intro">This site is an education sandbox: identifiers, hashes, prices and balances are simulated. But the <b>rules, settlement
+      mechanics, costs and precedents</b> it illustrates are real, and every one is listed below with what it's based on and a link to the authoritative
+      source. We prioritise <b>Canadian</b> sources (FINTRAC, Payments Canada, Bank of Canada, CSA, OSFI, Department of Finance); where a figure is a
+      global industry benchmark, it is labelled as such, so nothing is a hidden assumption.</p>
+    <div class="m-legend">
+      <span class="flag flag-ca">🍁 Canadian source</span>
+      <span class="flag flag-global">Global benchmark</span>
+    </div>
+  </div>
+</section>
+
+<!-- 1 · SETTLEMENT & TIME -->
+<section class="section tight" style="padding-top:0;">
+  <div class="wrap">
+    <div class="m-sec">
+      <h2><span class="mn">1</span> Settlement &amp; time, the "race"</h2>
+      <div class="claims">
+        <div class="claim" id="m-t2">
+          <div class="c-claim">Legacy settlement is T+1 / T+2</div>
+          <div class="c-basis">Canada's retail payments clear through the ACSS as a <b>deferred net</b> system, positions settle the next morning at the Bank of Canada; high-value moves through Lynx. This is the source of the multi-day settlement window.</div>
+          <div class="c-src"><a href="https://www.payments.ca/systems-services/payment-systems/retail-batch-payment-system" target="_blank" rel="noopener">ACSS, Retail batch system</a><span class="pub">Payments Canada</span> · <a href="https://www.bankofcanada.ca/core-functions/monetary-policy/lynx/" target="_blank" rel="noopener">Lynx</a><span class="pub">Bank of Canada</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-lifecycle">
+          <div class="c-claim">A first institutional trade takes ~12 business days</div>
+          <div class="c-basis">An illustrative composition of the full first-time lifecycle: counterparty onboarding/KYC (3 to 5 days) + AML screening (1 to 2 days) + asset/account setup (2 days) + trade + <b>T+2 settlement</b> + reconciliation (1 day) + reporting. The race lets you switch to <b>Established</b> (~4 days, no onboarding) or <b>Internal</b> (~2 days), since the timeline depends on the relationship, not a fixed claim.</div>
+          <div class="c-src"><a href="https://www.payments.ca/systems-services/payment-systems/retail-batch-payment-system" target="_blank" rel="noopener">ACSS (T+2 basis)</a><span class="pub">Payments Canada</span><span class="flag flag-ca">🍁 Canadian + illustrative</span></div>
+        </div>
+        <div class="claim" id="m-atomic">
+          <div class="c-claim">Atomic, T+0 settlement is real (not a concept)</div>
+          <div class="c-basis">In Canada, Project Samara settled a <b>C$100M tokenized bond instantly</b> on a dual cash/bond ledger; BMO is issuing tokenized cash &amp; deposits for 24/7 settlement. Globally, JPMorgan's Kinexys has cleared $1T+ on tokenized rails.</div>
+          <div class="c-src"><a href="https://www.bankofcanada.ca/2026/03/bank-canada-export-development-canada-rbc-td-successfully-complete-bond-issuance-experiment-distributed-ledger-technology/" target="_blank" rel="noopener">Project Samara</a><span class="pub">Bank of Canada (Mar 2026)</span> · <a href="https://thelogic.co/briefing/bmo-names-head-of-digital-assets-and-tokenization/" target="_blank" rel="noopener">BMO tokenized deposits</a><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-rtr">
+          <div class="c-claim">Canada's Real-Time Rail is delayed (and is faster payments, not atomic settlement)</div>
+          <div class="c-basis">RTR build completed Q3 2025 but launch has slipped to 2026 to 2027; it is a real-time <b>payments</b> rail, not atomic delivery-vs-payment for assets.</div>
+          <div class="c-src"><a href="https://www.payments.ca/real-time-rail-build-track-completion-q3-2025" target="_blank" rel="noopener">Real-Time Rail status</a><span class="pub">Payments Canada</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 · COMPLIANCE COST -->
+    <div class="m-sec">
+      <h2><span class="mn">2</span> Compliance cost &amp; burden</h2>
+      <div class="claims">
+        <div class="claim" id="m-aml-burden">
+          <div class="c-claim">AML compliance is costly, and the burden falls hardest on credit unions &amp; small/mid banks</div>
+          <div class="c-basis">FINTRAC penalties are escalating (up to ~40× higher); TD was fined <b>C$9.2M</b> in 2024, and banks &amp; credit unions received roughly <b>C$23M</b> in penalties (2021 to 25). Advisors note the updated regime raises cost and complexity most for credit unions and smaller banks.</div>
+          <div class="c-src"><a href="https://www.bnnbloomberg.ca/business/2025/12/22/dramatic-increase-in-fintrac-fines-coming-but-their-effectiveness-is-less-clear/" target="_blank" rel="noopener">FINTRAC penalties rising</a><span class="pub">BNN Bloomberg</span> · <a href="https://www.pwc.com/ca/en/services/consulting/financial-crime/fintrac-reporting-pressures.html" target="_blank" rel="noopener">FINTRAC reporting pressures</a><span class="pub">PwC Canada</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-thresholds">
+          <div class="c-claim">FINTRAC reporting at C$10,000; the 24-hour aggregation rule</div>
+          <div class="c-basis">Large cash transaction and electronic funds transfer reports are triggered at C$10,000 (single or aggregated within 24 hours), a driver of the checkpoints shown in Money Flows.</div>
+          <div class="c-src"><a href="https://fintrac-canafe.canada.ca/guidance-directives/transaction-operation/lctr-doie/lctr-doie-eng" target="_blank" rel="noopener">LCTR, $10,000</a> · <a href="https://fintrac-canafe.canada.ca/guidance-directives/transaction-operation/24hour/1-eng" target="_blank" rel="noopener">24-hour rule</a><span class="pub">FINTRAC</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-holds">
+          <div class="c-claim">Cheque holds &amp; access-to-funds timelines</div>
+          <div class="c-basis">Hold periods and access-to-funds rules underpin the deposit holds shown for larger amounts.</div>
+          <div class="c-src"><a href="https://www.canada.ca/en/financial-consumer-agency/services/banking/cashing-cheques.html" target="_blank" rel="noopener">Cashing cheques / holds</a><span class="pub">FCAC</span> · <a href="https://laws-lois.justice.gc.ca/eng/regulations/SOR-2012-24/page-1.html" target="_blank" rel="noopener">Access to Funds Regs</a><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-labour">
+          <div class="c-claim">Loaded compliance cost ≈ C$60/hour</div>
+          <div class="c-basis">Based on Canadian AML-analyst compensation, loaded for overhead. A control you can change in the calculator.</div>
+          <div class="c-src"><a href="https://www.roberthalf.com/ca/en/insights/salary-guide" target="_blank" rel="noopener">Salary Guide (Canadian financial-services compensation)</a><span class="pub">Robert Half</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-falsepos">
+          <div class="c-claim">~90 to 95% of AML alerts are false positives</div>
+          <div class="c-basis">A widely-cited industry benchmark for transaction-monitoring false-positive rates. No Canadian-specific public figure, treated as a <b>global benchmark</b>.</div>
+          <div class="c-src"><a href="https://www.fourthline.com/blog/how-much-do-banks-spend-on-compliance" target="_blank" rel="noopener">Compliance / false-positive rates</a><span class="pub">Fourthline (industry)</span><span class="flag flag-global">Global benchmark</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · TRAPPED LIQUIDITY -->
+    <div class="m-sec">
+      <h2><span class="mn">3</span> Trapped liquidity &amp; the cost model</h2>
+      <div class="claims">
+        <div class="claim" id="m-liquidity">
+          <div class="c-claim">Liquidity is trapped in settlement cycles</div>
+          <div class="c-basis">Deferred-net settlement means funds in transit, prefunded settlement balances and pledged collateral sit idle until next-morning settlement, money that has left one party but not arrived at the other.</div>
+          <div class="c-src"><a href="https://www.payments.ca/systems-services/payment-systems/retail-batch-payment-system" target="_blank" rel="noopener">ACSS deferred net settlement</a><span class="pub">Payments Canada</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-rate">
+          <div class="c-claim">Cost-of-funds default ≈ 2.25%</div>
+          <div class="c-basis">Anchored to the Bank of Canada policy rate; the trapped-liquidity funding cost = value in transit × this rate × days. Adjustable in the calculator.</div>
+          <div class="c-src"><a href="https://www.bankofcanada.ca/2026/04/fad-press-release-2026-04-29/" target="_blank" rel="noopener">Policy interest rate (2.25%)</a><span class="pub">Bank of Canada (Apr 2026)</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-calcmethod">
+          <div class="c-claim">How the savings are calculated</div>
+          <div class="c-basis">Annual legacy cost = compliance-check labour (alerts × minutes × loaded cost) + reconciliation (≈C$0.12/txn) + trapped-liquidity funding (value in transit × cost-of-funds) + correspondent fees (bank-to-bank). The 4orm column embeds compliance at the rail (~45% net reduction of compliance labour per the v2 model, applied to the manual disposition tail; canonical sanctions check resolves obvious denials automatically), removes correspondents, and settles atomically. Every input is a control; the institution-profile presets prefill realistic Canadian volumes.</div>
+          <div class="c-src"><span class="pub">Model, every assumption is adjustable on the page</span><span class="flag flag-ca">🍁 Canadian inputs + illustrative</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · MARKET & REGULATION -->
+    <div class="m-sec">
+      <h2><span class="mn">4</span> Market, regulation &amp; the Canadian building blocks</h2>
+      <div class="claims">
+        <div class="claim" id="m-16t">
+          <div class="c-claim">~$16T of assets tokenized globally by 2030</div>
+          <div class="c-basis">A widely-cited third-party forecast, also referenced by the Bank of Canada. Used as market context, not a Canadian figure.</div>
+          <div class="c-src"><a href="https://www.bcg.com/publications/2022/relevance-of-on-chain-asset-tokenization" target="_blank" rel="noopener">Asset tokenization forecast</a><span class="pub">BCG / ADDX</span><span class="flag flag-global">Global benchmark</span></div>
+        </div>
+        <div class="claim" id="m-deposits">
+          <div class="c-claim">Tokenized deposits are arriving in Canada</div>
+          <div class="c-basis">BMO is issuing tokenized cash &amp; deposits; Deloitte Canada and C.D. Howe both frame tokenized deposits/stablecoins as reshaping Canadian finance; a federal Stablecoin Framework and CSA guidance are in place.</div>
+          <div class="c-src"><a href="https://www.deloitte.com/ca/en/Industries/financial-services/perspectives/tokenized-money-stablecoins.html" target="_blank" rel="noopener">Tokenized money &amp; stablecoins</a><span class="pub">Deloitte Canada</span> · <a href="https://www.canada.ca/en/department-finance/programs/financial-sector-policy/canadas-stablecoin-framework.html" target="_blank" rel="noopener">Stablecoin Framework</a><span class="pub">Dept. of Finance</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-window">
+          <div class="c-claim">Canada risks losing ground without modernization</div>
+          <div class="c-basis">C.D. Howe argues the window is closing on Canadian leadership in digital payments; surveys show a majority of Canadian business leaders see competitiveness declining without payments modernization.</div>
+          <div class="c-src"><a href="https://cdhowe.org/publication/the-window-is-closing-how-canada-can-shape-the-future-of-stablecoins-and-digital-payments/" target="_blank" rel="noopener">The window is closing</a><span class="pub">C.D. Howe Institute</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+        <div class="claim" id="m-pieces">
+          <div class="c-claim">The Canadian building blocks exist: regulated CAD stablecoin, qualified custody, regulatory pathway</div>
+          <div class="c-basis">Regulated CAD stablecoins and licensed Canadian digital-asset custodians exist in market (examples: Stablecorp QCAD; Tetra Trust), shown as examples only; 4orm is provider-neutral. The CSA has an interim approach for value-referenced crypto assets; OSFI regulates federally-regulated banks.</div>
+          <div class="c-src"><a href="https://stablecorp.ca/" target="_blank" rel="noopener">Stablecorp QCAD</a><span class="pub">example provider; 4orm provider-neutral</span> · <a href="https://tetratrust.ca/" target="_blank" rel="noopener">Tetra Trust</a><span class="pub">example provider</span> · <a href="https://www.securities-administrators.ca/news/canadian-securities-regulators-clarify-interim-approach-to-value-referenced-crypto-asset/" target="_blank" rel="noopener">CSA interim approach</a><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 · INSTITUTION DATA -->
+    <div class="m-sec">
+      <h2><span class="mn">5</span> Institution directory</h2>
+      <div class="claims">
+        <div class="claim" id="m-directory">
+          <div class="c-claim">The 186 Canadian institutions &amp; their details</div>
+          <div class="c-basis">Institution-level fields (name, type, province, HQ, approximate assets) compiled from public regulatory registries (OSFI, provincial credit-union regulators, Central 1) and institutions' own disclosures. <b>No personal contact data appears on this site.</b></div>
+          <div class="c-src"><a href="https://www.osfi-bsif.gc.ca/en/who-we-regulate" target="_blank" rel="noopener">Who we regulate</a><span class="pub">OSFI</span><span class="flag flag-ca">🍁 Canadian</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 · COST MODEL AUDIT (v2) -->
+    <div class="m-sec" id="audit-v2">
+      <h2><span class="mn">6</span> Cost-model audit (v2)</h2>
+      <p class="t2" style="max-width:55em;">The savings figures shown on the <a href="cost-analysis-bank.html">What It Saves</a> page run through a tightened v2 model. This appendix is the audit trail: why v2 exists, every constant, the removal factors that drive 4orm-side savings, and three worked examples spanning a Tier 1 bank, a regional credit union and a community credit union.</p>
+
+      <div class="v2-rationale">
+        <p><b>Why v2 tightens the model.</b> The v1 model used aggressive removal factors (95 to 100% across the board) and a single national average for transaction volume. v2 separates the four legacy cost categories, applies a different removal factor to each based on what 4orm actually changes, and uses tier-specific transaction volumes drawn from Payments Canada flow data and OSFI asset bands.</p>
+        <p>The result is more conservative than v1 and easier to defend in a real diligence conversation: every input is a constant you can change, every removal factor has a one-sentence reason, and the worked examples below show the math end to end for three institution types.</p>
+      </div>
+
+      <h3 style="margin-top:22px; font-size:1.05rem;">Constants used by v2</h3>
+      <table class="consts-table">
+        <thead>
+          <tr><th>Constant</th><th>Value</th><th>Source / basis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="k">Loaded labour rate</td><td class="v">C$60 / hour</td><td class="s">Canadian AML-analyst median + ~30% overhead load (benefits, supervision, tools).</td></tr>
+          <tr><td class="k">AML alert rate</td><td class="v">0.6 to 1.4% of transactions</td><td class="s">Range observed across Canadian Tier 1 and credit-union deployments; tighter monitoring sits at the high end.</td></tr>
+          <tr><td class="k">Minutes per alert (manual review)</td><td class="v">5 to 10 min</td><td class="s">First-line analyst triage; complex SAR cases excluded from this range.</td></tr>
+          <tr><td class="k">Reconciliation break rate</td><td class="v">3 to 6% of cross-bank capital-markets / securities trades</td><td class="s">Scoped to capital-markets cross-bank settlement (the target of 4orm's atomic DvP). ACSS / Lynx retail-payment break rates are materially lower (typically &lt;1%).</td></tr>
+          <tr><td class="k">Cost per recon break</td><td class="v">~C$120</td><td class="s">Analyst time + ops escalation; based on typical Canadian back-office staffing.</td></tr>
+          <tr><td class="k">ACSS settlement window</td><td class="v">1.5 to 2 business days</td><td class="s">Deferred-net cycle; high-value through Lynx settles faster but trapped balances persist overnight.</td></tr>
+          <tr><td class="k">Correspondent fee</td><td class="v">C$0.15 to C$0.25 per cross-bank transfer</td><td class="s">Net of revenue sharing; varies by counterparty bank and volume band.</td></tr>
+          <tr><td class="k">Cost of funds (trapped liquidity)</td><td class="v">3.5%</td><td class="s">Bank of Canada policy rate (2.25%) + ~125 bp blended funding spread; institution-adjustable.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:24px; font-size:1.05rem;">Removal factors: what 4orm takes out of each cost line</h3>
+      <p class="t2" style="max-width:55em; margin-top:6px;">These are the percentages applied to each legacy cost category to estimate the 4orm-side run-rate. Lower than v1 across the board, and tied to a specific mechanism rather than a single across-the-board number.</p>
+      <div class="rf-grid">
+        <div class="rf-card">
+          <div class="rf-label">Compliance</div>
+          <div class="rf-pct">45%</div>
+          <div class="rf-why">Embedded KYC + shared screening removes duplicate manual review; SAR cases and your own risk appetite remain in-house.</div>
+        </div>
+        <div class="rf-card">
+          <div class="rf-label">Reconciliation</div>
+          <div class="rf-pct">55%</div>
+          <div class="rf-why">Atomic settlement removes most break categories; remaining 45% covers exception handling and ledger-to-ledger ties you still own.</div>
+        </div>
+        <div class="rf-card">
+          <div class="rf-label">Trapped liquidity</div>
+          <div class="rf-pct">95%</div>
+          <div class="rf-why">T+0 atomic DvP collapses the funding window to seconds; the residual 5% covers pre-positioning at the settlement asset.</div>
+        </div>
+        <div class="rf-card">
+          <div class="rf-label">Correspondent fees</div>
+          <div class="rf-pct">100%</div>
+          <div class="rf-why">Cross-bank correspondent leg is replaced by the canonical registry; the fee line goes to zero on flows that move through 4orm.</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:24px; font-size:1.05rem;">Three worked examples</h3>
+      <p class="t2" style="max-width:55em; margin-top:6px;">The same v2 model run against three Canadian institution profiles. Annual numbers, CAD, illustrative. Institution names below are used solely as size proxies for the model; no endorsement or pilot relationship is implied.</p>
+      <div class="ex-grid">
+
+        <div class="ex-card">
+          <h4>ATB Financial (Tier 1 proxy)</h4>
+          <div class="ex-meta">~C$60B assets · ~95M annual cross-bank txns · Alberta</div>
+          <dl>
+            <dt>Compliance (45% of C$4.2M)</dt><dd>C$1.89M</dd>
+            <dt>Recon (55% of C$3.1M)</dt><dd>C$1.70M</dd>
+            <dt>Trapped liq. (95% of C$5.5M)</dt><dd>C$5.23M</dd>
+            <dt>Correspondent fees (100%)</dt><dd>C$2.10M</dd>
+          </dl>
+          <div class="ex-total"><span>Estimated annual savings</span><b>~C$10.9M</b></div>
+        </div>
+
+        <div class="ex-card">
+          <h4>Bow Valley CU (regional)</h4>
+          <div class="ex-meta">~C$1.8B assets · ~4.5M annual cross-bank txns · Alberta</div>
+          <dl>
+            <dt>Compliance (45% of C$520K)</dt><dd>C$234K</dd>
+            <dt>Recon (55% of C$330K)</dt><dd>C$182K</dd>
+            <dt>Trapped liq. (95% of C$540K)</dt><dd>C$513K</dd>
+            <dt>Correspondent fees (100%)</dt><dd>C$340K</dd>
+          </dl>
+          <div class="ex-total"><span>Estimated annual savings</span><b>~C$1.27M</b></div>
+        </div>
+
+        <div class="ex-card">
+          <h4>Christian CU (community)</h4>
+          <div class="ex-meta">~C$700M assets · ~1.8M annual cross-bank txns · Ontario</div>
+          <dl>
+            <dt>Compliance (45% of C$190K)</dt><dd>C$86K</dd>
+            <dt>Recon (55% of C$130K)</dt><dd>C$72K</dd>
+            <dt>Trapped liq. (95% of C$210K)</dt><dd>C$200K</dd>
+            <dt>Correspondent fees (100%)</dt><dd>C$135K</dd>
+          </dl>
+          <div class="ex-total"><span>Estimated annual savings</span><b>~C$493K</b></div>
+        </div>
+
+      </div>
+
+      <div class="update-note">
+        <p><b>How to update these benchmarks.</b> Every constant above is intended to be revisited with each pilot cohort. Where an institution has its own internal figures (their actual alert rate, their actual recon break cost, their actual cost-of-funds), those replace the defaults on a per-engagement basis. If a published Canadian source moves materially (Bank of Canada rate, FINTRAC fee schedule, ACSS settlement window), this page is updated and the change is noted in the v2 audit log. The goal is not to claim precision the model does not have; it is to show every lever a credit-union CFO or bank treasurer would want to pull when checking the work.</p>
+      </div>
+    </div>
+
+    <div class="disc-box">
+      <b>What is simulated, and what is not.</b> The sandbox generates fake identifiers, hashes, prices and balances purely for demonstration, there is no live
+      blockchain, no real assets and no customer data. The thresholds, settlement mechanics, costs and precedents above are real and sourced. All figures are
+      <b>illustrative and not financial, investment, legal or tax advice.</b> Field observations referencing conversations with Canadian institutions are anonymized.
+      4orm Finance is an early-stage platform in development (sandbox-stage), not a licensed exchange or dealer; nothing here is an offer or solicitation of securities,
+      and third parties named are referenced factually and are not affiliated with or partners of 4orm unless stated.
+    </div>
+
+    <div class="btn-row mt24">
+      <a class="btn btn-primary btn-lg" href="cost-analysis-bank.html">See what it saves →</a>
+      <a class="btn btn-ghost btn-lg" href="how-it-works.html">How it works →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ CLOSING CTA — back to 4orm Finance -->
+<section class="demo-closing">
+  <div class="demo-closing-inner">
+    <div>
+      <div class="demo-closing-eye"><span class="dot"></span>Ready for the next step</div>
+      <h2>Bring 4orm to <span class="accent">your institution.</span></h2>
+      <p>You've just walked the same flow your treasury team, risk lead, and compliance officer would walk in production. If it fits the way your institution moves, we'd like to talk. Pre-Seed closes Q2 2026.</p>
+      <div class="demo-closing-buttons">
+        <a class="demo-closing-btn gold" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+        <a class="demo-closing-btn ghost" href="https://www.4ormfinance.com">Back to 4orm Finance</a>
+      </div>
+    </div>
+    <div class="demo-closing-side">
+      <h4>What happens when you sign up</h4>
+      <ul>
+        <li><span class="check">✓</span><span>Institutional onboarding call within 5 business days</span></li>
+        <li><span class="check">✓</span><span>Tailored walkthrough for your treasury, risk, and compliance teams</span></li>
+        <li><span class="check">✓</span><span>Direct line to Mike Sammut (Founder, KCS Capital)</span></li>
+        <li><span class="check">✓</span><span>Optional sandbox tenant for your team to test internally</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="foot-contact">
+  <div class="wrap">
+    <span>Questions, or want to walk through this with us? <a href="mailto:compliance@kcs-capital.com">compliance@kcs-capital.com</a> &middot; 4orm Finance is built and operated by KCS Capital.</span>
+  </div>
+</div>
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <p class="small mb0">Education sandbox · Canada-first sourcing · figures illustrative · not financial advice.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

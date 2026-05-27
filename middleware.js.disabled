@@ -1,0 +1,92 @@
+/* =====================================================================
+   4orm Finance, server-side access gate (Vercel Edge Middleware)
+   ---------------------------------------------------------------------
+   The Overview page (/) is public. Every other page requires a valid
+   signed session cookie, set after a magic-link sign-in. Unauthenticated
+   requests are redirected to /login.html. This runs on Vercel's edge,
+   before any protected page is served, so it cannot be bypassed from the
+   browser.
+
+   Required environment variable: SESSION_SECRET (a long random string).
+   ===================================================================== */
+
+export const config = {
+  // Run on everything; we filter public paths inside the handler. The matcher
+  // skips Vercel internals so they are never gated.
+  matcher: ['/((?!_next/|_vercel/).*)']
+};
+
+const SECRET = process.env.SESSION_SECRET || '';
+
+/* Paths that never require sign-in. */
+function isPublic(path) {
+  if (path === '/' || path === '/index.html') return true;
+  if (path === '/login' || path === '/login.html') return true;
+  if (path.startsWith('/api/')) return true;            // API routes guard themselves
+  if (path === '/favicon.ico' || path === '/robots.txt') return true;
+  // static assets (css, js, images, fonts, etc.)
+  if (/\.(?:css|js|mjs|png|jpe?g|svg|gif|webp|ico|woff2?|ttf|map|json|txt|xml|pdf)$/i.test(path)) return true;
+  return false;
+}
+
+/* ---- HMAC-SHA256 token verify (Web Crypto, works on the edge) ---- */
+const enc = new TextEncoder();
+function b64urlToBytes(s) {
+  s = String(s || '').replace(/-/g, '+').replace(/_/g, '/');
+  while (s.length % 4) s += '=';
+  const bin = atob(s);
+  const b = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) b[i] = bin.charCodeAt(i);
+  return b;
+}
+async function verifyToken(token) {
+  if (!SECRET || !token || token.indexOf('.') < 0) return null;
+  const parts = token.split('.');
+  if (parts.length !== 2) return null;
+  try {
+    const key = await crypto.subtle.importKey('raw', enc.encode(SECRET),
+      { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']);
+    const ok = await crypto.subtle.verify('HMAC', key, b64urlToBytes(parts[1]), enc.encode(parts[0]));
+    if (!ok) return null;
+    const payload = JSON.parse(new TextDecoder().decode(b64urlToBytes(parts[0])));
+    if (!payload.x || Date.now() > payload.x) return null;   // expired
+    if (payload.t !== 'session') return null;
+    return payload;
+  } catch (e) { return null; }
+}
+
+function readCookie(req, name) {
+  const raw = req.headers.get('cookie') || '';
+  const m = raw.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]+)'));
+  return m ? decodeURIComponent(m[1]) : '';
+}
+
+/* admin paths require both a valid session AND the email being in ADMIN_EMAILS */
+function isAdminPath(path) {
+  return path === '/admin' || path === '/admin.html' || path.startsWith('/api/admin/');
+}
+function list(v){ return String(v||'').split(',').map(function(s){return s.trim().toLowerCase();}).filter(Boolean); }
+function isAdminEmail(email){ return list(process.env.ADMIN_EMAILS).indexOf(String(email||'').toLowerCase()) >= 0; }
+
+export default async function middleware(req) {
+  const url = new URL(req.url);
+  const path = url.pathname;
+
+  if (isPublic(path)) return; // allow
+
+  const session = await verifyToken(readCookie(req, '4orm_session'));
+  if (!session) {
+    const login = new URL('/login.html', req.url);
+    login.searchParams.set('next', path);
+    return Response.redirect(login, 302);
+  }
+  if (isAdminPath(path) && !isAdminEmail(session.e)) {
+    /* signed in but not an admin: send page requests home, API requests 403 */
+    if (path.startsWith('/api/')) {
+      return new Response(JSON.stringify({ error: 'not_admin' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } });
+    }
+    return Response.redirect(new URL('/?notice=admin_only', req.url), 302);
+  }
+  return; // signed in, allow
+}

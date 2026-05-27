@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sandbox, 4orm Finance</title>
+<meta name="description" content="Run an institutional transaction end-to-end: KYC, AML, tokenization, trading, attestation, settlement, audit and reporting." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* ---- scenario list (vertical, scan top-to-bottom) ---- */
+  .scn-launch { max-width: var(--maxw); margin: 0 auto; padding: 20px 28px 0; }
+  .scn-launch-head { font-size: .8rem; text-transform: uppercase; letter-spacing: .09em; color: var(--text-3); font-weight: 700; margin-bottom: 12px; }
+  .scn-cards { display: flex; flex-direction: column; gap: 10px; }
+  .scn-card { display: flex; align-items: center; gap: 18px; width: 100%; max-width: none;
+    border: 1.5px solid var(--border); border-radius: var(--r); padding: 16px 22px;
+    background: var(--surface); cursor: pointer; text-align: left; font-family: inherit;
+    transition: border-color .15s, box-shadow .15s, transform .12s; }
+  .scn-card:hover { border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-50); transform: translateX(2px); }
+  .scn-card .sc-rank { flex: none; width: 34px; height: 34px; border-radius: 50%;
+    background: var(--brand-50); color: var(--brand-700); font-weight: 800; font-size: 1rem;
+    display: grid; place-items: center; }
+  .scn-card .sc-main { flex: 1 1 auto; min-width: 0; display:flex; flex-direction: column; gap: 4px; }
+  .scn-card .sc-eyebrow { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--brand-700); font-weight: 700; }
+  .scn-card .sc-title { font-weight: 700; font-size: 1.08rem; margin: 0; color: var(--text); letter-spacing:-.005em; line-height:1.25; }
+  .scn-card .sc-sub { font-size: .85rem; color: var(--text-2); line-height: 1.4; }
+  .scn-card .sc-right { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; min-width: 130px; }
+  .scn-card .sc-amt { font-size: 1.3rem; font-weight: 800; color: var(--brand); letter-spacing: -.01em; white-space: nowrap; }
+  .scn-card .sc-go { font-size: .78rem; font-weight: 700; color: var(--text-3); letter-spacing:.02em; }
+  .scn-card:hover .sc-go { color: var(--brand); }
+  @media (max-width: 720px){ .scn-card { padding: 14px 16px; gap: 14px; } .scn-card .sc-right { min-width: 110px; } .scn-card .sc-title { font-size: 1rem; } .scn-card .sc-amt { font-size: 1.1rem; } }
+
+  /* ---- run strip (three buttons) ---- */
+  .run-strip { max-width: var(--maxw); margin: 16px auto 0; padding: 0 28px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .btn-customize { background: var(--brand); color: #fff; border: 1px solid var(--brand); }
+  .btn-customize:hover { background: var(--brand-600); color: #fff; }
+  .btn-customize.on { background: var(--brand-700); border-color: var(--brand-700); }
+  #reopenSummaryBtn { display: none; }
+
+  /* ---- main layout ---- */
+  .sbx-layout { max-width: var(--maxw); margin: 0 auto; padding: 20px 28px 60px;
+    display: grid; grid-template-columns: 286px 1fr; gap: 30px; align-items: start; }
+  @media (max-width: 940px){ .sbx-layout { grid-template-columns: 1fr; } }
+
+  /* ---- sidebar ---- */
+  .sbx-side { position: sticky; top: 120px; }
+  @media (max-width: 940px){ .sbx-side { position: static; } }
+  .side-card { background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-lg); box-shadow: var(--shadow-sm); padding: 16px; }
+  .side-title { font-size:.74rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-3);
+    font-weight:700; margin: 2px 4px 12px; }
+  .side-item { width:100%; display:flex; align-items:center; gap:11px; padding:9px 10px;
+    border:1px solid transparent; border-radius:10px; background:transparent; cursor:pointer;
+    text-align:left; font-family:inherit; font-size:.92rem; color:var(--text-2); transition: background .14s, border-color .14s, color .14s; }
+  .side-item:hover { background: var(--surface-2); color: var(--text); }
+  .side-item.active { background: var(--brand-50); border-color: var(--brand-100); color: var(--brand-700); font-weight:650; }
+  .si-num { width:24px; height:24px; border-radius:7px; background:var(--surface-2); color:var(--text-3);
+    font-weight:800; font-size:.78rem; display:grid; place-items:center; flex:none; transition: background .2s,color .2s; }
+  .side-item.active .si-num { background: var(--brand); color:#fff; }
+  .side-item.done .si-num { background: var(--success-bg); color: var(--success); }
+  .si-tx { flex:1; }
+  .si-state { width:16px; flex:none; color: var(--success); font-weight:800; opacity:0; }
+  .side-item.done .si-state { opacity:1; }
+
+  .progress-wrap { margin: 4px 4px 14px; }
+  .progress-bar { height:7px; background: var(--surface-3); border-radius:99px; overflow:hidden; margin-top:7px; }
+  .progress-bar > i { display:block; height:100%; width:0%; background: linear-gradient(90deg,var(--brand),#6A6FF0);
+    border-radius:99px; transition: width .5s ease; }
+  .progress-lab { font-size:.8rem; color:var(--text-3); display:flex; justify-content:space-between; }
+
+  /* ---- panels ---- */
+  .mpanel { display:none; }
+  .mpanel.active { display:block; animation: fade .3s ease; }
+  @keyframes fade { from { opacity:0; transform: translateY(6px);} to {opacity:1; transform:none;} }
+  .mp-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:18px; }
+  .mp-h-l { display:flex; align-items:center; gap:14px; }
+  .mp-num { width:46px; height:46px; border-radius:13px; background:var(--brand); color:#fff;
+    font-weight:800; font-size:1.15rem; display:grid; place-items:center; flex:none; box-shadow: var(--shadow-sm); }
+  .mp-h-l h2 { margin:0; font-size:1.5rem; }
+  .mp-h-l p { margin:2px 0 0; font-size:.92rem; }
+  .mp-body { display:grid; grid-template-columns: 0.92fr 1.08fr; gap:22px; align-items:start; }
+  @media (max-width: 820px){ .mp-body { grid-template-columns: 1fr; } }
+  .mp-output { min-height: 240px; }
+  .out-empty { color: var(--text-3); display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; height:100%; min-height:220px; gap:10px; }
+  .out-empty .ic { width:46px; height:46px; border-radius:50%; background:var(--surface-2);
+    display:grid; place-items:center; color:var(--text-3); }
+  .run-head { display:flex; align-items:center; gap:9px; font-weight:650; color:var(--text-2); font-size:.92rem; margin-bottom:4px; }
+
+  /* receipt */
+  .receipt { border:1px solid var(--border); border-radius: var(--r); overflow:hidden; margin-top:16px; }
+  .receipt .r-head { padding:12px 16px; background: var(--surface-2); display:flex;
+    justify-content:space-between; align-items:center; font-weight:700; gap:10px; }
+  .r-row { display:flex; justify-content:space-between; gap:16px; padding:10px 16px; border-top:1px solid var(--border); font-size:.9rem; }
+  .r-row .k { color: var(--text-3); flex:none; } .r-row .v { font-weight:600; text-align:right; word-break:break-word; }
+  .r-foot { padding:10px 16px; border-top:1px solid var(--border); font-size:.82rem; color:var(--text-3); background: var(--surface-2); }
+
+  .mp-nav { display:flex; justify-content:space-between; margin-top:22px; }
+
+  /* order book */
+  .book { font-family: var(--font-mono); font-size:.82rem; border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+  .book .brow { display:flex; justify-content:space-between; padding:4px 12px; position:relative; }
+  .book .brow .depth { position:absolute; top:0; bottom:0; right:0; opacity:.12; }
+  .book .ask .depth { background: var(--danger); } .book .bid .depth { background: var(--success); }
+  .book .ask .px { color: var(--danger); } .book .bid .px { color: var(--success); }
+  .book .sz { color: var(--text-3); position:relative; }
+  .book .px { font-weight:700; position:relative; }
+  .book .mid { text-align:center; padding:6px; font-weight:700; background: var(--surface-2);
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); color: var(--text); }
+
+  /* legs (settlement) */
+  .leg { display:flex; align-items:center; gap:12px; padding:13px 14px; border:1px solid var(--border);
+    border-radius:var(--r); margin-bottom:10px; }
+  .leg .lg-ic { width:34px; height:34px; border-radius:9px; background: var(--brand-50); color:var(--brand-700);
+    display:grid; place-items:center; font-weight:800; flex:none; }
+  .leg .lg-tx { flex:1; } .leg .lg-tx b { display:block; } .leg .lg-tx small { color: var(--text-3); }
+  .leg .lg-st { font-weight:700; font-size:.82rem; color: var(--text-3); }
+  .leg.settled { border-color: var(--success); background: var(--success-bg); }
+  .leg.settled .lg-st { color: var(--success); }
+  .leg.settled .lg-ic { background:var(--surface); color: var(--success); }
+
+  /* explorer */
+  .exp-row { border:1px solid var(--border); border-radius:var(--r); margin-bottom:10px; overflow:hidden; }
+  .exp-head { display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; }
+  .exp-head:hover { background: var(--surface-2); }
+  .exp-badge { width:30px; height:30px; border-radius:8px; background: var(--brand-50); color:var(--brand-700);
+    font-weight:800; font-size:.72rem; display:grid; place-items:center; flex:none; }
+  .exp-mid { flex:1; min-width:0; } .exp-mid b { font-size:.92rem; } .exp-mid .sub { font-size:.78rem; color:var(--text-3); }
+  .exp-blk { font-family:var(--font-mono); font-size:.78rem; color:var(--text-3); white-space:nowrap; }
+  .exp-detail { display:none; padding:0 14px 12px 56px; }
+  .exp-row.open .exp-detail { display:block; }
+  .exp-detail .r-row { padding:7px 0; }
+
+  /* immutable ledger record (step 7 upgrade) */
+  .ledger-full { border: 1.5px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 12px; }
+  .ledger-full .lf-head { padding: 14px 16px; background: var(--surface-2); display: flex; align-items: center; gap: 12px; cursor: pointer; width: 100%; border: none; text-align: left; font: inherit; color: inherit; }
+  .ledger-full .lf-head:hover { background: var(--brand-50); }
+  .lf-badge { width: 34px; height: 34px; border-radius: 9px; background: var(--brand); color: #fff;
+    font-weight: 800; font-size: .75rem; display: grid; place-items: center; flex: none; }
+  .lf-mid { flex: 1; min-width: 0; }
+  .lf-mid b { font-size: .94rem; display: block; }
+  .lf-mid .lf-sub { font-size: .78rem; color: var(--text-3); }
+  .lf-right { text-align: right; font-family: var(--font-mono); font-size: .75rem; color: var(--text-3); }
+  .lf-right .chip { font-size: .68rem; }
+  .ledger-full .lf-body { display: none; padding: 14px 16px 16px; border-top: 1px solid var(--border); }
+  .ledger-full.open .lf-body { display: block; }
+  .lf-linked { margin-top: 10px; }
+  .lf-linked .lf-link-row { display: flex; align-items: center; gap: 10px; padding: 5px 0;
+    border-bottom: 1px dashed var(--border); font-size: .84rem; }
+  .lf-linked .lf-link-row:last-child { border-bottom: none; }
+  .lf-linked .lf-link-type { font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--brand-700); font-weight: 700; background: var(--brand-50); border-radius: 5px;
+    padding: 2px 6px; flex: none; }
+  .lf-verify-btn { margin-top: 12px; }
+  .lf-verify-result { margin-top: 8px; font-size: .84rem; padding: 8px 12px; border-radius: 8px;
+    background: var(--success-bg); color: var(--success); font-weight: 600; display: none; }
+  .lf-flag { font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; margin-left: 6px; }
+  .lf-flag.append { background: var(--success-bg); color: var(--success); }
+  .lf-flag.net { background: var(--brand-50); color: var(--brand-700); }
+
+  /* report */
+  .report-doc { border:1px solid var(--border); border-radius:var(--r); background:var(--surface); padding:26px 28px; font-size:.9rem; }
+  .report-doc h3 { margin:0; } .report-doc .rd-meta { color:var(--text-3); font-size:.82rem; margin-top:2px; }
+  .rd-sec { margin-top:20px; } .rd-sec h4 { font-size:.78rem; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--brand-700); margin:0 0 8px; border-bottom:1px solid var(--border); padding-bottom:6px; }
+  .rd-line { display:flex; justify-content:space-between; gap:14px; padding:4px 0; }
+  .rd-line .k { color: var(--text-3); } .rd-line .v { font-weight:600; text-align:right; word-break:break-word; }
+  .checklist { list-style:none; padding:0; margin:0; }
+  .checklist li { display:flex; align-items:center; gap:9px; padding:7px 0; font-size:.9rem; }
+  .checklist .ok { color: var(--success); font-weight:800; } .checklist .miss { color: var(--warn); font-weight:800; }
+
+  .hint { font-size:.84rem; color: var(--warn); background: var(--warn-bg); border-radius:8px; padding:8px 12px; margin-top:12px; }
+  .toast { position: fixed; left:50%; bottom: 26px; transform: translateX(-50%) translateY(20px);
+    background: var(--surface-2); color: var(--text); padding: 11px 18px; border-radius: 10px; font-size:.9rem; border: 1px solid var(--border-strong);
+    box-shadow: var(--shadow-lg); opacity:0; transition: opacity .25s, transform .25s; z-index: 100; pointer-events:none; }
+  .toast.show { opacity:1; transform: translateX(-50%) translateY(0); }
+
+  /* post-run summary modal */
+  .summary-modal { position: fixed; inset: 0; z-index: 1000; display: none; }
+  .summary-modal.open { display: block; }
+  .summary-modal-backdrop { position: absolute; inset: 0; background: rgba(8,14,26,.62); backdrop-filter: blur(3px); }
+  .summary-card { position: relative; background: linear-gradient(135deg,#15233F,#2440B5); border-radius: var(--r-xl);
+    color: #fff; padding: 34px 38px; max-width: 780px; width: calc(100% - 32px); margin: 5vh auto; max-height: 90vh; overflow: auto;
+    box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  .summary-close { position: absolute; top: 14px; right: 16px; width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); color: #fff; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+  .summary-close:hover { background: rgba(255,255,255,.24); }
+  .summary-card h3 { color: #fff; margin: 0 0 4px; font-size: 1.3rem; }
+  .summary-card .sc-sub { color: #CBD8F2; font-size: .88rem; margin-bottom: 22px; }
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 700px){ .summary-grid { grid-template-columns: 1fr; } }
+  .summary-item { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
+    border-radius: var(--r); padding: 14px 16px; }
+  .summary-item .si-lab { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: #9AB6FF; font-weight: 700; margin-bottom: 4px; }
+  .summary-item .si-val { font-weight: 700; font-size: 1.05rem; color: #fff; }
+  .summary-mechanism, .summary-finality { margin: 16px 0 0; padding: 12px 16px;
+    background: rgba(124,170,255,.14); border: 1px solid rgba(154,182,255,.32);
+    border-radius: 10px; color: #EAF1FE; font-size: .9rem; line-height: 1.55;
+    display: flex; gap: 12px; align-items: flex-start; font-style: italic; }
+  .summary-mechanism::before { content: "\2714"; flex: none; color: #7BE3B0; font-weight: 800; font-style: normal; }
+  .summary-finality::before  { content: "\26AB"; flex: none; color: #9AB6FF; font-style: normal; }
+  .summary-divider { margin: 22px 0 16px; border-top: 1px solid rgba(255,255,255,.18); padding-top: 18px; }
+  .summary-divider h4 { color: #fff; margin: 0 0 12px; font-size: 1rem; }
+  .legacy-list { list-style: none; padding: 0; margin: 0 0 18px; }
+  .legacy-list li { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0;
+    font-size: .88rem; color: #D6E0F0; border-bottom: 1px dashed rgba(255,255,255,.12); }
+  .legacy-list li:last-child { border-bottom: none; }
+  .legacy-list .ll-icon { color: #FFB4A6; flex: none; margin-top: 1px; font-weight: 800; }
+  .legacy-list .ll-strike { color: #9FB0CC; }
+  .savings-badge { background: rgba(123,227,176,.15); border: 1px solid rgba(123,227,176,.4);
+    border-radius: var(--r); padding: 16px 18px; display: flex; align-items: center; gap: 14px; }
+  .savings-badge .sb-amt { font-size: 1.5rem; font-weight: 800; color: #7BE3B0; }
+  .savings-badge .sb-lab { font-size: .84rem; color: #D6E0F0; }
+  .summary-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .summary-actions .btn { font-size: .88rem; }
+
+  /* detailed breakdown + audit chain in the modal */
+  .breakdown-list { list-style: none; padding: 0; margin: 0 0 16px; }
+  .breakdown-list li { display: flex; align-items: flex-start; gap: 12px; padding: 11px 0; border-bottom: 1px dashed rgba(255,255,255,.12); }
+  .breakdown-list li:last-child { border-bottom: none; }
+  .breakdown-list .bd-main { flex: 1; }
+  .breakdown-list .bd-main b { color: #fff; font-size: .92rem; }
+  .breakdown-list .bd-main .bd-sub { color: #C2CFE6; font-size: .82rem; margin-top: 2px; }
+  .breakdown-list .bd-val { text-align: right; flex: none; }
+  .breakdown-list .bd-val .bd-money { color: #7BE3B0; font-weight: 800; font-size: .98rem; }
+  .breakdown-list .bd-val .bd-time { color: #AFC0DC; font-size: .76rem; }
+  .sc-how { font-size: .82rem; color: #CBD8F2; margin: 14px 0 0; line-height: 1.65; }
+  .aud-chain { display: flex; flex-direction: column; gap: 6px; }
+  .aud-row { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 8px 12px; }
+  .aud-row .aud-badge { font-family: var(--font-mono); font-size: .64rem; font-weight: 800; color: #0B1220;
+    background: #9AB6FF; border-radius: 4px; padding: 2px 6px; flex: none; }
+  .aud-row .aud-lab { flex: 1; font-size: .86rem; color: #fff; }
+  .aud-row .aud-meta { font-family: var(--font-mono); font-size: .74rem; color: #AFC0DC; white-space: nowrap; }
+
+  /* manual step button states */
+  .btn.done-muted { background: var(--surface-2) !important; color: var(--text-3) !important; border-color: var(--border) !important; box-shadow: none !important; }
+  .btn.next-go { background: var(--success) !important; color: #fff !important; border-color: var(--success) !important; }
+  .btn.next-go:hover { background: #0c7a54 !important; color: #fff !important; }
+
+  /* transition card at bottom */
+  .transition-card { max-width: var(--maxw); margin: 32px auto 48px; padding: 0 28px; }
+  .transition-inner { background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: var(--r-xl); padding: 32px 36px; display: flex; align-items: center; gap: 24px;
+    justify-content: space-between; flex-wrap: wrap; }
+  .transition-inner .ti-text h3 { margin: 0 0 6px; }
+  .transition-inner .ti-text p { margin: 0; color: var(--text-2); font-size: .94rem; max-width: 36em; }
+
+  /* form visibility */
+  .forms-area { display: none; }
+  .forms-area.visible { display: block; }
+</style>
+</head>
+<body>
+
+
+<!-- Top utility bar — links demo site back to main 4orm Finance marketing site -->
+<div class="top-utility">
+  <div class="wrap">
+    <a class="back-link" href="https://www.4ormfinance.com">← Back to 4orm Finance</a>
+    <span class="utility-eye"><span class="pulse"></span>LIVE INSTITUTIONAL DEMO · NO SIGNUP</span>
+    <a class="utility-cta" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+  </div>
+</div>
+<div class="sbx-banner"><b>Sandbox environment</b>, simulated data only, all amounts in <b>CAD</b>. Identifiers, hashes and balances are generated for demonstration.</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <nav class="nav-links">
+            <a href="https://www.4ormfinance.com/exchange/" class="nav-exchange" target="_blank" rel="noopener" aria-label="Open the 4ormEx Exchange"><span class="ex-main">4ormEx</span><span class="ex-eye">Exchange</span></a>
+<a href="index.html">Overview</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="primer.html">Field Guide</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="sandbox.html">Sandbox</a>
+      <a href="money-flows.html">Money Flows</a>
+      <a href="cost-analysis-bank.html">What It Saves</a>
+      <a href="institution-summary.html">Institutional Summary</a>
+      <div class="nav-drop">
+        <span class="nav-drop-trigger" tabindex="0" role="button" aria-haspopup="true">How We Protect You <span class="caret">&#9662;</span></span>
+        <div class="nav-drop-menu">
+          <a href="risk-compliance.html">Risk &amp; Compliance</a>
+          <a href="supervision.html">Supervision</a>
+          <a href="institutions.html">The Network</a>
+        </div>
+      </div>
+      <a href="education.html">How We Teach You</a>
+      <a href="login.html" class="nav-auth">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO (dark) ===== -->
+<section class="dhero">
+  <div class="dhero-inner">
+    <div class="dhero-eyebrow">Sandbox, simulated end-to-end</div>
+    <h1>Run a tokenized institutional transaction, <span class="accent">end to end.</span></h1>
+    <p class="dhero-sub">Eight steps from KYC through atomic settlement, with append-only audit trail and per-step compliance receipts. No live blockchain, no real assets, no real customer data. Pick one of three preset scenarios below, or run the lifecycle manually one step at a time.</p>
+    <div class="dhero-pills">
+      <span class="dhero-pill gold">Simulated data only</span>
+      <span class="dhero-pill">CAD</span>
+      <span class="dhero-pill">8-step lifecycle</span>
+      <span class="dhero-pill">Verifiable audit trail</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCENARIO TILES (gray band, 3 side-by-side) ===== -->
+<div class="sandbox-scn-band">
+  <div class="sandbox-scn-inner">
+    <div class="sandbox-scn-head" style="font-size: 1.1rem; font-weight: 800; letter-spacing: .02em; text-transform: none; color: #fff; margin-bottom: 4px;">Choose one</div>
+    <div class="sandbox-scn-head">One-click scenarios, prefill and run instantly</div>
+    <div class="sandbox-scn-grid">
+      <button class="sandbox-scn-tile" data-scn="gic" onclick="launchScenario('gic')">
+        <span class="stl-rank">1</span>
+        <div class="stl-eyebrow">Community bank</div>
+        <div class="stl-title">Tokenize a GIC</div>
+        <div class="stl-sub">GIC-backed note, ERC-3643, reusable KYC credential</div>
+        <div class="stl-foot">
+          <span class="stl-amt">C$250,000</span>
+        </div>
+        <div class="stl-cta-row">
+          <span class="stl-cta-btn">Choose this scenario</span>
+        </div>
+      </button>
+      <button class="sandbox-scn-tile" data-scn="bond" onclick="launchScenario('bond')">
+        <span class="stl-rank">2</span>
+        <div class="stl-eyebrow">Credit union</div>
+        <div class="stl-title">Alberta provincial bond</div>
+        <div class="stl-sub">Provincial Bond (Alberta), atomic DvP settlement</div>
+        <div class="stl-foot">
+          <span class="stl-amt">C$1,000,000</span>
+        </div>
+        <div class="stl-cta-row">
+          <span class="stl-cta-btn">Choose this scenario</span>
+        </div>
+      </button>
+      <button class="sandbox-scn-tile" data-scn="deposit" onclick="launchScenario('deposit')">
+        <span class="stl-rank">3</span>
+        <div class="stl-eyebrow">Schedule I bank</div>
+        <div class="stl-title">Tokenized CAD deposit</div>
+        <div class="stl-sub">Tokenized CAD deposit, T+0 trade-date settlement</div>
+        <div class="stl-foot">
+          <span class="stl-amt">C$5,000,000</span>
+        </div>
+        <div class="stl-cta-row">
+          <span class="stl-cta-btn">Choose this scenario</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RUN STRIP ===== -->
+<div class="run-strip">
+  <button class="btn btn-primary btn-lg" id="runAutoBtn" onclick="runAll()">&#9654; Run auto full flow</button>
+  <button class="btn btn-ghost btn-lg" id="runManualBtn" onclick="startManual()">Manual steps full flow</button>
+  <button class="btn btn-customize btn-sm" id="customizeBtn" onclick="toggleCustomize()" aria-pressed="false">Customize each step</button>
+  <button class="btn btn-gold btn-sm" id="reopenSummaryBtn" onclick="openSummaryModal()">&#8635; View summary again</button>
+  <button class="btn btn-stop btn-sm" id="stopBtn" onclick="stopRun()" style="display:none;">&#9632; Stop</button>
+</div>
+
+<div class="sbx-layout">
+
+  <!-- ===================================== SIDEBAR -->
+  <aside class="sbx-side">
+    <div class="side-card">
+      <div class="side-title">Transaction lifecycle</div>
+      <div class="progress-wrap">
+        <div class="progress-lab"><span>Progress</span><span id="progCount">0 / 8</span></div>
+        <div class="progress-bar"><i id="progFill"></i></div>
+      </div>
+      <button class="side-item" data-target="kyc"><span class="si-num">1</span><span class="si-tx">KYC Verification</span><span class="si-state">&#10003;</span></button>
+      <button class="side-item" data-target="aml"><span class="si-num">2</span><span class="si-tx">AML Screening</span><span class="si-state">&#10003;</span></button>
+      <button class="side-item" data-target="token"><span class="si-num">3</span><span class="si-tx">Tokenization</span><span class="si-state">&#10003;</span></button>
+      <button class="side-item" data-target="trade"><span class="si-num">4</span><span class="si-tx">Trade Execution</span><span class="si-state">&#10003;</span></button>
+      <button class="side-item" data-target="attest"><span class="si-num">5</span><span class="si-tx">Attestation</span><span class="si-state">&#10003;</span></button>
+      <button class="side-item" data-target="settle"><span class="si-num">6</span><span class="si-tx">Settlement</span><span class="si-state">&#10003;</span></button>
+      <button class="side-item" data-target="audit"><span class="si-num">7</span><span class="si-tx">Audit Trail</span><span class="si-state">&#10003;</span></button>
+      <button class="side-item" data-target="report"><span class="si-num">8</span><span class="si-tx">Compliance Report</span><span class="si-state">&#10003;</span></button>
+
+      <hr class="divider" />
+      <button class="btn btn-primary" style="width:100%;" id="runAllBtn" onclick="runAll()">&#9654; Run auto full flow</button>
+      <button class="btn btn-ghost btn-sm" style="width:100%; margin-top:8px;" id="resetBtn">Reset sandbox</button>
+    </div>
+  </aside>
+
+  <!-- ===================================== MAIN -->
+  <main class="sbx-main">
+
+    <!-- 1 KYC -->
+    <section class="mpanel" id="panel-kyc" data-mech="kyc">
+      <div class="mp-head">
+        <div class="mp-h-l"><span class="mp-num">01</span>
+          <div><h2>KYC Verification</h2><p class="t2">Know Your Customer (KYC): verify an institution's legal identity and beneficial owners, then issue a reusable on-chain credential.</p></div></div>
+        <span class="chip chip-neutral" id="status-kyc"><span class="dot"></span> Not run</span>
+      </div>
+      <div class="mp-body">
+        <div class="card pad forms-area" id="form-kyc">
+          <h4 class="mt0">Institution details</h4>
+          <label class="field"><span class="lab">Quick-fill from Canadian directory</span>
+            <select class="input" id="kyc_pick"><option value="">Choose a Canadian institution</option></select></label>
+          <label class="field"><span class="lab">Legal name</span><input class="input" id="kyc_name" value="ATB Financial"></label>
+          <div class="field-row">
+            <label class="field"><span class="lab">Province / jurisdiction</span>
+              <select class="input" id="kyc_jur"><option>Alberta</option><option>British Columbia</option><option>Saskatchewan</option><option>Manitoba</option><option>Ontario</option><option>Quebec</option><option>Nova Scotia</option><option>New Brunswick</option><option>Newfoundland &amp; Labrador</option><option>Prince Edward Island</option><option>Canada (Federal)</option></select></label>
+            <label class="field"><span class="lab">Entity type</span>
+              <select class="input" id="kyc_type"><option>Crown Corporation</option><option>Credit Union</option><option>Schedule I Bank</option><option>Caisse Populaire</option><option>Asset Manager</option><option>Trust Company</option></select></label>
+          </div>
+          <div class="field-row">
+            <label class="field"><span class="lab">Registration no.</span><input class="input" id="kyc_reg" value="AB-1938-0007"></label>
+            <label class="field"><span class="lab">Beneficial owners &gt;25%</span><input class="input" type="number" id="kyc_ubo" value="0" min="0" max="20"></label>
+          </div>
+          <button class="btn btn-primary" id="btn-kyc" onclick="runKYC()">Run KYC check</button>
+        </div>
+        <div class="card pad mp-output" id="out-kyc"></div>
+      </div>
+      <div class="mp-nav"><span></span><button class="btn btn-ghost" onclick="nextPanel('kyc')">Next: AML Screening &rarr;</button></div>
+    </section>
+
+    <!-- 2 AML -->
+    <section class="mpanel" id="panel-aml" data-mech="aml">
+      <div class="mp-head">
+        <div class="mp-h-l"><span class="mp-num">02</span>
+          <div><h2>AML Screening</h2><p class="t2">Anti-Money Laundering (AML): screen the party and the transaction against sanctions, politically exposed persons (PEP) and watchlists, with an auditable risk score.</p></div></div>
+        <span class="chip chip-neutral" id="status-aml"><span class="dot"></span> Not run</span>
+      </div>
+      <div class="mp-body">
+        <div class="card pad forms-area" id="form-aml">
+          <h4 class="mt0">Screening inputs</h4>
+          <label class="field"><span class="lab">Counterparty</span><input class="input" id="aml_party" value="Coast Capital Savings"></label>
+          <div class="field-row">
+            <label class="field"><span class="lab">Transaction amount (CAD)</span><input class="input" type="number" id="aml_amt" value="25000000"></label>
+            <label class="field"><span class="lab">Source of funds</span>
+              <select class="input" id="aml_sof"><option>Institutional treasury</option><option>Client subscriptions</option><option>Proprietary capital</option><option>Credit facility</option></select></label>
+          </div>
+          <button class="btn btn-primary" id="btn-aml" onclick="runAML()">Run AML check</button>
+        </div>
+        <div class="card pad mp-output" id="out-aml"></div>
+      </div>
+      <div class="mp-nav"><button class="btn btn-ghost" onclick="showPanel('kyc')">&larr; KYC</button><button class="btn btn-ghost" onclick="nextPanel('aml')">Next: Tokenization &rarr;</button></div>
+    </section>
+
+    <!-- 3 TOKENIZATION -->
+    <section class="mpanel" id="panel-token" data-mech="token">
+      <div class="mp-head">
+        <div class="mp-h-l"><span class="mp-num">03</span>
+          <div><h2>Tokenization</h2><p class="t2">Wrap a real-world asset (RWA = real-world asset) in a legal token contract and mint it on-chain with built-in transfer restrictions.</p></div></div>
+        <span class="chip chip-neutral" id="status-token"><span class="dot"></span> Not run</span>
+      </div>
+      <div class="mp-body">
+        <div class="card pad forms-area" id="form-token">
+          <h4 class="mt0">Asset to tokenize</h4>
+          <label class="field"><span class="lab">Asset type</span>
+            <select class="input" id="tok_asset"><option>Government of Canada T-Bill</option><option>Provincial Bond (Alberta)</option><option>Canadian Money Market Fund</option><option>GIC-Backed Note</option><option>Tokenized Mortgage Pool</option></select></label>
+          <div class="field-row">
+            <label class="field"><span class="lab">ISIN</span><input class="input" id="tok_isin" value="CA135087Q558"></label>
+            <label class="field"><span class="lab">Face value / unit (CAD)</span><input class="input" type="number" id="tok_face" value="100"></label>
+          </div>
+          <label class="field"><span class="lab">Quantity to mint</span><input class="input" type="number" id="tok_qty" value="250000"></label>
+          <button class="btn btn-primary" id="btn-token" onclick="runToken()">Tokenize asset</button>
+        </div>
+        <div class="card pad mp-output" id="out-token"></div>
+      </div>
+      <div class="mp-nav"><button class="btn btn-ghost" onclick="showPanel('aml')">&larr; AML</button><button class="btn btn-ghost" onclick="nextPanel('token')">Next: Trade Execution &rarr;</button></div>
+    </section>
+
+    <!-- 4 TRADE -->
+    <section class="mpanel" id="panel-trade" data-mech="trade">
+      <div class="mp-head">
+        <div class="mp-h-l"><span class="mp-num">04</span>
+          <div><h2>Trade Execution</h2><p class="t2">Place an order into a live book, match against a verified counterparty, and generate an execution receipt.</p></div></div>
+        <span class="chip chip-neutral" id="status-trade"><span class="dot"></span> Not run</span>
+      </div>
+      <div class="mp-body">
+        <div class="card pad forms-area" id="form-trade">
+          <h4 class="mt0">Order</h4>
+          <div class="field-row">
+            <label class="field"><span class="lab">Side</span><select class="input" id="trd_side"><option>Buy</option><option>Sell</option></select></label>
+            <label class="field"><span class="lab">Instrument</span><input class="input" id="trd_token" value="tGCB" readonly></label>
+          </div>
+          <div class="field-row">
+            <label class="field"><span class="lab">Quantity</span><input class="input" type="number" id="trd_qty" value="50000"></label>
+            <label class="field"><span class="lab">Limit price (CAD)</span><input class="input" type="number" step="0.01" id="trd_px" value="100.02"></label>
+          </div>
+          <div class="side-title" style="margin:6px 4px;">Order book</div>
+          <div class="book" id="trd_book"></div>
+          <button class="btn btn-primary mt16" id="btn-trade" onclick="runTrade()">Submit order</button>
+        </div>
+        <div class="card pad mp-output" id="out-trade"></div>
+      </div>
+      <div class="mp-nav"><button class="btn btn-ghost" onclick="showPanel('token')">&larr; Tokenization</button><button class="btn btn-ghost" onclick="nextPanel('trade')">Next: Attestation &rarr;</button></div>
+    </section>
+
+    <!-- 5 ATTESTATION -->
+    <section class="mpanel" id="panel-attest" data-mech="attest">
+      <div class="mp-head">
+        <div class="mp-h-l"><span class="mp-num">05</span>
+          <div><h2>Attestation</h2><p class="t2">Issue a signed, verifiable proof, anchored to the credentials and transactions created in prior steps.</p></div></div>
+        <span class="chip chip-neutral" id="status-attest"><span class="dot"></span> Not run</span>
+      </div>
+      <div class="mp-body">
+        <div class="card pad forms-area" id="form-attest">
+          <h4 class="mt0">Attestation</h4>
+          <label class="field"><span class="lab">Type</span>
+            <select class="input" id="att_type"><option>Proof of Reserves</option><option>Compliance Status</option><option>Asset Ownership</option><option>Best Execution</option></select></label>
+          <label class="field"><span class="lab">Statement</span>
+            <textarea class="input" id="att_stmt" rows="3">Issuer holds 1:1 backing for all minted units; all transfers restricted to verified members.</textarea></label>
+          <div class="side-title" style="margin:6px 4px;">Linked on-chain references</div>
+          <div id="att_links" class="t2" style="font-size:.86rem;"></div>
+          <button class="btn btn-primary mt16" id="btn-attest" onclick="runAttest()">Issue attestation</button>
+        </div>
+        <div class="card pad mp-output" id="out-attest"></div>
+      </div>
+      <div class="mp-nav"><button class="btn btn-ghost" onclick="showPanel('trade')">&larr; Trade</button><button class="btn btn-ghost" onclick="nextPanel('attest')">Next: Settlement &rarr;</button></div>
+    </section>
+
+    <!-- 6 SETTLEMENT -->
+    <section class="mpanel" id="panel-settle" data-mech="settle">
+      <div class="mp-head">
+        <div class="mp-h-l"><span class="mp-num">06</span>
+          <div><h2>Settlement</h2><p class="t2">Settle both legs atomically, delivery-versus-payment (DvP = delivery-versus-payment) at T+0 (trade-date settlement), with instant, irreversible finality.</p></div></div>
+        <span class="chip chip-neutral" id="status-settle"><span class="dot"></span> Not run</span>
+      </div>
+      <div class="mp-body">
+        <div class="card pad forms-area" id="form-settle">
+          <h4 class="mt0">Settlement instruction</h4>
+          <label class="field"><span class="lab">Trade reference</span><input class="input" id="set_trade" value="·" readonly></label>
+          <label class="field"><span class="lab">Settlement currency (cash leg)</span>
+            <select class="input" id="set_ccy"><option>Regulated CAD stablecoin</option><option>Tokenized CAD deposit</option></select></label>
+          <div class="side-title" style="margin:6px 4px;">Legs</div>
+          <div id="set_legs"></div>
+          <button class="btn btn-primary mt8" id="btn-settle" onclick="runSettle()">Settle atomically</button>
+        </div>
+        <div class="card pad mp-output" id="out-settle"></div>
+      </div>
+      <div class="mp-nav"><button class="btn btn-ghost" onclick="showPanel('attest')">&larr; Attestation</button><button class="btn btn-ghost" onclick="nextPanel('settle')">Next: Audit Trail &rarr;</button></div>
+    </section>
+
+    <!-- 7 AUDIT -->
+    <section class="mpanel" id="panel-audit" data-mech="audit">
+      <div class="mp-head">
+        <div class="mp-h-l"><span class="mp-num">07</span>
+          <div><h2>Audit Trail</h2><p class="t2">Every step above is written to an immutable, append-only ledger on the 4orm-EVM permissioned network. Each record carries a hash, timestamp, and linked references that tie it back to its originating credential, trade, or settlement leg.</p></div></div>
+        <span class="chip chip-neutral" id="status-audit"><span class="dot"></span> Not run</span>
+      </div>
+      <div class="card pad">
+        <div class="flex between aic wrapf gap12" style="margin-bottom:14px;">
+          <div class="flex gap24 wrapf">
+            <div><div class="muted" style="font-size:.78rem;">Records</div><div style="font-weight:800; font-size:1.3rem;" id="aud_count">0</div></div>
+            <div><div class="muted" style="font-size:.78rem;">Network</div><div style="font-weight:700;">4orm-EVM (permissioned)</div></div>
+            <div><div class="muted" style="font-size:.78rem;">Mutability</div><div style="font-weight:700; color:var(--success);">Append-only</div></div>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="renderLedger()">Refresh ledger</button>
+        </div>
+        <div id="aud_list"></div>
+      </div>
+      <div class="mp-nav"><button class="btn btn-ghost" onclick="showPanel('settle')">&larr; Settlement</button><button class="btn btn-ghost" onclick="nextPanel('audit')">Next: Compliance Report &rarr;</button></div>
+    </section>
+
+    <!-- 8 REPORT -->
+    <section class="mpanel" id="panel-report" data-mech="report">
+      <div class="mp-head">
+        <div class="mp-h-l"><span class="mp-num">08</span>
+          <div><h2>Compliance Report</h2><p class="t2">Auto-compile a regulatory report from the on-chain record, no manual reconciliation, and export it.</p></div></div>
+        <span class="chip chip-neutral" id="status-report"><span class="dot"></span> Not run</span>
+      </div>
+      <div class="mp-body">
+        <div class="card pad forms-area" id="form-report">
+          <h4 class="mt0">Report</h4>
+          <label class="field"><span class="lab">Report type</span>
+            <select class="input" id="rep_type"><option>Transaction Report</option><option>Holdings Report</option><option>Full Audit Package</option></select></label>
+          <div class="side-title" style="margin:6px 4px;">Source completeness</div>
+          <ul class="checklist" id="rep_check"></ul>
+          <button class="btn btn-primary mt8" id="btn-report" onclick="runReport()">Generate report</button>
+          <div class="btn-row mt16" id="rep_actions" style="display:none;">
+            <button class="btn btn-ghost btn-sm" onclick="downloadReport()">Download (.txt)</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.print()">Print</button>
+          </div>
+        </div>
+        <div class="card pad mp-output" id="out-report"></div>
+      </div>
+      <div class="mp-nav"><button class="btn btn-ghost" onclick="showPanel('audit')">&larr; Audit Trail</button><a class="btn btn-soft" href="cost-analysis-bank.html#compare">See manual vs 4orm &rarr;</a></div>
+    </section>
+
+    <!-- POST-RUN SUMMARY (modal, opens when the flow completes) -->
+    <div class="summary-modal" id="summaryModal" aria-hidden="true">
+      <div class="summary-modal-backdrop" onclick="closeSummaryModal()"></div>
+      <div class="summary-card" id="postRunSummary" role="dialog" aria-modal="true" aria-label="What just happened">
+        <button class="summary-close" onclick="closeSummaryModal()" aria-label="Close">&times;</button>
+        <h3 id="summaryTitle">What just happened</h3>
+        <div class="sc-sub" id="summarySub">End-to-end run complete. Here is what the ledger recorded, what it saved, and the audit record behind it.</div>
+        <div class="summary-grid" id="summaryGrid"></div>
+
+        <div class="summary-mechanism" id="summaryMechanism"></div>
+        <div class="summary-finality" id="summaryFinality"></div>
+
+        <div class="summary-divider">
+          <h4>What you avoided on 4orm</h4>
+          <ul class="legacy-list" id="avoidedList"></ul>
+        </div>
+
+        <div class="summary-divider">
+          <h4>Where the savings come from</h4>
+          <ul class="breakdown-list" id="breakdownList"></ul>
+          <div class="savings-badge">
+            <div>
+              <div class="sb-amt" id="savingsAmt">C$0</div>
+              <div class="sb-lab">Estimated saving on this single transaction (simulated, illustrative)</div>
+            </div>
+          </div>
+          <p class="sc-how" id="savingsHow"></p>
+        </div>
+
+        <div class="summary-divider">
+          <h4>Audit record</h4>
+          <div class="aud-chain" id="auditChain"></div>
+        </div>
+
+        <div class="summary-actions">
+          <button class="btn btn-ghost" onclick="copySummary()">Copy summary</button>
+          <button class="btn btn-ghost" onclick="window.print()">Print</button>
+          <button class="btn btn-ghost" onclick="closeSummaryModal()">Close</button>
+          <button class="btn btn-primary" onclick="resetAll()">Run another scenario</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- TRANSITION CARD -->
+<div class="transition-card">
+  <div class="transition-inner">
+    <div class="ti-text">
+      <h3>You just ran one transaction.</h3>
+      <p>Now see how money of any size moves through the system, and where it gets stuck on legacy rails. Dial any amount from C$500 to C$50M and watch the checkpoints pile up.</p>
+    </div>
+    <a class="btn btn-primary btn-lg" href="money-flows.html">See money flows &rarr;</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============================================ CLOSING CTA — back to 4orm Finance -->
+<section class="demo-closing">
+  <div class="demo-closing-inner">
+    <div>
+      <div class="demo-closing-eye"><span class="dot"></span>Ready for the next step</div>
+      <h2>Bring 4orm to <span class="accent">your institution.</span></h2>
+      <p>You've just walked the same flow your treasury team, risk lead, and compliance officer would walk in production. If it fits the way your institution moves, we'd like to talk. Pre-Seed closes Q2 2026.</p>
+      <div class="demo-closing-buttons">
+        <a class="demo-closing-btn gold" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+        <a class="demo-closing-btn ghost" href="https://www.4ormfinance.com">Back to 4orm Finance</a>
+      </div>
+    </div>
+    <div class="demo-closing-side">
+      <h4>What happens when you sign up</h4>
+      <ul>
+        <li><span class="check">✓</span><span>Institutional onboarding call within 5 business days</span></li>
+        <li><span class="check">✓</span><span>Tailored walkthrough for your treasury, risk, and compliance teams</span></li>
+        <li><span class="check">✓</span><span>Direct line to Mike Sammut (Founder, KCS Capital)</span></li>
+        <li><span class="check">✓</span><span>Optional sandbox tenant for your team to test internally</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="foot-contact">
+  <div class="wrap">
+    <span>Questions, or want to walk through this with us? <a href="mailto:compliance@kcs-capital.com">compliance@kcs-capital.com</a> &middot; 4orm Finance is built and operated by KCS Capital.</span>
+  </div>
+</div>
+<footer class="footer">
+  <div class="wrap">
+    <p class="small mb0" style="max-width:48em;">4orm Finance is an early-stage platform in development (sandbox-stage), not a licensed exchange or dealer.
+      All identifiers, hashes, prices, balances and outcomes here are simulated and do not represent live systems, real assets or real counterparties.
+      Educational only; not an offer or solicitation of securities and not financial, legal or tax advice. Third parties named are not affiliated with 4orm unless stated.</p>
+    <a class="btn btn-ghost btn-sm" href="index.html">&larr; Back to overview</a>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script src="institutions.js"></script>
+<script>
+(function(){
+'use strict';
+
+/* ===================================================================
+   State
+   =================================================================== */
+var FLOW = { done:{}, ledger:[], institution:null, aml:null, token:null, trade:null, attestation:null, settlement:null };
+var ORDER = ['kyc','aml','token','trade','attest','settle','audit','report'];
+var TITLES = { kyc:'KYC Verification', aml:'AML Screening', token:'Tokenization', trade:'Trade Execution',
+  attest:'Attestation', settle:'Settlement', audit:'Audit Trail', report:'Compliance Report' };
+
+/* ===================================================================
+   Scenario pre-fill configs
+   =================================================================== */
+var SCENARIOS = {
+  gic: {
+    kyc_name: 'First West Credit Union', kyc_jur: 'British Columbia', kyc_type: 'Credit Union', kyc_reg: 'BC-2001-0441', kyc_ubo: '0',
+    aml_party: 'Community Savings Credit Union', aml_amt: '250000', aml_sof: 'Institutional treasury',
+    tok_asset: 'GIC-Backed Note', tok_isin: 'CA37248G1014', tok_face: '100', tok_qty: '2500',
+    trd_side: 'Sell', trd_qty: '1000', trd_px: '100.00',
+    att_type: 'Proof of Reserves',
+    att_stmt: 'GIC-backed note: 1:1 backing confirmed, all units restricted to verified credit union members.',
+    set_ccy: 'Regulated CAD stablecoin'
+  },
+  bond: {
+    kyc_name: 'Servus Credit Union', kyc_jur: 'Alberta', kyc_type: 'Credit Union', kyc_reg: 'AB-1999-0321', kyc_ubo: '0',
+    aml_party: 'ATB Financial', aml_amt: '1000000', aml_sof: 'Institutional treasury',
+    tok_asset: 'Provincial Bond (Alberta)', tok_isin: 'CA013341AC76', tok_face: '1000', tok_qty: '1000',
+    trd_side: 'Buy', trd_qty: '500', trd_px: '1000.50',
+    att_type: 'Asset Ownership',
+    att_stmt: 'Provincial Bond (Alberta) tokenized: issuer holds custodied bond; transfer restricted to KYC-verified members.',
+    set_ccy: 'Tokenized CAD deposit'
+  },
+  deposit: {
+    kyc_name: 'Royal Bank of Canada', kyc_jur: 'Canada (Federal)', kyc_type: 'Schedule I Bank', kyc_reg: 'FED-1869-0003', kyc_ubo: '0',
+    aml_party: 'TD Bank', aml_amt: '5000000', aml_sof: 'Proprietary capital',
+    tok_asset: 'Government of Canada T-Bill', tok_isin: 'CA135087L726', tok_face: '100', tok_qty: '50000',
+    trd_side: 'Sell', trd_qty: '25000', trd_px: '99.95',
+    att_type: 'Compliance Status',
+    att_stmt: 'Tokenized CAD deposit: fully backed, regulatory capital requirements satisfied, T+0 settlement enabled.',
+    set_ccy: 'Tokenized CAD deposit'
+  }
+};
+
+function setInput(id, val) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (el.tagName === 'SELECT') {
+    for (var i = 0; i < el.options.length; i++) {
+      if (el.options[i].value === val || el.options[i].text === val) { el.selectedIndex = i; return; }
+    }
+  } else {
+    el.value = val;
+  }
+}
+
+function launchScenario(key) {
+  /* Just SELECT the scenario, prefill the inputs, mark the card as active.
+     Do NOT auto-run. The user clicks "Run auto full flow" after to actually run. */
+  var cfg = SCENARIOS[key];
+  if (!cfg) return;
+  FLOW.scenario = key;
+  Object.keys(cfg).forEach(function(k){ setInput(k, cfg[k]); });
+  /* Mark which scenario tile is active so the user sees their selection */
+  document.querySelectorAll('.sandbox-scn-tile').forEach(function(t){
+    t.classList.toggle('selected', t.getAttribute('data-scn') === key);
+  });
+  /* Reset progress so it's clear this is a fresh run waiting for them to start */
+  resetSilently();
+  showPanel('kyc', { noScroll: true });
+  /* Scroll the user gently down to the run controls so they see them */
+  var target = document.querySelector('.sandbox-scn-band');
+  if (target && typeof target.scrollIntoView === 'function') {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  toast('Scenario loaded. Click "Run auto full flow" to start.');
+}
+window.launchScenario = launchScenario;
+
+/* ===================================================================
+   Customize toggle
+   =================================================================== */
+function toggleCustomize(force) {
+  var btn = document.getElementById('customizeBtn');
+  var on = (typeof force === 'boolean') ? force : !(btn && btn.classList.contains('on'));
+  document.querySelectorAll('.forms-area').forEach(function(el){
+    el.classList.toggle('visible', on);
+  });
+  if (btn) {
+    btn.classList.toggle('on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? 'Hide step inputs' : 'Customize each step';
+  }
+}
+window.toggleCustomize = toggleCustomize;
+
+/* Manual mode: reveal the step inputs, reset, and start the user at step 1 so
+   they can run each step and click Next themselves (no auto-run). */
+function startManual() {
+  resetSilently();
+  toggleCustomize(true);
+  showPanel('kyc');
+  toast('Manual mode: run each step, then click Next');
+}
+window.startManual = startManual;
+
+/* ===================================================================
+   Panel navigation
+   =================================================================== */
+function showPanel(id, opts){
+  ORDER.forEach(function(m){
+    document.getElementById('panel-'+m).classList.toggle('active', m===id);
+  });
+  document.querySelectorAll('.side-item').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-target')===id);
+  });
+  try { if (history.replaceState) history.replaceState(null, '', '#'+id); } catch (e) { location.hash = id; }
+  onShow(id);
+  /* Only scroll when the user clicks a side-nav item or a manual control.
+     During the auto-run loop, we pass {noScroll: true} so the page does not
+     keep yanking back to the top while the user is trying to read the
+     compliance report further down. */
+  if (!opts || !opts.noScroll) {
+    /* Scroll to the run-strip (just below the scenario cards) so the user lands
+       with the controls visible at top and the active panel just below it. */
+    var target = document.querySelector('.sandbox-scn-band');
+    if (target && typeof target.scrollIntoView === 'function') {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top:0, behavior:'smooth' });
+    }
+  }
+}
+window.showPanel = showPanel;
+function nextPanel(cur){
+  var i = ORDER.indexOf(cur);
+  if (i >= ORDER.length-1) return;
+  var nextKey = ORDER[i+1];
+  showPanel(nextKey);
+  /* Auto-kick off the next step's processing so the user doesn't have to click Run again.
+     Each step has a run function (KYC, AML, token, trade, attest, settle); audit + report
+     render automatically. */
+  var runMap = {
+    kyc: typeof runKYC === 'function' ? runKYC : null,
+    aml: typeof runAML === 'function' ? runAML : null,
+    token: typeof runToken === 'function' ? runToken : null,
+    trade: typeof runTrade === 'function' ? runTrade : null,
+    attest: typeof runAttest === 'function' ? runAttest : null,
+    settle: typeof runSettle === 'function' ? runSettle : null,
+    audit: function(){ if (typeof renderLedger === 'function') renderLedger(); },
+    report: function(){
+      if (typeof renderRepCheck === 'function') renderRepCheck();
+      if (typeof runReport === 'function') runReport();
+    }
+  };
+  var fn = runMap[nextKey];
+  if (fn) {
+    /* Small delay so the panel-switch animation completes first */
+    setTimeout(function(){
+      try { fn(); } catch (e) { /* swallow, manual run still available */ }
+    }, 250);
+  }
+}
+window.nextPanel = nextPanel;
+function onShow(id){
+  if (id==='trade'){ document.getElementById('trd_token').value = FLOW.token ? FLOW.token.symbol : 'tGCB'; renderBook(); }
+  if (id==='settle'){ syncSettle(); }
+  if (id==='attest'){ renderAttLinks(); }
+  if (id==='audit'){ renderLedger(); }
+  if (id==='report'){ renderRepCheck(); }
+}
+
+document.querySelectorAll('.side-item').forEach(function(b){
+  b.addEventListener('click', function(){ showPanel(b.getAttribute('data-target')); });
+});
+
+/* ===================================================================
+   Shared helpers
+   =================================================================== */
+function setStatus(id, kind, text){
+  var el = document.getElementById('status-'+id);
+  if (!el) return;
+  el.className = 'chip chip-'+kind;
+  el.innerHTML = (kind==='pending' ? '<span class="spinner"></span> ' : '<span class="dot"></span> ') + text;
+}
+function emptyOut(id, label){
+  var el = document.getElementById('out-'+id);
+  if (!el) return;
+  el.innerHTML =
+    '<div class="out-empty"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div>'+label+'</div></div>';
+}
+async function runChecks(outId, steps){
+  var out = document.getElementById('out-'+outId);
+  if (!out) return null;
+  out.innerHTML = '';
+  var head = document.createElement('div');
+  head.className = 'run-head';
+  head.innerHTML = '<span class="spinner"></span> Processing on 4orm-EVM...';
+  out.appendChild(head);
+  var ul = document.createElement('ul'); ul.className='checks';
+  steps.forEach(function(s){
+    var li = document.createElement('li');
+    li.innerHTML = '<span class="ico"></span><span class="lbl">'+s.label+'</span><span class="meta"></span>';
+    ul.appendChild(li);
+  });
+  out.appendChild(ul);
+  var lis = ul.querySelectorAll('li');
+  for (var i=0;i<steps.length;i++){
+    var li = lis[i];
+    li.classList.add('active');
+    li.querySelector('.ico').innerHTML = '<span class="spinner"></span>';
+    await F.sleep(380 + Math.random()*340);
+    li.classList.remove('active'); li.classList.add('done');
+    li.querySelector('.ico').innerHTML = '&#10003;';
+    var meta = typeof steps[i].meta==='function' ? steps[i].meta() : steps[i].meta;
+    if (meta) li.querySelector('.meta').textContent = meta;
+  }
+  head.remove();
+  return out;
+}
+function receipt(out, opts){
+  var rows = opts.rows.map(function(r){
+    return '<div class="r-row"><span class="k">'+r[0]+'</span><span class="v">'+r[1]+'</span></div>';
+  }).join('');
+  var div = document.createElement('div');
+  div.className = 'receipt';
+  div.innerHTML =
+    '<div class="r-head"><span>'+opts.title+'</span><span class="chip chip-'+(opts.chipKind||'success')+'"><span class="dot"></span> '+opts.chip+'</span></div>'+
+    rows + (opts.foot ? '<div class="r-foot">'+opts.foot+'</div>' : '');
+  out.appendChild(div);
+  F.bindCopyables(out);
+}
+function markDone(id){
+  FLOW.done[id] = true;
+  var item = document.querySelector('.side-item[data-target="'+id+'"]');
+  if (item) item.classList.add('done');
+  /* grey the step's run / re-run button so it no longer reads as the next action */
+  var rb = document.getElementById('btn-'+id);
+  if (rb){ rb.classList.remove('btn-primary'); rb.classList.add('btn-ghost','done-muted'); }
+  /* turn the matching "Next" button green to signal the next action to press */
+  var nb = document.querySelector('[onclick*="nextPanel(\''+id+'\')"]');
+  if (nb){ nb.classList.add('next-go'); }
+  updateProgress();
+}
+function updateProgress(){
+  var n = ORDER.filter(function(m){ return FLOW.done[m]; }).length;
+  document.getElementById('progCount').textContent = n + ' / 8';
+  document.getElementById('progFill').style.width = (n/8*100) + '%';
+}
+function toast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._t); t._t = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
+function pushLedger(entry){
+  entry.block = F.nextBlock();
+  entry.time = F.now();
+  FLOW.ledger.push(entry);
+}
+function busy(id, on, label){
+  var b = document.getElementById('btn-'+id);
+  if (!b) return;
+  b.disabled = on;
+  if (on){ if (!b._label) b._label = b.textContent; b.textContent = 'Running...'; }
+  else { b.textContent = label || b._label || b.textContent; }
+}
+
+/* ===================================================================
+   1 · KYC
+   =================================================================== */
+async function runKYC(){
+  busy('kyc', true);
+  setStatus('kyc','pending','Verifying');
+  var name = document.getElementById('kyc_name').value || 'Institution';
+  var jur  = document.getElementById('kyc_jur').value;
+  var type = document.getElementById('kyc_type').value;
+  var reg  = document.getElementById('kyc_reg').value;
+  var ubo  = document.getElementById('kyc_ubo').value;
+  await runChecks('kyc', [
+    { label:'Validating legal entity registration', meta:'reg ok' },
+    { label:'Cross-referencing '+jur+' corporate registry', meta:'matched' },
+    { label:'Verifying '+ubo+' beneficial owners (UBO)', meta:'cleared' },
+    { label:'Screening directors against global lists', meta:'no hits' },
+    { label:'Issuing W3C verifiable credential', meta:'signed' }
+  ]);
+  var did = 'did:4orm:' + F.address();
+  var cred = F.txHash();
+  var lei = '8945' + String(Math.floor(Math.random()*1e12)).padStart(12,'0').slice(0,12) + 'CA';
+  FLOW.institution = { name:name, jurisdiction:jur, type:type, did:did, cred:cred, lei:lei };
+  pushLedger({ type:'KYC', label:'KYC credential issued · '+name, hash:cred, status:'Verified',
+    details:[['Institution',name],['Type',type],['Jurisdiction',jur],['DID',did]] });
+  var out = document.getElementById('out-kyc');
+  receipt(out, { title:'Institutional identity verified', chip:'Verified', rows:[
+    ['Institution', name],
+    ['Entity type', type],
+    ['Jurisdiction', jur],
+    ['LEI', '<span class="mono">'+lei+'</span>'],
+    ['Institutional DID', F.hashChip(did, 14, 6)],
+    ['Credential hash', F.hashChip(cred)]
+  ], foot:'Reusable credential: present once, transact anywhere on 4orm. No re-onboarding per counterparty.'});
+  setStatus('kyc','success','Verified');
+  markDone('kyc'); busy('kyc', false, 'Re-run KYC check');
+}
+window.runKYC = runKYC;
+
+/* ===================================================================
+   2 · AML
+   =================================================================== */
+async function runAML(){
+  busy('aml', true);
+  setStatus('aml','pending','Screening');
+  var party = document.getElementById('aml_party').value || 'Counterparty';
+  var amt = Number(document.getElementById('aml_amt').value||0);
+  var sof = document.getElementById('aml_sof').value;
+  await runChecks('aml', [
+    { label:'Screening against OFAC SDN list', meta:'0 matches' },
+    { label:'Screening against UN and EU consolidated lists', meta:'0 matches' },
+    { label:'Politically exposed persons (PEP) screening', meta:'clear' },
+    { label:'Adverse media and negative news scan', meta:'clear' },
+    { label:'Computing weighted risk score', meta:'done' }
+  ]);
+  var score = 8 + Math.floor(Math.random()*12) + (amt>100000000?10:0);
+  var band = score<25 ? 'Low' : (score<50 ? 'Medium' : 'High');
+  var bandKind = band==='Low'?'success':(band==='Medium'?'warn':'danger');
+  var ref = F.txHash();
+  FLOW.aml = { party:party, amt:amt, sof:sof, score:score, band:band, ref:ref };
+  pushLedger({ type:'AML', label:'AML screening cleared · '+party, hash:ref, status:'Cleared',
+    details:[['Counterparty',party],['Amount',F.money(amt)],['Risk score',score+' / 100 ('+band+')']] });
+  var out = document.getElementById('out-aml');
+  receipt(out, { title:'Screening complete', chip:'Cleared', rows:[
+    ['Counterparty', party],
+    ['Amount screened', F.money(amt)],
+    ['Source of funds', sof],
+    ['Sanctions / PEP', '<span class="chip chip-success"><span class="dot"></span> No matches</span>'],
+    ['Risk score', '<span class="chip chip-'+bandKind+'"><span class="dot"></span> '+score+' / 100 · '+band+'</span>'],
+    ['Screening reference', F.hashChip(ref)]
+  ], foot:'Every list checked is timestamped and recorded; the screening can be reproduced and audited at any time.'});
+  setStatus('aml','success','Cleared');
+  markDone('aml'); busy('aml', false, 'Re-run AML check');
+}
+window.runAML = runAML;
+
+/* ===================================================================
+   3 · Tokenization
+   =================================================================== */
+function symbolFor(asset){
+  return ({ 'Government of Canada T-Bill':'tGCB', 'Provincial Bond (Alberta)':'tABB', 'Canadian Money Market Fund':'tMMF',
+    'GIC-Backed Note':'tGIC', 'Tokenized Mortgage Pool':'tMTG' })[asset] || 'tAST';
+}
+async function runToken(){
+  busy('token', true);
+  setStatus('token','pending','Minting');
+  var asset = document.getElementById('tok_asset').value;
+  var isin = document.getElementById('tok_isin').value;
+  var face = Number(document.getElementById('tok_face').value||0);
+  var qty = Number(document.getElementById('tok_qty').value||0);
+  var sym = symbolFor(asset);
+  await runChecks('token', [
+    { label:'Verifying underlying asset and custody record', meta:isin },
+    { label:'Attaching legal wrapper and token terms', meta:'bound' },
+    { label:'Deploying ERC-3643 permissioned contract', meta:'deployed' },
+    { label:'Minting '+qty.toLocaleString()+' '+sym+' to issuer wallet', meta:'minted' },
+    { label:'Registering transfer restrictions', meta:'whitelist on' }
+  ]);
+  var addr = F.address();
+  var tx = F.txHash();
+  var total = face*qty;
+  FLOW.token = { symbol:sym, address:addr, supply:qty, face:face, asset:asset, isin:isin, total:total, tx:tx };
+  pushLedger({ type:'MINT', label:'Tokenized '+asset+' · '+qty.toLocaleString()+' '+sym, hash:tx, status:'Minted',
+    details:[['Asset',asset],['Symbol',sym],['Supply',qty.toLocaleString()],['Contract',addr]] });
+  var out = document.getElementById('out-token');
+  receipt(out, { title:asset+' tokenized', chip:'Minted', rows:[
+    ['Token symbol', '<b>'+sym+'</b>'],
+    ['Standard', 'ERC-3643 (permissioned)'],
+    ['Underlying', asset+' · <span class="mono">'+isin+'</span>'],
+    ['Total supply', qty.toLocaleString()+' units'],
+    ['Total value', F.money(total)],
+    ['Contract address', F.hashChip(addr, 14, 6)],
+    ['Mint transaction', F.hashChip(tx)]
+  ], foot:'Compliance is embedded in the token: it can only ever move between verified, whitelisted members.'});
+  setStatus('token','success','Minted');
+  markDone('token'); busy('token', false, 'Re-mint asset');
+}
+window.runToken = runToken;
+
+/* ===================================================================
+   4 · Trade
+   =================================================================== */
+function renderBook(){
+  var px = Number(document.getElementById('trd_px').value||100);
+  var base = Math.round(px*100)/100 || 100;
+  var rows = '';
+  for (var a=3;a>=1;a--){
+    var p=(base + a*0.01).toFixed(2), s=(8000+Math.floor(Math.random()*40000));
+    rows += '<div class="brow ask"><span class="depth" style="width:'+(20+s/700)+'%"></span><span class="px">'+p+'</span><span class="sz">'+s.toLocaleString()+'</span></div>';
+  }
+  rows += '<div class="mid">spread 0.01 · last '+base.toFixed(2)+'</div>';
+  for (var b=1;b<=3;b++){
+    var p2=(base - b*0.01).toFixed(2), s2=(8000+Math.floor(Math.random()*40000));
+    rows += '<div class="brow bid"><span class="depth" style="width:'+(20+s2/700)+'%"></span><span class="px">'+p2+'</span><span class="sz">'+s2.toLocaleString()+'</span></div>';
+  }
+  document.getElementById('trd_book').innerHTML = rows;
+}
+async function runTrade(){
+  busy('trade', true);
+  setStatus('trade','pending','Matching');
+  var side = document.getElementById('trd_side').value;
+  var sym = document.getElementById('trd_token').value;
+  var qty = Number(document.getElementById('trd_qty').value||0);
+  var px = Number(document.getElementById('trd_px').value||100);
+  var tokenMissing = !FLOW.token;
+  await runChecks('trade', [
+    { label:'Submitting order to matching engine', meta:'queued' },
+    { label:'Checking member eligibility and limits', meta:'ok' },
+    { label:'Locating best counterparty', meta:'found' },
+    { label:'Matching at best available price', meta:'filled' },
+    { label:'Generating execution receipt', meta:'signed' }
+  ]);
+  var fillPx = Math.round((px - 0.0)*100)/100;
+  var notional = qty*fillPx;
+  var oid = 'ORD-' + String(Math.floor(Math.random()*900000)+100000);
+  var tx = F.txHash();
+  var cp = 'Verified Member · ' + F.shortHash(F.address(), 8, 4);
+  FLOW.trade = { id:oid, side:side, sym:sym, qty:qty, px:fillPx, notional:notional, tx:tx, cp:cp };
+  pushLedger({ type:'TRADE', label:side+' '+qty.toLocaleString()+' '+sym+' @ '+fillPx.toFixed(2), hash:tx, status:'Filled',
+    details:[['Order ID',oid],['Side',side],['Quantity',qty.toLocaleString()],['Price',F.money(fillPx)],['Notional',F.money(notional)]] });
+  var out = document.getElementById('out-trade');
+  if (tokenMissing){ out.insertAdjacentHTML('beforeend','<div class="hint">Tip: run step 3 (Tokenization) first to trade a real minted instrument. A sample instrument was used here.</div>'); }
+  receipt(out, { title:'Order filled', chip:'Filled', rows:[
+    ['Order ID', '<span class="mono">'+oid+'</span>'],
+    ['Side', side],
+    ['Instrument', '<b>'+sym+'</b>'],
+    ['Quantity filled', qty.toLocaleString()+' units'],
+    ['Execution price', F.money(fillPx)],
+    ['Notional', F.money(notional)],
+    ['Counterparty', '<span class="mono">'+cp+'</span>'],
+    ['Trade hash', F.hashChip(tx)]
+  ], foot:'Both sides are pre-verified members; the trade can move straight to atomic settlement with no counterparty risk.'});
+  setStatus('trade','success','Filled');
+  markDone('trade'); busy('trade', false, 'Submit another order');
+}
+window.runTrade = runTrade;
+
+/* ===================================================================
+   5 · Attestation
+   =================================================================== */
+function renderAttLinks(){
+  var rows = [];
+  if (FLOW.institution) rows.push('KYC credential · '+F.hashChip(FLOW.institution.cred,10,6));
+  if (FLOW.token) rows.push('Token contract · '+F.hashChip(FLOW.token.address,10,6));
+  if (FLOW.trade) rows.push('Trade · '+F.hashChip(FLOW.trade.tx,10,6));
+  document.getElementById('att_links').innerHTML = rows.length
+    ? rows.map(function(r){ return '<div style="padding:3px 0;">'+r+'</div>'; }).join('')
+    : '<span class="muted">No prior references yet. Run earlier steps to anchor this attestation to them.</span>';
+  F.bindCopyables(document.getElementById('att_links'));
+}
+async function runAttest(){
+  busy('attest', true);
+  setStatus('attest','pending','Signing');
+  var type = document.getElementById('att_type').value;
+  var stmt = document.getElementById('att_stmt').value;
+  var links = [];
+  if (FLOW.institution) links.push(FLOW.institution.cred);
+  if (FLOW.token) links.push(FLOW.token.address);
+  if (FLOW.trade) links.push(FLOW.trade.tx);
+  await runChecks('attest', [
+    { label:'Gathering '+links.length+' linked on-chain reference(s)', meta:'linked' },
+    { label:'Canonicalising and hashing payload', meta:'hashed' },
+    { label:'Signing with issuer attestation key', meta:'signed' },
+    { label:'Anchoring attestation on-chain', meta:'anchored' }
+  ]);
+  var aid = 'ATT-' + String(Math.floor(Math.random()*900000)+100000);
+  var hash = F.txHash();
+  var signer = '4orm Attestation Authority · ' + F.shortHash(F.address(),8,4);
+  FLOW.attestation = { id:aid, type:type, stmt:stmt, hash:hash, signer:signer, links:links.length };
+  pushLedger({ type:'ATTEST', label:'Attestation issued · '+type, hash:hash, status:'Verifiable',
+    details:[['Attestation ID',aid],['Type',type],['Linked refs',String(links.length)],['Statement',stmt]] });
+  var out = document.getElementById('out-attest');
+  receipt(out, { title:type+' attested', chip:'Verifiable', rows:[
+    ['Attestation ID', '<span class="mono">'+aid+'</span>'],
+    ['Type', type],
+    ['Statement', stmt],
+    ['Linked references', links.length + ' on-chain record(s)'],
+    ['Signer', '<span class="mono">'+signer+'</span>'],
+    ['Attestation hash', F.hashChip(hash)]
+  ], foot:'Anyone with the hash can independently verify this proof against the chain; no trust in 4orm required.'});
+  setStatus('attest','success','Verifiable');
+  markDone('attest'); busy('attest', false, 'Re-issue attestation');
+}
+window.runAttest = runAttest;
+
+/* ===================================================================
+   6 · Settlement
+   =================================================================== */
+function syncSettle(){
+  document.getElementById('set_trade').value = FLOW.trade ? FLOW.trade.id : '·';
+  var assetTxt = FLOW.trade ? (FLOW.trade.qty.toLocaleString()+' '+FLOW.trade.sym) : '50,000 tGCB';
+  var cashTxt  = FLOW.trade ? F.money(FLOW.trade.notional) : F.money(5001000);
+  var ccy = document.getElementById('set_ccy').value;
+  document.getElementById('set_legs').innerHTML =
+    '<div class="leg" id="leg-asset"><span class="lg-ic">A</span><span class="lg-tx"><b>Asset leg</b><small>'+assetTxt+'</small></span><span class="lg-st">pending</span></div>'+
+    '<div class="leg" id="leg-cash"><span class="lg-ic">$</span><span class="lg-tx"><b>Cash leg</b><small>'+cashTxt+' '+ccy+'</small></span><span class="lg-st">pending</span></div>';
+}
+async function runSettle(){
+  busy('settle', true);
+  setStatus('settle','pending','Settling');
+  var tradeMissing = !FLOW.trade;
+  syncSettle();
+  var ccy = document.getElementById('set_ccy').value;
+  var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+  await runChecks('settle', [
+    { label:'Locking asset leg in settlement escrow', meta:'locked' },
+    { label:'Locking cash leg in settlement escrow', meta:'locked' },
+    { label:'Verifying delivery-versus-payment (DvP)', meta:'matched' },
+    { label:'Executing atomic swap', meta:'swapped' },
+    { label:'Finalising, writing irreversible record', meta:'final' }
+  ]);
+  ['leg-asset','leg-cash'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el){ el.classList.add('settled'); el.querySelector('.lg-st').textContent = 'settled'; }
+  });
+  var t1 = (window.performance && performance.now) ? performance.now() : Date.now();
+  var secs = ((t1-t0)/1000).toFixed(1);
+  var tx = F.txHash();
+  var notional = FLOW.trade ? FLOW.trade.notional : 5001000;
+  FLOW.settlement = { tx:tx, ccy:ccy, secs:secs, notional:notional, method:'Atomic DvP (T+0)' };
+  pushLedger({ type:'SETTLE', label:'Atomic DvP settlement · '+F.money(notional)+' '+ccy, hash:tx, status:'Final',
+    details:[['Method','Atomic DvP (T+0)'],['Cash currency',ccy],['Notional',F.money(notional)],['Finality','Irreversible']] });
+  var out = document.getElementById('out-settle');
+  if (tradeMissing){ out.insertAdjacentHTML('beforeend','<div class="hint">Tip: run step 4 (Trade Execution) first to settle a real trade. A sample trade was used here.</div>'); }
+  receipt(out, { title:'Settled with finality', chip:'Final', rows:[
+    ['Method', 'Atomic delivery-vs-payment (T+0)'],
+    ['Asset leg', '<span class="chip chip-success"><span class="dot"></span> Settled</span>'],
+    ['Cash leg', '<span class="chip chip-success"><span class="dot"></span> Settled</span>'],
+    ['Cash currency', ccy],
+    ['Notional', F.money(notional)],
+    ['Time to finality', secs + ' s'],
+    ['Settlement hash', F.hashChip(tx)]
+  ], foot:'Both legs moved simultaneously or not at all. No T+2 window, no failed trades, no reconciliation breaks.'});
+  setStatus('settle','success','Final');
+  markDone('settle'); busy('settle', false, 'Settle again');
+}
+window.runSettle = runSettle;
+
+/* ===================================================================
+   7 · Audit Trail (enriched immutable ledger records)
+   =================================================================== */
+var TYPE_LABEL = { KYC:'KYC', AML:'AML', MINT:'MNT', TRADE:'TRD', ATTEST:'ATT', SETTLE:'STL' };
+
+function linkedRefs(e) {
+  var refs = [];
+  if (e.type === 'KYC') {
+    refs.push({ type:'CREDENTIAL', label:'W3C Verifiable Credential', val:e.hash });
+  } else if (e.type === 'AML') {
+    refs.push({ type:'SCREEN-REF', label:'Sanctions screening run', val:e.hash });
+    if (FLOW.institution) refs.push({ type:'KYC-LINK', label:'KYC credential', val:FLOW.institution.cred });
+  } else if (e.type === 'MINT') {
+    refs.push({ type:'CONTRACT', label:'ERC-3643 token contract', val:e.hash });
+    if (FLOW.institution) refs.push({ type:'KYC-LINK', label:'KYC credential', val:FLOW.institution.cred });
+    if (FLOW.aml) refs.push({ type:'AML-LINK', label:'AML screening ref', val:FLOW.aml.ref });
+  } else if (e.type === 'TRADE') {
+    refs.push({ type:'EXEC-HASH', label:'Execution receipt', val:e.hash });
+    if (FLOW.token) refs.push({ type:'MINT-LINK', label:'Token contract', val:FLOW.token.address });
+  } else if (e.type === 'ATTEST') {
+    refs.push({ type:'ATTEST-HASH', label:'Attestation proof', val:e.hash });
+    if (FLOW.institution) refs.push({ type:'KYC-LINK', label:'KYC credential', val:FLOW.institution.cred });
+    if (FLOW.trade) refs.push({ type:'TRADE-LINK', label:'Trade match', val:FLOW.trade.tx });
+  } else if (e.type === 'SETTLE') {
+    refs.push({ type:'SETTLE-HASH', label:'Settlement finality hash', val:e.hash });
+    if (FLOW.trade) refs.push({ type:'TRADE-LINK', label:'Trade match', val:FLOW.trade.tx });
+    if (FLOW.attestation) refs.push({ type:'ATTEST-LINK', label:'Attestation', val:FLOW.attestation.hash });
+  }
+  return refs;
+}
+
+function renderLedger(){
+  var list = document.getElementById('aud_list');
+  document.getElementById('aud_count').textContent = FLOW.ledger.length;
+  if (!FLOW.ledger.length){
+    list.innerHTML = '<div class="out-empty" style="min-height:180px;"><div>No records yet.</div>'+
+      '<button class="btn btn-primary btn-sm" onclick="runAll()">Run the full flow to populate the ledger</button></div>';
+    return;
+  }
+  list.innerHTML = FLOW.ledger.map(function(e, i){
+    var details = (e.details||[]).map(function(d){
+      var val = (/^0x[0-9a-f]{8,}/i.test(d[1])) ? F.hashChip(d[1]) : d[1];
+      return '<div class="r-row"><span class="k">'+d[0]+'</span><span class="v">'+val+'</span></div>';
+    }).join('');
+    var refs = linkedRefs(e);
+    var refsHtml = refs.length ? '<div class="lf-linked"><div style="font-size:.78rem; font-weight:700; color:var(--text-3); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px;">Linked references</div>'+
+      refs.map(function(r){
+        return '<div class="lf-link-row"><span class="lf-link-type">'+r.type+'</span><span style="flex:1;">'+r.label+'</span>'+F.hashChip(r.val,10,6)+'</div>';
+      }).join('') + '</div>' : '';
+    var networkHtml = '<div class="r-row" style="margin-top:4px;"><span class="k">Network</span><span class="v">4orm-EVM (permissioned)</span></div>'+
+      '<div class="r-row"><span class="k">Append-only</span><span class="v"><span class="chip chip-success" style="font-size:.76rem;"><span class="dot"></span> Immutable</span></span></div>';
+    var verifyId = 'verify-result-'+i;
+    var verifyBtn = '<button class="btn btn-ghost btn-sm lf-verify-btn" onclick="verifyHash(\''+e.hash+'\',\''+verifyId+'\')">Verify hash</button>'+
+      '<div class="lf-verify-result" id="'+verifyId+'"></div>';
+    return '<div class="ledger-full" id="lf'+i+'">'+
+      '<button type="button" class="lf-head" aria-expanded="false" aria-controls="lf'+i+'" onclick="(function(b){var p=document.getElementById(\'lf'+i+'\');p.classList.toggle(\'open\');b.setAttribute(\'aria-expanded\',p.classList.contains(\'open\')?\'true\':\'false\');})(this)">'+
+        '<span class="lf-badge">'+(TYPE_LABEL[e.type]||e.type.slice(0,3))+'</span>'+
+        '<span class="lf-mid"><b>'+e.label+'</b><div class="lf-sub">'+e.time+' · block #'+e.block+'</div></span>'+
+        '<span class="lf-right">'+F.hashChip(e.hash,8,4)+'<br><span class="chip chip-success lf-right"><span class="dot"></span> '+e.status+'</span></span>'+
+      '</button>'+
+      '<div class="lf-body">'+details+networkHtml+refsHtml+verifyBtn+'</div>'+
+    '</div>';
+  }).join('');
+  F.bindCopyables(list);
+  if (FLOW.ledger.length) markDone('audit');
+}
+window.renderLedger = renderLedger;
+
+function verifyHash(hash, resultId) {
+  var el = document.getElementById(resultId);
+  if (!el) return;
+  el.style.display = 'block';
+  el.textContent = 'Verifying...';
+  setTimeout(function(){
+    el.textContent = 'Hash verified on 4orm-EVM · ' + hash.slice(0,18) + '... · append-only record confirmed';
+  }, 820 + Math.random()*600);
+}
+window.verifyHash = verifyHash;
+
+/* ===================================================================
+   8 · Compliance Report
+   =================================================================== */
+function renderRepCheck(){
+  var items = [
+    ['Institution identity (KYC)', !!FLOW.institution],
+    ['AML / sanctions screening', !!FLOW.aml],
+    ['Tokenized asset record', !!FLOW.token],
+    ['Trade execution receipt', !!FLOW.trade],
+    ['Attestation', !!FLOW.attestation],
+    ['Atomic settlement', !!FLOW.settlement]
+  ];
+  document.getElementById('rep_check').innerHTML = items.map(function(it){
+    return '<li>'+(it[1]?'<span class="ok">&#10003;</span>':'<span class="miss">!</span>')+' '+it[0]+
+      (it[1]?'':' <span class="muted">, not run</span>')+'</li>';
+  }).join('');
+}
+function reportData(){
+  var inst = FLOW.institution, aml=FLOW.aml, tok=FLOW.token, trd=FLOW.trade, att=FLOW.attestation, set=FLOW.settlement;
+  return { inst:inst, aml:aml, tok:tok, trd:trd, att:att, set:set,
+    type: document.getElementById('rep_type').value,
+    id: 'RPT-'+String(Math.floor(Math.random()*900000)+100000),
+    gen: F.now(), hash: F.txHash() };
+}
+var LAST_REPORT = null;
+async function runReport(){
+  busy('report', true);
+  setStatus('report','pending','Compiling');
+  await runChecks('report', [
+    { label:'Querying immutable ledger records', meta:FLOW.ledger.length+' records' },
+    { label:'Reconciling identity, trade and settlement', meta:'matched' },
+    { label:'Validating attestations and hashes', meta:'valid' },
+    { label:'Compiling regulatory report', meta:'built' }
+  ]);
+  var d = reportData();
+  LAST_REPORT = d;
+  var out = document.getElementById('out-report');
+  function line(k,v){ return '<div class="rd-line"><span class="k">'+k+'</span><span class="v">'+v+'</span></div>'; }
+  var html = '<div class="report-doc" id="reportDoc">'+
+    '<div class="flex between aic"><div><h3>4orm Finance, '+d.type+'</h3><div class="rd-meta">Report '+d.id+' · generated '+d.gen+'</div></div>'+
+    '<span class="chip chip-success"><span class="dot"></span> Auto-compiled</span></div>'+
+    '<div class="rd-sec"><h4>Counterparty</h4>'+
+      line('Institution', d.inst?d.inst.name:'·')+
+      line('Type / jurisdiction', d.inst?(d.inst.type+' · '+d.inst.jurisdiction):'·')+
+      line('LEI', d.inst?'<span class="mono">'+d.inst.lei+'</span>':'·')+
+    '</div>'+
+    '<div class="rd-sec"><h4>Compliance</h4>'+
+      line('AML screening', d.aml?('Cleared · risk '+d.aml.score+'/100 ('+d.aml.band+')'):'·')+
+      line('Attestation', d.att?(d.att.type+' · verifiable'):'·')+
+    '</div>'+
+    '<div class="rd-sec"><h4>Transaction</h4>'+
+      line('Instrument', d.tok?(d.tok.symbol+' · '+d.tok.asset):'·')+
+      line('Trade', d.trd?(d.trd.side+' '+d.trd.qty.toLocaleString()+' @ '+F.money(d.trd.px)):'·')+
+      line('Notional', d.trd?F.money(d.trd.notional):'·')+
+      line('Settlement', d.set?(d.set.method+' · '+d.set.secs+'s to finality'):'·')+
+    '</div>'+
+    '<div class="rd-sec"><h4>Integrity</h4>'+
+      line('Ledger records', FLOW.ledger.length+' immutable entries')+
+      line('Report hash', F.hashChip(d.hash))+
+    '</div>'+
+  '</div>';
+  out.innerHTML = html;
+  F.bindCopyables(out);
+  document.getElementById('rep_actions').style.display = 'flex';
+  setStatus('report','success','Generated');
+  markDone('report'); busy('report', false, 'Re-generate report');
+  toast('Report compiled from the on-chain record');
+  renderPostRunSummary();
+}
+window.runReport = runReport;
+
+/* ===================================================================
+   Post-run summary card
+   =================================================================== */
+function renderPostRunSummary(){
+  var inst = FLOW.institution, trd = FLOW.trade, set = FLOW.settlement, tok = FLOW.token;
+  if (!trd || !set) return;
+  var notional = set.notional;
+  var auditHash = (FLOW.ledger.length ? FLOW.ledger[FLOW.ledger.length-1].hash : F.txHash());
+  var cpName = trd.cp || 'Verified member';
+  var assetName = tok ? tok.asset : 'Asset';
+  var instName = (inst && inst.name) ? inst.name : 'Your institution';
+
+  /* reference the selected institution in the modal heading and intro */
+  var titleEl = document.getElementById('summaryTitle');
+  if (titleEl) titleEl.textContent = (inst && inst.name) ? ('What just happened, ' + instName) : 'What just happened';
+  var subEl = document.getElementById('summarySub');
+  if (subEl) subEl.textContent = 'End-to-end run complete for ' + instName + '. Here is what the ledger recorded, what it saved, and the audit record behind it.';
+
+  var gridItems = [
+    { lab:'Institution', val: instName },
+    { lab:'Asset tokenized', val: assetName },
+    { lab:'Trade size', val: F.money(notional) },
+    { lab:'Counterparty', val: cpName },
+    { lab:'Settled in', val: set.secs + ' s (T+0)' },
+    { lab:'Settlement method', val: 'Atomic DvP, no T+2 exposure' },
+    { lab:'Audit hash', val: F.hashChip(auditHash) }
+  ];
+  document.getElementById('summaryGrid').innerHTML = gridItems.map(function(g){
+    return '<div class="summary-item"><div class="si-lab">'+g.lab+'</div><div class="si-val">'+g.val+'</div></div>';
+  }).join('');
+
+  /* ---- B6: scenario-aware compliance-mechanism callout ---- */
+  var mechanismCopy = {
+    gic: 'During this run, KYC credential verification fired at step 1 and LCTR (large cash transaction report) auto-attestation fired at step 8, together saving an estimated C$240 of compliance labour vs. the legacy rail.',
+    bond: 'During this run, KYC credential verification fired at step 1, sanctions screening fired at step 2, and atomic DvP at step 6 eliminated the counterparty exposure window, saving an estimated C$1,850 of compliance and capital cost vs. the legacy rail.',
+    deposit: 'During this run, KYC credential verification fired at step 1, sanctions screening fired at step 2, atomic DvP at step 6 settled both legs together (treasury, custody and canonical ledger all confirmed), and LCTR auto-attestation fired at step 8, saving an estimated C$4,400 of compliance and capital cost vs. the legacy rail, with zero correspondent prefunding required.'
+  };
+  var mechEl = document.getElementById('summaryMechanism');
+  if (mechEl) {
+    var scnKey = FLOW.scenario || 'deposit';
+    mechEl.textContent = mechanismCopy[scnKey] || mechanismCopy.deposit;
+  }
+  /* ---- B7: settlement-finality callout (every scenario) ---- */
+  var finEl = document.getElementById('summaryFinality');
+  if (finEl) {
+    finEl.textContent = 'Settlement finality on this run: treasury confirmed + custody confirmed + canonical ledger committed. Blockchain confirmation alone does not represent institutional finality.';
+  }
+
+  /* ---- what the flow removed (helps them see WHY there are savings) ---- */
+  var avoided = [
+    'T+2 settlement wait removed: about 2 business days of trapped liquidity, freed at trade time (T+0)',
+    'No correspondent or clearing intermediary sitting in the payment path',
+    'No manual compliance review on either side: KYC, AML and sanctions checks ran inside the transaction',
+    'No reconciliation breaks to investigate: both institutions read one shared, self-reconciling ledger',
+    'No overnight batch or cut-off window: settlement was atomic, delivery-versus-payment, all-or-nothing',
+    'No separate audit assembly: the append-only record is the audit trail, ready for your regulator'
+  ];
+  document.getElementById('avoidedList').innerHTML = avoided.map(function(t){
+    return '<li><span class="ll-icon">&times;</span><span>'+t+'</span></li>';
+  }).join('');
+
+  /* ---- detailed savings line items: dollars AND time ---- */
+  function m2(v){ return 'C$' + Math.round(v).toLocaleString(); }
+  var rate = 60;                                    // C$/hr loaded compliance cost
+  var compHours = Math.round(notional/1000000*3 + 4);
+  var compCost = compHours * rate;
+  var reconcBreaks = Math.round(notional/500000 + 1);
+  var reconCost = reconcBreaks * 200;               // ~C$200 to investigate and clear each break
+  var cof = 0.04, days = 2;                          // ~4% annual cost of funds, ~2 settlement days
+  var liqCost = Math.round(notional * cof / 365 * days);
+  var totalSavings = compCost + reconCost + liqCost;
+
+  var rows = [
+    { b:'Trapped liquidity freed',
+      sub:'C$'+Math.round(notional).toLocaleString()+' held in transit on both sides, at ~'+(cof*100).toFixed(0)+'% cost of funds for ~'+days+' days',
+      money:liqCost, time:'~'+days+' days to '+set.secs+' s' },
+    { b:'Manual compliance review removed',
+      sub:'~'+compHours+' hours at C$'+rate+'/hr; on 4orm the checks run inside the transaction',
+      money:compCost, time:'~'+compHours+' hrs to seconds' },
+    { b:'Reconciliation breaks removed',
+      sub:'~'+reconcBreaks+' breaks to investigate and clear across both institutions; the shared ledger self-reconciles',
+      money:reconCost, time:'self-reconciling' }
+  ];
+  document.getElementById('breakdownList').innerHTML = rows.map(function(r){
+    return '<li><div class="bd-main"><b>'+r.b+'</b><div class="bd-sub">'+r.sub+'</div></div>'+
+      '<div class="bd-val"><div class="bd-money">'+m2(r.money)+'</div><div class="bd-time">'+r.time+'</div></div></li>';
+  }).join('');
+
+  document.getElementById('savingsAmt').textContent = m2(totalSavings);
+  document.getElementById('savingsHow').innerHTML =
+    'How we get here for '+instName+': on legacy rails this '+m2(notional)+' transaction settles in about 2 business days (T+2), so the full amount sits in transit on both sides, '+
+    'it takes roughly '+compHours+' hours of manual compliance review at C$'+rate+'/hr, and it typically creates about '+reconcBreaks+' reconciliation breaks to clear. '+
+    'On 4orm, atomic T+0 settlement in tokenized bank deposits removes the wait, frees the liquidity, runs compliance inside the transaction, and self-reconciles. Figures are simulated and illustrative.';
+
+  /* ---- audit record chain ---- */
+  document.getElementById('auditChain').innerHTML = FLOW.ledger.map(function(e){
+    return '<div class="aud-row"><span class="aud-badge">'+(TYPE_LABEL[e.type]||String(e.type).slice(0,3))+'</span>'+
+      '<span class="aud-lab">'+e.label+'</span>'+
+      '<span class="aud-meta">block #'+e.block+' &middot; '+String(e.hash).slice(0,12)+'…</span></div>';
+  }).join('') +
+  '<div class="aud-row" style="background:rgba(123,227,176,.12); border-color:rgba(123,227,176,.4);">'+
+    '<span class="aud-badge" style="background:#7BE3B0;">CHAIN</span>'+
+    '<span class="aud-lab">Append-only record on 4orm-EVM (permissioned), each step linked to the last</span>'+
+    '<span class="aud-meta">'+FLOW.ledger.length+' linked entries</span></div>';
+
+  /* the flow has produced a summary, so expose the re-open button */
+  var reBtn = document.getElementById('reopenSummaryBtn');
+  if (reBtn) reBtn.style.display = 'inline-flex';
+
+  openSummaryModal();
+}
+function openSummaryModal(){
+  var m = document.getElementById('summaryModal');
+  if (m){ m.classList.add('open'); m.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; }
+}
+function closeSummaryModal(){
+  var m = document.getElementById('summaryModal');
+  if (m){ m.classList.remove('open'); m.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; }
+}
+window.openSummaryModal = openSummaryModal;
+window.closeSummaryModal = closeSummaryModal;
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeSummaryModal(); });
+
+function copySummary(){
+  var trd = FLOW.trade, set = FLOW.settlement, tok = FLOW.token;
+  if (!trd || !set) { toast('Run the flow first'); return; }
+  var lines = [
+    '4orm Finance, Post-run Summary',
+    '(Sandbox / illustrative; not a real transaction)',
+    '',
+    'Asset tokenized:    ' + (tok ? tok.asset : '·'),
+    'Trade size:         ' + F.money(set.notional),
+    'Counterparty:       ' + trd.cp,
+    'Settled in:         ' + set.secs + ' s (T+0 = trade-date settlement)',
+    'Settlement method:  Atomic DvP (delivery-versus-payment)',
+    '',
+    'On legacy rails this transaction would have taken ~2 business days (T+2),',
+    'trapped ' + F.money(set.notional) + ' overnight, and required manual compliance review.',
+    '',
+    'Generated by 4orm Finance Education Sandbox'
+  ];
+  var text = lines.join('\n');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function(){ toast('Summary copied'); }, function(){ toast('Copy failed'); });
+  } else { toast('Copy not available in this browser'); }
+}
+window.copySummary = copySummary;
+
+function buildReportText(){
+  var d = LAST_REPORT || reportData();
+  function L(k,v){ return (k+':').padEnd(26)+ (v||'·'); }
+  var lines = [
+    '4orm FINANCE, '+d.type.toUpperCase(),
+    'Report '+d.id+'   Generated '+d.gen,
+    '(SANDBOX, simulated data, not a real regulatory filing)',
+    ''.padEnd(58,'='),
+    '',
+    '[ COUNTERPARTY ]',
+    L('Institution', d.inst?d.inst.name:'·'),
+    L('Type / jurisdiction', d.inst?(d.inst.type+' / '+d.inst.jurisdiction):'·'),
+    L('LEI', d.inst?d.inst.lei:'·'),
+    L('DID', d.inst?d.inst.did:'·'),
+    '',
+    '[ COMPLIANCE ]',
+    L('AML screening', d.aml?('Cleared, risk '+d.aml.score+'/100 ('+d.aml.band+')'):'·'),
+    L('Screening ref', d.aml?d.aml.ref:'·'),
+    L('Attestation', d.att?(d.att.type+' ('+d.att.id+')'):'·'),
+    '',
+    '[ TRANSACTION ]',
+    L('Instrument', d.tok?(d.tok.symbol+' / '+d.tok.asset):'·'),
+    L('ISIN', d.tok?d.tok.isin:'·'),
+    L('Trade', d.trd?(d.trd.side+' '+d.trd.qty.toLocaleString()+' @ '+d.trd.px):'·'),
+    L('Notional', d.trd?('C$'+d.trd.notional.toLocaleString()):'·'),
+    L('Settlement', d.set?(d.set.method+', '+d.set.secs+'s to finality'):'·'),
+    L('Settlement hash', d.set?d.set.tx:'·'),
+    '',
+    '[ INTEGRITY ]',
+    L('Ledger records', FLOW.ledger.length+' immutable entries'),
+    L('Report hash', d.hash),
+    '',
+    ''.padEnd(58,'='),
+    'Generated automatically from the immutable ledger, no manual reconciliation.'
+  ];
+  return lines.join('\n');
+}
+function downloadReport(){
+  var text = buildReportText();
+  var blob = new Blob([text], { type:'text/plain;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = '4orm-compliance-report.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+  toast('Report downloaded');
+}
+window.downloadReport = downloadReport;
+
+/* ===================================================================
+   Run full flow + reset
+   =================================================================== */
+/* Global stop flag the auto-run loop checks between steps so the Stop button can halt it. */
+window.__sandboxStopRequested = false;
+function stopRun(){
+  var btnStop = document.getElementById('stopBtn');
+  /* If the button is in Reset mode, perform a full reset. */
+  if (btnStop && btnStop.dataset.mode === 'reset') {
+    if (typeof resetAll === 'function') resetAll();
+    btnStop.dataset.mode = '';
+    btnStop.classList.remove('btn-reset');
+    btnStop.classList.add('btn-stop');
+    btnStop.innerHTML = '&#9632; Stop';
+    btnStop.style.display = 'none';
+    return;
+  }
+  window.__sandboxStopRequested = true;
+  var btnAuto = document.getElementById('runAutoBtn');
+  var btnMan  = document.getElementById('runManualBtn');
+  var btnSide = document.getElementById('runAllBtn');
+  if (btnAuto) { btnAuto.disabled = false; btnAuto.innerHTML = '&#9654; Run auto full flow'; }
+  if (btnMan)  { btnMan.disabled = false; }
+  if (btnSide) { btnSide.disabled = false; btnSide.innerHTML = '&#9654; Run auto full flow'; }
+  /* Convert the Stop button into a Reset button so the user can quickly clear the partial state. */
+  if (btnStop) {
+    btnStop.dataset.mode = 'reset';
+    btnStop.classList.remove('btn-stop');
+    btnStop.classList.add('btn-reset');
+    btnStop.innerHTML = '&#8635; Reset';
+  }
+  toast('Run stopped. Click Reset to clear.');
+}
+window.stopRun = stopRun;
+
+async function runAll(){
+  window.__sandboxStopRequested = false;
+  var btnAuto = document.getElementById('runAutoBtn');
+  var btnMan  = document.getElementById('runManualBtn');
+  var btnSide = document.getElementById('runAllBtn');
+  var btnStop = document.getElementById('stopBtn');
+  if (btnAuto) { btnAuto.disabled = true; btnAuto.textContent = 'Running...'; }
+  if (btnMan)  { btnMan.disabled = true; }
+  if (btnSide) { btnSide.disabled = true; btnSide.textContent = 'Running...'; }
+  if (btnStop) {
+    /* Reset any previous Reset-mode and switch back to Stop for this run */
+    btnStop.dataset.mode = '';
+    btnStop.classList.remove('btn-reset');
+    btnStop.classList.add('btn-stop');
+    btnStop.innerHTML = '&#9632; Stop';
+    btnStop.style.display = 'inline-block';
+  }
+  resetSilently();
+  /* Scroll ONCE at the start to the run-strip (just below the scenario tiles) so the user lands
+     with the buttons visible at the top of the viewport and the active panel just below.
+     Don't scroll all the way down to .sbx-layout, that overshoots. */
+  var startTarget = document.querySelector('.sandbox-scn-band');
+  if (startTarget && typeof startTarget.scrollIntoView === 'function') {
+    startTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  var seq = [['kyc',runKYC],['aml',runAML],['token',runToken],['trade',runTrade],['attest',runAttest],['settle',runSettle]];
+  for (var i=0;i<seq.length;i++){
+    if (window.__sandboxStopRequested) return;
+    showPanel(seq[i][0], { noScroll: true });
+    await F.sleep(250);
+    if (window.__sandboxStopRequested) return;
+    await seq[i][1]();
+    await F.sleep(350);
+  }
+  if (window.__sandboxStopRequested) return;
+  showPanel('audit', { noScroll: true }); renderLedger();
+  await F.sleep(700);
+  if (window.__sandboxStopRequested) return;
+  showPanel('report', { noScroll: true }); renderRepCheck();
+  await F.sleep(250);
+  if (window.__sandboxStopRequested) return;
+  await runReport();
+  if (btnAuto) { btnAuto.disabled = false; btnAuto.innerHTML = '&#9654; Run auto full flow'; }
+  if (btnMan)  { btnMan.disabled = false; }
+  if (btnSide) { btnSide.disabled = false; btnSide.innerHTML = '&#9654; Run auto full flow'; }
+  if (btnStop) { btnStop.style.display = 'none'; }
+  var instName = (FLOW.institution && FLOW.institution.name) ? FLOW.institution.name : '';
+  toast(instName ? ('End-to-end flow complete for ' + instName) : 'End-to-end flow complete');
+}
+window.runAll = runAll;
+
+function resetSilently(){
+  FLOW = { done:{}, ledger:[], institution:null, aml:null, token:null, trade:null, attestation:null, settlement:null };
+  ORDER.forEach(function(m){
+    setStatus(m,'neutral','Not run');
+    var item = document.querySelector('.side-item[data-target="'+m+'"]');
+    if (item) item.classList.remove('done');
+    var out = document.getElementById('out-'+m);
+    if (out) emptyOut(m, 'Run this step to see the result here.');
+  });
+  emptyOut('kyc','Enter details and run the KYC check.');
+  document.getElementById('rep_actions').style.display = 'none';
+  document.getElementById('aud_list').innerHTML='';
+  /* restore step button states (run buttons blue, next buttons un-highlighted) and close the modal */
+  document.querySelectorAll('.btn.done-muted').forEach(function(b){ b.classList.remove('done-muted','btn-ghost'); b.classList.add('btn-primary'); });
+  document.querySelectorAll('.btn.next-go').forEach(function(b){ b.classList.remove('next-go'); });
+  if (typeof closeSummaryModal === 'function') closeSummaryModal();
+  var reBtn = document.getElementById('reopenSummaryBtn');
+  if (reBtn) reBtn.style.display = 'none';
+  updateProgress();
+  renderAttLinks(); renderRepCheck();
+}
+function resetAll(){ resetSilently(); showPanel('kyc'); toast('Sandbox reset'); }
+window.resetAll = resetAll;
+
+document.getElementById('resetBtn').addEventListener('click', resetAll);
+document.getElementById('trd_px').addEventListener('input', renderBook);
+document.getElementById('set_ccy').addEventListener('change', syncSettle);
+
+/* ===================================================================
+   Canadian institution quick-fill
+   =================================================================== */
+var PROV_NAME = { AB:'Alberta', BC:'British Columbia', SK:'Saskatchewan', MB:'Manitoba', ON:'Ontario',
+  QC:'Quebec', NS:'Nova Scotia', NB:'New Brunswick', NL:'Newfoundland & Labrador', PE:'Prince Edward Island' };
+function instType(t){ t=(t||'').toLowerCase();
+  if(t.indexOf('crown')>=0) return 'Crown Corporation';
+  if(t.indexOf('caisse')>=0) return 'Caisse Populaire';
+  if(t.indexOf('credit union')>=0||t.indexOf('cooperative')>=0) return 'Credit Union';
+  if(t.indexOf('trust')>=0) return 'Trust Company';
+  if(t.indexOf('bank')>=0) return 'Schedule I Bank';
+  return 'Credit Union'; }
+function setSelectVal(id,val){ var s=document.getElementById(id); if(!s||val==null) return;
+  for(var i=0;i<s.options.length;i++){ if(s.options[i].value===val||s.options[i].text===val){ s.selectedIndex=i; return; } } }
+function populatePicker(){
+  var sel=document.getElementById('kyc_pick'); if(!sel||!window.INSTITUTIONS) return;
+  var list=window.INSTITUTIONS.slice().sort(function(a,b){ return (a.name||'').localeCompare(b.name||''); });
+  list.forEach(function(d){ var o=document.createElement('option'); o.value=d.name; o.textContent=d.name+' · '+d.prov; sel.appendChild(o); });
+  sel.addEventListener('change', function(){
+    var inst=window.INSTITUTIONS.filter(function(d){ return d.name===sel.value; })[0]; if(!inst) return;
+    document.getElementById('kyc_name').value=inst.name;
+    setSelectVal('kyc_jur', PROV_NAME[inst.prov]||'Canada (Federal)');
+    setSelectVal('kyc_type', instType(inst.type));
+  });
+}
+
+/* ===================================================================
+   Boot
+   =================================================================== */
+function relocateNextButtons(){
+  ORDER.forEach(function(m){
+    var runBtn = document.getElementById('btn-'+m);
+    var panel = document.getElementById('panel-'+m);
+    if (!runBtn || !panel) return;
+    var nav = panel.querySelector('.mp-nav'); if (!nav) return;
+    var nextBtn = null;
+    nav.querySelectorAll('button').forEach(function(b){
+      if (((b.getAttribute('onclick')||'').indexOf('nextPanel')) >= 0) nextBtn = b;
+    });
+    if (!nextBtn) return;
+    var row = document.createElement('div');
+    row.style.display='flex'; row.style.flexDirection='column';
+    row.style.alignItems='flex-start'; row.style.gap='10px'; row.style.marginTop='4px';
+    runBtn.parentNode.insertBefore(row, runBtn);
+    row.appendChild(runBtn); row.appendChild(nextBtn);
+    if (!nav.querySelector('button, a')) nav.style.display='none';
+  });
+}
+
+(function init(){
+  populatePicker();
+  relocateNextButtons();
+  ORDER.forEach(function(m){ if (m!=='audit') emptyOut(m, 'Run this step to see the result here.'); });
+  emptyOut('kyc','Enter details and run the KYC check.');
+  updateProgress();
+  var hash = (location.hash||'').replace('#','');
+  /* On initial load, do NOT scroll. Only scroll when the user actually picks a scenario or clicks a side-nav item. */
+  showPanel(ORDER.indexOf(hash)>=0 ? hash : 'kyc', { noScroll: true });
+})();
+
+})();
+</script>
+</body>
+</html>

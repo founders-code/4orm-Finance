@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin, 4orm Finance</title>
+<meta name="description" content="Manage the 4orm Finance access allow-list: approve emails and domains for the demo." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .admin-wrap { max-width: var(--maxw); margin: 0 auto; padding: 28px; }
+  .admin-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 18px; }
+  .admin-head h1 { margin: 0; font-size: 1.4rem; letter-spacing: -.02em; }
+  .admin-head .you { font-size: .82rem; color: var(--text-3); }
+
+  .ad-status { padding: 12px 16px; border-radius: 10px; font-size: .88rem; margin-bottom: 18px; display: none; }
+  .ad-status.show { display: block; }
+  .ad-status.ok { background: var(--success-bg); color: var(--success); border: 1px solid rgba(14,138,95,.3); }
+  .ad-status.err { background: #FCE8EA; color: var(--danger); border: 1px solid rgba(206,34,55,.3); }
+  .ad-status.info { background: var(--brand-50); color: var(--brand-700); border: 1px solid var(--brand-100); }
+
+  .ad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 820px){ .ad-grid { grid-template-columns: 1fr; } }
+  .ad-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg);
+    box-shadow: var(--shadow-sm); padding: 20px 22px; }
+  .ad-card h2 { margin: 0 0 4px; font-size: 1.05rem; }
+  .ad-card .sub { color: var(--text-3); font-size: .82rem; margin: 0 0 14px; }
+  .ad-form { display: flex; gap: 8px; margin-bottom: 14px; }
+  .ad-form input { flex: 1; padding: 9px 12px; border: 1.5px solid var(--border-strong); border-radius: 8px;
+    font-family: inherit; font-size: .92rem; color: var(--text); background: var(--surface); }
+  .ad-form input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-50); }
+  .ad-form button { flex: none; }
+  .ad-list { list-style: none; margin: 0; padding: 0; max-height: 360px; overflow: auto;
+    border: 1px solid var(--border); border-radius: 8px; }
+  .ad-list li { display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 9px 12px; border-bottom: 1px solid var(--border); font-size: .92rem; }
+  .ad-list li:last-child { border-bottom: none; }
+  .ad-list li .v { font-family: var(--font-mono, monospace); color: var(--text); word-break: break-all; }
+  .ad-list li .src { font-size: .68rem; padding: 2px 7px; border-radius: 99px; text-transform: uppercase;
+    letter-spacing: .06em; font-weight: 700; flex: none; }
+  .ad-list li .src.kv { background: var(--brand-50); color: var(--brand-700); }
+  .ad-list li .src.env { background: var(--surface-2); color: var(--text-3); border: 1px solid var(--border); }
+  .ad-list li button { padding: 4px 9px; font-size: .78rem; }
+  .ad-empty { padding: 14px 12px; text-align: center; color: var(--text-3); font-size: .88rem; }
+
+  .ad-foot { margin-top: 22px; padding: 16px 18px; background: var(--brand-50); border: 1px solid var(--brand-100);
+    border-radius: var(--r); font-size: .88rem; color: var(--brand-700); line-height: 1.55; }
+  .ad-foot b { color: var(--brand-700); }
+</style>
+</head>
+<body>
+
+
+<!-- Top utility bar — links demo site back to main 4orm Finance marketing site -->
+<div class="top-utility">
+  <div class="wrap">
+    <a class="back-link" href="https://www.4ormfinance.com">← Back to 4orm Finance</a>
+    <span class="utility-eye"><span class="pulse"></span>LIVE INSTITUTIONAL DEMO · NO SIGNUP</span>
+    <a class="utility-cta" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+  </div>
+</div>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <nav class="nav-links">
+            <a href="https://www.4ormfinance.com/exchange/" class="nav-exchange" target="_blank" rel="noopener" aria-label="Open the 4ormEx Exchange"><span class="ex-main">4ormEx</span><span class="ex-eye">Exchange</span></a>
+<a href="index.html">Overview</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="primer.html">Field Guide</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="sandbox.html">Sandbox</a>
+      <a href="money-flows.html">Money Flows</a>
+      <a href="cost-analysis-bank.html">What It Saves</a>
+      <a href="institution-summary.html">Institutional Summary</a>
+      <div class="nav-drop">
+        <span class="nav-drop-trigger" tabindex="0" role="button" aria-haspopup="true">How We Protect You <span class="caret">&#9662;</span></span>
+        <div class="nav-drop-menu">
+          <a href="risk-compliance.html">Risk &amp; Compliance</a>
+          <a href="supervision.html">Supervision</a>
+          <a href="institutions.html">The Network</a>
+        </div>
+      </div>
+      <a href="education.html">How We Teach You</a>
+      <a href="login.html" class="nav-auth">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<div class="admin-wrap">
+
+  <div class="admin-head">
+    <div>
+      <h1>Access allow-list</h1>
+      <div class="you">Signed in as <b id="meEmail">...</b> &middot; this page is admin-only</div>
+    </div>
+    <a class="btn btn-ghost btn-sm" href="/api/logout">Log out</a>
+  </div>
+
+  <div class="ad-status" id="adStatus"></div>
+
+  <div class="ad-grid">
+
+    <div class="ad-card">
+      <h2>Approved emails</h2>
+      <p class="sub">Anyone on this list can sign in. Edits are live; no redeploy required.</p>
+      <form class="ad-form" id="addEmailForm">
+        <input type="email" id="newEmail" aria-label="Approved email address" placeholder="person@institution.ca" autocomplete="off" required />
+        <button class="btn btn-primary btn-sm" type="submit">Add email</button>
+      </form>
+      <ul class="ad-list" id="emailList"><li class="ad-empty">Loading...</li></ul>
+    </div>
+
+    <div class="ad-card">
+      <h2>Approved domains</h2>
+      <p class="sub">Anyone whose email ends with one of these domains can sign in.</p>
+      <form class="ad-form" id="addDomainForm">
+        <input type="text" id="newDomain" aria-label="Approved domain" placeholder="atb.com" autocomplete="off" required />
+        <button class="btn btn-primary btn-sm" type="submit">Add domain</button>
+      </form>
+      <ul class="ad-list" id="domainList"><li class="ad-empty">Loading...</li></ul>
+    </div>
+
+  </div>
+
+  <div class="ad-foot" id="adFoot">
+    Loading status...
+  </div>
+
+</div>
+
+<!-- ============================================ CLOSING CTA — back to 4orm Finance -->
+<section class="demo-closing">
+  <div class="demo-closing-inner">
+    <div>
+      <div class="demo-closing-eye"><span class="dot"></span>Ready for the next step</div>
+      <h2>Bring 4orm to <span class="accent">your institution.</span></h2>
+      <p>You've just walked the same flow your treasury team, risk lead, and compliance officer would walk in production. If it fits the way your institution moves, we'd like to talk. Pre-Seed closes Q2 2026.</p>
+      <div class="demo-closing-buttons">
+        <a class="demo-closing-btn gold" href="https://www.4ormfinance.com/#waitlist">Join the institutional waitlist →</a>
+        <a class="demo-closing-btn ghost" href="https://www.4ormfinance.com">Back to 4orm Finance</a>
+      </div>
+    </div>
+    <div class="demo-closing-side">
+      <h4>What happens when you sign up</h4>
+      <ul>
+        <li><span class="check">✓</span><span>Institutional onboarding call within 5 business days</span></li>
+        <li><span class="check">✓</span><span>Tailored walkthrough for your treasury, risk, and compliance teams</span></li>
+        <li><span class="check">✓</span><span>Direct line to Mike Sammut (Founder, KCS Capital)</span></li>
+        <li><span class="check">✓</span><span>Optional sandbox tenant for your team to test internally</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap"><span class="small">Admin tool &middot; 4orm Finance &middot; built by KCS Capital &middot; <a href="mailto:compliance@kcs-capital.com">compliance@kcs-capital.com</a></span></div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+(function () {
+  var statusEl = document.getElementById('adStatus');
+  var foot = document.getElementById('adFoot');
+
+  function status(kind, html) {
+    statusEl.className = 'ad-status show ' + kind;
+    statusEl.innerHTML = html;
+    if (kind !== 'err') setTimeout(function () { statusEl.classList.remove('show'); }, 4000);
+  }
+
+  function row(value, source, kind) {
+    var li = document.createElement('li');
+    var v = document.createElement('span'); v.className = 'v'; v.textContent = value;
+    var src = document.createElement('span'); src.className = 'src ' + source;
+    src.textContent = source === 'kv' ? 'editable' : 'env-var';
+    var actions = document.createElement('span'); actions.style.display = 'flex'; actions.style.gap = '6px';
+    actions.appendChild(src);
+    if (source === 'kv') {
+      var rm = document.createElement('button');
+      rm.className = 'btn btn-ghost'; rm.type = 'button'; rm.textContent = 'Remove';
+      rm.addEventListener('click', function () {
+        if (!confirm('Remove ' + value + '?')) return;
+        rm.disabled = true; rm.textContent = '...';
+        fetch('/api/admin/remove', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ kind: kind, value: value })
+        }).then(function (r) { return r.json(); }).then(function (d) {
+          if (d && d.ok) { status('ok', 'Removed <b>' + value + '</b>.'); load(); }
+          else { rm.disabled = false; rm.textContent = 'Remove'; status('err', d.error || 'Remove failed.'); }
+        }).catch(function () { rm.disabled = false; rm.textContent = 'Remove'; status('err', 'Network error.'); });
+      });
+      actions.appendChild(rm);
+    }
+    li.appendChild(v); li.appendChild(actions);
+    return li;
+  }
+
+  function render(kind, kvList, envList) {
+    var ul = document.getElementById(kind === 'email' ? 'emailList' : 'domainList');
+    ul.innerHTML = '';
+    var seen = {};
+    kvList.forEach(function (v) { seen[v] = 1; ul.appendChild(row(v, 'kv', kind)); });
+    envList.forEach(function (v) { if (!seen[v]) ul.appendChild(row(v, 'env', kind)); });
+    if (!ul.children.length) {
+      var li = document.createElement('li'); li.className = 'ad-empty';
+      li.textContent = 'No ' + (kind === 'email' ? 'emails' : 'domains') + ' approved yet. Add one above.';
+      ul.appendChild(li);
+    }
+  }
+
+  function load() {
+    fetch('/api/admin/list').then(function (r) {
+      if (r.status === 403) { status('err', 'You are signed in, but this page is restricted to admin emails. Set <code>ADMIN_EMAILS</code> in Vercel and include your address.'); throw 0; }
+      if (r.status === 401) { location.href = '/login.html?next=/admin.html'; throw 0; }
+      return r.json();
+    }).then(function (d) {
+      document.getElementById('meEmail').textContent = d.you || '(you)';
+      render('email', d.kv.emails, d.envFallback.emails);
+      render('domain', d.kv.domains, d.envFallback.domains);
+      if (d.kvConfigured) {
+        foot.innerHTML = '<b>Storage:</b> Vercel KV is connected. Changes here are live immediately; env-var entries are kept as a read-only fallback.';
+      } else {
+        foot.innerHTML = '<b>Vercel KV is not yet connected.</b> Right now you are only seeing the env-var fallback. Connect a KV store in Vercel (Storage → KV → Create &amp; connect) so changes you make here persist. Until then, additions will fail.';
+      }
+    }).catch(function () { /* handled above */ });
+  }
+
+  function addHandler(formId, inputId, kind) {
+    document.getElementById(formId).addEventListener('submit', function (e) {
+      e.preventDefault();
+      var input = document.getElementById(inputId);
+      var value = (input.value || '').trim().toLowerCase();
+      if (!value) return;
+      fetch('/api/admin/add', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kind: kind, value: value })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (d && d.ok) { input.value = ''; status('ok', 'Added <b>' + value + '</b>.'); load(); }
+        else { status('err', (d.error === 'kv_not_configured') ? 'Vercel KV is not connected yet, so changes cannot be saved. See the note below.' : (d.error || 'Add failed.')); }
+      }).catch(function () { status('err', 'Network error.'); });
+    });
+  }
+  addHandler('addEmailForm', 'newEmail', 'email');
+  addHandler('addDomainForm', 'newDomain', 'domain');
+
+  load();
+})();
+</script>
+</body>
+</html>
