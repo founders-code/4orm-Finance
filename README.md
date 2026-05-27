@@ -10,13 +10,27 @@ Built as a single self-contained `index.html` with one image asset. No build ste
 
 ```
 4orm-finance-landing/
-├── index.html              ← the entire site (HTML + CSS + JS inlined)
+├── index.html              ← landing page (HTML + CSS + JS inlined)
 ├── assets/
 │   └── 4orm-logo.png       ← brand logo (you'll add this)
+├── exchange/               ← 4ormEx sandbox preview
+│   ├── index.html          ← Exchange overview (6 modules + personas + live listings)
+│   ├── marketplace.html    ← Live order book + trade ticket (works in sandbox)
+│   ├── issuer.html         ← Issuer portal (in development)
+│   ├── investor.html       ← Investor portal (in development)
+│   ├── compliance.html     ← Compliance console (in development)
+│   ├── settlement.html     ← Settlement ledger (in development)
+│   └── admin.html          ← Admin & audit (in development)
 ├── vercel.json             ← Vercel static-hosting config
 ├── .gitignore
 └── README.md
 ```
+
+### Routes
+- `/` — 4orm Finance landing page
+- `/exchange/` — 4ormEx overview (entry to the product experience)
+- `/exchange/marketplace.html` — live sandbox order book
+- `/exchange/{issuer,investor,compliance,settlement,admin}.html` — module stubs ("in development" with roadmap previews)
 
 ---
 
