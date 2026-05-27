@@ -3,175 +3,73 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>4orm Finance — Canada's Institution-Grade RWA Exchange &amp; Digital Settlement Network</title>
-<meta name="description" content="4orm Finance is Canada's institution-grade real-world asset exchange and digital settlement network. Built to Bank of Canada Project Samara standards. Regulator-aligned. Independently governed. Canadian sovereign. Operated by KCS Capital." />
-<meta property="og:title" content="4orm Finance — Canada's Institution-Grade RWA Exchange &amp; Digital Settlement Network" />
-<meta property="og:description" content="The neutral, multi-institution settlement layer for tokenized real-world assets in Canada. Pre-Seed active. Closing Q2 2026." />
-<meta property="og:type" content="website" />
+<title>4ormEx — The 4orm Exchange · Institutional RWA Trading Platform</title>
+<meta name="description" content="4ormEx is the institutional trading platform of 4orm Finance: tokenized real-world asset issuance, marketplace, atomic settlement, qualified custody, and regulatory reporting on one regulated rail." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
 <style>
-/* =====================================================================
-   4orm Finance — landing page
-   Design tokens lifted from demo-exchange.vercel.app/styles.css
-   Clean white / Desjardins-style box layout
-   Brand: 4orm electric blue + gold accents on a white base
-   ===================================================================== */
-
+/* Design tokens — identical to 4orm landing */
 :root{
-  /* Surfaces */
-  --bg:            #FFFFFF;
-  --bg-2:          #F4F7FB;
-  --surface:       #FFFFFF;
-  --surface-2:     #F4F7FB;
-  --surface-3:     #EAEFF6;
-  --border:        #E3E9F2;
-  --border-strong: #CCD6E4;
-
-  /* Ink */
-  --text:   #142036;
-  --text-2: #46556E;
-  --text-3: #5E6E88;
-
-  /* 4orm brand blue */
-  --brand:     #2E6BF2;
-  --brand-600: #1F57D6;
-  --brand-700: #1B4ABE;
-  --brand-50:  #EAF1FE;
-  --brand-100: #CFE0FD;
-
-  /* 4orm gold accent */
-  --gold:     #E7C76C;
-  --gold-2:   #C49A3A;
-  --gold-ink: #8A6712;
-  --gold-50:  #FBF3DC;
-  --gold-100: #F1E2B4;
-
-  /* Semantic */
-  --success:    #0E8A5F;
-  --success-bg: #E3F6EE;
-  --warn:       #8F5C12;
-  --warn-bg:    #FBF1DC;
-  --danger:     #D6334E;
-  --danger-bg:  #FCE6EA;
-  --info:       #1B7BB5;
-  --info-bg:    #E3F2FB;
-
-  /* Radii + shadow */
-  --r-xs: 6px;
-  --r-sm: 9px;
-  --r:    13px;
-  --r-lg: 18px;
-  --r-xl: 26px;
-
-  --shadow-sm: 0 1px 2px rgba(16,32,64,.06);
-  --shadow:    0 8px 26px rgba(16,32,64,.09);
-  --shadow-lg: 0 20px 52px rgba(16,32,64,.13);
-
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
-
-  --maxw: 1200px;
+  --bg:#FFFFFF;--bg-2:#F4F7FB;--surface:#FFFFFF;--surface-2:#F4F7FB;--surface-3:#EAEFF6;
+  --border:#E3E9F2;--border-strong:#CCD6E4;
+  --text:#142036;--text-2:#46556E;--text-3:#5E6E88;
+  --brand:#2E6BF2;--brand-600:#1F57D6;--brand-700:#1B4ABE;--brand-50:#EAF1FE;--brand-100:#CFE0FD;
+  --gold:#E7C76C;--gold-2:#C49A3A;--gold-ink:#8A6712;--gold-50:#FBF3DC;--gold-100:#F1E2B4;
+  --success:#0E8A5F;--success-bg:#E3F6EE;--warn:#8F5C12;--warn-bg:#FBF1DC;
+  --danger:#D6334E;--danger-bg:#FCE6EA;--info:#1B7BB5;--info-bg:#E3F2FB;
+  --r-xs:6px;--r-sm:9px;--r:13px;--r-lg:18px;--r-xl:26px;
+  --shadow-sm:0 1px 2px rgba(16,32,64,.06);--shadow:0 8px 26px rgba(16,32,64,.09);--shadow-lg:0 20px 52px rgba(16,32,64,.13);
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:ui-monospace,'SF Mono','JetBrains Mono',Menlo,Consolas,monospace;
+  --maxw:1240px;
 }
-
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:var(--font-sans);
-  color:var(--text);
-  background:var(--bg);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  color-scheme:light;
-}
+body{margin:0;font-family:var(--font-sans);color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;color-scheme:light}
 img,svg{display:block;max-width:100%}
-
-h1,h2,h3,h4{
-  font-family:var(--font-sans);
-  line-height:1.18;
-  margin:0 0 .5em;
-  letter-spacing:-0.02em;
-  font-weight:750;
-  color:var(--text);
-}
-.h-it{color:var(--brand);font-weight:800}
-h1{font-size:clamp(2rem,4.4vw,3.3rem);letter-spacing:-0.03em}
+h1,h2,h3,h4{font-family:var(--font-sans);line-height:1.18;margin:0 0 .5em;letter-spacing:-.02em;font-weight:750;color:var(--text)}
+h1{font-size:clamp(2rem,4.4vw,3.3rem);letter-spacing:-.03em}
 h2{font-size:clamp(1.5rem,2.8vw,2.1rem)}
 h3{font-size:1.22rem}
 h4{font-size:1rem}
 p{margin:0 0 1em;color:var(--text-2)}
 a{color:var(--brand);text-decoration:none}
 a:hover{color:var(--brand-700)}
-
 .muted{color:var(--text-3)}
-.t2{color:var(--text-2)}
-.center{text-align:center}
-.mono{font-family:var(--font-mono)}
-.nowrap{white-space:nowrap}
-
-.eyebrow{
-  font-size:.74rem;font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--brand);
-}
-.s-eye{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
-.s-eye .tick{width:30px;height:1px;background:var(--gold-2);flex:none}
-.s-eye .dot{width:5px;height:5px;border-radius:50%;background:var(--gold-2);flex:none}
-.s-eye .txt{font-size:.74rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--brand)}
-
+.eyebrow{font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.h-it{color:var(--brand);font-weight:800}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-.section{padding:104px 0}
-.section.tight{padding:64px 0}
-.section-band{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 
-/* --------------------------------------------------- Sandbox banner */
-.sbx-banner{
-  background:var(--brand-50);
-  border-bottom:1px solid var(--border);
-  font-size:.82rem;color:var(--text-2);text-align:center;padding:9px 16px;
-}
+/* Status banner */
+.sbx-banner{background:var(--brand-50);border-bottom:1px solid var(--border);font-size:.82rem;color:var(--text-2);text-align:center;padding:9px 16px}
 .sbx-banner b{color:var(--brand-700)}
 
-/* --------------------------------------------------- Top navigation */
-.nav{
-  position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.86);
-  backdrop-filter:saturate(180%) blur(12px);
-  -webkit-backdrop-filter:saturate(180%) blur(12px);
-  border-bottom:1px solid var(--border);
-}
-.nav-inner{
-  max-width:var(--maxw);margin:0 auto;padding:10px 28px;
-  min-height:80px;display:flex;align-items:center;gap:12px 18px;flex-wrap:nowrap;
-}
+/* Top nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:10px 28px;min-height:74px;display:flex;align-items:center;gap:12px 18px;flex-wrap:nowrap}
 @media (max-width:560px){.nav-inner{flex-wrap:wrap}}
-.brand{
-  display:flex;align-items:center;gap:12px;flex:none;color:var(--text);
-}
+.brand{display:flex;align-items:center;gap:12px;flex:none;color:var(--text)}
 .brand:hover{color:var(--text)}
-.brand-logo{height:46px;width:auto;display:block}
-@media (max-width:760px){.brand-logo{height:36px}}
-.brand .sub{
-  font-weight:600;font-size:.72rem;color:var(--text-3);
-  letter-spacing:.18em;text-transform:uppercase;
-  padding-left:12px;border-left:1px solid var(--border);
-}
+.brand-logo{height:42px;width:auto;display:block}
+@media (max-width:760px){.brand-logo{height:34px}}
+.brand .sub{font-weight:600;font-size:.72rem;color:var(--text-3);letter-spacing:.18em;text-transform:uppercase;padding-left:12px;border-left:1px solid var(--border)}
 @media (max-width:680px){.brand .sub{display:none}}
 .nav-links{display:flex;margin-left:auto;gap:14px;justify-content:flex-end;align-items:center;flex-wrap:nowrap}
-.nav-links a{
-  padding:7px 11px;border-radius:8px;color:var(--text-2);white-space:nowrap;
-  font-weight:600;font-size:.9rem;transition:background .15s, color .15s;
-}
+.nav-links a{padding:7px 8px;border-radius:8px;color:var(--text-2);white-space:nowrap;font-weight:600;font-size:.92rem;transition:background .15s,color .15s}
 .nav-links a:hover{background:var(--surface-2);color:var(--text)}
-.nav-links a.active{color:var(--brand-700);background:var(--brand-50)}
-/* 4ormEx: TALLER, on the LEFT (right after the brand) */
+.nav-sep{width:1px;height:18px;background:var(--border);margin:0 5px;flex:none}
+.nav-links a.nav-auth{
+  margin-left:auto;
+  padding:9px 18px;border-radius:99px;border:1px solid var(--brand-100);
+  background:var(--brand-50);color:var(--brand-700);font-weight:700;font-size:.9rem;
+}
+.nav-links a.nav-auth:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
 .nav-links a.nav-exchange{
   order:-2;margin-left:6px;margin-right:0;
-  display:inline-flex;flex-direction:column;align-items:center;gap:2px;
+  display:inline-flex;flex-direction:column-reverse;align-items:center;gap:2px;
   padding:12px 22px 13px;border-radius:14px;line-height:1;
   border:1.5px solid var(--gold-2);
   background:linear-gradient(180deg,#FFE39E 0%,var(--gold) 38%,var(--gold-2) 100%);
@@ -179,413 +77,126 @@ a:hover{color:var(--brand-700)}
   box-shadow:0 3px 10px rgba(196,154,58,.32),inset 0 1px 0 rgba(255,255,255,.5);
   transition:all .15s ease;
 }
-.nav-links a.nav-exchange .ex-eye{
-  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold-ink);font-weight:800;margin-bottom:2px;
-}
-.nav-links a.nav-exchange .ex-main{
-  font-size:1.15rem;font-weight:800;letter-spacing:-.02em;color:#15233F;
-  display:inline-flex;align-items:center;gap:4px;
-}
-.nav-links a.nav-exchange .ex-arr{font-size:.78rem;color:var(--gold-ink);transition:transform .15s ease}
-.nav-links a.nav-exchange:hover{
-  background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 60%,#FFE39E 100%);
-  box-shadow:0 5px 16px rgba(196,154,58,.45),inset 0 1px 0 rgba(255,255,255,.5);transform:translateY(-1px);
-}
-.nav-links a.nav-exchange:hover .ex-arr{transform:translate(2px,-2px)}
+.nav-links a.nav-exchange:hover{background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 60%,#FFE39E 100%);transform:translateY(-1px);box-shadow:0 5px 16px rgba(196,154,58,.45),inset 0 1px 0 rgba(255,255,255,.5)}
+.nav-links a.nav-exchange .ex-eye{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:800;margin-bottom:2px}
+.nav-links a.nav-exchange .ex-main{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;color:#15233F;display:inline-flex;align-items:center;gap:4px}
 
-/* Request access: pinned to the FAR RIGHT */
-.nav-links a.nav-auth{
-  margin-left:auto;
-  padding:9px 18px;border-radius:99px;
-  border:1px solid var(--brand-100);background:var(--brand-50);color:var(--brand-700);font-weight:700;font-size:.9rem;
+/* Exchange sub-nav */
+.subnav{background:#0B1220;border-bottom:1px solid #1c2740;position:sticky;top:74px;z-index:49}
+.subnav-inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none}
+.subnav-inner::-webkit-scrollbar{display:none}
+.subnav-inner a{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 18px;color:rgba(255,255,255,.6);font-size:.85rem;font-weight:600;
+  border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s ease;
 }
-.nav-links a.nav-auth:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+.subnav-inner a:hover{color:#fff;background:rgba(255,255,255,.04)}
+.subnav-inner a.active{color:#FFD9A8;border-bottom-color:#FFD9A8}
+.subnav-inner .sn-num{font-family:var(--font-mono);font-size:.66rem;color:rgba(255,217,168,.6);letter-spacing:.1em;font-weight:700}
+.subnav-inner a.active .sn-num{color:#FFD9A8}
 
-@media (max-width:760px){
-  .nav-links{flex-wrap:wrap;gap:4px}
-  .nav-links a{padding:6px 9px;font-size:.85rem}
-  .nav-links a.nav-auth{order:0;margin-right:0;margin-left:4px}
-  .nav-links a.nav-exchange{padding:6px 14px 7px}
-  .nav-links a.nav-exchange .ex-main{font-size:.96rem}
-}
-
-/* --------------------------------------------------- Buttons */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  font-family:inherit;font-weight:650;font-size:.95rem;
-  padding:11px 20px;border-radius:10px;border:1px solid transparent;
-  cursor:pointer;transition:transform .12s, box-shadow .15s, background .15s, border-color .15s;
-  text-decoration:none;white-space:nowrap;color:#fff;
-}
-.btn:active{transform:translateY(1px)}
-.btn-primary{background:var(--brand);color:#fff;box-shadow:var(--shadow-sm)}
-.btn-primary:hover{background:var(--brand-600);color:#fff;box-shadow:var(--shadow)}
-.btn-ghost{background:var(--surface);color:var(--text);border-color:var(--border-strong)}
-.btn-ghost:hover{background:var(--surface-2);color:var(--text);border-color:var(--brand-100)}
-.btn-soft{background:var(--brand-50);color:var(--brand-700)}
-.btn-soft:hover{background:var(--brand-100);color:var(--brand-700)}
-.btn-gold{background:var(--gold);color:#15233F;box-shadow:var(--shadow-sm)}
-.btn-gold:hover{background:var(--gold-2);color:#15233F;box-shadow:var(--shadow)}
-.btn-sm{padding:7px 13px;font-size:.85rem;border-radius:8px}
-.btn-lg{padding:14px 26px;font-size:1.02rem}
-.btn-row{display:flex;flex-wrap:wrap;gap:12px}
-
-/* --------------------------------------------------- Cards, tiles */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm)}
-.card.pad{padding:26px}
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px}
-.grid{display:grid;gap:22px}
-.grid-2{grid-template-columns:repeat(2,1fr)}
-.grid-3{grid-template-columns:repeat(3,1fr)}
-.grid-4{grid-template-columns:repeat(4,1fr)}
-@media (max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
-
-.tile-grid{display:grid;gap:20px}
-.tile-grid.c2{grid-template-columns:repeat(2,1fr)}
-.tile-grid.c3{grid-template-columns:repeat(3,1fr)}
-.tile-grid.c4{grid-template-columns:repeat(4,1fr)}
-@media (max-width:900px){.tile-grid.c3,.tile-grid.c4{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:620px){.tile-grid.c2,.tile-grid.c3,.tile-grid.c4{grid-template-columns:1fr}}
-
-.tile{
-  display:flex;flex-direction:column;gap:9px;height:100%;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r-lg);padding:24px 24px 22px;
-  box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;
-  transition:transform .16s ease, box-shadow .2s ease, border-color .2s ease;
-}
-a.tile:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--brand-100)}
-.tile .tile-ico{
-  width:46px;height:46px;border-radius:12px;flex:none;
-  background:var(--brand-50);color:var(--brand);
-  display:grid;place-items:center;margin-bottom:4px;
-}
-.tile .tile-ico svg{width:23px;height:23px}
-.tile.gold .tile-ico{background:var(--gold-50);color:var(--gold-ink)}
-.tile h3{margin:0;font-size:1.08rem}
-.tile p{margin:0;font-size:.92rem;color:var(--text-2)}
-.tile .tile-link{
-  margin-top:auto;padding-top:12px;color:var(--brand);font-weight:700;font-size:.9rem;
-  display:inline-flex;align-items:center;gap:6px;transition:gap .15s;
-}
-a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
-.tile .tag{
-  align-self:flex-start;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;
-  color:var(--gold-ink);background:var(--gold-50);border:1px solid var(--gold-100);
-  border-radius:99px;padding:3px 9px;
-}
-
-/* --------------------------------------------------- Numbered cards (KCS pattern) */
-.ncards{
-  display:grid;gap:1px;background:var(--border);border:1px solid var(--border);
-  border-radius:var(--r-lg);overflow:hidden;
-}
-.ncards.c2{grid-template-columns:repeat(2,1fr)}
-.ncards.c3{grid-template-columns:repeat(3,1fr)}
-@media (max-width:820px){.ncards.c3,.ncards.c2{grid-template-columns:1fr}}
-.ncard{background:var(--surface);padding:26px 24px 24px;display:flex;flex-direction:column;gap:8px}
-.ncard .nnum{font-family:var(--font-mono);font-size:.82rem;font-weight:700;color:var(--brand);letter-spacing:.04em}
-.ncard h3{margin:2px 0 0;font-size:1.1rem}
-.ncard p{margin:0;font-size:.92rem;color:var(--text-2)}
-.ncard .metric{margin-top:auto;padding-top:14px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.ncard .metric .mv{font-family:var(--font-mono);font-weight:800;font-size:.95rem;color:var(--brand-700)}
-.ncard .metric .ml{font-size:.78rem;color:var(--text-3)}
-
-/* --------------------------------------------------- Chips */
-.chip{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:3px 11px;border-radius:999px;font-size:.78rem;font-weight:650;
-  border:1px solid transparent;line-height:1.5;
-}
-.chip .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
-.chip-success{color:var(--success);background:var(--success-bg)}
-.chip-warn{color:var(--warn);background:var(--warn-bg)}
-.chip-info{color:var(--info);background:var(--info-bg)}
-.chip-neutral{color:var(--text-2);background:var(--surface-2)}
-.chip-brand{color:var(--brand-700);background:var(--brand-50)}
-
-.vbadge{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
-  color:var(--success);background:var(--success-bg);border-radius:999px;padding:4px 11px;
-}
-.vbadge svg{width:13px;height:13px}
-
-/* --------------------------------------------------- Mono micro tag */
-.mono-tag{
-  font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);
-  display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;
-}
-.mono-tag .sep{color:var(--gold-2);font-weight:700}
-.mono-tag .on{color:var(--text-2)}
-
-/* --------------------------------------------------- Dark hero */
-.dhero{
-  background:linear-gradient(135deg,#0B1220 0%,#15233F 45%,#1F3CA8 100%);
-  color:#fff;padding:96px 0 88px;position:relative;overflow:hidden;
-}
-.dhero::before{
-  content:'';position:absolute;top:-40%;right:-12%;
-  width:60vw;height:60vw;max-width:780px;max-height:780px;
-  background:radial-gradient(circle,rgba(247,196,102,.18) 0%,rgba(247,196,102,0) 60%);
-  pointer-events:none;
-}
-.dhero::after{
-  content:'';position:absolute;bottom:-30%;left:-10%;
-  width:50vw;height:50vw;max-width:640px;max-height:640px;
-  background:radial-gradient(circle,rgba(46,107,242,.25) 0%,rgba(46,107,242,0) 60%);
-  pointer-events:none;
-}
+/* Dark hero */
+.dhero{background:linear-gradient(135deg,#0B1220 0%,#15233F 45%,#1F3CA8 100%);color:#fff;padding:80px 0 72px;position:relative;overflow:hidden}
+.dhero::before{content:'';position:absolute;top:-40%;right:-12%;width:60vw;height:60vw;max-width:780px;max-height:780px;background:radial-gradient(circle,rgba(247,196,102,.18) 0%,rgba(247,196,102,0) 60%);pointer-events:none}
+.dhero::after{content:'';position:absolute;bottom:-30%;left:-10%;width:50vw;height:50vw;max-width:640px;max-height:640px;background:radial-gradient(circle,rgba(46,107,242,.25) 0%,rgba(46,107,242,0) 60%);pointer-events:none}
 .dhero-inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
-.dhero-eyebrow{
-  font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:#FFD9A8;font-weight:800;margin-bottom:14px;
-  display:inline-flex;align-items:center;gap:10px;
-}
+.dhero-eyebrow{font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:#FFD9A8;font-weight:800;margin-bottom:14px;display:inline-flex;align-items:center;gap:10px}
 .dhero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#FFD9A8;box-shadow:0 0 0 4px rgba(255,217,168,.18)}
-.dhero h1{
-  color:#fff;margin:0 0 18px;
-  font-size:clamp(2.4rem,4.8vw,3.6rem);
-  line-height:1.05;letter-spacing:-.03em;max-width:22em;font-weight:800;
-}
+.dhero h1{color:#fff;margin:0 0 18px;font-size:clamp(2.2rem,4.2vw,3.2rem);line-height:1.06;letter-spacing:-.03em;max-width:22em;font-weight:800}
 .dhero h1 .accent{color:#FFD9A8}
-.dhero p.dhero-sub{
-  color:rgba(255,255,255,.82);font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.55;
-  max-width:56em;margin:0 0 26px;
-}
+.dhero p.dhero-sub{color:rgba(255,255,255,.82);font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.55;max-width:56em;margin:0 0 26px}
 .dhero p.dhero-sub strong{color:#fff;font-weight:700}
-.dhero-pills{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 24px}
-.dhero-pill{
-  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);color:#fff;
-  font-weight:700;font-size:.78rem;padding:6px 14px;border-radius:99px;
-  letter-spacing:.02em;
-}
+.dhero-pills{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px}
+.dhero-pill{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);color:#fff;font-weight:700;font-size:.78rem;padding:6px 14px;border-radius:99px;letter-spacing:.02em}
 .dhero-pill.gold{background:rgba(255,217,168,.16);border-color:rgba(255,217,168,.45);color:#FFD9A8}
-.dhero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-.dhero-btn{
-  padding:13px 24px;border-radius:10px;font-weight:800;font-size:.95rem;
-  border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
-  transition:transform .15s, box-shadow .15s, background .15s;
-}
+.dhero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.dhero-btn{padding:13px 22px;border-radius:10px;font-weight:800;font-size:.9rem;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s, box-shadow .15s, background .15s}
 .dhero-btn.gold{background:#FFD9A8;color:#0B1220;box-shadow:0 4px 16px rgba(255,217,168,.4)}
-.dhero-btn.gold:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(255,217,168,.55);background:#FFCB87}
+.dhero-btn.gold:hover{transform:translateY(-1px);background:#FFCB87}
 .dhero-btn.ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.30)}
 .dhero-btn.ghost:hover{background:rgba(255,255,255,.14)}
 
-/* Hero status bar */
-.dhero-spec{
-  display:flex;gap:18px 28px;flex-wrap:wrap;
-  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(255,255,255,.55);margin-bottom:20px;
-}
-.dhero-spec .v{color:#FFD9A8}
+/* KPI strip */
+.kpis{background:#fff;border-bottom:1px solid var(--border);padding:28px 0}
+.kpis .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.kpi{display:flex;flex-direction:column;gap:2px}
+.kpi .label{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);font-weight:700;margin-bottom:4px}
+.kpi .v{font-size:1.9rem;font-weight:800;color:var(--text);letter-spacing:-.02em;line-height:1.05;font-variant-numeric:tabular-nums}
+.kpi .v .u{color:var(--brand);font-weight:800}
+.kpi .delta{font-family:var(--font-mono);font-size:.78rem;color:var(--success);font-weight:700;margin-top:4px}
+.kpi .delta.dn{color:var(--danger)}
+@media (max-width:880px){.kpis .wrap{grid-template-columns:repeat(2,1fr);gap:22px}}
 
-/* --------------------------------------------------- Hero metrics strip */
-.hstrip{
-  background:#fff;border-bottom:1px solid var(--border);
-  padding:28px 0;
-}
-.hstrip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
-.hstrip .met{display:flex;flex-direction:column;gap:4px}
-.hstrip .met .mv{font-size:1.6rem;font-weight:800;color:var(--text);letter-spacing:-.02em;font-family:var(--font-sans);line-height:1.1}
-.hstrip .met .mv em{color:var(--brand);font-style:normal}
-.hstrip .met .ml{font-size:.82rem;color:var(--text-2);font-weight:500}
-.hstrip .met .sr{font-family:var(--font-mono);font-size:.65rem;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
-@media (max-width:880px){.hstrip .wrap{grid-template-columns:repeat(2,1fr);gap:22px}}
-
-/* --------------------------------------------------- Section heading lockup */
-.shead{margin-bottom:48px;max-width:60ch}
+/* Section */
+.section{padding:88px 0}
+.section.tight{padding:56px 0}
+.section.band{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.shead{margin-bottom:42px;max-width:60ch}
 .shead.row{display:grid;grid-template-columns:1fr 1.3fr;gap:48px;align-items:end;max-width:none}
 @media (max-width:900px){.shead.row{grid-template-columns:1fr;gap:18px}}
+.shead .s-eye{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.shead .s-eye .tick{width:30px;height:1px;background:var(--gold-2);flex:none}
+.shead .s-eye .txt{font-size:.74rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--brand)}
 .shead h2{margin:0}
 .shead p{margin:14px 0 0;font-size:1.02rem;color:var(--text-2);max-width:60ch}
 
-/* --------------------------------------------------- Pull quote / thesis */
-.thesis{
-  background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  padding:88px 0;
-}
-.thesis .wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:48px;align-items:center}
-@media (max-width:900px){.thesis .wrap{grid-template-columns:1fr;gap:18px}}
-.thesis .qmark{
-  font-family:Georgia, serif;font-size:5rem;line-height:.6;color:var(--gold-2);font-weight:700;
-}
-.thesis blockquote{
-  margin:0;font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.18;
-  font-weight:750;letter-spacing:-.02em;color:var(--text);max-width:24ch;
-}
-.thesis blockquote em{color:var(--brand);font-style:normal;font-weight:800}
-.thesis .attrib{margin-top:18px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
-
-/* --------------------------------------------------- Market panel */
-.market{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:start}
-@media (max-width:980px){.market{grid-template-columns:1fr;gap:22px}}
-.mpanel{
+/* Persona switcher */
+.personas{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media (max-width:1080px){.personas{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.personas{grid-template-columns:1fr 1fr}}
+.persona{
+  display:flex;flex-direction:column;gap:10px;
   background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
-  padding:30px;box-shadow:var(--shadow-sm);
+  padding:22px 20px;text-decoration:none;color:inherit;box-shadow:var(--shadow-sm);
+  transition:all .18s ease;
 }
-.mpanel + .mpanel{margin-top:20px}
-.mpanel h5{
-  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);
-  margin:0 0 10px;font-weight:700;
-}
-.mpanel .big{
-  font-size:clamp(2.2rem,3.6vw,3rem);letter-spacing:-.03em;font-weight:800;line-height:1.02;
-  color:var(--text);margin:0 0 12px;
-}
-.mpanel .big em{color:var(--brand);font-style:normal;font-weight:800}
-.mpanel .desc{color:var(--text-2);font-size:.95rem;line-height:1.6}
-.mpanel .desc em{color:var(--text);font-style:normal;font-weight:700}
-.mpanel ul{margin:18px 0 0;padding:0;list-style:none;border-top:1px dashed var(--border)}
-.mpanel li{
-  display:flex;justify-content:space-between;gap:16px;
-  padding:11px 0;border-bottom:1px dashed var(--border);
-  font-size:.92rem;color:var(--text-2);
-}
-.mpanel li strong{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums;font-family:var(--font-mono)}
-.mnote{
-  font-family:var(--font-mono);font-size:.72rem;color:var(--text-3);letter-spacing:.04em;
-  margin-top:18px;line-height:1.6;
-}
+.persona:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--brand-100)}
+.persona .pico{width:42px;height:42px;border-radius:11px;background:var(--brand-50);color:var(--brand);display:grid;place-items:center}
+.persona .pico svg{width:22px;height:22px}
+.persona.gold .pico{background:var(--gold-50);color:var(--gold-ink)}
+.persona .pn{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);font-weight:700}
+.persona h4{margin:0;font-size:1.02rem;font-weight:800;letter-spacing:-.01em}
+.persona .who{font-size:.85rem;color:var(--text-2);line-height:1.45}
+.persona .pgo{margin-top:auto;padding-top:10px;font-size:.78rem;font-weight:700;color:var(--brand);display:inline-flex;align-items:center;gap:6px;transition:gap .15s}
+.persona:hover .pgo{gap:10px;color:var(--brand-700)}
 
-/* --------------------------------------------------- Momentum timeline */
-.moment{margin-top:56px;border-top:1px solid var(--border)}
-.moment .row{
-  display:grid;grid-template-columns:170px 1fr;gap:32px;
-  padding:22px 0;border-bottom:1px solid var(--border);align-items:start;
-}
-.moment .row .date{
-  font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;color:var(--brand);
-  text-transform:uppercase;padding-top:4px;font-weight:700;
-}
-.moment .row h6{margin:0;font-size:1.08rem;font-weight:750;letter-spacing:-.01em}
-.moment .row p{margin:6px 0 0;color:var(--text-2);font-size:.94rem;line-height:1.6;max-width:72ch}
-@media (max-width:700px){.moment .row{grid-template-columns:1fr;gap:6px}}
+/* Module grid */
+.modules{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+@media (max-width:980px){.modules{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.modules{grid-template-columns:1fr}}
+.module{background:var(--surface);padding:30px 28px;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit;transition:background .15s ease}
+.module:hover{background:var(--surface-2)}
+.module .mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.module .mn{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.16em;color:var(--brand);font-weight:700;text-transform:uppercase}
+.module .mst{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:99px}
+.module .mst.live{color:var(--success);background:var(--success-bg)}
+.module .mst.dev{color:var(--gold-ink);background:var(--gold-50);border:1px solid var(--gold-100)}
+.module h3{margin:0;font-size:1.15rem;font-weight:800;letter-spacing:-.01em}
+.module p{margin:0;font-size:.92rem;color:var(--text-2);line-height:1.55}
+.module ul{margin:6px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+.module ul li{font-size:.82rem;color:var(--text-2);display:flex;align-items:center;gap:6px}
+.module ul li::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--brand);flex:none}
+.module .mgo{margin-top:auto;padding-top:14px;font-size:.82rem;font-weight:700;color:var(--brand);display:inline-flex;align-items:center;gap:6px;transition:gap .15s}
+.module:hover .mgo{gap:10px;color:var(--brand-700)}
 
-/* --------------------------------------------------- Leadership */
-.team{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
-.person{background:var(--surface);padding:26px 24px;display:flex;flex-direction:column;gap:12px;min-height:240px}
-.avatar{
-  width:56px;height:56px;border-radius:14px;
-  background:linear-gradient(135deg,var(--brand),var(--brand-700));
-  display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.2rem;
-  box-shadow:var(--shadow-sm);
-}
-.avatar.gold{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#15233F}
-.person h4{margin:0;font-size:1.1rem;font-weight:800;letter-spacing:-.01em}
-.person .role{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;color:var(--brand-700);text-transform:uppercase;font-weight:700;margin-top:-4px}
-.person p{margin:0;font-size:.9rem;color:var(--text-2);line-height:1.55}
-@media (max-width:980px){.team{grid-template-columns:1fr 1fr}}
-@media (max-width:600px){.team{grid-template-columns:1fr}}
+/* Listed assets snapshot */
+.assets-table{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+.assets-table table{width:100%;border-collapse:collapse;font-size:.9rem}
+.assets-table th{text-align:left;padding:14px 18px;background:var(--bg-2);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);font-weight:700;border-bottom:1px solid var(--border)}
+.assets-table th.r,.assets-table td.r{text-align:right;font-variant-numeric:tabular-nums}
+.assets-table td{padding:14px 18px;border-bottom:1px solid var(--border);color:var(--text-2)}
+.assets-table tr:last-child td{border-bottom:none}
+.assets-table tr:hover td{background:var(--bg-2)}
+.assets-table .ticker{font-family:var(--font-mono);font-weight:800;color:var(--text)}
+.assets-table .name{color:var(--text);font-weight:600}
+.assets-table .price{font-weight:700;color:var(--text)}
+.assets-table .chg.up{color:var(--success);font-weight:700}
+.assets-table .chg.dn{color:var(--danger);font-weight:700}
+.assets-table .pill{display:inline-block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:99px;font-weight:700;color:var(--brand-700);background:var(--brand-50)}
+.assets-table .pill.gold{color:var(--gold-ink);background:var(--gold-50)}
 
-/* --------------------------------------------------- Regulatory matrix */
-.reg{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:start}
-@media (max-width:980px){.reg{grid-template-columns:1fr}}
-.reg .matrix{
-  display:grid;grid-template-columns:1fr 1fr;gap:1px;
-  background:var(--border);border:1px solid var(--border);
-  border-radius:var(--r-lg);overflow:hidden;
-}
-.reg .matrix .cell{background:var(--surface);padding:22px 22px 20px}
-.reg .matrix .cell h6{margin:0 0 4px;font-size:1.02rem;font-weight:800;letter-spacing:-.01em}
-.reg .matrix .cell p{margin:0;font-size:.88rem;color:var(--text-2);line-height:1.55}
-.reg .matrix .badge{
-  display:inline-block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
-  padding:3px 9px;border-radius:99px;margin-bottom:10px;font-weight:700;
-}
-.reg .matrix .badge.active{color:var(--success);background:var(--success-bg)}
-.reg .matrix .badge.path{color:var(--gold-ink);background:var(--gold-50);border:1px solid var(--gold-100)}
-.reg .matrix .badge.verified{color:var(--brand-700);background:var(--brand-50)}
-
-.struct{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;box-shadow:var(--shadow-sm)}
-.struct h5{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin:0 0 16px;font-weight:700}
-.struct .ent{
-  border:1px dashed var(--border);padding:16px 18px;border-radius:var(--r);
-  display:flex;flex-direction:column;gap:4px;margin-top:12px;
-}
-.struct .ent .role{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:700}
-.struct .ent .nm{font-size:1.02rem;font-weight:800;letter-spacing:-.01em}
-.struct .ent .dsc{font-size:.88rem;color:var(--text-2);line-height:1.55}
-.struct .ent.highlight{background:var(--brand-50);border-style:solid;border-color:var(--brand-100)}
-.struct .ent.highlight .role{color:var(--brand-700)}
-
-/* --------------------------------------------------- Waitlist */
-.waitlist-section{background:linear-gradient(135deg,#0B1220 0%,#15233F 60%,#1B3082 100%);color:#fff;padding:104px 0;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
-.waitlist-section::before{
-  content:'';position:absolute;top:-20%;right:-10%;width:50vw;height:50vw;max-width:600px;max-height:600px;
-  background:radial-gradient(circle,rgba(247,196,102,.14) 0%,rgba(247,196,102,0) 60%);pointer-events:none;
-}
-.waitlist-section .shead h2,
-.waitlist-section .shead h2 .h-it{color:#fff}
-.waitlist-section .shead p{color:rgba(255,255,255,.78)}
-.waitlist-section .eyebrow{color:#FFD9A8}
-.wform{
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
-  border-radius:var(--r-lg);padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:16px;
-  position:relative;z-index:1;backdrop-filter:blur(6px);
-}
-.wform .full{grid-column:1/-1}
-.wform label{
-  display:flex;flex-direction:column;gap:8px;
-  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;color:rgba(255,255,255,.7);text-transform:uppercase;font-weight:700;
-}
-.wform input,.wform select,.wform textarea{
-  background:rgba(0,0,0,.28);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:10px;
-  padding:13px 14px;font:inherit;font-size:.95rem;letter-spacing:normal;text-transform:none;font-weight:500;
-  transition:border-color .15s, box-shadow .15s;
-}
-.wform input::placeholder,.wform textarea::placeholder{color:rgba(255,255,255,.35)}
-.wform input:focus,.wform select:focus,.wform textarea:focus{outline:none;border-color:#FFD9A8;box-shadow:0 0 0 3px rgba(255,217,168,.18)}
-.wform textarea{min-height:96px;resize:vertical}
-.wform .actions{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:8px}
-.wform .note{font-family:var(--font-mono);font-size:.7rem;color:rgba(255,255,255,.55);letter-spacing:.04em}
-.wform .wsubmit{
-  background:#FFD9A8;color:#0B1220;font-weight:800;border:none;border-radius:10px;padding:13px 24px;font-size:.95rem;
-  cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(255,217,168,.35);
-  transition:transform .15s, box-shadow .15s, background .15s;
-}
-.wform .wsubmit:hover{background:#FFCB87;transform:translateY(-1px);box-shadow:0 6px 22px rgba(255,217,168,.5)}
-.wsuccess{
-  display:none;
-  background:rgba(14,138,95,.18);color:#a8e0c1;border:1px solid rgba(14,138,95,.4);
-  padding:14px 16px;border-radius:10px;font-size:.95rem;
-}
-@media (max-width:760px){.wform{grid-template-columns:1fr;padding:24px}}
-
-/* --------------------------------------------------- FAQ */
-.faq details{border-bottom:1px solid var(--border);padding:22px 0}
-.faq summary{
-  list-style:none;cursor:pointer;
-  display:flex;justify-content:space-between;align-items:center;gap:24px;
-  font-size:1.05rem;font-weight:750;letter-spacing:-.01em;color:var(--text);
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary .plus{
-  width:30px;height:30px;border-radius:50%;border:1.5px solid var(--border-strong);
-  display:grid;place-items:center;font-size:18px;color:var(--text-2);
-  transition:transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
-  flex-shrink:0;
-}
-.faq details[open] summary .plus{transform:rotate(45deg);background:var(--brand);color:#fff;border-color:var(--brand)}
-.faq details p{margin:14px 0 0;color:var(--text-2);max-width:75ch;line-height:1.65;font-size:.95rem}
-
-/* --------------------------------------------------- Marquee */
-.marquee{
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  background:var(--bg-2);overflow:hidden;
-}
-.marquee .track{
-  display:flex;gap:48px;
-  padding-block:14px;white-space:nowrap;
-  animation:slide 70s linear infinite;
-  font-family:var(--font-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:600;
-}
-.marquee .track span{display:inline-flex;align-items:center;gap:10px}
-.marquee .track span::after{content:"◆";color:var(--gold-2);font-size:9px;margin-left:48px}
-@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* --------------------------------------------------- Footer */
-.footer{border-top:1px solid var(--border);background:var(--bg-2);margin-top:0;padding:56px 0 28px}
+/* Footer */
+.footer{border-top:1px solid var(--border);background:var(--bg-2);padding:48px 0 28px}
 .footer .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
 .footer h6{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.16em;color:var(--text);text-transform:uppercase;margin:0 0 14px;font-weight:700}
 .footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
@@ -593,705 +204,488 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 .footer a:hover{color:var(--brand)}
 .footer .brand-blk h5{font-size:1.2rem;font-weight:800;color:var(--text);margin:0 0 8px;letter-spacing:-.02em}
 .footer .brand-blk p{margin:0;font-size:.92rem;line-height:1.6;max-width:42ch;color:var(--text-2)}
-.footer .lr{
-  margin-top:42px;padding-top:22px;border-top:1px solid var(--border);
-  display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
-  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em;color:var(--text-3);
-}
-.footer .disclaim{margin-top:18px;font-size:.78rem;color:var(--text-3);max-width:90ch;line-height:1.65}
+.footer .lr{margin-top:36px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;color:var(--text-3)}
+.footer .disclaim{margin-top:14px;font-size:.76rem;color:var(--text-3);max-width:90ch;line-height:1.65}
 @media (max-width:880px){.footer .grid{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.footer .grid{grid-template-columns:1fr}}
 
 ::selection{background:var(--brand);color:#fff}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* NYSE-style ticker tape attached to bottom of dark hero */
+.tape{background:#070C16;border-top:1px solid rgba(255,255,255,.08);overflow:hidden;position:relative;z-index:2}
+.tape::before,.tape::after{content:"";position:absolute;top:0;bottom:0;width:60px;z-index:3;pointer-events:none}
+.tape::before{left:0;background:linear-gradient(90deg,#070C16,transparent)}
+.tape::after{right:0;background:linear-gradient(-90deg,#070C16,transparent)}
+.tape .tape-track{display:flex;gap:0;padding:10px 0;white-space:nowrap;animation:tape-slide 80s linear infinite;font-family:var(--font-mono);font-size:.84rem;color:#fff;font-weight:600}
+.tape .tk-item{display:inline-flex;align-items:center;gap:8px;padding:0 22px;border-right:1px solid rgba(255,255,255,.08)}
+.tape .tk-item .tk{color:#FFD9A8;font-weight:800;letter-spacing:-.01em}
+.tape .tk-item .px{color:#fff;font-variant-numeric:tabular-nums}
+.tape .tk-item .ch{font-size:.78rem;font-weight:700}
+.tape .tk-item .ch.up{color:#5dd6a0}
+.tape .tk-item .ch.dn{color:#ff7a8a}
+.tape .tk-item .ar{font-size:.7rem;opacity:.6}
+@keyframes tape-slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* Hero feature row */
+.hero-feature{background:#0B1220;border-bottom:1px solid var(--border);padding:34px 0;position:relative;z-index:1}
+.hero-feature .wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:780px){.hero-feature .wrap{grid-template-columns:1fr}}
+.hero-feature a{text-decoration:none;color:inherit;display:flex;gap:20px;align-items:center;border-radius:var(--r-lg);padding:24px;transition:transform .15s,box-shadow .2s ease,background .2s}
+.hero-feature .feat-gold{background:linear-gradient(135deg,#FFD9A8,#E7C76C);color:#0B1220;box-shadow:0 4px 20px rgba(255,217,168,.25)}
+.hero-feature .feat-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,217,168,.4)}
+.hero-feature .feat-blue{background:linear-gradient(135deg,#15233F,#1F3CA8);color:#fff;box-shadow:0 4px 20px rgba(31,60,168,.25)}
+.hero-feature .feat-blue:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(31,60,168,.45)}
+.hero-feature .feat-ico{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;font-size:1.9rem;font-weight:800;flex:none}
+.hero-feature .feat-gold .feat-ico{background:rgba(11,18,32,.18);color:#0B1220}
+.hero-feature .feat-blue .feat-ico{background:rgba(255,217,168,.22);color:#FFD9A8}
+.hero-feature .feat-eye{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;margin-bottom:4px;opacity:.85}
+.hero-feature .feat-blue .feat-eye{color:#FFD9A8;opacity:1}
+.hero-feature h3{margin:0 0 6px;font-size:1.18rem;font-weight:800;letter-spacing:-.01em;color:inherit}
+.hero-feature p{margin:0;font-size:.86rem;line-height:1.5;opacity:.85}
+.hero-feature .feat-go{margin-top:10px;font-size:.85rem;font-weight:800;display:inline-flex;align-items:center;gap:4px}
 
-/* Reveal */
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease, transform .7s ease}
-.reveal.visible{opacity:1;transform:none}
-
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:.001ms !important;transition-duration:.001ms !important;scroll-behavior:auto}
-}
 </style>
 </head>
 <body>
 
-<!-- ───────────────────────────────────────────────────────────── Status banner -->
-<div class="sbx-banner">
-  <b>Pre-Seed Active</b> · Closing Q2 2026 · 51.0447° N · 114.0719° W · Calgary, AB
-</div>
+<div class="sbx-banner"><b>4ormEx · Sandbox preview</b> · Simulated institutional environment · All amounts in CAD · Not a live trading venue</div>
 
-<!-- ───────────────────────────────────────────────────────────── Nav -->
+<!-- Top nav -->
 <header class="nav">
   <div class="nav-inner">
-    <a href="#" class="brand" aria-label="4orm Finance home">
-      <img src="./assets/4orm-logo.png" alt="4orm Finance" class="brand-logo" />
+    <a href="/" class="brand" aria-label="4orm Finance home">
+      <img src="../assets/4orm-logo.png" alt="4orm Finance" class="brand-logo" />
       <span class="sub">RWA Exchange</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="/platform.html">Platform</a>
-      <a href="/who.html">Who we serve</a>
-      <a href="/market.html">Market</a>
-      <a href="/regulatory.html">Regulatory</a>
-      <a href="/leadership.html">Leadership</a>
-      <a href="#faq">FAQ</a>
+      <a href="../#platform">Platform</a>
+      <a href="../#who">Who we serve</a>
+      <a href="../#market">Market</a>
+      <a href="../#regulatory">Regulatory</a>
+      <a href="../#team">Leadership</a>
+      <a href="/#faq">FAQ</a>
       <span class="nav-sep" aria-hidden="true"></span>
-      <a href="/exchange/" class="nav-exchange" aria-label="Enter the 4orm Exchange">
+      <a href="/exchange/" class="nav-exchange" aria-current="page">
         <span class="ex-eye">Exchange</span>
-        <span class="ex-main">4ormEx<span class="ex-arr">↗</span></span>
+        <span class="ex-main">4ormEx</span>
       </a>
-      <a href="#waitlist" class="nav-auth">Request access</a>
+      <a href="/#waitlist" class="nav-auth">Request access</a>
     </nav>
   </div>
 </header>
 
-<!-- ───────────────────────────────────────────────────────────── Dark hero -->
-<section class="dhero">
-  <div class="dhero-inner">
-    <div class="dhero-spec">
-      <div>SYS / <span class="v">DIGITAL_SETTLEMENT_NETWORK</span></div>
-      <div>REG / <span class="v">CIRO · CSA · OSFI · FINTRAC</span></div>
-      <div>STRUCT / <span class="v">HOLDCO · OPCO · CUSTODYCO</span></div>
-      <div>OPERATOR / <span class="v">KCS_CAPITAL</span></div>
-    </div>
-
-    <div class="dhero-eyebrow"><span class="dot"></span> Canada's institution-grade RWA exchange</div>
-
-    <h1>Canada's <span class="accent">settlement layer</span> for tokenized real-world assets.</h1>
-
-    <p class="dhero-sub">
-      <strong>4orm Finance</strong> is the neutral, multi-institution infrastructure layer for tokenized
-      real-world assets in Canada — built to the standards validated by the Bank of Canada's Project Samara.
-      Regulator-aligned. Independently governed. Canadian sovereign. Operated as a separately governed entity, with technology developed by KCS Capital.
-    </p>
-
-    <div class="dhero-pills">
-      <span class="dhero-pill gold">Pre-Seed · Closing Q2 2026</span>
-      <span class="dhero-pill">CIRO custody framework</span>
-      <span class="dhero-pill">Project Samara architecture</span>
-      <span class="dhero-pill">Alberta Sandbox</span>
-    </div>
-
-    <div class="dhero-actions">
-      <a class="dhero-btn gold" href="#waitlist">Join the institutional waitlist →</a>
-      <a class="dhero-btn ghost" href="#platform">Explore the platform</a>
-      <a class="dhero-btn ghost" href="https://demo-exchange.vercel.app/sandbox.html" target="_blank" rel="noopener">See the sandbox ↗</a>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── Metrics strip -->
-<section class="hstrip">
-  <div class="wrap">
-    <div class="met">
-      <div class="mv">$16<em>T</em></div>
-      <div class="ml">Global tokenized RWA market by 2030</div>
-      <div class="sr">BCG · ADDX (cited by BoC)</div>
-    </div>
-    <div class="met">
-      <div class="mv">$1.5<em>T+</em></div>
-      <div class="ml">Settled on JPMorgan Onyx / Kinexys rails</div>
-      <div class="sr">J.P. Morgan · 2026</div>
-    </div>
-    <div class="met">
-      <div class="mv">$1.9<em>B/yr</em></div>
-      <div class="ml">Canadian RWA infrastructure TAM</div>
-      <div class="sr">4orm Master Pro Forma</div>
-    </div>
-    <div class="met">
-      <div class="mv">$100<em>M</em></div>
-      <div class="ml">BoC Project Samara tokenized bond pilot — RBC, TD, EDC</div>
-      <div class="sr">Bank of Canada · Mar 2026</div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── Credibility marquee -->
-<div class="marquee" aria-hidden="true">
-  <div class="track">
-    <span>Bank of Canada · Project Samara</span>
-    <span>JPMorgan Kinexys · $1.5T+ cleared</span>
-    <span>McKinsey · 75% CAGR to 2030</span>
-    <span>BlackRock BUIDL · $18B AUM</span>
-    <span>Pineapple Financial · $13.7B tokenized mortgages</span>
-    <span>AuCan Gold · $2.5B tokenized mining bullion</span>
-    <span>Tetra Trust · Canada's first qualified digital custodian</span>
-    <span>Ocree Capital · Ontario EMD</span>
-    <span>T-RIZE · Quebec tokenized real estate</span>
-    <span>BMO · CME · Google Cloud tokenized cash</span>
-    <span>Bank of Canada · Project Samara</span>
-    <span>JPMorgan Kinexys · $1.5T+ cleared</span>
-    <span>McKinsey · 75% CAGR to 2030</span>
-    <span>BlackRock BUIDL · $18B AUM</span>
-    <span>Pineapple Financial · $13.7B tokenized mortgages</span>
-    <span>AuCan Gold · $2.5B tokenized mining bullion</span>
-    <span>Tetra Trust · Canada's first qualified digital custodian</span>
-    <span>Ocree Capital · Ontario EMD</span>
-    <span>T-RIZE · Quebec tokenized real estate</span>
-    <span>BMO · CME · Google Cloud tokenized cash</span>
+<!-- Exchange sub-nav -->
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="./" class="active"><span class="sn-num">01</span> Overview</a>
+    <a href="/exchange/marketplace.html"><span class="sn-num">02</span> Marketplace</a>
+    <a href="/exchange/tokenize.html"><span class="sn-num">03</span> Tokenize</a>
+    <a href="/exchange/lifecycle.html"><span class="sn-num">04</span> Lifecycle</a>
+    <a href="/exchange/issuer.html"><span class="sn-num">05</span> Issuer Portal</a>
+    <a href="/exchange/investor.html"><span class="sn-num">06</span> Investor Portal</a>
+    <a href="/exchange/compliance.html"><span class="sn-num">07</span> Compliance</a>
+    <a href="/exchange/settlement.html"><span class="sn-num">08</span> Settlement</a>
+    <a href="/exchange/admin.html"><span class="sn-num">09</span> Admin &amp; Audit</a>
   </div>
 </div>
 
-<!-- ───────────────────────────────────────────────────────────── The Distinction -->
+<!-- Dark hero -->
+<section class="dhero">
+  <div class="dhero-inner">
+    <div class="dhero-eyebrow"><span class="dot"></span> 4ormEx · Institutional RWA Trading Platform</div>
+    <h1>Institution-grade <span class="accent">trading, settlement &amp; custody</span> for tokenized real-world assets.</h1>
+    <p class="dhero-sub">
+      <strong>4ormEx</strong> is the institutional trading layer of 4orm Finance: a fully regulated venue for tokenized securities, real estate, infrastructure, and private credit
+      with T+0 atomic settlement, qualified Canadian custody, and embedded compliance — under one regulated rail.
+    </p>
+    <div class="dhero-pills">
+      <span class="dhero-pill gold">Sandbox Preview · v0.1</span>
+      <span class="dhero-pill">NI 45-106 compliant</span>
+      <span class="dhero-pill">Data residency · Canada</span>
+      <span class="dhero-pill">CIRO custody framework</span>
+    </div>
+    <div class="dhero-actions">
+      <a class="dhero-btn gold" href="./marketplace.html">Enter the marketplace →</a>
+      <a class="dhero-btn ghost" href="./tokenize.html">⚙ Tokenize an asset</a>
+      <a class="dhero-btn ghost" href="./lifecycle.html">⚡ Run the lifecycle</a>
+      <a class="dhero-btn ghost" href="../">← Back to 4orm Finance</a>
+    </div>
+  </div>
+</section>
+
+<!-- NYSE-style ticker tape -->
+<div class="tape" aria-hidden="true">
+  <div class="tape-track">
+    <span class="tk-item"><span class="tk">tGCB</span><span class="px">C$ 99.82</span><span class="ch up">▲ 0.03%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tABP28</span><span class="px">C$ 102.41</span><span class="ch up">▲ 0.18%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tACP-VII</span><span class="px">C$ 1,041.20</span><span class="ch up">▲ 4.12%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tPMP-A</span><span class="px">C$ 1.0400</span><span class="ch up">▲ 0.42%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tAUC</span><span class="px">C$ 96.18</span><span class="ch dn">▼ 0.27%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tCRE-CGY1</span><span class="px">C$ 524.00</span><span class="ch up">▲ 1.12%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">QCAD</span><span class="px">C$ 1.0000</span><span class="ch up">▲ 0.00%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tMMF-RBC</span><span class="px">C$ 10.0021</span><span class="ch up">▲ 0.01%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tEDC25</span><span class="px">C$ 101.18</span><span class="ch up">▲ 0.07%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tCRE-EDM2</span><span class="px">C$ 287.50</span><span class="ch up">▲ 0.62%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tAGL-SK1</span><span class="px">C$ 1,200.00</span><span class="ch up">▲ 0.08%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tHQI32</span><span class="px">C$ 99.91</span><span class="ch dn">▼ 0.04%</span><span class="ar">|</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="tk-item"><span class="tk">tGCB</span><span class="px">C$ 99.82</span><span class="ch up">▲ 0.03%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tABP28</span><span class="px">C$ 102.41</span><span class="ch up">▲ 0.18%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tACP-VII</span><span class="px">C$ 1,041.20</span><span class="ch up">▲ 4.12%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tPMP-A</span><span class="px">C$ 1.0400</span><span class="ch up">▲ 0.42%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tAUC</span><span class="px">C$ 96.18</span><span class="ch dn">▼ 0.27%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tCRE-CGY1</span><span class="px">C$ 524.00</span><span class="ch up">▲ 1.12%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">QCAD</span><span class="px">C$ 1.0000</span><span class="ch up">▲ 0.00%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tMMF-RBC</span><span class="px">C$ 10.0021</span><span class="ch up">▲ 0.01%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tEDC25</span><span class="px">C$ 101.18</span><span class="ch up">▲ 0.07%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tCRE-EDM2</span><span class="px">C$ 287.50</span><span class="ch up">▲ 0.62%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tAGL-SK1</span><span class="px">C$ 1,200.00</span><span class="ch up">▲ 0.08%</span><span class="ar">|</span></span>
+    <span class="tk-item"><span class="tk">tHQI32</span><span class="px">C$ 99.91</span><span class="ch dn">▼ 0.04%</span><span class="ar">|</span></span>
+  </div>
+</div>
+
+<!-- Hero feature row: Tokenize + Lifecycle (the two interactive workflows) -->
+<section class="hero-feature">
+  <div class="wrap">
+    <a href="/exchange/tokenize.html" class="feat-gold">
+      <div class="feat-ico">⚙</div>
+      <div>
+        <div class="feat-eye">Tokenization Engine</div>
+        <h3>Create a new tokenized asset</h3>
+        <p>5-step wizard · asset details → economics → distribution rules → compliance → mint. ERC-3643. CCO sign-off.</p>
+        <div class="feat-go">Open the wizard →</div>
+      </div>
+    </a>
+    <a href="/exchange/lifecycle.html" class="feat-blue">
+      <div class="feat-ico">⚡</div>
+      <div>
+        <div class="feat-eye">Transaction Lifecycle</div>
+        <h3>Run the 8-step atomic flow</h3>
+        <p>KYC → AML → Tokenize → Trade → Attestation → Settle → Audit → Report. End-to-end in 12 seconds, sandboxed.</p>
+        <div class="feat-go">Run the lifecycle →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- KPI strip -->
+<section class="kpis">
+  <div class="wrap">
+    <div class="kpi">
+      <div class="label">Total value locked</div>
+      <div class="v">C$<span class="u">852.6M</span></div>
+      <div class="delta">+ C$14.2M · 24h</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Listed assets</div>
+      <div class="v">12<span class="u" style="font-size:1.1rem;margin-left:6px">issuers</span></div>
+      <div class="delta">+ 2 new · this week</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Settlement time</div>
+      <div class="v"><span class="u">T+0</span></div>
+      <div class="delta">~ 12 sec atomic DvP</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Compliance pass rate</div>
+      <div class="v">100<span class="u">%</span></div>
+      <div class="delta">All checks · 30d</div>
+    </div>
+  </div>
+</section>
+
+<!-- Personas -->
+<section class="section">
+  <div class="wrap">
+    <div class="shead">
+      <div class="s-eye"><span class="tick"></span><span class="txt">Explore as</span></div>
+      <h2>Step into the platform <span class="h-it">as any participant.</span></h2>
+      <p>The sandbox preview is open-access. Each persona below is a curated view of 4ormEx as that participant — pre-loaded with realistic Canadian data and the workflows they actually run.</p>
+    </div>
+
+    <div class="personas">
+      <a class="persona gold" href="./issuer.html">
+        <div class="pico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="pn">01 · Issuer</div>
+        <h4>Alpha Capital</h4>
+        <div class="who">Tokenized private credit issuer, Toronto · Exempt Market Dealer</div>
+        <div class="pgo">Open issuer portal →</div>
+      </a>
+      <a class="persona" href="./investor.html">
+        <div class="pico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 20V10M9 20V6M13 20V13M17 20V8M21 20V4"/></svg></div>
+        <div class="pn">02 · Investor</div>
+        <h4>Bay Street Investments</h4>
+        <div class="who">Multi-strategy asset manager · institutional accredited</div>
+        <div class="pgo">Open investor portal →</div>
+      </a>
+      <a class="persona" href="./compliance.html">
+        <div class="pico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4-1.5 8.5L12 22l-7.5-7.5L3 6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="pn">03 · Compliance</div>
+        <h4>Compliance Officer</h4>
+        <div class="who">CIRO/CSA registered · KYC, AML, NI 45-106 oversight</div>
+        <div class="pgo">Open compliance console →</div>
+      </a>
+      <a class="persona" href="./settlement.html">
+        <div class="pico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4"/><path d="M3 7h18"/><path d="M7 21l-4-4 4-4"/><path d="M21 17H3"/></svg></div>
+        <div class="pn">04 · Custodian</div>
+        <h4>Tetra Trust</h4>
+        <div class="who">Qualified digital asset custodian · settlement counterparty</div>
+        <div class="pgo">Open settlement ledger →</div>
+      </a>
+      <a class="persona" href="./admin.html">
+        <div class="pico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div class="pn">05 · Admin</div>
+        <h4>Platform Admin</h4>
+        <div class="who">4ormEx operations · audit logs, reporting, supervision</div>
+        <div class="pgo">Open admin console →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Six modules -->
+<section class="section band">
+  <div class="wrap">
+    <div class="shead row">
+      <div>
+        <div class="s-eye"><span class="tick"></span><span class="txt">The 4ormEx Platform</span></div>
+        <p>Six integrated services on one regulated rail. Each is independently navigable; together they form a complete institutional lifecycle from issuance to audit.</p>
+      </div>
+      <h2>Six services. <span class="h-it">One regulated rail.</span></h2>
+    </div>
+
+    <div class="modules">
+      <a href="/exchange/issuer.html" class="module">
+        <div class="mhead">
+          <span class="mn">01 · Issuance</span>
+          <span class="mst dev">Sandbox</span>
+        </div>
+        <h3>Issuance Service</h3>
+        <p>Create and manage tokenized securities with regulatory compliance built into the token from mint.</p>
+        <ul>
+          <li>Token creation (ERC-3643)</li>
+          <li>Offering management</li>
+          <li>Jurisdiction rules</li>
+          <li>Distribution controls</li>
+        </ul>
+        <span class="mgo">Open issuer portal →</span>
+      </a>
+
+      <a href="/exchange/compliance.html" class="module">
+        <div class="mhead">
+          <span class="mn">02 · Compliance</span>
+          <span class="mst live">Live</span>
+        </div>
+        <h3>Compliance Engine</h3>
+        <p>KYC/AML verification, accreditation validation under NI 45-106, and pre-trade compliance checks on every order.</p>
+        <ul>
+          <li>KYC verification</li>
+          <li>NI 45-106 accreditation</li>
+          <li>Pre-trade checks</li>
+          <li>Regulatory reporting</li>
+        </ul>
+        <span class="mgo">Open compliance console →</span>
+      </a>
+
+      <a href="/exchange/marketplace.html" class="module">
+        <div class="mhead">
+          <span class="mn">03 · Marketplace</span>
+          <span class="mst live">Live</span>
+        </div>
+        <h3>Marketplace Service</h3>
+        <p>Central limit order book with real-time matching, depth-of-book transparency, and institutional trading controls.</p>
+        <ul>
+          <li>Limit &amp; market orders</li>
+          <li>Order book depth</li>
+          <li>Trade matching</li>
+          <li>Price discovery</li>
+        </ul>
+        <span class="mgo">Open marketplace →</span>
+      </a>
+
+      <a href="/exchange/settlement.html" class="module">
+        <div class="mhead">
+          <span class="mn">04 · Settlement</span>
+          <span class="mst dev">Sandbox</span>
+        </div>
+        <h3>Settlement Service</h3>
+        <p>T+0 atomic settlement with delivery-versus-payment guarantees in tokenized CAD — bank deposits or QCAD.</p>
+        <ul>
+          <li>DvP atomic settlement</li>
+          <li>T+0 finality</li>
+          <li>Netting &amp; reconciliation</li>
+          <li>Multi-bank corridors</li>
+        </ul>
+        <span class="mgo">Open settlement ledger →</span>
+      </a>
+
+      <a href="/exchange/investor.html" class="module">
+        <div class="mhead">
+          <span class="mn">05 · Custody</span>
+          <span class="mst dev">Sandbox</span>
+        </div>
+        <h3>Custody Adapter</h3>
+        <p>Unified interface to qualified Canadian custodians and wallet infrastructure. Multi-custodian, single view.</p>
+        <ul>
+          <li>Tetra · Balance · Brane</li>
+          <li>Balance management</li>
+          <li>Transfer controls</li>
+          <li>Audit trail</li>
+        </ul>
+        <span class="mgo">Open investor portal →</span>
+      </a>
+
+      <a href="/exchange/admin.html" class="module">
+        <div class="mhead">
+          <span class="mn">06 · Audit</span>
+          <span class="mst live">Live</span>
+        </div>
+        <h3>Audit &amp; Reporting</h3>
+        <p>Immutable audit logs on the 4orm-EVM permissioned network and one-click regulatory reporting.</p>
+        <ul>
+          <li>Immutable ledger</li>
+          <li>Regulatory reports</li>
+          <li>Real-time monitoring</li>
+          <li>Export to CSV/PDF</li>
+        </ul>
+        <span class="mgo">Open admin console →</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Listed assets snapshot -->
 <section class="section">
   <div class="wrap">
     <div class="shead row">
       <div>
-        <div class="s-eye"><span class="tick"></span><span class="txt">The Distinction</span></div>
-        <p>Most tokenization companies are building tokenized assets.</p>
+        <div class="s-eye"><span class="tick"></span><span class="txt">Live listings · sandbox</span></div>
+        <p>A snapshot of assets currently listed in the sandbox. Click into the marketplace for the full order book and trade execution.</p>
       </div>
-      <h2>We are building the <span class="h-it">institutional infrastructure layer</span> that allows Canada to safely operate tokenized finance at scale.</h2>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── Six capabilities -->
-<section class="section section-band" id="platform" style="padding-top:88px;padding-bottom:88px">
-  <div class="wrap">
-    <div class="shead row">
-      <div>
-        <div class="s-eye"><span class="tick"></span><span class="txt">The 4orm Finance Platform</span></div>
-        <p>Full-stack institutional infrastructure for Canadian regulatory frameworks. Not a crypto exchange — six capabilities operating as one regulated rail.</p>
-      </div>
-      <h2>Six capabilities. <span class="h-it">One regulated rail.</span></h2>
+      <h2>Listed assets <span class="h-it">on 4ormEx.</span></h2>
     </div>
 
-    <div class="ncards c3">
-      <div class="ncard">
-        <div class="nnum">01 · Settlement</div>
-        <h3>Digital Settlement Network</h3>
-        <p>Instant, auditable settlement for institutional transactions. Near real-time replacement for multi-day settlement cycles, freeing trapped capital and reducing counterparty risk.</p>
-        <div class="metric"><span class="mv">T+0</span><span class="ml">Near real-time settlement</span></div>
-      </div>
-      <div class="ncard">
-        <div class="nnum">02 · Deposits</div>
-        <h3>Tokenized CAD Deposits</h3>
-        <p>Bank-issued digital deposits for institutional use only. Not retail stablecoins. CAD-denominated bank deposits issued by regulated institutions, under existing banking regulation.</p>
-        <div class="metric"><span class="mv">1 : 1</span><span class="ml">CAD-backed · bank-issued</span></div>
-      </div>
-      <div class="ncard">
-        <div class="nnum">03 · Issuance</div>
-        <h3>RWA Issuance &amp; Registry</h3>
-        <p>Native infrastructure for tokenizing real-world assets. Smart contract development, asset registry, and on-chain binding to legal and economic claims with full audit trails.</p>
-        <div class="metric"><span class="mv">Smart</span><span class="ml">Multi-asset registry</span></div>
-      </div>
-      <div class="ncard">
-        <div class="nnum">04 · Collateral</div>
-        <h3>Tokenized Collateral Engine</h3>
-        <p>Real-time collateralization and margin efficiency. Mobilizes illiquid Canadian assets — CRE, energy royalties, mining bullion, equipment, private credit — into institutional-grade collateral.</p>
-        <div class="metric"><span class="mv">Real-time</span><span class="ml">Margin efficiency</span></div>
-      </div>
-      <div class="ncard">
-        <div class="nnum">05 · Marketplace</div>
-        <h3>Regulated RWA Marketplace</h3>
-        <p>Secondary market liquidity for institutional assets. Transparent pricing, fractional ownership, multi-bank settlement corridors — all under CIRO marketplace oversight.</p>
-        <div class="metric"><span class="mv">24 / 7</span><span class="ml">Secondary liquidity</span></div>
-      </div>
-      <div class="ncard">
-        <div class="nnum">06 · Trust</div>
-        <h3>Trust &amp; Estate Digitization</h3>
-        <p>Digital representation of trust and estate holdings. Modernizes administration of Canadian fiduciary assets while preserving the legal and tax frameworks institutions already operate within.</p>
-        <div class="metric"><span class="mv">Fiduciary</span><span class="ml">Trust &amp; estate grade</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── Who we serve -->
-<section class="section" id="who">
-  <div class="wrap">
-    <div class="shead row">
-      <div>
-        <div class="s-eye"><span class="tick"></span><span class="txt">Who we serve</span></div>
-        <p>4orm Finance is institutional infrastructure for the firms that already carry Canada's regulatory burden, the issuers originating tokenizable assets, and the public capital that needs a sovereign rail.</p>
-      </div>
-      <h2>Built for the institutions <span class="h-it">that move Canadian capital.</span></h2>
-    </div>
-
-    <div class="tile-grid c3">
-      <div class="tile">
-        <div class="tile-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg>
-        </div>
-        <span class="tag">01 · Institutions</span>
-        <h3>Banks, custodians, credit unions, asset managers</h3>
-        <p>Neutral, multi-institution settlement and tokenized deposit rails. The Canadian answer to JPMorgan Onyx — without forcing any single bank to own the rails.</p>
-        <span class="tile-link">Tier-1 · provincial · Schedule II · trust →</span>
-      </div>
-
-      <div class="tile gold">
-        <div class="tile-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v16"/></svg>
-        </div>
-        <span class="tag">02 · Tokenization projects</span>
-        <h3>Issuers &amp; originators of real-world assets</h3>
-        <p>You've built the assets and the dealer pathway. 4orm is the institutional bridge: bank counterparties, secondary liquidity, an investor pool, and a way to offload at scale.</p>
-        <span class="tile-link">EMDs · CRE · private credit · resources →</span>
-      </div>
-
-      <div class="tile">
-        <div class="tile-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10l4-3 4 3v11M16 21v-7h4v7M12 13h4"/></svg>
-        </div>
-        <span class="tag">03 · Municipalities</span>
-        <h3>Cities, regional authorities &amp; public-sector treasurers</h3>
-        <p>A regulated venue to tokenize municipal debt, infrastructure revenue streams, and capital projects — with primary distribution to institutional investors and secondary liquidity for ratepayers and pensions.</p>
-        <span class="tile-link">Capital plans · revenue financing →</span>
-      </div>
-
-      <div class="tile">
-        <div class="tile-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4-9 4-9-4 9-4z"/><path d="M3 10v6l9 4 9-4v-6"/></svg>
-        </div>
-        <span class="tag">04 · Governments</span>
-        <h3>Federal, provincial &amp; Crown corporations</h3>
-        <p>A Canadian-sovereign rail for tokenized sovereign and sub-sovereign instruments — modelled on the architecture proven by Bank of Canada Project Samara with RBC, TD, and EDC.</p>
-        <span class="tile-link">Sovereign · treasury · Crown ops →</span>
-      </div>
-
-      <div class="tile gold">
-        <div class="tile-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20V10M9 20V6M13 20V13M17 20V8M21 20V4"/></svg>
-        </div>
-        <span class="tag">05 · Capital firms</span>
-        <h3>Pensions, insurers, asset managers, family offices</h3>
-        <p>Institutional access to a regulated Canadian RWA marketplace — fractional positions, programmable compliance, and tokenized collateral that mobilizes balance-sheet assets.</p>
-        <span class="tile-link">Pensions · life cos · alts · MFOs →</span>
-      </div>
-
-      <div class="tile">
-        <div class="tile-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21h20M3 21V9l9-6 9 6v12M9 21v-6h6v6M9 12h.01M15 12h.01"/></svg>
-        </div>
-        <span class="tag">06 · Development firms</span>
-        <h3>Large-scale developers &amp; infrastructure originators</h3>
-        <p>Tokenize project equity, revenue rights, and development pipelines into compliant, tradeable instruments. Unlock capital from Canadian and global institutional pools — without selling the asset.</p>
-        <span class="tile-link">Real estate · energy · resources →</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── Thesis pull -->
-<section class="thesis">
-  <div class="wrap">
-    <div class="qmark">“</div>
-    <div>
-      <blockquote>A rising tide <em>raises all ships.</em></blockquote>
-      <div class="attrib">— The Thesis · 4orm Finance</div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── Canadian market -->
-<section class="section" id="market">
-  <div class="wrap">
-    <div class="shead row">
-      <div>
-        <div class="s-eye"><span class="tick"></span><span class="txt">Canadian tokenization landscape</span></div>
-        <p>Canada has no central registry for tokenization projects. KCS Capital — 4orm's technology partner — maintains its own ecosystem map. Below is the current read on the active landscape and where it's heading.</p>
-      </div>
-      <h2>The market is forming. <span class="h-it">Right now.</span></h2>
+    <div class="assets-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Asset</th>
+            <th>Class</th>
+            <th class="r">Last</th>
+            <th class="r">24h change</th>
+            <th class="r">24h volume</th>
+            <th class="r">Issuer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ticker">tGCB</span></td>
+            <td><span class="name">Gov. of Canada T-Bill · 90d</span></td>
+            <td><span class="pill">Sovereign</span></td>
+            <td class="r price">C$99.82</td>
+            <td class="r chg up">+ 0.03 %</td>
+            <td class="r">C$ 24.1M</td>
+            <td class="r">Bank of Canada</td>
+          </tr>
+          <tr>
+            <td><span class="ticker">tABP28</span></td>
+            <td><span class="name">Province of Alberta Bond 2028</span></td>
+            <td><span class="pill">Sub-sovereign</span></td>
+            <td class="r price">C$102.41</td>
+            <td class="r chg up">+ 0.18 %</td>
+            <td class="r">C$ 11.7M</td>
+            <td class="r">Province of Alberta</td>
+          </tr>
+          <tr>
+            <td><span class="ticker">tPMP-A</span></td>
+            <td><span class="name">Pineapple Mortgage Pool · Series A</span></td>
+            <td><span class="pill gold">Private credit</span></td>
+            <td class="r price">C$ 1.04</td>
+            <td class="r chg up">+ 0.42 %</td>
+            <td class="r">C$ 8.3M</td>
+            <td class="r">Pineapple Financial</td>
+          </tr>
+          <tr>
+            <td><span class="ticker">tAUC</span></td>
+            <td><span class="name">AuCan Tokenized Gold Bullion · 1g</span></td>
+            <td><span class="pill gold">Commodity</span></td>
+            <td class="r price">C$ 96.18</td>
+            <td class="r chg dn">− 0.27 %</td>
+            <td class="r">C$ 5.4M</td>
+            <td class="r">AuCan Gold</td>
+          </tr>
+          <tr>
+            <td><span class="ticker">tCRE-CGY1</span></td>
+            <td><span class="name">Calgary CRE Tower · Fractional Equity</span></td>
+            <td><span class="pill gold">Real estate</span></td>
+            <td class="r price">C$ 524.00</td>
+            <td class="r chg up">+ 1.12 %</td>
+            <td class="r">C$ 3.1M</td>
+            <td class="r">Ocree Capital</td>
+          </tr>
+          <tr>
+            <td><span class="ticker">QCAD</span></td>
+            <td><span class="name">Stablecorp QCAD · Settlement Currency</span></td>
+            <td><span class="pill">Stablecoin</span></td>
+            <td class="r price">C$ 1.0000</td>
+            <td class="r chg up">+ 0.00 %</td>
+            <td class="r">C$ 42.6M</td>
+            <td class="r">Stablecorp</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="market">
-      <div>
-        <div class="mpanel">
-          <h5>Today · 2026</h5>
-          <div class="big">75 – 175</div>
-          <div class="desc">Meaningful Canadian tokenization projects across asset classes and infrastructure layers.</div>
-          <ul>
-            <li>Live operational products <strong>10 – 25</strong></li>
-            <li>Active pilots &amp; institutional discovery <strong>30 – 60</strong></li>
-            <li>Early-stage / stealth buildouts <strong>40 – 90</strong></li>
-            <li>Institutional infrastructure initiatives <strong>15 – 30</strong></li>
-            <li>Stablecoin / tokenized deposit / rail <strong>5 – 15</strong></li>
-            <li>Regulatory &amp; sandbox pilots <strong>10 – 20</strong></li>
-          </ul>
-        </div>
-        <div class="mpanel">
-          <h5>Five-year horizon · 2031</h5>
-          <div class="big"><em>250 – 600</em></div>
-          <div class="desc">Projected Canadian tokenization projects at the close of the decade-defining build-out.</div>
-          <ul>
-            <li>Institutional infrastructure players <strong>25 – 50</strong></li>
-            <li>Asset tokenization platforms <strong>100 – 250</strong></li>
-            <li>Real estate tokenization ecosystems <strong>50 – 150</strong></li>
-            <li>Stablecoin &amp; payment rail systems <strong>15 – 40</strong></li>
-            <li>Bank-integrated tokenization systems <strong>10 – 20</strong></li>
-            <li>Total ecosystem growth <strong>3 – 4×</strong></li>
-          </ul>
-        </div>
-        <div class="mnote">
-          Source · KCS Capital ecosystem mapping, May 2026. Compiled from public company announcements, regulatory filings,
-          CSA Project Tokenization participation, and Canadian startup ecosystem data. No central registry of Canadian tokenization projects exists; ranges reflect KCS Capital's market-mapping methodology.
-        </div>
-      </div>
-
-      <div>
-        <div class="mpanel">
-          <h5>Why now</h5>
-          <div class="big" style="font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.15">
-            The Bank of Canada has answered <em>the question.</em>
-          </div>
-          <div class="desc">
-            On March 6, 2026, the Bank of Canada completed Project Samara — Canada's first tokenized bond trial — with RBC, TD, and EDC.
-            C$100&nbsp;million in tokenized bonds. Full lifecycle: issuance, bidding, coupon payments, secondary trading, redemption. Regulatory sign-off from OSC, AMF, and CIRO.
-            The question of whether Canada will operate on tokenized rails has been answered. The remaining question is who builds it.
-          </div>
-        </div>
-
-        <div class="mpanel">
-          <h5>What Canada has — and what's still missing</h5>
-          <div class="desc">
-            What Canada <em>has</em>: credible asset issuers (T-RIZE, Ocree Capital, Pineapple Financial with $13.7B in tokenized mortgages,
-            AuCan Gold with $2.5B in tokenized mining bullion), stablecoin infrastructure (Cybrid, Stablecorp's QCAD, Loon), qualified custodians
-            (Tetra Trust, Balance Trust, Brane Trust), and a regulated assets blockchain in Polymesh.
-          </div>
-          <div class="desc" style="margin-top:14px">
-            What Canada <em>does not yet have</em>: institutional liquidity, a bank-aligned secondary market, an investor pool, or a settlement layer
-            connecting these issuers to the buy-side. That is the bridge 4orm Finance is being built to be.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Momentum -->
-    <div class="moment">
-      <div class="s-eye" style="margin-bottom:18px;margin-top:8px"><span class="tick"></span><span class="txt">Recent institutional momentum</span></div>
-      <div class="row">
-        <div class="date">Q2 2026</div>
-        <div>
-          <h6>CSA launches Project Tokenization</h6>
-          <p>Canadian Securities Administrators formally elevated tokenization to a national regulatory initiative. The market-structure question has moved from "if" to "who builds it."</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="date">2026</div>
-        <div>
-          <h6>BMO · CME · Google Cloud tokenized cash</h6>
-          <p>Bank of Montreal announced tokenized cash and deposit infrastructure built with CME and Google Cloud — a second Tier-1 Canadian bank moving on production-grade tokenized infrastructure.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="date">Mar 2026</div>
-        <div>
-          <h6>Bank of Canada · Project Samara</h6>
-          <p>$100M tokenized bond trial completed with RBC, TD, and EDC. Full lifecycle, regulatory sign-off from OSC, AMF, and CIRO. The reference architecture for what comes next.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="date">Feb 2026</div>
-        <div>
-          <h6>CIRO publishes Digital Asset Custody Framework</h6>
-          <p>The framework establishing the three-entity separation model (HoldCo / OpCo / CustodyCo) that 4orm Finance is structured against from day one.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── Leadership -->
-<section class="section section-band" id="team">
-  <div class="wrap">
-    <div class="shead row">
-      <div>
-        <div class="s-eye"><span class="tick"></span><span class="txt">Leadership</span></div>
-        <p>4orm Finance is operated by a Canadian leadership team with deep experience in capital markets, regulated infrastructure, and technology. Independently governed under the CIRO Digital Asset Custody Framework.</p>
-      </div>
-      <h2>The team building <span class="h-it">Canada's settlement layer.</span></h2>
-    </div>
-
-    <div class="team">
-      <div class="person">
-        <div class="avatar gold">CJ</div>
-        <h4>Chad Johnston</h4>
-        <div class="role">Founder · KCS Capital</div>
-        <p>Founder of KCS Capital, the independent technology and research firm developing the 4orm Finance platform. Calgary-based.</p>
-      </div>
-      <div class="person">
-        <div class="avatar">—</div>
-        <h4>Leadership · TBD</h4>
-        <div class="role">Chief Executive Officer · 4orm</div>
-        <p>Operating leadership for 4orm Finance OpCo. Reporting under the independent board, structured per the CIRO custody framework.</p>
-      </div>
-      <div class="person">
-        <div class="avatar">—</div>
-        <h4>Leadership · TBD</h4>
-        <div class="role">Chief Compliance Officer</div>
-        <p>OSFI / CSA / CIRO / FINTRAC pathway lead. Compliance and supervisory framework. Sandbox application Q3 2026.</p>
-      </div>
-      <div class="person">
-        <div class="avatar">—</div>
-        <h4>Leadership · TBD</h4>
-        <div class="role">Chief Technology Officer</div>
-        <p>Technology delivery for the 4orm-EVM permissioned network, RWA issuance &amp; registry, and the tokenized collateral engine.</p>
-      </div>
-    </div>
-
-    <p class="mono-tag" style="margin-top:22px">
-      Senior team additions <span class="sep">·</span> Independent board announced as pre-seed closes <span class="sep">·</span> <span class="on">Advisor roster on request</span>
+    <p class="muted" style="margin-top:18px;font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em">
+      Sandbox data · simulated identifiers, hashes and balances · not a live trading venue · figures illustrative.
     </p>
   </div>
 </section>
 
-<!-- ───────────────────────────────────────────────────────────── Regulatory posture -->
-<section class="section" id="regulatory">
-  <div class="wrap">
-    <div class="shead row">
-      <div>
-        <div class="s-eye"><span class="tick"></span><span class="txt">Regulatory &amp; infrastructure posture</span></div>
-        <p>4orm Finance is structured against the CIRO Digital Asset Custody Framework from inception — independently governed, separately incorporated, and aligned with the federal and provincial regulators that supervise Canadian capital markets.</p>
-      </div>
-      <h2>Regulator-aligned. <span class="h-it">Independently governed.</span> Canadian sovereign.</h2>
-    </div>
-
-    <div class="reg">
-      <div class="matrix">
-        <div class="cell">
-          <span class="badge path">Pathway</span>
-          <h6>CIRO Custody Framework</h6>
-          <p>Three-entity separation, Tier-2 target. Operationalized as HoldCo / OpCo / CustodyCo from day one.</p>
-        </div>
-        <div class="cell">
-          <span class="badge path">Pathway</span>
-          <h6>OSFI · CSA · FINTRAC</h6>
-          <p>Sandbox application Q3 2026. Coordinated regulatory engagement across federal and provincial supervisors.</p>
-        </div>
-        <div class="cell">
-          <span class="badge active">Active</span>
-          <h6>Alberta Sandbox</h6>
-          <p>Financial Innovation Act · Bill 13. Calgary HQ, Canada's first regulatory sandbox for digital asset infrastructure.</p>
-        </div>
-        <div class="cell">
-          <span class="badge verified">Verified</span>
-          <h6>Project Samara Architecture</h6>
-          <p>Reference architecture validated by Bank of Canada with RBC, TD, EDC — March 2026. The model 4orm builds against.</p>
-        </div>
-        <div class="cell">
-          <span class="badge active">Active</span>
-          <h6>CSA Project Tokenization</h6>
-          <p>National regulatory initiative. The market-structure standard 4orm is engaging with as it is written.</p>
-        </div>
-        <div class="cell">
-          <span class="badge verified">Verified</span>
-          <h6>FINTRAC AML / ATF</h6>
-          <p>Embedded sanctions, PEP and watchlist screening. Large-transaction reporting at the C$10,000 threshold.</p>
-        </div>
-      </div>
-
-      <div class="struct">
-        <h5>Corporate structure · per CIRO framework</h5>
-        <div class="ent">
-          <div class="role">HoldCo</div>
-          <div class="nm">4orm Finance Holdings</div>
-          <div class="dsc">Independent governing entity. Owns and governs the operating and custody subsidiaries. Independent board, separate from the technology developer.</div>
-        </div>
-        <div class="ent">
-          <div class="role">OpCo</div>
-          <div class="nm">4orm Finance Operations</div>
-          <div class="dsc">Regulated operating company. Runs the marketplace, settlement network, and tokenized deposit rails. Operates under CIRO marketplace and dealer oversight.</div>
-        </div>
-        <div class="ent">
-          <div class="role">CustodyCo</div>
-          <div class="nm">4orm Custody &amp; Trust</div>
-          <div class="dsc">Qualified custody entity. Holds underlying assets and credentials. Structured per the CIRO Digital Asset Custody Framework, Tier-2 target.</div>
-        </div>
-        <div class="ent highlight">
-          <div class="role">Technology Partner</div>
-          <div class="nm">KCS Capital Inc.</div>
-          <div class="dsc">Independent technology and research firm. Develops the platform; does not operate it. Separately governed Canadian entity — Calgary · Vancouver · Edmonton.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── Waitlist -->
-<section class="waitlist-section" id="waitlist">
-  <div class="wrap">
-    <div class="shead row">
-      <div>
-        <div class="eyebrow" style="color:#FFD9A8;margin-bottom:14px">Institutional waitlist</div>
-        <p>4orm Finance is in pre-seed. Onboarding is institution-by-institution as the closed-loop pilots come online. Tell us who you are and we'll get back to you about the right entry point — discovery, pilot, or partner program.</p>
-      </div>
-      <h2>Request access. <span class="h-it" style="color:#FFD9A8">Closed-loop pilots opening throughout 2026.</span></h2>
-    </div>
-
-    <form class="wform" id="waitlist-form" autocomplete="on">
-      <label>
-        Full name
-        <input type="text" name="name" required placeholder="Jane Doe" />
-      </label>
-      <label>
-        Work email
-        <input type="email" name="email" required placeholder="jane@institution.ca" />
-      </label>
-      <label>
-        Organization
-        <input type="text" name="org" required placeholder="Schedule I Bank · Provincial Crown · Pension · EMD · Developer" />
-      </label>
-      <label>
-        Role
-        <input type="text" name="role" placeholder="Treasurer · CIO · Head of Digital Assets · Risk · Founder" />
-      </label>
-      <label class="full">
-        Organization type
-        <select name="org_type" required>
-          <option value="">— Select —</option>
-          <option>Tier-1 bank / Schedule I</option>
-          <option>Credit union / Schedule II / caisse populaire</option>
-          <option>Tokenization project / issuer / originator</option>
-          <option>Municipality / regional authority</option>
-          <option>Federal / provincial government / Crown corporation</option>
-          <option>Asset manager / pension / insurer / family office</option>
-          <option>Large-scale developer / infrastructure firm</option>
-          <option>Custodian / trust company</option>
-          <option>Regulator / academic / press</option>
-          <option>Other</option>
-        </select>
-      </label>
-      <label class="full">
-        What are you trying to do? (optional)
-        <textarea name="notes" placeholder="A short note about what you'd like to tokenize, settle, custody, or pilot."></textarea>
-      </label>
-      <div class="actions full">
-        <div class="note">We respond within five business days. Pre-seed closing Q2 2026.</div>
-        <button type="submit" class="wsubmit">Request access →</button>
-      </div>
-      <div class="wsuccess full" id="waitlist-success">
-        Thanks — your request is in. We'll be in touch from <a href="mailto:founders@kcs-capital.com" style="color:#a8e0c1;text-decoration:underline">founders@kcs-capital.com</a>.
-      </div>
-    </form>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── FAQ -->
-<section class="section" id="faq">
-  <div class="wrap">
-    <div class="shead row">
-      <div>
-        <div class="s-eye"><span class="tick"></span><span class="txt">Frequently asked</span></div>
-        <p>The questions Canadian institutions, public-sector treasurers, and tokenization issuers ask before joining a closed-loop pilot.</p>
-      </div>
-      <h2>Answers — <span class="h-it">plain English.</span></h2>
-    </div>
-
-    <div class="faq">
-      <details>
-        <summary>Is 4orm Finance a crypto exchange? <span class="plus">+</span></summary>
-        <p>No. 4orm Finance is institution-grade infrastructure for real-world assets — tokenized bonds, tokenized deposits, real estate, private credit, resource and infrastructure assets. It does not list speculative crypto-assets, does not serve retail traders, and does not custody bearer assets outside of a regulated perimeter.</p>
-      </details>
-      <details>
-        <summary>How is 4orm Finance different from KCS Capital? <span class="plus">+</span></summary>
-        <p>KCS Capital is the independent technology and research firm that develops the platform. 4orm Finance operates it as a separately incorporated, independently governed regulated entity — structured as HoldCo / OpCo / CustodyCo per the CIRO Digital Asset Custody Framework.</p>
-      </details>
-      <details>
-        <summary>What's the regulatory pathway? <span class="plus">+</span></summary>
-        <p>4orm is engaging with CIRO (marketplace and custody), CSA (Project Tokenization), OSFI (banking-aligned settlement), and FINTRAC (AML/ATF) on a coordinated pathway. The sandbox application is targeted for Q3 2026. The custody entity is structured against the CIRO Digital Asset Custody Framework Tier-2 target from day one.</p>
-      </details>
-      <details>
-        <summary>Do banks have to run a blockchain to plug in? <span class="plus">+</span></summary>
-        <p>No. The blockchain is the execution surface underneath; the regulated control plane stays with the institution. Banks integrate via standard rails — ISO 20022, APIs, and existing core banking and treasury systems. The deployment model is a closed-loop pilot first, never a big-bang migration.</p>
-      </details>
-      <details>
-        <summary>Who can hold tokens on 4orm? <span class="plus">+</span></summary>
-        <p>Verified, whitelisted institutional members only. Transfer rules are embedded in the token contracts; no bearer transfers, no anonymous wallets. KYC/AML credentials are reusable across the network so onboarding compounds rather than repeats.</p>
-      </details>
-      <details>
-        <summary>What is the settlement asset? <span class="plus">+</span></summary>
-        <p>4orm settles in tokenized CAD. The cash leg is either a regulated Canadian-dollar stablecoin (e.g., Stablecorp's QCAD) or bank-issued tokenized CAD deposits — depending on the participating institution's preference and regulatory posture.</p>
-      </details>
-      <details>
-        <summary>What does the partnership model look like for tokenization projects? <span class="plus">+</span></summary>
-        <p>Issuers like exempt market dealers, real estate platforms, mining and energy projects, and private credit funds keep their dealer registration and asset specialization. 4orm provides the institutional bridge: bank counterparties, secondary liquidity, an institutional investor pool, and the secondary market needed to actually offload at scale.</p>
-      </details>
-      <details>
-        <summary>How can a municipality or government engage? <span class="plus">+</span></summary>
-        <p>Through a discovery engagement and, when appropriate, a closed-loop pilot. Use cases include tokenized municipal debt, infrastructure revenue financing, sovereign and sub-sovereign instruments, and Crown-aligned tokenized programs that benefit from a Canadian-sovereign rail.</p>
-      </details>
-      <details>
-        <summary>When does the platform go live? <span class="plus">+</span></summary>
-        <p>4orm Finance is in pre-seed, closing Q2 2026. Closed-loop pilots are opening throughout 2026. The architecture, custody framework, and regulatory pathway are in flight today. Production timing depends on regulatory sandbox progression and pilot results.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────────────── Footer -->
+<!-- Footer -->
 <footer class="footer">
   <div class="wrap">
     <div class="grid">
       <div class="brand-blk">
-        <h5>4orm Finance</h5>
-        <p>Canada's institution-grade RWA exchange and digital settlement network. Operated as a separately governed regulated entity. Technology developed by KCS Capital. Calgary · Vancouver · Edmonton.</p>
+        <h5>4ormEx · The 4orm Exchange</h5>
+        <p>The institutional trading layer of 4orm Finance. Canadian-regulated marketplace for tokenized real-world assets. Sandbox preview · v0.1.</p>
       </div>
       <div>
-        <h6>Platform</h6>
+        <h6>Exchange</h6>
         <ul>
-          <li><a href="#platform">Capabilities</a></li>
-          <li><a href="#who">Who we serve</a></li>
-          <li><a href="#market">Market</a></li>
-          <li><a href="https://demo-exchange.vercel.app/sandbox.html" target="_blank" rel="noopener">Sandbox ↗</a></li>
-          <li><a href="https://demo-exchange.vercel.app/how-it-works.html" target="_blank" rel="noopener">How it works ↗</a></li>
+          <li><a href="./">Overview</a></li>
+          <li><a href="/exchange/marketplace.html">Marketplace</a></li>
+          <li><a href="/exchange/issuer.html">Issuer portal</a></li>
+          <li><a href="/exchange/investor.html">Investor portal</a></li>
         </ul>
       </div>
       <div>
-        <h6>Company</h6>
+        <h6>Operations</h6>
         <ul>
-          <li><a href="#team">Leadership</a></li>
-          <li><a href="#regulatory">Regulatory</a></li>
-          <li><a href="#waitlist">Request access</a></li>
-          <li><a href="https://kcs-capital.com" target="_blank" rel="noopener">KCS Capital ↗</a></li>
-          <li><a href="https://kcs-capital.com/research" target="_blank" rel="noopener">Research ↗</a></li>
+          <li><a href="/exchange/compliance.html">Compliance</a></li>
+          <li><a href="/exchange/settlement.html">Settlement</a></li>
+          <li><a href="/exchange/admin.html">Admin &amp; audit</a></li>
         </ul>
       </div>
       <div>
-        <h6>Contact</h6>
+        <h6>4orm Finance</h6>
         <ul>
+          <li><a href="../">Main site</a></li>
+          <li><a href="../#regulatory">Regulatory posture</a></li>
+          <li><a href="/#waitlist">Request access</a></li>
           <li><a href="mailto:founders@kcs-capital.com">founders@kcs-capital.com</a></li>
-          <li><a href="mailto:compliance@kcs-capital.com">compliance@kcs-capital.com</a></li>
-          <li><a href="tel:17783632423">+1 778 363 2423 · Calgary HQ</a></li>
-          <li>Unit 400, 718 8 Ave SW<br />Calgary, AB T2P 1H3</li>
         </ul>
       </div>
     </div>
-
     <div class="lr">
       <div>© 2026 4orm Finance · 4orm Finance Holdings Inc.</div>
-      <div>Privacy · Terms · Regulator engagement on request</div>
+      <div>Sandbox preview · simulated data only · not a live trading venue</div>
     </div>
-
     <p class="disclaim">
-      4orm Finance is an early-stage platform in development (sandbox-stage), not a licensed exchange or dealer.
-      This website does not constitute an offer or solicitation to buy or sell securities and is not financial, legal or tax advice.
-      Market statistics sourced from McKinsey, BCG, PwC, KPMG, Bank of Canada, Payments Canada, and the 4orm Master Pro Forma.
-      Third parties named are referenced factually and are not affiliated with 4orm unless stated.
-      Corporate structure is operationalized per the CIRO Digital Asset Custody Framework: HoldCo / OpCo / CustodyCo, independently governed from KCS Capital, the technology developer.
+      4orm Finance is an early-stage platform in development. 4ormEx is a sandbox-stage institutional preview environment, not a licensed exchange or dealer. All identifiers, hashes, prices and balances on these pages are simulated and do not represent live systems, real assets or real counterparties. Educational only; not an offer or solicitation of securities and not financial, legal or tax advice.
     </p>
   </div>
 </footer>
 
-<script>
-  // On-scroll reveal
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-  document.querySelectorAll('.section, .hstrip, .thesis, .waitlist-section').forEach(el => {
-    el.classList.add('reveal'); io.observe(el);
-  });
-
-  // Waitlist — front-end only (wire to Formspree / Resend / API on Vercel)
-  const form = document.getElementById('waitlist-form');
-  const ok = document.getElementById('waitlist-success');
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const fd = new FormData(form);
-    console.log('Waitlist submission', Object.fromEntries(fd.entries()));
-    form.querySelectorAll('input, select, textarea, button').forEach(el => el.setAttribute('disabled','true'));
-    ok.style.display = 'block';
-    ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
-</script>
 </body>
 </html>

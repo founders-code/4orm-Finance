@@ -63,7 +63,7 @@ a:hover{color:var(--brand-700)}
 /* 4ormEx: TALLER, prominent on the LEFT (right after the logo) */
 .nav-links a.nav-exchange{
   order:-2;margin-left:6px;margin-right:0;
-  display:inline-flex;flex-direction:column;align-items:center;gap:2px;
+  display:inline-flex;flex-direction:column-reverse;align-items:center;gap:2px;
   padding:12px 22px 13px;border-radius:14px;line-height:1;
   border:1.5px solid var(--gold-2);
   background:linear-gradient(180deg,#FFE39E 0%,var(--gold) 38%,var(--gold-2) 100%);
