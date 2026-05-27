@@ -47,8 +47,8 @@ a:hover{color:var(--brand-700)}
 
 /* Top nav */
 .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:var(--maxw);margin:0 auto;padding:10px 28px;min-height:74px;display:flex;align-items:center;gap:12px 18px;flex-wrap:nowrap}
-@media (max-width:560px){.nav-inner{flex-wrap:wrap}}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:10px 28px;min-height:74px;height:74px;display:flex;align-items:center;gap:12px 18px;flex-wrap:nowrap;box-sizing:border-box}
+@media (max-width:560px){.nav-inner{flex-wrap:wrap;height:auto}}
 .brand{display:flex;align-items:center;gap:12px;flex:none;color:var(--text)}
 .brand:hover{color:var(--text)}
 .brand-logo{height:42px;width:auto;display:block}
@@ -56,7 +56,7 @@ a:hover{color:var(--brand-700)}
 .brand .sub{font-weight:600;font-size:.72rem;color:var(--text-3);letter-spacing:.18em;text-transform:uppercase;padding-left:12px;border-left:1px solid var(--border)}
 @media (max-width:680px){.brand .sub{display:none}}
 .nav-links{display:flex;margin-left:auto;gap:14px;justify-content:flex-end;align-items:center;flex-wrap:nowrap}
-.nav-links a{padding:7px 8px;border-radius:8px;color:var(--text-2);white-space:nowrap;font-weight:600;font-size:.92rem;transition:background .15s,color .15s}
+.nav-links a{padding:7px 11px;border-radius:8px;color:var(--text-2);white-space:nowrap;font-weight:600;font-size:.9rem;transition:background .15s,color .15s}
 .nav-links a:hover{background:var(--surface-2);color:var(--text)}
 .nav-links a.active{color:var(--brand-700);background:var(--brand-50)}
 .nav-sep{width:1px;height:18px;background:var(--border);margin:0 5px;flex:none}
@@ -205,62 +205,44 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 @media (max-width:520px){.footer .grid{grid-template-columns:1fr}}
 
 /* =====================================================================
-   4ormEx dropdown — small floating menu opened by the gold nav button
+   Exchange subnav — full-width black bar that drops below the white
+   header when the gold .nav-exchange button is clicked. Toggle only.
+   Identical look on every page; on exchange pages it starts visible
+   and is already in the markup.
    ===================================================================== */
 .nav-links a.nav-exchange.is-open{
   background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 60%,#FFE39E 100%);
   box-shadow:0 5px 16px rgba(196,154,58,.45),inset 0 1px 0 rgba(255,255,255,.5);
 }
-.ex-dropdown{
-  position:fixed;top:0;left:0;
-  min-width:280px;max-width:340px;
-  background:#0B1220;color:#fff;
-  border:1px solid #1c2740;border-radius:14px;
-  box-shadow:0 24px 64px rgba(8,16,32,.55),0 4px 14px rgba(8,16,32,.35);
-  padding:10px;z-index:1000;
-  font-family:var(--font-sans);
-  animation:exddIn .14s ease-out;
+.subnav{
+  background:#0B1220;border-bottom:1px solid #1c2740;
+  position:sticky;top:74px;z-index:49;
+  animation:subnavIn .16s ease-out;
 }
-.ex-dropdown[hidden]{display:none}
-@keyframes exddIn{
-  from{opacity:0;transform:translateY(-6px)}
+.subnav[hidden]{display:none}
+@keyframes subnavIn{
+  from{opacity:0;transform:translateY(-4px)}
   to{opacity:1;transform:translateY(0)}
 }
-.ex-dd-head{
-  display:flex;flex-direction:column;gap:8px;
-  padding:8px 10px 12px;border-bottom:1px solid #1c2740;margin-bottom:6px;
+.subnav-inner{
+  max-width:1400px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;overflow-x:auto;scrollbar-width:none;
 }
-.ex-dd-eye{
-  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;
-  color:#FFD9A8;text-transform:uppercase;font-weight:800;
+.subnav-inner::-webkit-scrollbar{display:none}
+.subnav-inner a{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 18px;color:rgba(255,255,255,.62);
+  font-size:.85rem;font-weight:600;
+  border-bottom:2px solid transparent;white-space:nowrap;
+  transition:all .15s ease;text-decoration:none;
 }
-.ex-dd-open{
-  display:inline-flex;align-items:center;justify-content:space-between;gap:8px;
-  padding:8px 12px;border-radius:9px;
-  background:rgba(255,217,168,.12);color:#FFD9A8 !important;
-  border:1px solid rgba(255,217,168,.28);
-  font-weight:700;font-size:.84rem;text-decoration:none;
-  transition:background .15s,border-color .15s;
+.subnav-inner a:hover{color:#fff;background:rgba(255,255,255,.04)}
+.subnav-inner a.active{color:#FFD9A8;border-bottom-color:#FFD9A8}
+.subnav-inner .sn-num{
+  font-family:var(--font-mono);font-size:.66rem;
+  color:rgba(255,217,168,.62);letter-spacing:.1em;font-weight:700;
 }
-.ex-dd-open:hover{background:rgba(255,217,168,.22);border-color:rgba(255,217,168,.5);color:#FFD9A8 !important}
-.ex-dd-nav{display:flex;flex-direction:column;gap:1px}
-.ex-dd-nav a{
-  display:flex;align-items:center;gap:12px;
-  padding:9px 10px;border-radius:8px;
-  color:rgba(255,255,255,.82) !important;
-  font-weight:600;font-size:.88rem;text-decoration:none;
-  transition:background .12s,color .12s;
-}
-.ex-dd-nav a:hover{background:rgba(255,255,255,.06);color:#fff !important}
-.ex-dd-nav a.active{
-  background:rgba(255,217,168,.10);color:#FFD9A8 !important;
-}
-.ex-dd-nav .sn-num{
-  font-family:var(--font-mono);font-size:.7rem;font-weight:700;
-  color:rgba(255,217,168,.55);letter-spacing:.08em;
-  min-width:22px;flex:none;
-}
-.ex-dd-nav a.active .sn-num{color:#FFD9A8}
+.subnav-inner a.active .sn-num{color:#FFD9A8}
 
 /* Selection */
 ::selection{background:var(--brand);color:#fff}
