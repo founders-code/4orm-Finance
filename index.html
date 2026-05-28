@@ -55,8 +55,8 @@
   --success-bg: #E3F6EE;
   --warn:       #8F5C12;
   --warn-bg:    #FBF1DC;
-  --danger:     #D6334E;
-  --danger-bg:  #FCE6EA;
+  --danger:     #8F5C12;
+  --danger-bg:  #EAF1FE;
   --info:       #1B7BB5;
   --info-bg:    #E3F2FB;
 
@@ -780,7 +780,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .lsm-chip.green { background: var(--success-bg); color: var(--success); border-color: rgba(46,165,109,.3); }
   .lsm-chip.blue { background: var(--brand-50); color: var(--brand-700); border-color: var(--brand-100); }
   .lsm-chip.amber { background: var(--gold-50); color: var(--gold-ink); border-color: rgba(196,154,58,.3); }
-  .lsm-chip.red { background: rgba(214,51,78,.08); color: #B5283F; border-color: rgba(214,51,78,.25); }
+  .lsm-chip.red { background: rgba(214,51,78,.08); color: #8F5C12; border-color: rgba(214,51,78,.25); }
 
   /* SVG common */
   .lsm-svg { width: 100%; height: auto; display: block; max-height: none; }
@@ -788,9 +788,9 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   /* ===== Layer bands ===== */
   .lyr-band-onus { fill: #EAF2FF; }
   .lyr-band-l1 { fill: #EAF2FF; }
-  .lyr-band-l2 { fill: #FFFCEF; }
+  .lyr-band-l2 { fill: #F4F7FB; }
   .lyr-band-l3 { fill: #F4F7FB; }
-  .lyr-band-legacy { fill: #FBF4F4; }
+  .lyr-band-legacy { fill: #F4F7FB; }
   .lyr-label { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; fill: #8995AD; }
 
   /* ===== Boxes (generic) ===== */
@@ -798,7 +798,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .lsm-node.brand { stroke: var(--brand); stroke-width: 2; }
   .lsm-node.gold { stroke: #C49A3A; stroke-width: 1.8; fill: #FFFDF6; }
   .lsm-node.green { stroke: #2EA56D; stroke-width: 1.8; fill: #F4FBF7; }
-  .lsm-node.legacy { stroke: #C4825A; stroke-width: 1.6; fill: #FBF5F0; }
+  .lsm-node.legacy { stroke: #CCD6E4; stroke-width: 1.6; fill: #F4F7FB; }
   .lsm-title { font-size: 14px; font-weight: 800; fill: var(--text); }
   .lsm-title.lg { font-size: 16px; }
   .lsm-sub { font-size: 11px; fill: var(--text-3); }
@@ -813,10 +813,10 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .lsm-arrow { stroke: #6B7CA0; stroke-width: 1.6; fill: none; }
   .lsm-arrow-brand { stroke: var(--brand); stroke-width: 2; fill: none; }
   .lsm-arrow-gold { stroke: #C49A3A; stroke-width: 1.8; fill: none; stroke-dasharray: 5 4; }
-  .lsm-arrow-legacy { stroke: #B96A3E; stroke-width: 1.8; fill: none; }
+  .lsm-arrow-legacy { stroke: #8995AD; stroke-width: 1.8; fill: none; }
   .lsm-edge-label { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; fill: #6B7CA0; }
   .lsm-edge-label.brand { fill: var(--brand-700); }
-  .lsm-edge-label.gold { fill: #8E6A1F; }
+  .lsm-edge-label.gold { fill: #8A6712; }
 
   /* DvP circle */
   .lsm-dvp { fill: #FFFFFF; stroke: var(--brand); stroke-width: 2.4; }
@@ -824,13 +824,13 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .lsm-dvp-sub { font-size: 11px; fill: var(--text-3); text-anchor: middle; }
 
   /* Coin */
-  .lsm-coin { fill: #F2B70A; stroke: #8E6A1F; stroke-width: 1.4; }
-  .lsm-coin-sym { font-size: 13px; font-weight: 800; fill: #5A4715; text-anchor: middle; pointer-events: none; }
+  .lsm-coin { fill: #F2B70A; stroke: #8A6712; stroke-width: 1.4; }
+  .lsm-coin-sym { font-size: 13px; font-weight: 800; fill: #8A6712; text-anchor: middle; pointer-events: none; }
   .lsm-coin-halo { fill: none; stroke: #F2B70A; stroke-width: 2; opacity: 0; }
 
   /* Cost callouts (legacy) */
   .cost-pill { fill: rgba(214,51,78,.08); stroke: rgba(214,51,78,.35); stroke-width: 1; }
-  .cost-pill-text { font-size: 10.5px; font-weight: 700; fill: #B5283F; text-anchor: middle; }
+  .cost-pill-text { font-size: 10.5px; font-weight: 700; fill: #8F5C12; text-anchor: middle; }
 
   /* Caption under each diagram */
   .lsm-caption { margin-top: 14px; font-size: .9rem; color: var(--text-2); line-height: 1.55; max-width: 64em; }
@@ -842,33 +842,33 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .lsm-ext { fill: #F4F7FB; stroke: #C8D1E0; stroke-width: 1.4; stroke-dasharray: 6 5; opacity: .75; }
   .lsm-ext-label { font-size: 12px; font-weight: 700; letter-spacing: .12em; fill: #8995AD; text-transform: uppercase; }
   .lsm-ext-text { font-size: 12px; fill: #8995AD; font-style: italic; }
-  .lsm-journal-bg { fill: #FFFCEF; stroke: #C49A3A; stroke-width: 1.4; }
-  .lsm-journal-debit { font-size: 13px; font-weight: 700; fill: #B5283F; font-family: var(--font-mono, monospace); }
+  .lsm-journal-bg { fill: #F4F7FB; stroke: #C49A3A; stroke-width: 1.4; }
+  .lsm-journal-debit { font-size: 13px; font-weight: 700; fill: #8F5C12; font-family: var(--font-mono, monospace); }
   .lsm-journal-credit { font-size: 13px; font-weight: 700; fill: #1F7A4D; font-family: var(--font-mono, monospace); }
-  .lsm-journal-label { font-size: 11px; font-weight: 700; fill: #8E6A1F; letter-spacing: .08em; text-transform: uppercase; }
+  .lsm-journal-label { font-size: 11px; font-weight: 700; fill: #8A6712; letter-spacing: .08em; text-transform: uppercase; }
   .lsm-dvp-oct { fill: #FFFFFF; stroke: var(--brand); stroke-width: 2.6; }
   .lsm-dvp-oct-bg { fill: var(--brand-50); stroke: var(--brand); stroke-width: 2.6; }
   .lsm-rail-glow { fill: url(#lsm-rail-grad-v4); filter: drop-shadow(0 6px 18px rgba(31,60,168,.35)); }
   .lsm-zone-bg-a { fill: #F0F6FF; }
   .lsm-zone-bg-b { fill: #F0F6FF; }
-  .lsm-zone-bg-center { fill: #FFFCEF; }
+  .lsm-zone-bg-center { fill: #F4F7FB; }
   .lsm-zone-bg-oversight { fill: #F4F7FB; }
   .lsm-zone-divider { stroke: #E3E9F2; stroke-width: 1; stroke-dasharray: 3 4; }
   .lsm-bank-col-label { font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; fill: var(--brand-700); }
   .lsm-reg-grid-bg { fill: #E4ECF8; stroke: #5A6C8C; stroke-width: 1.6; }
   .lsm-reg-mini { fill: #FFFFFF; stroke: #C49A3A; stroke-width: 1.2; }
-  .lsm-reg-mini-text { font-size: 11px; font-weight: 800; fill: #8E6A1F; text-anchor: middle; }
+  .lsm-reg-mini-text { font-size: 11px; font-weight: 800; fill: #8A6712; text-anchor: middle; }
   .lsm-cost-pill-lg { fill: rgba(214,51,78,.10); stroke: rgba(214,51,78,.42); stroke-width: 1.2; }
-  .lsm-cost-pill-lg-text { font-size: 11px; font-weight: 800; fill: #B5283F; text-anchor: middle; }
-  .lsm-corr-internal { fill: #FBF5F0; stroke: #B96A3E; stroke-width: 1.4; }
-  .lsm-corr-internal-text { font-size: 10.5px; fill: #8E4F22; font-family: var(--font-mono, monospace); }
-  .lsm-batch-tray { fill: rgba(185,106,62,.06); stroke: #B96A3E; stroke-width: 1.6; }
+  .lsm-cost-pill-lg-text { font-size: 11px; font-weight: 800; fill: #8F5C12; text-anchor: middle; }
+  .lsm-corr-internal { fill: #F4F7FB; stroke: #8995AD; stroke-width: 1.4; }
+  .lsm-corr-internal-text { font-size: 10.5px; fill: #46556E; font-family: var(--font-mono, monospace); }
+  .lsm-batch-tray { fill: rgba(185,106,62,.06); stroke: #8995AD; stroke-width: 1.6; }
   .lsm-batch-row { fill: #FFFFFF; stroke: #C8D1E0; stroke-width: 1; }
-  .lsm-timeline-line { stroke: #B96A3E; stroke-width: 2.5; fill: none; }
-  .lsm-timeline-tick { stroke: #B96A3E; stroke-width: 2; }
-  .lsm-timeline-tick-now { stroke: #B5283F; stroke-width: 3; }
-  .lsm-timeline-text { font-size: 11px; font-weight: 700; fill: #8E4F22; text-anchor: middle; }
-  .lsm-timeline-text-now { font-size: 12px; font-weight: 800; fill: #B5283F; text-anchor: middle; }
+  .lsm-timeline-line { stroke: #8995AD; stroke-width: 2.5; fill: none; }
+  .lsm-timeline-tick { stroke: #8995AD; stroke-width: 2; }
+  .lsm-timeline-tick-now { stroke: #8F5C12; stroke-width: 3; }
+  .lsm-timeline-text { font-size: 11px; font-weight: 700; fill: #46556E; text-anchor: middle; }
+  .lsm-timeline-text-now { font-size: 12px; font-weight: 800; fill: #8F5C12; text-anchor: middle; }
   .lsm-section-band-label { font-size: 13px; font-weight: 800; letter-spacing: .14em; fill: #8995AD; text-transform: uppercase; }
 
   /* === LSM v5: brighter colors + live animations === */
@@ -905,17 +905,17 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   /* Per-regulator color variants for the chips */
   .lsm-reg-mini.reg-blue   { fill: #E8F0FE; stroke: #2E6BF2; }
   .lsm-reg-mini.reg-green  { fill: #E6F7EE; stroke: #2EA56D; }
-  .lsm-reg-mini.reg-pink   { fill: #FCE7F0; stroke: #C7468A; }
-  .lsm-reg-mini.reg-orange { fill: #FDEBDD; stroke: #C5701F; }
+  .lsm-reg-mini.reg-pink   { fill: #FCE7F0; stroke: #C49A3A; }
+  .lsm-reg-mini.reg-orange { fill: #FDEBDD; stroke: #C49A3A; }
   .lsm-reg-mini.reg-violet { fill: #EFE6FA; stroke: #6E45BD; }
   .lsm-reg-mini.reg-gold   { fill: #FBF4E1; stroke: #C49A3A; }
 
   .reg-blue-text   { fill: #163C8C !important; }
   .reg-green-text  { fill: #15553A !important; }
-  .reg-pink-text   { fill: #7B2A56 !important; }
-  .reg-orange-text { fill: #7A431C !important; }
+  .reg-pink-text   { fill: #8F5C12 !important; }
+  .reg-orange-text { fill: #46556E !important; }
   .reg-violet-text { fill: #3F2780 !important; }
-  .reg-gold-text   { fill: #8E6A1F !important; }
+  .reg-gold-text   { fill: #8A6712 !important; }
 
   /* ISO 20022 pills, sit above the rail for clarity */
   .lsm-iso-pill      { fill: #1B4ABE; stroke: #FFFFFF; stroke-width: 1.4; }
@@ -940,18 +940,18 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .lsm-live-ring { fill: none; stroke: #2EA56D; animation: lsm-pulse-ring 1.6s ease-out infinite; }
 
   /* New brighter gold + accent colors */
-  .lsm-bright-amber-bg { fill: #FFF4D6; stroke: #E0B040; }
+  .lsm-bright-amber-bg { fill: #FFF4D6; stroke: #C49A3A; }
   .lsm-bright-gold-chip { fill: #FFEEC2; stroke: #C8961E; }
 
   /* "What you are seeing" cards (replaces the long paragraph caption) */
   .lsm-explain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
   @media (max-width: 900px) { .lsm-explain-grid { grid-template-columns: 1fr; } }
   .lsm-explain-card { background: #FFFFFF; border: 1px solid #E3E9F2; border-left-width: 4px; border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(15,40,90,.04); }
-  .lsm-explain-card.top { border-left-color: #C49A3A; background: linear-gradient(180deg, #FFFCEF 0%, #FFFFFF 60%); }
+  .lsm-explain-card.top { border-left-color: #C49A3A; background: linear-gradient(180deg, #F4F7FB 0%, #FFFFFF 60%); }
   .lsm-explain-card.middle { border-left-color: #2E6BF2; background: linear-gradient(180deg, #F2F6FF 0%, #FFFFFF 60%); }
   .lsm-explain-card.bottom { border-left-color: #2EA56D; background: linear-gradient(180deg, #F1FAF5 0%, #FFFFFF 60%); }
   .lsm-explain-card .h { font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 4px 0; }
-  .lsm-explain-card.top .h { color: #8E6A1F; }
+  .lsm-explain-card.top .h { color: #8A6712; }
   .lsm-explain-card.middle .h { color: #1E3A8C; }
   .lsm-explain-card.bottom .h { color: #1F7A4D; }
   .lsm-explain-card .ttl { font-size: 1rem; font-weight: 700; color: var(--text); margin: 0 0 8px 0; }
@@ -993,8 +993,8 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   }
 
   /* The bottom-band inline gold fill on this stage stays visible -- gold reads fine on dark.
-     But the inline style="fill:#8E6A1F" is too dark; bump via a more visible gold using attribute selector */
-  .lsm-stage[data-stage="interbank"] text.lsm-section-band-label[style*="8E6A1F"] { fill: #E0B040 !important; }
+     But the inline style="fill:#8A6712" is too dark; bump via a more visible gold using attribute selector */
+  .lsm-stage[data-stage="interbank"] text.lsm-section-band-label[style*="8E6A1F"] { fill: #C49A3A !important; }
 
   /* ----- Brighten the small bank-column labels so they read on the dark backdrop ----- */
   .lsm-stage[data-stage="interbank"] .lsm-bank-col-label { fill: #9AB6FF; font-size: 11px; letter-spacing: .12em; }
@@ -1066,8 +1066,8 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .status-halo { animation: status-halo 2.2s ease-in-out infinite; }
 
   /* Risk-window strip on Legacy diagram (warm gold) */
-  .legacy-risk-strip { fill: #FFFAEC; stroke: #E0B040; stroke-width: 1; stroke-dasharray: 6 4; }
-  .legacy-risk-text  { font-size: 10.5px; font-weight: 800; fill: #9C7B1F; letter-spacing: .08em; text-transform: uppercase; }
+  .legacy-risk-strip { fill: #EAF1FE; stroke: #C49A3A; stroke-width: 1; stroke-dasharray: 6 4; }
+  .legacy-risk-text  { font-size: 10.5px; font-weight: 800; fill: #8A6712; letter-spacing: .08em; text-transform: uppercase; }
 
   /* Atomic strip on Interbank diagram (calm green) */
   .interbank-atomic-strip { fill: rgba(46,165,109,.10); stroke: #2EA56D; stroke-width: 1; stroke-dasharray: 6 4; }
@@ -1106,7 +1106,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   /* ===== Legacy stuck coin color cycle: yellow -> red (TX 02A, the rejected one) ===== */
   @keyframes legacy-stuck-coin-state {
     0%, 30%   { fill: #F2C94C; }   /* yellow while travelling */
-    35%, 65%  { fill: #B5283F; }   /* red, rejected, while bouncing back */
+    35%, 65%  { fill: #8F5C12; }   /* red, rejected, while bouncing back */
     70%, 100% { fill: #F2C94C; }   /* yellow again on next attempt */
   }
   .legacy-stuck-coin .stuck-coin-fill {
@@ -1121,7 +1121,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   /* Dot 4 (SWIFT 2) goes yellow -> red (rejected) briefly, then yellow, then green */
   @keyframes legacy-progress-d-4-reject {
     0%, 42%   { fill: #F2C94C; }
-    47%, 60%  { fill: #B5283F; }   /* red, the rejection point */
+    47%, 60%  { fill: #8F5C12; }   /* red, the rejection point */
     65%, 78%  { fill: #F2C94C; }
     82%, 100% { fill: #2EA56D; }   /* green eventually, after retry */
   }
@@ -1167,12 +1167,28 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   /* "LIVE" tag on the rail keeps its current light fill (already rgba(255,255,255,.85)), fine on dark.
      "Append-only" caption inside the gold registry stays on the gold panel, untouched. */
 
-  /* === EMBEDDED-ON-HOME overrides — 30% narrower than the standalone how-it-works page === */
-  .lsm-section { padding: 64px 0 !important; }
-  .lsm-card { max-width: 1080px !important; padding: 18px 22px 22px !important; }
-  .lsm-head { padding: 0 22px !important; max-width: 1080px !important; }
-  .lsm-tab { font-size: .94rem !important; padding: 11px 20px !important; }
-  .lsm-svg { display: block; width: 100%; height: auto; }
+  /* === EMBEDDED-ON-HOME overrides — full-width readable on home page === */
+  .lsm-section { padding: 80px 0 !important; background: #FFFFFF !important; border-top: 1px solid var(--border) !important; border-bottom: 1px solid var(--border) !important; }
+  .lsm-card { max-width: 1320px !important; padding: 28px 36px 36px !important; }
+  .lsm-head { padding: 0 36px !important; max-width: 1320px !important; }
+  .lsm-tab { font-size: 1rem !important; padding: 12px 22px !important; }
+  .lsm-svg { display: block; width: 100%; height: auto; min-height: 540px; }
+  /* Key-takeaway panel underneath the diagram */
+  .lsm-keypoints { max-width: 1320px; margin: 22px auto 0; padding: 0 36px; }
+  .lsm-keypoints-inner { background: var(--brand-50); border: 1px solid var(--brand-100); border-radius: 14px; padding: 20px 24px; }
+  .lsm-keypoints h4 { margin: 0 0 10px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); font-weight: 800; }
+  .lsm-keypoints-grid { display: grid; gap: 0; }
+  .lsm-keypoints-panel { display: none; }
+  .lsm-keypoints-panel.active { display: block; }
+  .lsm-keypoints-panel h5 { margin: 0 0 8px; font-size: 1.04rem; font-weight: 750; color: var(--text); letter-spacing: -.01em; }
+  .lsm-keypoints-panel ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 28px; }
+  @media (max-width: 760px) { .lsm-keypoints-panel ul { grid-template-columns: 1fr; } }
+  .lsm-keypoints-panel li { display: flex; gap: 10px; align-items: flex-start; font-size: .94rem; line-height: 1.55; color: var(--text-2); }
+  .lsm-keypoints-panel li::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); margin-top: 9px; }
+  .lsm-keypoints-panel li b { color: var(--text); font-weight: 700; }
+  .lsm-keypoints-panel.legacy li::before { background: var(--warn); }
+  .lsm-keypoints-panel.interbank li::before { background: var(--brand); }
+  .lsm-keypoints-panel.onus li::before { background: var(--gold-2); }
 </style>
 
 <section class="lsm-section" aria-labelledby="lsm-heading">
@@ -1400,8 +1416,8 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           </defs>
 
           <!-- ===== INTERNATIONAL GATEWAY (corner badge) ===== -->
-          <rect x="1240" y="20" width="240" height="62" rx="10" fill="#FFFCEF" stroke="#C49A3A" stroke-width="1.4" stroke-dasharray="6 4" />
-          <text class="lsm-title" x="1360" y="44" text-anchor="middle" style="font-size:12px; fill:#8E6A1F;">International gateway</text>
+          <rect x="1240" y="20" width="240" height="62" rx="10" fill="#F4F7FB" stroke="#C49A3A" stroke-width="1.4" stroke-dasharray="6 4" />
+          <text class="lsm-title" x="1360" y="44" text-anchor="middle" style="font-size:12px; fill:#8A6712;">International gateway</text>
           <text class="lsm-sub" x="1360" y="60" text-anchor="middle">bounded interop, Layer-Zero</text>
           <text class="lsm-sub" x="1360" y="74" text-anchor="middle">roadmap, not live today</text>
 
@@ -1411,7 +1427,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- Canonical token registry (left wide, slightly narrower so supervisory feed can grow) -->
           <rect class="lsm-node gold" x="30" y="150" width="930" height="160" rx="12" />
-          <text class="lsm-title" x="495" y="176" text-anchor="middle" style="fill:#8E6A1F;">Canonical token registry &middot; the Canadian-anchored ledger of record</text>
+          <text class="lsm-title" x="495" y="176" text-anchor="middle" style="fill:#8A6712;">Canonical token registry &middot; the Canadian-anchored ledger of record</text>
           <text class="lsm-sub" x="495" y="192" text-anchor="middle" style="font-style:italic;">Settlement finality requires DvP match + canonical write + treasury confirmation. Not blockchain alone.</text>
 
           <!-- Sample ledger entries (3 rows, the bottom one is "fresh" via JS) -->
@@ -1426,7 +1442,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
             <text id="lsm-led-text-3" x="62" y="275" style="font-family:var(--font-mono,monospace); font-size:11px; fill:#46556E;">tx#1042c8f   2026-05-26T14:31:42Z   tokenizedCAD: C$    750,000   tRWA: tABB-2031   DvP: settled   hash: c01...4ab</text>
           </g>
 
-          <text x="495" y="300" text-anchor="middle" style="font-size:10.5px; font-style:italic; fill:#8E6A1F;">Append-only. Each row is the authoritative reference for the trade. Disputes resolve here.</text>
+          <text x="495" y="300" text-anchor="middle" style="font-size:10.5px; font-style:italic; fill:#8A6712;">Append-only. Each row is the authoritative reference for the trade. Disputes resolve here.</text>
 
           <!-- Regulators panel (right side of zone 1), enlarged with colored chips. Slate-blue background, distinct from the warm-gold canonical ledger. -->
           <rect class="lsm-reg-grid-bg" x="980" y="138" width="500" height="184" rx="14" />
@@ -1584,17 +1600,17 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- ========== STATION 4: Settlement asset stack ========== -->
           <rect x="925" y="600" width="240" height="200" rx="11" fill="rgba(255,253,239,.97)" stroke="#C49A3A" stroke-width="1.4" />
-          <text class="lsm-title" x="1045" y="630" text-anchor="middle" style="fill:#8E6A1F;">Settlement asset stack</text>
+          <text class="lsm-title" x="1045" y="630" text-anchor="middle" style="fill:#8A6712;">Settlement asset stack</text>
           <text class="lsm-sub" x="1045" y="648" text-anchor="middle" style="font-style:italic; font-size:10px;">three live options at trade time</text>
           <text class="lsm-sub b" x="945" y="676" style="font-size:10.5px;">1.</text>
           <text class="lsm-sub" x="960" y="676" style="font-size:10.5px;">Tokenized CAD deposit</text>
-          <text class="lsm-sub" x="960" y="690" style="font-size:9.5px; fill:#8E6A1F;">(bank-issued)</text>
+          <text class="lsm-sub" x="960" y="690" style="font-size:9.5px; fill:#8A6712;">(bank-issued)</text>
           <text class="lsm-sub b" x="945" y="714" style="font-size:10.5px;">2.</text>
           <text class="lsm-sub" x="960" y="714" style="font-size:10.5px;">Regulated CAD</text>
-          <text class="lsm-sub" x="960" y="728" style="font-size:9.5px; fill:#8E6A1F;">stablecoin (e.g. QCAD)</text>
+          <text class="lsm-sub" x="960" y="728" style="font-size:9.5px; fill:#8A6712;">stablecoin (e.g. QCAD)</text>
           <text class="lsm-sub b" x="945" y="752" style="font-size:10.5px;">3.</text>
           <text class="lsm-sub" x="960" y="752" style="font-size:10.5px;">Qualified Canadian</text>
-          <text class="lsm-sub" x="960" y="766" style="font-size:9.5px; fill:#8E6A1F;">trust custodian</text>
+          <text class="lsm-sub" x="960" y="766" style="font-size:9.5px; fill:#8A6712;">trust custodian</text>
           <text class="lsm-sub" x="1045" y="790" text-anchor="middle" style="font-style:italic; font-size:9.5px;">All institution-pickable, all regulated.</text>
 
           <!-- Animated arrow Settlement -&gt; Attestation -->
@@ -1725,10 +1741,10 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           <title id="lg-title">Legacy correspondent banking flow with full nostro and vostro account detail, per-hop SWIFT fees, ACSS deferred-net batch tray, T-timeline, dual ledgers, dual FINTRAC reporting paths, and a settlement-risk window showing customer funds at risk between trade date and T+2 final settlement</title>
           <defs>
             <marker id="arrow-legacy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-              <path d="M0,0 L10,5 L0,10 z" fill="#B96A3E" />
+              <path d="M0,0 L10,5 L0,10 z" fill="#8995AD" />
             </marker>
             <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-              <path d="M0,0 L10,5 L0,10 z" fill="#B5283F" />
+              <path d="M0,0 L10,5 L0,10 z" fill="#8F5C12" />
             </marker>
           </defs>
 
@@ -1738,7 +1754,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- Bank A ledger -->
           <rect class="lsm-node legacy" x="30" y="76" width="380" height="190" rx="10" />
-          <text class="lsm-title" x="220" y="104" text-anchor="middle" style="fill:#8E4F22;">Bank A ledger</text>
+          <text class="lsm-title" x="220" y="104" text-anchor="middle" style="fill:#46556E;">Bank A ledger</text>
           <text class="lsm-sub" x="220" y="122" text-anchor="middle" style="font-style:italic;">internal record of this trade</text>
 
           <rect x="50" y="140" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
@@ -1748,12 +1764,12 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           <rect x="50" y="192" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
           <text x="58" y="206" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 18420   confirmation: awaited from Corr1</text>
 
-          <text class="lsm-sub" x="220" y="242" text-anchor="middle" style="font-style:italic; fill:#8E4F22;">Bank A's view of the trade.</text>
-          <text class="lsm-sub" x="220" y="256" text-anchor="middle" style="font-style:italic; fill:#8E4F22;">Bank A reconciles its own.</text>
+          <text class="lsm-sub" x="220" y="242" text-anchor="middle" style="font-style:italic; fill:#46556E;">Bank A's view of the trade.</text>
+          <text class="lsm-sub" x="220" y="256" text-anchor="middle" style="font-style:italic; fill:#46556E;">Bank A reconciles its own.</text>
 
           <!-- Manual reconciliation between -->
-          <path stroke="#B5283F" stroke-width="2" stroke-dasharray="5 4" fill="none" d="M 410 170 L 480 170" marker-end="url(#arrow-red)" />
-          <path stroke="#B5283F" stroke-width="2" stroke-dasharray="5 4" fill="none" d="M 480 190 L 410 190" marker-end="url(#arrow-red)" />
+          <path stroke="#8F5C12" stroke-width="2" stroke-dasharray="5 4" fill="none" d="M 410 170 L 480 170" marker-end="url(#arrow-red)" />
+          <path stroke="#8F5C12" stroke-width="2" stroke-dasharray="5 4" fill="none" d="M 480 190 L 410 190" marker-end="url(#arrow-red)" />
           <rect class="lsm-cost-pill-lg" x="412" y="200" width="76" height="44" rx="6" />
           <text class="lsm-cost-pill-lg-text" x="450" y="218" style="font-size:9.5px;">manual</text>
           <text class="lsm-cost-pill-lg-text" x="450" y="230" style="font-size:9.5px;">recon</text>
@@ -1761,7 +1777,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- Bank B ledger -->
           <rect class="lsm-node legacy" x="500" y="76" width="380" height="190" rx="10" />
-          <text class="lsm-title" x="690" y="104" text-anchor="middle" style="fill:#8E4F22;">Bank B ledger</text>
+          <text class="lsm-title" x="690" y="104" text-anchor="middle" style="fill:#46556E;">Bank B ledger</text>
           <text class="lsm-sub" x="690" y="122" text-anchor="middle" style="font-style:italic;">internal record of the same trade</text>
 
           <rect x="520" y="140" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
@@ -1771,31 +1787,31 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           <rect x="520" y="192" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
           <text x="528" y="206" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 92117   confirmation: awaited from Corr2</text>
 
-          <text class="lsm-sub" x="690" y="242" text-anchor="middle" style="font-style:italic; fill:#8E4F22;">Bank B's view, different tx ref.</text>
-          <text class="lsm-sub" x="690" y="256" text-anchor="middle" style="font-style:italic; fill:#8E4F22;">Bank B reconciles its own.</text>
+          <text class="lsm-sub" x="690" y="242" text-anchor="middle" style="font-style:italic; fill:#46556E;">Bank B's view, different tx ref.</text>
+          <text class="lsm-sub" x="690" y="256" text-anchor="middle" style="font-style:italic; fill:#46556E;">Bank B reconciles its own.</text>
 
           <!-- Dual FINTRAC reporting -->
           <rect class="lsm-node" x="900" y="76" width="570" height="190" rx="10" />
           <text class="lsm-title" x="1185" y="104" text-anchor="middle">Independent FINTRAC reporting</text>
           <text class="lsm-sub" x="1185" y="122" text-anchor="middle" style="font-style:italic;">two parallel statutory filings, no shared view</text>
 
-          <rect x="920" y="140" width="265" height="60" rx="6" fill="#FBF5F0" stroke="#B96A3E" stroke-width="1.2" />
-          <text class="lsm-title" x="1052" y="160" text-anchor="middle" style="font-size:11.5px; fill:#8E4F22;">From Bank A</text>
+          <rect x="920" y="140" width="265" height="60" rx="6" fill="#F4F7FB" stroke="#8995AD" stroke-width="1.2" />
+          <text class="lsm-title" x="1052" y="160" text-anchor="middle" style="font-size:11.5px; fill:#46556E;">From Bank A</text>
           <text class="lsm-sub" x="1052" y="176" text-anchor="middle" style="font-size:10px;">LCTR / EFTR / STR as applicable</text>
           <text class="lsm-sub" x="1052" y="190" text-anchor="middle" style="font-size:10px;">Bank A's record only</text>
 
-          <rect x="1200" y="140" width="265" height="60" rx="6" fill="#FBF5F0" stroke="#B96A3E" stroke-width="1.2" />
-          <text class="lsm-title" x="1332" y="160" text-anchor="middle" style="font-size:11.5px; fill:#8E4F22;">From Bank B</text>
+          <rect x="1200" y="140" width="265" height="60" rx="6" fill="#F4F7FB" stroke="#8995AD" stroke-width="1.2" />
+          <text class="lsm-title" x="1332" y="160" text-anchor="middle" style="font-size:11.5px; fill:#46556E;">From Bank B</text>
           <text class="lsm-sub" x="1332" y="176" text-anchor="middle" style="font-size:10px;">LCTR / EFTR / STR as applicable</text>
           <text class="lsm-sub" x="1332" y="190" text-anchor="middle" style="font-size:10px;">Bank B's record only</text>
 
           <text class="lsm-sub" x="1185" y="224" text-anchor="middle" style="font-style:italic;">FINTRAC receives two reports about the same trade,</text>
           <text class="lsm-sub" x="1185" y="240" text-anchor="middle" style="font-style:italic;">each filed under each institution's view of the world.</text>
-          <text class="lsm-sub" x="1185" y="256" text-anchor="middle" style="font-style:italic; fill:#B5283F; font-weight:700;">No single canonical record exists for the trade.</text>
+          <text class="lsm-sub" x="1185" y="256" text-anchor="middle" style="font-style:italic; fill:#8F5C12; font-weight:700;">No single canonical record exists for the trade.</text>
 
           <!-- ===== STATUS BAND: SETTLEMENT RISK WINDOW (taller, now contains the per-hop status dots in a row between the two big customer lights) ===== -->
-          <rect x="0" y="320" width="1500" height="140" rx="10" fill="#FFFAEC" stroke="#E0B040" stroke-width="1" />
-          <text class="lsm-section-band-label" x="30" y="346" style="fill:#9C7B1F;">Status band &middot; settlement risk window &middot; funds at risk until T+2</text>
+          <rect x="0" y="320" width="1500" height="140" rx="10" fill="#EAF1FE" stroke="#C49A3A" stroke-width="1" />
+          <text class="lsm-section-band-label" x="30" y="346" style="fill:#8A6712;">Status band &middot; settlement risk window &middot; funds at risk until T+2</text>
 
           <!-- Row 1 (top): the T+2 exposure strip in the middle -->
           <rect class="legacy-risk-strip" x="320" y="362" width="860" height="26" rx="13" />
@@ -1853,7 +1869,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- ===== MIDDLE BAND: THE CORRESPONDENT CHAIN (was top) ===== -->
           <rect class="lyr-band-legacy" x="0" y="330" width="1500" height="260" rx="10" />
-          <text class="lsm-section-band-label" x="30" y="358" style="fill:#B96A3E;">Middle band &middot; the correspondent chain, every hop has a cost</text>
+          <text class="lsm-section-band-label" x="30" y="358" style="fill:#8995AD;">Middle band &middot; the correspondent chain, every hop has a cost</text>
 
           <!-- Customer A -->
           <rect class="lsm-node" x="20" y="430" width="120" height="70" rx="10" />
@@ -1862,20 +1878,20 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- Bank A (sender) -->
           <rect class="lsm-node legacy" x="160" y="425" width="130" height="80" rx="10" />
-          <text class="lsm-title" x="225" y="456" text-anchor="middle" style="fill:#8E4F22;">Bank A</text>
+          <text class="lsm-title" x="225" y="456" text-anchor="middle" style="fill:#46556E;">Bank A</text>
           <text class="lsm-sub b" x="225" y="474" text-anchor="middle">sender bank</text>
           <text class="lsm-sub" x="225" y="490" text-anchor="middle">core banking</text>
 
           <!-- SWIFT hop 1 with cost pill above -->
           <rect class="lsm-cost-pill-lg" x="305" y="390" width="100" height="28" rx="7" />
           <text class="lsm-cost-pill-lg-text" x="355" y="409">fee C$0.15-0.25</text>
-          <rect class="lsm-node" x="305" y="445" width="100" height="44" rx="8" fill="#FFFFFF" stroke="#B96A3E" />
-          <text class="lsm-title" x="355" y="466" text-anchor="middle" style="font-size:11.5px; fill:#8E4F22;">SWIFT MT103</text>
+          <rect class="lsm-node" x="305" y="445" width="100" height="44" rx="8" fill="#FFFFFF" stroke="#8995AD" />
+          <text class="lsm-title" x="355" y="466" text-anchor="middle" style="font-size:11.5px; fill:#46556E;">SWIFT MT103</text>
           <text class="lsm-sub" x="355" y="480" text-anchor="middle" style="font-size:9.5px;">message hop 1</text>
 
           <!-- Correspondent 1 -->
           <rect class="lsm-node legacy" x="420" y="410" width="220" height="160" rx="10" />
-          <text class="lsm-title" x="530" y="434" text-anchor="middle" style="fill:#8E4F22;">Correspondent bank 1</text>
+          <text class="lsm-title" x="530" y="434" text-anchor="middle" style="fill:#46556E;">Correspondent bank 1</text>
           <text class="lsm-sub" x="530" y="450" text-anchor="middle" style="font-size:10.5px;">routes Bank A traffic</text>
 
           <rect class="lsm-corr-internal" x="436" y="466" width="188" height="38" rx="6" />
@@ -1889,13 +1905,13 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           <!-- SWIFT hop 2 -->
           <rect class="lsm-cost-pill-lg" x="655" y="390" width="100" height="28" rx="7" />
           <text class="lsm-cost-pill-lg-text" x="705" y="409">fee C$0.15-0.25</text>
-          <rect class="lsm-node" x="655" y="445" width="100" height="44" rx="8" fill="#FFFFFF" stroke="#B96A3E" />
-          <text class="lsm-title" x="705" y="466" text-anchor="middle" style="font-size:11.5px; fill:#8E4F22;">SWIFT MT103</text>
+          <rect class="lsm-node" x="655" y="445" width="100" height="44" rx="8" fill="#FFFFFF" stroke="#8995AD" />
+          <text class="lsm-title" x="705" y="466" text-anchor="middle" style="font-size:11.5px; fill:#46556E;">SWIFT MT103</text>
           <text class="lsm-sub" x="705" y="480" text-anchor="middle" style="font-size:9.5px;">message hop 2</text>
 
           <!-- Correspondent 2 -->
           <rect class="lsm-node legacy" x="770" y="410" width="220" height="160" rx="10" />
-          <text class="lsm-title" x="880" y="434" text-anchor="middle" style="fill:#8E4F22;">Correspondent bank 2</text>
+          <text class="lsm-title" x="880" y="434" text-anchor="middle" style="fill:#46556E;">Correspondent bank 2</text>
           <text class="lsm-sub" x="880" y="450" text-anchor="middle" style="font-size:10.5px;">routes Bank B traffic</text>
 
           <rect class="lsm-corr-internal" x="786" y="466" width="188" height="38" rx="6" />
@@ -1909,13 +1925,13 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           <!-- SWIFT hop 3 -->
           <rect class="lsm-cost-pill-lg" x="1005" y="390" width="100" height="28" rx="7" />
           <text class="lsm-cost-pill-lg-text" x="1055" y="409">fee C$0.15-0.25</text>
-          <rect class="lsm-node" x="1005" y="445" width="100" height="44" rx="8" fill="#FFFFFF" stroke="#B96A3E" />
-          <text class="lsm-title" x="1055" y="466" text-anchor="middle" style="font-size:11.5px; fill:#8E4F22;">SWIFT MT103</text>
+          <rect class="lsm-node" x="1005" y="445" width="100" height="44" rx="8" fill="#FFFFFF" stroke="#8995AD" />
+          <text class="lsm-title" x="1055" y="466" text-anchor="middle" style="font-size:11.5px; fill:#46556E;">SWIFT MT103</text>
           <text class="lsm-sub" x="1055" y="480" text-anchor="middle" style="font-size:9.5px;">message hop 3</text>
 
           <!-- Bank B (receiver) -->
           <rect class="lsm-node legacy" x="1120" y="425" width="130" height="80" rx="10" />
-          <text class="lsm-title" x="1185" y="456" text-anchor="middle" style="fill:#8E4F22;">Bank B</text>
+          <text class="lsm-title" x="1185" y="456" text-anchor="middle" style="fill:#46556E;">Bank B</text>
           <text class="lsm-sub b" x="1185" y="474" text-anchor="middle">receiver bank</text>
           <text class="lsm-sub" x="1185" y="490" text-anchor="middle">core banking</text>
 
@@ -1933,7 +1949,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- Batch tray on the left -->
           <rect class="lsm-batch-tray" x="30" y="664" width="680" height="130" rx="10" />
-          <text class="lsm-title" x="370" y="688" text-anchor="middle" style="fill:#8E4F22;">ACSS deferred-net batch</text>
+          <text class="lsm-title" x="370" y="688" text-anchor="middle" style="fill:#46556E;">ACSS deferred-net batch</text>
           <text class="lsm-sub" x="370" y="704" text-anchor="middle" style="font-size:10.5px;">batches finalize next morning at the Bank of Canada</text>
 
           <rect class="lsm-batch-row" x="50" y="716" width="640" height="14" rx="3" />
@@ -1945,11 +1961,11 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           <rect class="lsm-batch-row" x="50" y="764" width="640" height="14" rx="3" />
           <text x="58" y="774" style="font-family:var(--font-mono,monospace); font-size:9px; fill:#46556E;">tx 18417  Bank A -&gt; Corr 1 -&gt; Corr 2 -&gt; Bank E   pending   C$    98,000</text>
 
-          <text class="lsm-sub" x="370" y="790" text-anchor="middle" style="fill:#8E4F22; font-style:italic; font-size:10.5px;">All in transit, all trapped until the next-morning settlement window.</text>
+          <text class="lsm-sub" x="370" y="790" text-anchor="middle" style="fill:#46556E; font-style:italic; font-size:10.5px;">All in transit, all trapped until the next-morning settlement window.</text>
 
           <!-- T-timeline on the right -->
-          <rect x="740" y="664" width="730" height="130" rx="10" fill="rgba(185,106,62,.05)" stroke="#B96A3E" stroke-width="1.4" />
-          <text class="lsm-title" x="1105" y="688" text-anchor="middle" style="fill:#8E4F22;">Settlement window timeline</text>
+          <rect x="740" y="664" width="730" height="130" rx="10" fill="rgba(185,106,62,.05)" stroke="#8995AD" stroke-width="1.4" />
+          <text class="lsm-title" x="1105" y="688" text-anchor="middle" style="fill:#46556E;">Settlement window timeline</text>
 
           <line class="lsm-timeline-line" x1="780" y1="740" x2="1430" y2="740" />
           <line class="lsm-timeline-tick" x1="800" y1="730" x2="800" y2="750" />
@@ -1987,27 +2003,27 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- TX 02A: the "stuck and rejected" coin. Sits ABOVE the chain (y=395) so the main coin (TX 01A, at y=465) can keep flowing along the chain without getting hidden by this rejected one. -->
           <g class="legacy-stuck-coin">
-            <circle cx="160" cy="395" r="13" fill="#F2C94C" stroke="#B96A3E" stroke-width="1.4" class="stuck-coin-fill" />
-            <text x="160" y="399" text-anchor="middle" style="font-size:14px; font-weight:800; fill:#5A4715;">$</text>
+            <circle cx="160" cy="395" r="13" fill="#F2C94C" stroke="#8995AD" stroke-width="1.4" class="stuck-coin-fill" />
+            <text x="160" y="399" text-anchor="middle" style="font-size:14px; font-weight:800; fill:#8A6712;">$</text>
             <rect x="142" y="367" width="36" height="14" rx="3" fill="#1F2937" />
             <text x="160" y="378" text-anchor="middle" style="font-size:9px; font-weight:800; fill:#F2C94C; font-family:var(--font-mono,monospace);">02A</text>
           </g>
 
           <!-- REJECTED badge appearing during the bounce-back phase of TX 02A. Moved up to y=350 so it sits clearly above the chain and never covers the main coin. -->
           <g class="legacy-break-badge">
-            <rect x="486" y="350" width="190" height="46" rx="9" fill="#FBE5E8" stroke="#B5283F" stroke-width="1.6" />
-            <text x="581" y="367" text-anchor="middle" style="font-size:11px; font-weight:800; fill:#B5283F; letter-spacing:.06em;">REJECTED &middot; TX 02A</text>
-            <text x="581" y="381" text-anchor="middle" style="font-size:10px; font-weight:700; fill:#B5283F;">+1 day &middot; -C$45 recon cost</text>
-            <text x="581" y="393" text-anchor="middle" style="font-size:9px; fill:#B5283F; font-style:italic;">re-keyed manually, customer notified</text>
+            <rect x="486" y="350" width="190" height="46" rx="9" fill="#FBE5E8" stroke="#8F5C12" stroke-width="1.6" />
+            <text x="581" y="367" text-anchor="middle" style="font-size:11px; font-weight:800; fill:#8F5C12; letter-spacing:.06em;">REJECTED &middot; TX 02A</text>
+            <text x="581" y="381" text-anchor="middle" style="font-size:10px; font-weight:700; fill:#8F5C12;">+1 day &middot; -C$45 recon cost</text>
+            <text x="581" y="393" text-anchor="middle" style="font-size:9px; fill:#8F5C12; font-style:italic;">re-keyed manually, customer notified</text>
           </g>
 
           <!-- (Per-hop status dots moved up into the status band, between the two big Customer lights, so they read as a single timeline.) -->
 
           <!-- Rejection tally readout: small pill in the bottom-left of the middle band, narrower so it does not stretch across the band -->
           <g class="legacy-rejection-tally">
-            <rect x="30" y="380" width="278" height="38" rx="8" fill="rgba(181,40,63,.08)" stroke="#B5283F" stroke-width="1.2" stroke-dasharray="5 3" />
-            <text x="42" y="396" style="font-size:9px; font-weight:800; fill:#B5283F; letter-spacing:.08em; text-transform:uppercase;">Cycle tally &middot; what the breaks cost</text>
-            <text x="42" y="411" style="font-size:10px; fill:#B5283F; font-weight:700;">1 of 9 hops rejected &middot; <tspan style="font-family:var(--font-mono,monospace);">-C$45 recon</tspan></text>
+            <rect x="30" y="380" width="278" height="38" rx="8" fill="rgba(181,40,63,.08)" stroke="#8F5C12" stroke-width="1.2" stroke-dasharray="5 3" />
+            <text x="42" y="396" style="font-size:9px; font-weight:800; fill:#8F5C12; letter-spacing:.08em; text-transform:uppercase;">Cycle tally &middot; what the breaks cost</text>
+            <text x="42" y="411" style="font-size:10px; fill:#8F5C12; font-weight:700;">1 of 9 hops rejected &middot; <tspan style="font-family:var(--font-mono,monospace);">-C$45 recon</tspan></text>
           </g>
 
           </g><!-- end transform group (status band shift) -->
@@ -2015,31 +2031,31 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
         <p class="lsm-caption"><b>What you are seeing.</b> Top band: each bank keeps its own books and files its own FINTRAC reports, two parallel filings about the same trade. Status band: yellow lights show Customer A and Customer B funds at risk during the T+2 settlement window. Customer A's light turns green quickly when their debit posts, but Customer B's stays yellow until next-morning settlement clears, exposing both parties to break/repair risk in the meantime. The amber coin bouncing back and the red BREAK! badge illustrate the 3 to 6% recon-break rate on capital-markets cross-bank trades, each costing additional time and money. Middle band: the correspondent chain with each intermediary's actual nostro/vostro account visible inside, plus the AML re-screening that happens on every hop. Each SWIFT message above the chain has a red fee pill. Bottom band: the ACSS deferred-net batch tray with the T-timeline alongside, showing where the money actually is at each stage. <b>4orm replaces this whole picture</b> with the single rail shown in the What can 4orm do? tab.</p>
 
         <!-- Translation: what this costs in dollars for a mid-size regional bank -->
-        <div style="margin-top: 14px; padding: 16px 18px; background: linear-gradient(135deg, #FBF4F4 0%, #F8EBEB 100%); border: 1px solid #E8C5C5; border-left: 4px solid #B5283F; border-radius: 10px;">
-          <div style="font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #B5283F; margin-bottom: 8px;">What this costs in dollars, illustrative for a mid-size regional bank</div>
+        <div style="margin-top: 14px; padding: 16px 18px; background: linear-gradient(135deg, #F4F7FB 0%, #F8EBEB 100%); border: 1px solid #CCD6E4; border-left: 4px solid #8F5C12; border-radius: 10px;">
+          <div style="font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #8F5C12; margin-bottom: 8px;">What this costs in dollars, illustrative for a mid-size regional bank</div>
           <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
             <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #B5283F;">~$520K / yr</div>
+              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$520K / yr</div>
               <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>Trapped liquidity.</b> ~$40M average daily cross-bank flow stuck 1.5-2 days at 3.5% cost-of-funds.</div>
             </div>
             <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #B5283F;">~$340K / yr</div>
+              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$340K / yr</div>
               <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>Correspondent fees.</b> ~1.8M annual cross-bank payments at $0.15-0.25 SWIFT cost per hop.</div>
             </div>
             <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #B5283F;">~$230K / yr</div>
+              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$230K / yr</div>
               <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>Compliance labour tail.</b> Manual disposition of false-positive sanctions/AML alerts at $60/hr loaded.</div>
             </div>
             <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #B5283F;">~$180K / yr</div>
+              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$180K / yr</div>
               <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>The 3-6% break rate.</b> Manual reconciliation work on cross-bank cap-markets trades at ~$120 per break.</div>
             </div>
             <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #B5283F;">~$150K / yr</div>
+              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$150K / yr</div>
               <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>KYC duplication.</b> Re-onboarding the same client at each institution across the network.</div>
             </div>
           </div>
-          <div style="margin-top: 12px; font-size: .82rem; color: var(--text-2); line-height: 1.5;"><b style="color: #B5283F;">Total: ~$1.42M / year</b> for a Canadian mid-size regional bank profile, CAD, illustrative. This is the gap 4orm is built to close. Full v2 methodology on the <a href="cost-analysis-bank.html">What It Saves</a> page; flip to the <b>What can 4orm do?</b> tab above to see what the same flow looks like with the rail in place.</div>
+          <div style="margin-top: 12px; font-size: .82rem; color: var(--text-2); line-height: 1.5;"><b style="color: #8F5C12;">Total: ~$1.42M / year</b> for a Canadian mid-size regional bank profile, CAD, illustrative. This is the gap 4orm is built to close. Full v2 methodology on the <a href="cost-analysis-bank.html">What It Saves</a> page; flip to the <b>What can 4orm do?</b> tab above to see what the same flow looks like with the rail in place.</div>
         </div>
       </div>
 
@@ -2068,6 +2084,52 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
     </div>
 
   </div><!-- /lsm-card -->
+
+  <!-- Key takeaways panel — switches with the active tab via JS -->
+  <div class="lsm-keypoints" aria-live="polite">
+    <div class="lsm-keypoints-inner">
+      <h4>Key takeaways</h4>
+      <div class="lsm-keypoints-grid">
+
+        <div class="lsm-keypoints-panel legacy active" data-keypoints-for="legacy">
+          <h5>Why legacy cross-bank settlement is slow, expensive, and risky</h5>
+          <ul>
+            <li><b>~T+2 of exposure</b> — funds at risk for up to two days while messages relay between banks.</li>
+            <li><b>3-6% manual recon break rate</b> — Bank A and Bank B independently reconcile against their own ledger.</li>
+            <li><b>2-4 correspondent hops per trade</b> — each charges fees ($0.15-$0.25 per MT103 message hop).</li>
+            <li><b>1 in 9 hops rejected</b> on average; re-keyed manually, customer notified — adds ~C$45 recon cost and 1 day delay.</li>
+            <li><b>Independent FINTRAC reporting</b> — two parallel statutory filings, no shared view of the transaction.</li>
+            <li><b>No single canonical record</b> exists for the trade across the network.</li>
+          </ul>
+        </div>
+
+        <div class="lsm-keypoints-panel interbank" data-keypoints-for="interbank">
+          <h5>What 4orm replaces: cross-bank settled on one regulated rail</h5>
+          <ul>
+            <li><b>T+0 atomic settlement</b> — the asset and the cash change hands at the same instant or not at all.</li>
+            <li><b>Single canonical ledger</b> — both banks see the same record; no manual reconciliation breaks.</li>
+            <li><b>Zero correspondent chain</b> — no MT103 hops, no per-hop fees, no rejection cycles.</li>
+            <li><b>Embedded compliance</b> — KYC/AML checks live inside the token contract; transfers enforce the rules.</li>
+            <li><b>Real-time reporting view</b> — FINTRAC and regulators can opt into supervisory access on the same rail.</li>
+            <li><b>Bank cores untouched</b> — institutions integrate via ISO 20022 / API; control plane stays with the bank.</li>
+          </ul>
+        </div>
+
+        <div class="lsm-keypoints-panel onus" data-keypoints-for="onus">
+          <h5>What 4orm replaces: internal (on-us) transfer within one bank</h5>
+          <ul>
+            <li><b>Instant on-ledger transfer</b> — within Bank A's perimeter, the token moves between accounts in seconds.</li>
+            <li><b>Zero settlement risk</b> — both sides of the transaction live inside one regulated entity.</li>
+            <li><b>Replaces internal core-banking reconciliation</b> with a single shared on-ledger record.</li>
+            <li><b>One audit trail, not two</b> — debit and credit are inseparable, posted atomically.</li>
+            <li><b>FINTRAC reporting auto-derives</b> from the on-ledger record — no parallel filing.</li>
+            <li><b>Same UX for the customer</b> — branch / online / ATM / mobile all see the same instant confirmation.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
@@ -2194,6 +2256,10 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
     if (playing) startAnim();
     // Start/stop the live ledger rotator based on whether interbank is active
     if (flow === 'interbank' && playing) { startLedger(); } else { stopLedger(); }
+    // Switch key-takeaways panel
+    document.querySelectorAll('.lsm-keypoints-panel').forEach(function (p) {
+      p.classList.toggle('active', p.getAttribute('data-keypoints-for') === flow);
+    });
   }
 
   var flowOrder = ['legacy', 'interbank', 'onus'];
