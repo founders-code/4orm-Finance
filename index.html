@@ -963,6 +963,18 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
     .lsm-coin-halo, .lsm-reg-mini.pulse, .lsm-ledger-row.pulse, .lsm-live-dot, .lsm-live-ring { animation: none; }
   }
 
+  
+  /* Bigger, more readable rail pipeline text */
+  .lsm-stage[data-stage="interbank"] .lsm-title { font-size: 16px !important; }
+  .lsm-stage[data-stage="interbank"] .lsm-sub { font-size: 12.5px !important; }
+  .lsm-stage[data-stage="interbank"] .lsm-dvp-title { font-size: 18.5px !important; }
+  .lsm-stage[data-stage="interbank"] .lsm-dvp-sub { font-size: 12.5px !important; }
+
+  
+  /* Legacy ledger rejection flash — both Bank A and Bank B lines turn red when a reject happens */
+  .lsm-legacy-ledger-text.rejected { fill: #D6334E !important; font-weight: 700; transition: fill .3s; }
+  .lsm-legacy-ledger-row-bg.rejected { fill: #FCE6EA !important; transition: fill .3s; }
+
   /* ====== INTERBANK PANEL: BLACK BACKDROP MODE ====== */
   /* Everything inside keeps its own color. Only the panel backdrop + zone backgrounds + outer text go dark. */
   .lsm-stage[data-stage="interbank"] {
@@ -1610,18 +1622,18 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           <path class="lsm-rail-to-dvp-flow d5" d="M 895 700 L 920 700" />
 
           <!-- ========== STATION 4: Settlement asset stack ========== -->
-          <rect x="925" y="600" width="240" height="200" rx="11" fill="rgba(255,253,239,.97)" stroke="#C49A3A" stroke-width="1.4" />
-          <text class="lsm-title" x="1045" y="630" text-anchor="middle" style="fill:#8A6712;">Settlement asset stack</text>
+          <rect x="925" y="600" width="240" height="200" rx="11" fill="rgba(255,255,255,.96)" stroke="rgba(255,255,255,.6)" stroke-width="1.4" />
+          <text class="lsm-title" x="1045" y="630" text-anchor="middle" style="fill:var(--brand-700);">Settlement asset stack</text>
           <text class="lsm-sub" x="1045" y="648" text-anchor="middle" style="font-style:italic; font-size:10px;">three live options at trade time</text>
           <text class="lsm-sub b" x="945" y="676" style="font-size:10.5px;">1.</text>
           <text class="lsm-sub" x="960" y="676" style="font-size:10.5px;">Tokenized CAD deposit</text>
-          <text class="lsm-sub" x="960" y="690" style="font-size:9.5px; fill:#8A6712;">(bank-issued)</text>
+          <text class="lsm-sub" x="960" y="690" style="font-size:11px; fill:var(--text-3);">(bank-issued)</text>
           <text class="lsm-sub b" x="945" y="714" style="font-size:10.5px;">2.</text>
           <text class="lsm-sub" x="960" y="714" style="font-size:10.5px;">Regulated CAD</text>
-          <text class="lsm-sub" x="960" y="728" style="font-size:9.5px; fill:#8A6712;">stablecoin (e.g. QCAD)</text>
+          <text class="lsm-sub" x="960" y="728" style="font-size:11px; fill:var(--text-3);">stablecoin (e.g. QCAD)</text>
           <text class="lsm-sub b" x="945" y="752" style="font-size:10.5px;">3.</text>
           <text class="lsm-sub" x="960" y="752" style="font-size:10.5px;">Qualified Canadian</text>
-          <text class="lsm-sub" x="960" y="766" style="font-size:9.5px; fill:#8A6712;">trust custodian</text>
+          <text class="lsm-sub" x="960" y="766" style="font-size:11px; fill:var(--text-3);">trust custodian</text>
           <text class="lsm-sub" x="1045" y="790" text-anchor="middle" style="font-style:italic; font-size:9.5px;">All institution-pickable, all regulated.</text>
 
           <!-- Animated arrow Settlement -&gt; Attestation -->
@@ -1769,11 +1781,11 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           <text class="lsm-sub" x="220" y="122" text-anchor="middle" style="font-style:italic;">internal record of this trade</text>
 
           <rect x="50" y="140" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
-          <text x="58" y="154" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 18420   debit Customer A   C$ 5,000,000</text>
+          <text id="lsm-legacy-a-1" class="lsm-legacy-ledger-text" x="58" y="154" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 18420   debit Customer A   C$ 5,000,000</text>
           <rect x="50" y="166" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
-          <text x="58" y="180" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 18420   credit Nostro@Corr1   pending</text>
+          <text id="lsm-legacy-a-2" class="lsm-legacy-ledger-text" x="58" y="180" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 18420   credit Nostro@Corr1   pending</text>
           <rect x="50" y="192" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
-          <text x="58" y="206" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 18420   confirmation: awaited from Corr1</text>
+          <text id="lsm-legacy-a-3" class="lsm-legacy-ledger-text" x="58" y="206" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 18420   confirmation: awaited from Corr1</text>
 
           <text class="lsm-sub" x="220" y="242" text-anchor="middle" style="font-style:italic; fill:#46556E;">Bank A's view of the trade.</text>
           <text class="lsm-sub" x="220" y="256" text-anchor="middle" style="font-style:italic; fill:#46556E;">Bank A reconciles its own.</text>
@@ -1792,11 +1804,11 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
           <text class="lsm-sub" x="690" y="122" text-anchor="middle" style="font-style:italic;">internal record of the same trade</text>
 
           <rect x="520" y="140" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
-          <text x="528" y="154" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 92117   debit Vostro@Corr2   C$ 5,000,000</text>
+          <text id="lsm-legacy-b-1" class="lsm-legacy-ledger-text" x="528" y="154" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 92117   debit Vostro@Corr2   C$ 5,000,000</text>
           <rect x="520" y="166" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
-          <text x="528" y="180" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 92117   credit Customer B   pending</text>
+          <text id="lsm-legacy-b-2" class="lsm-legacy-ledger-text" x="528" y="180" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 92117   credit Customer B   pending</text>
           <rect x="520" y="192" width="340" height="20" rx="3" fill="#FFFFFF" stroke="#E3E9F2" stroke-width="1" />
-          <text x="528" y="206" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 92117   confirmation: awaited from Corr2</text>
+          <text id="lsm-legacy-b-3" class="lsm-legacy-ledger-text" x="528" y="206" style="font-family:var(--font-mono,monospace); font-size:9.5px; fill:#46556E;">tx 92117   confirmation: awaited from Corr2</text>
 
           <text class="lsm-sub" x="690" y="242" text-anchor="middle" style="font-style:italic; fill:#46556E;">Bank B's view, different tx ref.</text>
           <text class="lsm-sub" x="690" y="256" text-anchor="middle" style="font-style:italic; fill:#46556E;">Bank B reconciles its own.</text>
@@ -2247,6 +2259,62 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
     if (ledgerTimer) { clearInterval(ledgerTimer); ledgerTimer = null; }
   }
 
+
+  // ============================================================================
+  // Legacy ledger rotator + rejection-flasher
+  // Updates the Bank A / Bank B ledger text every few seconds with new tx IDs.
+  // Every 4th cycle, marks the entries as REJECTED (red) to show recon breaks.
+  // ============================================================================
+  var legacyPool = [
+    { aId: 18420, bId: 92117, amt: 'C$ 5,000,000', corrA: 'Corr1', corrB: 'Corr2', reject: false },
+    { aId: 18421, bId: 92118, amt: 'C$ 1,250,000', corrA: 'Corr1', corrB: 'Corr2', reject: false },
+    { aId: 18422, bId: 92119, amt: 'C$   750,000', corrA: 'Corr1', corrB: 'Corr2', reject: false },
+    { aId: 18423, bId: 92120, amt: 'C$ 2,400,000', corrA: 'Corr1', corrB: 'Corr2', reject: true },   // REJECTED
+    { aId: 18424, bId: 92121, amt: 'C$   320,000', corrA: 'Corr1', corrB: 'Corr2', reject: false },
+    { aId: 18425, bId: 92122, amt: 'C$ 8,750,000', corrA: 'Corr1', corrB: 'Corr2', reject: false },
+    { aId: 18426, bId: 92123, amt: 'C$   650,000', corrA: 'Corr1', corrB: 'Corr2', reject: false },
+    { aId: 18427, bId: 92124, amt: 'C$ 3,100,000', corrA: 'Corr1', corrB: 'Corr2', reject: true },   // REJECTED
+    { aId: 18428, bId: 92125, amt: 'C$   480,000', corrA: 'Corr1', corrB: 'Corr2', reject: false }
+  ];
+  var legacyCursor = 0;
+  function rotateLegacy() {
+    if (currentFlow !== 'legacy') return;
+    legacyCursor = (legacyCursor + 1) % legacyPool.length;
+    var row = legacyPool[legacyCursor];
+    var aLines = [
+      'tx ' + row.aId + '   debit Customer A   ' + row.amt,
+      'tx ' + row.aId + '   credit Nostro@' + row.corrA + '   ' + (row.reject ? 'REJECTED' : 'pending'),
+      'tx ' + row.aId + '   confirmation: ' + (row.reject ? 'REJECT received from ' + row.corrA : 'awaited from ' + row.corrA)
+    ];
+    var bLines = [
+      'tx ' + row.bId + '   debit Vostro@' + row.corrB + '   ' + row.amt,
+      'tx ' + row.bId + '   credit Customer B   ' + (row.reject ? 'REVERSED' : 'pending'),
+      'tx ' + row.bId + '   confirmation: ' + (row.reject ? 'REJECT propagated from ' + row.corrB : 'awaited from ' + row.corrB)
+    ];
+    var ids = ['lsm-legacy-a-1','lsm-legacy-a-2','lsm-legacy-a-3','lsm-legacy-b-1','lsm-legacy-b-2','lsm-legacy-b-3'];
+    var allLines = aLines.concat(bLines);
+    ids.forEach(function (id, i) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = allLines[i];
+      if (row.reject) {
+        el.classList.add('rejected');
+        // Auto-clear after 2.4s so the next cycle gets a clean slate visually
+        setTimeout(function () { el.classList.remove('rejected'); }, 2400);
+      } else {
+        el.classList.remove('rejected');
+      }
+    });
+  }
+  var legacyTimer = null;
+  function startLegacy() {
+    if (legacyTimer) return;
+    legacyTimer = setInterval(rotateLegacy, 2800);
+  }
+  function stopLegacy() {
+    if (legacyTimer) { clearInterval(legacyTimer); legacyTimer = null; }
+  }
+
   function setFlow(flow) {
     currentFlow = flow;
     card.setAttribute('data-flow', flow);
@@ -2267,6 +2335,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
     if (playing) startAnim();
     // Start/stop the live ledger rotator based on whether interbank is active
     if (flow === 'interbank' && playing) { startLedger(); } else { stopLedger(); }
+    if (flow === 'legacy' && playing) { startLegacy(); } else { stopLegacy(); }
     // Switch key-takeaways panel
     document.querySelectorAll('.lsm-keypoints-panel').forEach(function (p) {
       p.classList.toggle('active', p.getAttribute('data-keypoints-for') === flow);
@@ -2297,6 +2366,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
       playBtn.innerHTML = '&#10074;&#10074; Pause';
       startAnim();
       if (currentFlow === 'interbank') startLedger();
+      if (currentFlow === 'legacy') startLegacy();
     } else {
       playBtn.innerHTML = '&#9654; Play';
       stopAnim();
