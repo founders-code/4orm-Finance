@@ -977,36 +977,63 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
   
   /* "What you are seeing" structured breakdown */
-  .wys-panel { margin: 22px 0 0; padding: 24px 28px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-sm); }
-  .wys-eye { font-family: var(--font-mono); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); margin-bottom: 16px; }
-  .wys-grid { display: grid; gap: 14px; }
-  .wys-row { display: grid; grid-template-columns: 56px 1fr; gap: 18px; align-items: start; padding: 14px 0; border-top: 1px solid var(--border); }
-  .wys-row:first-child { border-top: none; padding-top: 0; }
-  .wys-num { font-family: var(--font-mono); font-size: 1.45rem; font-weight: 800; color: var(--brand); letter-spacing: -.02em; line-height: 1; padding-top: 3px; }
-  .wys-label { font-size: .82rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
-  .wys-badge { font-family: var(--font-mono); font-size: .62rem; font-weight: 700; letter-spacing: .1em; padding: 3px 9px; border-radius: 99px; background: var(--warn-bg); color: var(--warn); text-transform: uppercase; }
-  .wys-body p { margin: 0; font-size: .94rem; line-height: 1.6; color: var(--text-2); }
-  .wys-replace { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); font-size: .94rem; color: var(--text); line-height: 1.55; }
+  .wys-panel { margin: 22px 0 0; padding: 16px 20px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-sm); }
+  .wys-eye { font-family: var(--font-mono); font-size: .68rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); margin-bottom: 10px; }
+  .wys-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+  @media (max-width: 760px) { .wys-grid { grid-template-columns: 1fr; } }
+  .wys-row { display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; padding: 8px 0; border-top: 1px solid var(--border); }
+  .wys-row:first-child, .wys-row:nth-child(2) { border-top: none; padding-top: 4px; }
+  @media (max-width: 760px) { .wys-row:nth-child(2) { border-top: 1px solid var(--border); padding-top: 8px; } }
+  .wys-num { font-family: var(--font-mono); font-size: 1.05rem; font-weight: 800; color: var(--brand); letter-spacing: -.02em; line-height: 1; padding-top: 2px; }
+  .wys-label { font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--text); margin-bottom: 3px; display: flex; align-items: center; gap: 8px; }
+  .wys-badge { font-family: var(--font-mono); font-size: .56rem; font-weight: 700; letter-spacing: .1em; padding: 2px 7px; border-radius: 99px; background: var(--warn-bg); color: var(--warn); text-transform: uppercase; }
+  .wys-body p { margin: 0; font-size: .82rem; line-height: 1.5; color: var(--text-2); }
+  .wys-replace { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: .86rem; color: var(--text); line-height: 1.5; }
   .wys-replace b { color: var(--brand-700); }
 
   /* Cost panel, brand-aligned */
-  .cost-panel { margin: 18px 0 0; padding: 24px 28px 22px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--warn); border-radius: 14px; box-shadow: var(--shadow-sm); }
-  .cost-head { display: flex; flex-direction: column; gap: 4px; margin-bottom: 18px; }
-  .cost-eye { font-family: var(--font-mono); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--warn); }
-  .cost-sub { font-size: .82rem; color: var(--text-3); font-style: italic; }
-  .cost-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .cost-panel { margin: 14px 0 0; padding: 16px 20px 14px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--brand); border-radius: 12px; box-shadow: var(--shadow-sm); }
+  .cost-head { display: flex; flex-direction: row; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .cost-eye { font-family: var(--font-mono); font-size: .68rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); }
+  .cost-sub { font-size: .76rem; color: var(--text-3); font-style: italic; }
+  .cost-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
   @media (max-width: 1100px) { .cost-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 720px) { .cost-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 480px) { .cost-grid { grid-template-columns: 1fr; } }
-  .cost-cell { background: var(--surface); padding: 16px 14px; display: flex; flex-direction: column; gap: 6px; }
-  .cost-amt { font-size: 1.18rem; font-weight: 800; color: var(--warn); letter-spacing: -.01em; line-height: 1.1; }
-  .cost-unit { font-size: .82rem; font-weight: 600; color: var(--text-3); margin-left: 4px; }
-  .cost-label { font-size: .88rem; font-weight: 700; color: var(--text); margin-top: 2px; }
-  .cost-note { margin: 0; font-size: .8rem; line-height: 1.5; color: var(--text-2); }
-  .cost-total { margin-top: 16px; padding: 14px 16px; background: var(--bg-2); border-radius: 10px; display: flex; flex-direction: column; gap: 6px; }
-  @media (min-width: 760px) { .cost-total { flex-direction: row; align-items: baseline; gap: 18px; } }
-  .cost-total-amt { font-size: 1.1rem; font-weight: 800; color: var(--warn); white-space: nowrap; }
-  .cost-total-text { font-size: .9rem; color: var(--text-2); line-height: 1.55; }
+  .cost-cell { background: var(--surface); padding: 12px 12px; display: flex; flex-direction: column; gap: 3px; }
+  .cost-amt { font-size: 1.05rem; font-weight: 800; color: var(--warn); letter-spacing: -.01em; line-height: 1.1; }
+  .cost-unit { font-size: .74rem; font-weight: 600; color: var(--text-3); margin-left: 3px; }
+  .cost-label { font-size: .8rem; font-weight: 700; color: var(--text); margin-top: 1px; }
+  .cost-note { margin: 0; font-size: .74rem; line-height: 1.45; color: var(--text-2); }
+  .cost-total { margin-top: 10px; padding: 10px 14px; background: var(--brand-50); border-radius: 8px; display: flex; flex-direction: column; gap: 4px; }
+  @media (min-width: 760px) { .cost-total { flex-direction: row; align-items: baseline; gap: 14px; } }
+  .cost-total-amt { font-size: 1rem; font-weight: 800; color: var(--brand-700); white-space: nowrap; }
+  .cost-total-text { font-size: .82rem; color: var(--text-2); line-height: 1.5; }
+
+  /* "What does this mean for MY bank?" institutional bridge hook */
+  .ibridge { background: linear-gradient(135deg, #0B1220 0%, #15233F 45%, #1F3CA8 100%); color: #fff; padding: 56px 0; position: relative; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .ibridge::before { content: ''; position: absolute; top: -30%; right: -8%; width: 50vw; height: 50vw; max-width: 580px; max-height: 580px; background: radial-gradient(circle, rgba(255,217,168,.16) 0%, rgba(255,217,168,0) 60%); pointer-events: none; }
+  .ibridge::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 40vw; height: 40vw; max-width: 500px; max-height: 500px; background: radial-gradient(circle, rgba(46,107,242,.22) 0%, rgba(46,107,242,0) 60%); pointer-events: none; }
+  .ibridge-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 880px) { .ibridge-inner { grid-template-columns: 1fr; gap: 28px; } }
+  .ibridge-eye { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .16em; color: #FFD9A8; text-transform: uppercase; font-weight: 800; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .ibridge-eye .dot { width: 7px; height: 7px; border-radius: 50%; background: #FFD9A8; box-shadow: 0 0 0 4px rgba(255,217,168,.18); }
+  .ibridge h2 { color: #fff !important; font-size: clamp(1.5rem, 2.6vw, 2.05rem); line-height: 1.15; letter-spacing: -.02em; font-weight: 800; margin: 0 0 16px; max-width: 16em; }
+  .ibridge h2 .accent { color: #FFD9A8; }
+  .ibridge-lead { color: rgba(255,255,255,.82); font-size: .96rem; line-height: 1.55; margin: 0 0 22px; max-width: 38em; }
+  .ibridge-cta { display: inline-flex; align-items: center; gap: 10px; background: #FFD9A8; color: #0B1220 !important; font-weight: 800; font-size: 1rem; padding: 14px 26px; border-radius: 11px; text-decoration: none; box-shadow: 0 6px 22px rgba(255,217,168,.32); transition: transform .15s, box-shadow .15s, background .15s; }
+  .ibridge-cta:hover { background: #FFCB87; color: #0B1220 !important; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,217,168,.45); }
+  .ibridge-meta { margin-top: 12px; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .12em; color: rgba(255,217,168,.7); text-transform: uppercase; display: flex; gap: 14px; flex-wrap: wrap; }
+  .ibridge-meta span::before { content: '·'; margin-right: 14px; color: rgba(255,217,168,.4); }
+  .ibridge-meta span:first-child::before { display: none; }
+
+  /* Question chips */
+  .ibridge-qs { display: flex; flex-direction: column; gap: 10px; }
+  .ibridge-q { display: flex; gap: 14px; align-items: flex-start; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 12px; padding: 12px 16px; backdrop-filter: blur(4px); transition: background .15s, border-color .15s; }
+  .ibridge-q:hover { background: rgba(255,255,255,.10); border-color: rgba(255,217,168,.32); }
+  .ibridge-q-num { font-family: var(--font-mono); font-size: .82rem; font-weight: 800; color: #FFD9A8; flex: none; padding-top: 1px; min-width: 22px; }
+  .ibridge-q-text { font-size: .94rem; line-height: 1.45; color: #fff; font-weight: 600; }
+
 
   /* ====== INTERBANK PANEL: BLACK BACKDROP MODE ====== */
   /* Everything inside keeps its own color. Only the panel backdrop + zone backgrounds + outer text go dark. */
@@ -1229,22 +1256,26 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .lsm-head { padding: 0 36px !important; max-width: 1320px !important; }
   .lsm-tab { font-size: 1rem !important; padding: 12px 22px !important; }
   .lsm-svg { display: block; width: 100%; height: auto; min-height: 540px; }
-  /* Key-takeaway panel underneath the diagram */
-  .lsm-keypoints { max-width: 1320px; margin: 22px auto 0; padding: 0 36px; }
-  .lsm-keypoints-inner { background: var(--brand-50); border: 1px solid var(--brand-100); border-radius: 14px; padding: 20px 24px; }
-  .lsm-keypoints h4 { margin: 0 0 10px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); font-weight: 800; }
-  .lsm-keypoints-grid { display: grid; gap: 0; }
+  /* Key-takeaway panel — bubble grid */
+  .lsm-keypoints { max-width: 1320px; margin: 14px auto 0; padding: 0 36px; }
+  .lsm-keypoints-inner { background: var(--bg-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; }
+  .lsm-keypoints-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .lsm-keypoints h4 { margin: 0; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); font-weight: 800; }
+  .lsm-keypoints-subhead { font-size: .82rem; color: var(--text-2); font-weight: 600; }
   .lsm-keypoints-panel { display: none; }
   .lsm-keypoints-panel.active { display: block; }
-  .lsm-keypoints-panel h5 { margin: 0 0 8px; font-size: 1.04rem; font-weight: 750; color: var(--text); letter-spacing: -.01em; }
-  .lsm-keypoints-panel ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 28px; }
-  @media (max-width: 760px) { .lsm-keypoints-panel ul { grid-template-columns: 1fr; } }
-  .lsm-keypoints-panel li { display: flex; gap: 10px; align-items: flex-start; font-size: .94rem; line-height: 1.55; color: var(--text-2); }
-  .lsm-keypoints-panel li::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); margin-top: 9px; }
-  .lsm-keypoints-panel li b { color: var(--text); font-weight: 700; }
-  .lsm-keypoints-panel.legacy li::before { background: var(--warn); }
-  .lsm-keypoints-panel.interbank li::before { background: var(--brand); }
-  .lsm-keypoints-panel.onus li::before { background: var(--gold-2); }
+  .lsm-keypoints-panel h5 { display: none; } /* old heading hidden — moved to .lsm-keypoints-subhead */
+  .kp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  @media (max-width: 880px) { .kp-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .kp-grid { grid-template-columns: 1fr; } }
+  .kp-bubble { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; transition: border-color .15s, box-shadow .15s; }
+  .kp-bubble:hover { border-color: var(--brand-100); box-shadow: var(--shadow-sm); }
+  .kp-stat { font-family: var(--font-mono); font-size: 1.05rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; color: var(--brand); }
+  .kp-label { font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--text); margin-top: 1px; }
+  .kp-note { margin: 0; font-size: .76rem; line-height: 1.4; color: var(--text-2); margin-top: 2px; }
+  .lsm-keypoints-panel.legacy .kp-stat { color: var(--warn); }
+  .lsm-keypoints-panel.interbank .kp-stat { color: var(--brand); }
+  .lsm-keypoints-panel.onus .kp-stat { color: var(--gold-2); }
 </style>
 
 <section class="lsm-section" aria-labelledby="lsm-heading">
@@ -2191,43 +2222,43 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   <!-- Key takeaways panel — switches with the active tab via JS -->
   <div class="lsm-keypoints" aria-live="polite">
     <div class="lsm-keypoints-inner">
-      <h4>Key takeaways</h4>
+      <div class="lsm-keypoints-head">
+        <h4>Key takeaways</h4>
+        <div class="lsm-keypoints-subhead" data-subhead-for="legacy">Why legacy cross-bank settlement is slow, expensive, and risky</div>
+      </div>
       <div class="lsm-keypoints-grid">
 
         <div class="lsm-keypoints-panel legacy active" data-keypoints-for="legacy">
-          <h5>Why legacy cross-bank settlement is slow, expensive, and risky</h5>
-          <ul>
-            <li><b>~T+2 of exposure</b>, funds at risk for up to two days while messages relay between banks.</li>
-            <li><b>3-6% manual recon break rate</b>. Bank A and Bank B independently reconcile against their own ledger.</li>
-            <li><b>2-4 correspondent hops per trade</b>. Each charges fees ($0.15 to $0.25 per MT103 message hop).</li>
-            <li><b>1 in 9 hops rejected</b> on average. Re-keyed manually, customer notified. Adds ~C$45 recon cost and 1 day delay.</li>
-            <li><b>Independent FINTRAC reporting</b>. Two parallel statutory filings, no shared view of the transaction.</li>
-            <li><b>No single canonical record</b> exists for the trade across the network.</li>
-          </ul>
+          <div class="kp-grid">
+            <div class="kp-bubble"><div class="kp-stat">~T+2</div><div class="kp-label">Exposure window</div><p class="kp-note">Funds at risk for up to two days while messages relay between banks.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">3-6%</div><div class="kp-label">Manual recon break rate</div><p class="kp-note">Bank A and Bank B reconcile against their own ledger independently.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">2-4 hops</div><div class="kp-label">Per cross-bank trade</div><p class="kp-note">Each charges fees ($0.15 to $0.25 per MT103 message hop).</p></div>
+            <div class="kp-bubble"><div class="kp-stat">1 in 9</div><div class="kp-label">Hops rejected</div><p class="kp-note">Re-keyed manually, customer notified, ~C$45 recon cost, 1 day delay.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">2 filings</div><div class="kp-label">Independent FINTRAC</div><p class="kp-note">Two parallel statutory filings, no shared view of the transaction.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">0</div><div class="kp-label">Canonical record</div><p class="kp-note">No single canonical record exists for the trade across the network.</p></div>
+          </div>
         </div>
 
         <div class="lsm-keypoints-panel interbank" data-keypoints-for="interbank">
-          <h5>What 4orm replaces: cross-bank settled on one regulated rail</h5>
-          <ul>
-            <li><b>T+0 atomic settlement</b>. The asset and the cash change hands at the same instant or not at all.</li>
-            <li><b>Single canonical ledger</b>. Both banks see the same record. No manual reconciliation breaks.</li>
-            <li><b>Zero correspondent chain</b>. No MT103 hops, no per-hop fees, no rejection cycles.</li>
-            <li><b>Embedded compliance</b>. KYC/AML checks live inside the token contract. Transfers enforce the rules.</li>
-            <li><b>Real-time reporting view</b>. FINTRAC and regulators can opt into supervisory access on the same rail.</li>
-            <li><b>Bank cores untouched</b>. Institutions integrate via ISO 20022 / API. Control plane stays with the bank.</li>
-          </ul>
+          <div class="kp-grid">
+            <div class="kp-bubble"><div class="kp-stat">T+0</div><div class="kp-label">Atomic settlement</div><p class="kp-note">Asset and cash change hands at the same instant or not at all.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">1 ledger</div><div class="kp-label">Single canonical record</div><p class="kp-note">Both banks see the same entry. No manual reconciliation breaks.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">0 hops</div><div class="kp-label">Correspondent chain</div><p class="kp-note">No MT103, no per-hop fees, no rejection cycles.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">In-token</div><div class="kp-label">Embedded compliance</div><p class="kp-note">KYC and AML checks live inside the token contract. Transfers enforce them.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">Live</div><div class="kp-label">Supervisory feed</div><p class="kp-note">FINTRAC and regulators can opt into read-only access on the same rail.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">0 changes</div><div class="kp-label">Bank cores untouched</div><p class="kp-note">Integrate via ISO 20022 / API. Control plane stays with the bank.</p></div>
+          </div>
         </div>
 
         <div class="lsm-keypoints-panel onus" data-keypoints-for="onus">
-          <h5>What 4orm replaces: internal (on-us) transfer within one bank</h5>
-          <ul>
-            <li><b>Instant on-ledger transfer</b>. Within Bank A's perimeter the token moves between accounts in seconds.</li>
-            <li><b>Zero settlement risk</b>. Both sides of the transaction live inside one regulated entity.</li>
-            <li><b>Replaces internal core-banking reconciliation</b> with a single shared on-ledger record.</li>
-            <li><b>One audit trail, not two</b>. Debit and credit are inseparable, posted atomically.</li>
-            <li><b>FINTRAC reporting auto-derives</b> from the on-ledger record. No parallel filing.</li>
-            <li><b>Same UX for the customer</b>. Branch / online / ATM / mobile all see the same instant confirmation.</li>
-          </ul>
+          <div class="kp-grid">
+            <div class="kp-bubble"><div class="kp-stat">Instant</div><div class="kp-label">On-ledger transfer</div><p class="kp-note">Within Bank A's perimeter the token moves between accounts in seconds.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">0 risk</div><div class="kp-label">Settlement exposure</div><p class="kp-note">Both sides of the transaction live inside one regulated entity.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">1 record</div><div class="kp-label">Replaces internal recon</div><p class="kp-note">One shared on-ledger entry instead of two reconciled core-banking records.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">1 trail</div><div class="kp-label">Audit log</div><p class="kp-note">Debit and credit are inseparable, posted atomically. One trail, not two.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">Auto</div><div class="kp-label">FINTRAC reporting</div><p class="kp-note">Reporting auto-derives from the on-ledger record. No parallel filing.</p></div>
+            <div class="kp-bubble"><div class="kp-stat">Same UX</div><div class="kp-label">For the customer</div><p class="kp-note">Branch, online, ATM, mobile all see the same instant confirmation.</p></div>
+          </div>
         </div>
 
       </div>
@@ -2420,6 +2451,14 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
     document.querySelectorAll('.lsm-keypoints-panel').forEach(function (p) {
       p.classList.toggle('active', p.getAttribute('data-keypoints-for') === flow);
     });
+    // Update the subhead next to "Key takeaways"
+    var subheads = {
+      legacy: 'Why legacy cross-bank settlement is slow, expensive, and risky',
+      interbank: 'What 4orm replaces: cross-bank settled on one regulated rail',
+      onus: 'What 4orm replaces: internal (on-us) transfer within one bank'
+    };
+    var sh = document.querySelector('.lsm-keypoints-subhead');
+    if (sh) sh.textContent = subheads[flow] || '';
   }
 
   var flowOrder = ['legacy', 'interbank', 'onus'];
@@ -2458,6 +2497,31 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   setFlow('legacy');
 })();
 </script>
+
+<!-- ───────────────────────────────────────────────────────────── Institutional bridge: hook to demo -->
+<section class="ibridge">
+  <div class="ibridge-inner">
+    <div>
+      <div class="ibridge-eye"><span class="dot"></span>For Canadian institutions</div>
+      <h2>This is the picture. <span class="accent">What does it mean for your bank?</span></h2>
+      <p class="ibridge-lead">The diagram above shows what changes at the rail level. The institutional demo walks the same flow tailored to your institution's profile, so your treasurer, risk lead, and CCO can see the dollar impact, the integration shape, and the regulatory posture in their own context.</p>
+      <a href="https://demo-exchange.vercel.app" target="_blank" rel="noopener" class="ibridge-cta">See it tailored to your institution ↗</a>
+      <div class="ibridge-meta">
+        <span>Live institutional sandbox</span>
+        <span>No signup</span>
+        <span>~15 minutes</span>
+      </div>
+    </div>
+
+    <div class="ibridge-qs">
+      <div class="ibridge-q"><div class="ibridge-q-num">01</div><div class="ibridge-q-text">How does this interoperate with our existing core, treasury, and clearing systems?</div></div>
+      <div class="ibridge-q"><div class="ibridge-q-num">02</div><div class="ibridge-q-text">What does this actually save us, in dollars per year, on our specific flow profile?</div></div>
+      <div class="ibridge-q"><div class="ibridge-q-num">03</div><div class="ibridge-q-text">What is the platform actually doing under the hood, and what is it not doing?</div></div>
+      <div class="ibridge-q"><div class="ibridge-q-num">04</div><div class="ibridge-q-text">How does our compliance, risk, and audit team plug in without losing oversight?</div></div>
+      <div class="ibridge-q"><div class="ibridge-q-num">05</div><div class="ibridge-q-text">What does the pilot look like, what does it cost, and how do we walk away if it does not fit?</div></div>
+    </div>
+  </div>
+</section>
 
 <!-- ───────────────────────────────────────────────────────────── Three entry points (architecture) -->
 <section class="section section-band">
