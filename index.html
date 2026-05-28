@@ -796,7 +796,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   /* ===== Boxes (generic) ===== */
   .lsm-node { fill: #FFFFFF; stroke: #C8D1E0; stroke-width: 1.4; }
   .lsm-node.brand { stroke: var(--brand); stroke-width: 2; }
-  .lsm-node.gold { stroke: #C49A3A; stroke-width: 1.5; fill: #FBF3DC; }
+  .lsm-node.gold { stroke: rgba(255,255,255,.32); stroke-width: 1.2; fill: rgba(255,255,255,.94); }
   .lsm-node.green { stroke: #2EA56D; stroke-width: 1.8; fill: #F4FBF7; }
   .lsm-node.legacy { stroke: #CCD6E4; stroke-width: 1.6; fill: #F4F7FB; }
   .lsm-title { font-size: 14px; font-weight: 800; fill: var(--text); }
@@ -918,7 +918,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .reg-gold-text   { fill: #8A6712 !important; }
 
   /* ISO 20022 pills, sit above the rail for clarity */
-  .lsm-iso-pill      { fill: #1B4ABE; stroke: #FFFFFF; stroke-width: 1.4; }
+  .lsm-iso-pill      { fill: rgba(255,255,255,.18); stroke: #FFFFFF; stroke-width: 1.4; }
   .lsm-iso-pill-text { font-size: 11.5px; font-weight: 800; fill: #FFFFFF; text-anchor: middle; letter-spacing: .04em; }
 
   /* Rail-to-DvP pathway label pill */
@@ -940,8 +940,8 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .lsm-live-ring { fill: none; stroke: #2EA56D; animation: lsm-pulse-ring 1.6s ease-out infinite; }
 
   /* New brighter gold + accent colors */
-  .lsm-bright-amber-bg { fill: #FFF4D6; stroke: #C49A3A; }
-  .lsm-bright-gold-chip { fill: #FFEEC2; stroke: #C8961E; }
+  .lsm-bright-amber-bg { fill: #FBF3DC; stroke: #C49A3A; }
+  .lsm-bright-gold-chip { fill: #FBF3DC; stroke: #C8961E; }
 
   /* "What you are seeing" cards (replaces the long paragraph caption) */
   .lsm-explain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
@@ -966,18 +966,18 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   /* ====== INTERBANK PANEL: BLACK BACKDROP MODE ====== */
   /* Everything inside keeps its own color. Only the panel backdrop + zone backgrounds + outer text go dark. */
   .lsm-stage[data-stage="interbank"] {
-    background: #07091A;
+    background: #1F3CA8;
     border-radius: 16px;
     padding: 18px 14px 22px 14px;
-    box-shadow: 0 12px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
+    box-shadow: 0 12px 40px rgba(11,18,32,.18), inset 0 0 0 1px rgba(255,255,255,.10);
   }
   .lsm-stage[data-stage="interbank"] .lsm-svg {
     background: transparent;
   }
   /* Override the 3 zone bgs to dark navy variants (subtle tonal difference per zone) */
-  .lsm-stage[data-stage="interbank"] rect.lsm-zone-bg-oversight { fill: #1B3082; }
-  .lsm-stage[data-stage="interbank"] rect.lsm-zone-bg-a        { fill: #1F3CA8; }
-  .lsm-stage[data-stage="interbank"] rect.lsm-zone-bg-center   { fill: #1F3CA8; }
+  .lsm-stage[data-stage="interbank"] rect.lsm-zone-bg-oversight { fill: #15233F; }
+  .lsm-stage[data-stage="interbank"] rect.lsm-zone-bg-a        { fill: #1B3082; }
+  .lsm-stage[data-stage="interbank"] rect.lsm-zone-bg-center   { fill: #1B3082; }
 
   /* Lighten zone band labels so they read on dark */
   .lsm-stage[data-stage="interbank"] .lsm-section-band-label { fill: #C5D2EC; }
@@ -989,12 +989,23 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   }
   .lsm-stage[data-stage="interbank"] .lsm-explain-grid .lsm-explain-card {
     /* keep cards as light cards on dark backdrop so they pop */
-    box-shadow: 0 6px 20px rgba(0,0,0,.35);
+    box-shadow: 0 6px 20px rgba(11,18,32,.20);
   }
 
   /* The bottom-band inline gold fill on this stage stays visible -- gold reads fine on dark.
      But the inline style="fill:#8A6712" is too dark; bump via a more visible gold using attribute selector */
   .lsm-stage[data-stage="interbank"] text.lsm-section-band-label[style*="8E6A1F"] { fill: #C49A3A !important; }
+
+  /* Arrows inside the 4orm rail (between Bank A core → rail → Bank B core) become white for legibility on blue */
+  .lsm-stage[data-stage="interbank"] .lsm-arrow-brand { stroke: #FFFFFF !important; }
+  .lsm-stage[data-stage="interbank"] marker[id^="arrow-brand-ib"] path,
+  .lsm-stage[data-stage="interbank"] marker[id^="arrow-brand-ib"] polygon { fill: #FFFFFF !important; stroke: #FFFFFF !important; }
+  /* Gold dashed feed arrow → white dashed (supervisory feed line) */
+  .lsm-stage[data-stage="interbank"] .lsm-arrow-gold { stroke: #FFFFFF !important; opacity: .8; }
+  .lsm-stage[data-stage="interbank"] marker[id^="arrow-gold-ib"] path,
+  .lsm-stage[data-stage="interbank"] marker[id^="arrow-gold-ib"] polygon { fill: #FFFFFF !important; stroke: #FFFFFF !important; }
+  /* Edge labels (feed, etc.) get white text */
+  .lsm-stage[data-stage="interbank"] .lsm-edge-label.gold { fill: #FFFFFF !important; }
 
   /* ----- Brighten the small bank-column labels so they read on the dark backdrop ----- */
   .lsm-stage[data-stage="interbank"] .lsm-bank-col-label { fill: #9AB6FF; font-size: 11px; letter-spacing: .12em; }
@@ -1427,7 +1438,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- Canonical token registry (left wide, slightly narrower so supervisory feed can grow) -->
           <rect class="lsm-node gold" x="30" y="150" width="930" height="160" rx="12" />
-          <text class="lsm-title" x="495" y="176" text-anchor="middle" style="fill:#8A6712;">Canonical token registry &middot; the Canadian-anchored ledger of record</text>
+          <text class="lsm-title" x="495" y="176" text-anchor="middle" style="fill:#1B4ABE;">Canonical token registry &middot; the Canadian-anchored ledger of record</text>
           <text class="lsm-sub" x="495" y="192" text-anchor="middle" style="font-style:italic;">Settlement finality requires DvP match + canonical write + treasury confirmation. Not blockchain alone.</text>
 
           <!-- Sample ledger entries (3 rows, the bottom one is "fresh" via JS) -->
@@ -1442,7 +1453,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
             <text id="lsm-led-text-3" x="62" y="275" style="font-family:var(--font-mono,monospace); font-size:11px; fill:#46556E;">tx#1042c8f   2026-05-26T14:31:42Z   tokenizedCAD: C$    750,000   tRWA: tABB-2031   DvP: settled   hash: c01...4ab</text>
           </g>
 
-          <text x="495" y="300" text-anchor="middle" style="font-size:10.5px; font-style:italic; fill:#8A6712;">Append-only. Each row is the authoritative reference for the trade. Disputes resolve here.</text>
+          <text x="495" y="300" text-anchor="middle" style="font-size:10.5px; font-style:italic; fill:#46556E;">Append-only. Each row is the authoritative reference for the trade. Disputes resolve here.</text>
 
           <!-- Regulators panel (right side of zone 1), enlarged with colored chips. Slate-blue background, distinct from the warm-gold canonical ledger. -->
           <rect class="lsm-reg-grid-bg" x="980" y="138" width="500" height="184" rx="14" />
@@ -2011,7 +2022,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           <!-- REJECTED badge appearing during the bounce-back phase of TX 02A. Moved up to y=350 so it sits clearly above the chain and never covers the main coin. -->
           <g class="legacy-break-badge">
-            <rect x="486" y="350" width="190" height="46" rx="9" fill="#FBE5E8" stroke="#8F5C12" stroke-width="1.6" />
+            <rect x="486" y="350" width="190" height="46" rx="9" fill="#FBF1DC" stroke="#8F5C12" stroke-width="1.6" />
             <text x="581" y="367" text-anchor="middle" style="font-size:11px; font-weight:800; fill:#8F5C12; letter-spacing:.06em;">REJECTED &middot; TX 02A</text>
             <text x="581" y="381" text-anchor="middle" style="font-size:10px; font-weight:700; fill:#8F5C12;">+1 day &middot; -C$45 recon cost</text>
             <text x="581" y="393" text-anchor="middle" style="font-size:9px; fill:#8F5C12; font-style:italic;">re-keyed manually, customer notified</text>
@@ -2031,7 +2042,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
         <p class="lsm-caption"><b>What you are seeing.</b> Top band: each bank keeps its own books and files its own FINTRAC reports, two parallel filings about the same trade. Status band: yellow lights show Customer A and Customer B funds at risk during the T+2 settlement window. Customer A's light turns green quickly when their debit posts, but Customer B's stays yellow until next-morning settlement clears, exposing both parties to break/repair risk in the meantime. The amber coin bouncing back and the red BREAK! badge illustrate the 3 to 6% recon-break rate on capital-markets cross-bank trades, each costing additional time and money. Middle band: the correspondent chain with each intermediary's actual nostro/vostro account visible inside, plus the AML re-screening that happens on every hop. Each SWIFT message above the chain has a red fee pill. Bottom band: the ACSS deferred-net batch tray with the T-timeline alongside, showing where the money actually is at each stage. <b>4orm replaces this whole picture</b> with the single rail shown in the What can 4orm do? tab.</p>
 
         <!-- Translation: what this costs in dollars for a mid-size regional bank -->
-        <div style="margin-top: 14px; padding: 16px 18px; background: linear-gradient(135deg, #F4F7FB 0%, #F8EBEB 100%); border: 1px solid #CCD6E4; border-left: 4px solid #8F5C12; border-radius: 10px;">
+        <div style="margin-top: 14px; padding: 16px 18px; background: linear-gradient(135deg, #F4F7FB 0%, #FBF1DC 100%); border: 1px solid #CCD6E4; border-left: 4px solid #8F5C12; border-radius: 10px;">
           <div style="font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #8F5C12; margin-bottom: 8px;">What this costs in dollars, illustrative for a mid-size regional bank</div>
           <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
             <div>
