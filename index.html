@@ -613,23 +613,6 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 }
 
 
-/* Exchange subnav — full-width black bar toggled by .nav-exchange */
-.nav-links a.nav-exchange.is-open{
-  background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 60%,#FFE39E 100%);
-  box-shadow:0 5px 16px rgba(196,154,58,.45),inset 0 1px 0 rgba(255,255,255,.5);
-}
-.subnav{background:#0B1220;border-bottom:1px solid #1c2740;position:sticky;top:74px;z-index:49;animation:subnavIn .16s ease-out}
-.subnav[hidden]{display:none}
-@keyframes subnavIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
-.subnav-inner{max-width:1400px;margin:0 auto;padding:0 28px;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
-.subnav-inner::-webkit-scrollbar{display:none}
-.subnav-inner a{display:inline-flex;align-items:center;gap:8px;padding:14px 18px;color:rgba(255,255,255,.62);font-size:.85rem;font-weight:600;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s ease;text-decoration:none}
-.subnav-inner a:hover{color:#fff;background:rgba(255,255,255,.04)}
-.subnav-inner a.active{color:#FFD9A8;border-bottom-color:#FFD9A8}
-.subnav-inner .sn-num{font-family:var(--font-mono);font-size:.66rem;color:rgba(255,217,168,.62);letter-spacing:.1em;font-weight:700}
-.subnav-inner a.active .sn-num{color:#FFD9A8}
-
-
 </style>
 </head>
 <body>
@@ -655,7 +638,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
       <a href="/leadership.html">Leadership</a>
       <a href="#faq">FAQ</a>
       <span class="nav-sep" aria-hidden="true"></span>
-      <a href="/exchange/" class="nav-exchange" aria-label="Enter the 4orm Exchange">
+      <a href="https://4ormex.com" target="_blank" rel="noopener" class="nav-exchange" aria-label="Enter the 4orm Exchange">
         <span class="ex-main">4ormEx<span class="ex-arr">↗</span></span>
         <span class="ex-eye">Exchange</span>
       </a>
@@ -683,13 +666,6 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
       real-world assets in Canada — built to the standards validated by the Bank of Canada's Project Samara.
       Regulator-aligned. Independently governed. Canadian sovereign. Operated as a separately governed entity, with technology developed by KCS Capital.
     </p>
-
-    <div class="dhero-pills">
-      <span class="dhero-pill gold">Pre-Seed · Closing Q2 2026</span>
-      <span class="dhero-pill">CIRO custody framework</span>
-      <span class="dhero-pill">Project Samara architecture</span>
-      <span class="dhero-pill">Alberta Sandbox</span>
-    </div>
 
     <div class="dhero-actions">
       <a class="dhero-btn gold" href="#waitlist">Join the institutional waitlist →</a>
@@ -1312,6 +1288,5 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
     ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 </script>
-<script src="./assets/nav.js?v=19" defer></script>
 </body>
 </html>
