@@ -975,6 +975,39 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   .lsm-legacy-ledger-text.rejected { fill: #D6334E !important; font-weight: 700; transition: fill .3s; }
   .lsm-legacy-ledger-row-bg.rejected { fill: #FCE6EA !important; transition: fill .3s; }
 
+  
+  /* "What you are seeing" structured breakdown */
+  .wys-panel { margin: 22px 0 0; padding: 24px 28px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-sm); }
+  .wys-eye { font-family: var(--font-mono); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); margin-bottom: 16px; }
+  .wys-grid { display: grid; gap: 14px; }
+  .wys-row { display: grid; grid-template-columns: 56px 1fr; gap: 18px; align-items: start; padding: 14px 0; border-top: 1px solid var(--border); }
+  .wys-row:first-child { border-top: none; padding-top: 0; }
+  .wys-num { font-family: var(--font-mono); font-size: 1.45rem; font-weight: 800; color: var(--brand); letter-spacing: -.02em; line-height: 1; padding-top: 3px; }
+  .wys-label { font-size: .82rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+  .wys-badge { font-family: var(--font-mono); font-size: .62rem; font-weight: 700; letter-spacing: .1em; padding: 3px 9px; border-radius: 99px; background: var(--warn-bg); color: var(--warn); text-transform: uppercase; }
+  .wys-body p { margin: 0; font-size: .94rem; line-height: 1.6; color: var(--text-2); }
+  .wys-replace { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); font-size: .94rem; color: var(--text); line-height: 1.55; }
+  .wys-replace b { color: var(--brand-700); }
+
+  /* Cost panel, brand-aligned */
+  .cost-panel { margin: 18px 0 0; padding: 24px 28px 22px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--warn); border-radius: 14px; box-shadow: var(--shadow-sm); }
+  .cost-head { display: flex; flex-direction: column; gap: 4px; margin-bottom: 18px; }
+  .cost-eye { font-family: var(--font-mono); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--warn); }
+  .cost-sub { font-size: .82rem; color: var(--text-3); font-style: italic; }
+  .cost-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  @media (max-width: 1100px) { .cost-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 720px) { .cost-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .cost-grid { grid-template-columns: 1fr; } }
+  .cost-cell { background: var(--surface); padding: 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .cost-amt { font-size: 1.18rem; font-weight: 800; color: var(--warn); letter-spacing: -.01em; line-height: 1.1; }
+  .cost-unit { font-size: .82rem; font-weight: 600; color: var(--text-3); margin-left: 4px; }
+  .cost-label { font-size: .88rem; font-weight: 700; color: var(--text); margin-top: 2px; }
+  .cost-note { margin: 0; font-size: .8rem; line-height: 1.5; color: var(--text-2); }
+  .cost-total { margin-top: 16px; padding: 14px 16px; background: var(--bg-2); border-radius: 10px; display: flex; flex-direction: column; gap: 6px; }
+  @media (min-width: 760px) { .cost-total { flex-direction: row; align-items: baseline; gap: 18px; } }
+  .cost-total-amt { font-size: 1.1rem; font-weight: 800; color: var(--warn); white-space: nowrap; }
+  .cost-total-text { font-size: .9rem; color: var(--text-2); line-height: 1.55; }
+
   /* ====== INTERBANK PANEL: BLACK BACKDROP MODE ====== */
   /* Everything inside keeps its own color. Only the panel backdrop + zone backgrounds + outer text go dark. */
   .lsm-stage[data-stage="interbank"] {
@@ -2051,34 +2084,81 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
           </g><!-- end transform group (status band shift) -->
         </svg>
-        <p class="lsm-caption"><b>What you are seeing.</b> Top band: each bank keeps its own books and files its own FINTRAC reports, two parallel filings about the same trade. Status band: yellow lights show Customer A and Customer B funds at risk during the T+2 settlement window. Customer A's light turns green quickly when their debit posts, but Customer B's stays yellow until next-morning settlement clears, exposing both parties to break/repair risk in the meantime. The amber coin bouncing back and the red BREAK! badge illustrate the 3 to 6% recon-break rate on capital-markets cross-bank trades, each costing additional time and money. Middle band: the correspondent chain with each intermediary's actual nostro/vostro account visible inside, plus the AML re-screening that happens on every hop. Each SWIFT message above the chain has a red fee pill. Bottom band: the ACSS deferred-net batch tray with the T-timeline alongside, showing where the money actually is at each stage. <b>4orm replaces this whole picture</b> with the single rail shown in the What can 4orm do? tab.</p>
-
-        <!-- Translation: what this costs in dollars for a mid-size regional bank -->
-        <div style="margin-top: 14px; padding: 16px 18px; background: linear-gradient(135deg, #F4F7FB 0%, #FBF1DC 100%); border: 1px solid #CCD6E4; border-left: 4px solid #8F5C12; border-radius: 10px;">
-          <div style="font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #8F5C12; margin-bottom: 8px;">What this costs in dollars, illustrative for a mid-size regional bank</div>
-          <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
-            <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$520K / yr</div>
-              <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>Trapped liquidity.</b> ~$40M average daily cross-bank flow stuck 1.5-2 days at 3.5% cost-of-funds.</div>
+        <!-- "What you are seeing" — structured 4-band breakdown, not a wall of text -->
+        <div class="wys-panel">
+          <div class="wys-eye">What you are seeing</div>
+          <div class="wys-grid">
+            <div class="wys-row">
+              <div class="wys-num">01</div>
+              <div class="wys-body">
+                <div class="wys-label">Top band</div>
+                <p>Each bank keeps its own books and files its own FINTRAC reports. Two parallel filings about the same trade. No single canonical record.</p>
+              </div>
             </div>
-            <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$340K / yr</div>
-              <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>Correspondent fees.</b> ~1.8M annual cross-bank payments at $0.15-0.25 SWIFT cost per hop.</div>
+            <div class="wys-row">
+              <div class="wys-num">02</div>
+              <div class="wys-body">
+                <div class="wys-label">Status band <span class="wys-badge">T+2 risk window</span></div>
+                <p>Yellow lights show Customer A and B funds at risk during the T+2 settlement window. Customer A's light turns green quickly when their debit posts; Customer B's stays yellow until next morning. The bouncing amber coin and red BREAK badge show the 3 to 6% recon-break rate on capital-markets cross-bank trades.</p>
+              </div>
             </div>
-            <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$230K / yr</div>
-              <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>Compliance labour tail.</b> Manual disposition of false-positive sanctions/AML alerts at $60/hr loaded.</div>
+            <div class="wys-row">
+              <div class="wys-num">03</div>
+              <div class="wys-body">
+                <div class="wys-label">Middle band</div>
+                <p>The correspondent chain with each intermediary's nostro / vostro account visible inside. AML re-screening happens on every hop. Each SWIFT message above the chain carries a fee.</p>
+              </div>
             </div>
-            <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$180K / yr</div>
-              <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>The 3-6% break rate.</b> Manual reconciliation work on cross-bank cap-markets trades at ~$120 per break.</div>
-            </div>
-            <div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #8F5C12;">~$150K / yr</div>
-              <div style="font-size: .76rem; color: var(--text-2); line-height:1.4;"><b>KYC duplication.</b> Re-onboarding the same client at each institution across the network.</div>
+            <div class="wys-row">
+              <div class="wys-num">04</div>
+              <div class="wys-body">
+                <div class="wys-label">Bottom band</div>
+                <p>The ACSS deferred-net batch tray with the T-timeline alongside, showing where the money actually is at each stage.</p>
+              </div>
             </div>
           </div>
-          <div style="margin-top: 12px; font-size: .82rem; color: var(--text-2); line-height: 1.5;"><b style="color: #8F5C12;">Total: ~$1.42M / year</b> for a Canadian mid-size regional bank profile, CAD, illustrative. This is the gap 4orm is built to close. Full v2 methodology on the <a href="cost-analysis-bank.html">What It Saves</a> page; flip to the <b>What can 4orm do?</b> tab above to see what the same flow looks like with the rail in place.</div>
+          <div class="wys-replace">
+            <b>4orm replaces this whole picture</b> with the single rail shown in the <b>What can 4orm do?</b> tab.
+          </div>
+        </div>
+
+        <!-- What this costs, restyled to brand palette -->
+        <div class="cost-panel">
+          <div class="cost-head">
+            <div class="cost-eye">What this costs in dollars</div>
+            <div class="cost-sub">Illustrative for a Canadian mid-size regional bank, CAD</div>
+          </div>
+          <div class="cost-grid">
+            <div class="cost-cell">
+              <div class="cost-amt">~$520K<span class="cost-unit">/ yr</span></div>
+              <div class="cost-label">Trapped liquidity</div>
+              <p class="cost-note">~$40M average daily cross-bank flow stuck 1.5 to 2 days at 3.5% cost-of-funds.</p>
+            </div>
+            <div class="cost-cell">
+              <div class="cost-amt">~$340K<span class="cost-unit">/ yr</span></div>
+              <div class="cost-label">Correspondent fees</div>
+              <p class="cost-note">~1.8M annual cross-bank payments at $0.15 to $0.25 SWIFT cost per hop.</p>
+            </div>
+            <div class="cost-cell">
+              <div class="cost-amt">~$230K<span class="cost-unit">/ yr</span></div>
+              <div class="cost-label">Compliance labour tail</div>
+              <p class="cost-note">Manual disposition of false-positive sanctions and AML alerts at $60/hr loaded.</p>
+            </div>
+            <div class="cost-cell">
+              <div class="cost-amt">~$180K<span class="cost-unit">/ yr</span></div>
+              <div class="cost-label">3 to 6% break rate</div>
+              <p class="cost-note">Manual reconciliation work on cross-bank capital-markets trades at ~$120 per break.</p>
+            </div>
+            <div class="cost-cell">
+              <div class="cost-amt">~$150K<span class="cost-unit">/ yr</span></div>
+              <div class="cost-label">KYC duplication</div>
+              <p class="cost-note">Re-onboarding the same client at each institution across the network.</p>
+            </div>
+          </div>
+          <div class="cost-total">
+            <div class="cost-total-amt">~$1.42M / year</div>
+            <div class="cost-total-text">This is the gap 4orm is built to close. Full methodology on the <a href="https://demo-exchange.vercel.app/cost-analysis-bank.html" target="_blank" rel="noopener">What It Saves</a> page. Click the <b>What can 4orm do?</b> tab above to see the same flow with the rail in place.</div>
+          </div>
         </div>
       </div>
 
