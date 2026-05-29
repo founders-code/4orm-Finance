@@ -4,9 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>4orm Finance: Canada's Institution-Grade RWA Exchange &amp; Digital Settlement Network</title>
-<meta name="description" content="4orm Finance is Canada's institution-grade real-world asset exchange and digital settlement network. Built to Bank of Canada Project Samara standards. Regulator-aligned. Independently governed. Canadian sovereign. Operated by KCS Capital." />
+<meta name="description" content="4orm Finance is Canada's regulated control plane for tokenized real-world assets. Built to Bank of Canada Project Samara standards. Regulator-aligned. Independently governed. Canadian sovereign. Operated by KCS Capital." />
 <meta property="og:title" content="4orm Finance: Canada's Institution-Grade RWA Exchange &amp; Digital Settlement Network" />
-<meta property="og:description" content="The neutral, multi-institution settlement layer for tokenized real-world assets in Canada. Pre-Seed active. Closing Q2 2026." />
+<meta property="og:description" content="The regulated control plane for tokenized real-world assets in Canada. Pre-Seed active. Closing Q2 2026." />
 <meta property="og:type" content="website" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -601,7 +601,130 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 @media (max-width:880px){.footer .grid{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.footer .grid{grid-template-columns:1fr}}
 
-::selection{background:var(--brand);color:#fff}
+
+  /* The Control Plane — 6 pillars band */
+  .cplane-section { padding: 80px 0; background: var(--bg); }
+  .cplane-head { max-width: var(--maxw); margin: 0 auto 36px; padding: 0 28px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: end; }
+  @media (max-width: 900px) { .cplane-head { grid-template-columns: 1fr; gap: 18px; } }
+  .cplane-head .s-eye { margin-bottom: 12px; }
+  .cplane-head h2 { margin: 0; }
+  .cplane-head p { margin: 12px 0 0; color: var(--text-2); font-size: 1.02rem; line-height: 1.6; max-width: 56ch; }
+  .cplane-grid { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 900px) { .cplane-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .cplane-grid { grid-template-columns: 1fr; } }
+  .cplane-card { display: flex; flex-direction: column; gap: 10px; padding: 22px 22px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); text-decoration: none; color: inherit; transition: transform .15s, box-shadow .2s, border-color .2s; }
+  .cplane-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--brand-100); }
+  .cplane-card .cp-num { font-family: var(--font-mono); font-size: .82rem; font-weight: 700; color: var(--brand); letter-spacing: .04em; }
+  .cplane-card h3 { margin: 0; font-size: 1.12rem; letter-spacing: -.01em; color: var(--text); }
+  .cplane-card .cp-line { font-size: .92rem; color: var(--text-2); line-height: 1.5; margin: 0; }
+  .cplane-card .cp-prevents { margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--border); display: flex; align-items: baseline; gap: 8px; font-size: .82rem; color: var(--text-3); }
+  .cplane-card .cp-prevents b { color: var(--warn); font-weight: 700; font-family: var(--font-mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+  .cplane-card .cp-arr { margin-top: 6px; font-size: .86rem; font-weight: 700; color: var(--brand); display: inline-flex; align-items: center; gap: 6px; transition: gap .15s; }
+  .cplane-card:hover .cp-arr { gap: 10px; color: var(--brand-700); }
+
+  /* Interoperability adapter layer band */
+  .interop-section { padding: 80px 0; background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .interop-head { max-width: var(--maxw); margin: 0 auto 36px; padding: 0 28px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: end; }
+  @media (max-width: 900px) { .interop-head { grid-template-columns: 1fr; gap: 18px; } }
+  .interop-head h2 { margin: 0; }
+  .interop-head p { margin: 12px 0 0; color: var(--text-2); font-size: 1.02rem; line-height: 1.6; max-width: 56ch; }
+  .interop-grid { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 900px) { .interop-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .interop-grid { grid-template-columns: 1fr; } }
+  .adp-card { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); }
+  .adp-card .adp-label { font-family: var(--font-mono); font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--brand-700); }
+  .adp-card h4 { margin: 0; font-size: 1rem; color: var(--text); letter-spacing: -.01em; }
+  .adp-card p { margin: 0; font-size: .86rem; color: var(--text-2); line-height: 1.5; }
+  .adp-card .adp-providers { margin-top: 6px; font-size: .76rem; color: var(--text-3); font-style: italic; }
+  .interop-foot { max-width: var(--maxw); margin: 28px auto 0; padding: 18px 28px 0; border-top: 1px solid var(--border); color: var(--text-2); font-size: .94rem; line-height: 1.55; }
+  .interop-foot b { color: var(--brand-700); }
+
+  
+  /* What it means for a mid-size bank — cost surfacing band */
+  .cost-banner { background: var(--bg-2); border-bottom: 1px solid var(--border); padding: 22px 0; }
+  .cost-banner-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; }
+  @media (max-width: 760px) { .cost-banner-inner { grid-template-columns: 1fr; gap: 8px; } }
+  .cost-banner .cb-amt { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 800; color: var(--warn); letter-spacing: -.02em; line-height: 1; white-space: nowrap; }
+  .cost-banner .cb-amt span { font-size: .8rem; font-weight: 600; color: var(--text-3); margin-left: 4px; }
+  .cost-banner .cb-text { font-size: .94rem; color: var(--text-2); line-height: 1.5; }
+  .cost-banner .cb-text b { color: var(--text); font-weight: 700; }
+
+  /* Own / Integrate — architecture diagram + summary */
+  .owni { padding: 80px 0; background: var(--bg); border-top: 1px solid var(--border); }
+  .owni-head { max-width: var(--maxw); margin: 0 auto 32px; padding: 0 28px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: end; }
+  @media (max-width: 900px) { .owni-head { grid-template-columns: 1fr; gap: 18px; } }
+  .owni-head .s-eye { margin-bottom: 12px; }
+  .owni-head h2 { margin: 0; }
+  .owni-head p { margin: 12px 0 0; color: var(--text-2); font-size: 1.02rem; line-height: 1.6; max-width: 56ch; }
+  .owni-diagram-wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+  .owni-diagram { display: block; width: 100%; height: auto; max-width: 1200px; margin: 0 auto; }
+  .owni-foot { max-width: var(--maxw); margin: 28px auto 0; padding: 0 28px; color: var(--text-2); font-size: .96rem; line-height: 1.55; font-style: italic; text-align: center; }
+  .owni-foot b { color: var(--brand-700); font-style: normal; }
+  @media (max-width: 760px) {
+    .owni-diagram-wrap { padding: 0 14px; }
+  }
+
+  /* Settlement finality pull quote */
+  .pullq { background: var(--bg); padding: 56px 0 24px; border-top: 1px solid var(--border); }
+  .pullq-inner { max-width: 960px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 64px 1fr; gap: 28px; align-items: start; }
+  @media (max-width: 720px) { .pullq-inner { grid-template-columns: 1fr; gap: 16px; } }
+  .pullq-mark { font-family: 'Georgia', serif; font-size: 5rem; line-height: .8; color: var(--gold); font-weight: 800; }
+  .pullq-text { font-size: clamp(1.2rem, 1.8vw, 1.45rem); line-height: 1.4; color: var(--text); font-weight: 750; letter-spacing: -.01em; }
+  .pullq-text b { color: var(--brand-700); }
+  .pullq-cite { margin-top: 12px; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); font-weight: 700; }
+
+  
+  /* Cost breakdown stacked bar chart */
+  .costchart { background: var(--bg-2); border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); padding: 28px 0; }
+  .costchart-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+  .costchart-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; }
+  .costchart-eye { font-family: var(--font-mono); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); }
+  .costchart-total .cc-total-amt { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; color: var(--brand-700); letter-spacing: -.02em; }
+  .costchart-total .cc-total-unit { font-size: .82rem; color: var(--text-3); margin-left: 6px; }
+  .costchart-bar { display: flex; height: 76px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 14px rgba(11,18,32,.10); border: 1px solid rgba(0,0,0,.06); }
+  .cc-seg { display: flex; flex-direction: column; justify-content: center; padding: 8px 10px; color: #FFFFFF; min-width: 0; transition: filter .2s, transform .2s; }
+  .cc-seg:hover { filter: brightness(1.08); transform: translateY(-2px); }
+  .cc-seg-amt { font-family: var(--font-mono); font-size: 1.05rem; font-weight: 800; line-height: 1; letter-spacing: -.01em; }
+  .cc-seg-label { font-size: .76rem; font-weight: 600; margin-top: 4px; opacity: .92; }
+  .costchart-foot { margin-top: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: .88rem; color: var(--text-2); line-height: 1.55; }
+  .costchart-foot b { color: var(--text); font-weight: 700; }
+  .costchart-note { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; color: var(--text-3); text-transform: uppercase; }
+
+  /* Lifecycle flow */
+  .lifecycle { padding: 80px 0; background: var(--bg); border-top: 1px solid var(--border); }
+  .lifecycle-head { max-width: var(--maxw); margin: 0 auto 32px; padding: 0 28px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: end; }
+  @media (max-width: 900px) { .lifecycle-head { grid-template-columns: 1fr; gap: 18px; } }
+  .lifecycle-head .s-eye { margin-bottom: 12px; }
+  .lifecycle-head h2 { margin: 0; }
+  .lifecycle-head p { margin: 12px 0 0; color: var(--text-2); font-size: 1.02rem; line-height: 1.6; max-width: 56ch; }
+  .lc-flow { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; overflow-x: auto; }
+  .lc-svg { display: block; width: 100%; height: auto; min-width: 1100px; }
+  .lifecycle-foot { max-width: var(--maxw); margin: 24px auto 0; padding: 0 28px; color: var(--text-2); font-size: .96rem; line-height: 1.55; text-align: center; font-style: italic; }
+  .lifecycle-foot b { color: var(--brand-700); font-style: normal; }
+
+  /* Legal structure inside KCS bridge */
+  .legal-struct-wrap { max-width: 1100px; margin: 28px auto 0; padding: 0 28px; }
+  .legal-struct { display: block; width: 100%; height: auto; max-width: 1100px; margin: 0 auto; }
+  .legal-struct-foot { max-width: 60em; margin: 18px auto 0; color: var(--text-2); font-size: .94rem; line-height: 1.55; text-align: center; }
+  .legal-struct-foot b { color: var(--brand-700); }
+
+  /* Distinction 2-panel contrast */
+  .distinction .dist-contrast { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: stretch; margin-top: 36px; }
+  @media (max-width: 760px) { .distinction .dist-contrast { grid-template-columns: 1fr; } }
+  .dist-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px 26px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; }
+  .dist-them { border-left: 4px solid var(--gold-2); }
+  .dist-us { border-left: 4px solid var(--brand); }
+  .dist-eye { font-family: var(--font-mono); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+  .dist-them .dist-eye { color: var(--gold-ink); }
+  .dist-us .dist-eye { color: var(--brand-700); }
+  .dist-svg { margin: 6px 0; display: flex; justify-content: center; }
+  .dist-svg svg { display: block; width: 100%; height: auto; max-width: 280px; }
+  .dist-panel p { margin: 0; font-size: .94rem; color: var(--text-2); line-height: 1.55; }
+  .dist-divider { display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); }
+  .dist-divider span { padding: 6px 10px; border: 1px solid var(--border); border-radius: 99px; background: var(--surface); }
+  @media (max-width: 760px) { .dist-divider { padding: 0; margin: 8px 0; } }
+
+  ::selection{background:var(--brand);color:#fff}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* Reveal */
@@ -657,14 +780,12 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
       <div>OPERATOR / <span class="v">KCS_CAPITAL</span></div>
     </div>
 
-    <div class="dhero-eyebrow"><span class="dot"></span> Canada's institution-grade RWA exchange</div>
+    <div class="dhero-eyebrow"><span class="dot"></span> Canada's regulated RWA control plane</div>
 
-    <h1>Canada's <span class="accent">settlement layer</span> for tokenized real-world assets.</h1>
+    <h1>Canada's <span class="accent">regulated control plane</span> for tokenized real-world assets.</h1>
 
     <p class="dhero-sub">
-      <strong>4orm Finance</strong> is the agnostic, multi-institution infrastructure layer for tokenized
-      real-world assets in Canada, built to the standards validated by the Bank of Canada's Project Samara.
-      Regulator-aligned. Independently governed. Canadian sovereign. Operated as a separately governed entity, with technology developed by KCS Capital.
+      <strong>4orm Finance</strong> operates the regulated perimeter inside which Canadian institutions issue, trade, settle, custody, report, and supervise tokenized real-world assets. Settlement is embedded. Compliance is embedded. The blockchain is an execution surface; the regulated controls live with the platform and the institution. Built to the standards validated by the Bank of Canada's Project Samara. Operated as a separately governed regulated entity, with technology developed by KCS Capital.
     </p>
 
     <div class="dhero-actions">
@@ -728,6 +849,400 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   </div>
 </div>
 
+<!-- ───────────────────────────────────────────────────────────── Cost breakdown — stacked bar chart -->
+<section class="costchart">
+  <div class="costchart-inner">
+    <div class="costchart-head">
+      <div class="costchart-eye">What legacy cross-bank settlement costs a mid-size Canadian regional bank</div>
+      <div class="costchart-total"><span class="cc-total-amt">~$1.42M</span><span class="cc-total-unit">/ year</span></div>
+    </div>
+
+    <div class="costchart-bar" role="img" aria-label="$1.42M annual cost breakdown across five categories">
+      <div class="cc-seg" style="flex-basis:36.6%;background:#1B4ABE" data-amt="$520K" data-label="Trapped liquidity">
+        <span class="cc-seg-amt">$520K</span>
+        <span class="cc-seg-label">Trapped liquidity</span>
+      </div>
+      <div class="cc-seg" style="flex-basis:23.9%;background:#2E6BF2" data-amt="$340K" data-label="Correspondent fees">
+        <span class="cc-seg-amt">$340K</span>
+        <span class="cc-seg-label">Correspondent fees</span>
+      </div>
+      <div class="cc-seg" style="flex-basis:16.2%;background:#5A93FF" data-amt="$230K" data-label="Compliance labour">
+        <span class="cc-seg-amt">$230K</span>
+        <span class="cc-seg-label">Compliance labour</span>
+      </div>
+      <div class="cc-seg" style="flex-basis:12.7%;background:#C49A3A" data-amt="$180K" data-label="Break-rate work">
+        <span class="cc-seg-amt">$180K</span>
+        <span class="cc-seg-label">Break rate</span>
+      </div>
+      <div class="cc-seg" style="flex-basis:10.6%;background:#E7C76C" data-amt="$150K" data-label="KYC duplication">
+        <span class="cc-seg-amt">$150K</span>
+        <span class="cc-seg-label">KYC duplication</span>
+      </div>
+    </div>
+
+    <div class="costchart-foot">
+      <span><b>This is the gap 4orm Finance is built to close.</b> Trapped liquidity, correspondent fees, compliance labour, recon-break work, and KYC duplication, all on cross-bank settlement.</span>
+      <span class="costchart-note">Illustrative model, CAD &middot; methodology in the diagram below</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────────────────── The Control Plane: 6 pillars -->
+<section class="cplane-section">
+  <div class="cplane-head">
+    <div>
+      <div class="s-eye"><span class="tick"></span><span class="txt">The Control Plane</span></div>
+      <p>Settlement is one capability inside the perimeter. Issuance, trading, custody coordination, regulatory reporting, and supervisory auditability are the others. They are designed to operate as a single regulated rail.</p>
+    </div>
+    <h2>Six embedded capabilities. <span class="h-it">One regulated perimeter.</span></h2>
+  </div>
+
+  <div class="cplane-grid">
+
+    <a href="/architecture.html#issuance" class="cplane-card">
+      <div class="cp-num">01 · ISSUANCE</div>
+      <h3>EMD-governed primary issuance</h3>
+      <p class="cp-line">Suitability, approval, and distribution authority stay with the registered dealer. The token is minted with transfer rules embedded at genesis.</p>
+      <div class="cp-prevents"><b>Prevents</b><span>Mis-sold private placements. Off-ledger exception books.</span></div>
+      <span class="cp-arr">Inside the architecture →</span>
+    </a>
+
+    <a href="/architecture.html#trading" class="cplane-card">
+      <div class="cp-num">02 · TRADING</div>
+      <h3>Permissioned marketplace</h3>
+      <p class="cp-line">Eligibility checked before match. ERC-3643 transfer rules enforced by the token contract. Institutional members only.</p>
+      <div class="cp-prevents"><b>Prevents</b><span>Failed trades from non-eligible counterparties. Unsanctioned distribution.</span></div>
+      <span class="cp-arr">Inside the architecture →</span>
+    </a>
+
+    <a href="/architecture.html#settlement" class="cplane-card">
+      <div class="cp-num">03 · SETTLEMENT</div>
+      <h3>Atomic DvP, embedded</h3>
+      <p class="cp-line">Asset and cash change hands at the same instant or not at all. T+0. Both legs settle inside the perimeter, on the canonical ledger.</p>
+      <div class="cp-prevents"><b>Prevents</b><span>T+2 settlement-risk windows. Manual reconciliation breaks.</span></div>
+      <span class="cp-arr">Inside the architecture →</span>
+    </a>
+
+    <a href="/architecture.html#custody" class="cplane-card">
+      <div class="cp-num">04 · CUSTODY</div>
+      <h3>Qualified Canadian custody</h3>
+      <p class="cp-line">Underlying assets held by a CIRO-aligned qualified custodian. Custody confirmation is part of the settlement finality check, not a downstream task.</p>
+      <div class="cp-prevents"><b>Prevents</b><span>Custody-confirmation delays. Multi-custodian reconciliation drift.</span></div>
+      <span class="cp-arr">Inside the architecture →</span>
+    </a>
+
+    <a href="/architecture.html#reporting" class="cplane-card">
+      <div class="cp-num">05 · REPORTING</div>
+      <h3>Auto-derived regulatory reporting</h3>
+      <p class="cp-line">FINTRAC, CSA, and OSFI obligations auto-derive from the canonical ledger. The institution keeps filing authority; the source data is no longer disputed.</p>
+      <div class="cp-prevents"><b>Prevents</b><span>Late STR / LCTR / EFTR filings. Source-of-truth disagreements between desks.</span></div>
+      <span class="cp-arr">Inside the architecture →</span>
+    </a>
+
+    <a href="/architecture.html#supervision" class="cplane-card">
+      <div class="cp-num">06 · SUPERVISION</div>
+      <h3>Read-only supervisory feed</h3>
+      <p class="cp-line">OSFI, CSA, FINTRAC, BoC, FSRA, and AMF can opt into a privacy-preserving aggregate feed. Never reads core banking. Institution controls what is shared.</p>
+      <div class="cp-prevents"><b>Prevents</b><span>Surprise regulator visits over data that should have been visible.</span></div>
+      <span class="cp-arr">Inside the architecture →</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────────────────── What we own / What we integrate -->
+<section class="owni">
+  <div class="owni-head">
+    <div>
+      <div class="s-eye"><span class="tick"></span><span class="txt">The architectural philosophy</span></div>
+      <p>The regulated operational core stays inside the platform. Everything else, chains, custodians, KYC providers, interoperability frameworks, sits in bounded integration domains, all swappable behind a single abstraction. This is how the rail stays neutral and stays regulated at the same time.</p>
+    </div>
+    <h2>What we <span class="h-it">own.</span> What we <span class="h-it" style="color:var(--gold-2)">integrate.</span></h2>
+  </div>
+
+  <!-- The architectural diagram -->
+  <div class="owni-diagram-wrap">
+    <svg class="owni-diagram" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4orm regulated perimeter architecture diagram">
+
+      <!-- Background grid (subtle) -->
+      <defs>
+        <pattern id="gridDots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="1" fill="#E3E9F2" />
+        </pattern>
+        <linearGradient id="coreGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1F3CA8" />
+          <stop offset="100%" stop-color="#15233F" />
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1200" height="720" fill="url(#gridDots)" opacity="0.5" />
+
+      <!-- Outside ring label -->
+      <text x="600" y="34" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" font-weight="800" letter-spacing="3" fill="#8A6712">INTEGRATION DOMAINS &middot; BOUNDED &middot; SWAPPABLE</text>
+
+      <!-- 7 adapter boxes around the perimeter -->
+      <!-- Top row: Chains, Interop, Custodians -->
+      <g class="owni-adp">
+        <rect x="120" y="80" width="220" height="76" rx="14" fill="#FBF3DC" stroke="#C49A3A" stroke-width="1.5"/>
+        <text x="230" y="106" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.5" fill="#8A6712">CHAINS &amp; LEDGERS</text>
+        <text x="230" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#142036">Ethereum &middot; Stellar</text>
+        <text x="230" y="144" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Hyperledger family</text>
+      </g>
+
+      <g class="owni-adp">
+        <rect x="490" y="80" width="220" height="76" rx="14" fill="#FBF3DC" stroke="#C49A3A" stroke-width="1.5"/>
+        <text x="600" y="106" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.5" fill="#8A6712">INTEROP PROVIDERS</text>
+        <text x="600" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#142036">LayerZero &middot; CCIP</text>
+        <text x="600" y="144" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Wormhole &middot; IBC</text>
+      </g>
+
+      <g class="owni-adp">
+        <rect x="860" y="80" width="220" height="76" rx="14" fill="#FBF3DC" stroke="#C49A3A" stroke-width="1.5"/>
+        <text x="970" y="106" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.5" fill="#8A6712">QUALIFIED CUSTODY</text>
+        <text x="970" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#142036">Tetra Trust</text>
+        <text x="970" y="144" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">HSM &middot; multi-custodian</text>
+      </g>
+
+      <!-- Left side: Banking rails (vertical center-left) -->
+      <g class="owni-adp">
+        <rect x="40" y="320" width="200" height="76" rx="14" fill="#FBF3DC" stroke="#C49A3A" stroke-width="1.5"/>
+        <text x="140" y="346" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.5" fill="#8A6712">BANKING RAILS</text>
+        <text x="140" y="366" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#142036">ISO 20022 &middot; Lynx</text>
+        <text x="140" y="384" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">ACSS &middot; RTR</text>
+      </g>
+
+      <!-- Right side: Cash assets -->
+      <g class="owni-adp">
+        <rect x="960" y="320" width="200" height="76" rx="14" fill="#FBF3DC" stroke="#C49A3A" stroke-width="1.5"/>
+        <text x="1060" y="346" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.5" fill="#8A6712">CASH SETTLEMENT</text>
+        <text x="1060" y="366" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#142036">Tokenized deposits</text>
+        <text x="1060" y="384" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">QCAD &middot; reg. stablecoin</text>
+      </g>
+
+      <!-- Bottom row: KYC providers, Identity & credentials -->
+      <g class="owni-adp">
+        <rect x="240" y="564" width="220" height="76" rx="14" fill="#FBF3DC" stroke="#C49A3A" stroke-width="1.5"/>
+        <text x="350" y="590" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.5" fill="#8A6712">KYC / AML PROVIDERS</text>
+        <text x="350" y="610" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#142036">Institution-attested</text>
+        <text x="350" y="628" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">PCMLTFA s.105 reliance</text>
+      </g>
+
+      <g class="owni-adp">
+        <rect x="740" y="564" width="220" height="76" rx="14" fill="#FBF3DC" stroke="#C49A3A" stroke-width="1.5"/>
+        <text x="850" y="590" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.5" fill="#8A6712">IDENTITY &amp; CREDENTIALS</text>
+        <text x="850" y="610" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#142036">Reusable VCs</text>
+        <text x="850" y="628" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">across the network</text>
+      </g>
+
+      <!-- Dashed adapter lines connecting outer boxes to the core perimeter -->
+      <g stroke="#C49A3A" stroke-width="1.4" stroke-dasharray="5 4" fill="none" opacity="0.7">
+        <!-- Top to core -->
+        <path d="M 230 156 L 320 215" marker-end="url(#arrow-adp)"/>
+        <path d="M 600 156 L 600 215" marker-end="url(#arrow-adp)"/>
+        <path d="M 970 156 L 880 215" marker-end="url(#arrow-adp)"/>
+        <!-- Left to core -->
+        <path d="M 240 358 L 320 358" marker-end="url(#arrow-adp)"/>
+        <!-- Right to core -->
+        <path d="M 960 358 L 880 358" marker-end="url(#arrow-adp)"/>
+        <!-- Bottom to core -->
+        <path d="M 350 564 L 380 505" marker-end="url(#arrow-adp)"/>
+        <path d="M 850 564 L 820 505" marker-end="url(#arrow-adp)"/>
+      </g>
+
+      <!-- Arrow marker definition -->
+      <defs>
+        <marker id="arrow-adp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#C49A3A"/>
+        </marker>
+      </defs>
+
+      <!-- THE CORE — 4orm Regulated Perimeter -->
+      <rect x="320" y="215" width="560" height="290" rx="22" fill="url(#coreGrad)" stroke="#1B4ABE" stroke-width="2.5"/>
+
+      <!-- Glow halo -->
+      <rect x="312" y="207" width="576" height="306" rx="26" fill="none" stroke="rgba(31,60,168,.20)" stroke-width="14"/>
+
+      <!-- Core label -->
+      <text x="600" y="248" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" font-weight="800" letter-spacing="2.5" fill="#FFD9A8">4ORM REGULATED PERIMETER</text>
+      <text x="600" y="270" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="800" fill="#FFFFFF">What we own. Authority that cannot be delegated.</text>
+
+      <!-- 7 owned capabilities — 3 rows of cells inside the perimeter -->
+      <!-- Row 1 (3 items) -->
+      <g class="owni-core">
+        <rect x="346" y="290" width="166" height="46" rx="8" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.30)" stroke-width="1"/>
+        <text x="429" y="309" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="800" letter-spacing="1.2" fill="#FFD9A8">01</text>
+        <text x="429" y="324" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Canonical ledger</text>
+
+        <rect x="517" y="290" width="166" height="46" rx="8" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.30)" stroke-width="1"/>
+        <text x="600" y="309" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="800" letter-spacing="1.2" fill="#FFD9A8">02</text>
+        <text x="600" y="324" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Compliance engine</text>
+
+        <rect x="688" y="290" width="166" height="46" rx="8" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.30)" stroke-width="1"/>
+        <text x="771" y="309" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="800" letter-spacing="1.2" fill="#FFD9A8">03</text>
+        <text x="771" y="324" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Settlement orchestration</text>
+      </g>
+
+      <!-- Row 2 (2 items, centered) -->
+      <g class="owni-core">
+        <rect x="346" y="348" width="166" height="46" rx="8" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.30)" stroke-width="1"/>
+        <text x="429" y="367" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="800" letter-spacing="1.2" fill="#FFD9A8">04</text>
+        <text x="429" y="382" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Treasury coordination</text>
+
+        <rect x="517" y="348" width="166" height="46" rx="8" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.30)" stroke-width="1"/>
+        <text x="600" y="367" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="800" letter-spacing="1.2" fill="#FFD9A8">05</text>
+        <text x="600" y="382" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Issuer governance</text>
+
+        <rect x="688" y="348" width="166" height="46" rx="8" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.30)" stroke-width="1"/>
+        <text x="771" y="367" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="800" letter-spacing="1.2" fill="#FFD9A8">06</text>
+        <text x="771" y="382" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Token registry</text>
+      </g>
+
+      <!-- Row 3 (1 wide item: Supervisory auditability) -->
+      <g class="owni-core">
+        <rect x="430" y="408" width="340" height="46" rx="8" fill="rgba(255,217,168,.18)" stroke="rgba(255,217,168,.55)" stroke-width="1.4"/>
+        <text x="600" y="427" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="800" letter-spacing="1.2" fill="#FFD9A8">07</text>
+        <text x="600" y="442" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Supervisory auditability</text>
+      </g>
+
+      <text x="600" y="478" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" font-style="italic" fill="rgba(255,255,255,.65)">Ledger of record &middot; compliance engine &middot; settlement logic, never delegated.</text>
+
+    </svg>
+  </div>
+
+  <p class="owni-foot">The platform never yields control of the ledger of record, the compliance engine, or the settlement logic. Everything else is an adapter. <b>That posture is how 4orm stays provider-neutral and regulator-aligned at the same time.</b></p>
+</section>
+
+<!-- ───────────────────────────────────────────────────────────── End-to-end lifecycle flow -->
+<section class="lifecycle">
+  <div class="lifecycle-head">
+    <div>
+      <div class="s-eye"><span class="tick"></span><span class="txt">The end-to-end lifecycle</span></div>
+      <p>One regulated rail covers every state of a tokenized real-world asset, from EMD-governed primary issuance through atomic settlement, qualified custody, regulatory reporting, and final redemption. The same controls apply to every step.</p>
+    </div>
+    <h2>One platform. <span class="h-it">The full lifecycle.</span></h2>
+  </div>
+
+  <div class="lc-flow">
+    <svg class="lc-svg" viewBox="0 0 1320 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="End-to-end lifecycle: issuance, trading, settlement, custody, reporting, redemption">
+      <defs>
+        <marker id="lc-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#2E6BF2"/>
+        </marker>
+        <linearGradient id="lc-stop6" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#E7C76C"/>
+          <stop offset="100%" stop-color="#C49A3A"/>
+        </linearGradient>
+      </defs>
+
+      <!-- 6 stations -->
+      <!-- 01 ISSUANCE -->
+      <g class="lc-stn">
+        <rect x="10" y="80" width="200" height="220" rx="14" fill="#FFFFFF" stroke="#CFE0FD" stroke-width="1.6"/>
+        <circle cx="40" cy="110" r="18" fill="#EAF1FE" stroke="#2E6BF2" stroke-width="1.6"/>
+        <text x="40" y="116" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#1B4ABE">01</text>
+        <text x="110" y="125" font-family="Inter,sans-serif" font-size="15" font-weight="800" fill="#142036">Issuance</text>
+        <text x="22" y="158" font-family="ui-monospace,monospace" font-size="9.5" font-weight="800" letter-spacing="1.3" fill="#1B4ABE">EMD GOVERNED</text>
+        <text x="22" y="185" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Suitability check</text>
+        <text x="22" y="203" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Dealer approval</text>
+        <text x="22" y="221" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">ERC-3643 mint</text>
+        <text x="22" y="239" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Transfer rules</text>
+        <text x="22" y="257" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">embedded at genesis</text>
+        <text x="22" y="285" font-family="ui-monospace,monospace" font-size="9" font-weight="700" letter-spacing="1.2" fill="#0E8A5F">CONTROL: ISSUER GOVERNANCE</text>
+      </g>
+
+      <path d="M 215 190 L 230 190" stroke="#2E6BF2" stroke-width="2" marker-end="url(#lc-arrow)"/>
+
+      <!-- 02 TRADING -->
+      <g class="lc-stn">
+        <rect x="232" y="80" width="200" height="220" rx="14" fill="#FFFFFF" stroke="#CFE0FD" stroke-width="1.6"/>
+        <circle cx="262" cy="110" r="18" fill="#EAF1FE" stroke="#2E6BF2" stroke-width="1.6"/>
+        <text x="262" y="116" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#1B4ABE">02</text>
+        <text x="332" y="125" font-family="Inter,sans-serif" font-size="15" font-weight="800" fill="#142036">Trading</text>
+        <text x="244" y="158" font-family="ui-monospace,monospace" font-size="9.5" font-weight="800" letter-spacing="1.3" fill="#1B4ABE">PERMISSIONED MARKET</text>
+        <text x="244" y="185" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Eligibility check</text>
+        <text x="244" y="203" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">before order match</text>
+        <text x="244" y="221" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Institutional</text>
+        <text x="244" y="239" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">members only</text>
+        <text x="244" y="257" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Order book + match</text>
+        <text x="244" y="285" font-family="ui-monospace,monospace" font-size="9" font-weight="700" letter-spacing="1.2" fill="#0E8A5F">CONTROL: COMPLIANCE GATE</text>
+      </g>
+
+      <path d="M 437 190 L 452 190" stroke="#2E6BF2" stroke-width="2" marker-end="url(#lc-arrow)"/>
+
+      <!-- 03 SETTLEMENT -->
+      <g class="lc-stn">
+        <rect x="454" y="80" width="200" height="220" rx="14" fill="#FFFFFF" stroke="#CFE0FD" stroke-width="1.6"/>
+        <circle cx="484" cy="110" r="18" fill="#EAF1FE" stroke="#2E6BF2" stroke-width="1.6"/>
+        <text x="484" y="116" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#1B4ABE">03</text>
+        <text x="554" y="125" font-family="Inter,sans-serif" font-size="15" font-weight="800" fill="#142036">Settlement</text>
+        <text x="466" y="158" font-family="ui-monospace,monospace" font-size="9.5" font-weight="800" letter-spacing="1.3" fill="#1B4ABE">ATOMIC DVP &middot; T+0</text>
+        <text x="466" y="185" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Cash leg confirm</text>
+        <text x="466" y="203" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Token leg confirm</text>
+        <text x="466" y="221" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Custody confirm</text>
+        <text x="466" y="239" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Canonical write</text>
+        <text x="466" y="257" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">All atomic, or none.</text>
+        <text x="466" y="285" font-family="ui-monospace,monospace" font-size="9" font-weight="700" letter-spacing="1.2" fill="#0E8A5F">CONTROL: SETTLEMENT ORCH.</text>
+      </g>
+
+      <path d="M 659 190 L 674 190" stroke="#2E6BF2" stroke-width="2" marker-end="url(#lc-arrow)"/>
+
+      <!-- 04 CUSTODY -->
+      <g class="lc-stn">
+        <rect x="676" y="80" width="200" height="220" rx="14" fill="#FFFFFF" stroke="#CFE0FD" stroke-width="1.6"/>
+        <circle cx="706" cy="110" r="18" fill="#EAF1FE" stroke="#2E6BF2" stroke-width="1.6"/>
+        <text x="706" y="116" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#1B4ABE">04</text>
+        <text x="776" y="125" font-family="Inter,sans-serif" font-size="15" font-weight="800" fill="#142036">Custody</text>
+        <text x="688" y="158" font-family="ui-monospace,monospace" font-size="9.5" font-weight="800" letter-spacing="1.3" fill="#1B4ABE">QUALIFIED CANADIAN</text>
+        <text x="688" y="185" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">CIRO-aligned trust co</text>
+        <text x="688" y="203" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Attestation chain</text>
+        <text x="688" y="221" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Cash + token holding</text>
+        <text x="688" y="239" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Recon + exception</text>
+        <text x="688" y="257" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">handling</text>
+        <text x="688" y="285" font-family="ui-monospace,monospace" font-size="9" font-weight="700" letter-spacing="1.2" fill="#0E8A5F">CONTROL: TREASURY COORD.</text>
+      </g>
+
+      <path d="M 881 190 L 896 190" stroke="#2E6BF2" stroke-width="2" marker-end="url(#lc-arrow)"/>
+
+      <!-- 05 REPORTING -->
+      <g class="lc-stn">
+        <rect x="898" y="80" width="200" height="220" rx="14" fill="#FFFFFF" stroke="#CFE0FD" stroke-width="1.6"/>
+        <circle cx="928" cy="110" r="18" fill="#EAF1FE" stroke="#2E6BF2" stroke-width="1.6"/>
+        <text x="928" y="116" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#1B4ABE">05</text>
+        <text x="998" y="125" font-family="Inter,sans-serif" font-size="15" font-weight="800" fill="#142036">Reporting</text>
+        <text x="910" y="158" font-family="ui-monospace,monospace" font-size="9.5" font-weight="800" letter-spacing="1.3" fill="#1B4ABE">AUTO-DERIVED</text>
+        <text x="910" y="185" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">FINTRAC, CSA, OSFI</text>
+        <text x="910" y="203" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">auto from ledger</text>
+        <text x="910" y="221" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Institution files</text>
+        <text x="910" y="239" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Read-only feed</text>
+        <text x="910" y="257" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">to supervisors</text>
+        <text x="910" y="285" font-family="ui-monospace,monospace" font-size="9" font-weight="700" letter-spacing="1.2" fill="#0E8A5F">CONTROL: AUDITABILITY</text>
+      </g>
+
+      <path d="M 1103 190 L 1118 190" stroke="#C49A3A" stroke-width="2" marker-end="url(#lc-arrow)"/>
+
+      <!-- 06 REDEMPTION (gold accent) -->
+      <g class="lc-stn">
+        <rect x="1120" y="80" width="200" height="220" rx="14" fill="#FBF3DC" stroke="url(#lc-stop6)" stroke-width="1.8"/>
+        <circle cx="1150" cy="110" r="18" fill="#FBF3DC" stroke="#C49A3A" stroke-width="1.8"/>
+        <text x="1150" y="116" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#8A6712">06</text>
+        <text x="1220" y="125" font-family="Inter,sans-serif" font-size="15" font-weight="800" fill="#142036">Redemption</text>
+        <text x="1132" y="158" font-family="ui-monospace,monospace" font-size="9.5" font-weight="800" letter-spacing="1.3" fill="#8A6712">CLOSES THE LOOP</text>
+        <text x="1132" y="185" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Ownership verified</text>
+        <text x="1132" y="203" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Token burned</text>
+        <text x="1132" y="221" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Fiat returned via</text>
+        <text x="1132" y="239" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">supervised rails</text>
+        <text x="1132" y="257" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Recon complete</text>
+        <text x="1132" y="285" font-family="ui-monospace,monospace" font-size="9" font-weight="700" letter-spacing="1.2" fill="#8A6712">CONTROL: SUPPLY INTEGRITY</text>
+      </g>
+
+      <!-- Bottom "controlled by 4orm" rail -->
+      <rect x="10" y="332" width="1310" height="34" rx="10" fill="rgba(46,107,242,.08)" stroke="rgba(46,107,242,.18)" stroke-width="1" stroke-dasharray="4 4"/>
+      <text x="665" y="354" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" font-weight="800" letter-spacing="2" fill="#1B4ABE">4ORM REGULATED CONTROL PLANE &middot; SAME PERIMETER, EVERY STEP</text>
+    </svg>
+  </div>
+
+  <p class="lifecycle-foot">Every state of a tokenized RWA, <b>issuance, trading, settlement, custody, reporting, redemption,</b> happens inside one regulated rail. No drop-offs to external bridges, no handoffs to unsupervised ledgers, no off-platform exception books.</p>
+</section>
+
 <!-- ───────────────────────────────────────────────────────────── The Distinction (concise) -->
 <section class="section">
   <div class="wrap">
@@ -741,6 +1256,17 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   </div>
 </section>
 
+
+<!-- ───────────────────────────────────────────────────────────── Pull quote — settlement finality -->
+<div class="pullq">
+  <div class="pullq-inner">
+    <div class="pullq-mark">"</div>
+    <div>
+      <div class="pullq-text">Blockchain finality is <b>not</b> institutional finality. Only treasury confirmation, custody confirmation, and canonical ledger commitment together complete settlement.</div>
+      <div class="pullq-cite">The 4orm settlement principle</div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
      How it works, embedded interactive 3-tab diagram (from demo site)
@@ -1280,7 +1806,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
 
 <section class="lsm-section" aria-labelledby="lsm-heading">
   <div class="lsm-head">
-    <div class="lsm-kicker">The system</div>
+    <div class="lsm-kicker">Pillar 03 in focus &middot; Settlement</div>
     <h2 id="lsm-heading">The whole picture, three flows.</h2>
     <p class="lead">An internal transfer that never leaves your bank, an interbank settlement through the 4orm rail, and the legacy correspondent route that 4orm replaces. Each gets its own diagram, so the architecture isn't abstract.</p>
   </div>
@@ -2523,6 +3049,67 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
   </div>
 </section>
 
+<!-- ───────────────────────────────────────────────────────────── Interoperability adapter layer -->
+<section class="interop-section">
+  <div class="interop-head">
+    <div>
+      <div class="s-eye"><span class="tick"></span><span class="txt">Interoperability by design</span></div>
+      <p>Every integration boundary is an adapter, not a hard dependency. That means the rail is portable across cash assets, custodians, ledgers, KYC providers, and the institution's existing core banking systems.</p>
+    </div>
+    <h2>How it plugs into <span class="h-it">your institution.</span></h2>
+  </div>
+
+  <div class="interop-grid">
+
+    <div class="adp-card">
+      <div class="adp-label">Cash adapter</div>
+      <h4>Tokenized CAD, your choice</h4>
+      <p>Bank-issued tokenized deposit OR regulated CAD stablecoin. Adapter abstracts the cash-leg provider so the institution picks the asset that fits its posture.</p>
+      <div class="adp-providers">Stablecorp QCAD · bank-issued tokenized deposits · others on integration</div>
+    </div>
+
+    <div class="adp-card">
+      <div class="adp-label">Ledger + chain adapters</div>
+      <h4>Multi-chain by design</h4>
+      <p>Canonical write to the 4orm ledger. Execution-surface portability via swappable chain adapters. The platform never yields control of the ledger of record to a chain or a bridge.</p>
+      <div class="adp-providers">Phase 1: Ethereum · Stellar · Phase 3: omni-chain via LayerZero · CCIP · Wormhole · IBC (all swappable)</div>
+    </div>
+
+    <div class="adp-card">
+      <div class="adp-label">Institution adapter</div>
+      <h4>ISO 20022 / API / SFTP</h4>
+      <p>Connects to your existing core banking, treasury, and payments systems. No core replacement. The control plane sits beside, not on top of, what you already run.</p>
+      <div class="adp-providers">ISO 20022 messaging · REST API · SFTP batch · webhook listeners</div>
+    </div>
+
+    <div class="adp-card">
+      <div class="adp-label">Custody adapter</div>
+      <h4>Qualified custodian, your choice</h4>
+      <p>Use a CIRO-qualified Canadian trust company, an in-house HSM, or a multi-custodian split. The adapter handles confirmation, attestation, and recovery.</p>
+      <div class="adp-providers">Tetra Trust · in-house HSM · multi-custodian splits · others on integration</div>
+    </div>
+
+    <div class="adp-card">
+      <div class="adp-label">KYC adapter</div>
+      <h4>PCMLTFA s.105 reliance</h4>
+      <p>Re-use existing institution-attested KYC credentials across the network under a written reliance framework. Each FI revalidates to its own risk policy.</p>
+      <div class="adp-providers">Institution-attested KYC · reusable verifiable credentials · per-FI risk overlay</div>
+    </div>
+
+    <div class="adp-card">
+      <div class="adp-label">Supervisory adapter</div>
+      <h4>Read-only feeds per regulator</h4>
+      <p>OSFI, CSA, FINTRAC, BoC, FSRA, and AMF each get an aggregate, privacy-preserving read-only feed. Never reads core banking. STRs filed by the institution.</p>
+      <div class="adp-providers">Aggregate metrics · privacy-preserving aggregation · institution-led filing</div>
+    </div>
+
+  </div>
+
+  <div class="interop-foot">
+    The most common technical question from a partner bank's architecture team is <b>"how does this work with what we already have?"</b> The honest answer is: the control plane is provider-agnostic by design, and the adapter layer is part of the architecture, not an afterthought. Full adapter inventory with version pinning is in the <a href="/architecture.html#interop">architecture overlay</a>.
+  </div>
+</section>
+
 <!-- ───────────────────────────────────────────────────────────── Three entry points (architecture) -->
 <section class="section section-band">
   <div class="wrap">
@@ -2629,6 +3216,43 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
       </div>
       <h2>Independent technology. <span class="h-it">Independently governed regulated entity.</span></h2>
     </div>
+
+    <!-- Legal structure diagram -->
+    <div class="legal-struct-wrap">
+      <svg class="legal-struct" viewBox="0 0 1200 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Legal structure: KCS Capital licenses technology to 4orm Finance Holdings">
+        <defs><marker id="ls-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#46556E"/></marker></defs>
+        <rect x="450" y="20" width="300" height="80" rx="14" fill="#FFFFFF" stroke="#CCD6E4" stroke-width="1.6"/>
+        <text x="600" y="46" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.6" fill="#46556E">TECHNOLOGY LICENSOR</text>
+        <text x="600" y="70" text-anchor="middle" font-family="Inter,sans-serif" font-size="18" font-weight="800" fill="#142036">KCS Capital</text>
+        <text x="600" y="89" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E" font-style="italic">Independent Canadian technology and research firm</text>
+        <path d="M 600 100 L 600 145" stroke="#46556E" stroke-width="1.6" marker-end="url(#ls-arrow)" stroke-dasharray="5 4"/>
+        <text x="620" y="128" font-family="ui-monospace,monospace" font-size="10" font-weight="700" letter-spacing="1.2" fill="#46556E">LICENSE</text>
+        <rect x="350" y="148" width="500" height="100" rx="14" fill="#1F3CA8" stroke="#1B4ABE" stroke-width="2"/>
+        <text x="600" y="178" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.6" fill="#FFD9A8">PARENT &middot; GOVERNANCE &middot; HOLDCO</text>
+        <text x="600" y="206" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">4orm Finance Holdings Inc.</text>
+        <text x="600" y="226" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="rgba(255,255,255,.86)" font-style="italic">Canadian-incorporated, independently governed from KCS Capital</text>
+        <path d="M 600 250 L 600 280" stroke="#46556E" stroke-width="1.6" fill="none"/>
+        <path d="M 600 280 L 240 280 L 240 320" stroke="#46556E" stroke-width="1.6" fill="none" marker-end="url(#ls-arrow)"/>
+        <path d="M 600 280 L 600 320" stroke="#46556E" stroke-width="1.6" fill="none" marker-end="url(#ls-arrow)"/>
+        <path d="M 600 280 L 960 280 L 960 320" stroke="#46556E" stroke-width="1.6" fill="none" marker-end="url(#ls-arrow)"/>
+        <rect x="80" y="324" width="320" height="106" rx="14" fill="#EAF1FE" stroke="#2E6BF2" stroke-width="1.6"/>
+        <text x="240" y="352" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.6" fill="#1B4ABE">MARKETPLACE OPERATOR</text>
+        <text x="240" y="378" text-anchor="middle" font-family="Inter,sans-serif" font-size="17" font-weight="800" fill="#142036">OpCo</text>
+        <text x="240" y="400" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">CSA-recognized marketplace</text>
+        <text x="240" y="416" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">CIRO member firm</text>
+        <rect x="440" y="324" width="320" height="106" rx="14" fill="#FBF3DC" stroke="#C49A3A" stroke-width="1.6"/>
+        <text x="600" y="352" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.6" fill="#8A6712">QUALIFIED CUSTODY</text>
+        <text x="600" y="378" text-anchor="middle" font-family="Inter,sans-serif" font-size="17" font-weight="800" fill="#142036">CustodyCo</text>
+        <text x="600" y="400" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">CIRO Digital Asset Custody</text>
+        <text x="600" y="416" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Framework Tier-2 target</text>
+        <rect x="800" y="324" width="320" height="106" rx="14" fill="#F4F7FB" stroke="#CCD6E4" stroke-width="1.6" stroke-dasharray="6 5"/>
+        <text x="960" y="352" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="800" letter-spacing="1.6" fill="#5E6E88">FUTURE ENTITIES</text>
+        <text x="960" y="378" text-anchor="middle" font-family="Inter,sans-serif" font-size="17" font-weight="800" fill="#142036" opacity=".7">As required</text>
+        <text x="960" y="400" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">Provincial trust authorities,</text>
+        <text x="960" y="416" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#46556E">jurisdictional subsidiaries</text>
+      </svg>
+      <p class="legal-struct-foot">The CIRO Digital Asset Custody Framework requires the marketplace operator and the custody entity to be separately incorporated and independently governed. <b>4orm Finance is structured this way from day one.</b></p>
+    </div>
   </div>
 </section>
 
@@ -2697,7 +3321,7 @@ a.tile:hover .tile-link{gap:10px;color:var(--brand-700)}
     <div class="grid">
       <div class="brand-blk">
         <h5>4orm Finance</h5>
-        <p>Canada's institution-grade RWA exchange and digital settlement network. Operated as a separately governed regulated entity. Technology developed by KCS Capital. Calgary · Vancouver · Edmonton.</p>
+        <p>Canada's regulated RWA control plane and digital settlement network. Operated as a separately governed regulated entity. Technology developed by KCS Capital. Calgary · Vancouver · Edmonton.</p>
       </div>
       <div>
         <h6>Platform</h6>
