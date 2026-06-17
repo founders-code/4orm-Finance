@@ -1,437 +1,194 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>FAQ: 4orm Finance, Canadian RWA Control Plane</title>
-<meta name="description" content="The questions Canadian banks, credit unions, exempt market dealers, asset managers, regulators, and tokenization issuers ask before joining a closed-loop pilot on 4orm Finance." />
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FAQ · 4orm Finance · The questions institutions actually ask</title>
+<meta name="description" content="Frequently asked questions about 4orm Finance, Canada's regulated rail for tokenized real-world assets. Settlement finality, regulatory pathway, corporate structure, KCS Capital relationship, the active raise." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./assets/site.css?v=40" />
-
+<link rel="stylesheet" href="assets/styles.css?v=1" />
+<link rel="stylesheet" href="assets/site.css?v=1" />
 <style>
- /* FAQ-specific styles */
- .faq-hero{background:linear-gradient(135deg,#0B1220 0%,#15233F 45%,#1F3CA8 100%);color:#fff;padding:88px 0 72px;position:relative;overflow:hidden}
- .faq-hero::before{content:'';position:absolute;top:-30%;right:-10%;width:50vw;height:50vw;max-width:600px;background:radial-gradient(circle,rgba(247,196,102,.16) 0%,rgba(247,196,102,0) 60%);pointer-events:none}
- .faq-hero-inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
- .faq-hero h1{color:#fff;margin:14px 0 16px;font-size:clamp(2rem,4.4vw,3.3rem);letter-spacing:-.03em;font-weight:800}
- .faq-hero p{color:rgba(255,255,255,.82);font-size:1.04rem;line-height:1.6;max-width:50em;margin:0}
- .faq-hero-eyebrow{font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:#FFD9A8;font-weight:800;display:inline-flex;align-items:center;gap:10px}
- .faq-hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#FFD9A8;box-shadow:0 0 0 4px rgba(255,217,168,.18)}
-
- /* FAQ grouping */
- .faq-cats{display:flex;gap:10px;flex-wrap:wrap;padding:24px 0;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:74px;z-index:40}
- .faq-cats .wrap{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
- .faq-cat{padding:8px 16px;border-radius:99px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);font-size:.86rem;font-weight:600;text-decoration:none;transition:all .15s}
- .faq-cat:hover{background:var(--surface-2);color:var(--text);border-color:var(--brand-100)}
- .faq-cat.active{background:var(--brand);color:#fff;border-color:var(--brand)}
-
- .faq-group{margin-bottom:48px}
- .faq-group h2{font-size:1.5rem;margin:0 0 8px;font-weight:800;letter-spacing:-.02em;color:var(--text)}
- .faq-group .sg-eye{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--brand-700);font-weight:800;margin-bottom:6px}
- .faq-group .sg-lead{color:var(--text-2);margin:0 0 24px;font-size:1rem;max-width:48em}
-
- .faq{display:flex;flex-direction:column;gap:8px}
- .faq details{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 22px;transition:border-color .15s,box-shadow .15s}
- .faq details[open]{border-color:var(--brand-100);box-shadow:var(--shadow-sm)}
- .faq summary{cursor:pointer;font-weight:700;font-size:1rem;color:var(--text);display:flex;justify-content:space-between;align-items:center;list-style:none;padding-right:8px}
- .faq summary::-webkit-details-marker{display:none}
- .faq summary .plus{color:var(--brand);font-size:1.5rem;font-weight:600;line-height:1;transition:transform .2s}
- .faq details[open] summary .plus{transform:rotate(45deg)}
- .faq details p{margin:14px 0 0;color:var(--text-2);line-height:1.65;font-size:.95rem}
- .faq details p + p{margin-top:10px}
-
- /* Closing CTA */
- .faq-closing{background:var(--bg-2);border-top:1px solid var(--border);padding:64px 0}
- .faq-closing .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center}
- @media (max-width:880px){.faq-closing .wrap{grid-template-columns:1fr}}
- .faq-closing h2{margin:0 0 12px;font-size:1.6rem;letter-spacing:-.02em}
- .faq-closing p{margin:0;color:var(--text-2);line-height:1.6}
- .faq-closing .actions{display:flex;gap:12px;flex-wrap:wrap}
- .faq-closing .btn{padding:13px 24px;border-radius:10px;font-weight:800;font-size:.95rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
- .faq-closing .btn-primary{background:var(--brand);color:#fff;box-shadow:var(--shadow-sm)}
- .faq-closing .btn-primary:hover{background:var(--brand-600)}
- .faq-closing .btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border-strong)}
- .faq-closing .btn-ghost:hover{background:var(--surface-2);border-color:var(--brand-100)}
+  .faq-list { display: flex; flex-direction: column; gap: 10px; }
+  .faq { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; transition: border-color .2s, box-shadow .2s; }
+  .faq:hover { border-color: var(--brand-100); box-shadow: var(--shadow-sm); }
+  .faq summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 14px; font-size: 1.05rem; font-weight: 700; color: var(--text); letter-spacing: -.005em; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; margin-left: auto; font-size: 1.4rem; font-weight: 800; color: var(--brand); transition: transform .2s; }
+  .faq[open] summary::after { content: '−'; }
+  .faq-num { font-family: var(--font-mono); font-size: .68rem; font-weight: 800; letter-spacing: .14em; color: var(--brand-700); padding: 4px 10px; background: var(--brand-50); border-radius: 99px; flex: none; }
+  .faq-body { margin-top: 14px; font-size: .95rem; line-height: 1.65; color: var(--text-2); }
+  .faq-body b { color: var(--text); }
+  .faq-cat { margin: 32px 0 14px; font-family: var(--font-mono); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); display: flex; align-items: center; gap: 10px; }
+  .faq-cat::before { content: ''; width: 24px; height: 2px; background: var(--gold-2); }
 </style>
 </head>
 <body>
 
-<header class="nav">
- <div class="nav-inner">
- <a href="/" class="brand" aria-label="4orm Finance home">
- <img src="./assets/4orm-logo.png" alt="4orm Finance" class="brand-logo" />
- <span class="sub">RWA Exchange</span>
- </a>
- <nav class="nav-links" aria-label="Primary">
- <a href="/">Home</a>
- <a href="/platform.html">Platform</a>
- <a href="/who.html">Who we serve</a>
- <a href="/market.html">Market</a>
- <a href="/regulatory.html">Regulatory</a>
- <a href="/leadership.html">Leadership</a>
- <a href="/faq.html" class="active">FAQ</a>
- <span class="nav-sep" aria-hidden="true"></span>
- <a href="https://4ormex.com" target="_blank" rel="noopener" class="nav-exchange" aria-label="Enter the 4orm Exchange">
- <span class="ex-main">4ormEx</span>
- <span class="ex-eye">Exchange</span>
- </a>
- <a href="/#waitlist" class="nav-auth">Request access</a>
- </nav>
- </div>
-</header>
-
-<section class="faq-hero">
- <div class="faq-hero-inner">
- <div class="faq-hero-eyebrow"><span class="dot"></span> Frequently asked questions</div>
- <h1>The questions institutions actually ask.</h1>
- <p>The questions Canadian banks, credit unions, exempt market dealers, asset managers, custodians, regulators, and tokenization issuers actually ask before joining a closed-loop pilot. Six categories, indexed by who is asking.</p>
- </div>
-</section>
-
-<div class="faq-cats">
- <div class="wrap">
- <a href="#basics" class="faq-cat">The basics</a>
- <a href="#regulatory" class="faq-cat">Regulatory</a>
- <a href="#technical" class="faq-cat">Technical &amp; integration</a>
- <a href="#operations" class="faq-cat">Operations &amp; risk</a>
- <a href="#partnership" class="faq-cat">Pilots &amp; partnership</a>
- <a href="#company" class="faq-cat">The company</a>
- </div>
+<div class="util-bar">
+  <span class="util-left">Part of the 4orm Finance regulated control plane</span>
+  <a href="https://4ormex.com" target="_blank" rel="noopener" class="util-gold">4ormEx ↗</a>
+  <span class="util-sep">/</span>
+  <a href="https://data.4ormfinance.com" target="_blank" rel="noopener">Data Room ↗</a>
+  <span class="util-sep">/</span>
+  <a href="https://kcs-capital.com" target="_blank" rel="noopener">KCS Capital ↗</a>
 </div>
 
-<section class="section">
- <div class="wrap">
+<div class="sbx-banner gold"><b>Pre-Seed active</b> · Closing Q2 2026 <span class="pill">Institutional &amp; accredited</span></div>
 
- <!-- ───────────────── The basics ───────────────── -->
- <div class="faq-group" id="basics">
- <div class="sg-eye">01 The basics</div>
- <h2>What 4orm Finance actually is.</h2>
- <p class="sg-lead">Start here. The questions an executive, board member, or new committee member would ask in the first ten minutes.</p>
- <div class="faq">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="who.html">Who we serve</a>
+      <a href="market.html">Market</a>
+      <a href="regulatory.html">Regulatory</a>
+      <a href="leadership.html">Leadership</a>
+      <a href="faq.html" class="active">FAQ</a>
+      <a href="https://4ormex.com" target="_blank" rel="noopener">4ormEx ↗</a>
+      <a href="https://data.4ormfinance.com" class="nav-auth">Request access</a>
+    </nav>
+  </div>
+</header>
 
- <details>
- <summary>Is 4orm Finance a crypto exchange? <span class="plus">+</span></summary>
- <p>No. 4orm Finance is institution-grade infrastructure for real-world assets: tokenized bonds, tokenized deposits, real estate, private credit, resource and infrastructure assets. It does not list speculative crypto-assets, does not serve retail traders, and does not custody bearer assets outside of a regulated perimeter.</p>
- </details>
-
- <details>
- <summary>What does "tokenization" actually mean in this context? <span class="plus">+</span></summary>
- <p>It means issuing a digital certificate of ownership for a real asset (a bond, a building, a loan, a deposit) on a shared ledger, with the rules of ownership built into the certificate itself. Transfer restrictions, KYC requirements, eligibility, and settlement instructions all live inside the token. The token is not the asset. It is the registered, programmable claim on the asset.</p>
- </details>
-
- <details>
- <summary>Why does Canada specifically need this? <span class="plus">+</span></summary>
- <p>Canadian institutions today rely on correspondent banking chains, SWIFT messaging, T+2 settlement cycles, and parallel statutory reporting to FINTRAC and the CSA. That stack works but it is slow, expensive, and produces no single canonical record of a trade. The Bank of Canada's Project Samara (March 2026, $100M tokenized bond with RBC, TD, and EDC) validated that a Canadian-anchored DLT rail can settle the same instruments atomically. 4orm Finance is the regulated rail that operationalizes that pattern at scale.</p>
- </details>
-
- <details>
- <summary>How is this different from what JPMorgan Kinexys is doing? <span class="plus">+</span></summary>
- <p>Kinexys (formerly Onyx) is a J.P. Morgan-operated network that has cleared over $1.5T in tokenized cash and intraday repo. It is excellent infrastructure, but it is bank-owned, U.S.-anchored, and built for J.P. Morgan's counterparty universe. 4orm Finance is the Canadian equivalent: neutral and multi-institution by design, anchored in Canada under Canadian regulation, structured so no single bank owns the rail.</p>
- </details>
-
- <details>
- <summary>What problem does an atomic settlement (T+0) actually solve for our balance sheet? <span class="plus">+</span></summary>
- <p>Three things. First, it removes settlement risk: the asset and the cash change hands at the same instant or the trade fails cleanly. Second, it eliminates trapped liquidity that today sits in transit or as collateral buffers across a two-day cycle. Third, it collapses the reconciliation overhead: a single canonical ledger entry replaces parallel records at each counterparty and intermediary. For a mid-size Canadian bank, those three together free up working capital that today is locked inside Nostro and Vostro accounts.</p>
- </details>
-
- <details>
- <summary>Who actually owns the platform? <span class="plus">+</span></summary>
- <p>4orm Finance Holdings Inc. is a Canadian-incorporated entity, governed independently of any single bank. The technology is developed and licensed by KCS Capital, an independent Canadian institutional finance and research firm. The legal structure is HoldCo / OpCo / CustodyCo, the three-entity configuration required by the CIRO Digital Asset Custody Framework Tier-2 target.</p>
- </details>
-
- </div>
- </div>
-
- <!-- ───────────────── Regulatory ───────────────── -->
- <div class="faq-group" id="regulatory">
- <div class="sg-eye">02 Regulatory</div>
- <h2>Where the platform sits inside Canada's regulatory perimeter.</h2>
- <p class="sg-lead">The questions your Chief Compliance Officer, Chief Risk Officer, and external counsel will want answered before any pilot conversation.</p>
- <div class="faq">
-
- <details>
- <summary>What's the regulatory pathway? <span class="plus">+</span></summary>
- <p>4orm is engaging with CIRO (marketplace and custody), CSA (Project Tokenization), OSFI (banking-aligned settlement), and FINTRAC (AML/ATF) on a coordinated pathway. The sandbox application is targeted for Q3 2026. The custody entity is structured against the CIRO Digital Asset Custody Framework Tier-2 target from day one. All regulator engagement is conducted in writing and on the record.</p>
- </details>
-
- <details>
- <summary>Are you a registered dealer? An exchange? A trust company? <span class="plus">+</span></summary>
- <p>At present, no. 4orm Finance is a sandbox-stage platform in development. The roadmap requires CSA recognition as a marketplace, CIRO membership as a member-firm operator, and a Trust and Loan Companies Act charter (or equivalent provincial trust authority) for the custody entity. Each of those is an explicit milestone, not a side project, and each will be announced when achieved.</p>
- </details>
-
- <details>
- <summary>Where does the data live? <span class="plus">+</span></summary>
- <p>All transaction data, identity attestations, audit logs, and ledger state remain inside Canadian sovereign data residency. The technology stack is operated on Canadian-anchored infrastructure. Cross-border data flows, where they exist, are limited to non-identifying telemetry and follow the same residency rules as Canadian banks today.</p>
- </details>
-
- <details>
- <summary>How does FINTRAC reporting work on the platform? <span class="plus">+</span></summary>
- <p>Statutory filings remain the institution's responsibility. 4orm Finance does not file on behalf of members. What changes is the underlying record: instead of each institution generating its own reconciled view of a trade, the canonical ledger entry is the same record both sides reference. STR, LCTR, and EFTR obligations continue to apply. The platform makes the source data cleaner and timelier.</p>
- </details>
-
- <details>
- <summary>What about the Office of the Privacy Commissioner (OPC) and PIPEDA? <span class="plus">+</span></summary>
- <p>Personally identifying information is never written to the on-ledger record. KYC attestations are issued by qualified KYC providers and referenced by hash; the underlying PII remains inside the issuing institution under standard PIPEDA controls. Provincial private-sector privacy regimes (Quebec Law 25, Alberta PIPA, British Columbia PIPA) are addressed via residency and provincial data-handling controls in each pilot's data-processing agreement.</p>
- </details>
-
- <details>
- <summary>Does this fall under the new federal Stablecoin Framework? <span class="plus">+</span></summary>
- <p>Where tokenized CAD is used as the cash settlement leg, yes, the platform integrates with whichever regulated stablecoin or bank-issued tokenized deposit the participating institution selects. 4orm is provider-neutral. Cash leg options include regulated stablecoins (e.g., Stablecorp's QCAD) and bank-issued tokenized deposits. Each participating bank chooses the cash asset that fits its regulatory posture.</p>
- </details>
-
- </div>
- </div>
-
- <!-- ───────────────── Technical & integration ───────────────── -->
- <div class="faq-group" id="technical">
- <div class="sg-eye">03 Technical &amp; integration</div>
- <h2>How a bank actually plugs in.</h2>
- <p class="sg-lead">The questions your CTO, Head of Core Banking, Head of Treasury Technology, and integration team will ask before the technical architecture review.</p>
- <div class="faq">
-
- <details>
- <summary>Do banks have to run a blockchain to plug in? <span class="plus">+</span></summary>
- <p>No. The blockchain is the execution surface underneath; the regulated control plane stays with the institution. Banks integrate via standard rails: ISO 20022, APIs, and existing core banking and treasury systems. The deployment model is a closed-loop pilot first, never a big-bang migration. From the bank's perspective the integration looks much like adding a new clearing or correspondent connection, just one that settles atomically and produces a canonical record.</p>
- </details>
-
- <details>
- <summary>What does the integration architecture actually look like? <span class="plus">+</span></summary>
- <p>Three layers. (1) Connectivity: the bank's treasury or payments system connects over ISO 20022 messaging or REST APIs to a 4orm-side adapter. (2) Compliance hooks: the institution's existing KYC/AML provider issues attestations that 4orm references; sanctions screening can run on either side or both. (3) Settlement: the bank operates a node or uses a managed connection to read and write canonical ledger state. No core banking system replacement is required, and no bank-side database needs to be deprecated.</p>
- </details>
-
- <details>
- <summary>What's the latency profile? <span class="plus">+</span></summary>
- <p>Atomic settlement runs in approximately twelve seconds end-to-end inside the current sandbox configuration, dominated by consensus finality and attestation. That timing is consistent with Project Samara's published Bank of Canada results. Throughput in the sandbox supports institutional-scale daily volume; production scaling targets are set against the published Payments Canada Real-Time Rail profile (build complete Q3 2025, launch 2026 to 2027).</p>
- </details>
-
- <details>
- <summary>Which DLT stack? Is the code open source? <span class="plus">+</span></summary>
- <p>4orm uses a permissioned, Canadian-anchored ledger stack with a Hyperledger-family foundation and ERC-3643 (permissioned token) compatibility for the asset layer. Selected components are open source under permissive licenses; the orchestration, compliance hooks, and custody layer are proprietary. Source review is available to participating institutions under NDA during the pilot phase.</p>
- </details>
-
- <details>
- <summary>How does this interact with our existing payments rails (LVTS, Lynx, ACSS, RTR)? <span class="plus">+</span></summary>
- <p>4orm is a settlement rail for tokenized assets, not a payments rail. Where payments are required to fund or defund the platform, they continue to use Lynx, ACSS, or the upcoming Real-Time Rail as appropriate. The platform produces ISO 20022-compliant messages and reconciles cleanly against existing nostro, vostro, and clearing accounts during pilot operations.</p>
- </details>
-
- <details>
- <summary>Where does the cryptographic key custody live? <span class="plus">+</span></summary>
- <p>Inside the bank's existing HSM infrastructure, or under a qualified Canadian custodian (e.g., Tetra Trust) for institutions that do not yet operate their own digital asset key custody. Signing material never leaves the institution or its qualified custodian, and key recovery follows the same governance procedures the bank already operates for SWIFT keys or RTGS access.</p>
- </details>
-
- </div>
- </div>
-
- <!-- ───────────────── Operations & risk ───────────────── -->
- <div class="faq-group" id="operations">
- <div class="sg-eye">04 Operations &amp; risk</div>
- <h2>What changes for your treasury, risk, and ops teams.</h2>
- <p class="sg-lead">The questions a Treasurer, Head of Operations, Head of Market Risk, or internal audit team will ask once architecture is settled.</p>
- <div class="faq">
-
- <details>
- <summary>Who can hold tokens on 4orm? <span class="plus">+</span></summary>
- <p>Verified, whitelisted institutional members only. Transfer rules are embedded in the token contracts; no bearer transfers, no anonymous wallets. KYC/AML credentials are reusable across the network so onboarding compounds rather than repeats. Retail counterparties are explicitly excluded from the regulated rail.</p>
- </details>
-
- <details>
- <summary>What is the settlement asset? <span class="plus">+</span></summary>
- <p>4orm settles in tokenized CAD. The cash leg is either a regulated Canadian-dollar stablecoin (e.g., Stablecorp's QCAD) or bank-issued tokenized CAD deposits, depending on the participating institution's preference and regulatory posture.</p>
- </details>
-
- <details>
- <summary>How does a trade actually fail? What happens to the assets? <span class="plus">+</span></summary>
- <p>The platform operates atomic delivery-versus-payment. Either both legs settle in the same transaction or neither does. If either side cannot complete (insufficient balance, attestation failure, compliance flag), the trade is rejected and both balances remain untouched. There is no half-settled state. Disputes resolve against the canonical ledger entry, which is append-only.</p>
- </details>
-
- <details>
- <summary>What's the operational impact on our reconciliation teams? <span class="plus">+</span></summary>
- <p>Pilots typically reduce daily reconciliation breaks by 60 to 90 percent on the in-scope flow. The remaining recon work shifts from "matching two ledgers" to "validating the canonical entry against the institution's general ledger." Most pilots are able to reassign half a recon FTE per $5B in tokenized AUM after the first quarter of live operation.</p>
- </details>
-
- <details>
- <summary>What does this do to our capital and liquidity ratios? <span class="plus">+</span></summary>
- <p>Tokenized assets do not change the regulatory treatment of the underlying asset under the current OSFI framework. What changes is the working-capital efficiency: T+0 settlement reduces the size of nostro positions held against pending trades, reduces collateral buffers required for unsettled counterparty exposure, and improves intraday liquidity reporting accuracy. Institutions typically model 5 to 15 basis points of LCR improvement on the in-scope flow.</p>
- </details>
-
- <details>
- <summary>What's the disaster recovery and business continuity story? <span class="plus">+</span></summary>
- <p>The canonical ledger is replicated across multiple Canadian data centres with active-active failover. RPO is zero (no committed transaction can be lost), RTO targets are under fifteen minutes. The platform's own runbook is reviewed against OSFI Guideline B-10 and the equivalent provincial-regulator continuity expectations annually. Each pilot includes a documented institution-side continuity plan.</p>
- </details>
-
- <details>
- <summary>What if 4orm Finance, the company, goes away? <span class="plus">+</span></summary>
- <p>The canonical ledger and the bank's tokenized positions on it are not 4orm's property. They are entries the institution itself owns and signs. In the event of 4orm winding down, member institutions retain full read and write access to their positions and to the canonical record, and a successor operator can be appointed by the governance council without forcing migration. This is by design and is a condition of the regulated-marketplace posture.</p>
- </details>
-
- </div>
- </div>
-
- <!-- ───────────────── Pilots & partnership ───────────────── -->
- <div class="faq-group" id="partnership">
- <div class="sg-eye">05 Pilots &amp; partnership</div>
- <h2>How institutions engage and what a pilot actually looks like.</h2>
- <p class="sg-lead">The questions a Head of Innovation, Head of Digital Assets, or partnership lead will ask before scoping a pilot.</p>
- <div class="faq">
-
- <details>
- <summary>What does the partnership model look like for tokenization projects? <span class="plus">+</span></summary>
- <p>Issuers like exempt market dealers, real estate platforms, mining and energy projects, and private credit funds keep their dealer registration and asset specialization. 4orm provides the institutional bridge: bank counterparties, secondary liquidity, an institutional investor pool, and the secondary market needed to actually offload at scale. Revenue share is structured per pilot.</p>
- </details>
-
- <details>
- <summary>How can a municipality or government engage? <span class="plus">+</span></summary>
- <p>Through a discovery engagement and, when appropriate, a closed-loop pilot. Use cases include tokenized municipal debt, infrastructure revenue financing, sovereign and sub-sovereign instruments, and Crown-aligned tokenized programs that benefit from a Canadian-sovereign rail. Procurement follows the standard provincial or federal pathway; 4orm responds to RFIs and RFPs through the normal channels.</p>
- </details>
-
- <details>
- <summary>What does a pilot timeline look like? <span class="plus">+</span></summary>
- <p>Typical pilot from kickoff to first settled in-scope trade is 12 to 16 weeks. Phase 1 (weeks 1 to 4): scoping, regulatory map, integration architecture. Phase 2 (weeks 5 to 10): technical integration, compliance hook testing, runbook drafting. Phase 3 (weeks 11 to 16): closed-loop live trades, daily reconciliation against existing systems, regulator briefings. After phase 3, the pilot either expands to additional flows or sunsets cleanly.</p>
- </details>
-
- <details>
- <summary>What does it cost? <span class="plus">+</span></summary>
- <p>Pilots are priced on a fixed-fee basis covering integration, regulator engagement support, and the first three months of operation. Steady-state pricing is per-transaction at a per-trade fee materially below the all-in correspondent banking cost it replaces. Detailed pricing is shared under NDA during the discovery phase.</p>
- </details>
-
- <details>
- <summary>Can we run a pilot without committing to platform membership? <span class="plus">+</span></summary>
- <p>Yes. The pilot agreement includes an explicit sunset clause that allows the institution to walk away at the end of the pilot with no continuing obligation, no data lock-in, and a clean exit of any in-flight positions. The pilot is a discovery exercise, not a sales funnel.</p>
- </details>
-
- <details>
- <summary>What's the minimum commitment from our side to start a discovery conversation? <span class="plus">+</span></summary>
- <p>An hour of executive sponsor time, a mutual NDA, and a single technical or compliance contact who can route follow-ups internally. That is enough to scope whether a pilot makes sense for your institution.</p>
- </details>
-
- </div>
- </div>
-
- <!-- ───────────────── The company ───────────────── -->
- <div class="faq-group" id="company">
- <div class="sg-eye">06 The company</div>
- <h2>Who's behind 4orm Finance and KCS Capital.</h2>
- <p class="sg-lead">The questions an investor, a board member, an LP, or a partner organization will ask about the firm itself.</p>
- <div class="faq">
-
- <details>
- <summary>How is 4orm Finance different from KCS Capital? <span class="plus">+</span></summary>
- <p>KCS Capital is the independent technology and research firm that develops the 4orm Finance platform. KCS is the development firm; it is not the parent of 4orm Finance. 4orm Finance operates it as a separately incorporated, independently governed regulated entity, structured as HoldCo / OpCo / CustodyCo per the CIRO Digital Asset Custody Framework. The arrangement is contractual: KCS Capital develops the technology for 4orm Finance under a long-term development agreement, with safeguards against the development firm becoming a market participant in conflict with the platform's neutrality. KCS Capital does not own, operate, or sit above 4orm Finance Holdings.</p>
- </details>
-
- <details>
- <summary>When does the platform go live? <span class="plus">+</span></summary>
- <p>4orm Finance is in pre-seed, closing Q2 2026. Closed-loop pilots are opening throughout 2026. The architecture, custody framework, and regulatory pathway are in flight today. Production timing depends on regulatory sandbox progression and pilot results.</p>
- </details>
-
- <details>
- <summary>How is the pre-seed round structured? <span class="plus">+</span></summary>
- <p>Pre-seed is a SAFE (Simple Agreement for Future Equity) on standard Canadian terms, raised into 4orm Finance Holdings Inc. The round is sized to fund regulator engagement, the sandbox application, the first two closed-loop pilots, and the founding technical team through to seed close. Detail is shared with qualified investors under NDA.</p>
- </details>
-
- <details>
- <summary>Who's on the leadership team? <span class="plus">+</span></summary>
- <p>The founding team is on the <a href="/leadership.html">Leadership</a> page. KCS Capital is led by Mike Sammut, a Canadian institutional finance founder with operating experience across capital markets infrastructure. The 4orm Finance operating team is being assembled against the CIRO and OSFI fit-and-proper requirements for the marketplace and custody entities respectively.</p>
- </details>
-
- <details>
- <summary>Are you hiring? <span class="plus">+</span></summary>
- <p>Selectively. Current open priorities are: a Chief Compliance Officer with CIRO and CSA-side experience, a Head of Custody with qualified-custodian operating experience, and senior engineers with permissioned-ledger production experience. Inquiries to <a href="mailto:founders@kcs-capital.com">founders@kcs-capital.com</a>.</p>
- </details>
-
- <details>
- <summary>How do we get in touch? <span class="plus">+</span></summary>
- <p>For pilots and partnerships: the <a href="/#waitlist">institutional waitlist</a>. For investor inquiries: <a href="mailto:founders@kcs-capital.com">founders@kcs-capital.com</a>. For compliance and regulator coordination: <a href="mailto:compliance@kcs-capital.com">compliance@kcs-capital.com</a>. For press: same address, mark the subject "Press."</p>
- </details>
-
- </div>
- </div>
-
- </div>
+<section class="dhero">
+  <div class="dhero-inner">
+    <div class="dhero-eye">FAQ · The questions institutions actually ask</div>
+    <h1>What you need to know <span class="accent">before the data room.</span></h1>
+    <p class="lead">The questions Tier-1 banks, custodians, credit unions, and institutional investors have asked us. Direct answers. Where the answer is in the data room, the link is in the answer.</p>
+    <div class="dhero-acts">
+      <a class="dhero-btn-p" href="https://data.4ormfinance.com">Request data room access →</a>
+      <a class="dhero-btn-s" href="platform.html">Platform pillars →</a>
+    </div>
+  </div>
 </section>
 
-<!-- Closing CTA -->
-<section class="faq-closing">
- <div class="wrap">
- <div>
- <h2>Still have questions?</h2>
- <p>If your question is not above, the right thing to do is just talk. Pre-Seed closes Q2 2026 and closed-loop pilots are opening throughout 2026. We respond within five business days.</p>
- </div>
- <div class="actions">
- <a class="btn btn-primary" href="/#waitlist">Join the institutional waitlist →</a>
- <a class="btn btn-ghost" href="mailto:founders@kcs-capital.com">Email the founders</a>
- </div>
- </div>
+<section class="psec">
+  <div class="psec-inner">
+
+    <div class="faq-cat">The platform</div>
+    <div class="faq-list">
+      <details class="faq">
+        <summary><span class="faq-num">Q1</span> What does "regulated settlement finality" mean in practice?</summary>
+        <div class="faq-body">
+          <p>It means that when a transaction commits on the 4orm rail, four things commit atomically: the <b>cash leg</b>, the <b>token leg</b>, the <b>custody record</b>, and the <b>regulatory record</b>. Either all four commit, or none do. There is no window during which they can be out of sync. The transaction is final when the block is final. The Bank of Canada validated this architecture through Project Samara in March 2026.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-num">Q2</span> Is 4orm Finance a crypto exchange?</summary>
+        <div class="faq-body">
+          <p>No. 4orm Finance is institutional infrastructure for tokenized real-world assets, operated inside the Canadian regulatory perimeter. We do not list crypto-native tokens for retail. The trading venue (4ormEx) operates under CIRO marketplace oversight and serves Canadian institutional counterparties.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-num">Q3</span> What asset classes are on the rail?</summary>
+        <div class="faq-body">
+          <p>Bonds (government, provincial, corporate), bank-issued tokenized deposits, commercial real estate, private credit, energy royalties, mining bullion and precious metals. Asset issuers retain their dealer registration and asset specialization; 4orm Finance contributes the rail, the registry, and the legal-economic binding between the asset and its on-chain representation.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-num">Q4</span> How is this different from JPMorgan Onyx or Kinexys?</summary>
+        <div class="faq-body">
+          <p>JPMorgan Onyx / Kinexys is operated by a single Tier-1 bank for that bank's counterparties. 4orm Finance is operated as an independently governed entity neutral to any single bank. The neutrality is what lets every Canadian FI (Tier-1, regional, credit union) use it without conceding strategic ground to a competitor. Think of it as the Canadian answer to Onyx, but multi-institution by design.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-cat">Regulatory</div>
+    <div class="faq-list">
+      <details class="faq">
+        <summary><span class="faq-num">Q5</span> What regulators does 4orm Finance answer to?</summary>
+        <div class="faq-body">
+          <p>Four: <b>OSFI</b> (capital and liquidity for federally regulated institutions), <b>CSA</b> (securities, including Project Tokenization), <b>CIRO</b> (custody under the Digital Asset Custody Framework, and marketplace oversight for 4ormEx), and <b>FINTRAC</b> (AML/ATF). The platform is built to produce evidence for each one at the moment of commit. See the <a href="regulatory.html">Regulatory page</a> for the full pathway.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-num">Q6</span> Where is the company in its regulatory pathway?</summary>
+        <div class="faq-body">
+          <p>Pre-Seed active, closing Q2 2026. HoldCo / OpCo / Trust Co incorporations targeted to finalize Q3 2026. Alberta Sandbox engagement under the Financial Innovation Act in Q3 2026. CIRO Tier-2 authorization, CSA marketplace/dealer registrations, and OSFI engagement through 2027-2028. Full milestone-by-milestone roadmap is in the data room.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-num">Q7</span> Is this a stablecoin?</summary>
+        <div class="faq-body">
+          <p>No. 4orm Finance is not a stablecoin issuer. The cash leg on the rail is <b>bank-issued tokenized CAD deposits</b>, not a retail stablecoin. The deposits are issued by regulated Canadian financial institutions, denominated in CAD, supervised under existing banking regulation. The distinction matters: a tokenized bank deposit is a liability of a regulated bank; a stablecoin is a private claim on a reserve.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-cat">Corporate structure &amp; KCS Capital</div>
+    <div class="faq-list">
+      <details class="faq">
+        <summary><span class="faq-num">Q8</span> What is the relationship between 4orm Finance and KCS Capital?</summary>
+        <div class="faq-body">
+          <p>KCS Capital is the <b>independent technology and research firm</b> developing the infrastructure operated by 4orm Finance. The two entities are separately governed, separately incorporated, separately capitalized. KCS does not own 4orm Finance. 4orm Finance does not own KCS Capital. The relationship is technology-licensing-style: KCS develops, 4orm operates.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-num">Q9</span> What is the legal structure of 4orm Finance?</summary>
+        <div class="faq-body">
+          <p>Four entities under the 4orm Finance brand: <b>4orm Finance Holdings Inc.</b> (HoldCo, parent), <b>4orm Finance Operations Inc.</b> (OpCo, marketplace and issuance), <b>4ormEx Operations Inc.</b> (OpCo, trading venue), and <b>4orm Trust Co.</b> (CustodyCo, qualified digital custodian targeting CIRO Tier 2). Independent boards. Separate capital. Mirrors the CIRO Digital Asset Custody Framework's expectation that custody, operations, and ownership are independently controlled.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-cat">The raise</div>
+    <div class="faq-list">
+      <details class="faq">
+        <summary><span class="faq-num">Q10</span> What round is active and when does it close?</summary>
+        <div class="faq-body">
+          <p>Pre-Seed, closing Q2 2026. Use of proceeds: founding team completion, regulatory pathway through Alberta Sandbox engagement, technical architecture build-out. Full term sheet, use of proceeds, milestone gates, and committed capital are in the data room (category 09 · Fundraise).</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-num">Q11</span> Who can access the data room?</summary>
+        <div class="faq-body">
+          <p>Qualified institutional and accredited parties. Access is granted after a brief founder conversation. The three founders review every request. Typical response is within 48 hours. <a href="https://data.4ormfinance.com">Request access here</a>.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-num">Q12</span> What's the simplest way to see 4orm Finance in action?</summary>
+        <div class="faq-body">
+          <p>The <a href="https://demo-exchange.vercel.app" target="_blank" rel="noopener">4orm Demo Exchange</a> walks through the full lifecycle end to end in 8 minutes: KYC and accreditation, AML clearance, tokenization, order book, attestation, and atomic settlement. No NDA required for the first pass. After the demo, request data room access for the full materials.</p>
+        </div>
+      </details>
+    </div>
+
+  </div>
 </section>
 
-<footer class="footer">
- <div class="wrap">
- <div class="grid">
- <div class="brand-blk">
- <h5>4orm Finance</h5>
- <p>Canada's institution-grade RWA exchange and digital settlement network. Operated as a separately governed regulated entity. Technology developed by KCS Capital, the platform's development firm. Calgary · Vancouver · Edmonton.</p>
- </div>
- <div>
- <h6>Platform</h6>
- <ul>
- <li><a href="/platform.html">Platform</a></li>
- <li><a href="/who.html">Who we serve</a></li>
- <li><a href="/market.html">Market</a></li>
- <li><a href="https://4ormex.com" target="_blank" rel="noopener">4ormEx ↗</a></li>
- <li><a href="https://demo-exchange.vercel.app" target="_blank" rel="noopener">Institutional demo ↗</a></li>
- </ul>
- </div>
- <div>
- <h6>Company</h6>
- <ul>
- <li><a href="/leadership.html">Leadership</a></li>
- <li><a href="/regulatory.html">Regulatory</a></li>
- <li><a href="/#waitlist">Request access</a></li>
- <li><a href="https://kcs-capital.com" target="_blank" rel="noopener">KCS Capital ↗</a></li>
- </ul>
- </div>
- <div>
- <h6>Contact</h6>
- <ul>
- <li><a href="mailto:founders@kcs-capital.com">founders@kcs-capital.com</a></li>
- <li><a href="mailto:compliance@kcs-capital.com">compliance@kcs-capital.com</a></li>
- <li><a href="tel:17783632423">+1 778 363 2423 · Calgary HQ</a></li>
- <li>Unit 400, 718 8 Ave SW<br />Calgary, AB T2P 1H3</li>
- </ul>
- </div>
- </div>
+<section class="iwstrip">
+  <div class="iwstrip-in">
+    <div class="iwstrip-eye">Pre-Seed Active · Closing Q2 2026</div>
+    <h2>Have a question not on this list? <span class="key">Email the founders directly.</span></h2>
+    <p>admin@4ormfinance.com. The three founders read every email. If the question is in the data room, we'll point you to the right document.</p>
+    <div class="iwstrip-acts">
+      <a class="dhero-btn-p" href="https://data.4ormfinance.com">Request data room access →</a>
+      <a class="dhero-btn-s" href="mailto:admin@4ormfinance.com">Email the founders →</a>
+    </div>
+  </div>
+</section>
 
- <div class="lr">
- <div>© 2026 4orm Finance · 4orm Finance Holdings Inc.</div>
- <div>Privacy · Terms · Regulator engagement on request</div>
- </div>
+<section class="famfooter">
+  <div class="famfooter-in">
+    <div class="famfooter-head"><div><div class="famfooter-eye">4orm Finance family</div><h3>One regulated rail. <span class="key">Five surfaces.</span></h3></div></div>
+    <div class="famfooter-grid">
+      <a href="https://4ormex.com" target="_blank" rel="noopener" class="famtile f2"><span class="lab">02 · Exchange</span><span class="name">4ormEx</span><span class="desc">Institutional trading venue. Atomic settlement.</span><span class="link">4ormex.com ↗</span></a>
+      <a href="https://data.4ormfinance.com" class="famtile f3"><span class="lab">03 · Data Room</span><span class="name">4orm Data Room</span><span class="desc">Vetted access for institutional and accredited.</span><span class="link">data.4ormfinance.com ↗</span></a>
+      <a href="https://demo-exchange.vercel.app" target="_blank" rel="noopener" class="famtile f4"><span class="lab">04 · Demo</span><span class="name">4orm Demo Exchange</span><span class="desc">Live walkthrough. KYC to atomic finality.</span><span class="link">4ormedc.com ↗</span></a>
+      <a href="https://kcs-capital.com" target="_blank" rel="noopener" class="famtile f5"><span class="lab">Sister · Developer</span><span class="name">KCS Capital</span><span class="desc">Independent technology and research firm.</span><span class="link">kcs-capital.com ↗</span></a>
+    </div>
+    <div class="famfooter-legal">
+      <span>© 2026 4orm Finance Holdings Inc. · Calgary · Vancouver · Edmonton</span>
+      <span><a href="#">Privacy</a><a href="#">Terms</a><a href="mailto:admin@4ormfinance.com">admin@4ormfinance.com</a></span>
+    </div>
+    <p class="famfooter-fineprint">4orm Finance operates as a regulated entity with independent governance, structured as HoldCo / 4orm Finance OpCo / 4ormEx OpCo / 4orm Trust Co per the CIRO Digital Asset Custody Framework. Technology developed by KCS Capital Inc., an independent firm. This website does not constitute an offer to sell or a solicitation of an offer to buy any securities.</p>
+  </div>
+</section>
 
- <p class="disclaim">
- 4orm Finance is an early-stage platform in development (sandbox-stage), not a licensed exchange or dealer.
- This website does not constitute an offer or solicitation to buy or sell securities and is not financial, legal or tax advice.
- Market statistics sourced from McKinsey, BCG, PwC, KPMG, Bank of Canada, Payments Canada, and the 4orm Master Pro Forma.
- Third parties named are referenced factually and are not affiliated with 4orm unless stated.
- Corporate structure is operationalized per the CIRO Digital Asset Custody Framework: HoldCo / OpCo / CustodyCo, independently governed from KCS Capital, the technology developer.
- </p>
- </div>
-</footer>
-
-<script>
- // Highlight active FAQ category as user scrolls
- const cats = document.querySelectorAll('.faq-cat');
- const groups = document.querySelectorAll('.faq-group');
- const observer = new IntersectionObserver((entries) => {
- entries.forEach(e => {
- if (e.isIntersecting) {
- const id = e.target.id;
- cats.forEach(c => c.classList.toggle('active', c.getAttribute('href') === '#' + id));
- }
- });
- }, { rootMargin: '-150px 0px -50% 0px' });
- groups.forEach(g => observer.observe(g));
-</script>
 </body>
 </html>
