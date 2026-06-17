@@ -320,3 +320,33 @@
   background: var(--gold-100); color: var(--gold-ink);
   padding: 2px 9px; border-radius: 99px; margin-left: 6px;
 }
+
+/* ----- RAISE STATUS DOT INDICATOR (locked across 4orm-family surfaces) -----
+   Amber dot lit = current state (pre-open). Green dot dimmed = next state (active raise).
+   On 2026-07-01 the states flip: amber dims, green lights, caption changes to
+   "Active until September 29, 2026."
+*/
+.raise-status { display: inline-flex; align-items: center; gap: 8px; }
+.raise-status .status-dots { display: inline-flex; align-items: center; gap: 6px; margin-right: 4px; }
+.raise-status .status-dot {
+  display: inline-block;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.raise-status .dot-amber-lit {
+  background: #C49A3A;
+  box-shadow: 0 0 0 0 rgba(196, 154, 58, .65);
+  animation: dot-amber-pulse 2.4s ease-in-out infinite;
+}
+.raise-status .dot-green-dim {
+  background: #7BE3B0;
+  opacity: .28;
+}
+@keyframes dot-amber-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(196, 154, 58, .55); }
+  50%      { box-shadow: 0 0 0 6px rgba(196, 154, 58, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .raise-status .dot-amber-lit { animation: none; }
+}
