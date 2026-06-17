@@ -350,3 +350,84 @@
 @media (prefers-reduced-motion: reduce) {
   .raise-status .dot-amber-lit { animation: none; }
 }
+
+/* ===== ACCREDITED-INVESTOR LEGEND BAR (locked across every page) =====
+   Sits between the sbx-banner and the nav. Persistent. Never dismissible.
+   NI 45-106 s.2.3 + Companion Policy 45-106CP s.1.9 require this prominently.
+*/
+.ai-legend {
+  background: #15233F; color: rgba(255,255,255,.85);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  font-size: .76rem; line-height: 1.55;
+  padding: 10px 28px;
+  text-align: center;
+  font-weight: 500;
+}
+.ai-legend strong { color: #FFD9A8; font-weight: 700; }
+.ai-legend a { color: rgba(255,217,168,.85); text-decoration: underline; text-underline-offset: 2px; }
+.ai-legend a:hover { color: #FFD9A8; }
+@media (max-width: 760px){
+  .ai-legend { padding: 9px 16px; font-size: .72rem; }
+}
+
+/* ===== CONSOLIDATED LEGAL DISCLAIMERS BLOCK (in footer) ===== */
+.legal-block {
+  margin-top: 32px; padding: 24px 26px;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.10);
+  border-radius: 12px;
+  font-size: .82rem; line-height: 1.65; color: rgba(255,255,255,.78);
+}
+.legal-block h4 {
+  font-family: var(--font-mono); font-size: .72rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: #FFD9A8; font-weight: 800;
+  margin: 0 0 12px;
+}
+.legal-block p { margin: 0 0 12px; color: rgba(255,255,255,.78); font-size: .82rem; line-height: 1.65; }
+.legal-block p:last-child { margin-bottom: 0; }
+.legal-block em { color: #FFD9A8; font-style: normal; font-weight: 700; }
+
+/* ===== COOKIE CONSENT BANNER (Quebec Law 25 compliant) ===== */
+.cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #0B1220; color: #fff;
+  border-top: 2px solid #FFD9A8;
+  padding: 18px 28px;
+  box-shadow: 0 -12px 40px rgba(0,0,0,.5);
+  display: none;
+  font-family: var(--font-sans);
+}
+.cookie-banner.show { display: block; animation: cookieRise .3s ease; }
+@keyframes cookieRise { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.cookie-banner-in {
+  max-width: var(--maxw); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+}
+@media (max-width: 760px){ .cookie-banner-in { grid-template-columns: 1fr; gap: 14px; } }
+.cookie-text { font-size: .9rem; line-height: 1.55; color: rgba(255,255,255,.86); }
+.cookie-text strong { color: #FFD9A8; }
+.cookie-text a { color: #FFD9A8; text-decoration: underline; text-underline-offset: 2px; }
+.cookie-acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.cookie-btn {
+  font-family: inherit; font-weight: 700; font-size: .82rem;
+  padding: 9px 16px; border-radius: 8px; cursor: pointer;
+  border: 1px solid transparent; transition: all .15s;
+  white-space: nowrap;
+}
+.cookie-btn.accept { background: #FFD9A8; color: #0B1220; border-color: #FFD9A8; }
+.cookie-btn.accept:hover { background: #FFE6C0; }
+.cookie-btn.reject { background: transparent; color: #fff; border-color: rgba(255,255,255,.32); }
+.cookie-btn.reject:hover { background: rgba(255,255,255,.08); }
+.cookie-btn.custom { background: rgba(255,255,255,.06); color: rgba(255,255,255,.85); border-color: rgba(255,255,255,.20); }
+.cookie-btn.custom:hover { background: rgba(255,255,255,.12); }
+
+/* Cookie customize modal (inline expand) */
+.cookie-customize { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.10); }
+.cookie-customize.show { display: block; }
+.cookie-pref { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,.08); font-size: .86rem; }
+.cookie-pref:last-child { border-bottom: none; }
+.cookie-pref label { flex: 1; cursor: pointer; }
+.cookie-pref label strong { color: #fff; display: block; }
+.cookie-pref label span { color: rgba(255,255,255,.6); font-size: .78rem; }
+.cookie-pref input { width: 18px; height: 18px; accent-color: #FFD9A8; }
+.cookie-pref input:disabled { opacity: .5; }
