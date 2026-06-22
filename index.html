@@ -4,15 +4,15 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>4orm Finance · Regulated settlement finality for Canadian capital markets</title>
-<meta name="description" content="4orm Finance operates Canada's regulated rail for tokenized real-world assets. Atomic settlement, embedded compliance, regulated custody, all on one rail. Architecture informed by the public findings of the Bank of Canada's Project Samara experiment (Staff Analytical Paper 2026-8). 4orm Finance is not affiliated with the Bank of Canada or the Samara consortium." />
+<meta name="description" content="4orm Finance operates Canada's regulated rail for tokenized real-world assets. Settlement finality, embedded compliance, regulated custody, all on one settlement layer. Architecture informed by the public findings of the Bank of Canada's Project Samara experiment (Staff Analytical Paper 2026-8). 4orm Finance is not affiliated with the Bank of Canada or the Samara consortium." />
 <meta property="og:title" content="4orm Finance · Regulated settlement finality for Canadian capital markets" />
 <meta property="og:description" content="Canada's regulated rail for tokenized real-world assets. Settlement is final at commit." />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=3" />
-<link rel="stylesheet" href="assets/site.css?v=3" />
+<link rel="stylesheet" href="assets/styles.css?v=4" />
+<link rel="stylesheet" href="assets/site.css?v=4" />
 </head>
 <body>
 
@@ -55,9 +55,9 @@
 <!-- ============================================ DARK HERO -->
 <section class="dhero">
   <div class="dhero-inner">
-    <div class="dhero-eye">Building Canada's regulated rail for tokenized real-world assets</div>
-    <h1>Regulated settlement finality <span class="accent">for Canadian capital markets.</span></h1>
-    <p class="lead">4orm Finance is building infrastructure intended to operate the regulated perimeter inside which Canadian institutions will <b>issue, trade, settle, custody, and report</b> on tokenized real-world assets, subject to receipt of all required regulatory approvals. Settlement is designed to be embedded. Compliance is designed to be embedded. Architecture informed by the public findings of the Bank of Canada's Project Samara experiment (Staff Analytical Paper 2026-8). 4orm Finance is not affiliated with the Bank of Canada or the Samara consortium. Operated as a separately governed regulated entity, with technology developed by KCS Capital.</p>
+    <div class="dhero-eye">Settlement infrastructure for Canadian institutions</div>
+    <h1>Make the transfer final. <span class="accent">Across two institutions.</span></h1>
+    <p class="lead">When a tokenized asset moves between institutions, three things have to travel with it: the <b>title</b>, the <b>cash</b>, and the <b>rules</b>. 4orm settles all three together, so a transfer is final and legal the moment it commits. We issue the record of title and connect to a tokenized bank deposit for the cash leg. <b>We are not a bank, a custodian, or a stablecoin issuer.</b></p>
     <div class="dhero-acts">
       <a class="dhero-btn-p" href="https://data.4ormfinance.com">Open the data room →</a>
       <a class="dhero-btn-s" href="platform.html">Explore the platform →</a>
@@ -65,14 +65,14 @@
     </div>
     <div class="dhero-stats">
       <div class="dhero-stat">
-        <div class="lab">Settlement</div>
-        <div class="num gold">T+0</div>
-        <div class="sub">Atomic, final at commit</div>
+        <div class="lab">Final at commit</div>
+        <div class="num gold">DvP</div>
+        <div class="sub">Title and cash together, in one step</div>
       </div>
       <div class="dhero-stat">
-        <div class="lab">BoC validated</div>
+        <div class="lab">Directional support</div>
         <div class="num green">$100M</div>
-        <div class="sub">Project Samara tokenized bond, March 2026</div>
+        <div class="sub">Project Samara settled a tokenized bond against wholesale central-bank money, March 2026</div>
       </div>
       <div class="dhero-stat">
         <div class="lab">Capabilities</div>
@@ -88,13 +88,69 @@
   </div>
 </section>
 
+<!-- ============================================ WHAT 4ORM DOES (NEW, light) -->
+<section class="psec">
+  <div class="psec-inner">
+    <div class="psec-head">
+      <div class="psec-eye">What 4orm does</div>
+      <h2>For a tokenized asset to move and be final, <span class="key">three things have to travel with it.</span></h2>
+      <p class="lead">When a tokenized asset moves from one institution to another and is final and legal, three things travel with it. 4orm makes all three move together.</p>
+    </div>
+    <div class="cgrid c3">
+      <div class="ccard c2">
+        <span class="ctag">01 · The title</span>
+        <h3>The authoritative record of who owns the asset.</h3>
+        <p>4orm operates the ledger of record and the token registry, so ownership changes hands cleanly and is recognized.</p>
+        <div class="cmeta">4orm's responsibility</div>
+      </div>
+      <div class="ccard c3">
+        <span class="ctag">02 · The cash leg</span>
+        <h3>The money settles at the same instant the asset moves.</h3>
+        <p>The cash side is a tokenized bank deposit, issued and held by a regulated Canadian bank as the bank's own liability. 4orm connects to it; 4orm does not issue it.</p>
+        <div class="cmeta">Bank's responsibility</div>
+      </div>
+      <div class="ccard c1">
+        <span class="ctag">03 · The rules</span>
+        <h3>Identity, eligibility, sanctions, and jurisdiction travel with the asset.</h3>
+        <p>A transfer that should not happen cannot complete. The rules are part of the settlement, not a check after the fact.</p>
+        <div class="cmeta">Shared responsibility</div>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-size:1.02rem;line-height:1.7;color:var(--text-2);max-width:50em"><strong>When all three settle together, the transfer is final the moment it commits. That is the product.</strong></p>
+  </div>
+</section>
+
+<!-- ============================================ WHAT 4ORM IS / IS NOT (NEW, dark) -->
+<section class="psec dark">
+  <div class="psec-inner">
+    <div class="psec-head">
+      <div class="psec-eye">For the record</div>
+      <h2>What 4orm is, <span class="key">and what it is not.</span></h2>
+    </div>
+    <div class="cgrid c2">
+      <div class="ccard c2">
+        <span class="ctag">4orm is</span>
+        <h3>Settlement-layer software + the record of title</h3>
+        <p>Software and the authoritative record of title for tokenized assets. The settlement layer that makes a transfer final and legal across two institutions. The connector to a tokenized bank deposit that provides the cash leg. A neutral, independently governed Canadian entity no single bank owns.</p>
+        <div class="cmeta">Operated by 4orm Finance Holdings Inc.</div>
+      </div>
+      <div class="ccard c6">
+        <span class="ctag">4orm is not</span>
+        <h3>Not a bank. Not a custodian. Not a stablecoin issuer.</h3>
+        <p>Not a bank, and does not carry on banking or take deposits (Bank Act). Not a custodian of customer assets (custody is a separate proposed regulated entity, 4orm Trust Co). Not a stablecoin issuer (the deposit token is the bank's liability). Not the AML officer of record (the regulated institutions remain responsible for their obligations).</p>
+        <div class="cmeta">All activities subject to receipt of required regulatory approvals</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================================ PILLARS (LIGHT) -->
 <section class="psec band">
   <div class="psec-inner">
     <div class="psec-head">
       <div class="psec-eye">The 4orm Finance Platform</div>
-      <h2>Six capabilities. <span class="key">One regulated rail.</span></h2>
-      <p class="lead">4orm Finance is full-stack institutional infrastructure for Canada. Not a crypto exchange. Six embedded capabilities, each engineered to one outcome: settlement is final at commit, every time, for every asset class on the rail.</p>
+      <h2>How finality is delivered. <span class="key">Six capabilities, one settlement layer.</span></h2>
+      <p class="lead">4orm Finance is full-stack institutional infrastructure for Canada. Not a crypto exchange. Six embedded capabilities, each engineered to one outcome: settlement is final at commit, every time, for every asset class on the settlement layer.</p>
     </div>
 
     <div class="cgrid c3">
@@ -112,26 +168,26 @@
       </div>
       <div class="ccard c3">
         <span class="ctag">03 · Settlement</span>
-        <h3>Atomic settlement, final at commit</h3>
-        <p>T+0 institutional settlement. Cash leg, token leg, custody, and ledger commit atomically, or none. Replaces multi-day deferred-net cycles. Frees trapped capital. Reduces counterparty risk to zero at the moment of commit.</p>
-        <div class="cmeta">T+0 atomic DvP</div>
+        <h3>Settlement finality. Delivery versus payment.</h3>
+        <p>Title and cash leg settle in the same step, or neither settles. Replaces multi-day deferred-net cycles with one supervised settlement. Removes the multi-day gap where one side has paid and the other has not yet delivered.</p>
+        <div class="cmeta">T+0 delivery versus payment (DvP)</div>
       </div>
       <div class="ccard c4">
         <span class="ctag">04 · Custody</span>
         <h3>Trust Co, regulated digital custody</h3>
-        <p>4orm Trust Co (proposed; subject to OSFI letters patent or provincial trust authorization) is intended to operate as a qualified digital custodian aligned with the CIRO Notice on Digital Asset Custody Framework. Segregated reserves, attested 1:1, supervised under the CIRO Digital Asset Custody Framework. The custody layer banks already trust.</p>
-        <div class="cmeta">CIRO Tier 2 pathway</div>
+        <p>4orm Trust Co (proposed; subject to OSFI letters patent or provincial trust authorization) is intended to operate as a qualified digital custodian. Custody is structured as a separate entity from the marketplace and dealer functions, a deliberate structuring choice consistent with separating custody from dealing.</p>
+        <div class="cmeta">Intended alignment</div>
       </div>
       <div class="ccard c5">
         <span class="ctag">05 · Reporting</span>
         <h3>Regulator-aligned reporting</h3>
-        <p>OSFI, CSA, FINTRAC, and CIRO reporting embedded at the rail. No bolt-on. No post-hoc reconciliation. Reporting is what falls out of the ledger, not what your team builds after the fact.</p>
+        <p>OSFI, CSA, FINTRAC, and CIRO reporting embedded at the settlement layer. No bolt-on. No post-hoc reconciliation. Reporting is what falls out of the ledger, not what your team builds after the fact.</p>
         <div class="cmeta">Embedded reporting</div>
       </div>
       <div class="ccard c6">
         <span class="ctag">06 · Supervision</span>
         <h3>Embedded supervisory controls</h3>
-        <p>Real-time supervisory feeds for the regulators that approve the rail. Pre-trade screens, post-trade attestation, AML rule engines, KYC reusable credentials. Supervision lives with the platform.</p>
+        <p>Real-time supervisory feeds for the regulators that approve the settlement layer. Pre-trade screens, post-trade attestation, AML rule engines, KYC reusable credentials. Supervision lives with the platform.</p>
         <div class="cmeta">Real-time regulator feed</div>
       </div>
     </div>
@@ -152,7 +208,7 @@
   <div class="psec-inner">
     <div class="psec-head">
       <div class="psec-eye">End-to-end lifecycle</div>
-      <h2>Six steps from KYC to final settlement, <span class="key">on the same rail.</span></h2>
+      <h2>Six steps from onboarding to final settlement, <span class="key">on the same settlement layer.</span></h2>
       <p class="lead">Every institutional transaction on 4orm moves through the same regulated lifecycle. Each step is supervised. Each step produces a regulator-readable evidence trail. The lifecycle is the audit.</p>
     </div>
 
@@ -160,22 +216,22 @@
       <div class="lcstop k1">
         <div class="lcdot">01</div>
         <div class="lcn">KYC + Accred.</div>
-        <div class="lcs">Reusable credential at the rail</div>
+        <div class="lcs">Reusable credential at the platform</div>
       </div>
       <div class="lcstop k2">
         <div class="lcdot">02</div>
         <div class="lcn">AML</div>
-        <div class="lcs">Sanctions, PEP, cleared on rail</div>
+        <div class="lcs">Sanctions, PEP, cleared at the platform</div>
       </div>
       <div class="lcstop k3">
         <div class="lcdot">03</div>
         <div class="lcn">Tokenization</div>
-        <div class="lcs">Asset on the rail, registry binding</div>
+        <div class="lcs">Asset on the settlement layer, registry binding</div>
       </div>
       <div class="lcstop k4">
         <div class="lcdot">04</div>
         <div class="lcn">Order book</div>
-        <div class="lcs">Best execution, evidence at the rail</div>
+        <div class="lcs">Best execution, evidence captured at the platform</div>
       </div>
       <div class="lcstop k5">
         <div class="lcdot">05</div>
@@ -184,13 +240,13 @@
       </div>
       <div class="lcstop k6">
         <div class="lcdot">06</div>
-        <div class="lcn">Atomic finality</div>
-        <div class="lcs">Cash, asset, custody, all or none</div>
+        <div class="lcn">Settlement finality</div>
+        <div class="lcs">Title, cash, and rules settle together</div>
       </div>
     </div>
 
     <div style="margin-top:36px;padding:18px 22px;border-radius:99px;background:linear-gradient(90deg,rgba(255,217,168,.10),rgba(46,107,242,.10),rgba(123,227,176,.12));border:1px solid rgba(255,217,168,.30);display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;text-align:center;">
-      <span style="font-family:var(--font-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.88);font-weight:700;">Approximate end-to-end: <b style="color:#FFD9A8">~3 seconds</b> · Legacy comparable: <b style="color:rgba(255,128,149,.95)">2 to 3 days</b></span>
+      <span style="font-family:var(--font-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.88);font-weight:700;">Target end-to-end: <b style="color:#FFD9A8">seconds</b> · Legacy comparable: <b style="color:rgba(255,128,149,.95)">2 to 3 days</b></span>
     </div>
   </div>
 </section>
@@ -200,8 +256,8 @@
   <div class="psec-inner">
     <div class="psec-head">
       <div class="psec-eye">The validation moment</div>
-      <h2>The Bank of Canada has answered the question. <span class="key">The remaining question is who builds it.</span></h2>
-      <p class="lead">On March 6, 2026, the Bank of Canada completed Project Samara, Canada's first tokenized bond trial, with RBC, TD, and Export Development Canada. C$100M in tokenized bonds. Full lifecycle: issuance, bidding, coupon payments, secondary trading, redemption. Regulatory sign-off from the OSC, AMF, and CIRO. The question of whether Canada will operate on tokenized rails has been answered.</p>
+      <h2>The settlement model is proven in principle. <span class="key">The remaining question is who operates it for Canadian institutions.</span></h2>
+      <p class="lead">On March 6, 2026 the Bank of Canada completed Project Samara, settling a tokenized bond against wholesale central-bank money (W-CAD) with RBC, TD, and Export Development Canada. Full lifecycle: issuance, bidding, coupon payments, secondary trading, redemption. Regulatory sign-off from the OSC, AMF, and CIRO. <b>Samara settled against central-bank money, not a commercial-bank deposit token; 4orm's model uses a tokenized commercial-bank deposit as the cash leg.</b> Samara is directional support that settlement finality for tokenized assets works in Canada. (Bank of Canada Staff Analytical Paper 2026-8. 4orm is not affiliated with the Bank of Canada or the Samara consortium.)</p>
     </div>
 
     <div class="cgrid c4">
@@ -214,7 +270,7 @@
       <div class="ccard c2">
         <span class="ctag">Trial participants</span>
         <h3>RBC · TD · EDC</h3>
-        <p>Two Tier-1 Canadian banks and a Crown corporation participated in the trial that validated the architectural standard 4orm is built to.</p>
+        <p>Two Tier-1 Canadian banks and a Crown corporation participated in the trial that settled a tokenized bond in wholesale central-bank money, directional support only. 4orm is not affiliated with the Bank of Canada or the Samara consortium.</p>
         <div class="cmeta">Samara pilot</div>
       </div>
       <div class="ccard c3">
@@ -246,13 +302,13 @@
       <a class="ccard c1" href="index.html" style="text-decoration:none;color:inherit">
         <span class="ctag">01 · Hub</span>
         <h3>4orm Finance</h3>
-        <p>Canada's regulated rail for tokenized real-world assets. Six capabilities, one rail.</p>
+        <p>Canada's regulated rail for tokenized real-world assets. Six capabilities, one settlement layer.</p>
         <div class="cmeta">4ormfinance.com</div>
       </a>
       <a class="ccard c2" href="https://4ormex.com" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <span class="ctag">02 · Trading venue</span>
         <h3>4ormEx</h3>
-        <p>Pillar 02 of the rail. Order book, RFQ, atomic settlement. Final at commit.</p>
+        <p>Pillar 02 of the settlement layer. Order book, RFQ, settlement finality. Final at commit.</p>
         <div class="cmeta">4ormex.com ↗</div>
       </a>
       <a class="ccard c3" href="https://data.4ormfinance.com" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
@@ -264,7 +320,7 @@
       <a class="ccard c4" href="https://www.4ormedc.com" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <span class="ctag">04 · Demo</span>
         <h3>4orm Demo Exchange</h3>
-        <p>Live, hands-on walkthrough of the lifecycle. KYC to atomic finality, in 8 minutes.</p>
+        <p>Live, hands-on walkthrough of the lifecycle. KYC to settlement finality, in 8 minutes.</p>
         <div class="cmeta">4ormedc.com ↗</div>
       </a>
     </div>
@@ -275,8 +331,8 @@
 <section class="iwstrip">
   <div class="iwstrip-in">
     <div class="iwstrip-eye">Opening July 1, 2026 · 90-day window</div>
-    <h2>Canada doesn't need another crypto exchange. <span class="key">It needs settlement finality.</span></h2>
-    <p>The Bank of Canada has proven the architecture works. Tier-1 banks are running pilots. CIRO has published the custody framework. Canada's RWA infrastructure opportunity is $350M to $1.9B in annual revenue pools. The institutions that build this layer now will define the standard for decades.</p>
+    <h2>Canada has the assets, the custodians, and a tokenized-cash starting point. <span class="key">What it does not yet have is a neutral settlement layer.</span></h2>
+    <p>The Bank of Canada has proven the architecture in principle. CIRO has published the custody framework. What Canada does not yet have is a neutral settlement layer that makes transfers final across institutions. <em>(Market sizing: $350M to $1.9B estimated annual Canadian fee pools as the market forms; 4orm estimate, derived from McKinsey base case. See the data room.)</em></p>
     <div class="iwstrip-acts">
       <a class="dhero-btn-p" href="https://data.4ormfinance.com">Request access to the data room →</a>
       <a class="dhero-btn-s" href="https://www.4ormedc.com" target="_blank" rel="noopener">See the institutional demo ↗</a>
@@ -290,14 +346,14 @@
     <div class="famfooter-head">
       <div>
         <div class="famfooter-eye">4orm Finance family</div>
-        <h3>Four surfaces, <span class="key">one rail.</span></h3>
+        <h3>Four surfaces, <span class="key">one settlement layer.</span></h3>
       </div>
     </div>
     <div class="famfooter-grid">
       <a href="https://4ormex.com" target="_blank" rel="noopener" class="famtile f2">
         <span class="lab">02 · Exchange</span>
         <span class="name">4ormEx</span>
-        <span class="desc">Institutional trading venue. Atomic settlement.</span>
+        <span class="desc">Institutional trading venue. Settlement finality.</span>
         <span class="link">4ormex.com ↗</span>
       </a>
       <a href="https://data.4ormfinance.com" class="famtile f3">
@@ -309,7 +365,7 @@
       <a href="https://www.4ormedc.com" target="_blank" rel="noopener" class="famtile f4">
         <span class="lab">04 · Demo</span>
         <span class="name">4orm Demo Exchange</span>
-        <span class="desc">Live walkthrough. KYC to atomic finality, in 8 min.</span>
+        <span class="desc">Live walkthrough. KYC to settlement finality, in 8 min.</span>
         <span class="link">4ormedc.com ↗</span>
       </a>
       <a href="https://kcs-capital.com" target="_blank" rel="noopener" class="famtile f5">
