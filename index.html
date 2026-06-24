@@ -4,21 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>4orm Finance · Regulated settlement finality for Canadian capital markets</title>
-<meta name="description" content="4orm Finance operates Canada's regulated rail for tokenized real-world assets. Settlement finality, embedded compliance, regulated custody, all on one settlement layer. Architecture informed by the public findings of the Bank of Canada's Project Samara experiment (Staff Analytical Paper 2026-8). 4orm Finance is not affiliated with the Bank of Canada or the Samara consortium." />
+<meta name="description" content="4orm Finance operates Canada's neutral settlement layer for tokenized real-world assets. Settlement finality, embedded compliance, regulated custody, all on one settlement layer. Architecture informed by the public findings of the Bank of Canada's Project Samara experiment (Staff Analytical Paper 2026-8). 4orm Finance is not affiliated with the Bank of Canada or the Samara consortium." />
 <meta property="og:title" content="4orm Finance · Regulated settlement finality for Canadian capital markets" />
-<meta property="og:description" content="Canada's regulated rail for tokenized real-world assets. Settlement is final at commit." />
+<meta property="og:description" content="Canada's neutral settlement layer for tokenized real-world assets. Settlement is final at commit." />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=4" />
-<link rel="stylesheet" href="assets/site.css?v=4" />
+<link rel="stylesheet" href="assets/styles.css?v=6" />
+<link rel="stylesheet" href="assets/site.css?v=6" />
 </head>
 <body>
 
 <!-- Util bar -->
 <div class="util-bar">
-  <span class="util-left">Part of the 4orm Finance regulated control plane</span>
+  <span class="util-left">Part of the 4orm Finance neutral settlement layer</span>
   <a href="https://4ormex.com" target="_blank" rel="noopener" class="util-gold">4ormEx ↗</a>
   <span class="util-sep">/</span>
   <a href="https://data.4ormfinance.com" target="_blank" rel="noopener">Data Room ↗</a>
@@ -72,7 +72,7 @@
       <div class="dhero-stat">
         <div class="lab">Directional support</div>
         <div class="num green">$100M</div>
-        <div class="sub">Project Samara settled a tokenized bond against wholesale central-bank money, March 2026</div>
+        <div class="sub">Project Samara settled a tokenized bond against wholesale central-bank money (W-CAD), March 2026 (directional support, not validation of 4orm's commercial-bank deposit model)</div>
       </div>
       <div class="dhero-stat">
         <div class="lab">Capabilities</div>
@@ -108,6 +108,7 @@
         <h3>The money settles at the same instant the asset moves.</h3>
         <p>The cash side is a tokenized bank deposit, issued and held by a regulated Canadian bank as the bank's own liability. 4orm connects to it; 4orm does not issue it.</p>
         <div class="cmeta">Bank's responsibility</div>
+<p style="margin-top:14px;font-size:.86rem;color:var(--text-2);font-style:italic"><strong style="color:var(--brand-700)">4orm takes no deposits, touches no CDIC funds, and needs no banking or trust licence. The deposit token is the bank's liability, issued under the bank's own banking authorizations.</strong></p>
       </div>
       <div class="ccard c1">
         <span class="ctag">03 · The rules</span>
@@ -255,7 +256,7 @@
 <section class="psec">
   <div class="psec-inner">
     <div class="psec-head">
-      <div class="psec-eye">The validation moment</div>
+      <div class="psec-eye">The reference point</div>
       <h2>The settlement model is proven in principle. <span class="key">The remaining question is who operates it for Canadian institutions.</span></h2>
       <p class="lead">On March 6, 2026 the Bank of Canada completed Project Samara, settling a tokenized bond against wholesale central-bank money (W-CAD) with RBC, TD, and Export Development Canada. Full lifecycle: issuance, bidding, coupon payments, secondary trading, redemption. Regulatory sign-off from the OSC, AMF, and CIRO. <b>Samara settled against central-bank money, not a commercial-bank deposit token; 4orm's model uses a tokenized commercial-bank deposit as the cash leg.</b> Samara is directional support that settlement finality for tokenized assets works in Canada. (Bank of Canada Staff Analytical Paper 2026-8. 4orm is not affiliated with the Bank of Canada or the Samara consortium.)</p>
     </div>
@@ -282,7 +283,7 @@
       <div class="ccard c4">
         <span class="ctag">Reference architecture</span>
         <h3>The standard 4orm is built to</h3>
-        <p>Project Samara established the architectural patterns 4orm Finance operates against. 4orm is not in operational production with Tier-1 banks; it is building the regulated rail to that standard.</p>
+        <p>Project Samara established the architectural patterns 4orm Finance builds against. 4orm is not in operational production with Tier-1 banks; it is building the settlement layer to that standard.</p>
         <div class="cmeta">Reference model</div>
       </div>
     </div>
@@ -295,14 +296,14 @@
     <div class="psec-head">
       <div class="psec-eye">The family of properties</div>
       <h2>One thesis. <span class="key">Four surfaces of evidence.</span></h2>
-      <p class="lead">The four 4orm properties (and KCS Capital, the developer) form a hub-and-spoke. 4orm Finance is the hub. Each spoke is a separate site, a separate URL, a separate institutional surface — pointing back to the same opportunity.</p>
+      <p class="lead">The four 4orm properties (and KCS Capital, the developer) form a hub-and-spoke. 4orm Finance is the hub. Each spoke is a separate site, a separate URL, a separate institutional surface, pointing back to the same opportunity.</p>
     </div>
 
     <div class="cgrid c4">
       <a class="ccard c1" href="index.html" style="text-decoration:none;color:inherit">
         <span class="ctag">01 · Hub</span>
         <h3>4orm Finance</h3>
-        <p>Canada's regulated rail for tokenized real-world assets. Six capabilities, one settlement layer.</p>
+        <p>Canada's neutral settlement layer for tokenized real-world assets. Interoperability and settlement finality across institutions.</p>
         <div class="cmeta">4ormfinance.com</div>
       </a>
       <a class="ccard c2" href="https://4ormex.com" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">

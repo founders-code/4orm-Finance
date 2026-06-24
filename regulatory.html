@@ -8,13 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=4" />
-<link rel="stylesheet" href="assets/site.css?v=4" />
+<link rel="stylesheet" href="assets/styles.css?v=6" />
+<link rel="stylesheet" href="assets/site.css?v=6" />
 </head>
 <body>
 
 <div class="util-bar">
-  <span class="util-left">Part of the 4orm Finance regulated control plane</span>
+  <span class="util-left">Part of the 4orm Finance neutral settlement layer</span>
   <a href="https://4ormex.com" target="_blank" rel="noopener" class="util-gold">4ormEx ↗</a>
   <span class="util-sep">/</span>
   <a href="https://data.4ormfinance.com" target="_blank" rel="noopener">Data Room ↗</a>
@@ -62,14 +62,14 @@
   <div class="psec-inner">
     <div class="psec-head">
       <div class="psec-eye">The four regulators</div>
-      <h2>One rail. <span class="key">Four supervisory feeds.</span></h2>
+      <h2>One settlement layer. <span class="key">Four supervisory feeds.</span></h2>
       <p class="lead">Every transaction on 4orm Finance produces evidence for four distinct regulatory surfaces. Each one is named, each one has a specific supervisory expectation, each one receives a tailored feed at the moment of commit.</p>
     </div>
     <div class="cgrid c4">
       <div class="ccard c1"><span class="ctag">OSFI</span><h3>Capital &amp; liquidity</h3><p>Federally regulated banks and trust companies operate under OSFI capital and liquidity rules. 4orm Finance produces the reports OSFI needs to supervise the institutions on the settlement layer.</p><div class="cmeta">Capital rules</div></div>
       <div class="ccard c2"><span class="ctag">CSA</span><h3>Securities &amp; disclosure</h3><p>Canadian Securities Administrators set the continuous-disclosure and marketplace rules for tokenized securities. Project Tokenization is the national initiative. 4orm Finance's work is informed by it; 4orm Finance is not a formal participant.</p><div class="cmeta">National coordination</div></div>
       <div class="ccard c3"><span class="ctag">CIRO</span><h3>Custody &amp; marketplace</h3><p>CIRO's Digital Asset Custody Framework (February 2026) is the reference standard for institutional digital custody in Canada. 4orm Trust Co (proposed) is intended to align with the standards set out in the CIRO Notice on Digital Asset Custody Framework (subject to CIRO dealer membership application; no application has yet been filed). 4ormEx operates under CIRO marketplace oversight (subject to required authorization).</p><div class="cmeta">Custody framework</div></div>
-      <div class="ccard c4"><span class="ctag">FINTRAC</span><h3>AML / ATF</h3><p>FINTRAC LCTR and EFT thresholds, suspicious transaction reporting, KYC and beneficial ownership rules. AML rule engines run pre-trade at the settlement layer. Reporting is emitted from the ledger.</p><div class="cmeta">AML at the rail</div></div>
+      <div class="ccard c4"><span class="ctag">FINTRAC</span><h3>AML / ATF</h3><p>FINTRAC LCTR and EFT thresholds, suspicious transaction reporting, KYC and beneficial ownership rules. AML rule engines run pre-trade at the settlement layer. Reporting is emitted from the ledger.</p><div class="cmeta">AML at the settlement layer</div></div>
     </div>
   </div>
 </section>
@@ -102,9 +102,9 @@
     </div>
     <div class="cgrid c4">
       <div class="ccard c1"><span class="ctag">Jul-Sep 2026</span><h3>Pre-Seed open</h3><p>Opening July 1, 2026 with a 90-day window (closing approximately September 29, 2026). Capital deployed against the regulatory roadmap below.</p><div class="cmeta">Active</div></div>
-      <div class="ccard c2"><span class="ctag">Q3 2026</span><h3>Holdings + OpCos finalized</h3><p>HoldCo, 4orm Finance OpCo, 4ormEx OpCo, and 4orm Trust Co incorporations finalized. Independent board seated.</p><div class="cmeta">Q3 target</div></div>
+      <div class="ccard c2"><span class="ctag">Q3 2026</span><h3>Holdings + OpCos finalized</h3><p>HoldCo, 4orm Finance OpCo, 4ormEx OpCo, and 4orm Trust Co (proposed) incorporations finalized. Independent board seated.</p><div class="cmeta">Q3 target</div></div>
       <div class="ccard c3"><span class="ctag">Q3 2026</span><h3>Alberta Sandbox engagement</h3><p>Engagement under the Alberta Financial Innovation Act. Bill 13 streamlines the legislative pathway. Sandbox-tested before operating authorization.</p><div class="cmeta">Sandbox</div></div>
-      <div class="ccard c4"><span class="ctag">2027 - 2028</span><h3>Operating authorization</h3><p>CIRO custody Tier-2 authorization. CSA marketplace and dealer registrations. OSFI engagement for bank-issuer participation.</p><div class="cmeta">Full operation</div></div>
+      <div class="ccard c4"><span class="ctag">2027 - 2028</span><h3>Operating authorization</h3><p>CIRO dealer membership application and custody framework alignment. CSA marketplace and dealer registrations. OSFI engagement for bank-issuer participation.</p><div class="cmeta">Full operation</div></div>
     </div>
   </div>
 </section>
@@ -120,7 +120,7 @@
     <div class="cgrid c3">
       <div class="ccard c2"><span class="ctag">Pre-trade</span><h3>Screens at the order book</h3><p>Sanctions, PEP, beneficial-ownership screens run before a transaction enters the order book. Prohibited transactions never become trades.</p><div class="cmeta">Block on entry</div></div>
       <div class="ccard c3"><span class="ctag">In-trade</span><h3>Attested at commit</h3><p>Post-trade attestation runs in the same block as settlement. The attestation is a feature of the trade, not a separate operation.</p><div class="cmeta">Inline attest</div></div>
-      <div class="ccard c4"><span class="ctag">Post-trade</span><h3>Reporting from the ledger</h3><p>OSFI, CSA, FINTRAC, CIRO reporting are generated from the ledger as the rail clears. There is no reconciliation. There is no batch.</p><div class="cmeta">Ledger-emitted</div></div>
+      <div class="ccard c4"><span class="ctag">Post-trade</span><h3>Reporting from the ledger</h3><p>OSFI, CSA, FINTRAC, CIRO reporting are generated from the ledger as the settlement layer clears. There is no reconciliation. There is no batch.</p><div class="cmeta">Ledger-emitted</div></div>
     </div>
   </div>
 </section>

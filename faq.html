@@ -4,12 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FAQ · 4orm Finance · The questions institutions actually ask</title>
-<meta name="description" content="Frequently asked questions about 4orm Finance, Canada's regulated rail for tokenized real-world assets. Settlement finality, regulatory pathway, corporate structure, KCS Capital relationship, the active raise." />
+<meta name="description" content="Frequently asked questions about 4orm Finance, Canada's neutral settlement layer for tokenized real-world assets. Settlement finality, regulatory pathway, corporate structure, KCS Capital relationship, the active raise." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=4" />
-<link rel="stylesheet" href="assets/site.css?v=4" />
+<link rel="stylesheet" href="assets/styles.css?v=6" />
+<link rel="stylesheet" href="assets/site.css?v=6" />
 <style>
   .faq-list { display: flex; flex-direction: column; gap: 10px; }
   .faq { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; transition: border-color .2s, box-shadow .2s; }
@@ -28,7 +28,7 @@
 <body>
 
 <div class="util-bar">
-  <span class="util-left">Part of the 4orm Finance regulated control plane</span>
+  <span class="util-left">Part of the 4orm Finance neutral settlement layer</span>
   <a href="https://4ormex.com" target="_blank" rel="noopener" class="util-gold">4ormEx ↗</a>
   <span class="util-sep">/</span>
   <a href="https://data.4ormfinance.com" target="_blank" rel="noopener">Data Room ↗</a>
@@ -79,7 +79,7 @@
       <details class="faq">
         <summary><span class="faq-num">Q1</span> What does "regulated settlement finality" mean in practice?</summary>
         <div class="faq-body">
-          <p>It means that when a transaction commits on the 4orm settlement layer, three things travel together: the <b>title</b> (the record of who owns the asset), the <b>cash leg</b> (a tokenized bank deposit issued and held by a regulated bank), and the <b>rules</b> (identity, eligibility, sanctions, jurisdiction). Custody and regulatory records update in the same step. Either all settle together, or none do. There is no window during which they can be out of sync. The transaction is final when the block is final. Project Samara settled a tokenized bond against wholesale central-bank money in March 2026 (directional support that finality works in Canada; 4orm is not affiliated with the Bank of Canada or the Samara consortium).</p>
+          <p>It means that when a transaction commits on the 4orm settlement layer, three things travel together: the <b>title</b> (the record of who owns the asset), the <b>cash leg</b> (a tokenized bank deposit issued and held by a regulated bank), and the <b>rules</b> (identity, eligibility, sanctions, jurisdiction). Custody and regulatory records update in the same step. Either all settle together, or none do. There is no window during which they can be out of sync. The transaction is final when the block is final. Project Samara settled a tokenized bond against wholesale central-bank money (W-CAD) in March 2026 (directional support that finality works in Canada; 4orm is not affiliated with the Bank of Canada or the Samara consortium).</p>
         </div>
       </details>
       <details class="faq">
@@ -95,9 +95,9 @@
         </div>
       </details>
       <details class="faq">
-        <summary><span class="faq-num">Q4</span> How is this different from a single-bank tokenized rail like JPMorgan Onyx?</summary>
+        <summary><span class="faq-num">Q4</span> How is this different from a single-bank tokenized platform like JPMorgan Kinexys (formerly Onyx), Citi, or BMO/CME?</summary>
         <div class="faq-body">
-          <p>A single-bank tokenized rail is operated by one Tier-1 bank for that bank's counterparties. 4orm Finance is operated as an independently governed entity neutral to any single bank. The neutrality is what lets every Canadian FI (Tier-1, regional, credit union) use it without conceding strategic ground to a competitor.</p>
+          <p>A single-bank tokenized platform is operated by one Tier-1 bank for that bank's counterparties. 4orm Finance is operated as an independently governed entity neutral to any single bank. The neutrality is what lets every Canadian FI (Tier-1, regional, credit union) use it without conceding strategic ground to a competitor. (Domestically the incumbent to watch is TMX/CDS, the vertical clearing-and-settlement institution; 4orm's answer is the same: neutrality, no single owner.)</p>
         </div>
       </details>
     </div>
@@ -119,7 +119,7 @@
       <details class="faq">
         <summary><span class="faq-num">Q7</span> Is this a stablecoin?</summary>
         <div class="faq-body">
-          <p>No. 4orm Finance is not a stablecoin issuer. The tokenized bank deposit is issued and held by the bank as its liability; 4orm does not issue it. The cash leg on the settlement layer is a <b>bank-issued tokenized CAD deposit</b>, not a retail stablecoin. The deposits are issued by regulated Canadian financial institutions, denominated in CAD, issued and held by regulated Canadian banks under their existing banking authorizations. The distinction matters: a tokenized bank deposit is a liability of a regulated bank; a stablecoin is a private claim on a reserve.</p>
+          <p>No. 4orm Finance is not a stablecoin issuer. The tokenized bank deposit is issued and held by the bank as its liability; 4orm does not issue it. The cash leg on the settlement layer is a <b>bank-issued tokenized CAD deposit</b>, not a retail stablecoin. The deposits are issued by regulated Canadian financial institutions, denominated in CAD, issued and held by regulated Canadian banks under their existing banking authorizations. The distinction matters: a tokenized bank deposit is a liability of a regulated bank; a stablecoin is a private claim on a reserve. <strong>4orm takes no deposits, touches no CDIC funds, and needs no banking or trust licence. The bank issues and tokenizes its deposit using 4orm; 4orm provides the registry and ledger of record.</strong></p>
         </div>
       </details>
     </div>
@@ -135,7 +135,7 @@
       <details class="faq">
         <summary><span class="faq-num">Q9</span> What is the legal structure of 4orm Finance?</summary>
         <div class="faq-body">
-          <p>Four entities under the 4orm Finance brand: <b>4orm Finance Holdings Inc.</b> (HoldCo, parent), <b>4orm Finance Operations Inc.</b> (OpCo, marketplace and issuance), <b>4ormEx Operations Inc.</b> (OpCo, trading venue), and <b>4orm Trust Co.</b> (CustodyCo, qualified digital custodian targeting CIRO Tier 2). Independent boards. Separate capital. Separating custody, operations, and ownership is a deliberate structuring choice consistent with separating custody from dealing. The CIRO framework is a custody-tiering regime, not a structure mandate.</p>
+          <p>Four entities under the 4orm Finance brand: <b>4orm Finance Holdings Inc.</b> (HoldCo, parent), <b>4orm Finance Operations Inc.</b> (OpCo, marketplace and issuance), <b>4ormEx Operations Inc.</b> (OpCo, trading venue), and <b>4orm Trust Co.</b> (proposed CustodyCo, intended alignment with the CIRO Notice on Digital Asset Custody Framework; subject to OSFI letters patent or provincial trust authorization). Independent boards. Separate capital. Separating custody, operations, and ownership is a deliberate structuring choice consistent with separating custody from dealing. The CIRO framework is a custody-tiering regime, not a structure mandate.</p>
         </div>
       </details>
     </div>
