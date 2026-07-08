@@ -44,7 +44,12 @@
 <header class="nav">
   <div class="nav-inner">
     <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
-    <nav class="nav-links">
+    <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-hamburger-bar" aria-hidden="true"></span>
+      <span class="nav-hamburger-bar" aria-hidden="true"></span>
+      <span class="nav-hamburger-bar" aria-hidden="true"></span>
+    </button>
+    <nav class="nav-links" id="primaryNav">
       <a href="index.html">Home</a>
       <a href="platform.html">Platform</a>
       <a href="who.html">Who we serve</a>
@@ -222,5 +227,6 @@
 (function(){var KEY='fourm_cookie_consent_v1';var banner=document.getElementById('cookieBanner');var btnAccept=document.getElementById('cookieAccept');var btnReject=document.getElementById('cookieReject');var btnCustom=document.getElementById('cookieCustom');var btnSavePrefs=document.getElementById('cookieSavePrefs');var customizePanel=document.getElementById('cookieCustomize');var prefAnalytics=document.getElementById('prefAnalytics');var prefMarketing=document.getElementById('prefMarketing');function save(c){try{localStorage.setItem(KEY,JSON.stringify(Object.assign({ts:Date.now()},c)));}catch(e){}if(banner)banner.classList.remove('show');}function show(){if(banner)banner.classList.add('show');}function existing(){try{return JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){return null;}}if(!existing())show();if(btnAccept)btnAccept.addEventListener('click',function(){save({essential:true,analytics:true,marketing:true});});if(btnReject)btnReject.addEventListener('click',function(){save({essential:true,analytics:false,marketing:false});});if(btnCustom)btnCustom.addEventListener('click',function(){customizePanel.classList.toggle('show');});if(btnSavePrefs)btnSavePrefs.addEventListener('click',function(){save({essential:true,analytics:prefAnalytics.checked,marketing:prefMarketing.checked});});})();
 </script>
 
+<script src="assets/mobile-nav.js?v=2"></script>
 </body>
 </html>

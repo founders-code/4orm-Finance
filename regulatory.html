@@ -31,7 +31,12 @@
 <header class="nav">
   <div class="nav-inner">
     <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
-    <nav class="nav-links">
+    <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-hamburger-bar" aria-hidden="true"></span>
+      <span class="nav-hamburger-bar" aria-hidden="true"></span>
+      <span class="nav-hamburger-bar" aria-hidden="true"></span>
+    </button>
+    <nav class="nav-links" id="primaryNav">
       <a href="index.html">Home</a>
       <a href="platform.html">Platform</a>
       <a href="who.html">Who we serve</a>
@@ -219,5 +224,6 @@
   });
 })();
 </script>
+<script src="assets/mobile-nav.js?v=2"></script>
 </body>
 </html>
