@@ -10,18 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/styles.css?v=6" />
 <link rel="stylesheet" href="assets/site.css?v=6" />
-<style>
-  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  @media (max-width: 900px){ .team-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 600px){ .team-grid { grid-template-columns: 1fr; } }
-  .team-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform .2s, border-color .2s, box-shadow .2s; }
-  .team-card:hover { transform: translateY(-3px); border-color: var(--brand-100); box-shadow: var(--shadow); }
-  .team-photo { aspect-ratio: 1 / 1; background: linear-gradient(135deg, var(--bg-2), var(--surface-3)); display: grid; place-items: center; font-family: var(--font-mono); font-size: .68rem; font-weight: 800; letter-spacing: .14em; color: var(--text-3); text-transform: uppercase; border-bottom: 1px solid var(--border); }
-  .team-body { padding: 18px 20px 20px; }
-  .team-name { font-size: 1.15rem; font-weight: 800; color: var(--text); margin: 0 0 4px; letter-spacing: -.005em; }
-  .team-role { font-family: var(--font-mono); font-size: .68rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); margin-bottom: 10px; }
-  .team-bio { font-size: .9rem; color: var(--text-2); line-height: 1.55; margin: 0; }
-</style>
 </head>
 <body>
 
@@ -74,32 +62,28 @@
   <div class="psec-inner">
     <div class="psec-head">
       <div class="psec-eye">Founders</div>
-      <h2>The founding team <span class="key">and the two key hires this round funds.</span></h2>
-      <p class="lead">Each principal carries a distinct portion of the build: capital markets and product, regulatory and operations, technology and architecture. Full backgrounds in the data room.</p>
+      <h2>Founders</h2>
+      <p class="lead">The founders leading the 4orm Finance build. Full backgrounds and the extended advisory bench are in the data room.</p>
     </div>
-    <div class="team-grid">
+    <div class="team-grid c2">
       <div class="team-card">
-        <div class="team-photo" role="img" aria-label="Chad Johnston">CJ</div>
-        <div class="team-body">
-          <div class="team-name">Chad Johnston</div>
-          <div class="team-role">Founder · KCS Capital · 4orm Finance</div>
-          <p class="team-bio">Capital markets, product, and go-to-market. Founder of KCS Capital, the independent technology and research firm developing the 4orm Finance infrastructure. Calgary, AB.</p>
+        <img class="team-photo" src="assets/team/team-chad.png" alt="Chad R. Johnston" loading="lazy">
+        <span class="team-role-tag gold">Founder &amp; CEO</span>
+        <h3 class="team-name">Chad R. Johnston</h3>
+        <p class="team-title">KCS Capital &amp; 4orm Finance</p>
+        <p class="team-bio">Founder and CEO of KCS Capital, the independent technology and research firm developing the 4orm Finance infrastructure. Background leading large-scale industrial operations in Canadian oil and gas, including a senior role on the multi-billion-dollar CNRL Horizon Coker Upgrade. Focus today: regulated digital markets and institutional tokenization for Canadian capital markets.</p>
+        <div class="team-links">
+          <a href="https://www.linkedin.com/in/chadrjohnstonglobal/" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
       <div class="team-card">
-        <div class="team-photo" role="img" aria-label="Regulatory and Operations Lead">RO</div>
-        <div class="team-body">
-          <div class="team-name">Regulatory &amp; Operations Lead</div>
-          <div class="team-role">Search underway · funded by Pre-Seed</div>
-          <p class="team-bio">Key hire funded by this round: regulatory pathway, CIRO and CSA engagement, operations leadership. Background in Canadian financial regulation. Candidate slate in the data room.</p>
-        </div>
-      </div>
-      <div class="team-card">
-        <div class="team-photo" role="img" aria-label="Technology and Architecture Lead">TA</div>
-        <div class="team-body">
-          <div class="team-name">Technology &amp; Architecture Lead</div>
-          <div class="team-role">Search underway · funded by Pre-Seed</div>
-          <p class="team-bio">Key hire funded by this round: platform architecture, settlement layer, custody infrastructure. Background in distributed systems and regulated financial technology. Candidate slate in the data room.</p>
+        <img class="team-photo" src="assets/team/team-kevin.png" alt="Kevin Wong" loading="lazy">
+        <span class="team-role-tag gold">Co-Founder · Strategy</span>
+        <h3 class="team-name">Kevin Wong</h3>
+        <p class="team-title">Strategy Advisor · Founder, Evolve One Digital</p>
+        <p class="team-bio">Serial entrepreneur, Fractional CMO, and growth strategist with 22-plus years building, scaling, and advising companies. Founder of Evolve One Digital. At 4orm Finance, Kevin leads strategic growth, brand positioning, and market expansion.</p>
+        <div class="team-links">
+          <a href="https://www.linkedin.com/in/therealkevinwong/" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
     </div>
@@ -111,13 +95,87 @@
   <div class="psec-inner">
     <div class="psec-head">
       <div class="psec-eye">Advisory</div>
-      <h2>Operators and counsel who have <span class="key">built this before.</span></h2>
-      <p class="lead">Advisors come from Tier-1 Canadian banking, capital-markets regulation, qualified custody operations, and global tokenized real-world asset infrastructure. Advisor names and backgrounds are shared under NDA in the data room.</p>
+      <h2>Advisory</h2>
+      <p class="lead">Operators, counsel, and capital-markets professionals advising the 4orm Finance build. Backgrounds span Canadian securities regulation, qualified custody, Tier-1 banking systems, exempt-market capital formation, and real-world asset origination. Full bios in the data room.</p>
     </div>
-    <div class="cgrid c3">
-      <div class="ccard c1"><span class="ctag">Capital markets</span><h3>Former Tier-1 treasury</h3><p>Treasury operations and tokenized settlement advisors with Tier-1 Canadian bank backgrounds.</p><div class="cmeta">In the data room</div></div>
-      <div class="ccard c2"><span class="ctag">Regulatory</span><h3>Securities counsel</h3><p>Canadian securities counsel with CIRO, CSA, and OSFI engagement experience.</p><div class="cmeta">In the data room</div></div>
-      <div class="ccard c3"><span class="ctag">Custody</span><h3>Qualified custodian operators</h3><p>Operators from qualified digital custodians and trust companies inside the CIRO framework.</p><div class="cmeta">In the data room</div></div>
+    <div class="team-grid c4">
+      <div class="team-card">
+        <img class="team-photo" src="assets/team/team-mike.png" alt="Michael Stephens" loading="lazy">
+        <span class="team-role-tag">Legal Counsel</span>
+        <h3 class="team-name">Michael Stephens</h3>
+        <p class="team-title">Partner, Fasken (Vancouver)</p>
+        <p class="team-bio">Information technology law Partner in the Vancouver office of Fasken and a recognized leader in the British Columbia technology ecosystem. Counsels founders, executives, and boards on corporate strategy, securities, and governance.</p>
+        <div class="team-links">
+          <a href="https://www.linkedin.com/in/michael-stephens-lawyer/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="assets/team/team-james.png" alt="James Atherton" loading="lazy">
+        <span class="team-role-tag">Legal &amp; Capital Markets</span>
+        <h3 class="team-name">James Atherton</h3>
+        <p class="team-title">Partner, Capiche Legal LLP · Founder, Capiche Capital Technologies</p>
+        <p class="team-bio">Canadian corporate finance lawyer and capital markets entrepreneur with 25-plus years building compliance-first capital infrastructure. CEO of the Capiche Group. Member of the BCSC Corporate Finance Stakeholder Forum.</p>
+        <div class="team-links">
+          <a href="https://www.linkedin.com/in/james-atherton-8055a93/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="assets/team/team-miika.png" alt="Miika Makela" loading="lazy">
+        <span class="team-role-tag">Securities Compliance</span>
+        <h3 class="team-name">Miika Makela</h3>
+        <p class="team-title">CFA · Capital Markets Compliance</p>
+        <p class="team-bio">CFA charter holder with 22-plus years across Canadian capital markets. Former Chief Compliance Officer at multiple registered firms. Former Head of the Investment Review Committee at FrontFundr, Canada's largest equity crowdfunding platform.</p>
+        <div class="team-links">
+          <a href="https://www.linkedin.com/in/miika-makela-cfa-24aa056/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="assets/team/team-bruce.png" alt="Bruce Fair" loading="lazy">
+        <span class="team-role-tag">Capital Markets</span>
+        <h3 class="team-name">Bruce Fair</h3>
+        <p class="team-title">President, Mench Capital Corp.</p>
+        <p class="team-bio">Seasoned merchant banker with 25-plus years structuring private and public equity transactions. Mench Capital has originated more than $500M in transactions across Canadian resources, structured products, and alternative investments.</p>
+        <div class="team-links">
+          <a href="https://www.linkedin.com/in/bruce-fair/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="assets/team/team-zed.png" alt="Zahiruddin Sandeela" loading="lazy">
+        <span class="team-role-tag">Systems Architecture</span>
+        <h3 class="team-name">Zahiruddin Sandeela</h3>
+        <p class="team-title">TOGAF 9.1 · ITIL V3 · Enterprise &amp; Financial Systems Architecture</p>
+        <p class="team-bio">Senior Enterprise and Systems Architect with 20-plus years designing and modernizing complex systems in regulated environments. Prior engagements include Vancity (Interac payments modernization, AML), ICBC, UBC, WorkSafeBC, Safeway, and Blackhawk Network. Leads target-state systems architecture on the 4orm Finance build.</p>
+        <div class="team-links">
+          <a href="https://www.linkedin.com/in/zedzworld/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="assets/team/team-angelo.png" alt="Angelo Aquino" loading="lazy">
+        <span class="team-role-tag">Real-World Assets</span>
+        <h3 class="team-name">Angelo Aquino</h3>
+        <p class="team-title">Real Estate · Real-World Asset Advisor</p>
+        <p class="team-bio">Real estate professional with over a decade in sales and corporate training. Facilitated hundreds of transactions across Greater Vancouver. Bridges traditional real estate markets with tokenized asset models on the 4orm Finance build.</p>
+        <div class="team-links">
+          <a href="https://www.linkedin.com/in/angelo-aquino-a1973623b/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="assets/team/team-dean.png" alt="Dean Hesse" loading="lazy">
+        <span class="team-role-tag">Research</span>
+        <h3 class="team-name">Dean Hesse</h3>
+        <p class="team-title">Market Research · Blockchain</p>
+        <p class="team-bio">Four decades of leadership in commercial infrastructure combined with focused digital asset and blockchain research since 2021. Leads market analysis, protocol evaluation, and tokenomics assessment for the 4orm Finance build.</p>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="assets/team/team-don.png" alt="Don Hickling" loading="lazy">
+        <span class="team-role-tag gold">Angel Investor</span>
+        <h3 class="team-name">Don Hickling</h3>
+        <p class="team-title">Strategic Advisor</p>
+        <p class="team-bio">Seasoned entrepreneur and operator with 17-plus years of executive leadership. Founder and President of a large development company. Angel investor in KCS Capital and independent strategic advisor to the founding team.</p>
+        <div class="team-links">
+          <a href="https://www.linkedin.com/in/don-hickling-952aa877/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
