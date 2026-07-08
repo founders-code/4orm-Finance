@@ -1165,21 +1165,20 @@ body.menu-open .nav-hamburger-bar:nth-child(3) { transform: translateY(-7px) rot
   .util-bar { display: none; }
   .brand-logo { height: 61px; margin-top: 0; margin-bottom: 0; }
 
-  .nav { position: relative; }
   .nav-inner { flex-wrap: nowrap !important; }
   .nav-hamburger { display: inline-flex; margin-left: auto; border-color: rgba(255,255,255,.25); color: #fff; }
   .nav-hamburger:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.35); }
   .nav-hamburger-bar { background: currentColor; }
 
-  /* Force nav-links out of display: contents on mobile so it can render as a dropdown */
+  /* Dropdown panel — hero blue-to-black gradient; links hidden until menu opens */
   .nav-links {
     display: none !important;
     position: absolute;
     top: 100%; left: 0; right: 0;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow);
+    background: linear-gradient(180deg, #1F3CA8 0%, #15233F 42%, #0B1220 100%);
+    border-top: 1px solid rgba(255,255,255,.12);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 12px 40px rgba(11,18,32,.45);
     padding: 12px 20px 20px;
     flex-direction: column;
     gap: 2px;
@@ -1194,20 +1193,28 @@ body.menu-open .nav-hamburger-bar:nth-child(3) { transform: translateY(-7px) rot
     padding: 13px 12px;
     border-radius: 8px;
     font-size: 1rem;
-    color: var(--text-2);
+    font-weight: 600;
+    color: rgba(255,255,255,.88) !important;
     background: transparent;
     border: none;
   }
-  .nav-links a:hover { background: var(--surface-2); color: var(--text); }
-  .nav-links a.active { color: var(--brand-700); background: var(--brand-50); }
+  .nav-links a:hover {
+    background: rgba(255,255,255,.08) !important;
+    color: #fff !important;
+  }
+  .nav-links a.active {
+    color: #FFD9A8 !important;
+    background: rgba(255,217,168,.12) !important;
+  }
 
   /* Inline the platform dropdown inside the mobile menu */
   .nav-drop { width: 100%; }
   .nav-drop > .nav-drop-trigger {
     width: 100%; justify-content: space-between;
     padding: 13px 12px; font-size: 1rem;
+    color: rgba(255,255,255,.88);
   }
-  .nav-drop-trigger .caret { font-size: .7rem; }
+  .nav-drop-trigger .caret { font-size: .7rem; color: rgba(255,255,255,.55); }
   .nav-drop-menu {
     position: static; opacity: 1; visibility: visible; transform: none;
     background: transparent; border: none; box-shadow: none;
@@ -1215,7 +1222,14 @@ body.menu-open .nav-hamburger-bar:nth-child(3) { transform: translateY(-7px) rot
     display: flex; flex-direction: column; gap: 2px;
     min-width: 0;
   }
-  .nav-drop-menu a { padding: 10px 12px; font-size: .95rem; }
+  .nav-drop-menu a {
+    padding: 10px 12px; font-size: .95rem;
+    color: rgba(255,255,255,.78) !important;
+  }
+  .nav-drop-menu a:hover {
+    background: rgba(255,255,255,.08) !important;
+    color: #fff !important;
+  }
 
   /* Request access as full-width solid button at bottom of dropdown */
   .nav-links a.nav-auth {
@@ -1223,12 +1237,16 @@ body.menu-open .nav-hamburger-bar:nth-child(3) { transform: translateY(-7px) rot
     margin-top: 12px;
     padding: 14px 18px;
     border-radius: 10px;
-    background: var(--brand);
-    color: #fff;
-    border: 1px solid var(--brand);
+    background: #FFD9A8 !important;
+    color: #0B1220 !important;
+    border: 1px solid #FFD9A8 !important;
     font-size: 1rem; font-weight: 700;
     text-align: center;
     order: 999;
   }
-  .nav-links a.nav-auth:hover { background: var(--brand-600); border-color: var(--brand-600); }
+  .nav-links a.nav-auth:hover {
+    background: #FFE6C0 !important;
+    border-color: #FFE6C0 !important;
+    color: #0B1220 !important;
+  }
 }
