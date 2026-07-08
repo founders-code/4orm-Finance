@@ -522,8 +522,6 @@ a:hover { color: var(--brand-700); }
      right, and distributes every menu item between them with equal gaps. */
 }
 .nav-inner .brand { margin-right: 0; }
-/* on phones, let the brand sit on its own row so the menu can stack below it */
-@media (max-width: 560px){ .nav-inner { flex-wrap: wrap; } }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 800;
   font-size: 1.15rem; letter-spacing: -.03em; color: var(--text); flex: 0 0 auto; }
 .brand:hover { color: var(--text); }
@@ -537,20 +535,17 @@ a:hover { color: var(--brand-700); }
   letter-spacing: .04em; text-transform: uppercase; margin-left: 2px; }
 .brand-logo { height: 51px; width: auto; display: block; }
 @media (max-width: 760px){ .brand-logo { height: 38px; } }
-/* Make nav-links transparent to the flex layout so its children (each <a>
-   and the .nav-drop) participate as direct flex children of .nav-inner. */
-.nav-links { display: contents; }
+/* Desktop only: nav-links children participate as direct flex children of .nav-inner.
+   On mobile (≤900px) nav-links must be a real box so it can be hidden/shown as a dropdown. */
+@media (min-width: 901px) {
+  .nav-links { display: contents; }
+}
 .nav-links a.nav-auth { padding: 7px 16px; border-radius: 99px;
   border: 1px solid var(--brand-100); background: var(--brand-50); color: var(--brand-700); font-weight: 700; font-size: .9rem; }
 .nav-links a.nav-auth:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
 .nav-links a {
   padding: 7px 6px; border-radius: 8px; color: var(--text-2); white-space: nowrap;
   font-weight: 600; font-size: .84rem; transition: background .15s, color .15s;
-}
-/* on tablets/phones the nav becomes a real flex container again so it can wrap */
-@media (max-width: 760px){
-  .nav-inner { flex-wrap: wrap; }
-  .nav-links { display: flex; flex-wrap: wrap; gap: 4px; width: 100%; align-items: center; }
 }
 .nav-links a:hover { background: var(--surface-2); color: var(--text); }
 .nav-links a.active { color: var(--brand-700); background: var(--brand-50); }
@@ -584,17 +579,6 @@ a:hover { color: var(--brand-700); }
   font-size: .88rem; font-weight: 600; color: var(--text-2); text-transform: none; letter-spacing: 0; }
 .nav-drop-menu a:hover { background: var(--surface-2); color: var(--text); }
 .nav-drop-menu a.active { color: var(--brand-700); background: var(--brand-50); }
-@media (max-width: 760px){
-  .nav-drop { width: 100%; }
-  .nav-drop-menu { position: static; opacity: 1; visibility: visible; transform: none; display: flex;
-    box-shadow: none; border: none; padding: 2px 0 6px 14px; min-width: 0; }
-  .nav-drop-trigger .caret { display: none; }
-}
-@media (max-width: 760px){
-  .nav-links { margin-left: 0; width: 100%; gap: 2px 4px; }
-  .nav-links a { padding: 6px 9px; font-size: .85rem; }
-}
-
 /* --------------------------------------------------- Buttons */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
