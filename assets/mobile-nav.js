@@ -17,11 +17,11 @@
   document.addEventListener('click', function (e) {
     if (!body.classList.contains('menu-open')) return;
     if (btn.contains(e.target)) return;
-    if (e.target.closest('.nav-links a')) {
-      close();
+    if (e.target.closest('.nav-links')) {
+      if (e.target.closest('a')) close();
       return;
     }
-    if (!e.target.closest('.nav-links')) close();
+    close();
   });
 
   window.addEventListener('scroll', function () {

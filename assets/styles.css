@@ -522,6 +522,8 @@ a:hover { color: var(--brand-700); }
      right, and distributes every menu item between them with equal gaps. */
 }
 .nav-inner .brand { margin-right: 0; }
+/* on phones, let the brand sit on its own row so the menu can stack below it */
+@media (max-width: 560px){ .nav-inner { flex-wrap: wrap; } }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 800;
   font-size: 1.15rem; letter-spacing: -.03em; color: var(--text); flex: 0 0 auto; }
 .brand:hover { color: var(--text); }
@@ -535,17 +537,20 @@ a:hover { color: var(--brand-700); }
   letter-spacing: .04em; text-transform: uppercase; margin-left: 2px; }
 .brand-logo { height: 51px; width: auto; display: block; }
 @media (max-width: 760px){ .brand-logo { height: 38px; } }
-/* Desktop only: nav-links children participate as direct flex children of .nav-inner.
-   On mobile (≤900px) nav-links must be a real box so it can be hidden/shown as a dropdown. */
-@media (min-width: 901px) {
-  .nav-links { display: contents; }
-}
+/* Make nav-links transparent to the flex layout so its children (each <a>
+   and the .nav-drop) participate as direct flex children of .nav-inner. */
+.nav-links { display: contents; }
 .nav-links a.nav-auth { padding: 7px 16px; border-radius: 99px;
   border: 1px solid var(--brand-100); background: var(--brand-50); color: var(--brand-700); font-weight: 700; font-size: .9rem; }
 .nav-links a.nav-auth:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
 .nav-links a {
   padding: 7px 6px; border-radius: 8px; color: var(--text-2); white-space: nowrap;
   font-weight: 600; font-size: .84rem; transition: background .15s, color .15s;
+}
+/* on tablets/phones the nav becomes a real flex container again so it can wrap */
+@media (max-width: 760px){
+  .nav-inner { flex-wrap: wrap; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 4px; width: 100%; align-items: center; }
 }
 .nav-links a:hover { background: var(--surface-2); color: var(--text); }
 .nav-links a.active { color: var(--brand-700); background: var(--brand-50); }
@@ -579,6 +584,17 @@ a:hover { color: var(--brand-700); }
   font-size: .88rem; font-weight: 600; color: var(--text-2); text-transform: none; letter-spacing: 0; }
 .nav-drop-menu a:hover { background: var(--surface-2); color: var(--text); }
 .nav-drop-menu a.active { color: var(--brand-700); background: var(--brand-50); }
+@media (max-width: 760px){
+  .nav-drop { width: 100%; }
+  .nav-drop-menu { position: static; opacity: 1; visibility: visible; transform: none; display: flex;
+    box-shadow: none; border: none; padding: 2px 0 6px 14px; min-width: 0; }
+  .nav-drop-trigger .caret { display: none; }
+}
+@media (max-width: 760px){
+  .nav-links { margin-left: 0; width: 100%; gap: 2px 4px; }
+  .nav-links a { padding: 6px 9px; font-size: .85rem; }
+}
+
 /* --------------------------------------------------- Buttons */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -1088,7 +1104,21 @@ sup.ref a:hover { background: var(--brand); color: #fff; }
   box-shadow: 0 6px 18px rgba(255, 217, 168, .25);
 }
 
-/* ===== Leadership team cards ===== */
+/* =====================================================================
+   v58 CANONICAL ADDITIONS
+   Team cards, mobile banner hide, mobile hamburger nav, hero subhead,
+   distinction callout.
+   ===================================================================== */
+
+/* Hero subhead — sits directly under H1 in the dark hero */
+.dhero-sub {
+  font-size: 1.15rem; font-weight: 500; line-height: 1.35;
+  color: #FFD9A8; margin: 0 0 18px; letter-spacing: -0.005em;
+  max-width: 30em;
+}
+@media (max-width: 640px){ .dhero-sub { font-size: 1rem; } }
+
+/* Team cards (leadership.html) */
 .team-grid { display: grid; gap: 22px; }
 .team-grid.c2 { grid-template-columns: repeat(2, 1fr); }
 .team-grid.c3 { grid-template-columns: repeat(3, 1fr); }
@@ -1104,7 +1134,6 @@ sup.ref a:hover { background: var(--brand); color: #fff; }
   transition: transform .16s ease, box-shadow .2s ease, border-color .2s ease;
 }
 .team-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--brand-100); }
-
 .team-photo {
   width: 96px; height: 96px; border-radius: 50%;
   background: var(--surface-2); object-fit: cover; display: block;
@@ -1122,23 +1151,32 @@ sup.ref a:hover { background: var(--brand); color: #fff; }
 .team-title { font-size: .85rem; color: var(--text-3); margin: 0; }
 .team-bio { font-size: .9rem; line-height: 1.55; color: var(--text-2); margin: 0; }
 .team-links { margin-top: auto; padding-top: 10px; display: flex; gap: 14px; flex-wrap: wrap; }
-.team-links a {
-  font-size: .82rem; font-weight: 700; color: var(--brand);
-  display: inline-flex; align-items: center; gap: 5px;
-}
+.team-links a { font-size: .82rem; font-weight: 700; color: var(--brand); display: inline-flex; align-items: center; gap: 5px; }
 .team-links a:hover { color: var(--brand-700); }
 
-/* Hide accredited-investor legend and pre-seed raise banner on mobile.
-   Both remain in DOM (screen readers, SEO, legal coverage) and the full
-   NI 45-106 legal block at page footer is unchanged. */
-@media (max-width: 760px) {
-  .ai-legend,
-  .sbx-banner {
-    display: none;
-  }
+/* Distinction callout — houses the old H1 line as a pull quote */
+.distinction {
+  background: linear-gradient(135deg, #0B1220 0%, #15233F 60%, #1F3CA8 100%);
+  color: #fff; padding: 64px 28px; position: relative; overflow: hidden;
+  text-align: center;
 }
+.distinction-inner { max-width: 44em; margin: 0 auto; position: relative; z-index: 1; }
+.distinction-eye {
+  font-size: .74rem; text-transform: uppercase; letter-spacing: .18em;
+  color: #FFD9A8; font-weight: 800; margin-bottom: 16px;
+}
+.distinction p {
+  font-size: 1.55rem; line-height: 1.35; color: #fff; margin: 0 0 18px;
+  font-weight: 700; letter-spacing: -0.01em;
+}
+.distinction p em { color: #FFD9A8; font-style: italic; }
+.distinction .attrib {
+  font-size: .8rem; color: rgba(255,255,255,.68); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .12em;
+}
+@media (max-width: 640px){ .distinction p { font-size: 1.15rem; } }
 
-/* ===== Hamburger button (visible only on mobile) ===== */
+/* Hamburger button (mobile only) */
 .nav-hamburger {
   display: none;
   width: 44px; height: 44px;
@@ -1160,93 +1198,54 @@ body.menu-open .nav-hamburger-bar:nth-child(1) { transform: translateY(7px) rota
 body.menu-open .nav-hamburger-bar:nth-child(2) { opacity: 0; }
 body.menu-open .nav-hamburger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Mobile (≤ 900px) — hamburger dropdown menu + util-bar hide + logo scale */
+/* Mobile viewport (≤ 900px) — hamburger dropdown + banner hide + logo scale */
 @media (max-width: 900px) {
-  .util-bar { display: none; }
-  .brand-logo { height: 61px; margin-top: 0; margin-bottom: 0; }
-
-  .nav-inner { flex-wrap: nowrap !important; }
-  .nav-hamburger { display: inline-flex; margin-left: auto; border-color: rgba(255,255,255,.25); color: #fff; }
-  .nav-hamburger:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.35); }
-  .nav-hamburger-bar { background: currentColor; }
-
-  /* Dropdown panel — hero blue-to-black gradient; links hidden until menu opens */
+  /* Hide top banners on mobile */
+  .ai-legend, .util-bar { display: none; }
+  /* Scale logo up 20% */
+  .brand-logo { height: 61px; }
+  /* Nav becomes relative to allow absolute dropdown positioning */
+  .nav { position: relative; }
+  .nav-hamburger { display: inline-flex; }
+  /* Hide the horizontal nav-links on mobile */
   .nav-links {
     display: none !important;
     position: absolute;
     top: 100%; left: 0; right: 0;
-    background: linear-gradient(180deg, #1F3CA8 0%, #15233F 42%, #0B1220 100%);
-    border-top: 1px solid rgba(255,255,255,.12);
-    border-bottom: 1px solid rgba(255,255,255,.08);
-    box-shadow: 0 12px 40px rgba(11,18,32,.45);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
     padding: 12px 20px 20px;
     flex-direction: column;
     gap: 2px;
     z-index: 60;
-    width: auto;
-    margin-left: 0;
   }
   body.menu-open .nav-links { display: flex !important; }
-
   .nav-links a {
     width: 100%;
     padding: 13px 12px;
     border-radius: 8px;
     font-size: 1rem;
-    font-weight: 600;
-    color: rgba(255,255,255,.88) !important;
+    color: var(--text-2);
     background: transparent;
     border: none;
+    white-space: normal;
   }
-  .nav-links a:hover {
-    background: rgba(255,255,255,.08) !important;
-    color: #fff !important;
-  }
-  .nav-links a.active {
-    color: #FFD9A8 !important;
-    background: rgba(255,217,168,.12) !important;
-  }
-
-  /* Inline the platform dropdown inside the mobile menu */
-  .nav-drop { width: 100%; }
-  .nav-drop > .nav-drop-trigger {
-    width: 100%; justify-content: space-between;
-    padding: 13px 12px; font-size: 1rem;
-    color: rgba(255,255,255,.88);
-  }
-  .nav-drop-trigger .caret { font-size: .7rem; color: rgba(255,255,255,.55); }
-  .nav-drop-menu {
-    position: static; opacity: 1; visibility: visible; transform: none;
-    background: transparent; border: none; box-shadow: none;
-    padding: 4px 0 4px 16px; margin: 0;
-    display: flex; flex-direction: column; gap: 2px;
-    min-width: 0;
-  }
-  .nav-drop-menu a {
-    padding: 10px 12px; font-size: .95rem;
-    color: rgba(255,255,255,.78) !important;
-  }
-  .nav-drop-menu a:hover {
-    background: rgba(255,255,255,.08) !important;
-    color: #fff !important;
-  }
-
-  /* Request access as full-width solid button at bottom of dropdown */
+  .nav-links a:hover { background: var(--surface-2); color: var(--text); }
+  .nav-links a.active { color: var(--brand-700); background: var(--brand-50); }
+  /* Request access as full-width brand button at bottom of dropdown */
   .nav-links a.nav-auth {
     width: 100%;
     margin-top: 12px;
     padding: 14px 18px;
     border-radius: 10px;
-    background: #FFD9A8 !important;
-    color: #0B1220 !important;
-    border: 1px solid #FFD9A8 !important;
+    background: var(--brand);
+    color: #fff;
+    border: 1px solid var(--brand);
     font-size: 1rem; font-weight: 700;
     text-align: center;
     order: 999;
   }
-  .nav-links a.nav-auth:hover {
-    background: #FFE6C0 !important;
-    border-color: #FFE6C0 !important;
-    color: #0B1220 !important;
-  }
+  .nav-links a.nav-auth:hover { background: var(--brand-600); border-color: var(--brand-600); }
 }

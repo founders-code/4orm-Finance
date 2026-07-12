@@ -9,11 +9,32 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/styles.css?v=8" />
-<link rel="stylesheet" href="assets/site.css?v=7" />
+<link rel="stylesheet" href="assets/site.css?v=8" />
+<style>
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 900px){ .team-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px){ .team-grid { grid-template-columns: 1fr; } }
+  .team-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform .2s, border-color .2s, box-shadow .2s; }
+  .team-card:hover { transform: translateY(-3px); border-color: var(--brand-100); box-shadow: var(--shadow); }
+  .team-photo { aspect-ratio: 1 / 1; background: linear-gradient(135deg, var(--bg-2), var(--surface-3)); display: grid; place-items: center; font-family: var(--font-mono); font-size: .68rem; font-weight: 800; letter-spacing: .14em; color: var(--text-3); text-transform: uppercase; border-bottom: 1px solid var(--border); }
+  .team-body { padding: 18px 20px 20px; }
+  .team-name { font-size: 1.15rem; font-weight: 800; color: var(--text); margin: 0 0 4px; letter-spacing: -.005em; }
+  .team-role { font-family: var(--font-mono); font-size: .68rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); margin-bottom: 10px; }
+  .team-bio { font-size: .9rem; color: var(--text-2); line-height: 1.55; margin: 0; }
+</style>
 </head>
 <body>
 
-<div class="sbx-banner gold" role="status" aria-label="Pre-seed raise: opening July 1, 2026, 90-day window"><span class="raise-status"><span class="status-dots" aria-hidden="true"><span class="status-dot dot-amber-lit"></span><span class="status-dot dot-green-dim"></span></span><span><b>Pre-Seed</b> · Opening July 1, 2026 · 90-day window</span></span></div>
+<div class="util-bar">
+  <span class="util-left">Part of the 4orm Finance neutral settlement layer</span>
+  <a href="https://4ormex.com" target="_blank" rel="noopener" class="util-gold">4ormEx ↗</a>
+  <span class="util-sep">/</span>
+  <a href="https://4ormdr.com" target="_blank" rel="noopener">Data Room ↗</a>
+  <span class="util-sep">/</span>
+  <a href="https://kcs-capital.com" target="_blank" rel="noopener">KCS Capital ↗</a>
+</div>
+
+<div class="sbx-banner gold" role="status" aria-label="Pre-seed raise: opening August 1, 2026, 90-day window"><span class="raise-status"><span class="status-dots" aria-hidden="true"><span class="status-dot dot-amber-lit"></span><span class="status-dot dot-green-dim"></span></span><span><b>Pre-Seed</b> · Opening August 1, 2026 · 90-day window</span></span></div>
 
 <div class="ai-legend" role="region" aria-label="Accredited investor legend">
 <strong>For accredited investors only.</strong> Information on this website is for accredited investors as defined in National Instrument 45-106. It is not an offer to sell or solicitation of an offer to buy securities. No securities regulatory authority has assessed the merits of any securities described herein. See <a href="terms.html">Terms</a> and the legal information below.
@@ -36,7 +57,7 @@
       <a href="leadership.html" class="active">Leadership</a>
       <a href="faq.html">FAQ</a>
       <a href="https://4ormex.com" target="_blank" rel="noopener">4ormEx ↗</a>
-      <a href="https://data.4ormfinance.com" class="nav-auth">Request access</a>
+      <a href="https://4ormdr.com" class="nav-auth">Request access</a>
     </nav>
   </div>
 </header>
@@ -47,7 +68,7 @@
     <h1>The team building <span class="accent">Canada's neutral settlement layer.</span></h1>
     <p class="lead">Founders, operators, and advisors with the regulatory, capital-markets, and engineering backgrounds the settlement layer requires. Full bios, advisors, and the hiring plan tied to capital raised are in the data room. The summary is below.</p>
     <div class="dhero-acts">
-      <a class="dhero-btn-p" href="https://data.4ormfinance.com">Full bios in the data room →</a>
+      <a class="dhero-btn-p" href="https://4ormdr.com">Full bios in the data room →</a>
       <a class="dhero-btn-s" href="https://kcs-capital.com" target="_blank" rel="noopener">KCS Capital team ↗</a>
     </div>
   </div>
@@ -58,26 +79,26 @@
   <div class="psec-inner">
     <div class="psec-head">
       <div class="psec-eye">Founders</div>
-      <h2>Founders</h2>
-      <p class="lead">The founders leading the 4orm Finance build. Full backgrounds and the extended advisory bench are in the data room.</p>
+      <h2>The <span class="key">founding team.</span></h2>
+      <p class="lead">The founders leading the 4orm Finance build. Extended bios and the advisory bench in the data room.</p>
     </div>
-    <div class="team-grid c2">
+    <div class="team-grid c3">
       <div class="team-card">
-        <img class="team-photo" src="assets/team/team-chad.png" alt="Chad R. Johnston" loading="lazy">
-        <span class="team-role-tag gold">Founder &amp; CEO</span>
+        <img class="team-photo" src="assets/team/team-chad.png" alt="Chad R. Johnston" loading="lazy" />
+        <span class="team-role-tag gold">FOUNDER · CEO</span>
         <h3 class="team-name">Chad R. Johnston</h3>
-        <p class="team-title">KCS Capital &amp; 4orm Finance</p>
-        <p class="team-bio">Founder and CEO of KCS Capital, the independent technology and research firm developing the 4orm Finance infrastructure. Background leading large-scale industrial operations in Canadian oil and gas, including a senior role on the multi-billion-dollar CNRL Horizon Coker Upgrade. Focus today: regulated digital markets and institutional tokenization for Canadian capital markets.</p>
+        <p class="team-title">President · Chairman · 4orm Finance</p>
+        <p class="team-bio">Founder and CEO of 4orm Finance. Career rooted in high-consequence operations, including senior roles on the multi-billion-dollar CNRL Horizon Coker Upgrade. Over a decade of entrepreneurship across access control, renewable energy, and financial education. Six years working with tens of thousands of Canadian retail investors, where he identified the gap 4orm Finance is being built to close.</p>
         <div class="team-links">
           <a href="https://www.linkedin.com/in/chadrjohnstonglobal/" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
       <div class="team-card">
-        <img class="team-photo" src="assets/team/team-kevin.png" alt="Kevin Wong" loading="lazy">
-        <span class="team-role-tag gold">Co-Founder · Strategy</span>
+        <img class="team-photo" src="assets/team/team-kevin.png" alt="Kevin Wong" loading="lazy" />
+        <span class="team-role-tag gold">CO-FOUNDER</span>
         <h3 class="team-name">Kevin Wong</h3>
-        <p class="team-title">Strategy Advisor · Founder, Evolve One Digital</p>
-        <p class="team-bio">Serial entrepreneur, Fractional CMO, and growth strategist with 22-plus years building, scaling, and advising companies. Founder of Evolve One Digital. At 4orm Finance, Kevin leads strategic growth, brand positioning, and market expansion.</p>
+        <p class="team-title">Go-to-Market Strategy · Founder, Evolve One Digital</p>
+        <p class="team-bio">Serial entrepreneur, Fractional CMO, and growth strategist with 22-plus years scaling companies across multiple industries. Founder of Evolve One Digital and its Chief Growth Strategist. As Co-Founder of 4orm Finance, Kevin leads strategic growth, brand positioning, and market expansion.</p>
         <div class="team-links">
           <a href="https://www.linkedin.com/in/therealkevinwong/" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
@@ -91,13 +112,13 @@
   <div class="psec-inner">
     <div class="psec-head">
       <div class="psec-eye">Advisory</div>
-      <h2>Advisory</h2>
-      <p class="lead">Operators, counsel, and capital-markets professionals advising the 4orm Finance build. Backgrounds span Canadian securities regulation, qualified custody, Tier-1 banking systems, exempt-market capital formation, and real-world asset origination. Full bios in the data room.</p>
+      <h2>Operators, counsel, and <span class="key">capital markets.</span></h2>
+      <p class="lead">The advisory bench supporting the 4orm Finance build. Canadian securities counsel, capital markets, exempt-market compliance, and enterprise systems architecture. Full bios in the data room.</p>
     </div>
-    <div class="team-grid c4">
+    <div class="team-grid c3">
       <div class="team-card">
-        <img class="team-photo" src="assets/team/team-mike.png" alt="Michael Stephens" loading="lazy">
-        <span class="team-role-tag">Legal Counsel</span>
+        <img class="team-photo" src="assets/team/team-mike.png" alt="Michael Stephens" loading="lazy" />
+        <span class="team-role-tag">LEGAL COUNSEL</span>
         <h3 class="team-name">Michael Stephens</h3>
         <p class="team-title">Partner, Fasken (Vancouver)</p>
         <p class="team-bio">Information technology law Partner in the Vancouver office of Fasken and a recognized leader in the British Columbia technology ecosystem. Counsels founders, executives, and boards on corporate strategy, securities, and governance.</p>
@@ -106,8 +127,8 @@
         </div>
       </div>
       <div class="team-card">
-        <img class="team-photo" src="assets/team/team-james.png" alt="James Atherton" loading="lazy">
-        <span class="team-role-tag">Legal &amp; Capital Markets</span>
+        <img class="team-photo" src="assets/team/team-james.png" alt="James Atherton" loading="lazy" />
+        <span class="team-role-tag">LEGAL &amp; CAPITAL MARKETS</span>
         <h3 class="team-name">James Atherton</h3>
         <p class="team-title">Partner, Capiche Legal LLP · Founder, Capiche Capital Technologies</p>
         <p class="team-bio">Canadian corporate finance lawyer and capital markets entrepreneur with 25-plus years building compliance-first capital infrastructure. CEO of the Capiche Group. Member of the BCSC Corporate Finance Stakeholder Forum.</p>
@@ -116,18 +137,18 @@
         </div>
       </div>
       <div class="team-card">
-        <img class="team-photo" src="assets/team/team-miika.png" alt="Miika Makela" loading="lazy">
-        <span class="team-role-tag">Securities Compliance</span>
+        <img class="team-photo" src="assets/team/team-miika.png" alt="Miika Makela" loading="lazy" />
+        <span class="team-role-tag">CAPITAL STRATEGY</span>
         <h3 class="team-name">Miika Makela</h3>
-        <p class="team-title">CFA · Capital Markets Compliance</p>
-        <p class="team-bio">CFA charter holder with 22-plus years across Canadian capital markets. Former Chief Compliance Officer at multiple registered firms. Former Head of the Investment Review Committee at FrontFundr, Canada's largest equity crowdfunding platform.</p>
+        <p class="team-title">CFA · Capital Strategy Advisor</p>
+        <p class="team-bio">CFA charter holder with 22-plus years across Canadian capital markets. Former Chief Compliance Officer at multiple Canadian registered firms. Former Head of the Investment Review Committee at FrontFundr, Canada's largest equity crowdfunding platform.</p>
         <div class="team-links">
           <a href="https://www.linkedin.com/in/miika-makela-cfa-24aa056/" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
       <div class="team-card">
-        <img class="team-photo" src="assets/team/team-bruce.png" alt="Bruce Fair" loading="lazy">
-        <span class="team-role-tag">Capital Markets</span>
+        <img class="team-photo" src="assets/team/team-bruce.png" alt="Bruce Fair" loading="lazy" />
+        <span class="team-role-tag">CAPITAL MARKETS</span>
         <h3 class="team-name">Bruce Fair</h3>
         <p class="team-title">President, Mench Capital Corp.</p>
         <p class="team-bio">Seasoned merchant banker with 25-plus years structuring private and public equity transactions. Mench Capital has originated more than $500M in transactions across Canadian resources, structured products, and alternative investments.</p>
@@ -136,40 +157,13 @@
         </div>
       </div>
       <div class="team-card">
-        <img class="team-photo" src="assets/team/team-zed.png" alt="Zahiruddin Sandeela" loading="lazy">
-        <span class="team-role-tag">Systems Architecture</span>
+        <img class="team-photo" src="assets/team/team-zed.png" alt="Zahiruddin Sandeela" loading="lazy" />
+        <span class="team-role-tag">SYSTEMS ARCHITECTURE</span>
         <h3 class="team-name">Zahiruddin Sandeela</h3>
         <p class="team-title">TOGAF 9.1 · ITIL V3 · Enterprise &amp; Financial Systems Architecture</p>
         <p class="team-bio">Senior Enterprise and Systems Architect with 20-plus years designing and modernizing complex systems in regulated environments. Prior engagements include Vancity (Interac payments modernization, AML), ICBC, UBC, WorkSafeBC, Safeway, and Blackhawk Network. Leads target-state systems architecture on the 4orm Finance build.</p>
         <div class="team-links">
           <a href="https://www.linkedin.com/in/zedzworld/" target="_blank" rel="noopener">LinkedIn ↗</a>
-        </div>
-      </div>
-      <div class="team-card">
-        <img class="team-photo" src="assets/team/team-angelo.png" alt="Angelo Aquino" loading="lazy">
-        <span class="team-role-tag">Real-World Assets</span>
-        <h3 class="team-name">Angelo Aquino</h3>
-        <p class="team-title">Real Estate · Real-World Asset Advisor</p>
-        <p class="team-bio">Real estate professional with over a decade in sales and corporate training. Facilitated hundreds of transactions across Greater Vancouver. Bridges traditional real estate markets with tokenized asset models on the 4orm Finance build.</p>
-        <div class="team-links">
-          <a href="https://www.linkedin.com/in/angelo-aquino-a1973623b/" target="_blank" rel="noopener">LinkedIn ↗</a>
-        </div>
-      </div>
-      <div class="team-card">
-        <img class="team-photo" src="assets/team/team-dean.png" alt="Dean Hesse" loading="lazy">
-        <span class="team-role-tag">Research</span>
-        <h3 class="team-name">Dean Hesse</h3>
-        <p class="team-title">Market Research · Blockchain</p>
-        <p class="team-bio">Four decades of leadership in commercial infrastructure combined with focused digital asset and blockchain research since 2021. Leads market analysis, protocol evaluation, and tokenomics assessment for the 4orm Finance build.</p>
-      </div>
-      <div class="team-card">
-        <img class="team-photo" src="assets/team/team-don.png" alt="Don Hickling" loading="lazy">
-        <span class="team-role-tag gold">Angel Investor</span>
-        <h3 class="team-name">Don Hickling</h3>
-        <p class="team-title">Strategic Advisor</p>
-        <p class="team-bio">Seasoned entrepreneur and operator with 17-plus years of executive leadership. Founder and President of a large development company. Angel investor in KCS Capital and independent strategic advisor to the founding team.</p>
-        <div class="team-links">
-          <a href="https://www.linkedin.com/in/don-hickling-952aa877/" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
     </div>
@@ -194,11 +188,11 @@
 
 <section class="iwstrip">
   <div class="iwstrip-in">
-    <div class="iwstrip-eye">Opening July 1, 2026 · 90-day window</div>
+    <div class="iwstrip-eye">Opening August 1, 2026 · 90-day window</div>
     <h2>Full bios, the advisor roster, and the hiring plan <span class="key">are in the data room.</span></h2>
     <p>Access is granted to qualified institutional and accredited parties after a brief founder conversation. Email compliance@4ormfinance.com or submit the form.</p>
     <div class="iwstrip-acts">
-      <a class="dhero-btn-p" href="https://data.4ormfinance.com">Request access →</a>
+      <a class="dhero-btn-p" href="https://4ormdr.com">Request access →</a>
       <a class="dhero-btn-s" href="https://kcs-capital.com" target="_blank" rel="noopener">KCS Capital team ↗</a>
     </div>
   </div>
@@ -206,15 +200,14 @@
 
 <section class="famfooter">
   <div class="famfooter-in">
-    <div class="famfooter-head"><div><div class="famfooter-eye">4orm Finance family</div><h3>Four surfaces, <span class="key">one settlement layer.</span></h3></div></div>
+    <div class="famfooter-head"><div><div class="famfooter-eye">4orm Finance family</div><h3><span class="key">The 4orm Finance family.</span></h3></div></div>
     <div class="famfooter-grid">
-      <a href="https://4ormex.com" target="_blank" rel="noopener" class="famtile f2"><span class="lab">02 · Exchange</span><span class="name">4ormEx</span><span class="desc">Institutional trading venue. Settlement finality.</span><span class="link">4ormex.com ↗</span></a>
-      <a href="https://data.4ormfinance.com" class="famtile f3"><span class="lab">03 · Data Room</span><span class="name">4orm Data Room</span><span class="desc">Vetted access for institutional and accredited.</span><span class="link">data.4ormfinance.com ↗</span></a>
-      <a href="https://www.4ormedc.com" target="_blank" rel="noopener" class="famtile f4"><span class="lab">04 · Demo</span><span class="name">4orm Demo Exchange</span><span class="desc">Guided walkthrough. KYC to settlement finality.</span><span class="link">4ormedc.com ↗</span></a>
+      <a href="https://4ormex.com" target="_blank" rel="noopener" class="famtile f2"><span class="lab">02 · Exchange</span><span class="name">4ormEx</span><span class="desc">Institutional trading venue (concept). Settlement finality.</span><span class="link">4ormex.com ↗</span></a>
+      <a href="https://4ormdr.com" class="famtile f3"><span class="lab">03 · Data Room</span><span class="name">4orm Data Room</span><span class="desc">Vetted access for institutional and accredited.</span><span class="link">4ormdr.com ↗</span></a>
       <a href="https://kcs-capital.com" target="_blank" rel="noopener" class="famtile f5"><span class="lab">Sister · Developer</span><span class="name">KCS Capital</span><span class="desc">Independent technology and research firm.</span><span class="link">kcs-capital.com ↗</span></a>
     </div>
     <div class="famfooter-legal">
-      <span>© 2026 4orm Finance Holdings Inc. · Calgary · Vancouver · Edmonton</span>
+      <span>© 2026 4orm Finance · Calgary, AB</span>
       <span><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:compliance@4ormfinance.com">compliance@4ormfinance.com</a></span>
     </div>
     <div class="legal-block">
@@ -222,7 +215,7 @@
 <p><em>Accredited investors only.</em> The securities referenced on this website are being offered only to "accredited investors" as defined in National Instrument 45-106. This is not an offer to sell or a solicitation of an offer to buy securities in any jurisdiction where such offer is not permitted. No securities regulatory authority has assessed the merits of any securities described on this website.</p>
 <p><em>Forward-looking statements.</em> This website contains forward-looking statements within the meaning of applicable Canadian securities laws, including statements about 4orm Finance's planned operations, regulatory pathway, market opportunity, partnership pipeline, and capital raise. Forward-looking statements are based on assumptions current as of the date stated and are subject to material risks and uncertainties, including the receipt of required regulatory approvals. Actual results may differ materially. 4orm Finance disclaims any obligation to update forward-looking statements except as required by law.</p>
 <p><em>No affiliation or endorsement.</em> References to third-party companies, products, and services are for market-context and educational purposes only and do not imply any partnership, endorsement, sponsorship, or affiliation. All third-party names, trademarks, and logos are the property of their respective owners. 4orm Finance is not affiliated with the Bank of Canada, OSFI, the CSA (or its member regulators including OSC, AMF, BCSC, ASC), CIRO, FINTRAC, or any other regulator. No regulator has reviewed, endorsed, or approved 4orm Finance, its planned platform, or any securities described on this website. 4orm Finance is informed by, but not a participant in, the Bank of Canada's Project Samara experiment (Staff Analytical Paper 2026-8) and the CSA Project Tokenization initiative.</p>
-<p><em>Proposed entity.</em> "4orm Trust Co" is a proposed future Canadian trust company subsidiary. 4orm Finance does not currently carry on trust business and is not authorized under the Trust and Loan Companies Act. Use of "Trust Co" is subject to receipt of OSFI letters patent or equivalent provincial authorization.</p>
+
 <p><em>FINTRAC.</em> 4orm Finance will register with FINTRAC as required prior to commencing regulated activity. FINTRAC registration is not an endorsement.</p>
 </div>
   </div>
@@ -286,6 +279,6 @@
   });
 })();
 </script>
-<script src="assets/mobile-nav.js?v=2"></script>
+<script src="assets/mobile-nav.js?v=1" defer></script>
 </body>
 </html>
