@@ -1249,3 +1249,51 @@ body.menu-open .nav-hamburger-bar:nth-child(3) { transform: translateY(-7px) rot
   }
   .nav-links a.nav-auth:hover { background: var(--brand-600); border-color: var(--brand-600); }
 }
+
+/* Read More expandable bios */
+.team-bio-short {
+  font-size: .9rem; line-height: 1.55; color: var(--text-2); margin: 0;
+}
+.team-bio-full {
+  margin: 0; padding: 0;
+}
+.team-bio-full summary {
+  list-style: none;
+  cursor: pointer;
+  color: var(--brand);
+  font-weight: 700;
+  font-size: .82rem;
+  padding: 6px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color .15s ease;
+}
+.team-bio-full summary::-webkit-details-marker { display: none; }
+.team-bio-full summary::marker { display: none; content: ""; }
+.team-bio-full summary::after {
+  content: " →";
+  transition: transform .2s ease;
+  display: inline-block;
+}
+.team-bio-full summary:hover { color: var(--brand-700); }
+.team-bio-full[open] summary { color: var(--brand-700); }
+.team-bio-full[open] summary::after {
+  content: " ↑";
+}
+.team-bio-full[open] summary::before {
+  content: "Collapse";
+}
+.team-bio-full summary::before {
+  content: "Read more";
+}
+.team-bio-full-inner {
+  font-size: .88rem; line-height: 1.6; color: var(--text-2);
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  margin-top: 10px;
+}
+.team-bio-full-inner p {
+  margin: 0 0 12px;
+}
+.team-bio-full-inner p:last-child { margin-bottom: 0; }
