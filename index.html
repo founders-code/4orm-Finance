@@ -7,9 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=63">
-<link rel="stylesheet" href="assets/site.css?v=63">
-<link rel="stylesheet" href="assets/landing.css?v=63">
+<link rel="stylesheet" href="assets/styles.css?v=64">
+<link rel="stylesheet" href="assets/site.css?v=64">
+<link rel="stylesheet" href="assets/landing.css?v=64">
 </head>
 <body>
 
@@ -62,6 +62,128 @@
     <div class="in reveal"><div class="bn"><span data-count="2" data-pre="$" data-suf="T+">$2T+</span></div><div class="bl">is the conservative forecast for tokenized assets by 2030. The layer that clears it does not yet exist in Canada.</div></div>
   </div>
 </div></section>
+<!-- GLOBAL ADOPTION MAP -->
+<section class="sec alt" id="global"><div class="wrap">
+  <span class="eyebrow">Global adoption</span>
+  <h2 class="sec-h">Every major market is building this. <span style="color:#B57C00">Canada has one pilot.</span></h2>
+  <p class="sec-sub">Tokenized settlement infrastructure is live in production across the United States, United Kingdom, Switzerland, Singapore, Hong Kong, and Japan. The European Union has an operating pilot regime. Brazil and Australia have national sandbox programs running now. Canada has one experimental bond trial. The gap is not technology; it is a domestic settlement layer.</p>
+
+  <div style="margin-top:44px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:32px 28px 24px;position:relative;overflow:hidden">
+    <!-- SVG world map with country markers -->
+    <svg viewBox="0 0 1000 500" style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" aria-label="Global tokenized settlement infrastructure map">
+      <!-- Subtle dot grid backdrop -->
+      <defs>
+        <pattern id="dg" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1" fill="#DFE6F1"/>
+        </pattern>
+        <radialGradient id="pulse-gold" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#F0B848" stop-opacity=".55"/>
+          <stop offset="100%" stop-color="#F0B848" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect x="0" y="0" width="1000" height="500" fill="url(#dg)"/>
+
+      <!-- Very simplified continent silhouettes -->
+      <g fill="#E9EEF7" stroke="#D5DEEC" stroke-width="1">
+        <!-- North America -->
+        <path d="M 90 90 Q 130 70 180 80 L 230 75 Q 265 85 285 110 L 275 145 Q 285 175 265 200 L 240 225 Q 220 240 200 235 L 175 220 Q 155 235 130 220 L 105 200 Q 85 180 90 155 Q 80 125 90 90 Z"/>
+        <!-- South America -->
+        <path d="M 250 245 Q 280 245 300 265 L 320 295 Q 335 335 320 375 L 305 415 Q 285 445 265 435 L 255 405 Q 245 375 250 340 Q 240 300 250 245 Z"/>
+        <!-- Europe -->
+        <path d="M 460 110 Q 490 100 520 115 L 545 130 Q 560 150 545 175 L 520 190 Q 495 200 475 190 L 460 170 Q 450 145 460 110 Z"/>
+        <!-- Africa -->
+        <path d="M 470 200 Q 510 195 545 215 L 570 245 Q 585 285 575 325 L 555 370 Q 535 400 510 395 L 490 375 Q 470 345 470 305 Q 460 255 470 200 Z"/>
+        <!-- Asia -->
+        <path d="M 555 105 Q 620 90 700 100 L 790 110 Q 850 125 880 155 L 890 195 Q 870 225 830 235 L 780 240 Q 720 245 660 235 L 610 220 Q 570 200 560 170 Q 550 135 555 105 Z"/>
+        <!-- Australia -->
+        <path d="M 800 370 Q 830 360 870 370 L 900 385 Q 910 410 890 425 L 860 435 Q 825 435 805 420 L 795 400 Q 790 385 800 370 Z"/>
+      </g>
+
+      <!-- Country markers -->
+      <!-- USA -->
+      <g>
+        <circle cx="185" cy="165" r="18" fill="#2E6BF2" opacity=".18"/>
+        <circle cx="185" cy="165" r="10" fill="#2E6BF2"/>
+        <text x="185" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#142036">UNITED STATES</text>
+        <text x="185" y="220" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#46556E">JPM Kinexys · Citi · BlackRock</text>
+      </g>
+      <!-- Canada — the highlighted gap -->
+      <g>
+        <circle cx="200" cy="115" r="26" fill="url(#pulse-gold)"/>
+        <circle cx="200" cy="115" r="9" fill="none" stroke="#B57C00" stroke-width="2.5"/>
+        <circle cx="200" cy="115" r="3.5" fill="#B57C00"/>
+        <text x="200" y="82" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#B57C00">CANADA</text>
+        <text x="200" y="97" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B57C00">1 pilot &middot; Samara</text>
+      </g>
+      <!-- Brazil -->
+      <g>
+        <circle cx="300" cy="330" r="12" fill="#F0B848" opacity=".22"/>
+        <circle cx="300" cy="330" r="6" fill="#F0B848"/>
+        <text x="300" y="360" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#142036">BRAZIL</text>
+        <text x="300" y="374" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#46556E">Drex CBDC (pilot)</text>
+      </g>
+      <!-- United Kingdom -->
+      <g>
+        <circle cx="482" cy="130" r="14" fill="#2E6BF2" opacity=".18"/>
+        <circle cx="482" cy="130" r="7" fill="#2E6BF2"/>
+        <text x="482" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#142036">UNITED KINGDOM</text>
+        <text x="482" y="115" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#46556E">Fnality</text>
+      </g>
+      <!-- Switzerland / EU -->
+      <g>
+        <circle cx="520" cy="150" r="13" fill="#2E6BF2" opacity=".18"/>
+        <circle cx="520" cy="150" r="6.5" fill="#2E6BF2"/>
+        <text x="560" y="147" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#142036">EU + SWITZERLAND</text>
+        <text x="560" y="161" font-family="JetBrains Mono, monospace" font-size="9" fill="#46556E">SIX SDX · ECB DLT Pilot</text>
+      </g>
+      <!-- Singapore -->
+      <g>
+        <circle cx="745" cy="285" r="14" fill="#2E6BF2" opacity=".18"/>
+        <circle cx="745" cy="285" r="7" fill="#2E6BF2"/>
+        <text x="745" y="315" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#142036">SINGAPORE</text>
+        <text x="745" y="329" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#46556E">MAS Project Guardian</text>
+      </g>
+      <!-- Hong Kong -->
+      <g>
+        <circle cx="775" cy="240" r="11" fill="#F0B848" opacity=".22"/>
+        <circle cx="775" cy="240" r="5.5" fill="#F0B848"/>
+        <text x="820" y="238" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#142036">HONG KONG</text>
+        <text x="820" y="252" font-family="JetBrains Mono, monospace" font-size="9" fill="#46556E">HKMA Ensemble</text>
+      </g>
+      <!-- Japan -->
+      <g>
+        <circle cx="850" cy="180" r="13" fill="#2E6BF2" opacity=".18"/>
+        <circle cx="850" cy="180" r="6.5" fill="#2E6BF2"/>
+        <text x="850" y="153" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#142036">JAPAN</text>
+        <text x="850" y="166" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#46556E">Progmat</text>
+      </g>
+      <!-- Australia -->
+      <g>
+        <circle cx="850" cy="400" r="11" fill="#F0B848" opacity=".22"/>
+        <circle cx="850" cy="400" r="5.5" fill="#F0B848"/>
+        <text x="850" y="430" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#142036">AUSTRALIA</text>
+        <text x="850" y="444" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#46556E">RBA Project Acacia</text>
+      </g>
+    </svg>
+
+    <!-- Legend -->
+    <div style="display:flex;gap:26px;flex-wrap:wrap;margin-top:14px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--slate);letter-spacing:.06em;text-transform:uppercase">
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:11px;height:11px;background:#2E6BF2;border-radius:50%"></span> Live production infrastructure</div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:11px;height:11px;background:#F0B848;border-radius:50%"></span> Regulator-run sandbox or pilot</div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:11px;height:11px;border:2px solid #B57C00;border-radius:50%"></span> Canada &middot; one experimental trial</div>
+    </div>
+  </div>
+
+  <!-- The gap in three numbers -->
+  <div class="grid g3" style="margin-top:32px">
+    <div class="card"><div class="kicker" style="color:#B57C00">The gap</div><h3 style="margin-top:12px;font-size:26px">US$3T+</h3><p>Settled on tokenized rails abroad, driven by a single US bank. None of it in Canadian dollars.</p></div>
+    <div class="card"><div class="kicker" style="color:#B57C00">The gap</div><h3 style="margin-top:12px;font-size:26px">8 countries</h3><p>With live production tokenized settlement infrastructure or an operating national sandbox. Canada has one experimental trial to date.</p></div>
+    <div class="card"><div class="kicker" style="color:#B57C00">The gap</div><h3 style="margin-top:12px;font-size:26px">$2T-$16T</h3><p>Forecast tokenized asset value by 2030 (McKinsey to BCG). Canada's share of the domestic settlement layer today is zero.</p></div>
+  </div>
+
+  <div class="src" style="margin-top:22px">Sources: JPMorgan Kinexys disclosures (Kinexys Digital Payments cumulative volume); BlackRock BUIDL and Franklin OnChain public disclosures; Bank of Canada Project Samara Staff Analytical Paper 2026-8; Bank of England / HMT Fnality communications; Swiss SIX Digital Exchange (SDX); ECB DLT Pilot Regime; MAS Project Guardian; HKMA Project Ensemble; JPX Progmat; RBA Project Acacia; Banco Central do Brasil Drex; McKinsey (2024); BCG (2025). 4orm Finance is not affiliated with any named institution, regulator, or program.</div>
+</div></section>
+
 <!-- WHO WE ARE -->
 <section class="sec" id="who"><div class="wrap">
   <span class="eyebrow">Who we are</span>

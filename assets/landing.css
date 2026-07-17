@@ -1,6 +1,6 @@
-/* Logo 2x + roomier nav */
-.brand-logo { height: 96px !important; width: auto !important; }
-.nav-inner, header.nav .nav-inner { min-height: 116px !important; }
+/* Logo 2x + roomier nav (overrides site.css negative-margin logo) */
+.brand-logo { height: 96px !important; width: auto !important; margin: 0 !important; display: block !important; }
+.nav-inner, header.nav .nav-inner { min-height: 116px !important; padding-top: 6px !important; padding-bottom: 6px !important; align-items: center !important; }
 header.nav { min-height: 116px; }
 @media (max-width: 900px) {
   .brand-logo { height: 72px !important; }
