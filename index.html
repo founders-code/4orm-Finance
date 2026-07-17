@@ -1,22 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>4orm Finance · Regulated settlement finality for Canadian capital markets</title>
-<meta name="description" content="4orm Finance operates Canada's neutral settlement layer for tokenized real-world assets. Settlement finality, embedded compliance, regulated custody, all on one settlement layer. Architecture informed by the public findings of the Bank of Canada's Project Samara experiment (Staff Analytical Paper 2026-8). 4orm Finance is not affiliated with the Bank of Canada or the Samara consortium." />
-<meta property="og:title" content="4orm Finance · Regulated settlement finality for Canadian capital markets" />
-<meta property="og:description" content="Canada's neutral settlement layer for tokenized assets. Built for settlement finality across institutions." />
-<meta property="og:type" content="website" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=8" />
-<link rel="stylesheet" href="assets/site.css?v=8" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4orm Finance - Canada's Neutral Settlement Layer for Tokenized Real-World Assets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=59">
+<style>
+
+:root{
+  --ink:#142036; --blue:#2E6BF2; --steel:#46556E; --slate:#5E6E88;
+  --mist:#D7DEEA; --cloud:#EFF3FA; --paper:#F7FAFF; --tint:#EAF1FE;
+  --line:#E4EAF3; --white:#FFFFFF; --ok:#1F9D6B;
+  --sans:'Inter',-apple-system,'Segoe UI',Arial,sans-serif;
+  --mono:'JetBrains Mono','SFMono-Regular',Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+a{color:inherit;text-decoration:none}
+.eyebrow{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue)}
+.eyebrow.muted{color:var(--slate)}
+h2.sec-h{font-size:clamp(28px,3.4vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:14px 0 0}
+.sec-sub{font-size:clamp(16px,1.6vw,19px);color:var(--steel);max-width:760px;margin:18px 0 0;line-height:1.55}
+.sec{padding:96px 0}
+.sec.alt{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec.dark{background:var(--ink);color:#DCE4F2}
+.sec.dark h2.sec-h{color:#fff}
+.sec.dark .sec-sub{color:#AEBBD2}
+.hr{height:1px;background:var(--line);border:0}
+/* hero */
+.hero{padding:78px 0 54px;background:
+  radial-gradient(1100px 460px at 78% -10%, #EAF1FE 0%, rgba(234,241,254,0) 60%),
+  linear-gradient(180deg,#fff 0%,#F7FAFF 100%)}
+.hero h1{font-size:clamp(34px,5.1vw,62px);font-weight:900;letter-spacing:-.03em;line-height:1.03;margin:22px 0 0}
+.hero h1 .g{color:var(--blue)}
+.hero p.lead{font-size:clamp(17px,1.9vw,21px);color:var(--steel);max-width:720px;margin:24px 0 0;line-height:1.5}
+.hero .cta{display:flex;gap:14px;margin:34px 0 0;flex-wrap:wrap}
+.statband{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:64px 0 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.statband .s{padding:26px 24px;border-right:1px solid var(--line)}
+.statband .s:last-child{border-right:0}
+.statband .n{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.statband .n.b{color:var(--blue)}
+.statband .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--slate);margin-top:10px;line-height:1.4;text-transform:uppercase}
+/* generic cards + grids */
+.grid{display:grid;gap:22px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}
+.card.pad{padding:30px}
+.card h3{font-size:18px;font-weight:750;letter-spacing:-.01em}
+.card p{font-size:14.5px;color:var(--steel);margin-top:9px;line-height:1.55}
+.kicker{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.lead-tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--slate);text-transform:uppercase;margin-bottom:12px}
+/* chart bits */
+.chart{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 28px}
+.chart .ct{font-size:15px;font-weight:700}
+.chart .cs{font-size:12.5px;color:var(--slate);margin-top:4px}
+.src{font-family:var(--mono);font-size:10px;color:var(--slate);letter-spacing:.03em;margin-top:16px;line-height:1.5}
+.bar{margin-top:16px}
+.bar .row{display:flex;align-items:center;gap:14px;margin:11px 0}
+.bar .lab{width:150px;font-size:13px;color:var(--steel);flex-shrink:0;text-align:right}
+.bar .track{flex:1;background:var(--cloud);border-radius:6px;height:26px;position:relative;overflow:hidden}
+.bar .fill{height:100%;border-radius:6px;background:var(--blue);display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-size:12px;font-weight:700;font-family:var(--mono)}
+.bar .fill.ink{background:var(--ink)}
+.bar .fill.steel{background:var(--steel)}
+.bar .fill.mist{background:#9DB4D8;color:var(--ink)}
+.bar.fcast .fv{width:56px;flex-shrink:0;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);text-align:left}
+/* growth columns */
+.cols{display:flex;align-items:flex-end;gap:26px;height:230px;margin-top:22px;padding:0 6px}
+.cols .c{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.cols .cbar{width:100%;max-width:120px;border-radius:8px 8px 0 0;background:linear-gradient(180deg,var(--blue),#4f83f6);position:relative}
+.cols .cbar.g{background:linear-gradient(180deg,var(--ink),#26364f)}
+.cols .cval{font-size:20px;font-weight:800;margin-bottom:10px}
+.cols .clab{font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:12px;letter-spacing:.06em}
+/* donut */
+.donut-wrap{display:flex;align-items:center;gap:30px;flex-wrap:wrap;margin-top:12px}
+.legend{display:flex;flex-direction:column;gap:12px}
+.legend .li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--steel)}
+.legend .sw{width:13px;height:13px;border-radius:3px;flex-shrink:0}
+.legend b{color:var(--ink)}
+/* pipe / fragmentation */
+.layers{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.layer{border:1px solid var(--line);border-radius:12px;padding:18px 22px;background:#fff;display:flex;align-items:center;gap:20px}
+.layer .tag{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--slate);width:120px;flex-shrink:0;text-transform:uppercase}
+.layer .names{font-size:14px;color:var(--steel)}
+.layer.missing{border:1.5px dashed var(--blue);background:var(--tint)}
+.layer.missing .tag{color:var(--blue)}
+.layer.missing .names{color:var(--ink);font-weight:650}
+.badge-miss{margin-left:auto;font-family:var(--mono);font-size:10.5px;font-weight:700;color:#fff;background:var(--blue);padding:5px 10px;border-radius:6px;letter-spacing:.08em;flex-shrink:0}
+/* solution flow */
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:14px;margin-top:10px}
+.flow .node{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:20px;text-align:center}
+.flow .node .h{font-size:14px;font-weight:700;color:#fff}
+.flow .node .d{font-size:12px;color:#9FB0CC;margin-top:7px;line-height:1.45}
+.flow .node.core{background:var(--blue);border-color:var(--blue)}
+.flow .node.core .d{color:#DCE6FF}
+.flow .arw{color:var(--blue);font-size:22px;font-weight:800;text-align:center}
+.streams{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:26px}
+.stream{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:18px}
+.stream .sn{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.08em}
+.stream .st{font-size:14.5px;font-weight:700;color:#fff;margin-top:8px}
+.stream .sd{font-size:12px;color:#9FB0CC;margin-top:6px;line-height:1.4}
+/* ask */
+.ask{display:grid;grid-template-columns:1.2fr 1fr;gap:34px;align-items:center}
+.askbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:32px}
+.askrow{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.askrow:last-child{border-bottom:0}
+.askrow .k{color:var(--slate)}
+.askrow .v{font-weight:700}
+.askrow .v.b{color:var(--blue)}
+/* footer */
+footer{background:#0C1626;color:#8A97AD;padding:56px 0 40px;font-size:13px}
+footer .top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;border-bottom:1px solid #1E2A40;padding-bottom:28px}
+footer img{height:30px;opacity:.95}
+footer a{color:#AEBBD2}
+footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-width:900px}
+.srcbox{margin-top:24px;font-family:var(--mono);font-size:10.5px;color:#5E6E88;line-height:1.7}
+.srcbox a{color:#7C8AA6}
+/* keeps vs exports split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:22px;background:#fff}
+.split .col{padding:28px 30px}
+.split .col.keep{background:#F0F7F3;border-right:1px solid var(--line)}
+.split h4{font-size:16px;font-weight:750;display:flex;align-items:center;gap:9px}
+.split ul{list-style:none;margin:16px 0 0}
+.split li{font-size:14px;color:var(--steel);padding:10px 0;border-bottom:1px solid rgba(20,32,54,.06);display:flex;gap:11px;align-items:flex-start}
+.split li:last-child{border-bottom:0}
+.split .mk{flex-shrink:0;font-weight:800;font-size:15px;line-height:1.35}
+.keep .mk{color:var(--ok)} .exp .mk{color:var(--blue)}
+.split li b{color:var(--ink);font-weight:650}
+/* ecosystem chips */
+.eco{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.chip{font-size:14px;font-weight:650;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px;transition:.15s}
+.chip:hover{border-color:var(--blue);transform:translateY(-2px)}
+.chip .r{font-family:var(--mono);font-size:10px;color:var(--slate);margin-left:8px;letter-spacing:.03em}
+.ecogroup{margin-top:24px}
+.ecogroup .gl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;margin-bottom:13px}
+/* inevitability band */
+.inev-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
+.inev-nums .in{border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:26px;background:rgba(255,255,255,.04)}
+.inev-nums .bn{font-size:46px;font-weight:900;letter-spacing:-.02em;color:#fff;line-height:1}
+.inev-nums .bl{font-size:13.5px;color:#9FB0CC;margin-top:14px;line-height:1.45}
+/* solution how-it-works steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:22px}
+.step .snum{width:34px;height:34px;border-radius:9px;background:var(--blue);color:#fff;font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:15px}
+.step h4{color:#fff;font-size:15.5px;font-weight:700;margin-top:14px}
+.step p{color:#9FB0CC;font-size:13px;margin-top:7px;line-height:1.5}
+.subhead{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin:0 0 18px}
+.card:hover{border-color:#C7D6F4}
+/* motion */
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.bar .fill,.cols .cbar{transition:width 1.15s cubic-bezier(.2,.8,.2,1),height 1.15s cubic-bezier(.2,.8,.2,1)}
+.flow .arw{animation:slidex 1.9s ease-in-out infinite}
+@keyframes slidex{0%,100%{transform:translateX(-4px);opacity:.55}50%{transform:translateX(4px);opacity:1}}
+@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}.flow .arw{animation:none}}
+@media(max-width:900px){
+  .split,.inev-nums,.steps{grid-template-columns:1fr}
+  .statband{grid-template-columns:1fr 1fr}.statband .s:nth-child(2){border-right:0}
+  .g2,.g3,.g4,.ask{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}.flow .arw{transform:rotate(90deg)}
+  .streams{grid-template-columns:1fr 1fr}
+  .nav .links{display:none}
+}
+
+/* regulatory timeline */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.tl .n{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.tl .n .dt{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}
+.tl .n h4{font-size:15.5px;font-weight:750;margin-top:10px}
+.tl .n p{font-size:12.5px;color:var(--steel);margin-top:7px;line-height:1.45}
+.tl .n .st{font-family:var(--mono);font-size:9.5px;color:var(--slate);letter-spacing:.06em;margin-top:12px;text-transform:uppercase}
+.vpb{display:flex;gap:10px;margin-top:24px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--slate);text-transform:uppercase;align-items:center;flex-wrap:wrap}
+.vpb span{padding:8px 15px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.vpb .a{color:#fff;background:var(--blue);border-color:var(--blue)}
+.vpb .ar{color:var(--mist);border:0;background:none;padding:0}
+/* is / is not */
+.isnot{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+.isnot .col{border-radius:16px;padding:28px 30px;border:1px solid var(--line)}
+.isnot .is{background:var(--tint);border-color:#CBDAFB}
+.isnot .isnt{background:#fff}
+.isnot h4{font-size:12px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.isnot .is h4{color:var(--blue)} .isnot .isnt h4{color:var(--slate)}
+.isnot h3{font-size:19px;font-weight:750;margin-top:12px;letter-spacing:-.01em}
+.isnot ul{list-style:none;margin:16px 0 0}
+.isnot li{font-size:13.5px;color:var(--steel);padding:10px 0;border-bottom:1px solid rgba(20,32,54,.06);display:flex;gap:11px;line-height:1.45}
+.isnot li:last-child{border-bottom:0}
+.isnot .mk{flex-shrink:0;font-weight:800;font-size:16px;line-height:1.2}
+.is .mk{color:var(--blue)} .isnt .mk{color:var(--slate)}
+/* family */
+.fam{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px}
+.famcard{border:1px solid #1E2A40;border-radius:12px;padding:20px 22px;background:#0F1B2E;display:block;transition:.15s}
+.famcard:hover{border-color:#2E6BF2}
+.famcard .fl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:#5E6E88;text-transform:uppercase}
+.famcard .fn{font-size:16px;font-weight:700;color:#fff;margin-top:8px}
+.famcard .fd{font-size:12.5px;color:#8A97AD;margin-top:6px}
+@media(max-width:900px){.tl,.isnot,.fam{grid-template-columns:1fr}.util .wrap{justify-content:center;text-align:center}}
+
+/* --- v59 shell adjustments so landing sections coexist with the v58 header/footer --- */
+.hero { padding-top: 78px; }
+.landing-sources { background: #0C1626; color: #5E6E88; padding: 28px 0; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; line-height: 1.7; }
+.landing-sources .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+.landing-sources a { color: #7C8AA6; }
+</style>
 </head>
 <body>
 
-<!-- Util bar -->
 <div class="util-bar">
   <span class="util-left">Part of the 4orm Finance neutral settlement layer</span>
   <a href="https://4ormex.com" target="_blank" rel="noopener" class="util-gold">4ormEx ↗</a>
@@ -35,6 +229,9 @@
 </div>
 
 <!-- Compact black nav -->
+
+
+
 <header class="nav">
   <div class="nav-inner">
     <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo.png" alt="4orm Finance" /></a>
@@ -44,279 +241,344 @@
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
     </button>
     <nav class="nav-links" id="primaryNav">
-      <a href="index.html" class="active">Home</a>
-      <a href="platform.html">Platform</a>
-      <a href="who.html">Who we serve</a>
-      <a href="market.html">Market</a>
-      <a href="regulatory.html">Regulatory</a>
-      <a href="leadership.html">Leadership</a>
-      <a href="faq.html">FAQ</a>
+      <a href="#challenge">Challenge</a>
+      <a href="#opportunity">Opportunity</a>
+      <a href="#solution">Solution</a>
+      <a href="#what">What we are</a>
+      <a href="#raise">The Raise</a>
       <a href="https://4ormex.com" target="_blank" rel="noopener">4ormEx ↗</a>
       <a href="https://4ormdr.com" class="nav-auth">Request access</a>
     </nav>
   </div>
 </header>
 
-<!-- ============================================ DARK HERO (distinction-as-H1) -->
-<section class="dhero">
-  <div class="dhero-inner">
-    <div class="dhero-eye">Canada's institutional infrastructure for tokenized finance</div>
-    <h1>Interoperability and finality, <span class="accent">on one settlement layer</span>.</h1>
-    <p class="dhero-sub">The neutral settlement layer for Canadian tokenized assets.</p>
-    <p class="lead">We make a transfer final and legal across two institutions by moving the <b>title</b>, the <b>cash</b>, and the <b>rules</b> together in one settlement. We issue the record of title and connect to a bank-issued tokenized deposit for the cash leg. <b>We are not a bank, a custodian, or a stablecoin issuer.</b></p>
-    <div class="dhero-acts">
-      <a class="dhero-btn-p" href="https://4ormdr.com">Open the data room →</a>
-      <a class="dhero-btn-s" href="platform.html">Explore the platform →</a>
-      <a class="dhero-btn-s" href="https://4ormex.com" target="_blank" rel="noopener">Open 4ormEx ↗</a>
+<!-- HERO / WHO WE ARE -->
+<section class="hero"><div class="wrap">
+  <span class="pill"><span class="dot"></span>PRE-SEED OPEN AUGUST 1, 2026</span>
+  <h1>Canada's neutral settlement layer for <span class="g">tokenized real-world assets</span>.</h1>
+  <p class="lead">Tokenization is scaling worldwide. Canada has the issuers, the rails, and the custodians, but no neutral place to settle. 4orm Finance is building the regulated, Canadian-dollar layer that connects every tokenized project to every bank, so value settles with finality and stays in Canada.</p>
+  <div class="cta">
+    <a class="btn lg" href="#solution">See how it works</a>
+    <a class="btn ghost lg" href="#raise">The investment</a>
+  </div>
+  <div class="statband">
+    <div class="s"><div class="n b">$31B</div><div class="l">Real-world assets on-chain, July 2026, up ~5x since early 2025</div></div>
+    <div class="s"><div class="n">~$300B</div><div class="l">Stablecoin money layer, ~99% US-dollar denominated</div></div>
+    <div class="s"><div class="n">$2T-$30T</div><div class="l">Tokenization forecast by 2030-2034</div></div>
+    <div class="s"><div class="n b">$0</div><div class="l">Neutral Canadian-dollar settlement layer today</div></div>
+  </div>
+</div></section>
+<!-- INEVITABILITY -->
+<section class="sec dark"><div class="wrap">
+  <span class="eyebrow">The tide is already here</span>
+  <h2 class="sec-h">Tokenization is coming to Canada either way. The only question is whether it settles here.</h2>
+  <p class="sec-sub">This is not a bet on whether real-world assets move on-chain. That is already happening at scale. It is a decision about who operates the layer they settle on, and in which currency. Canadians will live with the answer for a generation.</p>
+  <div class="inev-nums">
+    <div class="in reveal"><div class="bn"><span data-count="31" data-pre="$" data-suf="B">$31B</span></div><div class="bl">of real-world assets are already on-chain today, up roughly 5x since early 2025.</div></div>
+    <div class="in reveal"><div class="bn"><span data-count="300" data-pre="~$" data-suf="B">~$300B</span></div><div class="bl">sits in the on-chain money layer, and about 99% of it is US dollars. The Canadian dollar is barely present.</div></div>
+    <div class="in reveal"><div class="bn"><span data-count="2" data-pre="$" data-suf="T+">$2T+</span></div><div class="bl">is the conservative forecast for tokenized assets by 2030. The layer that clears it does not yet exist in Canada.</div></div>
+  </div>
+</div></section>
+<!-- WHO WE ARE -->
+<section class="sec" id="who"><div class="wrap">
+  <span class="eyebrow">Who we are</span>
+  <h2 class="sec-h">A regulated settlement layer, not another exchange.</h2>
+  <p class="sec-sub">4orm Finance is an Alberta-incorporated financial infrastructure company. We operate the neutral, Canadian-dollar layer where a tokenized asset and a tokenized cash leg settle against each other with finality. The institutional trading venue, 4orm Exchange, sits on top of it. We take no deposits and compete with no bank, which is exactly what lets every bank settle on us.</p>
+  <div class="grid g3" style="margin-top:40px">
+    <div class="card"><div class="kicker">Neutral</div><h3 style="margin-top:12px">Owned by no bank</h3><p>We are infrastructure, not a competitor. Issuers, banks, and custodians connect to one shared layer instead of a dozen private islands.</p></div>
+    <div class="card"><div class="kicker">Regulated</div><h3 style="margin-top:12px">Built inside the rules</h3><p>Alberta Securities Commission as primary regulator, engaged through a supervised sandbox pathway, with compliance native to the asset itself.</p></div>
+    <div class="card"><div class="kicker">Canadian</div><h3 style="margin-top:12px">Settled in Canadian dollars</h3><p>Issuance, custody, settlement, and the economics stay onshore, hosted in Canada, denominated in the Canadian dollar.</p></div>
+  </div>
+</div></section>
+<!-- THE CHALLENGE -->
+<section class="sec alt" id="challenge"><div class="wrap">
+  <span class="eyebrow">The Challenge</span>
+  <h2 class="sec-h">The world is tokenizing fast. Canada keeps the assets, but exports the settlement.</h2>
+  <p class="sec-sub">Canada is not short on tokenization. It has real issuers, a domestic regulated chain, and bank-grade custody, and Canadian assets are being originated on-chain at home. What it does not have is a neutral place to settle. Without one, much of the settlement, liquidity, and money layer runs on foreign infrastructure, and Canadian assets cannot easily offload at home.</p>
+  <div class="grid g2" style="margin-top:44px">
+    <div class="chart">
+      <div class="ct">Real-world assets on-chain are compounding</div>
+      <div class="cs">Total value on public blockchains, excluding stablecoins</div>
+      <div class="cols">
+        <div class="c"><div class="cval" style="color:var(--slate)">$6B</div><div class="cbar" style="height:19%;background:#9DB4D8"></div><div class="clab">EARLY 2025</div></div>
+        <div class="c"><div class="cval" style="color:var(--blue)">$31B</div><div class="cbar" style="height:100%"></div><div class="clab">JULY 2026</div></div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:26px;flex-wrap:wrap">
+        <div><div style="font-size:22px;font-weight:800;color:var(--blue)">+400%</div><div style="font-size:12px;color:var(--slate)">growth in ~18 months</div></div>
+        <div><div style="font-size:22px;font-weight:800">961,073</div><div style="font-size:12px;color:var(--slate)">on-chain asset holders</div></div>
+        <div><div style="font-size:22px;font-weight:800">167</div><div style="font-size:12px;color:var(--slate)">platforms, none neutral to Canada</div></div>
+      </div>
+      <div class="src">Source: RWA.xyz; PYMNTS, "Tokenized RWA Value Jumps Fourfold" (2026); Yellow Research (2026).</div>
     </div>
-    <div class="dhero-stats">
-      <div class="dhero-stat">
-        <div class="lab">The product</div>
-        <div class="num gold">DvP</div>
-        <div class="sub">Title and cash settle together (delivery-versus-payment), subject to required regulatory approvals</div>
+    <div class="chart">
+      <div class="ct">The money layer is almost entirely US dollars</div>
+      <div class="cs">Stablecoin supply by currency of denomination, ~$300B total</div>
+      <div class="donut-wrap">
+        <svg width="180" height="180" viewBox="0 0 180 180">
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#D7DEEA" stroke-width="26"></circle>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#142036" stroke-width="26"
+            stroke-dasharray="435.4 4.4" transform="rotate(-90 90 90)"></circle>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#2E6BF2" stroke-width="26"
+            stroke-dasharray="4.4 435.4" stroke-dashoffset="-435.4" transform="rotate(-90 90 90)"></circle>
+          <text x="90" y="84" text-anchor="middle" font-family="Inter" font-size="30" font-weight="800" fill="#142036">99%</text>
+          <text x="90" y="104" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="1" fill="#5E6E88">US DOLLAR</text>
+        </svg>
+        <div class="legend">
+          <div class="li"><span class="sw" style="background:#142036"></span><b>~99%</b>&nbsp;US-dollar stablecoins</div>
+          <div class="li"><span class="sw" style="background:#2E6BF2"></span><b>~1%</b>&nbsp;all other currencies, including CAD</div>
+          <div class="li" style="color:var(--slate);font-size:12.5px;margin-top:4px;max-width:230px">The Canadian dollar is effectively absent from a $300B on-chain money layer.</div>
+        </div>
       </div>
-      <div class="dhero-stat">
-        <div class="lab">Directional support</div>
-        <div class="num green">$100M</div>
-        <div class="sub">Project Samara settled a tokenized bond against wholesale central-bank money (W-CAD), March 2026 (directional support, not validation of 4orm's commercial-bank deposit model)</div>
+      <div class="src">Source: DefiLlama; Bitcoin Foundation, "Stablecoin Market Cap Tops $321B" (2026); The Block.</div>
+    </div>
+  </div>
+  <div class="card pad reveal" style="margin-top:22px">
+    <div class="kicker">What stays and what leaves</div>
+    <h3 style="margin-top:12px;font-size:20px">Canadian issuers have already put $14B+ of assets on-chain at home</h3>
+    <p style="font-size:14.5px;max-width:840px">The origination is happening here. What leaves is the layer on top: distribution, secondary-market liquidity, settlement, and the money leg, which is where value compounds. 4orm is built to bring that layer home.</p>
+    <div class="split">
+      <div class="col keep">
+        <h4><span style="color:var(--ok)">&#9679;</span> What Canada keeps today</h4>
+        <ul>
+          <li><span class="mk">&#10003;</span><span><b>Asset origination and issuance</b> - Pineapple $13.7B mortgages, T-RIZE $300M+, Ocree $51.9M</span></li>
+          <li><span class="mk">&#10003;</span><span><b>A domestic regulated chain</b> - Polymesh, purpose-built for real-world assets</span></li>
+          <li><span class="mk">&#10003;</span><span><b>A Canadian-dollar stablecoin</b> - QCAD and other CAD rails</span></li>
+          <li><span class="mk">&#10003;</span><span><b>Qualified custody</b> - Tetra, Brane, Balance</span></li>
+        </ul>
       </div>
-      <div class="dhero-stat">
-        <div class="lab">Capabilities</div>
-        <div class="num blue">6</div>
-        <div class="sub">Issuance · Trading · Settlement · Custody · Reporting · Supervision</div>
+      <div class="col exp">
+        <h4><span style="color:var(--blue)">&#9679;</span> What defaults offshore</h4>
+        <ul>
+          <li><span class="mk">&#8594;</span><span><b>Institutional distribution</b> - foreign broker and investor platforms</span></li>
+          <li><span class="mk">&#8594;</span><span><b>Secondary-market liquidity</b> - foreign venues and allocators</span></li>
+          <li><span class="mk">&#8594;</span><span><b>The settlement layer and market data</b> - where durable value accrues</span></li>
+          <li><span class="mk">&#8594;</span><span><b>The money layer</b> - a $300B pool that is roughly 99% US dollars</span></li>
+        </ul>
       </div>
-      <div class="dhero-stat">
-        <div class="lab">Global market by 2030</div>
-        <div class="num">$2T to $16T</div>
-        <div class="sub">McKinsey base case to BCG/ADDX. Canadian fee pools $350M to $1.9B per year (4orm estimate, McKinsey-derived).</div>
+    </div>
+    <div class="src">Assets-originated figure aggregates disclosed Canadian issuance (Pineapple, T-RIZE, Ocree). Money-layer split per DefiLlama and The Block (2026).</div>
+  </div>
+  <div class="grid g2" style="margin-top:22px">
+    <div class="card pad">
+      <div class="kicker">The infrastructure is offshore</div>
+      <h3 style="margin-top:12px;font-size:20px">Canadian assets are distributed on someone else's rails</h3>
+      <p style="font-size:14.5px">Canada has a domestic regulated chain in Polymesh and strong issuers, yet the marketplaces, liquidity networks, and distribution partners with scale sit abroad. When a Canadian asset needs institutional distribution or a secondary market, it reaches for foreign platforms, and the settlement fees, custody revenue, and market data go with it.</p>
+      <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:8px">
+        <span class="lead-tag" style="margin:0;background:var(--cloud);padding:7px 12px;border-radius:7px">US MARKETPLACES</span>
+        <span class="lead-tag" style="margin:0;background:var(--cloud);padding:7px 12px;border-radius:7px">FOREIGN LIQUIDITY NETWORKS</span>
+        <span class="lead-tag" style="margin:0;background:var(--cloud);padding:7px 12px;border-radius:7px">OFFSHORE DISTRIBUTION</span>
+      </div>
+    </div>
+    <div class="chart">
+      <div class="ct">Resources the world is tokenizing that Canada is not</div>
+      <div class="cs">Fastest-growing on-chain segments, 2026</div>
+      <div class="bar">
+        <div class="row"><div class="lab">Tokenized commodities</div><div class="track"><div class="fill" style="width:100%">$8B</div></div></div>
+        <div class="row"><div class="lab">Tokenized gold</div><div class="track"><div class="fill ink" style="width:75%">$6B</div></div></div>
+        <div class="row"><div class="lab">Private credit</div><div class="track"><div class="fill steel" style="width:72%">~$18B*</div></div></div>
+        <div class="row"><div class="lab">US Treasuries (BUIDL)</div><div class="track"><div class="fill mist" style="width:32%">$2.5B</div></div></div>
+      </div>
+      <p style="font-size:13px;color:var(--steel);margin-top:14px">Canada is an energy, mining, real estate, and mortgage economy. Almost none of that resource wealth is on-chain, even as Pineapple Financial has moved a <b>$13.7B</b> mortgage portfolio toward tokenization.</p>
+      <div class="src">Source: BingX / DWF Labs tokenized commodities (2026); RWA.xyz; CoinGecko Q1 2026. *Broad count including platform-locked assets.</div>
+    </div>
+  </div>
+  <div class="card pad" style="margin-top:22px">
+    <div class="kicker">The structural gap</div>
+    <h3 style="margin-top:12px;font-size:20px">Canada built the supply and the plumbing, but never the settlement layer</h3>
+    <p style="font-size:14.5px;max-width:820px">The ecosystem has three layers. Canada has strong players in the first two. The third layer, where durable infrastructure value accrues, the way it does for DTCC, SWIFT, and Visa in traditional finance, does not yet exist.</p>
+    <div class="layers" style="margin-top:22px">
+      <div class="layer"><div class="tag">Layer 1 - Issuers</div><div class="names">T-RIZE - Ocree - Pineapple - SORS</div></div>
+      <div class="layer"><div class="tag">Layer 2 - Rails</div><div class="names">Polymesh - QCAD (Stablecorp) - Cybrid - Loon - Tetra, Brane, Balance custody</div></div>
+      <div class="layer missing"><div class="tag">Layer 3 - Settlement</div><div class="names">Neutral, regulated, multi-institution settlement and exchange layer</div><span class="badge-miss">MISSING IN CANADA</span></div>
+    </div>
+    <div class="src">Source: 4orm Finance market analysis, Canadian RWA and tokenization ecosystem (2024-2026), with entity roles per company disclosures.</div>
+  </div>
+</div></section>
+<!-- THE OPPORTUNITY -->
+<section class="sec" id="opportunity"><div class="wrap">
+  <span class="eyebrow">The Opportunity</span>
+  <h2 class="sec-h">A first-mover window on the layer that captures the value.</h2>
+  <p class="sec-sub">In traditional finance, the settlement layer, not the assets, is where durable value and network effects accrue. That layer is forming globally right now, and no one has built the Canadian one. The supply already exists at home, the banks are already proving the model, and every participant is building a separate island. The opportunity is the neutral connector between them.</p>
+  <div class="grid g2" style="margin-top:44px">
+    <div class="chart">
+      <div class="ct">Independent forecasts for tokenized assets by 2030</div>
+      <div class="cs">Total tokenized real-world asset value, by source</div>
+      <div class="bar fcast">
+        <div class="row"><div class="lab">McKinsey (base, 2030)</div><div class="track"><div class="fill mist" style="width:7%"></div></div><div class="fv">$2T</div></div>
+        <div class="row"><div class="lab">BCG x Ripple (2030)</div><div class="track"><div class="fill steel" style="width:31%"></div></div><div class="fv">$9.4T</div></div>
+        <div class="row"><div class="lab">BCG (2030)</div><div class="track"><div class="fill ink" style="width:53%"></div></div><div class="fv">$16T</div></div>
+        <div class="row"><div class="lab">Standard Chartered (2034)</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="fv">$30T</div></div>
+      </div>
+      <p style="font-size:13px;color:var(--steel);margin-top:14px">Even the conservative case is a <b>60x-plus</b> expansion from today's ~$31B on-chain. The layer that clears it does not yet exist in Canada.</p>
+      <div class="src">Source: McKinsey (2024); BCG x Ripple, "Approaching the Tokenization Tipping Point" (2025); Standard Chartered (2024).</div>
+    </div>
+    <div class="chart" style="background:var(--ink);border-color:var(--ink)">
+      <div class="ct" style="color:#fff">The settlement model has directional support in Canada</div>
+      <div class="cs" style="color:#AEBBD2">Project Samara, March 2026</div>
+      <div style="font-size:52px;font-weight:900;color:#fff;letter-spacing:-.02em;margin:20px 0 4px">C$100M</div>
+      <p style="font-size:14.5px;color:#C7D2E4;line-height:1.55">The Bank of Canada, Export Development Canada, RBC, and TD settled Canada's first tokenized bond against <b style="color:#fff">wholesale central-bank money (W-CAD)</b>, with cash and bond moving on the same ledger. 4orm's model uses a tokenized commercial-bank deposit for the cash leg, so this is directional support, not validation of 4orm's specific model.</p>
+      <p style="font-size:13px;color:#9FB0CC;margin-top:14px;border-top:1px solid #26364f;padding-top:14px">It was a research experiment, and the Bank has not moved to a production system. It shows settlement finality for tokenized assets works in Canada. By design it was a single, one-time issuance, not a neutral layer that issuers and banks can use every day.</p>
+      <div class="src" style="color:#5E6E88">Source: Bank of Canada Staff Analytical Paper 2026-8; Osler; EDC. 4orm is not affiliated with the Bank of Canada or the Samara consortium.</div>
+    </div>
+  </div>
+  <h3 style="font-size:20px;font-weight:750;margin:46px 0 0">The pattern in Canadian market infrastructure: validate, permit, build</h3>
+  <p style="font-size:14.5px;color:var(--steel);margin-top:8px;max-width:840px">The custody standard is published, the settlement model has directional support, and the national workstream is open. The build window is open now, and it will not stay empty.</p>
+  <div class="tl">
+    <div class="n reveal"><div class="dt">Feb 3, 2026</div><h4>CIRO custody framework</h4><p>CIRO published the Digital Asset Custody Framework, the permission structure for regulated custody of tokenized assets in Canada.</p><div class="st">Permission structure</div></div>
+    <div class="n reveal"><div class="dt">Mar 6, 2026</div><h4>Bank of Canada, Project Samara</h4><p>A C$100M tokenized bond settled against wholesale central-bank money with RBC, TD, and EDC. OSC, AMF, and CIRO participated in the pilot.</p><div class="st">Directional support</div></div>
+    <div class="n reveal"><div class="dt">Q2 2026</div><h4>CSA Project Tokenization</h4><p>The Canadian Securities Administrators launched a national tokenization workstream, inviting industry to build inside the perimeter with the regulators.</p><div class="st">National initiative</div></div>
+    <div class="n reveal"><div class="dt">2025-2026</div><h4>Tier-1 banks moving</h4><p>BMO announced tokenized cash and deposit infrastructure with CME and Google Cloud. International tokenized-settlement systems have processed more than $1.5T cumulatively.</p><div class="st">Market is forming</div></div>
+  </div>
+  <div class="vpb"><span class="a">Validate</span><span class="ar">&#8594;</span><span>Permit</span><span class="ar">&#8594;</span><span>Build</span><span class="ar">&#8594;</span><span style="border-color:var(--blue);color:var(--blue)">4orm operates the layer</span></div>
+  <div class="src">Sources: CIRO Digital Asset Custody Framework (2026); Bank of Canada Staff Analytical Paper 2026-8; CSA Project Tokenization (2026); company announcements (BMO, CME, Google Cloud); third-party industry reports. 4orm is not affiliated with any regulator or the Samara consortium.</div>
+  <h3 style="font-size:20px;font-weight:750;margin:46px 0 0">The supply is already here, and growing</h3>
+  <p style="font-size:14.5px;color:var(--steel);margin-top:8px;max-width:820px">Canadian issuers are putting real assets on-chain today. What they lack is a domestic venue to aggregate issuers, banks, and custodians and give those assets liquidity and finality.</p>
+  <div class="grid g4" style="margin-top:24px">
+    <div class="card"><div class="n" style="font-size:30px;font-weight:800;color:var(--blue)">$13.7B</div><div class="l" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:8px;text-transform:uppercase;letter-spacing:.06em">Pineapple Financial mortgage portfolio moving on-chain</div></div>
+    <div class="card"><div class="n" style="font-size:30px;font-weight:800">$300M+</div><div class="l" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:8px;text-transform:uppercase;letter-spacing:.06em">T-RIZE tokenized Quebec real estate developments</div></div>
+    <div class="card"><div class="n" style="font-size:30px;font-weight:800">$51.9M</div><div class="l" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:8px;text-transform:uppercase;letter-spacing:.06em">Ocree commercial property on Polymesh, Winnipeg</div></div>
+    <div class="card"><div class="n" style="font-size:30px;font-weight:800">$14M</div><div class="l" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:8px;text-transform:uppercase;letter-spacing:.06em">Rails raise for a hybrid exchange, backed by Kraken</div></div>
+  </div>
+  <div class="card pad" style="margin-top:24px;background:var(--tint);border-color:#CBDAFB">
+    <div class="grid g2" style="align-items:center;gap:30px">
+      <div>
+        <div class="kicker">The prize</div>
+        <h3 style="margin-top:12px;font-size:22px">Whoever settles it, keeps it</h3>
+        <p style="font-size:14.5px;color:var(--steel)">Banks do not build shared infrastructure. Crypto exchanges are retail-native. Issuers focus on issuance. Global platforms are not built for Canadian rules. That is why the neutral settlement layer is still open, and why it is defensible once built: regulatory precedent, embedded institutional workflows, and network effects compound to the first mover.</p>
+      </div>
+      <div class="askbox" style="background:#fff">
+        <div class="askrow"><span class="k">Canadian RWA fee pool by 2030</span><span class="v b">C$350M - $1.9B / yr</span></div>
+        <div class="askrow"><span class="k">Revenue surfaces</span><span class="v">Settlement, issuance, custody</span></div>
+        <div class="askrow"><span class="k">plus</span><span class="v">Trading and platform SaaS</span></div>
+        <div class="askrow"><span class="k">Position</span><span class="v">First neutral layer in market</span></div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--slate);margin-top:14px;line-height:1.5">Fee-pool figure is a 4orm management estimate, bottom-up, subject to adoption and regulatory approvals.</div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- ============================================ THE INFRASTRUCTURE THESIS (NEW: lock-in via the layer) -->
-<section class="psec band">
-  <div class="psec-inner">
-    <div class="psec-head">
-      <div class="psec-eye">The infrastructure thesis</div>
-      <h2>The transfer is final across two institutions. <span class="key">The lock-in comes from being the layer everyone settles on.</span></h2>
-      <p class="lead">A single tokenized transfer is a feature. Owning the layer where every Canadian institution settles is a position. Tokenized real-world assets are forming as a market category in Canada right now, and the infrastructure forms once. Whoever operates the neutral settlement layer sets the standard for the next two decades.</p>
+</div></section>
+<!-- THE SOLUTION -->
+<section class="sec dark" id="solution"><div class="wrap">
+  <span class="eyebrow">The Solution</span>
+  <h2 class="sec-h">One neutral layer where everything settles with finality.</h2>
+  <p class="sec-sub">4orm settles title, the cash leg, and the rules together, as one event, in Canadian dollars. It connects every tokenized project to every bank, so issuers get liquidity and can offload, and any token movement needed across Canada clears through one regulated venue instead of a dozen disconnected ones.</p>
+  <div class="subhead" style="margin:48px 0 18px">How value moves</div>
+  <div class="flow">
+    <div class="node"><div class="h">Issuers &amp; assets</div><div class="d">Real estate, mortgages, private credit, bonds, commodities, funds</div></div>
+    <div class="arw">&#8594;</div>
+    <div class="node core"><div class="h">4orm settlement layer</div><div class="d">Title + cash leg + rules settle as one, with finality, in CAD</div></div>
+    <div class="arw">&#8594;</div>
+    <div class="node"><div class="h">Banks &amp; liquidity</div><div class="d">Canadian banks and credit unions provide the cash leg and offload venue</div></div>
+  </div>
+  <p style="text-align:center;font-size:13px;color:#8A97AD;margin-top:16px;font-family:var(--mono);letter-spacing:.04em">The bank issues and holds the tokenized deposit. 4orm takes no deposits and needs no banking licence.</p>
+  <div class="subhead" style="margin:52px 0 18px">Built to be safe to adopt</div>
+  <div class="grid g3">
+    <div class="card reveal" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)"><h3 style="color:#fff">Starts as a read-only module</h3><p style="color:#9FB0CC">It sits beside a bank's existing systems, touches no funds, and proves settlement finality on a single tokenized deposit inside a supervised sandbox. The smallest thing that is both real and safe to run.</p></div>
+    <div class="card reveal" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)"><h3 style="color:#fff">Compliance native, Canadian hosted</h3><p style="color:#9FB0CC">Permissioned ERC-3643 tokens carry identity and transfer controls. Hyperledger Besu now, with a path to 4orm Native Chain, hosted in AWS Canada Central.</p></div>
+    <div class="card reveal" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)"><h3 style="color:#fff">Regulated from day one</h3><p style="color:#9FB0CC">Alberta Securities Commission as primary regulator, engaged through the Alberta Financial Regulatory Sandbox, with a phased CIRO custody pathway.</p></div>
+  </div>
+  <div class="subhead" style="margin:52px 0 18px">Five ways it earns</div>
+  <div class="streams" style="margin-top:0">
+    <div class="stream"><div class="sn">01</div><div class="st">Settlement</div><div class="sd">Delivery-versus-payment finality between institutions</div></div>
+    <div class="stream"><div class="sn">02</div><div class="st">Issuance</div><div class="sd">Compliant tokenization on the ERC-3643 standard</div></div>
+    <div class="stream"><div class="sn">03</div><div class="st">Custody &amp; registry</div><div class="sd">Asset lifecycle, records, and institution-facing controls</div></div>
+    <div class="stream"><div class="sn">04</div><div class="st">Trading</div><div class="sd">Institutional secondary market via 4orm Exchange</div></div>
+    <div class="stream"><div class="sn">05</div><div class="st">Platform SaaS</div><div class="sd">Recurring APIs and integration per institution</div></div>
+  </div>
+</div></section>
+<!-- WHAT 4ORM IS / IS NOT -->
+<section class="sec alt" id="what"><div class="wrap">
+  <span class="eyebrow">For the record</span>
+  <h2 class="sec-h">What 4orm is, and what it is not.</h2>
+  <p class="sec-sub">The structure is deliberate. 4orm operates the settlement-layer software and the record of title. It does not take deposits, hold customer assets, or issue money, which is what keeps it neutral and keeps it outside the banking perimeter.</p>
+  <div class="isnot">
+    <div class="col is reveal">
+      <h4>4orm is</h4>
+      <h3>Settlement-layer software and the record of title</h3>
+      <ul>
+        <li><span class="mk">+</span>The settlement layer that makes a transfer final and legal across two institutions.</li>
+        <li><span class="mk">+</span>The authoritative record of title and the token registry for tokenized assets.</li>
+        <li><span class="mk">+</span>The connector to a bank-issued tokenized deposit that provides the cash leg.</li>
+        <li><span class="mk">+</span>A neutral, independently governed Canadian entity that no single bank owns.</li>
+      </ul>
     </div>
-
-    <div class="cgrid c4">
-      <div class="ccard c2">
-        <span class="ctag">Q2 2026</span>
-        <h3>CSA Project Tokenization</h3>
-        <p>The Canadian Securities Administrators launched a national tokenization workstream, inviting industry to build inside the perimeter with the regulators, not around them.</p>
-        <div class="cmeta">National regulatory initiative</div>
-      </div>
-      <div class="ccard c3">
-        <span class="ctag">Feb 3, 2026</span>
-        <h3>CIRO custody framework</h3>
-        <p>CIRO published the Digital Asset Custody Framework, the permission structure for regulated custody of tokenized assets in Canada. The custody question now has a published reference standard.</p>
-        <div class="cmeta">Permission structure</div>
-      </div>
-      <div class="ccard c1">
-        <span class="ctag">Mar 6, 2026</span>
-        <h3>Bank of Canada Project Samara</h3>
-        <p>The Bank of Canada settled a C$100M tokenized bond against wholesale central-bank money (W-CAD) with RBC, TD, and EDC. OSC, AMF, and CIRO participated in the pilot. Settlement finality for tokenized assets, in production, in Canada (directional support; 4orm is not affiliated with the Bank of Canada or the Samara consortium).</p>
-        <div class="cmeta">Directional support</div>
-      </div>
-      <div class="ccard c4">
-        <span class="ctag">2025-2026</span>
-        <h3>Tier-1 banks moving</h3>
-        <p>BMO announced tokenized cash and deposit infrastructure built with CME and Google Cloud. International tokenized-settlement systems have processed more than $1.5T cumulatively (third-party industry reports). The category is forming; the operator question is open.</p>
-        <div class="cmeta">Market is forming</div>
+    <div class="col isnt reveal">
+      <h4>4orm is not</h4>
+      <h3>Not a bank. Not a custodian. Not a stablecoin issuer.</h3>
+      <ul>
+        <li><span class="mk">&#45;</span>Not a bank, and does not take deposits or carry on banking under the Bank Act. It touches no CDIC funds and needs no banking licence.</li>
+        <li><span class="mk">&#45;</span>Not a custodian of customer assets; custody sits under a separate regulated function.</li>
+        <li><span class="mk">&#45;</span>Not a stablecoin issuer; the deposit token is the bank's own liability.</li>
+        <li><span class="mk">&#45;</span>Not the AML officer of record; regulated institutions keep their own obligations.</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size:12.5px;color:var(--slate);margin-top:18px;font-style:italic">All activities are subject to receipt of required regulatory approvals. No regulator has reviewed, endorsed, or approved 4orm Finance or any securities described here.</p>
+</div></section>
+<!-- ECOSYSTEM SHOUT-OUT -->
+<section class="sec" id="ecosystem"><div class="wrap">
+  <span class="eyebrow">The players we connect</span>
+  <h2 class="sec-h">Canada already has the pieces. It has never had the layer that links them.</h2>
+  <p class="sec-sub">The talent and the building blocks are already here. Real issuers, a domestic regulated chain, Canadian-dollar rails, and qualified custodians are all live today. They are not competitors to route around. They are the network 4orm is built to connect, so their assets can settle and offload at home.</p>
+  <div class="ecogroup reveal">
+    <div class="gl">Issuers and tokenization platforms</div>
+    <div class="eco">
+      <span class="chip">Polymath / Polymesh<span class="r">RWA CHAIN</span></span>
+      <span class="chip">T-RIZE<span class="r">REAL ESTATE</span></span>
+      <span class="chip">Ocree Capital<span class="r">COMMERCIAL RE</span></span>
+      <span class="chip">Pineapple Financial<span class="r">MORTGAGES</span></span>
+      <span class="chip">SORS Capital<span class="r">SOCIAL HOUSING</span></span>
+    </div>
+  </div>
+  <div class="ecogroup reveal">
+    <div class="gl">Rails, stablecoins and payments</div>
+    <div class="eco">
+      <span class="chip">Stablecorp / QCAD<span class="r">CAD STABLECOIN</span></span>
+      <span class="chip">Cybrid<span class="r">PAYMENTS</span></span>
+      <span class="chip">Loon<span class="r">CAD STABLECOIN</span></span>
+      <span class="chip">Rails<span class="r">HYBRID EXCHANGE</span></span>
+    </div>
+  </div>
+  <div class="ecogroup reveal">
+    <div class="gl">Custody and trust</div>
+    <div class="eco">
+      <span class="chip">Tetra Trust<span class="r">CUSTODY</span></span>
+      <span class="chip">Brane<span class="r">CUSTODY</span></span>
+      <span class="chip">Balance<span class="r">CUSTODY</span></span>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--slate);margin-top:26px;font-style:italic;max-width:820px">Companies shown are independent third parties referenced as market context. Their inclusion reflects publicly reported activity and does not imply any partnership or endorsement.</p>
+</div></section>
+<!-- THE RAISE -->
+<section class="sec alt" id="raise"><div class="wrap">
+  <span class="eyebrow">The Raise</span>
+  <h2 class="sec-h">Pre-seed, open August 1, 2026.</h2>
+  <div class="ask" style="margin-top:40px">
+    <div>
+      <p class="sec-sub" style="margin-top:0">4orm is raising a $2M pre-seed on a post-money SAFE to build the settlement module, clear the regulatory pathway, run the first institutional pilot, and execute the first two bank MOUs. The SAFE is structured to be TFSA and RRSP eligible.</p>
+      <div class="cta" style="margin-top:28px">
+        <a class="btn lg" href="https://www.4ormdr.com">Enter the data room</a>
+        <a class="btn ghost lg" href="mailto:office@4ormfinance.com">Talk to us</a>
       </div>
     </div>
+    <div class="askbox reveal">
+      <div class="askrow"><span class="k">Round</span><span class="v">Pre-seed</span></div>
+      <div class="askrow"><span class="k">Instrument</span><span class="v">Post-money SAFE</span></div>
+      <div class="askrow"><span class="k">Target</span><span class="v b">$2,000,000</span></div>
+      <div class="askrow"><span class="k">Valuation cap</span><span class="v">$12,000,000</span></div>
+      <div class="askrow"><span class="k">Discount</span><span class="v">15%, with MFN</span></div>
+      <div class="askrow"><span class="k">Opens</span><span class="v">August 1, 2026</span></div>
+      <div class="askrow"><span class="k">Eligibility</span><span class="v">TFSA / RRSP</span></div>
+    </div>
+  </div>
+</div></section>
 
-    <p style="margin-top:32px;font-size:1.05rem;line-height:1.7;color:var(--text-2);max-width:54em"><strong>The pattern in Canadian market infrastructure is always the same: validate, permit, build.</strong> Samara provided directional support. CIRO and the CSA opened the permission structure. The build window is open right now, and it will not stay empty. The only question is whether the operator that fills it is Canadian-owned, regulator-aligned, and institution-grade, or whether Canada imports its settlement layer the way it imported its cloud.</p>
+<!-- Sources block (from the sales landing) -->
+<section class="landing-sources">
+  <div class="wrap">
+    SOURCES: RWA.xyz; PYMNTS (2026); Yellow Research (2026); DefiLlama; The Block; Bitcoin Foundation (2026); McKinsey (2024); BCG x Ripple (2025); Standard Chartered (2024); Bank of Canada Project Samara research paper (2026); Osler; EDC; BingX / DWF Labs tokenized commodities (2026); CoinGecko (2026); company disclosures for T-RIZE, Ocree, Pineapple Financial, SORS, Polymesh, Stablecorp, Cybrid, Loon, Tetra, Brane, Rails.
   </div>
 </section>
 
-<!-- ============================================ WHAT 4ORM DOES (NEW, light) -->
-<section class="psec">
-  <div class="psec-inner">
-    <div class="psec-head">
-      <div class="psec-eye">What 4orm does</div>
-      <h2>For a tokenized asset to move and be final, <span class="key">three things have to travel with it.</span></h2>
-      <p class="lead">When a tokenized asset moves from one institution to another and is final and legal, three things travel with it. 4orm makes all three move together.</p>
-    </div>
-    <div class="cgrid c3">
-      <div class="ccard c2">
-        <span class="ctag">01 · The title</span>
-        <h3>The authoritative record of who owns the asset.</h3>
-        <p>4orm operates the ledger of record and the token registry, so ownership changes hands cleanly and is recognized.</p>
-        <div class="cmeta">4orm's responsibility</div>
-      </div>
-      <div class="ccard c3">
-        <span class="ctag">02 · The cash leg</span>
-        <h3>The money settles at the same instant the asset moves.</h3>
-        <p>The cash side is a tokenized bank deposit, issued and held by a regulated Canadian bank as the bank's own liability. 4orm connects to it; 4orm does not issue it.</p>
-        <div class="cmeta">Bank's responsibility</div>
-<p style="margin-top:14px;font-size:.86rem;color:var(--text-2);font-style:italic"><strong style="color:var(--brand-700)">4orm takes no deposits, touches no CDIC funds, and needs no banking or trust licence. The deposit token is the bank's liability, issued under the bank's own banking authorizations.</strong></p>
-      </div>
-      <div class="ccard c1">
-        <span class="ctag">03 · The rules</span>
-        <h3>Identity, eligibility, sanctions, and jurisdiction travel with the asset.</h3>
-        <p>A transfer that should not happen cannot complete. The rules are part of the settlement, not a check after the fact.</p>
-        <div class="cmeta">Shared responsibility</div>
-      </div>
-    </div>
-    <p style="margin-top:28px;font-size:1.02rem;line-height:1.7;color:var(--text-2);max-width:50em"><strong>When all three settle together, the transfer is final the moment it commits. That is the product.</strong></p>
-  </div>
-</section>
-
-<!-- ============================================ WHAT 4ORM IS / IS NOT (NEW, dark) -->
-<section class="psec dark">
-  <div class="psec-inner">
-    <div class="psec-head">
-      <div class="psec-eye">For the record</div>
-      <h2>What 4orm is, <span class="key">and what it is not.</span></h2>
-    </div>
-    <div class="cgrid c2">
-      <div class="ccard c2">
-        <span class="ctag">4orm is</span>
-        <h3>Settlement-layer software + the record of title</h3>
-        <p>Software and the authoritative record of title for tokenized assets. The settlement layer that makes a transfer final and legal across two institutions. The connector to a tokenized bank deposit that provides the cash leg. A neutral, independently governed Canadian entity no single bank owns.</p>
-        <div class="cmeta">Operated by 4orm Finance</div>
-      </div>
-      <div class="ccard c6">
-        <span class="ctag">4orm is not</span>
-        <h3>Not a bank. Not a custodian. Not a stablecoin issuer.</h3>
-        <p>Not a bank, and does not carry on banking or take deposits (Bank Act). Not a custodian of customer assets (custody sits under a separate regulated custody function). Not a stablecoin issuer (the deposit token is the bank's liability). Not the AML officer of record (the regulated institutions remain responsible for their obligations).</p>
-        <div class="cmeta">All activities subject to receipt of required regulatory approvals</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ PILLARS (LIGHT) -->
-<section class="psec band">
-  <div class="psec-inner">
-    <div class="psec-head">
-      <div class="psec-eye">The 4orm Finance Platform</div>
-      <h2>How finality is delivered. <span class="key">Six capabilities, one settlement layer.</span></h2>
-      <p class="lead">Issuance, trading, settlement, custody, reporting, supervision. Each pillar is engineered for one outcome: title and cash settle together, every time, for every asset class. <a href="platform.html" style="color:var(--brand-700);font-weight:700">See the platform in detail →</a></p>
-    </div>
-
-    <div class="cgrid c3">
-      <div class="ccard c1">
-        <span class="ctag">01 · Issuance</span>
-        <h3>Tokenized asset issuance</h3>
-        <p>Native infrastructure for tokenizing real-world assets. Smart contracts, on-chain registry, legal-economic binding, full audit trail. Bonds, deposits, real estate, private credit, energy royalties, precious metals.</p>
-        <div class="cmeta">Multi-asset registry</div>
-      </div>
-      <div class="ccard c2">
-        <span class="ctag">02 · Trading</span>
-        <h3>4ormEx, the institutional venue</h3>
-        <p>Pillar 02 is being built as 4ormEx, the planned regulated trading layer (subject to CIRO marketplace authorization). Order book, RFQ, secondary liquidity, multi-bank settlement corridors, all designed to operate under CIRO marketplace oversight (subject to required authorization). No bridges, no multi-day windows.</p>
-        <div class="cmeta">24/7 secondary liquidity</div>
-      </div>
-      <div class="ccard c3">
-        <span class="ctag">03 · Settlement</span>
-        <h3>Settlement finality. Delivery versus payment.</h3>
-        <p>Title and cash leg settle in the same step, or neither settles. Replaces multi-day deferred-net cycles with one supervised settlement. Removes the multi-day gap where one side has paid and the other has not yet delivered.</p>
-        <div class="cmeta">T+0 delivery versus payment (DvP)</div>
-      </div>
-      <div class="ccard c4">
-        <span class="ctag">04 · Custody</span>
-        <h3>Regulated digital custody</h3>
-        <p>the platform's regulated custody function (subject to CIRO Digital Asset Custody Framework alignment and OSFI letters patent or provincial trust authorization) is intended to operate as a qualified digital custodian. Custody is structured as a separate entity from the marketplace and dealer functions, a deliberate structuring choice consistent with separating custody from dealing.</p>
-        <div class="cmeta">Intended alignment</div>
-      </div>
-      <div class="ccard c5">
-        <span class="ctag">05 · Reporting</span>
-        <h3>Regulator-aligned reporting</h3>
-        <p>OSFI, CSA, FINTRAC, and CIRO reporting embedded at the settlement layer. No bolt-on. No post-hoc reconciliation. Reporting is what falls out of the ledger, not what your team builds after the fact.</p>
-        <div class="cmeta">Embedded reporting</div>
-      </div>
-      <div class="ccard c6">
-        <span class="ctag">06 · Supervision</span>
-        <h3>Embedded supervisory controls</h3>
-        <p>Real-time supervisory feeds for the regulators that approve the settlement layer. Pre-trade screens, post-trade attestation, AML rule engines, KYC reusable credentials. Supervision lives with the platform.</p>
-        <div class="cmeta">Real-time regulator feed</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DISTINCTION section removed in v55: content promoted to H1 hero. -->
-<!-- Replaced with a quieter attribution stamp so the rhythm doesn't break. -->
-<section class="pquote">
-  <div class="pquote-in">
-    <div class="pquote-eye">Independently governed</div>
-    <p class="pquote-q">Issued by 4orm Finance <span class="key">Developed by KCS Capital, an independent firm.</span></p>
-    <div class="pquote-attr">All activities subject to receipt of required regulatory approvals</div>
-  </div>
-</section>
-
-<!-- LIFECYCLE block removed from index in v56 audit; lives on platform.html -->
-
-<!-- ============================================ PROOF: PROJECT SAMARA (LIGHT) -->
-
-<!-- Distinction callout: houses the old H1 line as a punchy pull quote -->
-<section class="distinction">
-  <div class="distinction-inner">
-    <div class="distinction-eye">The distinction</div>
-    <p>Most tokenization companies are building <em>tokenized assets</em>. 4orm Finance is building the institutional infrastructure layer that allows Canada to safely operate tokenized finance at scale.</p>
-    <div class="attrib">Issued by 4orm Finance · Developed by KCS Capital · Independently governed</div>
-  </div>
-</section>
-
-<section class="psec">
-  <div class="psec-inner">
-    <div class="psec-head">
-      <div class="psec-eye">The reference point</div>
-      <h2>The settlement model is proven in principle. <span class="key">The remaining question is who operates it for Canadian institutions.</span></h2>
-      <p class="lead">On March 6, 2026 the Bank of Canada completed Project Samara, settling a tokenized bond against wholesale central-bank money (W-CAD) with RBC, TD, and Export Development Canada. Full lifecycle: issuance, bidding, coupon payments, secondary trading, redemption. OSC, AMF, and CIRO participated in the pilot. <b>Samara settled against central-bank money, not a commercial-bank deposit token; 4orm's model uses a tokenized commercial-bank deposit as the cash leg.</b> Samara is directional support that settlement finality for tokenized assets works in Canada. (Bank of Canada Staff Analytical Paper 2026-8. 4orm is not affiliated with the Bank of Canada or the Samara consortium.)</p>
-    </div>
-
-    <div class="cgrid c4">
-      <div class="ccard c1">
-        <span class="ctag">Pilot</span>
-        <h3>$100M tokenized bond</h3>
-        <p>Mar 6, 2026. Full lifecycle settled on a dual cash + bond ledger.</p>
-        <div class="cmeta">Bank of Canada</div>
-      </div>
-      <div class="ccard c2">
-        <span class="ctag">Trial participants</span>
-        <h3>RBC · TD · EDC</h3>
-        <p>Two Tier-1 Canadian banks and a Crown corporation participated in the trial that settled a tokenized bond in wholesale central-bank money, directional support only. 4orm is not affiliated with the Bank of Canada or the Samara consortium.</p>
-        <div class="cmeta">Samara pilot</div>
-      </div>
-      <div class="ccard c3">
-        <span class="ctag">Pilot regulators</span>
-        <h3>OSC · AMF · CIRO</h3>
-        <p>Three Canadian securities regulators participated in the Bank of Canada Samara pilot.</p>
-        <div class="cmeta">Pilot participation</div>
-      </div>
-      <div class="ccard c4">
-        <span class="ctag">Reference architecture</span>
-        <h3>The standard 4orm is built to</h3>
-        <p>Project Samara established the architectural patterns 4orm Finance builds against. 4orm is not in operational production with Tier-1 banks; it is building the settlement layer to that standard.</p>
-        <div class="cmeta">Reference model</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAMILY PROPERTIES mid-page block removed from index in v56 audit; the footer family block carries the same information -->
-
-<!-- ============================================ CLOSING CTA -->
-<section class="iwstrip">
-  <div class="iwstrip-in">
-    <div class="iwstrip-eye">Opening August 1, 2026 · 90-day window</div>
-    <h2>Canada has the assets, the custodians, and a tokenized-cash starting point. <span class="key">What it does not yet have is a neutral settlement layer.</span></h2>
-    <p>The Bank of Canada has proven the architecture in principle. CIRO has published the custody framework. What Canada does not yet have is a neutral settlement layer that makes transfers final across institutions. <em>(Market sizing: $350M to $1.9B estimated annual Canadian fee pools as the market forms; 4orm estimate, derived from McKinsey base case. See the data room.)</em></p>
-    <div class="iwstrip-acts">
-      <a class="dhero-btn-p" href="https://4ormdr.com">Request access to the data room →</a>
-      <a class="dhero-btn-s" href="https://www.4ormedc.com" target="_blank" rel="noopener">See the guided walkthrough ↗</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ FAMILY FOOTER -->
 <section class="famfooter">
   <div class="famfooter-in">
     <div class="famfooter-head">
@@ -364,64 +626,34 @@
   </div>
 </section>
 
-<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie consent">
-<div class="cookie-banner-in">
-<div class="cookie-text">
-<strong>Cookies and tracking.</strong> 4orm Finance uses cookies and similar technologies. Essential cookies are required for the site to function. Analytics and marketing cookies are off by default and only enabled with your consent. See our <a href="privacy.html">Privacy Policy</a>.
-</div>
-<div class="cookie-acts">
-<button class="cookie-btn reject" id="cookieReject" type="button">Reject all</button>
-<button class="cookie-btn custom" id="cookieCustom" type="button">Customize</button>
-<button class="cookie-btn accept" id="cookieAccept" type="button">Accept all</button>
-</div>
-</div>
-<div class="cookie-customize" id="cookieCustomize">
-<div class="cookie-pref">
-<input type="checkbox" id="prefEssential" checked disabled aria-describedby="prefEssentialDesc">
-<label for="prefEssential"><strong>Essential</strong><span id="prefEssentialDesc">Required for the site to function (session, security, preferences). Always on.</span></label>
-</div>
-<div class="cookie-pref">
-<input type="checkbox" id="prefAnalytics" aria-describedby="prefAnalyticsDesc">
-<label for="prefAnalytics"><strong>Analytics</strong><span id="prefAnalyticsDesc">First-party analytics to understand site usage. No personal data shared externally.</span></label>
-</div>
-<div class="cookie-pref">
-<input type="checkbox" id="prefMarketing" aria-describedby="prefMarketingDesc">
-<label for="prefMarketing"><strong>Marketing</strong><span id="prefMarketingDesc">Third-party marketing trackers. Off until you opt in.</span></label>
-</div>
-<div style="margin-top:12px;text-align:right">
-<button class="cookie-btn accept" id="cookieSavePrefs" type="button">Save my preferences</button>
-</div>
-</div>
-</div>
+<script src="assets/mobile-nav.js?v=1" defer></script>
 <script>
 (function(){
-  var KEY = 'fourm_cookie_consent_v1';
-  var banner = document.getElementById('cookieBanner');
-  var btnAccept = document.getElementById('cookieAccept');
-  var btnReject = document.getElementById('cookieReject');
-  var btnCustom = document.getElementById('cookieCustom');
-  var btnSavePrefs = document.getElementById('cookieSavePrefs');
-  var customizePanel = document.getElementById('cookieCustomize');
-  var prefAnalytics = document.getElementById('prefAnalytics');
-  var prefMarketing = document.getElementById('prefMarketing');
-  function save(consent){
-    try { localStorage.setItem(KEY, JSON.stringify(Object.assign({ts: Date.now()}, consent))); } catch(e) {}
-    if (banner) banner.classList.remove('show');
-    // Phase 2: load analytics/marketing scripts conditionally on consent.analytics / consent.marketing here.
-  }
-  function show(){ if(banner){ banner.classList.add('show'); } }
-  function existing(){
-    try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e){ return null; }
-  }
-  if (!existing()) { show(); }
-  if (btnAccept) btnAccept.addEventListener('click', function(){ save({essential:true, analytics:true, marketing:true}); });
-  if (btnReject) btnReject.addEventListener('click', function(){ save({essential:true, analytics:false, marketing:false}); });
-  if (btnCustom) btnCustom.addEventListener('click', function(){ customizePanel.classList.toggle('show'); });
-  if (btnSavePrefs) btnSavePrefs.addEventListener('click', function(){
-    save({essential:true, analytics: prefAnalytics.checked, marketing: prefMarketing.checked});
+  var d=document; d.documentElement.classList.add('js');
+  d.querySelectorAll('.chart,.card,.layer,.split,.stream,.askbox,.ecogroup,.inev-nums .in').forEach(function(el){el.classList.add('reveal')});
+  d.querySelectorAll('.reveal').forEach(function(el){
+    var i=Array.prototype.indexOf.call(el.parentNode.children, el);
+    el.style.transitionDelay=(Math.min(i,6)*70)+'ms';
   });
+  function grow(root){
+    root.querySelectorAll('.bar .fill, .cols .cbar').forEach(function(el){
+      var w=el.style.width, h=el.style.height;
+      if(w){el.style.width='0';requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.width=w})});}
+      if(h){el.style.height='0';requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.height=h})});}
+    });
+  }
+  function count(root){
+    root.querySelectorAll('[data-count]').forEach(function(el){
+      if(el._c)return; el._c=1;
+      var t=+el.getAttribute('data-count'), pre=el.getAttribute('data-pre')||'', suf=el.getAttribute('data-suf')||'', dur=1100, s=performance.now();
+      (function f(now){var k=Math.min(1,(now-s)/dur);var v=Math.round(t*(1-Math.pow(1-k,3)));el.textContent=pre+v.toLocaleString()+suf;if(k<1)requestAnimationFrame(f);})(s);
+    });
+  }
+  var els=d.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');grow(e);count(e);});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var el=e.target;el.classList.add('in');grow(el);count(el);io.unobserve(el);}});},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el){io.observe(el);});
 })();
 </script>
-<script src="assets/mobile-nav.js?v=1" defer></script>
 </body>
 </html>
