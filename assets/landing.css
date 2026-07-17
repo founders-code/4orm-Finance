@@ -31,9 +31,14 @@ h2.sec-h{font-size:clamp(28px,3.4vw,42px);font-weight:800;letter-spacing:-.02em;
 .sec.dark .sec-sub{color:#AEBBD2}
 .hr{height:1px;background:var(--line);border:0}
 /* hero */
-.hero{padding:78px 0 54px;background:
+.hero{padding:78px 0 54px;min-height:calc(100vh - 196px);box-sizing:border-box;background:
   radial-gradient(1100px 460px at 78% -10%, #EAF1FE 0%, rgba(234,241,254,0) 60%),
   linear-gradient(180deg,#fff 0%,#F7FAFF 100%)}
+/* compact dark rhythm band — sits directly under hero on interior pages so a sliver peeks at the bottom of the viewport */
+.rhythm{padding:64px 0;background:var(--ink);color:#DCE4F2;border-top:1px solid rgba(255,255,255,.06)}
+.rhythm .re{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.rhythm .rh{font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.18;margin:12px 0 0;color:#fff}
+.rhythm .rp{font-size:15px;color:#AEBBD2;margin:14px 0 0;max-width:820px;line-height:1.55}
 .hero h1{font-size:clamp(34px,5.1vw,62px);font-weight:900;letter-spacing:-.03em;line-height:1.03;margin:22px 0 0}
 .hero h1 .g{color:var(--blue)}
 .hero p.lead{font-size:clamp(17px,1.9vw,21px);color:var(--steel);max-width:720px;margin:24px 0 0;line-height:1.5}
@@ -202,6 +207,11 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 
 /* --- v59 shell adjustments so landing sections coexist with the v58 header/footer --- */
 .hero { padding-top: 78px; }
+@media (max-width: 900px){
+  .hero{min-height:auto}
+  .rhythm{padding:44px 0}
+  .rhythm .rh{font-size:22px}
+}
 .landing-sources { background: #0C1626; color: #5E6E88; padding: 28px 0; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; line-height: 1.7; }
 .landing-sources .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
 .landing-sources a { color: #7C8AA6; }
