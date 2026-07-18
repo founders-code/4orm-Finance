@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=72">
-<link rel="stylesheet" href="assets/site.css?v=72">
-<link rel="stylesheet" href="assets/landing.css?v=72">
+<link rel="stylesheet" href="assets/styles.css?v=73">
+<link rel="stylesheet" href="assets/site.css?v=73">
+<link rel="stylesheet" href="assets/landing.css?v=73">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=72" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=73" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -186,22 +186,23 @@
       <svg class="islands-canvas" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FAF6EE"/><stop offset="1" stop-color="#EEE6D4"/></linearGradient>
-          <linearGradient id="sand-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5D69A"/><stop offset="1" stop-color="#C48A3F"/></linearGradient>
+          <!-- Darker sand -->
+          <linearGradient id="sand-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9A96B"/><stop offset="1" stop-color="#8A5C22"/></linearGradient>
           <linearGradient id="ocean-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FBCDD"/><stop offset="1" stop-color="#4E86AE"/></linearGradient>
         </defs>
 
         <!-- Sky backdrop -->
-        <rect x="0" y="0" width="800" height="190" fill="url(#sky)"/>
+        <rect x="0" y="0" width="800" height="180" fill="url(#sky)"/>
 
         <!-- Ocean base -->
-        <rect x="0" y="185" width="800" height="95" fill="url(#ocean-g)"/>
+        <rect x="0" y="175" width="800" height="105" fill="url(#ocean-g)"/>
 
         <!-- Wave lines animated across the ocean -->
         <g stroke="#FFFFFF" stroke-width="1.4" fill="none" opacity=".55" stroke-linecap="round">
-          <path d="M-100 210 Q-50 205 0 210 T100 210 T200 210 T300 210 T400 210 T500 210 T600 210 T700 210 T800 210 T900 210">
+          <path d="M-100 205 Q-50 200 0 205 T100 205 T200 205 T300 205 T400 205 T500 205 T600 205 T700 205 T800 205 T900 205">
             <animateTransform attributeName="transform" type="translate" from="0 0" to="100 0" dur="4s" repeatCount="indefinite"/>
           </path>
-          <path d="M-100 230 Q-50 224 0 230 T100 230 T200 230 T300 230 T400 230 T500 230 T600 230 T700 230 T800 230 T900 230">
+          <path d="M-100 228 Q-50 222 0 228 T100 228 T200 228 T300 228 T400 228 T500 228 T600 228 T700 228 T800 228 T900 228">
             <animateTransform attributeName="transform" type="translate" from="0 0" to="-100 0" dur="6s" repeatCount="indefinite"/>
           </path>
           <path d="M-100 250 Q-50 245 0 250 T100 250 T200 250 T300 250 T400 250 T500 250 T600 250 T700 250 T800 250 T900 250" opacity=".35">
@@ -210,112 +211,110 @@
         </g>
 
         <!-- Small blocking X marks over the water between islands -->
-        <g opacity=".75">
-          <g transform="translate(255 165)"><line x1="-6" y1="-6" x2="6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="-6" x2="-6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/></g>
-          <g transform="translate(545 165)"><line x1="-6" y1="-6" x2="6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="-6" x2="-6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/></g>
+        <g opacity=".8">
+          <g transform="translate(275 155)"><line x1="-6" y1="-6" x2="6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="-6" x2="-6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/></g>
+          <g transform="translate(565 155)"><line x1="-6" y1="-6" x2="6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="-6" x2="-6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/></g>
         </g>
 
-        <!-- ISLAND 1 -->
+        <!-- ============ ISLAND 1 ============ -->
         <g>
-          <!-- sand mound -->
-          <path d="M55 195 Q90 155 140 152 Q190 155 225 195 Z" fill="url(#sand-g)"/>
-          <!-- foamy shoreline animation -->
+          <!-- sand mound: top at y=143, base at y=195 -->
+          <path d="M55 195 Q90 145 140 143 Q190 145 225 195 Z" fill="url(#sand-g)"/>
+          <!-- foamy shoreline -->
           <path d="M55 195 Q90 190 140 188 Q190 190 225 195" stroke="#FFFFFF" stroke-width="1.6" fill="none" opacity=".7">
             <animate attributeName="opacity" values=".7;.35;.7" dur="2.4s" repeatCount="indefinite"/>
           </path>
-          <!-- bank building -->
-          <rect x="115" y="85" width="50" height="55" fill="#3A4E75"/>
-          <polygon points="108,85 140,62 172,85" fill="#2E3E5C"/>
-          <rect x="120" y="95" width="7" height="11" fill="#DDE7F5"/>
-          <rect x="133" y="95" width="7" height="11" fill="#DDE7F5"/>
-          <rect x="146" y="95" width="7" height="11" fill="#DDE7F5"/>
-          <rect x="120" y="112" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="146" y="112" width="7" height="10" fill="#DDE7F5"/>
-          <!-- door -->
-          <rect x="132" y="112" width="12" height="28" fill="#1D2A47"/>
-          <!-- pillars line -->
-          <rect x="110" y="140" width="60" height="3" fill="#2E3E5C"/>
-          <!-- PERSON A emerging from door, waving right -->
-          <g transform="translate(158 172)">
+          <!-- bank building: bottom sits ON sand at y=143 -->
+          <rect x="115" y="88" width="50" height="55" fill="#3A4E75"/>
+          <polygon points="108,88 140,66 172,88" fill="#2E3E5C"/>
+          <!-- windows (upper row) -->
+          <rect x="120" y="98" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="133" y="98" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="146" y="98" width="7" height="10" fill="#DDE7F5"/>
+          <!-- windows flanking door -->
+          <rect x="118" y="115" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="148" y="115" width="7" height="10" fill="#DDE7F5"/>
+          <!-- door (dark opening) -->
+          <rect x="132" y="115" width="12" height="28" fill="#0F1A30"/>
+          <!-- door arch top -->
+          <path d="M132 118 Q138 113 144 118" stroke="#0F1A30" stroke-width="2" fill="none"/>
+          <!-- PERSON A standing IN FRONT of door, waving right (toward B) -->
+          <g transform="translate(138 143)">
+            <!-- head -->
+            <circle cx="0" cy="-22" r="4.2" fill="#F5D6B0"/>
             <!-- body -->
-            <circle cx="0" cy="-14" r="4" fill="#F5D6B0"/>
-            <rect x="-3" y="-10" width="6" height="12" fill="#2E6BF2" rx="1"/>
+            <rect x="-4" y="-18" width="8" height="14" fill="#2E6BF2" rx="1"/>
             <!-- legs -->
-            <line x1="-2" y1="2" x2="-3" y2="10" stroke="#243554" stroke-width="1.8" stroke-linecap="round"/>
-            <line x1="2" y1="2" x2="3" y2="10" stroke="#243554" stroke-width="1.8" stroke-linecap="round"/>
-            <!-- left arm (down) -->
-            <line x1="-3" y1="-7" x2="-6" y2="0" stroke="#F5D6B0" stroke-width="1.8" stroke-linecap="round"/>
-            <!-- right arm waving (rotates from up-out to up-high) -->
-            <g transform-origin="3 -7">
-              <line x1="3" y1="-7" x2="10" y2="-14" stroke="#F5D6B0" stroke-width="1.8" stroke-linecap="round"/>
-              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="-20 3 -7; 15 3 -7; -20 3 -7" dur="1.2s" repeatCount="indefinite"/>
-            </g>
+            <line x1="-2" y1="-4" x2="-2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="2" y1="-4" x2="2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- LEFT arm (resting down against side) -->
+            <line x1="-4" y1="-16" x2="-5" y2="-6" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- RIGHT arm — pivots at SHOULDER (4, -16), waves up toward Bank B -->
+            <line x1="4" y1="-16" x2="10" y2="-24" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round">
+              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="10 4 -16; -35 4 -16; 10 4 -16" dur="1s" repeatCount="indefinite"/>
+            </line>
           </g>
         </g>
 
-        <!-- ISLAND 2 (middle) -->
+        <!-- ============ ISLAND 2 (middle) ============ -->
         <g>
-          <path d="M345 195 Q380 155 430 152 Q480 155 515 195 Z" fill="url(#sand-g)"/>
+          <path d="M345 195 Q380 145 430 143 Q480 145 515 195 Z" fill="url(#sand-g)"/>
           <path d="M345 195 Q380 190 430 188 Q480 190 515 195" stroke="#FFFFFF" stroke-width="1.6" fill="none" opacity=".7">
             <animate attributeName="opacity" values=".7;.35;.7" dur="2.4s" begin=".4s" repeatCount="indefinite"/>
           </path>
-          <rect x="405" y="85" width="50" height="55" fill="#3A4E75"/>
-          <polygon points="398,85 430,62 462,85" fill="#2E3E5C"/>
-          <rect x="410" y="95" width="7" height="11" fill="#DDE7F5"/>
-          <rect x="423" y="95" width="7" height="11" fill="#DDE7F5"/>
-          <rect x="436" y="95" width="7" height="11" fill="#DDE7F5"/>
-          <rect x="410" y="112" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="436" y="112" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="422" y="112" width="12" height="28" fill="#1D2A47"/>
-          <rect x="400" y="140" width="60" height="3" fill="#2E3E5C"/>
-          <!-- PERSON B (waves both sides — one arm up-left, one arm up-right, alternating) -->
-          <g transform="translate(430 172)">
-            <circle cx="0" cy="-14" r="4" fill="#F5D6B0"/>
-            <rect x="-3" y="-10" width="6" height="12" fill="#7BE3B0" rx="1"/>
-            <line x1="-2" y1="2" x2="-3" y2="10" stroke="#243554" stroke-width="1.8" stroke-linecap="round"/>
-            <line x1="2" y1="2" x2="3" y2="10" stroke="#243554" stroke-width="1.8" stroke-linecap="round"/>
-            <!-- left arm waving -->
-            <g transform-origin="-3 -7">
-              <line x1="-3" y1="-7" x2="-10" y2="-14" stroke="#F5D6B0" stroke-width="1.8" stroke-linecap="round"/>
-              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="20 -3 -7; -15 -3 -7; 20 -3 -7" dur="1.3s" repeatCount="indefinite"/>
-            </g>
-            <!-- right arm waving -->
-            <g transform-origin="3 -7">
-              <line x1="3" y1="-7" x2="10" y2="-14" stroke="#F5D6B0" stroke-width="1.8" stroke-linecap="round"/>
-              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="-20 3 -7; 15 3 -7; -20 3 -7" dur="1.3s" begin=".65s" repeatCount="indefinite"/>
-            </g>
+          <rect x="405" y="88" width="50" height="55" fill="#3A4E75"/>
+          <polygon points="398,88 430,66 462,88" fill="#2E3E5C"/>
+          <rect x="410" y="98" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="423" y="98" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="436" y="98" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="408" y="115" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="438" y="115" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="422" y="115" width="12" height="28" fill="#0F1A30"/>
+          <path d="M422 118 Q428 113 434 118" stroke="#0F1A30" stroke-width="2" fill="none"/>
+          <!-- PERSON B — waves BOTH arms alternately -->
+          <g transform="translate(428 143)">
+            <circle cx="0" cy="-22" r="4.2" fill="#F5D6B0"/>
+            <rect x="-4" y="-18" width="8" height="14" fill="#7BE3B0" rx="1"/>
+            <line x1="-2" y1="-4" x2="-2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="2" y1="-4" x2="2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- LEFT arm waving left (toward A) -->
+            <line x1="-4" y1="-16" x2="-10" y2="-24" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round">
+              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="-10 -4 -16; 35 -4 -16; -10 -4 -16" dur="1.1s" repeatCount="indefinite"/>
+            </line>
+            <!-- RIGHT arm waving right (toward C) -->
+            <line x1="4" y1="-16" x2="10" y2="-24" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round">
+              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="10 4 -16; -35 4 -16; 10 4 -16" dur="1.1s" begin=".55s" repeatCount="indefinite"/>
+            </line>
           </g>
         </g>
 
-        <!-- ISLAND 3 -->
+        <!-- ============ ISLAND 3 ============ -->
         <g>
-          <path d="M635 195 Q670 155 720 152 Q770 155 745 195 Z" fill="url(#sand-g)"/>
-          <path d="M575 195 Q640 155 720 152 Q770 155 745 195 Z" fill="url(#sand-g)"/>
-          <path d="M575 195 Q640 190 720 188 Q770 190 745 195" stroke="#FFFFFF" stroke-width="1.6" fill="none" opacity=".7">
+          <path d="M575 195 Q620 145 660 143 Q710 145 745 195 Z" fill="url(#sand-g)"/>
+          <path d="M575 195 Q620 190 660 188 Q710 190 745 195" stroke="#FFFFFF" stroke-width="1.6" fill="none" opacity=".7">
             <animate attributeName="opacity" values=".7;.35;.7" dur="2.4s" begin=".8s" repeatCount="indefinite"/>
           </path>
-          <rect x="695" y="85" width="50" height="55" fill="#3A4E75"/>
-          <polygon points="688,85 720,62 752,85" fill="#2E3E5C"/>
-          <rect x="700" y="95" width="7" height="11" fill="#DDE7F5"/>
-          <rect x="713" y="95" width="7" height="11" fill="#DDE7F5"/>
-          <rect x="726" y="95" width="7" height="11" fill="#DDE7F5"/>
-          <rect x="700" y="112" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="726" y="112" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="712" y="112" width="12" height="28" fill="#1D2A47"/>
-          <rect x="690" y="140" width="60" height="3" fill="#2E3E5C"/>
-          <!-- PERSON C emerging from door, waving left -->
-          <g transform="translate(700 172)">
-            <circle cx="0" cy="-14" r="4" fill="#F5D6B0"/>
-            <rect x="-3" y="-10" width="6" height="12" fill="#F5D06B" rx="1"/>
-            <line x1="-2" y1="2" x2="-3" y2="10" stroke="#243554" stroke-width="1.8" stroke-linecap="round"/>
-            <line x1="2" y1="2" x2="3" y2="10" stroke="#243554" stroke-width="1.8" stroke-linecap="round"/>
-            <!-- left arm waving -->
-            <g transform-origin="-3 -7">
-              <line x1="-3" y1="-7" x2="-10" y2="-14" stroke="#F5D6B0" stroke-width="1.8" stroke-linecap="round"/>
-              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="20 -3 -7; -15 -3 -7; 20 -3 -7" dur="1.2s" begin=".3s" repeatCount="indefinite"/>
-            </g>
-            <!-- right arm (down) -->
-            <line x1="3" y1="-7" x2="6" y2="0" stroke="#F5D6B0" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="635" y="88" width="50" height="55" fill="#3A4E75"/>
+          <polygon points="628,88 660,66 692,88" fill="#2E3E5C"/>
+          <rect x="640" y="98" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="653" y="98" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="666" y="98" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="638" y="115" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="668" y="115" width="7" height="10" fill="#DDE7F5"/>
+          <rect x="652" y="115" width="12" height="28" fill="#0F1A30"/>
+          <path d="M652 118 Q658 113 664 118" stroke="#0F1A30" stroke-width="2" fill="none"/>
+          <!-- PERSON C standing IN FRONT of door, waving left (toward B) -->
+          <g transform="translate(658 143)">
+            <circle cx="0" cy="-22" r="4.2" fill="#F5D6B0"/>
+            <rect x="-4" y="-18" width="8" height="14" fill="#F5D06B" rx="1"/>
+            <line x1="-2" y1="-4" x2="-2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="2" y1="-4" x2="2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- LEFT arm — pivots at shoulder, waves up toward Bank B -->
+            <line x1="-4" y1="-16" x2="-10" y2="-24" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round">
+              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="-10 -4 -16; 35 -4 -16; -10 -4 -16" dur="1s" begin=".3s" repeatCount="indefinite"/>
+            </line>
+            <!-- RIGHT arm resting down -->
+            <line x1="4" y1="-16" x2="5" y2="-6" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round"/>
           </g>
         </g>
 
@@ -323,12 +322,12 @@
         <g font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".14em" font-weight="800" fill="#8A3A3A" text-anchor="middle">
           <text x="140" y="222">BANK A</text>
           <text x="430" y="222">BANK B</text>
-          <text x="720" y="222">BANK C</text>
+          <text x="660" y="222">BANK C</text>
         </g>
         <g font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#142036" text-anchor="middle">
           <text x="140" y="238">Kinexys-style</text>
           <text x="430" y="238">Token Services-style</text>
-          <text x="720" y="238">CME-partnered stack</text>
+          <text x="660" y="238">CME-partnered stack</text>
         </g>
       </svg>
     </div>
@@ -1067,5 +1066,6 @@
   els.forEach(function(el){io.observe(el);});
 })();
 </script>
+<script src="assets/scroll-animate.js?v=73" defer></script>
 </body>
 </html>
