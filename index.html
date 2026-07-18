@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=69">
-<link rel="stylesheet" href="assets/site.css?v=69">
-<link rel="stylesheet" href="assets/landing.css?v=69">
+<link rel="stylesheet" href="assets/styles.css?v=70">
+<link rel="stylesheet" href="assets/site.css?v=70">
+<link rel="stylesheet" href="assets/landing.css?v=70">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=69" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=70" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -177,29 +177,112 @@
   <h2 class="sec-h">Today: private islands. <span class="g">On 4orm: one connected layer.</span></h2>
   <p class="sec-sub">Every Canadian bank building tokenization infrastructure is building a private stack that only its own counterparties can use. 4orm is the neutral layer that lets any of them settle with any other.</p>
 
-  <!-- TODAY: isolated islands -->
+  <!-- TODAY: cartoon-style isolated islands with buildings and bouncing assets -->
   <div class="flow-block current">
     <div class="flow-tag" style="color:#C25252">TODAY</div>
     <div class="flow-title">Private tokenization platforms. No shared settlement layer.</div>
-    <div class="isles">
-      <div class="isle">
-        <div class="isle-tag">BANK A</div>
-        <div class="isle-name">Kinexys-style</div>
-        <div class="isle-sub">Issuers &middot; custody &middot; internal settlement</div>
+
+    <div class="islands-scene">
+      <!-- Island 1 -->
+      <div class="island">
+        <svg class="isle-art" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- water base -->
+          <ellipse cx="90" cy="160" rx="80" ry="10" fill="#DEE9F2"/>
+          <!-- island mound -->
+          <path d="M20 155 Q40 115 90 110 Q140 115 160 155 Z" fill="#EFC793"/>
+          <path d="M20 155 Q40 115 90 110 Q140 115 160 155 Z" fill="url(#sand-grad)" opacity=".5"/>
+          <defs><linearGradient id="sand-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F9DFB3"/><stop offset="1" stop-color="#D6A85E"/></linearGradient></defs>
+          <!-- bank building -->
+          <rect x="60" y="50" width="60" height="65" fill="#3A4E75"/>
+          <polygon points="52,50 90,25 128,50" fill="#2E3E5C"/>
+          <rect x="70" y="65" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="86" y="65" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="102" y="65" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="70" y="87" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="86" y="87" width="14" height="28" fill="#1D2A47"/>
+          <rect x="102" y="87" width="8" height="14" fill="#DDE7F5"/>
+          <!-- pillars -->
+          <rect x="55" y="115" width="70" height="4" fill="#2E3E5C"/>
+          <!-- bouncing coin (asset trying to leave) -->
+          <g class="isle-coin bounce-a">
+            <circle cx="0" cy="0" r="9" fill="#F5D06B" stroke="#B58A28" stroke-width="1.5"/>
+            <text x="0" y="4" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="11" fill="#7A5A15">$</text>
+          </g>
+        </svg>
+        <div class="isle-cap">
+          <div class="isle-tag">BANK A</div>
+          <div class="isle-name">Kinexys-style</div>
+        </div>
       </div>
-      <div class="isle-x" aria-hidden="true">&times;</div>
-      <div class="isle">
-        <div class="isle-tag">BANK B</div>
-        <div class="isle-name">Token Services-style</div>
-        <div class="isle-sub">Issuers &middot; custody &middot; internal settlement</div>
+
+      <!-- Blocked route between A and B -->
+      <div class="isle-gap">
+        <div class="x-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g stroke="#C25252" stroke-width="4" stroke-linecap="round"><line x1="10" y1="10" x2="30" y2="30"/><line x1="30" y1="10" x2="10" y2="30"/></g></svg>
+        </div>
+        <div class="gap-label">NO ROUTE</div>
       </div>
-      <div class="isle-x" aria-hidden="true">&times;</div>
-      <div class="isle">
-        <div class="isle-tag">BANK C</div>
-        <div class="isle-name">CME-partnered stack</div>
-        <div class="isle-sub">Issuers &middot; custody &middot; internal settlement</div>
+
+      <!-- Island 2 -->
+      <div class="island">
+        <svg class="isle-art" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="90" cy="160" rx="80" ry="10" fill="#DEE9F2"/>
+          <path d="M20 155 Q40 115 90 110 Q140 115 160 155 Z" fill="#EFC793"/>
+          <path d="M20 155 Q40 115 90 110 Q140 115 160 155 Z" fill="url(#sand-grad)" opacity=".5"/>
+          <rect x="60" y="50" width="60" height="65" fill="#3A4E75"/>
+          <polygon points="52,50 90,25 128,50" fill="#2E3E5C"/>
+          <rect x="70" y="65" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="86" y="65" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="102" y="65" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="70" y="87" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="86" y="87" width="14" height="28" fill="#1D2A47"/>
+          <rect x="102" y="87" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="55" y="115" width="70" height="4" fill="#2E3E5C"/>
+          <g class="isle-coin bounce-b">
+            <circle cx="0" cy="0" r="9" fill="#F5D06B" stroke="#B58A28" stroke-width="1.5"/>
+            <text x="0" y="4" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="11" fill="#7A5A15">$</text>
+          </g>
+        </svg>
+        <div class="isle-cap">
+          <div class="isle-tag">BANK B</div>
+          <div class="isle-name">Token Services-style</div>
+        </div>
+      </div>
+
+      <div class="isle-gap">
+        <div class="x-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g stroke="#C25252" stroke-width="4" stroke-linecap="round"><line x1="10" y1="10" x2="30" y2="30"/><line x1="30" y1="10" x2="10" y2="30"/></g></svg>
+        </div>
+        <div class="gap-label">NO ROUTE</div>
+      </div>
+
+      <!-- Island 3 -->
+      <div class="island">
+        <svg class="isle-art" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="90" cy="160" rx="80" ry="10" fill="#DEE9F2"/>
+          <path d="M20 155 Q40 115 90 110 Q140 115 160 155 Z" fill="#EFC793"/>
+          <path d="M20 155 Q40 115 90 110 Q140 115 160 155 Z" fill="url(#sand-grad)" opacity=".5"/>
+          <rect x="60" y="50" width="60" height="65" fill="#3A4E75"/>
+          <polygon points="52,50 90,25 128,50" fill="#2E3E5C"/>
+          <rect x="70" y="65" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="86" y="65" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="102" y="65" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="70" y="87" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="86" y="87" width="14" height="28" fill="#1D2A47"/>
+          <rect x="102" y="87" width="8" height="14" fill="#DDE7F5"/>
+          <rect x="55" y="115" width="70" height="4" fill="#2E3E5C"/>
+          <g class="isle-coin bounce-c">
+            <circle cx="0" cy="0" r="9" fill="#F5D06B" stroke="#B58A28" stroke-width="1.5"/>
+            <text x="0" y="4" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="11" fill="#7A5A15">$</text>
+          </g>
+        </svg>
+        <div class="isle-cap">
+          <div class="isle-tag">BANK C</div>
+          <div class="isle-name">CME-partnered stack</div>
+        </div>
       </div>
     </div>
+
     <div class="isle-note">A tokenized asset originated inside Bank A cannot be transferred to a counterparty at Bank B or Bank C without leaving the domestic perimeter.</div>
     <div class="flow-metrics">
       <div class="fm"><div class="fmn" style="color:#C25252">0</div><div class="fml">Domestic cross-institution settlement paths</div></div>
@@ -208,32 +291,130 @@
     </div>
   </div>
 
-  <!-- ON 4ORM: hub-and-spoke -->
+  <!-- ON 4ORM: animated hub with flowing traffic + building icons -->
   <div class="flow-block onform">
     <div class="flow-tag" style="color:#1F9D6B">ON 4ORM</div>
     <div class="flow-title">Every institution connects to one shared, neutral settlement layer.</div>
-    <div class="hub">
-      <div class="spoke sp-tl">Bank A</div>
-      <div class="spoke sp-tr">Bank B</div>
-      <div class="spoke sp-l">Issuer</div>
-      <div class="spoke sp-r">Custodian</div>
-      <div class="spoke sp-bl">Bank C</div>
-      <div class="spoke sp-br">Credit union</div>
-      <svg class="hub-svg" viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <g stroke="#1F9D6B" stroke-width="1.5" stroke-dasharray="4 3" fill="none" opacity=".55">
-          <line x1="90" y1="55" x2="310" y2="130"/>
-          <line x1="530" y1="55" x2="310" y2="130"/>
-          <line x1="40" y1="130" x2="310" y2="130"/>
-          <line x1="580" y1="130" x2="310" y2="130"/>
-          <line x1="90" y1="205" x2="310" y2="130"/>
-          <line x1="530" y1="205" x2="310" y2="130"/>
+
+    <div class="hub-scene">
+      <svg class="hub-canvas" viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <!-- flowing dot animations along each spoke -->
+          <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1F9D6B" stop-opacity=".28"/>
+            <stop offset="70%" stop-color="#1F9D6B" stop-opacity=".05"/>
+            <stop offset="100%" stop-color="#1F9D6B" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- outer pulse aura behind hub -->
+        <circle cx="360" cy="190" r="120" fill="url(#hubGlow)">
+          <animate attributeName="r" values="100;135;100" dur="3.4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".9;.35;.9" dur="3.4s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- connection lines -->
+        <g stroke="#1F9D6B" stroke-width="1.5" stroke-dasharray="5 4" fill="none" opacity=".55">
+          <line x1="120" y1="70" x2="360" y2="190"/>
+          <line x1="600" y1="70" x2="360" y2="190"/>
+          <line x1="60" y1="190" x2="360" y2="190"/>
+          <line x1="660" y1="190" x2="360" y2="190"/>
+          <line x1="120" y1="310" x2="360" y2="190"/>
+          <line x1="600" y1="310" x2="360" y2="190"/>
+        </g>
+
+        <!-- flowing traffic dots (animated along each spoke, inward) -->
+        <g fill="#1F9D6B">
+          <circle r="4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M120 70 L360 190"/></circle>
+          <circle r="4"><animateMotion dur="2.9s" repeatCount="indefinite" begin=".4s" path="M600 70 L360 190"/></circle>
+          <circle r="4"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".8s" path="M60 190 L360 190"/></circle>
+          <circle r="4"><animateMotion dur="2.7s" repeatCount="indefinite" begin="1.1s" path="M660 190 L360 190"/></circle>
+          <circle r="4"><animateMotion dur="2.5s" repeatCount="indefinite" begin=".2s" path="M120 310 L360 190"/></circle>
+          <circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" begin=".6s" path="M600 310 L360 190"/></circle>
+        </g>
+
+        <!-- spoke nodes with building icons -->
+        <!-- Bank top-left -->
+        <g transform="translate(120 70)">
+          <circle r="34" fill="#fff" stroke="#1F9D6B" stroke-width="2"/>
+          <g transform="translate(-16 -14)">
+            <polygon points="0,6 16,-4 32,6" fill="#3A4E75"/>
+            <rect x="2" y="6" width="28" height="18" fill="#3A4E75"/>
+            <rect x="6" y="10" width="4" height="10" fill="#fff"/>
+            <rect x="14" y="10" width="4" height="10" fill="#fff"/>
+            <rect x="22" y="10" width="4" height="10" fill="#fff"/>
+          </g>
+          <text y="52" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="11" fill="#142036">Bank A</text>
+        </g>
+        <!-- Bank top-right -->
+        <g transform="translate(600 70)">
+          <circle r="34" fill="#fff" stroke="#1F9D6B" stroke-width="2"/>
+          <g transform="translate(-16 -14)">
+            <polygon points="0,6 16,-4 32,6" fill="#3A4E75"/>
+            <rect x="2" y="6" width="28" height="18" fill="#3A4E75"/>
+            <rect x="6" y="10" width="4" height="10" fill="#fff"/>
+            <rect x="14" y="10" width="4" height="10" fill="#fff"/>
+            <rect x="22" y="10" width="4" height="10" fill="#fff"/>
+          </g>
+          <text y="52" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="11" fill="#142036">Bank B</text>
+        </g>
+        <!-- Issuer left -->
+        <g transform="translate(60 190)">
+          <circle r="34" fill="#fff" stroke="#1F9D6B" stroke-width="2"/>
+          <g transform="translate(-12 -14)">
+            <rect x="0" y="0" width="24" height="28" rx="2" fill="#3A4E75"/>
+            <line x1="4" y1="6" x2="20" y2="6" stroke="#fff" stroke-width="1.5"/>
+            <line x1="4" y1="12" x2="20" y2="12" stroke="#fff" stroke-width="1.5"/>
+            <line x1="4" y1="18" x2="20" y2="18" stroke="#fff" stroke-width="1.5"/>
+          </g>
+          <text y="52" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="11" fill="#142036">Issuer</text>
+        </g>
+        <!-- Custodian right -->
+        <g transform="translate(660 190)">
+          <circle r="34" fill="#fff" stroke="#1F9D6B" stroke-width="2"/>
+          <g transform="translate(-12 -14)">
+            <path d="M12 0 L24 5 L24 15 Q24 24 12 28 Q0 24 0 15 L0 5 Z" fill="#3A4E75"/>
+            <circle cx="12" cy="14" r="3" fill="#F5D06B"/>
+          </g>
+          <text y="52" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="11" fill="#142036">Custodian</text>
+        </g>
+        <!-- Bank bottom-left (Bank C) -->
+        <g transform="translate(120 310)">
+          <circle r="34" fill="#fff" stroke="#1F9D6B" stroke-width="2"/>
+          <g transform="translate(-16 -14)">
+            <polygon points="0,6 16,-4 32,6" fill="#3A4E75"/>
+            <rect x="2" y="6" width="28" height="18" fill="#3A4E75"/>
+            <rect x="6" y="10" width="4" height="10" fill="#fff"/>
+            <rect x="14" y="10" width="4" height="10" fill="#fff"/>
+            <rect x="22" y="10" width="4" height="10" fill="#fff"/>
+          </g>
+          <text y="52" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="11" fill="#142036">Bank C</text>
+        </g>
+        <!-- Credit union bottom-right -->
+        <g transform="translate(600 310)">
+          <circle r="34" fill="#fff" stroke="#1F9D6B" stroke-width="2"/>
+          <g transform="translate(-14 -14)">
+            <circle cx="14" cy="14" r="13" fill="#3A4E75"/>
+            <path d="M8 10 Q14 6 20 10 M8 14 Q14 10 20 14 M8 18 Q14 14 20 18" stroke="#fff" stroke-width="1.5" fill="none"/>
+          </g>
+          <text y="52" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="11" fill="#142036">Credit union</text>
+        </g>
+
+        <!-- central 4orm hub -->
+        <g transform="translate(360 190)">
+          <circle r="60" fill="#142036" stroke="#1F9D6B" stroke-width="3"/>
+          <circle r="60" fill="none" stroke="#1F9D6B" stroke-width="1" opacity=".55">
+            <animate attributeName="r" values="60;74;60" dur="2.4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".55;0;.55" dur="2.4s" repeatCount="indefinite"/>
+          </circle>
+          <text y="-6" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="17" fill="#fff">4ORM</text>
+          <text y="10" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" letter-spacing=".14em" fill="#9AB6FF">SETTLEMENT</text>
+          <text y="24" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" letter-spacing=".14em" fill="#9AB6FF">LAYER</text>
         </g>
       </svg>
-      <div class="hub-core">
-        <div class="hc-tag">4ORM SETTLEMENT LAYER</div>
-        <div class="hc-title">Title + cash leg + rules<br/>commit as one</div>
-      </div>
+      <div class="hub-caption">Title + cash leg + rules commit as one</div>
     </div>
+
     <div class="flow-metrics">
       <div class="fm"><div class="fmn" style="color:#1F9D6B">1 shared layer</div><div class="fml">Every participant settles across the same regulated infrastructure</div></div>
       <div class="fm"><div class="fmn" style="color:#1F9D6B">T+0</div><div class="fml">Delivery versus payment settlement finality at the moment of commit</div></div>
@@ -438,13 +619,92 @@
   <span class="eyebrow">The Solution</span>
   <h2 class="sec-h">One enterprise layer where everything settles with finality.</h2>
   <p class="sec-sub">4orm settles title, the cash leg, and the rules together, as one event, in Canadian dollars. It connects every tokenized project to every bank, so issuers get liquidity and can offload, and any token movement needed across Canada clears through one regulated venue instead of a dozen disconnected ones.</p>
-  <div class="subhead" style="margin:48px 0 18px">How value moves</div>
-  <div class="flow">
-    <div class="node"><div class="h">Issuers &amp; assets</div><div class="d">Real estate, mortgages, private credit, bonds, commodities, funds</div></div>
-    <div class="arw">&#8594;</div>
-    <div class="node core"><div class="h">4orm settlement layer</div><div class="d">Title + cash leg + rules settle as one, with finality, in CAD</div></div>
-    <div class="arw">&#8594;</div>
-    <div class="node"><div class="h">Banks &amp; liquidity</div><div class="d">Canadian banks and credit unions provide the cash leg and offload venue</div></div>
+  <div class="subhead" style="margin:48px 0 18px">Delivery versus payment, animated</div>
+  <div class="dvp-scene">
+    <svg class="dvp-svg" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="asset-glow" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9AB6FF" stop-opacity="0"/><stop offset=".5" stop-color="#9AB6FF" stop-opacity=".55"/><stop offset="1" stop-color="#9AB6FF" stop-opacity="0"/></linearGradient>
+        <linearGradient id="cash-glow" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#7BE3B0" stop-opacity="0"/><stop offset=".5" stop-color="#7BE3B0" stop-opacity=".55"/><stop offset="1" stop-color="#7BE3B0" stop-opacity="0"/></linearGradient>
+        <radialGradient id="commit-pulse" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#7BE3B0" stop-opacity=".55"/><stop offset="1" stop-color="#7BE3B0" stop-opacity="0"/></radialGradient>
+      </defs>
+
+      <!-- Left column: ISSUERS -->
+      <g transform="translate(60 100)">
+        <text x="0" y="-20" font-family="JetBrains Mono,monospace" font-size="11" font-weight="800" letter-spacing=".14em" fill="#9AB6FF">ISSUERS</text>
+        <!-- Real estate -->
+        <g transform="translate(0 0)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(154,182,255,.08)" stroke="rgba(154,182,255,.35)"/><g transform="translate(10 8)"><rect x="0" y="4" width="14" height="14" fill="#9AB6FF"/><polygon points="0,4 7,-2 14,4" fill="#9AB6FF"/><rect x="4" y="8" width="6" height="10" fill="#0B1220"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Real estate</text></g>
+        <!-- Bonds -->
+        <g transform="translate(0 46)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(154,182,255,.08)" stroke="rgba(154,182,255,.35)"/><g transform="translate(10 8)"><rect x="0" y="0" width="18" height="18" rx="1" fill="#9AB6FF"/><line x1="4" y1="4" x2="14" y2="4" stroke="#0B1220" stroke-width="1.5"/><line x1="4" y1="9" x2="14" y2="9" stroke="#0B1220" stroke-width="1.5"/><line x1="4" y1="14" x2="14" y2="14" stroke="#0B1220" stroke-width="1.5"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Bonds</text></g>
+        <!-- Private credit -->
+        <g transform="translate(0 92)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(154,182,255,.08)" stroke="rgba(154,182,255,.35)"/><g transform="translate(10 8)"><circle cx="9" cy="9" r="8" fill="#9AB6FF"/><text x="9" y="13" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="10" fill="#0B1220">%</text></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Credit</text></g>
+        <!-- Gold -->
+        <g transform="translate(0 138)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(154,182,255,.08)" stroke="rgba(154,182,255,.35)"/><g transform="translate(10 10)"><polygon points="0,14 9,0 18,14" fill="#F5D06B"/><rect x="1" y="14" width="16" height="4" fill="#B58A28"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Bullion</text></g>
+      </g>
+
+      <!-- Right column: BANKS / LIQUIDITY -->
+      <g transform="translate(720 100)">
+        <text x="120" y="-20" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="11" font-weight="800" letter-spacing=".14em" fill="#7BE3B0">BANKS &amp; LIQUIDITY</text>
+        <g transform="translate(0 0)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(123,227,176,.08)" stroke="rgba(123,227,176,.35)"/><g transform="translate(10 8)"><polygon points="0,6 9,0 18,6" fill="#7BE3B0"/><rect x="1" y="6" width="16" height="12" fill="#7BE3B0"/><rect x="4" y="10" width="2" height="6" fill="#0B1220"/><rect x="8" y="10" width="2" height="6" fill="#0B1220"/><rect x="12" y="10" width="2" height="6" fill="#0B1220"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Tier-1 bank</text></g>
+        <g transform="translate(0 46)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(123,227,176,.08)" stroke="rgba(123,227,176,.35)"/><g transform="translate(10 8)"><path d="M9 0 L18 4 L18 12 Q18 18 9 20 Q0 18 0 12 L0 4 Z" fill="#7BE3B0"/><circle cx="9" cy="10" r="2" fill="#0B1220"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Custodian</text></g>
+        <g transform="translate(0 92)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(123,227,176,.08)" stroke="rgba(123,227,176,.35)"/><g transform="translate(10 6)"><circle cx="9" cy="9" r="9" fill="#7BE3B0"/><path d="M4 7 Q9 4 14 7 M4 10 Q9 7 14 10" stroke="#0B1220" stroke-width="1.4" fill="none"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Credit union</text></g>
+        <g transform="translate(0 138)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(123,227,176,.08)" stroke="rgba(123,227,176,.35)"/><g transform="translate(10 8)"><path d="M0 12 L9 4 L18 12 L18 18 L0 18 Z" fill="#7BE3B0"/><rect x="7" y="4" width="4" height="4" fill="#0B1220"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Pension</text></g>
+      </g>
+
+      <!-- TWO LANES (asset flow top, cash flow bottom) -->
+      <!-- lane backgrounds -->
+      <rect x="190" y="118" width="510" height="30" rx="15" fill="rgba(154,182,255,.06)" stroke="rgba(154,182,255,.18)"/>
+      <rect x="190" y="192" width="510" height="30" rx="15" fill="rgba(123,227,176,.06)" stroke="rgba(123,227,176,.18)"/>
+
+      <!-- lane labels -->
+      <text x="200" y="112" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing=".12em" fill="#9AB6FF" font-weight="700">TITLE / ASSET LEG &rarr;</text>
+      <text x="690" y="242" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing=".12em" fill="#7BE3B0" font-weight="700">&larr; CASH LEG (TOKENIZED DEPOSIT)</text>
+
+      <!-- animated asset tokens flowing left → right -->
+      <g fill="#9AB6FF">
+        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" path="M195 133 L695 133"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" repeatCount="indefinite"/></circle>
+        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" begin="1.3s" path="M195 133 L695 133"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" begin="1.3s" repeatCount="indefinite"/></circle>
+        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" begin="2.6s" path="M195 133 L695 133"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" begin="2.6s" repeatCount="indefinite"/></circle>
+      </g>
+      <!-- animated cash tokens flowing right → left -->
+      <g fill="#7BE3B0">
+        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" path="M695 207 L195 207"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" repeatCount="indefinite"/></circle>
+        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" begin="1.3s" path="M695 207 L195 207"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" begin="1.3s" repeatCount="indefinite"/></circle>
+        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" begin="2.6s" path="M695 207 L195 207"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" begin="2.6s" repeatCount="indefinite"/></circle>
+      </g>
+
+      <!-- CENTER 4ORM COMMIT hub -->
+      <g transform="translate(445 170)">
+        <!-- commit pulse aura -->
+        <circle r="65" fill="url(#commit-pulse)">
+          <animate attributeName="r" values="55;80;55" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <!-- hub core box -->
+        <rect x="-72" y="-52" width="144" height="104" rx="14" fill="#0F1A30" stroke="#7BE3B0" stroke-width="2"/>
+        <text y="-28" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="16" fill="#fff">4ORM</text>
+        <text y="-14" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" letter-spacing=".14em" fill="#7BE3B0">COMMIT AS ONE</text>
+        <!-- three commit rows: title + cash + rules -->
+        <g transform="translate(-56 0)">
+          <rect x="0" y="0" width="112" height="14" rx="3" fill="rgba(154,182,255,.16)" stroke="rgba(154,182,255,.4)"/>
+          <text x="6" y="10" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#9AB6FF" font-weight="700">TITLE</text>
+          <text x="106" y="10" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#9AB6FF">&#10003;</text>
+        </g>
+        <g transform="translate(-56 18)">
+          <rect x="0" y="0" width="112" height="14" rx="3" fill="rgba(123,227,176,.16)" stroke="rgba(123,227,176,.4)"/>
+          <text x="6" y="10" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#7BE3B0" font-weight="700">CASH</text>
+          <text x="106" y="10" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#7BE3B0">&#10003;</text>
+        </g>
+        <g transform="translate(-56 36)">
+          <rect x="0" y="0" width="112" height="14" rx="3" fill="rgba(245,208,107,.16)" stroke="rgba(245,208,107,.4)"/>
+          <text x="6" y="10" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#F5D06B" font-weight="700">RULES</text>
+          <text x="106" y="10" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#F5D06B">&#10003;</text>
+        </g>
+      </g>
+
+      <!-- caption -->
+      <text x="450" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#fff">All three commit together in the same block, or nothing settles.</text>
+      <text x="450" y="308" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing=".12em" fill="#9FB0CC">DELIVERY VERSUS PAYMENT &middot; T+0 &middot; CANADIAN DOLLARS</text>
+    </svg>
   </div>
   <p style="text-align:center;font-size:13px;color:#8A97AD;margin-top:16px;font-family:var(--mono);letter-spacing:.04em">The bank issues and holds the tokenized deposit. 4orm takes no deposits and needs no banking licence.</p>
   <div class="subhead" style="margin:52px 0 18px">Built to be safe to adopt</div>

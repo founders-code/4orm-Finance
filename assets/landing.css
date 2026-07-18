@@ -286,37 +286,47 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
   .flow-metrics{grid-template-columns:1fr}
 }
 
-/* Isolated islands (TODAY) */
-.isles{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center;margin-top:14px}
-.isle{background:#FAF2F2;border:1.5px dashed #E4B7B7;border-radius:12px;padding:22px 20px;text-align:center;min-height:130px;display:flex;flex-direction:column;justify-content:center;gap:6px}
-.isle-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;font-weight:800;color:#8A3A3A;text-transform:uppercase}
-.isle-name{font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
-.isle-sub{font-size:12px;color:var(--steel);line-height:1.4}
-.isle-x{font-size:28px;color:#C25252;font-weight:400;padding:0 14px;user-select:none}
 .isle-note{margin-top:18px;padding:14px 18px;background:#FDF6F6;border-left:3px solid #C25252;border-radius:6px;font-size:13.5px;color:var(--steel);line-height:1.55}
+
+/* Islands scene (TODAY) — cartoon-style with animated bouncing coins */
+.islands-scene{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center;margin-top:14px}
+.island{text-align:center}
+.isle-art{width:100%;max-width:180px;height:auto;display:block;margin:0 auto}
+.isle-cap{margin-top:6px}
+.isle-cap .isle-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;font-weight:800;color:#8A3A3A;text-transform:uppercase}
+.isle-cap .isle-name{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-.01em;margin-top:3px}
+.isle-gap{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 12px}
+.x-mark{width:40px;height:40px;animation:xpulse 1.6s ease-in-out infinite}
+.x-mark svg{width:100%;height:100%}
+.gap-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:#C25252;font-weight:800;text-transform:uppercase}
+@keyframes xpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.6}}
+
+/* Bouncing coins - each island has one, offset timing */
+.isle-coin{transform-origin:center;transform:translate(90px 130px)}
+.bounce-a{animation:bounceA 3.2s ease-in-out infinite}
+.bounce-b{animation:bounceB 3.2s ease-in-out infinite .6s}
+.bounce-c{animation:bounceC 3.2s ease-in-out infinite 1.2s}
+@keyframes bounceA{0%,100%{transform:translate(90px 130px)}25%{transform:translate(60px 100px)}30%{transform:translate(45px 105px)}50%{transform:translate(90px 130px)}75%{transform:translate(120px 100px)}80%{transform:translate(135px 105px)}}
+@keyframes bounceB{0%,100%{transform:translate(90px 130px)}25%{transform:translate(60px 100px)}30%{transform:translate(45px 105px)}50%{transform:translate(90px 130px)}75%{transform:translate(120px 100px)}80%{transform:translate(135px 105px)}}
+@keyframes bounceC{0%,100%{transform:translate(90px 130px)}25%{transform:translate(60px 100px)}30%{transform:translate(45px 105px)}50%{transform:translate(90px 130px)}75%{transform:translate(120px 100px)}80%{transform:translate(135px 105px)}}
+
 @media (max-width: 720px){
-  .isles{grid-template-columns:1fr;gap:8px}
-  .isle-x{transform:rotate(90deg);padding:6px 0}
+  .islands-scene{grid-template-columns:1fr;gap:14px}
+  .isle-gap{flex-direction:row;padding:6px 0}
+  .x-mark{transform:rotate(90deg)}
 }
 
-/* Hub-and-spoke (ON 4ORM) */
-.hub{position:relative;margin-top:14px;padding:24px 12px;min-height:280px;display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto 1fr auto;gap:0}
-.hub-svg{position:absolute;inset:24px 40px;width:calc(100% - 80px);height:calc(100% - 48px);z-index:1;pointer-events:none}
-.hub-core{grid-column:2;grid-row:2;justify-self:center;align-self:center;z-index:2;background:#fff;border:2px solid #1F9D6B;border-radius:14px;padding:20px 24px;text-align:center;min-width:220px;box-shadow:0 8px 26px rgba(31,157,107,.18)}
-.hc-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;font-weight:800;color:#1F9D6B;text-transform:uppercase}
-.hc-title{margin-top:8px;font-size:15px;font-weight:800;color:var(--ink);line-height:1.35;letter-spacing:-.01em}
-.spoke{background:#F7FBF9;border:1px solid #CCE9DA;border-radius:10px;padding:12px 16px;text-align:center;font-size:13.5px;font-weight:700;color:var(--ink);z-index:2;justify-self:center;align-self:center;min-width:110px}
-.sp-tl{grid-column:1;grid-row:1;justify-self:end}
-.sp-tr{grid-column:3;grid-row:1;justify-self:start}
-.sp-l{grid-column:1;grid-row:2;justify-self:start}
-.sp-r{grid-column:3;grid-row:2;justify-self:end}
-.sp-bl{grid-column:1;grid-row:3;justify-self:end}
-.sp-br{grid-column:3;grid-row:3;justify-self:start}
-@media (max-width: 720px){
-  .hub{grid-template-columns:1fr;grid-template-rows:none;gap:8px;min-height:auto}
-  .hub-svg{display:none}
-  .hub-core,.spoke{grid-column:1;justify-self:stretch}
-  .hub-core{order:0;margin:12px 0}
+/* Hub scene (ON 4ORM) — animated SVG canvas */
+.hub-scene{position:relative;margin-top:14px}
+.hub-canvas{width:100%;max-width:820px;height:auto;display:block;margin:0 auto}
+.hub-caption{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);font-weight:700;margin-top:8px}
+
+/* DvP scene (SOLUTION) */
+.dvp-scene{margin:0 auto;max-width:1000px}
+.dvp-svg{width:100%;height:auto;display:block}
+@media (max-width: 900px){
+  .dvp-scene{overflow-x:auto}
+  .dvp-svg{min-width:720px}
 }
 .landing-sources { background: #0C1626; color: #5E6E88; padding: 28px 0; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; line-height: 1.7; }
 .landing-sources .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
