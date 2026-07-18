@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=80">
-<link rel="stylesheet" href="assets/site.css?v=80">
-<link rel="stylesheet" href="assets/landing.css?v=80">
+<link rel="stylesheet" href="assets/styles.css?v=84">
+<link rel="stylesheet" href="assets/site.css?v=84">
+<link rel="stylesheet" href="assets/landing.css?v=84">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=80" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=84" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -39,6 +39,7 @@
 <section class="hero"><div class="wrap">
   <div class="hero-grid">
     <div class="hero-copy">
+      <div class="hero-eye"><span class="hero-eye-dot"></span>4ORM FINANCE &middot; REGULATED SETTLEMENT INFRASTRUCTURE</div>
       <h1>Canada's <span class="g">neutral settlement layer</span> for tokenized finance.</h1>
       <p class="lead">Canada's tokenized economy needs one neutral settlement layer, denominated in Canadian dollars, trusted by banks and issuers alike.</p>
       <div class="cta">
@@ -51,53 +52,77 @@
       </div>
     </div>
     <div class="hero-visual" aria-hidden="true">
-      <!-- 4ORM = title + cash + rules commit as one. Three tightly-overlapping circles with the 4orm blue commit core at their shared intersection. -->
-      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+      <!-- 4ORM = TITLE (top) + CASH + RULES (bottom row) all commit into a central 4orm mark. -->
+      <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="commit-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="#2E6BF2" stop-opacity=".55"/>
-            <stop offset=".55" stop-color="#2E6BF2" stop-opacity=".18"/>
+            <stop offset="0" stop-color="#2E6BF2" stop-opacity=".45"/>
+            <stop offset=".55" stop-color="#2E6BF2" stop-opacity=".14"/>
             <stop offset="1" stop-color="#2E6BF2" stop-opacity="0"/>
           </radialGradient>
-          <radialGradient id="commit-core" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="#5C89F5"/>
-            <stop offset="1" stop-color="#2E6BF2"/>
+          <radialGradient id="orb-blue" cx="35%" cy="35%" r="70%">
+            <stop offset="0" stop-color="#EAF1FE"/>
+            <stop offset=".55" stop-color="#B7CEFA"/>
+            <stop offset="1" stop-color="#5C89F5"/>
+          </radialGradient>
+          <radialGradient id="orb-green" cx="35%" cy="35%" r="70%">
+            <stop offset="0" stop-color="#E8F7EF"/>
+            <stop offset=".55" stop-color="#A8DFC1"/>
+            <stop offset="1" stop-color="#1F9D6B"/>
+          </radialGradient>
+          <radialGradient id="orb-gold" cx="35%" cy="35%" r="70%">
+            <stop offset="0" stop-color="#FBF3DE"/>
+            <stop offset=".55" stop-color="#EFD79B"/>
+            <stop offset="1" stop-color="#B58A28"/>
           </radialGradient>
           <filter id="soft-shadow" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F1A30" flood-opacity=".16"/>
+            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F1A30" flood-opacity=".14"/>
           </filter>
         </defs>
 
-        <!-- soft blue aura behind the commit point -->
-        <circle cx="180" cy="200" r="72" fill="url(#commit-glow)">
-          <animate attributeName="r" values="60;82;60" dur="2.8s" repeatCount="indefinite"/>
+        <!-- Dashed connectors from each orb into the central commit -->
+        <g stroke="#B7C7EA" stroke-width="1.5" stroke-dasharray="4 5" fill="none" opacity=".75">
+          <line x1="200" y1="60" x2="200" y2="180"/>
+          <line x1="90" y1="290" x2="200" y2="180"/>
+          <line x1="310" y1="290" x2="200" y2="180"/>
+        </g>
+
+        <!-- TITLE orb (top center) -->
+        <circle cx="200" cy="60" r="46" fill="url(#orb-blue)" filter="url(#soft-shadow)"/>
+        <text x="200" y="56" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="16" fill="#0F1A30">TITLE</text>
+        <text x="200" y="72" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" letter-spacing=".14em" fill="#0F1A30" opacity=".7">ASSET LEDGER</text>
+
+        <!-- CASH orb (bottom-left) -->
+        <circle cx="90" cy="290" r="46" fill="url(#orb-green)" filter="url(#soft-shadow)"/>
+        <text x="90" y="286" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="16" fill="#0F1A30">CASH</text>
+        <text x="90" y="302" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" letter-spacing=".14em" fill="#0F1A30" opacity=".7">TOKENIZED $</text>
+
+        <!-- RULES orb (bottom-right) -->
+        <circle cx="310" cy="290" r="46" fill="url(#orb-gold)" filter="url(#soft-shadow)"/>
+        <text x="310" y="286" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="16" fill="#0F1A30">RULES</text>
+        <text x="310" y="302" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" letter-spacing=".14em" fill="#0F1A30" opacity=".7">COMPLIANCE</text>
+
+        <!-- Soft blue aura behind the central commit -->
+        <circle cx="200" cy="180" r="88" fill="url(#commit-glow)">
+          <animate attributeName="r" values="72;96;72" dur="2.8s" repeatCount="indefinite"/>
           <animate attributeName="opacity" values=".95;.4;.95" dur="2.8s" repeatCount="indefinite"/>
         </circle>
 
-        <!-- THREE TIGHTLY OVERLAPPING CIRCLES = TITLE + CASH + RULES -->
-        <!-- TITLE (top, deeper blue) -->
-        <circle cx="180" cy="150" r="80" fill="rgba(46,107,242,.14)" stroke="#2E6BF2" stroke-width="2.4"/>
-        <text x="180" y="96" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="16" letter-spacing=".04em" fill="#2E6BF2" filter="url(#soft-shadow)">TITLE</text>
-        <text x="180" y="112" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" letter-spacing=".14em" fill="#2E6BF2" opacity=".8">ASSET LEDGER</text>
+        <!-- Animated dots flowing from each orb INTO the central commit -->
+        <circle r="4.5" fill="#2E6BF2"><animateMotion dur="2.4s" repeatCount="indefinite" path="M200 60 L200 180"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" dur="2.4s" repeatCount="indefinite"/></circle>
+        <circle r="4.5" fill="#1F9D6B"><animateMotion dur="2.4s" begin=".8s" repeatCount="indefinite" path="M90 290 L200 180"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" dur="2.4s" begin=".8s" repeatCount="indefinite"/></circle>
+        <circle r="4.5" fill="#B58A28"><animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite" path="M310 290 L200 180"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" dur="2.4s" begin="1.6s" repeatCount="indefinite"/></circle>
 
-        <!-- CASH LEG (bottom-left, green) — moved IN, tighter overlap -->
-        <circle cx="152" cy="222" r="80" fill="rgba(31,157,107,.14)" stroke="#1F9D6B" stroke-width="2.4"/>
-        <text x="88" y="296" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="16" letter-spacing=".04em" fill="#1F9D6B" filter="url(#soft-shadow)">CASH</text>
-        <text x="88" y="312" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" letter-spacing=".14em" fill="#1F9D6B" opacity=".8">TOKENIZED $</text>
-
-        <!-- RULES (bottom-right, gold) — moved IN, tighter overlap -->
-        <circle cx="208" cy="222" r="80" fill="rgba(245,208,107,.16)" stroke="#B58A28" stroke-width="2.4"/>
-        <text x="272" y="296" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="16" letter-spacing=".04em" fill="#B58A28" filter="url(#soft-shadow)">RULES</text>
-        <text x="272" y="312" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" letter-spacing=".14em" fill="#B58A28" opacity=".8">COMPLIANCE</text>
-
-        <!-- CENTRAL 4ORM COMMIT — bright blue at the intersection -->
-        <circle cx="180" cy="200" r="42" fill="none" stroke="#2E6BF2" stroke-width="1.2" opacity=".55">
-          <animate attributeName="r" values="42;56;42" dur="2.4s" repeatCount="indefinite"/>
+        <!-- Pulse ring around the central mark -->
+        <circle cx="200" cy="180" r="62" fill="none" stroke="#2E6BF2" stroke-width="1.4" opacity=".55">
+          <animate attributeName="r" values="62;80;62" dur="2.4s" repeatCount="indefinite"/>
           <animate attributeName="opacity" values=".55;0;.55" dur="2.4s" repeatCount="indefinite"/>
         </circle>
-        <circle cx="180" cy="200" r="38" fill="url(#commit-core)" stroke="#fff" stroke-width="2" filter="url(#soft-shadow)"/>
-        <text x="180" y="196" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="14" fill="#fff">4orm</text>
-        <text x="180" y="212" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" letter-spacing=".16em" fill="#DCE9FF">COMMIT</text>
+
+        <!-- Central circle background (white with subtle border) -->
+        <circle cx="200" cy="180" r="55" fill="#FFFFFF" stroke="#DCE6FA" stroke-width="2" filter="url(#soft-shadow)"/>
+        <!-- 4ORM LOGO MARK — drop assets/4orm-mark.png (small icon version of the logo) into GitHub assets/ folder -->
+        <image href="assets/4orm-mark.png" x="152" y="132" width="96" height="96" preserveAspectRatio="xMidYMid meet"/>
       </svg>
       <div class="hv-cap">Title. Cash. Rules. Commit as one, on one canonical ledger.</div>
     </div>
@@ -177,10 +202,9 @@
 
 <!-- CURRENT LOGISTICS (islands today vs connected on 4orm) -->
 <section class="sec alt" id="logistics"><div class="wrap">
-  <span class="eyebrow">The problem</span>
+  <span class="eyebrow">The Challenge</span>
   <h2 class="sec-h">Every asset is trapped <span class="g">on its own private island.</span></h2>
-  <p class="sec-sub" style="margin-bottom:14px">Every Canadian bank building tokenization today is building a walled garden. The result:</p>
-  <ul class="problem-bullets">
+  <ul class="problem-bullets tight">
     <li><b>A REIT held at one bank cannot reach a buyer at another.</b></li>
     <li>Every institution rebuilds the same infrastructure in parallel.</li>
     <li>Liquidity fragments across a dozen private platforms.</li>
@@ -1132,6 +1156,6 @@
   els.forEach(function(el){io.observe(el);});
 })();
 </script>
-<script src="assets/scroll-animate.js?v=80" defer></script>
+<script src="assets/scroll-animate.js?v=84" defer></script>
 </body>
 </html>

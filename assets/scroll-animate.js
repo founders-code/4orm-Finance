@@ -1,40 +1,34 @@
 /* scroll-animate.js
-   Kicks every bar chart, fill, and stat counter from 0 up to its target value
-   when its container scrolls into view. Includes a 3s safety fallback that
-   restores any bar still at 0% so nothing ever stays blank. */
+   Bars, fills, and counters start at 0 and animate to their target values
+   the moment their container scrolls into view. */
 (function () {
   if (typeof window === 'undefined' || !document || !document.querySelectorAll) return;
+  if (!('IntersectionObserver' in window)) return; // Old browsers: leave charts at their inline values
 
   var EASE = 'cubic-bezier(.22,.61,.36,1)';
   var DUR = 1400;
   var CSS_DUR = '1.4s';
 
-  var ioSupported = ('IntersectionObserver' in window);
-
-  // ---- 1. STASH targets ---------------------------------------------------
+  // ---- 1. STASH targets + reset to 0 --------------------------------------
 
   var bars = [];
-  document.querySelectorAll('.chart .cbar, .cbar').forEach(function (bar) {
-    var h = bar.style.height;
+  document.querySelectorAll('.chart .cbar, .cols .cbar, .cbar').forEach(function (bar) {
+    var h = bar.getAttribute('style') && bar.style.height;
     if (!h) return;
     bar.dataset.tgtH = h;
+    bar.style.transition = 'height ' + CSS_DUR + ' ' + EASE;
+    bar.style.height = '0%';
     bars.push(bar);
-    if (ioSupported) {
-      bar.style.height = '0%';
-      bar.style.transition = 'height ' + CSS_DUR + ' ' + EASE;
-    }
   });
 
   var fills = [];
   document.querySelectorAll('.bar .fill, .track .fill, .fill').forEach(function (fill) {
-    var w = fill.style.width;
+    var w = fill.getAttribute('style') && fill.style.width;
     if (!w) return;
     fill.dataset.tgtW = w;
+    fill.style.transition = 'width ' + CSS_DUR + ' ' + EASE;
+    fill.style.width = '0%';
     fills.push(fill);
-    if (ioSupported) {
-      fill.style.width = '0%';
-      fill.style.transition = 'width ' + CSS_DUR + ' ' + EASE;
-    }
   });
 
   var counters = document.querySelectorAll('[data-count]');
@@ -42,22 +36,24 @@
     var pre = el.dataset.pre || '';
     var suf = el.dataset.suf || '';
     el.dataset.origText = el.textContent;
-    if (ioSupported) el.textContent = pre + '0' + suf;
+    el.textContent = pre + '0' + suf;
   });
-
-  if (!ioSupported) return;
 
   // ---- 2. ANIMATE HELPERS -------------------------------------------------
 
-  function restoreBar(bar) {
+  function fireBar(bar) {
+    if (bar.dataset.fired === '1') return;
+    bar.dataset.fired = '1';
     if (bar.dataset.tgtH) bar.style.height = bar.dataset.tgtH;
   }
-  function restoreFill(fill) {
+  function fireFill(fill) {
+    if (fill.dataset.fired === '1') return;
+    fill.dataset.fired = '1';
     if (fill.dataset.tgtW) fill.style.width = fill.dataset.tgtW;
   }
-  function tickCounter(el) {
-    if (el.dataset.animated === '1') return;
-    el.dataset.animated = '1';
+  function fireCounter(el) {
+    if (el.dataset.fired === '1') return;
+    el.dataset.fired = '1';
     var target = parseFloat(el.dataset.count);
     var pre = el.dataset.pre || '';
     var suf = el.dataset.suf || '';
@@ -74,56 +70,36 @@
     requestAnimationFrame(tick);
   }
 
-  function animateContainer(container) {
-    container.querySelectorAll('.cbar[data-tgt-h]').forEach(restoreBar);
-    container.querySelectorAll('.fill[data-tgt-w]').forEach(restoreFill);
-    container.querySelectorAll('[data-count]').forEach(tickCounter);
-    // If the element itself is a bar/fill/counter, animate it too
-    if (container.matches && container.matches('.cbar[data-tgt-h]')) restoreBar(container);
-    if (container.matches && container.matches('.fill[data-tgt-w]')) restoreFill(container);
-    if (container.matches && container.matches('[data-count]')) tickCounter(container);
+  function fireAllInside(container) {
+    container.querySelectorAll('.cbar[data-tgt-h]').forEach(fireBar);
+    container.querySelectorAll('.fill[data-tgt-w]').forEach(fireFill);
+    container.querySelectorAll('[data-count]').forEach(fireCounter);
+    if (container.matches) {
+      if (container.matches('.cbar[data-tgt-h]')) fireBar(container);
+      if (container.matches('.fill[data-tgt-w]')) fireFill(container);
+      if (container.matches('[data-count]')) fireCounter(container);
+    }
   }
 
-  // ---- 3. OBSERVE ---------------------------------------------------------
+  // ---- 3. OBSERVE — permissive settings so nothing is missed --------------
 
   var io = new IntersectionObserver(function (entries, observer) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
-      animateContainer(entry.target);
+      fireAllInside(entry.target);
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
 
-  // Observe containers AND bars/fills/counters directly (belt + braces)
   var seen = new Set();
   function observe(el) {
     if (!el || seen.has(el)) return;
     seen.add(el);
     io.observe(el);
   }
+  // Observe both containers AND individual bars/fills/counters
   document.querySelectorAll('.chart, .inev-nums, .statband, .bar').forEach(observe);
   bars.forEach(observe);
   fills.forEach(observe);
   counters.forEach(observe);
-
-  // ---- 4. SAFETY FALLBACK -------------------------------------------------
-  // If anything is still at 0% after 3 seconds, snap it to target so nothing
-  // ever stays blank on a viewer's screen.
-  setTimeout(function () {
-    document.querySelectorAll('.cbar[data-tgt-h]').forEach(function (bar) {
-      if (bar.style.height === '0%' || bar.style.height === '0') {
-        bar.style.height = bar.dataset.tgtH;
-      }
-    });
-    document.querySelectorAll('.fill[data-tgt-w]').forEach(function (fill) {
-      if (fill.style.width === '0%' || fill.style.width === '0') {
-        fill.style.width = fill.dataset.tgtW;
-      }
-    });
-    counters.forEach(function (el) {
-      if (el.dataset.animated !== '1' && el.dataset.origText) {
-        el.textContent = el.dataset.origText;
-      }
-    });
-  }, 3000);
 })();

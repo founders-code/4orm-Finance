@@ -292,11 +292,20 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 .islands-scene{display:block;width:100%;margin-top:14px;border-radius:12px;overflow:hidden;background:#FAF6EE}
 .islands-canvas{display:block;width:100%;height:auto}
 
-/* Problem bullets — readable scan list */
-.problem-bullets{list-style:none;padding:0;margin:0 0 8px;display:grid;gap:12px;max-width:820px}
-.problem-bullets li{position:relative;padding:8px 0 8px 34px;font-size:16.5px;line-height:1.5;color:var(--steel)}
-.problem-bullets li::before{content:'';position:absolute;left:0;top:16px;width:18px;height:2px;background:#C25252;border-radius:2px}
+/* Hero eyebrow (small tag above H1) */
+.hero-eye{display:inline-flex;align-items:center;gap:10px;padding:6px 14px;background:#EFF3FA;border:1px solid #DCE6FA;border-radius:99px;font-family:var(--mono);font-size:10.5px;font-weight:800;letter-spacing:.16em;color:var(--ink);margin-bottom:20px}
+.hero-eye-dot{width:7px;height:7px;background:#2E6BF2;border-radius:50%;position:relative}
+.hero-eye-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:rgba(46,107,242,.28);animation:eye-pulse 2.2s ease-out infinite}
+@keyframes eye-pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2);opacity:0}}
+
+/* Compressed problem bullets — readable scan list */
+.problem-bullets{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:6px;max-width:820px}
+.problem-bullets li{position:relative;padding:6px 0 6px 30px;font-size:16px;line-height:1.5;color:var(--steel)}
+.problem-bullets li::before{content:'';position:absolute;left:0;top:14px;width:16px;height:2px;background:#C25252;border-radius:2px}
 .problem-bullets li b{color:var(--ink);font-weight:700}
+.problem-bullets.tight{gap:2px;margin-top:20px}
+.problem-bullets.tight li{padding-top:4px;padding-bottom:4px;font-size:15.5px}
+.problem-bullets.tight li::before{top:12px}
 
 /* Bouncing coins - each island has one, offset timing */
 .isle-coin{transform-origin:center;transform:translate(90px 130px)}
