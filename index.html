@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=68">
-<link rel="stylesheet" href="assets/site.css?v=68">
-<link rel="stylesheet" href="assets/landing.css?v=68">
+<link rel="stylesheet" href="assets/styles.css?v=69">
+<link rel="stylesheet" href="assets/site.css?v=69">
+<link rel="stylesheet" href="assets/landing.css?v=69">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=68" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=69" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -37,8 +37,67 @@
 
 <!-- HERO -->
 <section class="hero"><div class="wrap">
-  <h1>4orm Finance provides a <span class="g">neutral enterprise layer</span> and infrastructure solution for Canadian finance seeking autonomous settlement.</h1>
-  <p class="lead">Tokenization is scaling worldwide. Canada has the issuers, the settlement rails, and the custodians, but no neutral place to settle. 4orm Finance is building the regulated, Canadian-dollar layer that connects every tokenized project to every bank, so value settles with finality and stays in Canada.</p>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="cred-strip">
+        <span class="cs-item"><span class="dot"></span>Alberta Sandbox pathway</span>
+        <span class="cs-sep">/</span>
+        <span class="cs-item">ERC-3643 &middot; Hyperledger Besu</span>
+        <span class="cs-sep">/</span>
+        <span class="cs-item">Fasken counsel</span>
+        <span class="cs-sep">/</span>
+        <span class="cs-item">Alberta incorporated</span>
+      </div>
+      <h1>Canada's <span class="g">neutral settlement layer</span> for tokenized finance.</h1>
+      <p class="lead">Canada's tokenized economy needs one neutral settlement layer, denominated in Canadian dollars, trusted by banks and issuers alike.</p>
+      <div class="cta">
+        <a class="btn lg" href="https://4ormdr.com">Request data room access</a>
+        <a class="btn ghost lg" href="mailto:office@4ormfinance.com">Talk to us</a>
+      </div>
+      <div class="hero-metric">
+        <span class="pulse-dot"></span>
+        <span><b>Pre-seed opens August 1, 2026</b> &nbsp;&middot;&nbsp; $500K LOI signed to date &nbsp;&middot;&nbsp; SAFE, TFSA/RRSP eligible</span>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="corepulse" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#2E6BF2" stop-opacity=".22"/>
+            <stop offset="100%" stop-color="#2E6BF2" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- pulse aura -->
+        <circle cx="180" cy="180" r="130" fill="url(#corepulse)"/>
+        <!-- concentric rings -->
+        <circle cx="180" cy="180" r="118" fill="none" stroke="#D7DEEA" stroke-width="1" stroke-dasharray="3 4"/>
+        <circle cx="180" cy="180" r="80" fill="none" stroke="#CBDAFB" stroke-width="1" stroke-dasharray="3 4"/>
+        <!-- spoke lines to core -->
+        <g stroke="#B7C7EA" stroke-width="1.2" stroke-dasharray="3 3">
+          <line x1="60" y1="60" x2="180" y2="180"/>
+          <line x1="300" y1="60" x2="180" y2="180"/>
+          <line x1="30" y1="180" x2="180" y2="180"/>
+          <line x1="330" y1="180" x2="180" y2="180"/>
+          <line x1="60" y1="300" x2="180" y2="180"/>
+          <line x1="300" y1="300" x2="180" y2="180"/>
+        </g>
+        <!-- perimeter nodes -->
+        <g font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#142036">
+          <circle cx="60" cy="60" r="18" fill="#fff" stroke="#2E6BF2" stroke-width="1.5"/><text x="60" y="63" text-anchor="middle">BANK</text>
+          <circle cx="300" cy="60" r="18" fill="#fff" stroke="#2E6BF2" stroke-width="1.5"/><text x="300" y="63" text-anchor="middle">BANK</text>
+          <circle cx="30" cy="180" r="18" fill="#fff" stroke="#2E6BF2" stroke-width="1.5"/><text x="30" y="183" text-anchor="middle">ISSUER</text>
+          <circle cx="330" cy="180" r="18" fill="#fff" stroke="#2E6BF2" stroke-width="1.5"/><text x="330" y="183" text-anchor="middle">CUST.</text>
+          <circle cx="60" cy="300" r="18" fill="#fff" stroke="#2E6BF2" stroke-width="1.5"/><text x="60" y="303" text-anchor="middle">CU</text>
+          <circle cx="300" cy="300" r="18" fill="#fff" stroke="#2E6BF2" stroke-width="1.5"/><text x="300" y="303" text-anchor="middle">PENSION</text>
+        </g>
+        <!-- core -->
+        <circle cx="180" cy="180" r="52" fill="#142036" stroke="#2E6BF2" stroke-width="2"/>
+        <text x="180" y="176" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" font-weight="800" fill="#fff">4ORM</text>
+        <text x="180" y="192" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" letter-spacing=".14em" fill="#9AB6FF">SETTLEMENT</text>
+      </svg>
+      <div class="hv-cap">Every regulated Canadian counterparty settles through one neutral layer.</div>
+    </div>
+  </div>
 </div></section>
 
 <!-- INDUSTRY CHALLENGE / INDUSTRY SOLUTION (Raven-style two-column) -->
@@ -185,46 +244,22 @@
   <p class="src" style="margin-top:24px">Named platforms (JPM Kinexys, Citi Token Services, BMO with CME) are independent third parties referenced as market context. Inclusion does not imply partnership. 4orm target design; production deployment subject to regulatory approvals.</p>
 </div></section>
 
-<!-- HERO CTAS + STAT BAND (moved out of hero, after the two new sections) -->
-<section class="sec" id="stats"><div class="wrap">
-  <div class="cta" style="justify-content:center">
-    <a class="btn lg" href="#solution">See how it works</a>
-    <a class="btn ghost lg" href="#raise">The investment</a>
-  </div>
-  <div class="statband" style="margin-top:36px">
-    <div class="s"><div class="n b">$31B</div><div class="l">Real-world assets on-chain, July 2026, up ~5x since early 2025</div></div>
-    <div class="s"><div class="n">~$300B</div><div class="l">Stablecoin money layer, ~99% US-dollar denominated</div></div>
-    <div class="s"><div class="n">$2T-$30T</div><div class="l">Tokenization forecast by 2030-2034</div></div>
-    <div class="s"><div class="n b">$0</div><div class="l">Neutral Canadian-dollar settlement layer today</div></div>
-  </div>
-</div></section>
-<!-- INEVITABILITY -->
-<section class="sec dark"><div class="wrap">
+<!-- MARKET FORCE (merged Inevitability + Challenge lead) -->
+<section class="sec dark" id="tide"><div class="wrap">
   <span class="eyebrow">The tide is already here</span>
   <h2 class="sec-h">Tokenization is coming to Canada either way. The only question is whether it settles here.</h2>
-  <p class="sec-sub">This is not a bet on whether real-world assets move on-chain. That is already happening at scale. It is a decision about who operates the layer they settle on, and in which currency. Canadians will live with the answer for a generation.</p>
+  <p class="sec-sub">Real-world assets are already moving on-chain at scale. The decision in front of the country is who operates the layer they settle on, and in which currency. Canadians will live with the answer for a generation.</p>
   <div class="inev-nums">
     <div class="in reveal"><div class="bn"><span data-count="31" data-pre="$" data-suf="B">$31B</span></div><div class="bl">of real-world assets are already on-chain today, up roughly 5x since early 2025.</div></div>
-    <div class="in reveal"><div class="bn"><span data-count="300" data-pre="~$" data-suf="B">~$300B</span></div><div class="bl">sits in the on-chain money layer, and about 99% of it is US dollars. The Canadian dollar is barely present.</div></div>
-    <div class="in reveal"><div class="bn"><span data-count="2" data-pre="$" data-suf="T+">$2T+</span></div><div class="bl">is the conservative forecast for tokenized assets by 2030. The layer that clears it does not yet exist in Canada.</div></div>
-  </div>
-</div></section>
-<!-- WHO WE ARE -->
-<section class="sec" id="who"><div class="wrap">
-  <span class="eyebrow">Who we are</span>
-  <h2 class="sec-h">A regulated settlement layer, not another exchange.</h2>
-  <p class="sec-sub">4orm Finance is an Alberta-incorporated financial infrastructure company. We operate the neutral, Canadian-dollar layer where a tokenized asset and a tokenized cash leg settle against each other with finality. The institutional trading venue, 4orm Exchange, sits on top of it. We take no deposits and compete with no bank, which is exactly what lets every bank settle on us.</p>
-  <div class="grid g3" style="margin-top:40px">
-    <div class="card"><div class="kicker">Neutral</div><h3 style="margin-top:12px">Owned by no bank</h3><p>We are infrastructure, not a competitor. Issuers, banks, and custodians connect to one shared layer instead of a dozen private islands.</p></div>
-    <div class="card"><div class="kicker">Regulated</div><h3 style="margin-top:12px">Built inside the rules</h3><p>Alberta Securities Commission as primary regulator, engaged through a supervised sandbox pathway, with compliance native to the asset itself.</p></div>
-    <div class="card"><div class="kicker">Canadian</div><h3 style="margin-top:12px">Settled in Canadian dollars</h3><p>Issuance, custody, settlement, and the economics stay onshore, hosted in Canada, denominated in the Canadian dollar.</p></div>
+    <div class="in reveal"><div class="bn"><span data-count="300" data-pre="~$" data-suf="B">~$300B</span></div><div class="bl">sits in the on-chain money layer, about 99% of it US dollars. The Canadian dollar is barely present.</div></div>
+    <div class="in reveal"><div class="bn"><span data-count="2" data-pre="$" data-suf="T+">$2T+</span></div><div class="bl">is the conservative 2030 forecast. The layer that clears it does not yet exist in Canada.</div></div>
   </div>
 </div></section>
 <!-- THE CHALLENGE -->
 <section class="sec alt" id="challenge"><div class="wrap">
-  <span class="eyebrow">The Challenge</span>
-  <h2 class="sec-h">The world is tokenizing fast. Currently, Canada keeps the assets, but exports the settlement process.</h2>
-  <p class="sec-sub">Canada is not short on tokenization. It has real issuers, a domestic regulated chain, and bank-grade custody, and Canadian assets are being originated on-chain at home. What it does not have is a neutral place to settle. Without one, much of the settlement, liquidity, and money layer runs on foreign infrastructure, and Canadian assets cannot easily offload at home.</p>
+  <span class="eyebrow">The Canadian gap</span>
+  <h2 class="sec-h">Canada keeps the assets. It exports the settlement process.</h2>
+  <p class="sec-sub">Real issuers, domestic regulated infrastructure, bank-grade custody: all live in Canada. The one thing missing is a neutral place to settle. Without it, the settlement, liquidity, and money layer runs on foreign infrastructure, and Canadian assets cannot easily offload at home.</p>
   <div class="grid g2" style="margin-top:44px">
     <div class="chart">
       <div class="ct">Real-world assets on-chain are compounding</div>
@@ -427,11 +462,16 @@
     <div class="stream"><div class="sn">05</div><div class="st">Platform SaaS</div><div class="sd">Recurring APIs and integration per institution</div></div>
   </div>
 </div></section>
-<!-- WHAT 4ORM IS / IS NOT -->
+<!-- WHO WE ARE + WHAT 4ORM IS / IS NOT (merged) -->
 <section class="sec alt" id="what"><div class="wrap">
-  <span class="eyebrow">For the record</span>
-  <h2 class="sec-h">What 4orm is, and what it is not.</h2>
-  <p class="sec-sub">The structure is deliberate. 4orm operates the settlement-layer software and the record of title. It does not take deposits, hold customer assets, or issue money, which is what keeps it neutral and keeps it outside the banking perimeter.</p>
+  <span class="eyebrow">Who we are &middot; For the record</span>
+  <h2 class="sec-h">A regulated settlement layer. Not another exchange.</h2>
+  <p class="sec-sub">4orm Finance is an Alberta-incorporated infrastructure company. We operate the neutral, Canadian-dollar layer where a tokenized asset and a tokenized cash leg settle against each other with finality. The institutional trading venue, 4ormEx, sits on top of it. We take no deposits and compete with no bank, which is exactly what lets every bank settle on us.</p>
+  <div class="grid g3" style="margin:36px 0 44px">
+    <div class="card"><div class="kicker">Neutral</div><h3 style="margin-top:12px">Owned by no bank</h3><p>Infrastructure, not a competitor. Issuers, banks, and custodians connect to one shared layer instead of a dozen private islands.</p></div>
+    <div class="card"><div class="kicker">Regulated</div><h3 style="margin-top:12px">Built inside the rules</h3><p>Alberta Securities Commission as primary regulator, engaged through a supervised sandbox pathway, with compliance native to the asset itself.</p></div>
+    <div class="card"><div class="kicker">Canadian</div><h3 style="margin-top:12px">Settled in Canadian dollars</h3><p>Issuance, custody, settlement, and the economics stay onshore, hosted in Canada, denominated in the Canadian dollar.</p></div>
+  </div>
   <div class="isnot">
     <div class="col is reveal">
       <h4>4orm is</h4>
