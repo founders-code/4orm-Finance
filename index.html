@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=71">
-<link rel="stylesheet" href="assets/site.css?v=71">
-<link rel="stylesheet" href="assets/landing.css?v=71">
+<link rel="stylesheet" href="assets/styles.css?v=72">
+<link rel="stylesheet" href="assets/site.css?v=72">
+<link rel="stylesheet" href="assets/landing.css?v=72">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=71" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=72" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -362,32 +362,43 @@
           <animate attributeName="opacity" values=".9;.35;.9" dur="3.4s" repeatCount="indefinite"/>
         </circle>
 
-        <!-- Route lines — each source→hub→destination is a distinct color -->
-        <!-- Route 1 (BLUE): Bank A → 4orm → Bank B -->
-        <path d="M120 70 L360 190 L600 70" stroke="#2E6BF2" stroke-width="1.5" stroke-dasharray="5 4" fill="none" opacity=".45"/>
-        <!-- Route 2 (GOLD): Issuer → 4orm → Custodian -->
-        <path d="M60 190 L360 190 L660 190" stroke="#F5D06B" stroke-width="1.5" stroke-dasharray="5 4" fill="none" opacity=".45"/>
-        <!-- Route 3 (GREEN): Credit union → 4orm → Bank C -->
-        <path d="M600 310 L360 190 L120 310" stroke="#1F9D6B" stroke-width="1.5" stroke-dasharray="5 4" fill="none" opacity=".45"/>
-
-        <!-- Route labels (small, near source) -->
-        <g font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" letter-spacing=".10em">
-          <text x="170" y="60" fill="#2E6BF2">A &rarr; B</text>
-          <text x="30" y="180" fill="#B58A28">ISSUER &rarr; CUST.</text>
-          <text x="530" y="330" fill="#1F9D6B">CU &rarr; C</text>
+        <!-- Passive connections: Issuer + Custodian sit on the network but don't run active flows in this frame -->
+        <g stroke="#B7C7EA" stroke-width="1.2" stroke-dasharray="3 4" fill="none" opacity=".45">
+          <line x1="60" y1="190" x2="360" y2="190"/>
+          <line x1="660" y1="190" x2="360" y2="190"/>
         </g>
 
-        <!-- ROUTE 1 (BLUE): Bank A → hub → Bank B — flowing through hub -->
-        <circle r="6" fill="#2E6BF2"><animateMotion dur="4s" repeatCount="indefinite" path="M120 70 L360 190 L600 70"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" repeatCount="indefinite"/></circle>
-        <circle r="6" fill="#2E6BF2"><animateMotion dur="4s" begin="1.4s" repeatCount="indefinite" path="M120 70 L360 190 L600 70"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" begin="1.4s" repeatCount="indefinite"/></circle>
+        <!-- REAL SETTLEMENT ROUTES: bank ↔ bank, each showing DvP (asset one way + cash the other) -->
+        <!-- Route 1 lines: Bank A ↔ Bank B via 4orm (top arc) -->
+        <path d="M120 70 L360 190 L600 70" stroke="#2E6BF2" stroke-width="1.6" stroke-dasharray="5 4" fill="none" opacity=".5"/>
+        <!-- Route 2 lines: Bank C ↔ Credit Union via 4orm (bottom arc) -->
+        <path d="M120 310 L360 190 L600 310" stroke="#1F9D6B" stroke-width="1.6" stroke-dasharray="5 4" fill="none" opacity=".5"/>
 
-        <!-- ROUTE 2 (GOLD): Issuer → hub → Custodian -->
-        <circle r="6" fill="#F5D06B"><animateMotion dur="4.5s" repeatCount="indefinite" path="M60 190 L360 190 L660 190"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4.5s" repeatCount="indefinite"/></circle>
-        <circle r="6" fill="#F5D06B"><animateMotion dur="4.5s" begin="1.6s" repeatCount="indefinite" path="M60 190 L360 190 L660 190"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4.5s" begin="1.6s" repeatCount="indefinite"/></circle>
+        <!-- Route labels -->
+        <g font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="800" letter-spacing=".10em">
+          <text x="220" y="45" fill="#2E6BF2">BANK A &harr; BANK B</text>
+          <text x="180" y="360" fill="#1F9D6B">BANK C &harr; CREDIT UNION</text>
+        </g>
 
-        <!-- ROUTE 3 (GREEN): Credit union → hub → Bank C -->
-        <circle r="6" fill="#1F9D6B"><animateMotion dur="4.2s" repeatCount="indefinite" path="M600 310 L360 190 L120 310"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4.2s" repeatCount="indefinite"/></circle>
-        <circle r="6" fill="#1F9D6B"><animateMotion dur="4.2s" begin="1.5s" repeatCount="indefinite" path="M600 310 L360 190 L120 310"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4.2s" begin="1.5s" repeatCount="indefinite"/></circle>
+        <!-- Small callout labels near hub showing what's flowing on each route -->
+        <g font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" letter-spacing=".06em">
+          <text x="245" y="128" fill="#2E6BF2">ASSET &rarr;</text>
+          <text x="452" y="128" fill="#2E6BF2">&larr; CASH</text>
+          <text x="245" y="260" fill="#1F9D6B">ASSET &rarr;</text>
+          <text x="452" y="260" fill="#1F9D6B">&larr; CASH</text>
+        </g>
+
+        <!-- ROUTE 1 (BLUE) — DvP between Bank A and Bank B -->
+        <!-- Asset: A → 4orm → B (dark blue token) -->
+        <circle r="6" fill="#2E6BF2"><animateMotion dur="3.6s" repeatCount="indefinite" path="M120 70 L360 190 L600 70"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.06;.5;.94;1" dur="3.6s" repeatCount="indefinite"/></circle>
+        <!-- Cash: B → 4orm → A (lighter blue token) -->
+        <circle r="6" fill="#9AB6FF"><animateMotion dur="3.6s" repeatCount="indefinite" path="M600 70 L360 190 L120 70"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.06;.5;.94;1" dur="3.6s" repeatCount="indefinite"/></circle>
+
+        <!-- ROUTE 2 (GREEN) — DvP between Bank C and Credit Union -->
+        <!-- Asset: C → 4orm → CU -->
+        <circle r="6" fill="#1F9D6B"><animateMotion dur="4.2s" begin=".6s" repeatCount="indefinite" path="M120 310 L360 190 L600 310"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.06;.5;.94;1" dur="4.2s" begin=".6s" repeatCount="indefinite"/></circle>
+        <!-- Cash: CU → 4orm → C -->
+        <circle r="6" fill="#7BE3B0"><animateMotion dur="4.2s" begin=".6s" repeatCount="indefinite" path="M600 310 L360 190 L120 310"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.06;.5;.94;1" dur="4.2s" begin=".6s" repeatCount="indefinite"/></circle>
 
         <!-- spoke nodes with building icons -->
         <!-- Bank top-left -->
