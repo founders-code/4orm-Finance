@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=88">
-<link rel="stylesheet" href="assets/site.css?v=88">
-<link rel="stylesheet" href="assets/landing.css?v=88">
+<link rel="stylesheet" href="assets/styles.css?v=90">
+<link rel="stylesheet" href="assets/site.css?v=90">
+<link rel="stylesheet" href="assets/landing.css?v=90">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=88" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=90" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -121,8 +121,11 @@
 
         <!-- Central circle background (white with subtle border) -->
         <circle cx="200" cy="180" r="55" fill="#FFFFFF" stroke="#DCE6FA" stroke-width="2" filter="url(#soft-shadow)"/>
-        <!-- 4ORM LOGO MARK — drop assets/4orm-mark.png (small icon version of the logo) into GitHub assets/ folder -->
-        <image href="assets/4orm-mark.png" x="152" y="132" width="96" height="96" preserveAspectRatio="xMidYMid meet"/>
+        <!-- 4ORM MARK — rendered inline as a crisp centered glyph, no PNG dependency -->
+        <text x="200" y="182" text-anchor="middle" dominant-baseline="central"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+              font-size="66" font-weight="900" fill="#2b4bd0"
+              style="letter-spacing:-3px;">4</text>
       </svg>
       <div class="hv-cap">Title. Cash. Rules. Commit as one, on one canonical ledger.</div>
     </div>
@@ -595,7 +598,7 @@
 <!-- THE CHALLENGE -->
 <section class="sec alt" id="challenge"><div class="wrap">
   <span class="eyebrow">The Canadian gap</span>
-  <h2 class="sec-h">Canada keeps the assets. It exports the settlement process.</h2>
+  <h2 class="sec-h">Canada currently keeps the assets but exports the settlement process.</h2>
   <p class="sec-sub">Real issuers, domestic regulated infrastructure, bank-grade custody: all live in Canada. The one thing missing is a neutral place to settle. Without it, the settlement, liquidity, and money layer runs on foreign infrastructure, and Canadian assets cannot easily offload at home.</p>
   <div class="grid g2" style="margin-top:44px">
 
@@ -1208,6 +1211,6 @@
   els.forEach(function(el){io.observe(el);});
 })();
 </script>
-<script src="assets/scroll-animate.js?v=88" defer></script>
+<script src="assets/scroll-animate.js?v=90" defer></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
-/* Logo 2x + roomier nav (overrides site.css negative-margin logo) */
-.brand-logo { height: 96px !important; width: auto !important; margin: 0 !important; display: block !important; }
-.nav-inner, header.nav .nav-inner { min-height: 116px !important; padding-top: 6px !important; padding-bottom: 6px !important; align-items: center !important; }
-header.nav { min-height: 116px; }
+/* Logo 3x + roomier nav (overrides site.css negative-margin logo) — bumped 50% larger in v90 */
+.brand-logo { height: 144px !important; width: auto !important; margin: 0 !important; display: block !important; }
+.nav-inner, header.nav .nav-inner { min-height: 164px !important; padding-top: 6px !important; padding-bottom: 6px !important; align-items: center !important; }
+header.nav { min-height: 164px; }
 @media (max-width: 900px) {
-  .brand-logo { height: 72px !important; }
-  .nav-inner, header.nav .nav-inner { min-height: 88px !important; }
+  .brand-logo { height: 108px !important; }
+  .nav-inner, header.nav .nav-inner { min-height: 124px !important; }
 }
 
 
@@ -208,12 +208,34 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 /* --- v59 shell adjustments so landing sections coexist with the v58 header/footer --- */
 .hero { padding-top: 68px; }
 
-/* Interior pages without a right-column visual: center the hero content so it doesn't sit lopsided on the left with dead space on the right */
-.hero > .wrap:not(:has(.hero-grid)){text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.hero > .wrap:not(:has(.hero-grid)) .eyebrow{display:inline-block}
-.hero > .wrap:not(:has(.hero-grid)) h1{max-width:22ch;margin-left:auto;margin-right:auto}
+/* Interior pages without a right-column visual: center the hero content so it doesn't sit lopsided on the left with dead space on the right.
+   v90: uses .hero-centered class instead of :has() so centering works in every browser and can't silently fail. */
+.hero.hero-centered > .wrap,
+.hero > .wrap:not(:has(.hero-grid)){
+  text-align:center !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.hero.hero-centered > .wrap .eyebrow,
+.hero > .wrap:not(:has(.hero-grid)) .eyebrow{display:inline-block; margin-left:auto; margin-right:auto;}
+.hero.hero-centered > .wrap h1,
+.hero > .wrap:not(:has(.hero-grid)) h1{
+  max-width:22ch;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+}
+.hero.hero-centered > .wrap .lead,
+.hero.hero-centered > .wrap p.lead,
 .hero > .wrap:not(:has(.hero-grid)) .lead,
-.hero > .wrap:not(:has(.hero-grid)) p.lead{max-width:60ch;margin-left:auto;margin-right:auto;text-align:center}
+.hero > .wrap:not(:has(.hero-grid)) p.lead{
+  max-width:60ch;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+}
 
 /* Two-column hero layout */
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;width:100%}
