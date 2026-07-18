@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=67">
-<link rel="stylesheet" href="assets/site.css?v=67">
-<link rel="stylesheet" href="assets/landing.css?v=67">
+<link rel="stylesheet" href="assets/styles.css?v=68">
+<link rel="stylesheet" href="assets/site.css?v=68">
+<link rel="stylesheet" href="assets/landing.css?v=68">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=67" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=68" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -47,31 +47,31 @@
     <div class="cs-col">
       <div class="cs-h">INDUSTRY CHALLENGE</div>
       <div class="cs-item">
-        <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M16 8 v8 l5 3"/></svg></div>
+        <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="8" height="12" rx="1"/><rect x="20" y="10" width="8" height="12" rx="1"/><path d="M13 16 h6" stroke-dasharray="2 2"/><path d="M14 13 l-2 3 l2 3 M18 13 l2 3 l-2 3"/></svg></div>
         <div>
-          <h4>Multi-day settlement</h4>
-          <p>Canadian institutional settlement runs <b class="cs-num-g">T+2</b> or <b class="cs-num-g">T+3</b>. Capital sits in float for <b class="cs-num-g">2-3 days</b> after transactions are economically complete.</p>
+          <h4>No cross-institution settlement</h4>
+          <p>Cross-bank tokenized transfers do not settle domestically today. A tokenized asset held at one Canadian institution cannot move to another without leaving the country.</p>
         </div>
       </div>
       <div class="cs-item">
         <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="9" height="9" rx="1.5"/><rect x="20" y="6" width="9" height="9" rx="1.5"/><rect x="3" y="19" width="9" height="9" rx="1.5"/><rect x="20" y="19" width="9" height="9" rx="1.5"/></svg></div>
         <div>
           <h4>Fragmented platforms</h4>
-          <p>Every bank builds a private tokenization platform. None connect to each other. Cross-institution settlement is bilateral, manual, and slow.</p>
+          <p>Every Tier-1 builds a private tokenization stack. <b class="cs-num-g">JPM Kinexys, Citi Token Services, BMO with CME.</b> Each one operates as its own island. None of them connect.</p>
         </div>
       </div>
       <div class="cs-item">
         <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M4 16h24 M16 4c4 4 4 20 0 24 M16 4c-4 4-4 20 0 24"/></svg></div>
         <div>
           <h4>Foreign settlement</h4>
-          <p>Without a domestic layer, Canadian assets tokenize on <b class="cs-num-g">US infrastructure</b>. The fees, the control, and the data leave the country.</p>
+          <p>Without a domestic neutral layer, Canadian assets that need to move tokenize on <b class="cs-num-g">US infrastructure</b>. The fees, the control, and the data leave the country.</p>
         </div>
       </div>
       <div class="cs-item">
-        <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26 L4 12 L12 6 L20 12 L28 6 L28 26 Z"/><path d="M4 26 L28 26"/></svg></div>
+        <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8 L14 8 L14 20 L26 20 L26 26" /><path d="M4 26 h24" /><circle cx="6" cy="8" r="2"/><circle cx="14" cy="20" r="2"/><circle cx="26" cy="20" r="2"/></svg></div>
         <div>
-          <h4>Cost of capital</h4>
-          <p>Buffers held against slow settlement. Correspondent banking fees. Reconciliation overhead. A compound cost paid by every Canadian bank.</p>
+          <h4>Trapped liquidity</h4>
+          <p>Buyers on one bank's platform cannot access sellers on another's. Every institution rebuilds the same infrastructure in parallel, and liquidity fragments across a dozen private stacks.</p>
         </div>
       </div>
     </div>
@@ -112,57 +112,77 @@
   </div>
 </div></section>
 
-<!-- CURRENT LOGISTICS (settlement flow: today vs 4orm) -->
+<!-- CURRENT LOGISTICS (islands today vs connected on 4orm) -->
 <section class="sec alt" id="logistics"><div class="wrap">
   <span class="eyebrow">Current settlement logistics</span>
-  <h2 class="sec-h">How a transfer moves today. <span class="g">And how it moves on 4orm.</span></h2>
-  <p class="sec-sub">A cross-institution tokenized transfer today traverses six to seven separate systems, each with its own reconciliation, its own custody record, and its own delay. 4orm replaces that chain with one commit.</p>
+  <h2 class="sec-h">Today: private islands. <span class="g">On 4orm: one connected layer.</span></h2>
+  <p class="sec-sub">Every Canadian bank building tokenization infrastructure is building a private stack that only its own counterparties can use. 4orm is the neutral layer that lets any of them settle with any other.</p>
 
-  <!-- Current flow -->
+  <!-- TODAY: isolated islands -->
   <div class="flow-block current">
     <div class="flow-tag" style="color:#C25252">TODAY</div>
-    <div class="flow-title">Current settlement chain</div>
-    <div class="flow-line">
-      <div class="fn"><div class="fni" style="background:#F5E6E6;color:#8A3A3A">1</div><div class="fnl">Issuer</div></div>
-      <div class="far">&rarr;</div>
-      <div class="fn"><div class="fni" style="background:#F5E6E6;color:#8A3A3A">2</div><div class="fnl">Custodian</div></div>
-      <div class="far">&rarr;</div>
-      <div class="fn"><div class="fni" style="background:#F5E6E6;color:#8A3A3A">3</div><div class="fnl">Clearing house</div></div>
-      <div class="far">&rarr;</div>
-      <div class="fn"><div class="fni" style="background:#F5E6E6;color:#8A3A3A">4</div><div class="fnl">Settlement bank</div></div>
-      <div class="far">&rarr;</div>
-      <div class="fn"><div class="fni" style="background:#F5E6E6;color:#8A3A3A">5</div><div class="fnl">Correspondent</div></div>
-      <div class="far">&rarr;</div>
-      <div class="fn"><div class="fni" style="background:#F5E6E6;color:#8A3A3A">6</div><div class="fnl">Recipient bank</div></div>
-      <div class="far">&rarr;</div>
-      <div class="fn"><div class="fni" style="background:#F5E6E6;color:#8A3A3A">7</div><div class="fnl">Recipient</div></div>
+    <div class="flow-title">Private tokenization platforms. No shared settlement layer.</div>
+    <div class="isles">
+      <div class="isle">
+        <div class="isle-tag">BANK A</div>
+        <div class="isle-name">Kinexys-style</div>
+        <div class="isle-sub">Issuers &middot; custody &middot; internal settlement</div>
+      </div>
+      <div class="isle-x" aria-hidden="true">&times;</div>
+      <div class="isle">
+        <div class="isle-tag">BANK B</div>
+        <div class="isle-name">Token Services-style</div>
+        <div class="isle-sub">Issuers &middot; custody &middot; internal settlement</div>
+      </div>
+      <div class="isle-x" aria-hidden="true">&times;</div>
+      <div class="isle">
+        <div class="isle-tag">BANK C</div>
+        <div class="isle-name">CME-partnered stack</div>
+        <div class="isle-sub">Issuers &middot; custody &middot; internal settlement</div>
+      </div>
     </div>
+    <div class="isle-note">A tokenized asset originated inside Bank A cannot be transferred to a counterparty at Bank B or Bank C without leaving the domestic perimeter.</div>
     <div class="flow-metrics">
-      <div class="fm"><div class="fmn" style="color:#C25252">T+2 to T+3</div><div class="fml">Time from trade to final settlement</div></div>
-      <div class="fm"><div class="fmn" style="color:#C25252">7 systems</div><div class="fml">Separate ledgers to reconcile per transaction</div></div>
-      <div class="fm"><div class="fmn" style="color:#C25252">Multi-hour</div><div class="fml">Manual attestation across each hop</div></div>
+      <div class="fm"><div class="fmn" style="color:#C25252">0</div><div class="fml">Domestic cross-institution settlement paths</div></div>
+      <div class="fm"><div class="fmn" style="color:#C25252">N private stacks</div><div class="fml">Every bank rebuilds the same infrastructure in parallel</div></div>
+      <div class="fm"><div class="fmn" style="color:#C25252">Foreign infra</div><div class="fml">Cross-bank tokenized flows route through US settlement systems</div></div>
     </div>
   </div>
 
-  <!-- 4orm flow -->
+  <!-- ON 4ORM: hub-and-spoke -->
   <div class="flow-block onform">
     <div class="flow-tag" style="color:#1F9D6B">ON 4ORM</div>
-    <div class="flow-title">One commit. Title, cash, and rules together.</div>
-    <div class="flow-line short">
-      <div class="fn"><div class="fni" style="background:#E1F4EB;color:#1F9D6B">1</div><div class="fnl">Issuer</div></div>
-      <div class="far">&rarr;</div>
-      <div class="fn core"><div class="fni core" style="background:#142036;color:#fff">4</div><div class="fnl core"><b>4orm settlement layer</b><span>Title + cash leg + rules commit as one</span></div></div>
-      <div class="far">&rarr;</div>
-      <div class="fn"><div class="fni" style="background:#E1F4EB;color:#1F9D6B">2</div><div class="fnl">Recipient</div></div>
+    <div class="flow-title">Every institution connects to one shared, neutral settlement layer.</div>
+    <div class="hub">
+      <div class="spoke sp-tl">Bank A</div>
+      <div class="spoke sp-tr">Bank B</div>
+      <div class="spoke sp-l">Issuer</div>
+      <div class="spoke sp-r">Custodian</div>
+      <div class="spoke sp-bl">Bank C</div>
+      <div class="spoke sp-br">Credit union</div>
+      <svg class="hub-svg" viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="#1F9D6B" stroke-width="1.5" stroke-dasharray="4 3" fill="none" opacity=".55">
+          <line x1="90" y1="55" x2="310" y2="130"/>
+          <line x1="530" y1="55" x2="310" y2="130"/>
+          <line x1="40" y1="130" x2="310" y2="130"/>
+          <line x1="580" y1="130" x2="310" y2="130"/>
+          <line x1="90" y1="205" x2="310" y2="130"/>
+          <line x1="530" y1="205" x2="310" y2="130"/>
+        </g>
+      </svg>
+      <div class="hub-core">
+        <div class="hc-tag">4ORM SETTLEMENT LAYER</div>
+        <div class="hc-title">Title + cash leg + rules<br/>commit as one</div>
+      </div>
     </div>
     <div class="flow-metrics">
-      <div class="fm"><div class="fmn" style="color:#1F9D6B">T+0</div><div class="fml">Settlement finality at the moment of commit</div></div>
-      <div class="fm"><div class="fmn" style="color:#1F9D6B">1 ledger</div><div class="fml">One record of title, cash, and regulatory evidence</div></div>
-      <div class="fm"><div class="fmn" style="color:#1F9D6B">Seconds</div><div class="fml">Attestation embedded in the same block</div></div>
+      <div class="fm"><div class="fmn" style="color:#1F9D6B">1 shared layer</div><div class="fml">Every participant settles across the same regulated infrastructure</div></div>
+      <div class="fm"><div class="fmn" style="color:#1F9D6B">T+0</div><div class="fml">Delivery versus payment settlement finality at the moment of commit</div></div>
+      <div class="fm"><div class="fmn" style="color:#1F9D6B">Onshore</div><div class="fml">Canadian dollar settlement, Canadian custody, Canadian regulatory oversight</div></div>
     </div>
   </div>
 
-  <p class="src" style="margin-top:24px">Settlement flow is illustrative. Current-state chain reflects typical multi-institution securities settlement in Canadian capital markets. 4orm flow reflects target design; production deployment subject to regulatory approvals.</p>
+  <p class="src" style="margin-top:24px">Named platforms (JPM Kinexys, Citi Token Services, BMO with CME) are independent third parties referenced as market context. Inclusion does not imply partnership. 4orm target design; production deployment subject to regulatory approvals.</p>
 </div></section>
 
 <!-- HERO CTAS + STAT BAND (moved out of hero, after the two new sections) -->
