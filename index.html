@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=101">
-<link rel="stylesheet" href="assets/site.css?v=101">
-<link rel="stylesheet" href="assets/landing.css?v=101">
+<link rel="stylesheet" href="assets/styles.css?v=102">
+<link rel="stylesheet" href="assets/site.css?v=102">
+<link rel="stylesheet" href="assets/landing.css?v=102">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=101" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=102" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -164,7 +164,7 @@
         <circle cx="250" cy="410" r="62" fill="none" stroke="#2E6BF2" stroke-width="1.3" opacity=".55"/>
 
         <!-- 4orm mark (blue "4") — white-pixel-knockout filter applied so no matter what PNG version is deployed, no white background can bleed onto the black badge -->
-        <image href="assets/4orm-mark.png?v=101"
+        <image href="assets/4orm-mark.png?v=102"
                x="204" y="364" width="92" height="92"
                preserveAspectRatio="xMidYMid meet"
                filter="url(#knockout-white)"/>
@@ -550,7 +550,7 @@
 
   <!-- ON 4ORM: 3-layer stack, institutions above, canonical settlement engine in middle, tokenized asset types below -->
   <div class="flow-block onform onform-v2">
-    <div class="flow-tag" style="color:#1F9D6B">ON 4ORM</div>
+    <div class="flow-tag" style="color:#1F9D6B">4ORM INDUSTRY SOLUTION</div>
     <div class="flow-title">One canonical settlement engine. Three commits. Every asset. Every institution.</div>
 
     <div class="stack-scene">
@@ -1351,7 +1351,74 @@
   els.forEach(function(el){io.observe(el);});
 })();
 </script>
-<script src="assets/scroll-animate.js?v=101" defer></script>
-<script src="assets/nav-scroll.js?v=101" defer></script>
+<script src="assets/scroll-animate.js?v=102" defer></script>
+<script src="assets/nav-scroll.js?v=102" defer></script>
+
+<!-- v102: Data room access-request modal (single-source across all pages) -->
+<div id="request-access-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="access-modal-title">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card">
+    <button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
+    <div class="modal-eyebrow">DATA ROOM ACCESS</div>
+    <h2 id="access-modal-title" class="modal-title">Request access to the 4orm Finance data room.</h2>
+    <p class="modal-sub">Approved counterparties get access within one business day. Every request is reviewed by the founding team; we vet before we share.</p>
+    <form class="access-form" id="access-form">
+      <div class="ff-row">
+        <label><span>First name</span><input type="text" name="firstname" required autocomplete="given-name"></label>
+        <label><span>Last name</span><input type="text" name="lastname" required autocomplete="family-name"></label>
+      </div>
+      <div class="ff-row">
+        <label><span>Email</span><input type="email" name="email" required autocomplete="email"></label>
+        <label><span>Phone</span><input type="tel" name="phone" required autocomplete="tel"></label>
+      </div>
+      <label><span>Firm / Organization</span><input type="text" name="firm" required autocomplete="organization"></label>
+      <label><span>Your role</span><input type="text" name="role" placeholder="e.g. Managing Partner, Head of Digital Assets, CIO" autocomplete="organization-title"></label>
+      <label><span>Investor classification</span>
+        <select name="classification" required>
+          <option value="" disabled selected>Select one</option>
+          <option>Accredited investor (individual)</option>
+          <option>Institutional counterparty</option>
+          <option>Family office</option>
+          <option>Financial advisor</option>
+          <option>Bank / Credit union / Custodian</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label><span>Area of interest</span>
+        <select name="interest" required>
+          <option value="" disabled selected>Select one</option>
+          <option>Direct investment in the pre-seed round</option>
+          <option>Institutional partnership / integration</option>
+          <option>General exploration / research</option>
+        </select>
+      </label>
+      <label><span>Timeline</span>
+        <select name="timeline" required>
+          <option value="" disabled selected>Select one</option>
+          <option>This week</option>
+          <option>Within 30 days</option>
+          <option>30 to 60 days</option>
+          <option>Just exploring, no specific timeline</option>
+        </select>
+      </label>
+      <label><span>Anything you would like us to know before we speak? (optional)</span><textarea name="notes" rows="3"></textarea></label>
+      <label class="ff-check">
+        <input type="checkbox" name="consent" required>
+        <span>I confirm the information above is accurate, and I understand that any data room materials shared with me are confidential and provided for my evaluation only.</span>
+      </label>
+      <div class="ff-actions">
+        <button type="button" class="mbtn ghost" data-close>Cancel</button>
+        <button type="submit" class="mbtn primary">Request access</button>
+      </div>
+      <div class="ff-fine">A member of the founding team will review your request and reach out within one business day.</div>
+    </form>
+    <div class="access-thankyou">
+      <h3>Request opened in your email client.</h3>
+      <p>Please review and send the pre-filled message to complete your request. We will reach out within one business day.</p>
+    </div>
+  </div>
+</div>
+<script src="assets/access-modal.js?v=102" defer></script>
+
 </body>
 </html>
