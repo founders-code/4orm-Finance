@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=99">
-<link rel="stylesheet" href="assets/site.css?v=99">
-<link rel="stylesheet" href="assets/landing.css?v=99">
+<link rel="stylesheet" href="assets/styles.css?v=100">
+<link rel="stylesheet" href="assets/site.css?v=100">
+<link rel="stylesheet" href="assets/landing.css?v=100">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=99" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=100" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -67,6 +67,15 @@
             <stop offset="0" stop-color="#2E6BF2" stop-opacity=".05"/>
             <stop offset="1" stop-color="#1F9D6B" stop-opacity=".18"/>
           </linearGradient>
+
+          <!-- v100: knock white pixels out of any raster mark so the PNG background never shows on the black badge, regardless of what version is deployed -->
+          <filter id="knockout-white" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="
+              1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              -1 -1 -1 3 0"/>
+          </filter>
         </defs>
 
         <!-- SECTION HEADERS on the left rail -->
@@ -154,10 +163,11 @@
         <circle cx="250" cy="410" r="62" fill="url(#ledger-bar)" filter="url(#drop-soft)"/>
         <circle cx="250" cy="410" r="62" fill="none" stroke="#2E6BF2" stroke-width="1.3" opacity=".55"/>
 
-        <!-- 4orm mark (blue "4") — another 10% bigger (84 → 92) without changing the circle -->
-        <image href="assets/4orm-mark.png?v=99"
+        <!-- 4orm mark (blue "4") — white-pixel-knockout filter applied so no matter what PNG version is deployed, no white background can bleed onto the black badge -->
+        <image href="assets/4orm-mark.png?v=100"
                x="204" y="364" width="92" height="92"
-               preserveAspectRatio="xMidYMid meet"/>
+               preserveAspectRatio="xMidYMid meet"
+               filter="url(#knockout-white)"/>
 
         <!-- Live status LED, riding the top-right corner of the badge -->
         <circle cx="305" cy="368" r="4" fill="#1F9D6B">
@@ -1346,7 +1356,7 @@
   els.forEach(function(el){io.observe(el);});
 })();
 </script>
-<script src="assets/scroll-animate.js?v=99" defer></script>
-<script src="assets/nav-scroll.js?v=99" defer></script>
+<script src="assets/scroll-animate.js?v=100" defer></script>
+<script src="assets/nav-scroll.js?v=100" defer></script>
 </body>
 </html>
