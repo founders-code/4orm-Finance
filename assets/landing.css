@@ -1,10 +1,13 @@
-/* Logo 3x + roomier nav (overrides site.css negative-margin logo) — bumped 50% larger in v90 */
-.brand-logo { height: 144px !important; width: auto !important; margin: 0 !important; display: block !important; }
-.nav-inner, header.nav .nav-inner { min-height: 164px !important; padding-top: 6px !important; padding-bottom: 6px !important; align-items: center !important; }
-header.nav { min-height: 164px; }
+/* v93: sane nav — logo fits INSIDE the 72px black bar cleanly, no negative-margin overflow tricks. */
+header.nav, .nav { background: #000 !important; overflow: visible !important; }
+.brand-logo { height: 60px !important; width: auto !important; margin: 0 !important; display: block !important; }
+.brand { display: flex !important; align-items: center !important; overflow: visible !important; }
+.nav-inner, header.nav .nav-inner { min-height: 72px !important; padding-top: 6px !important; padding-bottom: 6px !important; align-items: center !important; overflow: visible !important; }
+header.nav { min-height: 72px; }
 @media (max-width: 900px) {
-  .brand-logo { height: 108px !important; }
-  .nav-inner, header.nav .nav-inner { min-height: 124px !important; }
+  .brand-logo { height: 46px !important; }
+  .nav-inner, header.nav .nav-inner { min-height: 56px !important; padding-top: 5px !important; padding-bottom: 5px !important; }
+  header.nav { min-height: 56px; }
 }
 
 
@@ -208,8 +211,12 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 /* --- v59 shell adjustments so landing sections coexist with the v58 header/footer --- */
 .hero { padding-top: 68px; }
 
-/* Interior pages without a right-column visual: center the hero content so it doesn't sit lopsided on the left with dead space on the right.
-   v90: uses .hero-centered class instead of :has() so centering works in every browser and can't silently fail. */
+/* Interior pages without a right-column visual: center the hero content and give it real vertical breathing room below the nav.
+   v92: adds generous top+bottom padding so the eyebrow / H1 / lead sit lower on the page instead of crammed against the header. */
+.hero.hero-centered,
+.hero:has(.hero-grid) ~ * .hero:not(.hero-centered) { /* no-op guard */ }
+.hero.hero-centered { padding-top: 130px !important; padding-bottom: 110px !important; }
+@media (max-width: 900px) { .hero.hero-centered { padding-top: 84px !important; padding-bottom: 72px !important; } }
 .hero.hero-centered > .wrap,
 .hero > .wrap:not(:has(.hero-grid)){
   text-align:center !important;
