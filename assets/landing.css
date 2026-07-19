@@ -1,21 +1,21 @@
-/* v95 fix: back to the compact nav that worked (v93). max-width on the logo so a missing PNG can't render as a giant broken-image slab. */
+/* v96: taller nav restored — the 140px-logo / 156px-bar sizing Chad had approved earlier. max-width guard kept so a missing PNG still can't render as a huge broken slab. */
 header.nav, .nav { background: #000 !important; overflow: visible !important; }
 .brand-logo {
-  height: 68px !important;
+  height: 140px !important;
   width: auto !important;
-  max-width: 260px !important;
+  max-width: 420px !important;
   margin: 0 !important;
   display: block !important;
   object-fit: contain !important;
 }
-.brand { display: flex !important; align-items: center !important; overflow: visible !important; max-width: 260px !important; }
-.nav-inner, header.nav .nav-inner { min-height: 84px !important; padding-top: 6px !important; padding-bottom: 6px !important; align-items: center !important; overflow: visible !important; }
-header.nav { min-height: 84px; }
+.brand { display: flex !important; align-items: center !important; overflow: visible !important; max-width: 420px !important; }
+.nav-inner, header.nav .nav-inner { min-height: 156px !important; padding-top: 8px !important; padding-bottom: 8px !important; align-items: center !important; overflow: visible !important; }
+header.nav { min-height: 156px; }
 @media (max-width: 900px) {
-  .brand-logo { height: 52px !important; max-width: 200px !important; }
-  .brand { max-width: 200px !important; }
-  .nav-inner, header.nav .nav-inner { min-height: 66px !important; padding-top: 5px !important; padding-bottom: 5px !important; }
-  header.nav { min-height: 66px; }
+  .brand-logo { height: 100px !important; max-width: 300px !important; }
+  .brand { max-width: 300px !important; }
+  .nav-inner, header.nav .nav-inner { min-height: 116px !important; padding-top: 6px !important; padding-bottom: 6px !important; }
+  header.nav { min-height: 116px; }
 }
 
 
@@ -352,7 +352,8 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
   .flow-metrics{grid-template-columns:1fr}
 }
 
-.isle-note{margin-top:18px;padding:14px 18px;background:#FDF6F6;border-left:3px solid #C25252;border-radius:6px;font-size:13.5px;color:var(--steel);line-height:1.55}
+/* v96: clean neutral caption (no pink) */
+.isle-note{margin-top:18px;padding:16px 20px;background:#F7F9FC;border:1px solid var(--line);border-left:3px solid var(--ink);border-radius:8px;font-size:13.5px;color:var(--ink);line-height:1.6}
 
 /* Islands scene (TODAY) — one continuous ocean canvas, full width */
 .islands-scene{display:block;width:100%;margin-top:14px;border-radius:12px;overflow:hidden;background:#FAF6EE}
@@ -401,25 +402,35 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 .problem-bullets.tight li{padding-top:4px;padding-bottom:4px;font-size:15.5px}
 .problem-bullets.tight li::before{top:12px}
 
-/* v95: bullets inside the .flow-block frame — sit flush, no overflow, use light red bg for each row */
+/* v96: clean editorial framed bullets inside the .flow-block — no pink bg, muted neutral lines, mono numeric markers */
 .problem-bullets.framed{
   margin:0 0 22px;
-  padding:14px 18px;
-  background:#FBF3F3;
-  border:1px solid #F0DBDB;
-  border-radius:10px;
-  gap:2px;
+  padding:6px 4px 4px;
+  background:transparent;
+  border:none;
+  border-radius:0;
+  gap:0;
   max-width:none;
+  counter-reset:pbf;
 }
 .problem-bullets.framed li{
-  padding:8px 0 8px 26px;
+  padding:12px 0 12px 40px;
   font-size:15px;
   color:var(--ink);
-  border-bottom:1px dashed rgba(194,82,82,.22);
+  border-bottom:1px solid var(--line);
+  position:relative;
+  counter-increment:pbf;
 }
 .problem-bullets.framed li:last-child{border-bottom:none}
 .problem-bullets.framed li::before{
-  left:2px;top:16px;width:14px;height:2px;background:#C25252;border-radius:2px;
+  content:counter(pbf, decimal-leading-zero);
+  left:0;top:12px;width:auto;height:auto;background:none;border-radius:0;
+  font-family:var(--mono);
+  font-size:10.5px;
+  font-weight:800;
+  letter-spacing:.18em;
+  color:var(--slate);
+  opacity:.7;
 }
 .problem-bullets.framed li b{color:var(--ink);font-weight:800}
 
