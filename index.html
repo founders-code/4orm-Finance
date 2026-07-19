@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=94">
-<link rel="stylesheet" href="assets/site.css?v=94">
-<link rel="stylesheet" href="assets/landing.css?v=94">
+<link rel="stylesheet" href="assets/styles.css?v=96">
+<link rel="stylesheet" href="assets/site.css?v=96">
+<link rel="stylesheet" href="assets/landing.css?v=96">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=94" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=96" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -41,7 +41,7 @@
     <div class="hero-copy">
       <div class="hero-eye"><span class="hero-eye-dot"></span>4ORM FINANCE &middot; REGULATED SETTLEMENT INFRASTRUCTURE</div>
       <h1>Canada's <span class="g">neutral settlement layer</span> for tokenized finance.</h1>
-      <p class="lead">Canada's tokenized economy needs one neutral settlement layer, denominated in Canadian dollars, trusted by banks and issuers alike.</p>
+      <p class="lead">Canada's tokenized economy needs one neutral settlement layer, denominated in Canadian dollars, trusted by banks and issuers alike. <b style="color:var(--blue)">That's what 4orm does.</b></p>
       <div class="cta">
         <a class="btn lg" href="https://4ormdr.com">Request data room access</a>
         <a class="btn ghost lg" href="mailto:office@4ormfinance.com?subject=4orm%20Finance%20-%20Inquiry">Talk to us</a>
@@ -76,25 +76,25 @@
         <!-- TOP: THREE INPUT PILLS (side by side)                          -->
         <!-- ============================================================ -->
 
-        <!-- TITLE pill (left) -->
+        <!-- TITLE pill (left) — pill labels bumped 12→14, subtitle 8.5→10 -->
         <g>
           <rect x="55" y="42" width="110" height="36" rx="18" fill="#EAF1FE" stroke="#B7CEFA" stroke-width="1.3"/>
-          <text x="110" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing=".24em" font-weight="800" fill="#2E6BF2">TITLE</text>
-          <text x="110" y="96" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" letter-spacing=".18em" font-weight="700" fill="#5E6E88" opacity=".7">ASSET LEDGER</text>
+          <text x="110" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing=".24em" font-weight="800" fill="#2E6BF2">TITLE</text>
+          <text x="110" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".18em" font-weight="700" fill="#5E6E88" opacity=".7">ASSET LEDGER</text>
         </g>
 
         <!-- CASH pill (center) -->
         <g>
           <rect x="195" y="42" width="110" height="36" rx="18" fill="#E8F7EF" stroke="#A8DFC1" stroke-width="1.3"/>
-          <text x="250" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing=".24em" font-weight="800" fill="#1F9D6B">CASH</text>
-          <text x="250" y="96" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" letter-spacing=".18em" font-weight="700" fill="#5E6E88" opacity=".7">TOKENIZED $</text>
+          <text x="250" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing=".24em" font-weight="800" fill="#1F9D6B">CASH</text>
+          <text x="250" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".18em" font-weight="700" fill="#5E6E88" opacity=".7">TOKENIZED $</text>
         </g>
 
         <!-- RULES pill (right) -->
         <g>
           <rect x="335" y="42" width="110" height="36" rx="18" fill="#FBF3DE" stroke="#EFD79B" stroke-width="1.3"/>
-          <text x="390" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing=".24em" font-weight="800" fill="#B58A28">RULES</text>
-          <text x="390" y="96" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" letter-spacing=".18em" font-weight="700" fill="#5E6E88" opacity=".7">COMPLIANCE</text>
+          <text x="390" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing=".24em" font-weight="800" fill="#B58A28">RULES</text>
+          <text x="390" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".18em" font-weight="700" fill="#5E6E88" opacity=".7">COMPLIANCE</text>
         </g>
 
         <!-- ============================================================ -->
@@ -143,36 +143,40 @@
         <line x1="250" y1="323" x2="250" y2="360" stroke="#0B1220" stroke-width="3.4"/>
 
         <!-- ============================================================ -->
-        <!-- 4ORM LEDGER PILL (the canonical ledger — carries the wordmark, prominent center) -->
+        <!-- 4ORM LEDGER BADGE — proper circle, blue "4" mark inside       -->
+        <!-- v95 spacing pass: caption labels pushed OFF the circle        -->
         <!-- ============================================================ -->
-        <text x="250" y="350" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing=".28em" font-weight="800" fill="#5E6E88" opacity=".7">ONE CANONICAL LEDGER</text>
 
-        <rect x="70" y="360" width="360" height="100" rx="50" fill="url(#ledger-bar)" filter="url(#drop-soft)"/>
-        <rect x="70" y="360" width="360" height="100" rx="50" fill="none" stroke="#2E6BF2" stroke-width="1.3" opacity=".55"/>
+        <!-- Caption ABOVE — moved up so it clears the circle top -->
+        <text x="250" y="330" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing=".28em" font-weight="800" fill="#5E6E88" opacity=".7">ONE CANONICAL LEDGER</text>
 
-        <!-- Real 4orm Finance wordmark, comfortably filling the pill -->
-        <image href="assets/4orm-logo-white-cropped.png?v=94"
-               x="115" y="376" width="270" height="68"
+        <!-- Circle badge (unchanged size — chad's happy with it) -->
+        <circle cx="250" cy="410" r="62" fill="url(#ledger-bar)" filter="url(#drop-soft)"/>
+        <circle cx="250" cy="410" r="62" fill="none" stroke="#2E6BF2" stroke-width="1.3" opacity=".55"/>
+
+        <!-- 4orm mark (blue "4") — another 10% bigger (84 → 92) without changing the circle -->
+        <image href="assets/4orm-mark.png?v=96"
+               x="204" y="364" width="92" height="92"
                preserveAspectRatio="xMidYMid meet"/>
 
-        <!-- Live tape scanline inside the pill -->
-        <line x1="90" y1="452" x2="410" y2="452" stroke="#2E6BF2" stroke-width="1" stroke-dasharray="2 4" opacity=".45"/>
-
-        <!-- Live status LED -->
-        <circle cx="410" cy="376" r="4" fill="#1F9D6B">
+        <!-- Live status LED, riding the top-right corner of the badge -->
+        <circle cx="305" cy="368" r="4" fill="#1F9D6B">
           <animate attributeName="opacity" values="1;.25;1" dur="1.6s" repeatCount="indefinite"/>
         </circle>
 
-        <!-- Caption below pill -->
-        <text x="250" y="482" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing=".24em" font-weight="700" fill="#5E6E88" opacity=".65">SETTLEMENT FINAL AT COMMIT</text>
+        <!-- Compact scanline underneath the badge -->
+        <line x1="205" y1="486" x2="295" y2="486" stroke="#2E6BF2" stroke-width="1" stroke-dasharray="2 4" opacity=".45"/>
 
-        <!-- Bridge DOWN from ledger pill to output commit node -->
-        <line x1="250" y1="490" x2="250" y2="530" stroke="#0B1220" stroke-width="3.4"/>
+        <!-- Caption BELOW — moved down so it clears the circle bottom -->
+        <text x="250" y="506" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing=".24em" font-weight="700" fill="#5E6E88" opacity=".65">SETTLEMENT FINAL AT COMMIT</text>
+
+        <!-- Bridge DOWN from badge caption zone to output commit node -->
+        <line x1="250" y1="518" x2="250" y2="552" stroke="#0B1220" stroke-width="3.4"/>
 
         <!-- ============================================================ -->
         <!-- OUTPUT COMMIT NODE (single node — one output, not three)      -->
         <!-- ============================================================ -->
-        <g transform="translate(250, 550)">
+        <g transform="translate(250, 570)">
           <circle r="26" fill="none" stroke="#2E6BF2" stroke-width="1.2" opacity=".45">
             <animate attributeName="r" values="26;42;26" dur="2.4s" begin=".3s" repeatCount="indefinite"/>
             <animate attributeName="opacity" values=".55;0;.55" dur="2.4s" begin=".3s" repeatCount="indefinite"/>
@@ -197,9 +201,9 @@
         <!-- Large receiver pill -->
         <rect x="80" y="720" width="340" height="110" rx="55" fill="#0B1220" stroke="#1F9D6B" stroke-width="1.8" filter="url(#drop-soft)"/>
 
-        <!-- Large label -->
-        <text x="250" y="770" text-anchor="middle" font-family="Inter, sans-serif" font-size="34" letter-spacing=".18em" font-weight="900" fill="#FFFFFF">SETTLED</text>
-        <text x="250" y="800" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".22em" font-weight="700" fill="#1F9D6B">TITLE + CASH + RULES DELIVERED</text>
+        <!-- Large label — reduced 25% from 34 to 26 -->
+        <text x="250" y="770" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" letter-spacing=".18em" font-weight="900" fill="#FFFFFF">SETTLED</text>
+        <text x="250" y="800" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing=".22em" font-weight="700" fill="#1F9D6B">TITLE + CASH + RULES DELIVERED</text>
 
         <!-- Green LED on receiver -->
         <circle cx="112" cy="745" r="5" fill="#1F9D6B">
@@ -211,16 +215,9 @@
   </div>
 </div></section>
 
-<!-- POST-HERO POSITIONING BAND -->
-<section class="sec" style="padding:56px 0;background:linear-gradient(180deg,#F7FAFF 0%, #EFF3FA 100%);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap" style="text-align:center">
-  <p style="font-size:clamp(20px,2.2vw,28px);font-weight:800;color:var(--ink);max-width:56ch;margin:0 auto;line-height:1.35;letter-spacing:-.01em">
-    4orm Finance provides a <span style="color:var(--blue)">neutral infrastructure solution</span> for Canadian finance.
-  </p>
-</div></section>
-
-<!-- INDUSTRY CHALLENGE / INDUSTRY SOLUTION (Raven-style two-column) -->
+<!-- INDUSTRY CHALLENGE / INDUSTRY SOLUTION / BENEFITS (three-column) -->
 <section class="sec dark" id="challenge-solution"><div class="wrap">
-  <div class="cs2">
+  <div class="cs2 cs3">
     <div class="cs-col">
       <div class="cs-h">INDUSTRY CHALLENGE</div>
       <div class="cs-item">
@@ -286,6 +283,40 @@
         </div>
       </div>
     </div>
+
+    <div class="cs-div" aria-hidden="true"></div>
+
+    <div class="cs-col cs-ben">
+      <div class="cs-h">BENEFITS</div>
+      <div class="cs-item">
+        <div class="cs-icon ben" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#FFD9A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24 L14 12 L20 18 L28 8"/><path d="M20 8 L28 8 L28 16"/></svg></div>
+        <div>
+          <h4>Faster capital velocity</h4>
+          <p>T+0 commit frees capital the same block the trade settles. <b class="cs-num-y">No T+2 window. No trapped balance sheet.</b></p>
+        </div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-icon ben" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#FFD9A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="10"/><path d="M6 16 h20 M16 6 c4 3 4 17 0 20 M16 6 c-4 3 -4 17 0 20"/></svg></div>
+        <div>
+          <h4>Universal Canadian reach</h4>
+          <p>Every regulated FI, custodian, and issuer connects through one shared layer. <b class="cs-num-y">Multi-institution liquidity, not walled gardens.</b></p>
+        </div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-icon ben" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#FFD9A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26 L6 6 L26 6 L26 26 Z"/><path d="M11 20 h10 M11 15 h10 M11 10 h6"/></svg></div>
+        <div>
+          <h4>Domestic value capture</h4>
+          <p>Fees, control, custody, and data all stay in Canada. <b class="cs-num-y">Value compounds at home, not offshore.</b></p>
+        </div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-icon ben" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#FFD9A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 L27 9 L27 19 C27 24 22 27 16 29 C10 27 5 24 5 19 L5 9 Z"/><path d="M11 16 l4 4 l7-8"/></svg></div>
+        <div>
+          <h4>Regulator-native trust</h4>
+          <p>Supervisory feeds delivered at the moment of commit, not weeks after. <b class="cs-num-y">Institutional trust engineered in, not bolted on.</b></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div></section>
 
@@ -293,18 +324,19 @@
 <section class="sec alt" id="logistics"><div class="wrap">
   <span class="eyebrow">The Challenge</span>
   <h2 class="sec-h">Every asset is trapped <span class="g">on its own private island.</span></h2>
-  <ul class="problem-bullets tight">
-    <li><b>A REIT held at one bank cannot reach a buyer at another.</b></li>
-    <li>Every institution rebuilds the same infrastructure in parallel.</li>
-    <li>Liquidity fragments across a dozen private platforms.</li>
-    <li>Fees, control, and data leak offshore to US infrastructure.</li>
-    <li>No canonical ledger connects any of it.</li>
-  </ul>
 
-  <!-- TODAY: cartoon-style isolated islands with buildings and bouncing assets -->
+  <!-- TODAY: unified frame around bullets + islands scene -->
   <div class="flow-block current">
     <div class="flow-tag" style="color:#C25252">TODAY</div>
     <div class="flow-title">Private tokenization platforms. No shared settlement layer.</div>
+
+    <ul class="problem-bullets tight framed">
+      <li><b>A REIT held at one bank cannot reach a buyer at another.</b></li>
+      <li>Every institution rebuilds the same infrastructure in parallel.</li>
+      <li>Liquidity fragments across a dozen private platforms.</li>
+      <li>Fees, control, and data leak offshore to US infrastructure.</li>
+      <li>No canonical ledger connects any of it.</li>
+    </ul>
 
     <div class="islands-scene">
       <svg class="islands-canvas" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -737,7 +769,16 @@
       </div>
 
       <div class="gap-callout"><b>The single missing layer is what 4orm Finance is being built to be.</b></div>
-      <div class="src">Source: RWA.xyz platform tracker (2026); public company disclosures; Bank of Canada Staff Analytical Paper 2026-8.</div>
+
+      <!-- v96: Explicit honesty on what Canada DOES have + where the settlement layer actually runs today -->
+      <div class="gap-honest">
+        <div class="gap-honest-eye">Where Canadian tokenization actually settles today</div>
+        <p><b>Canada is not without tokenization capability.</b> Polymath (Canadian-built, security-token protocol), Stablecorp (QCAD), Cybrid, and Loon all issue tokenized instruments; T-RIZE, Ocree, Pineapple, and AuCan Gold originate tokenized real-world assets domestically. That capability is real.</p>
+        <p style="margin-top:8px"><b>What Canada does not have is the neutral settlement layer.</b> The tokens above settle, list, and clear on foreign infrastructure: Ethereum L1 and L2s (Base, Arbitrum, Polygon), US-based custodians, and US-dollar stablecoin rails (USDC, USDT, PYUSD). ~99% of the on-chain money layer is US-dollar denominated. Canada originates the assets; the settlement, secondary liquidity, and money leg run offshore.</p>
+        <div class="gap-honest-src">
+          <b>Sources:</b> RWA.xyz platform tracker (Jul 2026); DefiLlama stablecoin dashboard (2026); Bank of Canada Staff Analytical Paper 2026-8 (Project Samara); Polymath / Polymesh public documentation; company disclosures for T-RIZE, Ocree, Stablecorp, and Tetra Trust; CSA Project Tokenization (Q2 2026).
+        </div>
+      </div>
     </div>
 
     <!-- RIGHT CARD — CAD ABSENT FROM $300B MONEY LAYER -->
@@ -777,8 +818,8 @@
   </div>
   <div class="card pad reveal" style="margin-top:22px">
     <div class="kicker">What stays and what leaves</div>
-    <h3 style="margin-top:12px;font-size:20px">Canadian issuers have already put $14B+ of assets on-chain at home</h3>
-    <p style="font-size:14.5px;max-width:840px">The origination is happening here. What leaves is the layer on top: distribution, secondary-market liquidity, settlement, and the money leg, which is where value compounds. 4orm is built to bring that layer home.</p>
+    <h3 style="margin-top:12px;font-size:20px">Canadian issuers currently have already put $14B+ of assets on-chain at home</h3>
+    <p style="font-size:14.5px;max-width:840px">The origination is happening here. What leaves is the layer on top: distribution, secondary-market liquidity, settlement, and the money leg, which is where value compounds. <b>4orm Finance is built to bring that layer home.</b></p>
     <div class="split">
       <div class="col keep">
         <h4><span style="color:var(--ok)">&#9679;</span> What Canada keeps today</h4>
@@ -1305,6 +1346,6 @@
   els.forEach(function(el){io.observe(el);});
 })();
 </script>
-<script src="assets/scroll-animate.js?v=94" defer></script>
+<script src="assets/scroll-animate.js?v=96" defer></script>
 </body>
 </html>

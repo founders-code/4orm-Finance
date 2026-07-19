@@ -208,9 +208,11 @@
 .famfooter-eye { font-size: .74rem; text-transform: uppercase; letter-spacing: .18em; color: #FFD9A8; font-weight: 800; }
 .famfooter h3 { font-size: 1.6rem; color: #fff; margin: 8px 0 0; letter-spacing: -.01em; line-height: 1.15; }
 .famfooter h3 .key { color: #FFD9A8; }
-.famfooter-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-@media (max-width: 920px){ .famfooter-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 500px){ .famfooter-grid { grid-template-columns: 1fr; } }
+.famfooter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 920px){ .famfooter-grid { grid-template-columns: 1fr; gap: 14px; } }
+.famtile { padding: 22px 24px; min-height: 148px; }
+.famtile .name { font-size: 1.2rem; }
+.famtile .desc { font-size: .88rem; }
 .famtile {
   background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14);
   border-radius: 12px; padding: 18px 18px 16px;

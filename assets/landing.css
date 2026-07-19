@@ -1,13 +1,21 @@
-/* v93: sane nav — logo fits INSIDE the 72px black bar cleanly, no negative-margin overflow tricks. */
+/* v95 fix: back to the compact nav that worked (v93). max-width on the logo so a missing PNG can't render as a giant broken-image slab. */
 header.nav, .nav { background: #000 !important; overflow: visible !important; }
-.brand-logo { height: 60px !important; width: auto !important; margin: 0 !important; display: block !important; }
-.brand { display: flex !important; align-items: center !important; overflow: visible !important; }
-.nav-inner, header.nav .nav-inner { min-height: 72px !important; padding-top: 6px !important; padding-bottom: 6px !important; align-items: center !important; overflow: visible !important; }
-header.nav { min-height: 72px; }
+.brand-logo {
+  height: 68px !important;
+  width: auto !important;
+  max-width: 260px !important;
+  margin: 0 !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+.brand { display: flex !important; align-items: center !important; overflow: visible !important; max-width: 260px !important; }
+.nav-inner, header.nav .nav-inner { min-height: 84px !important; padding-top: 6px !important; padding-bottom: 6px !important; align-items: center !important; overflow: visible !important; }
+header.nav { min-height: 84px; }
 @media (max-width: 900px) {
-  .brand-logo { height: 46px !important; }
-  .nav-inner, header.nav .nav-inner { min-height: 56px !important; padding-top: 5px !important; padding-bottom: 5px !important; }
-  header.nav { min-height: 56px; }
+  .brand-logo { height: 52px !important; max-width: 200px !important; }
+  .brand { max-width: 200px !important; }
+  .nav-inner, header.nav .nav-inner { min-height: 66px !important; padding-top: 5px !important; padding-bottom: 5px !important; }
+  header.nav { min-height: 66px; }
 }
 
 
@@ -258,7 +266,8 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 /* Two-column hero layout */
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;width:100%}
 .hero-copy{max-width:640px}
-.hero-visual{position:relative;justify-self:center}
+.hero-visual{position:relative;justify-self:center;margin-top:100px}
+@media (max-width: 900px) { .hero-visual{margin-top:0} }
 .hero-visual svg{width:100%;max-width:416px;height:auto;display:block;margin:0 auto}
 .hv-cap{margin-top:14px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);max-width:340px;margin-left:auto;margin-right:auto;line-height:1.5}
 
@@ -289,17 +298,27 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 
 /* Industry Challenge / Industry Solution (Raven-style) */
 .cs2{display:grid;grid-template-columns:1fr 1px 1fr;gap:36px;align-items:start;margin-top:6px}
+/* v96: 3-column variant — Challenge / Solution / Benefits */
+.cs2.cs3{grid-template-columns:1fr 1px 1fr 1px 1fr;gap:28px}
 .cs-div{background:rgba(255,255,255,.14);width:1px;height:100%;min-height:420px}
 .cs-col{display:flex;flex-direction:column;gap:22px}
 .cs-h{font-family:var(--mono);font-size:12px;letter-spacing:.22em;font-weight:800;color:#fff;text-align:center;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.14);margin-bottom:6px}
 .cs-item{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:flex-start}
 .cs-icon{width:52px;height:52px;background:rgba(154,182,255,.10);border:1px solid rgba(154,182,255,.28);border-radius:12px;display:grid;place-items:center;flex:none}
 .cs-icon.sol{background:rgba(123,227,176,.10);border-color:rgba(123,227,176,.30)}
+.cs-icon.ben{background:rgba(255,217,168,.10);border-color:rgba(255,217,168,.32)}
 .cs-icon svg{width:26px;height:26px}
 .cs-item h4{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.01em;margin:2px 0 6px}
 .cs-item p{font-size:14px;color:#AEBBD2;line-height:1.55;margin:0}
 .cs-num-g{color:#9AB6FF;font-weight:800}
 .cs-num-a{color:#7BE3B0;font-weight:800}
+.cs-num-y{color:#FFD9A8;font-weight:800}
+/* v96: Benefits column header gets a gold tint to match its accent color */
+.cs-col.cs-ben .cs-h{color:#FFD9A8}
+@media(max-width:1100px){
+  .cs2.cs3{grid-template-columns:1fr;gap:36px}
+  .cs2.cs3 .cs-div{display:none}
+}
 @media (max-width: 900px){
   .cs2{grid-template-columns:1fr;gap:36px}
   .cs-div{display:none}
@@ -360,6 +379,13 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 .gap-x{color:#C25252;font-size:20px;font-weight:800;text-align:center}
 .gap-callout{margin-top:14px;padding:12px 16px;background:#EAF1FE;border:1px solid #CBDAFB;border-radius:8px;font-size:14px;color:var(--ink);line-height:1.5}
 .gap-callout b{color:var(--blue)}
+/* v96: sourced honesty block acknowledging Polymath + Canadian tokenization real capability */
+.gap-honest{margin-top:14px;padding:16px 18px;background:#FBF8F0;border:1px solid #EFD79B;border-radius:10px}
+.gap-honest-eye{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;font-weight:800;color:#B58A28;text-transform:uppercase;margin-bottom:8px}
+.gap-honest p{font-size:13.5px;color:var(--ink);line-height:1.55;margin:0;max-width:none}
+.gap-honest p b{color:var(--ink);font-weight:800}
+.gap-honest-src{margin-top:10px;padding-top:10px;border-top:1px dashed #E9D5A6;font-size:11.5px;color:var(--slate);line-height:1.5}
+.gap-honest-src b{color:var(--ink);font-weight:700}
 
 /* Compact centered metric row (used under the donut) */
 .gap-metric-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);text-align:center}
@@ -374,6 +400,28 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 .problem-bullets.tight{gap:2px;margin-top:20px}
 .problem-bullets.tight li{padding-top:4px;padding-bottom:4px;font-size:15.5px}
 .problem-bullets.tight li::before{top:12px}
+
+/* v95: bullets inside the .flow-block frame — sit flush, no overflow, use light red bg for each row */
+.problem-bullets.framed{
+  margin:0 0 22px;
+  padding:14px 18px;
+  background:#FBF3F3;
+  border:1px solid #F0DBDB;
+  border-radius:10px;
+  gap:2px;
+  max-width:none;
+}
+.problem-bullets.framed li{
+  padding:8px 0 8px 26px;
+  font-size:15px;
+  color:var(--ink);
+  border-bottom:1px dashed rgba(194,82,82,.22);
+}
+.problem-bullets.framed li:last-child{border-bottom:none}
+.problem-bullets.framed li::before{
+  left:2px;top:16px;width:14px;height:2px;background:#C25252;border-radius:2px;
+}
+.problem-bullets.framed li b{color:var(--ink);font-weight:800}
 
 /* Bouncing coins - each island has one, offset timing */
 .isle-coin{transform-origin:center;transform:translate(90px 130px)}
