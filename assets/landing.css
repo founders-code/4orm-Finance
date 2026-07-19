@@ -211,12 +211,23 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 /* --- v59 shell adjustments so landing sections coexist with the v58 header/footer --- */
 .hero { padding-top: 68px; }
 
-/* Interior pages without a right-column visual: center the hero content and give it real vertical breathing room below the nav.
-   v92: adds generous top+bottom padding so the eyebrow / H1 / lead sit lower on the page instead of crammed against the header. */
-.hero.hero-centered,
-.hero:has(.hero-grid) ~ * .hero:not(.hero-centered) { /* no-op guard */ }
-.hero.hero-centered { padding-top: 130px !important; padding-bottom: 110px !important; }
-@media (max-width: 900px) { .hero.hero-centered { padding-top: 84px !important; padding-bottom: 72px !important; } }
+/* Interior pages without a right-column visual: TRULY vertically center the hero content in the viewport.
+   v94: hero fills the viewport below the 72px nav and flex-centers its content — no more "still too high". */
+.hero.hero-centered {
+  min-height: calc(100vh - 72px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+}
+@media (max-width: 900px) {
+  .hero.hero-centered {
+    min-height: calc(100vh - 56px) !important;
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+}
 .hero.hero-centered > .wrap,
 .hero > .wrap:not(:has(.hero-grid)){
   text-align:center !important;
@@ -248,7 +259,7 @@ footer .disc{margin-top:24px;font-size:11px;color:#5E6E88;line-height:1.65;max-w
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;width:100%}
 .hero-copy{max-width:640px}
 .hero-visual{position:relative;justify-self:center}
-.hero-visual svg{width:100%;max-width:420px;height:auto;display:block}
+.hero-visual svg{width:100%;max-width:416px;height:auto;display:block;margin:0 auto}
 .hv-cap{margin-top:14px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);max-width:340px;margin-left:auto;margin-right:auto;line-height:1.5}
 
 /* Credibility strip */
