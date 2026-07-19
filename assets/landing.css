@@ -1,4 +1,27 @@
 /* v96: taller nav restored — the 140px-logo / 156px-bar sizing Chad had approved earlier. max-width guard kept so a missing PNG still can't render as a huge broken slab. */
+/* v104: Sources & references — compact accordion (native <details>), narrow, scroll-on-expand */
+.src-accordion { max-width: 640px; margin: 28px auto 0; display: flex; flex-direction: column; gap: 8px; }
+.src-item { background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; transition: border-color .18s, box-shadow .18s; }
+.src-item[open] { border-color: var(--blue); box-shadow: 0 6px 18px rgba(46,107,242,.08); }
+.src-item summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 12px; padding: 14px 18px; font-size: 14px; }
+.src-item summary::-webkit-details-marker { display: none; }
+.src-item summary::after { content: '+'; margin-left: auto; font-size: 20px; font-weight: 800; color: var(--blue); line-height: 1; transition: transform .2s; }
+.src-item[open] summary::after { content: '−'; }
+.src-a { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; font-weight: 800; color: var(--blue); background: var(--tint); padding: 4px 8px; border-radius: 6px; flex: none; }
+.src-t { font-weight: 700; color: var(--ink); letter-spacing: -.005em; flex: 1; }
+.src-n { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--slate); }
+.src-scroll { list-style: none; margin: 0; padding: 6px 18px 14px; max-height: 132px; overflow-y: auto; display: flex; flex-direction: column; gap: 0; scrollbar-width: thin; scrollbar-color: var(--mist) transparent; border-top: 1px solid var(--line); }
+.src-scroll::-webkit-scrollbar { width: 6px; }
+.src-scroll::-webkit-scrollbar-thumb { background: var(--mist); border-radius: 3px; }
+.src-scroll li { font-size: 13px; line-height: 1.5; color: var(--ink); padding: 10px 0 10px 14px; position: relative; border-bottom: 1px dashed var(--line); }
+.src-scroll li:last-child { border-bottom: none; }
+.src-scroll li::before { content: '·'; position: absolute; left: 0; top: 4px; color: var(--blue); font-weight: 800; font-size: 18px; }
+.src-scroll a { color: var(--blue); text-decoration: none; font-weight: 600; border-bottom: 1px dashed rgba(46,107,242,.35); }
+.src-scroll a:hover { border-bottom-style: solid; }
+
+/* v103: "Sources" link in famfooter-legal */
+.famfooter-legal a.sources-link { color: #FFD9A8; }
+
 /* ========================================================== */
 /* v102: Data room access-request MODAL */
 /* ========================================================== */

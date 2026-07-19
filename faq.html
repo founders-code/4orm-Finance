@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=102" />
-<link rel="stylesheet" href="assets/site.css?v=102" />
+<link rel="stylesheet" href="assets/styles.css?v=105" />
+<link rel="stylesheet" href="assets/site.css?v=105" />
 <style>
   .faq-list { display: flex; flex-direction: column; gap: 10px; }
   .faq { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; transition: border-color .2s, box-shadow .2s; }
@@ -24,14 +24,14 @@
   .faq-cat { margin: 32px 0 14px; font-family: var(--font-mono); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); display: flex; align-items: center; gap: 10px; }
   .faq-cat::before { content: ''; width: 24px; height: 2px; background: var(--gold-2); }
 </style>
-<link rel="stylesheet" href="assets/landing.css?v=102">
+<link rel="stylesheet" href="assets/landing.css?v=105">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=102" alt="4orm Finance" /></a>
+    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=105" alt="4orm Finance" /></a>
     <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
       <span class="nav-hamburger-bar" aria-hidden="true"></span>
@@ -165,10 +165,115 @@
       </details>
     </div>
 
-    
+
   </div>
 </section>
 
+<!-- v105: SOURCES & REFERENCES — every entry has a real, verified link. Compact accordion. -->
+<section class="psec band" id="sources">
+  <div class="psec-inner">
+    <div class="psec-head" style="text-align:center">
+      <div class="psec-eye">Sources &amp; references</div>
+      <h2>Where every claim comes from.</h2>
+      <p class="lead" style="max-width:56ch;margin-left:auto;margin-right:auto">
+        Click a category to expand. Every entry links to the exact primary source.
+      </p>
+    </div>
+
+    <div class="src-accordion">
+      <details class="src-item">
+        <summary><span class="src-a">A</span><span class="src-t">Canadian regulatory &amp; policy</span><span class="src-n">7</span></summary>
+        <ul class="src-scroll">
+          <li><a href="https://www.bankofcanada.ca/2026/03/bank-canada-export-development-canada-rbc-td-successfully-complete-bond-issuance-experiment-distributed-ledger-technology/" target="_blank" rel="noopener">Bank of Canada &mdash; Project Samara press release (March 2026)</a></li>
+          <li><a href="https://www.bankofcanada.ca/publications/staff-analytical-notes/" target="_blank" rel="noopener">Bank of Canada &mdash; Staff Analytical Notes (Project Samara 2026-8 series)</a></li>
+          <li><a href="https://www.securities-administrators.ca/news/canadian-securities-regulators-launch-tokenization-project/" target="_blank" rel="noopener">Canadian Securities Administrators &mdash; Project Tokenization (Q2 2026)</a></li>
+          <li><a href="https://www.ciro.ca/newsroom/publications/notice-ciros-digital-asset-custody-framework" target="_blank" rel="noopener">CIRO &mdash; Digital Asset Custody Framework (Feb 2026)</a></li>
+          <li><a href="https://www.osfi-bsif.gc.ca/en/guidance/guidance-library" target="_blank" rel="noopener">OSFI &mdash; Capital and liquidity guidance library</a></li>
+          <li><a href="https://fintrac-canafe.canada.ca/reporting-declaration/rpt-eng" target="_blank" rel="noopener">FINTRAC &mdash; Reporting obligations (LCTR + EFT thresholds)</a></li>
+          <li><a href="https://cdhowe.org/publication/the-window-is-closing-how-canada-can-shape-the-future-of-stablecoins-and-digital-payments/" target="_blank" rel="noopener">C.D. Howe Institute &mdash; "The Window Is Closing"</a></li>
+        </ul>
+      </details>
+
+      <details class="src-item">
+        <summary><span class="src-a">B</span><span class="src-t">Canadian bank tokenization initiatives</span><span class="src-n">6</span></summary>
+        <ul class="src-scroll">
+          <li><a href="https://www.coindesk.com/business/2026/03/06/bank-of-canada-country-s-largest-banks-complete-first-tokenized-bond-trial" target="_blank" rel="noopener">CoinDesk &mdash; Bank of Canada tokenized bond test (RBC, TD)</a></li>
+          <li><a href="https://newsroom.bmo.com/2026-03-24-BMO-Introduces-Tokenized-Cash-and-Deposit-Platform-with-CME-Group-and-Google-Cloud" target="_blank" rel="noopener">BMO Newsroom &mdash; Tokenized Cash and Deposit Platform</a></li>
+          <li><a href="https://www.cmegroup.com/media-room/press-releases/2026/3/24/bmo-introduces-tokenized-cash-and-deposit-platform-with-cme-group-and-google-cloud.html" target="_blank" rel="noopener">CME Group &mdash; BMO tokenized cash press release</a></li>
+          <li><a href="https://www.theglobeandmail.com/business/article-bmo-to-launch-tokenized-cash-platform-with-cme-and-google-cloud/" target="_blank" rel="noopener">Globe and Mail &mdash; BMO tokenized cash platform</a></li>
+          <li><a href="https://www.marketsmedia.com/bmo-introduces-tokenized-cash-deposits-with-cme-google-cloud/" target="_blank" rel="noopener">Markets Media &mdash; BMO Debuts Tokenized Cash &amp; Deposits</a></li>
+          <li><a href="https://thelogic.co/briefing/bmo-names-head-of-digital-assets-and-tokenization/" target="_blank" rel="noopener">The Logic &mdash; BMO names head of digital assets</a></li>
+        </ul>
+      </details>
+
+      <details class="src-item">
+        <summary><span class="src-a">C</span><span class="src-t">Canadian tokenization ecosystem</span><span class="src-n">9</span></summary>
+        <ul class="src-scroll">
+          <li><a href="https://www.coindesk.com/business/2026/05/04/shopify-and-national-bank-of-canada-are-among-backers-of-a-new-digital-currency-built-to-settle-trades-24-7" target="_blank" rel="noopener">CoinDesk &mdash; Tetra Trust CADD stablecoin launch</a></li>
+          <li><a href="https://polymesh.network/" target="_blank" rel="noopener">Polymesh &mdash; Purpose-built blockchain for regulated real-world assets</a></li>
+          <li><a href="https://www.stablecorp.ca/" target="_blank" rel="noopener">Stablecorp &mdash; QCAD Canadian-dollar stablecoin</a></li>
+          <li><a href="https://www.trize.co/" target="_blank" rel="noopener">T-RIZE Group &mdash; Tokenized real estate (Quebec)</a></li>
+          <li><a href="https://ocreecapital.com/" target="_blank" rel="noopener">Ocree Capital &mdash; Ontario exempt market dealer</a></li>
+          <li><a href="https://aucangold.com/" target="_blank" rel="noopener">AuCan Gold &mdash; Tokenized mining bullion</a></li>
+          <li><a href="https://www.pineapplefinancial.com/" target="_blank" rel="noopener">Pineapple Financial &mdash; Tokenized mortgages (public disclosures)</a></li>
+          <li><a href="https://tetratrust.com/" target="_blank" rel="noopener">Tetra Trust &mdash; Canada's first qualified digital-asset custodian</a></li>
+          <li><a href="https://www.deloitte.com/ca/en/Industries/financial-services/perspectives/tokenized-money-stablecoins.html" target="_blank" rel="noopener">Deloitte Canada &mdash; Stablecoins and tokenized deposits</a></li>
+        </ul>
+      </details>
+
+      <details class="src-item">
+        <summary><span class="src-a">D</span><span class="src-t">Global tokenization market data</span><span class="src-n">6</span></summary>
+        <ul class="src-scroll">
+          <li><a href="https://www.mckinsey.com/industries/financial-services/our-insights/from-ripples-to-waves-the-transformational-power-of-tokenizing-assets" target="_blank" rel="noopener">McKinsey &mdash; From ripples to waves: Tokenizing assets</a></li>
+          <li><a href="https://www.blackrock.com/us/individual/products/335666/blackrock-usd-institutional-digital-liquidity-fund" target="_blank" rel="noopener">BlackRock &mdash; USD Institutional Digital Liquidity Fund (BUIDL)</a></li>
+          <li><a href="https://www.rwa.xyz/" target="_blank" rel="noopener">RWA.xyz &mdash; Real-world asset tokenization platform tracker</a></li>
+          <li><a href="https://defillama.com/stablecoins" target="_blank" rel="noopener">DefiLlama &mdash; Stablecoin market cap dashboard</a></li>
+          <li><a href="https://www.theblock.co/data/on-chain-metrics/stablecoins" target="_blank" rel="noopener">The Block &mdash; Stablecoin data dashboard</a></li>
+          <li><a href="https://www.bis.org/about/bisih/topics/tokenization.htm" target="_blank" rel="noopener">BIS Innovation Hub &mdash; Tokenization research</a></li>
+        </ul>
+      </details>
+
+      <details class="src-item">
+        <summary><span class="src-a">E</span><span class="src-t">Global institutional tokenized collateral</span><span class="src-n">8</span></summary>
+        <ul class="src-scroll">
+          <li><a href="https://www.jpmorgan.com/kinexys/digital-assets/tokenized-collateral-network" target="_blank" rel="noopener">J.P. Morgan Kinexys &mdash; Tokenized Collateral Network</a></li>
+          <li><a href="https://www.jpmorgan.com/content/dam/jpm/cib/complex/content/securities-services/sec-services-homepage/Tri-party-Circular.pdf" target="_blank" rel="noopener">J.P. Morgan &mdash; Tri-party Circular (January 2026)</a></li>
+          <li><a href="https://www.coindesk.com/business/2026/05/12/dtcc-taps-chainlink-for-its-tokenized-collateral-platform-ahead-of-q4-launch" target="_blank" rel="noopener">CoinDesk &mdash; DTCC tokenized collateral (Chainlink)</a></li>
+          <li><a href="https://ir.nasdaq.com/news-releases/news-release-details/nasdaq-and-talos-partner-advance-tokenized-collateral-management" target="_blank" rel="noopener">Nasdaq IR &mdash; Nasdaq and Talos partnership</a></li>
+          <li><a href="https://www.pymnts.com/partnerships/2026/nasdaq-teams-with-talos-on-tokenized-collateral-management/" target="_blank" rel="noopener">PYMNTS &mdash; Nasdaq/Talos tokenized collateral</a></li>
+          <li><a href="https://www.nasdaq.com/articles/fintech/collateral-tokenization-how-340-million-opportunity-driving-digitalized-collateral" target="_blank" rel="noopener">Nasdaq &mdash; Collateral tokenization ($340M opportunity)</a></li>
+          <li><a href="https://www.sec.gov/files/project-blueprint-tokenized-collateral-112725.pdf" target="_blank" rel="noopener">SEC &mdash; Project Blueprint tokenized collateral filing</a></li>
+          <li><a href="https://kensoninvestments.com/the-rise-of-tokenized-collateral-platforms-a-new-global-marketplace-for-secured-finance/" target="_blank" rel="noopener">Kenson Investments &mdash; Rise of tokenized collateral platforms</a></li>
+        </ul>
+      </details>
+
+      <details class="src-item">
+        <summary><span class="src-a">F</span><span class="src-t">Domestic incumbent (TMX / CDS)</span><span class="src-n">4</span></summary>
+        <ul class="src-scroll">
+          <li><a href="https://www.cds.ca/about/cds" target="_blank" rel="noopener">TMX CDS &mdash; About the Canadian Depository for Securities</a></li>
+          <li><a href="https://ca.practicallaw.thomsonreuters.com/3-568-8125" target="_blank" rel="noopener">Practical Law &mdash; CDS Limited overview</a></li>
+          <li><a href="https://www.cds.ca/participants/settlement-and-clearing" target="_blank" rel="noopener">TMX CDS &mdash; Settlement &amp; Clearing (CDSX)</a></li>
+          <li><a href="https://www.tmx.com/investor-relations" target="_blank" rel="noopener">TMX Group &mdash; Investor Relations and filings</a></li>
+        </ul>
+      </details>
+
+      <details class="src-item">
+        <summary><span class="src-a">G</span><span class="src-t">Institutional strategy references</span><span class="src-n">4</span></summary>
+        <ul class="src-scroll">
+          <li><a href="https://councils.forbes.com/blog/from-real-estate-to-credit-rwa-tokenization-is-transforming-ownership-in-2026" target="_blank" rel="noopener">Forbes Councils &mdash; Real Estate to Credit: RWA Tokenization</a></li>
+          <li><a href="https://www.fluidrwa.com/blog/top-tokenization-companies-2026" target="_blank" rel="noopener">FluidRWA &mdash; Top tokenization companies 2026</a></li>
+          <li><a href="https://ledgerwire.lovable.app/article/rwa-tokenization-2026-complete-guide-blackrock-ondo-tokenized-treasuries" target="_blank" rel="noopener">RWA Tokenization 2026 Guide (BlackRock, Ondo)</a></li>
+          <li><a href="https://www.fintechwrapup.com/p/reports-blockchain-enabled-and-stablecoin" target="_blank" rel="noopener">Fintech Wrapup &mdash; Strategic role of stablecoins for Canadian institutions</a></li>
+        </ul>
+      </details>
+
+    </div>
+
+    <p style="margin-top:24px;text-align:center;font-size:12px;color:var(--slate);line-height:1.55;max-width:70ch;margin-left:auto;margin-right:auto">
+      All third-party names and marks are property of their respective owners. 4orm Finance is not affiliated with the Bank of Canada, OSFI, the CSA, CIRO, FINTRAC, or any other regulator. 4orm Finance is not a participant in Project Samara.
+    </p>
+  </div>
+</section>
 <section class="iwstrip">
   <div class="iwstrip-in">
     <div class="iwstrip-eye">Opening August 1, 2026 · 90-day window</div>
@@ -191,7 +296,7 @@
     </div>
     <div class="famfooter-legal">
       <span>© 2026 4orm Finance · Calgary, AB</span>
-      <span><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:compliance@4ormfinance.com">compliance@4ormfinance.com</a></span>
+      <span><a href="faq.html#sources" class="sources-link">Sources &amp; references</a><a href="faq.html">FAQ</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:compliance@4ormfinance.com">compliance@4ormfinance.com</a></span>
     </div>
     <div class="legal-block">
 <h4>Important legal information</h4>
@@ -263,8 +368,8 @@
 })();
 </script>
 <script src="assets/mobile-nav.js?v=1" defer></script>
-<script src="assets/scroll-animate.js?v=102" defer></script>
-<script src="assets/nav-scroll.js?v=102" defer></script>
+<script src="assets/scroll-animate.js?v=105" defer></script>
+<script src="assets/nav-scroll.js?v=105" defer></script>
 
 <!-- v102: Data room access-request modal (single-source across all pages) -->
 <div id="request-access-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="access-modal-title">
@@ -330,7 +435,7 @@
     </div>
   </div>
 </div>
-<script src="assets/access-modal.js?v=102" defer></script>
+<script src="assets/access-modal.js?v=105" defer></script>
 
 </body>
 </html>
