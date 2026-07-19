@@ -1,21 +1,28 @@
 /* v96: taller nav restored — the 140px-logo / 156px-bar sizing Chad had approved earlier. max-width guard kept so a missing PNG still can't render as a huge broken slab. */
-header.nav, .nav { background: #000 !important; overflow: visible !important; }
+/* v98: scroll-hide animation — nav slides off-screen on scroll DOWN, slides back in on scroll UP. */
+header.nav, .nav {
+  background: #000 !important;
+  overflow: visible !important;
+  transition: transform 0.28s cubic-bezier(.22,.9,.3,1) !important;
+  will-change: transform;
+}
+header.nav.nav-hidden { transform: translateY(-100%) !important; }
 .brand-logo {
-  height: 140px !important;
+  height: 118px !important;
   width: auto !important;
-  max-width: 420px !important;
+  max-width: 360px !important;
   margin: 0 !important;
   display: block !important;
   object-fit: contain !important;
 }
-.brand { display: flex !important; align-items: center !important; overflow: visible !important; max-width: 420px !important; }
-.nav-inner, header.nav .nav-inner { min-height: 156px !important; padding-top: 8px !important; padding-bottom: 8px !important; align-items: center !important; overflow: visible !important; }
-header.nav { min-height: 156px; }
+.brand { display: flex !important; align-items: center !important; overflow: visible !important; max-width: 360px !important; }
+.nav-inner, header.nav .nav-inner { min-height: 132px !important; padding-top: 7px !important; padding-bottom: 7px !important; align-items: center !important; overflow: visible !important; }
+header.nav { min-height: 132px; }
 @media (max-width: 900px) {
-  .brand-logo { height: 100px !important; max-width: 300px !important; }
-  .brand { max-width: 300px !important; }
-  .nav-inner, header.nav .nav-inner { min-height: 116px !important; padding-top: 6px !important; padding-bottom: 6px !important; }
-  header.nav { min-height: 116px; }
+  .brand-logo { height: 86px !important; max-width: 260px !important; }
+  .brand { max-width: 260px !important; }
+  .nav-inner, header.nav .nav-inner { min-height: 100px !important; padding-top: 5px !important; padding-bottom: 5px !important; }
+  header.nav { min-height: 100px; }
 }
 
 
