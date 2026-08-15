@@ -31,7 +31,6 @@
   var CTA_LABEL = 'Talk to us';
   var CTA_HREF  = '/contact';
 
-  var LEGEND_HTML = '<strong>Written to be understood.</strong> Every rule on this site is named, dated and linked, so you can check any of it yourself.';
 
   /* The investor data room is deliberately NOT linked or named here. A public
      buyer page has no reason to advertise the address of a confidential
@@ -57,15 +56,6 @@
   }
 
   var ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
-
-  /* ========================================================
-     Preview legend
-     ======================================================== */
-  function buildLegend(){
-    var s = el('div', {class:'preview-legend'});
-    s.innerHTML = LEGEND_HTML;
-    return s;
-  }
 
   /* ========================================================
      Nav
@@ -169,7 +159,6 @@
   /* ========================================================
      Mount
      ======================================================== */
-  mount('legend-mount', buildLegend());
   mount('nav-mount',    buildNav());
   mount('cta-mount',    buildCTA());
   mount('footer-mount', buildFooter());

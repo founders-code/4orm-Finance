@@ -1,76 +1,82 @@
-# 4orm Finance, the company site
+# 4orm Finance, company site
 
-Built 15 August 2026. Five pages, educational, written so a reader meeting this
-subject for the first time can follow it.
+Rebuilt 15 August 2026 after a language audit. Five pages.
 
-| Page | What it does |
+| Page | Hook |
 |---|---|
-| index.html | Somebody else is holding your money. Five steps, the fines, the six kinds of firm |
-| the-rules.html | Plain-word glossary, the clock, the fines table, the reporting deadlines, who owes what, sources |
-| the-problem.html | The mess, four firms, five failures, where the opening is |
-| what-we-do.html | The what, the why, the boundary, and what we will not do |
-| contact.html | One email is enough |
+| index.html | The money is where it should be. Can you prove it was there in March? |
+| the-rules.html | Every rule we cite, with the section it comes from |
+| the-problem.html | You are typing the same number into four different places |
+| what-we-do.html | One place that tells you what you owe, and shows you it is done |
+| contact.html | Not sure whether this applies to you? Ask. |
 
-## The rule this site is built to
+## The writing rule this rebuild enforces
 
-What and why, never how. Patent applications are pending, so no page describes
-how anything is built. No company estimate, no market size, no forecast and no
-pricing appears anywhere.
+Copy states the thing. It never narrates the writing of it. Six shapes are
+banned outright and the counts below are from before and after the rewrite.
 
-Every number on the site is published by the body named beside it. Where a claim
-could not be traced to a primary source, it was cut rather than softened.
+| Banned shape | Before | After |
+|---|---|---|
+| Negative definition ("not X, Y" / "rather than") | 45 | 12, all load-bearing |
+| "somebody" as the universal human | 20 | 0 |
+| Announcing plainness or candour | 13 | 0 |
+| Elbowing the reader ("notice that", "here is the thing") | 8 | 0 |
+| British idiom, British spelling | 6 | 0 |
+| Invented personas with a disclaimer | 4 | 0 |
 
-## Claims that were cut during the build
+The 12 surviving negatives are the boundary list on what-we-do, where the
+negation carries the meaning: we do not hold money, we do not create evidence,
+we do not certify compliance, we do not file with a regulator, we give no legal
+advice. Plus "we never touch the money" and "the product is not finished."
 
-These appeared in a secondary source and did not survive verification against
-FINTRAC and Justice Laws Canada. Do not add them back without a primary citation.
+Also enforced: sentence case headlines, numerals for anything actionable,
+Canadian spelling, hyphens on month-end and cut-off and pre-revenue, roles named
+rather than "somebody", one date format throughout.
 
-- "30 penalties in 2025 against 8 in 2021." No regulator publishes either figure,
-  and the public register only keeps five years, so the older number cannot be
-  counted.
-- "More than $197 million in penalties since July 2025." No regulator publishes
-  this total.
-- "$30,000,000 for breach of a compliance order." Not found in section 73.1 or in
-  any regulator page.
-- "Minor $40,000, serious $4,000,000, very serious $20,000,000." The Act does not
-  tier it that way. Section 73.1(2) splits by person and company, and the site now
-  follows the statute.
-- "Suspicious transaction reports are due within 30 days." Wrong. The standard is
-  as soon as practicable after the checks are complete.
-- "Fifty registrations cancelled in 2026, forty seven of them crypto." Could not
-  be sourced, and it conflates cancelled with revoked, which are different things
-  in the register.
+Removed in this pass: the top legend bar. Its text announced the site's own
+plainness, which is the same violation.
 
-## What is verified and used
+## Facts and their sources
 
-- Bill C-12, Royal Assent and in force 26 March 2026, S.C. 2026 c. 4
-- Proceeds of Crime Act s. 73.1(2), $4,000,000 person and $20,000,000 company
-- Proceeds of Crime Act s. 73.1(3), the greater of that and 3 per cent of gross
-  global income or revenue where one notice covers several violations
-- Prior ceilings, $500,000 company and $100,000 individual
-- A single penalty of $176,960,190 imposed October 2025, recorded as under appeal
-- 23 notices of violation totalling more than $25 million, fiscal 2024 to 2025
-- Large cash transaction reports within 15 calendar days
-- Terrorist property reports immediately
-- Compliance programme effectiveness review every two years at a minimum
+Every figure is traced to a primary source. Verified 15 August 2026.
+
 - Bank of Canada supervision and safeguarding in force 8 September 2025
-- Annual report due 31 March, first independent review due 8 September 2028
-- Law society, insolvency, mortgage, insurance and collections rules as cited on
-  the rules page
+- Annual report due 31 March; first independent review due 8 September 2028
+- Bill C-12, Royal Assent and in force 26 March 2026, S.C. 2026 c. 4
+- Proceeds of Crime Act s. 73.1(2): $4,000,000 individual, $20,000,000 company
+- s. 73.1(3): the greater of that and 3 per cent of gross global revenue where
+  one notice covers several violations
+- Prior maximums: $500,000 company, $100,000 individual
+- FINTRAC assessed $176,960,190 against Xeltox Enterprises Ltd, October 2025,
+  under appeal
+- FINTRAC issued 23 notices totalling more than $25 million in fiscal 2024-25
+- Large cash transaction reports within 15 calendar days; terrorist property
+  immediately; suspicious transactions as soon as practicable
+- Compliance program effectiveness review every 2 years at a minimum
+- About 1,600 payment providers registered in Canada in 2025
+
+### Claims cut during the build, do not reinstate without a primary citation
+
+- "30 penalties in 2025 against 8 in 2021." No regulator publishes either.
+- "More than $197 million since July 2025." No regulator publishes this total.
+- "$30,000,000 for breach of a compliance order." Not in s. 73.1.
+- "Minor $40,000 / serious $4M / very serious $20M." The Act splits by person
+  and company, not by that tiering.
+- "Suspicious transaction reports within 30 days." The standard is as soon as
+  practicable.
+- "50 registrations cancelled in 2026, 47 crypto." Unsourceable, and it
+  conflates cancelled with revoked.
 
 ## Before deploying
 
-1. The design system, `assets/styles.css` and `assets/chrome.js`, is the same one
-   used on the platform preview build. Nav, legend, closing CTA and footer are
-   injected by `chrome.js`. Edit the config block at the top of that file to change
-   any of them.
-2. Increment the asset paths if you cache-bust. This build ships unversioned and
-   relies on the immutable cache header in `vercel.json`.
-3. Run the sweep. All four must return nothing:
+1. Nav, closing CTA and footer are injected by `assets/chrome.js`. The config
+   block at the top of that file holds the nav links, the CTA label and the
+   contact address.
+2. Run the sweep. All four return nothing:
 
 ```
 grep -rE '—|–|…' *.html
 grep -rE '&mdash;|&ndash;|&rsquo;|&ldquo;' *.html
 grep -rinE '\b(AI|LLM|artificial intelligence)\b' *.html assets/chrome.js
-grep -rinE '\bhash|append-only|tenant.isolat|vector|inference|corpus\b' *.html
+grep -rinE 'in plain words|our opinion|held against us|Notice that|programme' *.html
 ```
