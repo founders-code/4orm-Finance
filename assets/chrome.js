@@ -114,11 +114,11 @@
         '<div class="footer-grid">' +
           '<div>' +
             '<h5>' + BRAND_NAME + '</h5>' +
-            '<p>Software for firms that hold money belonging to somebody else. It does the checking the law asks for, keeps the proof, and produces it when somebody asks. An Alberta company.</p>' +
+            '<p>Software for firms that hold money belonging to their clients. It does the checking the law asks for, keeps the proof, and produces it when it is asked for. A Calgary company.</p>' +
             '<div class="foot-contact">' +
               '<div class="fc-lbl">Get in touch</div>' +
               '<a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>' +
-                            '<span class="fc-addr">Alberta, Canada</span>' +
+                            '<span class="fc-addr">Calgary, Alberta, Canada</span>' +
             '</div>' +
           '</div>' +
           '<div><h6>This site</h6><ul>' +
@@ -141,15 +141,15 @@
         '</div>' +
 
         '<div class="legal-block">' +
-          '<p><strong>Written for a general reader.</strong> This site explains published rules in plain words so that somebody meeting them for the first time can follow them. Plain wording is a summary and the instrument itself governs. Every rule named here is linked so you can read the wording yourself.</p>' +
+          '<p><strong>Written for a general reader.</strong> This site explains published rules in plain words so that a reader meeting them for the first time can follow them. Plain wording is a summary and the instrument itself governs. Every rule named here is linked so you can read the wording yourself.</p>' +
           '<p><strong>Not advice.</strong> Nothing on this site is legal, compliance, accounting, tax or investment advice, and nothing here is an offer to sell or a solicitation to buy securities. A firm subject to the Retail Payment Activities Act, the Proceeds of Crime (Money Laundering) and Terrorist Financing Act or a provincial real estate act should take its own advice on what those statutes require of it.</p>' +
           '<p><strong>No affiliation.</strong> 4orm Finance is an independent company. It is not affiliated with, endorsed by, sponsored by, acting for or approved by the Bank of Canada, FINTRAC, OSFI, the Canadian Securities Administrators, any provincial regulator or any other public body named anywhere on this site. Those bodies are named only to identify the statutes and published requirements this software is built to serve.</p>' +
           '<p><strong>Intellectual property.</strong> Patent applications pending. This site describes what the platform produces. It does not describe how any of it is produced, and the underlying design is confidential and shown only under a written agreement.</p>' +
-          '<p><strong>Sources.</strong> Statutory dates and penalty ceilings cited on this site are drawn from the Bank of Canada retail payments pages, the Retail Payment Activities Act and the Retail Payment Activities Regulations SOR/2023-229, and from Bill C-12 as it came into force on 26 March 2026. Readers should confirm all of them against the current published text before relying on any of them.</p>' +
+          '<p><strong>Sources.</strong> Dates, deadlines and penalty ceilings cited on this site are drawn from the Retail Payment Activities Act and its regulations SOR/2023-229, the Proceeds of Crime (Money Laundering) and Terrorist Financing Act, Bill C-12 as it came into force on 26 March 2026 (S.C. 2026, c. 4), the Canada Evidence Act sections 31.1 to 31.8, and notices published by FINTRAC. Readers should confirm all of them against the current published text before relying on any of them.</p>' +
         '</div>' +
 
         '<div class="copy-row">' +
-          '<span>&#169; ' + year + ' ' + BRAND_NAME + ' &#183; Alberta, Canada</span>' +
+          '<span>&#169; ' + year + ' ' + BRAND_NAME + ' &#183; Calgary, Alberta, Canada</span>' +
           '<span>Plain English &#183; every rule named and linked</span>' +
         '</div>' +
       '</div>';
