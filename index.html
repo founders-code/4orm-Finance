@@ -1,1424 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>4orm Finance · Canada's neutral settlement layer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=105">
-<link rel="stylesheet" href="assets/site.css?v=105">
-<link rel="stylesheet" href="assets/landing.css?v=105">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Somebody else is holding your money right now &#183; 4orm Finance</title>
+  <meta name="description" content="Money you own spends much of its life in somebody else's bank account. Plain English on what the law requires them to prove, what the fines are, and what we are building for it." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Somebody else is holding your money right now &#183; 4orm Finance" />
+  <meta property="og:description" content="Money you own spends much of its life in somebody else's bank account. Plain English on what the law requires them to prove, what the fines are, and what we are building for it." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.4ormfinance.com/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://www.4ormfinance.com/" />
+  <meta property="og:site_name" content="4orm Finance" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://www.4ormfinance.com/" />
+  <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0B1220" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/styles.css" />
 </head>
-<body>
+<body data-page="home">
+  <div id="legend-mount"></div>
+  <div id="nav-mount"></div>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="index.html"><img class="brand-logo" src="assets/4orm-logo-white-cropped.png?v=105" alt="4orm Finance" /></a>
-    <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
-      <span class="nav-hamburger-bar" aria-hidden="true"></span>
-      <span class="nav-hamburger-bar" aria-hidden="true"></span>
-      <span class="nav-hamburger-bar" aria-hidden="true"></span>
-    </button>
-    <nav class="nav-links" id="primaryNav">
-      <a href="index.html" class="active">Home</a>
-      <a href="platform.html">Platform</a>
-      <a href="who.html">Who we serve</a>
-      <a href="market.html">Market Opportunity</a>
-      <a href="regulatory.html">Regulatory</a>
-      <a href="leadership.html">Leadership</a>
-      <a href="faq.html">FAQ</a>
-      <a href="https://4ormex.com" target="_blank" rel="noopener">4ormEx ↗</a>
-      <a href="https://4ormdr.com" class="nav-auth">Request access to data room</a>
-    </nav>
-  </div>
-</header>
+  <main>
 
-<!-- HERO -->
-<section class="hero"><div class="wrap">
-  <div class="hero-grid">
-    <div class="hero-copy">
-      <div class="hero-eye"><span class="hero-eye-dot"></span>4ORM FINANCE &middot; REGULATED SETTLEMENT INFRASTRUCTURE</div>
-      <h1>Canada's <span class="g">neutral settlement layer</span> for tokenized finance.</h1>
-      <p class="lead">Canada's tokenized economy needs one neutral settlement layer, denominated in Canadian dollars, trusted by banks and issuers alike. <b style="color:var(--blue)">That's what 4orm does.</b></p>
-      <div class="cta">
-        <a class="btn lg" href="https://4ormdr.com">Request data room access</a>
-        <a class="btn ghost lg" href="mailto:office@4ormfinance.com?subject=4orm%20Finance%20-%20Inquiry">Talk to us</a>
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="hero-eye"><span class="bar"></span><span class="txt">4orm Finance</span></div>
+        <h1>Somebody Else Is Holding Your Money <span class="accent">Right Now.</span></h1>
+        <p class="lede">Your pay before it reaches your account. The deposit on a house, sitting with a lawyer. The rent
+  you sent last week. Money you own spends a lot of its life in somebody else's bank account, and the
+  law is strict about what that somebody has to be able to prove. This site explains that duty in
+  plain words, why it is hard to meet, and what we are building for it.</p>
       </div>
-      <div class="hero-metric">
-        <span class="pulse-dot"></span>
-        <span><b>Pre-seed opens August 1, 2026</b> &nbsp;&middot;&nbsp; SAFE, TFSA/RRSP eligible</span>
-      </div>
-    </div>
-    <div class="hero-visual" aria-hidden="true">
-      <!-- v94 VERTICAL REDESIGN — inputs at top, 4orm ledger in the middle, single SETTLED output at the bottom.
-           All three input dots arrive at the commit node at the same instant ("commit as one"). One canonical output. -->
-      <svg viewBox="0 0 500 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Title, cash, and rules commit as one through 4orm, producing a single settled state">
-        <defs>
-          <filter id="drop-soft" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0F1A30" flood-opacity=".18"/>
-          </filter>
-          <linearGradient id="ledger-bar" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#0B1220"/>
-            <stop offset="1" stop-color="#182446"/>
-          </linearGradient>
-          <linearGradient id="output-glow" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#2E6BF2" stop-opacity=".05"/>
-            <stop offset="1" stop-color="#1F9D6B" stop-opacity=".18"/>
-          </linearGradient>
-
-          <!-- v100: knock white pixels out of any raster mark so the PNG background never shows on the black badge, regardless of what version is deployed -->
-          <filter id="knockout-white" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
-            <feColorMatrix type="matrix" values="
-              1 0 0 0 0
-              0 1 0 0 0
-              0 0 1 0 0
-              -1 -1 -1 3 0"/>
-          </filter>
-        </defs>
-
-        <!-- SECTION HEADERS on the left rail -->
-        <text x="250" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".28em" font-weight="800" fill="#5E6E88" opacity=".55">THREE INPUTS</text>
-
-        <!-- ============================================================ -->
-        <!-- TOP: THREE INPUT PILLS (side by side)                          -->
-        <!-- ============================================================ -->
-
-        <!-- TITLE pill (left) — pill labels bumped 12→14, subtitle 8.5→10 -->
-        <g>
-          <rect x="55" y="42" width="110" height="36" rx="18" fill="#EAF1FE" stroke="#B7CEFA" stroke-width="1.3"/>
-          <text x="110" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing=".24em" font-weight="800" fill="#2E6BF2">TITLE</text>
-          <text x="110" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".18em" font-weight="700" fill="#5E6E88" opacity=".7">ASSET LEDGER</text>
-        </g>
-
-        <!-- CASH pill (center) -->
-        <g>
-          <rect x="195" y="42" width="110" height="36" rx="18" fill="#E8F7EF" stroke="#A8DFC1" stroke-width="1.3"/>
-          <text x="250" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing=".24em" font-weight="800" fill="#1F9D6B">CASH</text>
-          <text x="250" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".18em" font-weight="700" fill="#5E6E88" opacity=".7">TOKENIZED $</text>
-        </g>
-
-        <!-- RULES pill (right) -->
-        <g>
-          <rect x="335" y="42" width="110" height="36" rx="18" fill="#FBF3DE" stroke="#EFD79B" stroke-width="1.3"/>
-          <text x="390" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing=".24em" font-weight="800" fill="#B58A28">RULES</text>
-          <text x="390" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".18em" font-weight="700" fill="#5E6E88" opacity=".7">COMPLIANCE</text>
-        </g>
-
-        <!-- ============================================================ -->
-        <!-- STREAMS: three colored streams flowing DOWN, converging at COMMIT node at (250, 300) -->
-        <!-- All three animated dots share begin="0s" + dur="3.4s" so they arrive at the commit AT THE SAME INSTANT -->
-        <!-- ============================================================ -->
-
-        <!-- TITLE stream (curves right into center) -->
-        <path d="M 110 108 L 110 200 Q 110 260 190 285 L 240 298" stroke="#2E6BF2" stroke-width="2.6" fill="none"/>
-        <circle r="5.5" fill="#2E6BF2">
-          <animateMotion dur="3.4s" begin="0s" repeatCount="indefinite" path="M 110 108 L 110 200 Q 110 260 190 285 L 240 298"/>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.92;1" dur="3.4s" begin="0s" repeatCount="indefinite"/>
-        </circle>
-
-        <!-- CASH stream (straight down) -->
-        <path d="M 250 108 L 250 288" stroke="#1F9D6B" stroke-width="2.6" fill="none"/>
-        <circle r="5.5" fill="#1F9D6B">
-          <animateMotion dur="3.4s" begin="0s" repeatCount="indefinite" path="M 250 108 L 250 288"/>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.92;1" dur="3.4s" begin="0s" repeatCount="indefinite"/>
-        </circle>
-
-        <!-- RULES stream (curves left into center) -->
-        <path d="M 390 108 L 390 200 Q 390 260 310 285 L 260 298" stroke="#B58A28" stroke-width="2.6" fill="none"/>
-        <circle r="5.5" fill="#B58A28">
-          <animateMotion dur="3.4s" begin="0s" repeatCount="indefinite" path="M 390 108 L 390 200 Q 390 260 310 285 L 260 298"/>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.92;1" dur="3.4s" begin="0s" repeatCount="indefinite"/>
-        </circle>
-
-        <!-- ============================================================ -->
-        <!-- COMMIT NODE (all three streams arrive here simultaneously)     -->
-        <!-- ============================================================ -->
-        <text x="250" y="278" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing=".28em" font-weight="800" fill="#2E6BF2" opacity=".9">COMMIT</text>
-
-        <g transform="translate(250, 310)">
-          <!-- Breathing outer ring -->
-          <circle r="26" fill="none" stroke="#2E6BF2" stroke-width="1.2" opacity=".45">
-            <animate attributeName="r" values="26;42;26" dur="2.4s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values=".55;0;.55" dur="2.4s" repeatCount="indefinite"/>
-          </circle>
-          <!-- Solid node -->
-          <circle r="13" fill="#2E6BF2" filter="url(#drop-soft)"/>
-          <circle r="13" fill="none" stroke="#FFFFFF" stroke-width="1.6" opacity=".9"/>
-        </g>
-
-        <!-- Bridge DOWN from commit node into the ledger pill -->
-        <line x1="250" y1="323" x2="250" y2="360" stroke="#0B1220" stroke-width="3.4"/>
-
-        <!-- ============================================================ -->
-        <!-- 4ORM LEDGER BADGE — proper circle, blue "4" mark inside       -->
-        <!-- v95 spacing pass: caption labels pushed OFF the circle        -->
-        <!-- ============================================================ -->
-
-        <!-- Caption ABOVE — moved up so it clears the circle top -->
-        <text x="250" y="330" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing=".28em" font-weight="800" fill="#5E6E88" opacity=".7">ONE CANONICAL LEDGER</text>
-
-        <!-- Circle badge (unchanged size — chad's happy with it) -->
-        <circle cx="250" cy="410" r="62" fill="url(#ledger-bar)" filter="url(#drop-soft)"/>
-        <circle cx="250" cy="410" r="62" fill="none" stroke="#2E6BF2" stroke-width="1.3" opacity=".55"/>
-
-        <!-- 4orm mark (blue "4") — white-pixel-knockout filter applied so no matter what PNG version is deployed, no white background can bleed onto the black badge -->
-        <image href="assets/4orm-mark.png?v=105"
-               x="204" y="364" width="92" height="92"
-               preserveAspectRatio="xMidYMid meet"
-               filter="url(#knockout-white)"/>
-
-        <!-- Live status LED, riding the top-right corner of the badge -->
-        <circle cx="305" cy="368" r="4" fill="#1F9D6B">
-          <animate attributeName="opacity" values="1;.25;1" dur="1.6s" repeatCount="indefinite"/>
-        </circle>
-
-        <!-- Compact scanline underneath the badge -->
-        <line x1="205" y1="486" x2="295" y2="486" stroke="#2E6BF2" stroke-width="1" stroke-dasharray="2 4" opacity=".45"/>
-
-        <!-- Caption BELOW — moved down so it clears the circle bottom -->
-        <text x="250" y="506" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing=".24em" font-weight="700" fill="#5E6E88" opacity=".65">SETTLEMENT FINAL AT COMMIT</text>
-
-        <!-- Bridge DOWN from badge caption zone to output commit node -->
-        <line x1="250" y1="518" x2="250" y2="552" stroke="#0B1220" stroke-width="3.4"/>
-
-        <!-- ============================================================ -->
-        <!-- OUTPUT COMMIT NODE (single node — one output, not three)      -->
-        <!-- ============================================================ -->
-        <g transform="translate(250, 570)">
-          <circle r="26" fill="none" stroke="#2E6BF2" stroke-width="1.2" opacity=".45">
-            <animate attributeName="r" values="26;42;26" dur="2.4s" begin=".3s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values=".55;0;.55" dur="2.4s" begin=".3s" repeatCount="indefinite"/>
-          </circle>
-          <circle r="13" fill="#2E6BF2" filter="url(#drop-soft)"/>
-          <circle r="13" fill="none" stroke="#FFFFFF" stroke-width="1.6" opacity=".9"/>
-        </g>
-
-        <!-- Single unified output stream flowing DOWN to the SETTLED receiver -->
-        <path d="M 250 563 L 250 700" stroke="#2E6BF2" stroke-width="3.4" fill="none"/>
-        <circle r="6" fill="#2E6BF2">
-          <animateMotion dur="3.4s" begin="0.3s" repeatCount="indefinite" path="M 250 563 L 250 700"/>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.92;1" dur="3.4s" begin="0.3s" repeatCount="indefinite"/>
-        </circle>
-
-        <!-- ============================================================ -->
-        <!-- SETTLED RECEIVER — SINGLE prominent output at the bottom      -->
-        <!-- ============================================================ -->
-        <!-- Faint gradient haze behind for "settled zone" -->
-        <rect x="30" y="700" width="440" height="180" rx="20" fill="url(#output-glow)"/>
-
-        <!-- Large receiver pill -->
-        <rect x="80" y="720" width="340" height="110" rx="55" fill="#0B1220" stroke="#1F9D6B" stroke-width="1.8" filter="url(#drop-soft)"/>
-
-        <!-- Large label — reduced 25% from 34 to 26 -->
-        <text x="250" y="770" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" letter-spacing=".18em" font-weight="900" fill="#FFFFFF">SETTLED</text>
-        <text x="250" y="800" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing=".22em" font-weight="700" fill="#1F9D6B">TITLE + CASH + RULES DELIVERED</text>
-
-        <!-- Green LED on receiver -->
-        <circle cx="112" cy="745" r="5" fill="#1F9D6B">
-          <animate attributeName="opacity" values="1;.3;1" dur="1.6s" repeatCount="indefinite"/>
-        </circle>
-      </svg>
-      <div class="hv-cap">Title. Cash. Rules. Committed as one. Settled as one, on one canonical ledger.</div>
-    </div>
-  </div>
-</div></section>
-
-<!-- INDUSTRY CHALLENGE / INDUSTRY SOLUTION / BENEFITS (three-column) -->
-<section class="sec dark" id="challenge-solution"><div class="wrap">
-  <div class="cs2 cs3">
-    <div class="cs-col">
-      <div class="cs-h">INDUSTRY CHALLENGE</div>
-      <div class="cs-item">
-        <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="8" height="12" rx="1"/><rect x="20" y="10" width="8" height="12" rx="1"/><path d="M13 16 h6" stroke-dasharray="2 2"/><path d="M14 13 l-2 3 l2 3 M18 13 l2 3 l-2 3"/></svg></div>
-        <div>
-          <h4>No cross-institution settlement</h4>
-          <p>Cross-bank tokenized transfers do not settle domestically today. A tokenized asset held at one Canadian institution cannot move to another without leaving the country.</p>
-        </div>
-      </div>
-      <div class="cs-item">
-        <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="9" height="9" rx="1.5"/><rect x="20" y="6" width="9" height="9" rx="1.5"/><rect x="3" y="19" width="9" height="9" rx="1.5"/><rect x="20" y="19" width="9" height="9" rx="1.5"/></svg></div>
-        <div>
-          <h4>Fragmented platforms</h4>
-          <p>Every major bank builds its own private tokenization platform. Each one is a walled garden. None of them connect to each other.</p>
-        </div>
-      </div>
-      <div class="cs-item">
-        <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M4 16h24 M16 4c4 4 4 20 0 24 M16 4c-4 4-4 20 0 24"/></svg></div>
-        <div>
-          <h4>Foreign settlement</h4>
-          <p>Without a domestic neutral layer, Canadian assets that need to move tokenize on <b class="cs-num-g">US infrastructure</b>. The fees, the control, and the data leave the country.</p>
-        </div>
-      </div>
-      <div class="cs-item">
-        <div class="cs-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#9AB6FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8 L14 8 L14 20 L26 20 L26 26" /><path d="M4 26 h24" /><circle cx="6" cy="8" r="2"/><circle cx="14" cy="20" r="2"/><circle cx="26" cy="20" r="2"/></svg></div>
-        <div>
-          <h4>Trapped liquidity</h4>
-          <p>Buyers on one bank's platform cannot access sellers on another's. Every institution rebuilds the same infrastructure in parallel, and liquidity fragments across each bank's private stack.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cs-div" aria-hidden="true"></div>
-
-    <div class="cs-col cs-sol">
-      <div class="cs-h">INDUSTRY SOLUTION</div>
-      <div class="cs-item">
-        <div class="cs-icon sol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#7BE3B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M10 16 l4 4 l8-8"/></svg></div>
-        <div>
-          <h4>Settlement finality</h4>
-          <p>Title and cash leg commit in the same block, delivery versus payment. <b class="cs-num-a">T+0</b>. Capital freed the moment the transaction commits.</p>
-        </div>
-      </div>
-      <div class="cs-item">
-        <div class="cs-icon sol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#7BE3B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="5"/><circle cx="5" cy="7" r="2.5"/><circle cx="27" cy="7" r="2.5"/><circle cx="5" cy="25" r="2.5"/><circle cx="27" cy="25" r="2.5"/><path d="M14 14 L7 9 M18 14 L25 9 M14 18 L7 23 M18 18 L25 23"/></svg></div>
-        <div>
-          <h4>One neutral layer</h4>
-          <p>Every bank, every issuer, every custodian settles across the same regulated Canadian-dollar layer. Owned by no bank. Used by all of them.</p>
-        </div>
-      </div>
-      <div class="cs-item">
-        <div class="cs-icon sol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#7BE3B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26 L6 10 L26 10 L26 26 Z"/><path d="M6 14 L26 14"/><path d="M11 20 h4 M17 20 h4"/></svg></div>
-        <div>
-          <h4>Onshore economics</h4>
-          <p>The cash leg is a bank-issued tokenized deposit under Canadian banking authorization. <b class="cs-num-a">Fees, control, and data stay in Canada.</b></p>
-        </div>
-      </div>
-      <div class="cs-item">
-        <div class="cs-icon sol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#7BE3B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 L28 10 L28 20 C28 25 22 28 16 30 C10 28 4 25 4 20 L4 10 Z"/></svg></div>
-        <div>
-          <h4>Regulated by design</h4>
-          <p>Inside the Canadian perimeter. Supervisory feeds to <b class="cs-num-a">OSFI, CSA, CIRO, FINTRAC</b> at the moment of commit. Not around the rules. Inside them.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cs-div" aria-hidden="true"></div>
-
-    <div class="cs-col cs-ben">
-      <div class="cs-h">BENEFITS</div>
-      <div class="cs-item">
-        <div class="cs-icon ben" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#FFD9A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24 L14 12 L20 18 L28 8"/><path d="M20 8 L28 8 L28 16"/></svg></div>
-        <div>
-          <h4>Faster capital velocity</h4>
-          <p>T+0 commit frees capital the same block the trade settles. <b class="cs-num-y">No T+2 window. No trapped balance sheet.</b></p>
-        </div>
-      </div>
-      <div class="cs-item">
-        <div class="cs-icon ben" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#FFD9A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="10"/><path d="M6 16 h20 M16 6 c4 3 4 17 0 20 M16 6 c-4 3 -4 17 0 20"/></svg></div>
-        <div>
-          <h4>Universal Canadian reach</h4>
-          <p>Every regulated FI, custodian, and issuer connects through one shared layer. <b class="cs-num-y">Multi-institution liquidity, not walled gardens.</b></p>
-        </div>
-      </div>
-      <div class="cs-item">
-        <div class="cs-icon ben" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#FFD9A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26 L6 6 L26 6 L26 26 Z"/><path d="M11 20 h10 M11 15 h10 M11 10 h6"/></svg></div>
-        <div>
-          <h4>Domestic value capture</h4>
-          <p>Fees, control, custody, and data all stay in Canada. <b class="cs-num-y">Value compounds at home, not offshore.</b></p>
-        </div>
-      </div>
-      <div class="cs-item">
-        <div class="cs-icon ben" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#FFD9A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 L27 9 L27 19 C27 24 22 27 16 29 C10 27 5 24 5 19 L5 9 Z"/><path d="M11 16 l4 4 l7-8"/></svg></div>
-        <div>
-          <h4>Regulator-native trust</h4>
-          <p>Supervisory feeds delivered at the moment of commit, not weeks after. <b class="cs-num-y">Institutional trust engineered in, not bolted on.</b></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div></section>
-
-<!-- CURRENT LOGISTICS (islands today vs connected on 4orm) -->
-<section class="sec alt" id="logistics"><div class="wrap">
-  <span class="eyebrow">The Challenge</span>
-  <h2 class="sec-h">Every asset is trapped <span class="g">on its own private island.</span></h2>
-
-  <!-- TODAY: unified frame around bullets + islands scene -->
-  <div class="flow-block current">
-    <div class="flow-tag" style="color:var(--blue);font-size:14px">TODAY</div>
-    <div class="flow-title">Private tokenization platforms. No shared settlement layer.</div>
-
-    <ul class="problem-bullets tight framed">
-      <li><b>A tokenized asset at one bank cannot reach a buyer at another.</b></li>
-      <li>Every institution rebuilds the same infrastructure in parallel.</li>
-      <li>Liquidity fragments across each bank's private platform.</li>
-      <li>Fees, control, and data leak offshore to US infrastructure.</li>
-      <li>No canonical ledger connects any of it.</li>
-    </ul>
-
-    <div class="islands-scene">
-      <svg class="islands-canvas" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <!-- Real blue sky, brighter at top, softer near horizon -->
-          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#6BAEDB"/>
-            <stop offset=".55" stop-color="#9CC8E5"/>
-            <stop offset="1" stop-color="#D3E4EF"/>
-          </linearGradient>
-          <!-- Warm sun with soft outer glow -->
-          <radialGradient id="sun-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="#FFE38A" stop-opacity=".85"/>
-            <stop offset=".4" stop-color="#FFC94D" stop-opacity=".35"/>
-            <stop offset="1" stop-color="#FFC94D" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="sun-core" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="#FFF6D8"/>
-            <stop offset=".7" stop-color="#FFD86B"/>
-            <stop offset="1" stop-color="#F5B944"/>
-          </radialGradient>
-          <linearGradient id="sand-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9A96B"/><stop offset="1" stop-color="#8A5C22"/></linearGradient>
-          <linearGradient id="ocean-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3E7CA6"/><stop offset="1" stop-color="#1E4E76"/></linearGradient>
-        </defs>
-
-        <!-- Sky backdrop -->
-        <rect x="0" y="0" width="800" height="180" fill="url(#sky)"/>
-
-        <!-- Sun in upper right, with glow -->
-        <circle cx="710" cy="52" r="60" fill="url(#sun-glow)"/>
-        <circle cx="710" cy="52" r="22" fill="url(#sun-core)"/>
-
-        <!-- Distant clouds -->
-        <g fill="#FFFFFF" opacity=".55">
-          <ellipse cx="140" cy="45" rx="30" ry="8"/>
-          <ellipse cx="160" cy="52" rx="22" ry="6"/>
-          <ellipse cx="420" cy="30" rx="26" ry="7"/>
-          <ellipse cx="440" cy="36" rx="18" ry="5"/>
-        </g>
-
-        <!-- Birds, animated seagull silhouettes floating across the sky -->
-        <g fill="none" stroke="#243554" stroke-width="1.6" stroke-linecap="round" opacity=".78">
-          <path d="M0 0 q4 -5 8 0 q4 -5 8 0" transform="translate(80 90)">
-            <animateTransform attributeName="transform" type="translate" values="80 90; 300 78; 560 92; 80 90" dur="24s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values=".78;.9;.6;.78" dur="24s" repeatCount="indefinite"/>
-          </path>
-          <path d="M0 0 q3 -4 6 0 q3 -4 6 0" transform="translate(240 70)">
-            <animateTransform attributeName="transform" type="translate" values="240 70; 460 62; 700 78; 240 70" dur="30s" repeatCount="indefinite"/>
-          </path>
-          <path d="M0 0 q3 -4 6 0 q3 -4 6 0" transform="translate(510 110)">
-            <animateTransform attributeName="transform" type="translate" values="510 110; 640 100; 780 116; 510 110" dur="28s" begin="4s" repeatCount="indefinite"/>
-          </path>
-          <path d="M0 0 q4 -5 8 0 q4 -5 8 0" transform="translate(360 130)">
-            <animateTransform attributeName="transform" type="translate" values="360 130; 580 118; 780 140; 360 130" dur="26s" begin="8s" repeatCount="indefinite"/>
-          </path>
-        </g>
-
-        <!-- Sun glint on water -->
-        <ellipse cx="710" cy="200" rx="90" ry="4" fill="#FFE38A" opacity=".35"/>
-
-        <!-- Ocean base -->
-        <rect x="0" y="175" width="800" height="105" fill="url(#ocean-g)"/>
-
-        <!-- Wave lines animated across the ocean -->
-        <g stroke="#FFFFFF" stroke-width="1.4" fill="none" opacity=".55" stroke-linecap="round">
-          <path d="M-100 205 Q-50 200 0 205 T100 205 T200 205 T300 205 T400 205 T500 205 T600 205 T700 205 T800 205 T900 205">
-            <animateTransform attributeName="transform" type="translate" from="0 0" to="100 0" dur="4s" repeatCount="indefinite"/>
-          </path>
-          <path d="M-100 228 Q-50 222 0 228 T100 228 T200 228 T300 228 T400 228 T500 228 T600 228 T700 228 T800 228 T900 228">
-            <animateTransform attributeName="transform" type="translate" from="0 0" to="-100 0" dur="6s" repeatCount="indefinite"/>
-          </path>
-          <path d="M-100 250 Q-50 245 0 250 T100 250 T200 250 T300 250 T400 250 T500 250 T600 250 T700 250 T800 250 T900 250" opacity=".35">
-            <animateTransform attributeName="transform" type="translate" from="0 0" to="100 0" dur="7s" repeatCount="indefinite"/>
-          </path>
-        </g>
-
-        <!-- Small blocking X marks over the water between islands -->
-        <g opacity=".8">
-          <g transform="translate(275 155)"><line x1="-6" y1="-6" x2="6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="-6" x2="-6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/></g>
-          <g transform="translate(565 155)"><line x1="-6" y1="-6" x2="6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="-6" x2="-6" y2="6" stroke="#C25252" stroke-width="2.5" stroke-linecap="round"/></g>
-        </g>
-
-        <!-- ============ ISLAND 1 ============ -->
-        <g>
-          <!-- sand: flat plateau where the building sits, curves down to water on each side -->
-          <path d="M55 195 Q78 168 105 141 L175 141 Q202 168 225 195 Z" fill="url(#sand-g)"/>
-          <!-- foamy shoreline -->
-          <path d="M55 195 Q90 190 140 188 Q190 190 225 195" stroke="#FFFFFF" stroke-width="1.6" fill="none" opacity=".7">
-            <animate attributeName="opacity" values=".7;.35;.7" dur="2.4s" repeatCount="indefinite"/>
-          </path>
-          <!-- bank building: bottom sits ON sand at y=143 -->
-          <rect x="115" y="88" width="50" height="55" fill="#3A4E75"/>
-          <polygon points="108,88 140,66 172,88" fill="#2E3E5C"/>
-          <!-- windows (upper row) -->
-          <rect x="120" y="98" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="133" y="98" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="146" y="98" width="7" height="10" fill="#DDE7F5"/>
-          <!-- windows flanking door -->
-          <rect x="118" y="115" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="148" y="115" width="7" height="10" fill="#DDE7F5"/>
-          <!-- door (dark opening) -->
-          <rect x="132" y="115" width="12" height="28" fill="#0F1A30"/>
-          <!-- door arch top -->
-          <path d="M132 118 Q138 113 144 118" stroke="#0F1A30" stroke-width="2" fill="none"/>
-          <!-- PERSON A standing IN FRONT of door, waving right (toward B) -->
-          <g transform="translate(138 143)">
-            <!-- head -->
-            <circle cx="0" cy="-22" r="4.2" fill="#F5D6B0"/>
-            <!-- body -->
-            <rect x="-4" y="-18" width="8" height="14" fill="#2E6BF2" rx="1"/>
-            <!-- legs -->
-            <line x1="-2" y1="-4" x2="-2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
-            <line x1="2" y1="-4" x2="2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- LEFT arm (resting down against side) -->
-            <line x1="-4" y1="-16" x2="-5" y2="-6" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- RIGHT arm, pivots at SHOULDER (4, -16), waves up toward Bank B -->
-            <line x1="4" y1="-16" x2="10" y2="-24" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round">
-              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="10 4 -16; -35 4 -16; 10 4 -16" dur="1s" repeatCount="indefinite"/>
-            </line>
-          </g>
-        </g>
-
-        <!-- ============ ISLAND 2 (middle) ============ -->
-        <g>
-          <path d="M345 195 Q368 168 395 141 L465 141 Q492 168 515 195 Z" fill="url(#sand-g)"/>
-          <path d="M345 195 Q380 190 430 188 Q480 190 515 195" stroke="#FFFFFF" stroke-width="1.6" fill="none" opacity=".7">
-            <animate attributeName="opacity" values=".7;.35;.7" dur="2.4s" begin=".4s" repeatCount="indefinite"/>
-          </path>
-          <rect x="405" y="88" width="50" height="55" fill="#3A4E75"/>
-          <polygon points="398,88 430,66 462,88" fill="#2E3E5C"/>
-          <rect x="410" y="98" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="423" y="98" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="436" y="98" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="408" y="115" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="438" y="115" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="422" y="115" width="12" height="28" fill="#0F1A30"/>
-          <path d="M422 118 Q428 113 434 118" stroke="#0F1A30" stroke-width="2" fill="none"/>
-          <!-- PERSON B, waves BOTH arms alternately -->
-          <g transform="translate(428 143)">
-            <circle cx="0" cy="-22" r="4.2" fill="#F5D6B0"/>
-            <rect x="-4" y="-18" width="8" height="14" fill="#7BE3B0" rx="1"/>
-            <line x1="-2" y1="-4" x2="-2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
-            <line x1="2" y1="-4" x2="2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- LEFT arm waving left (toward A) -->
-            <line x1="-4" y1="-16" x2="-10" y2="-24" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round">
-              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="-10 -4 -16; 35 -4 -16; -10 -4 -16" dur="1.1s" repeatCount="indefinite"/>
-            </line>
-            <!-- RIGHT arm waving right (toward C) -->
-            <line x1="4" y1="-16" x2="10" y2="-24" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round">
-              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="10 4 -16; -35 4 -16; 10 4 -16" dur="1.1s" begin=".55s" repeatCount="indefinite"/>
-            </line>
-          </g>
-        </g>
-
-        <!-- ============ ISLAND 3 ============ -->
-        <g>
-          <path d="M575 195 Q598 168 625 141 L695 141 Q722 168 745 195 Z" fill="url(#sand-g)"/>
-          <path d="M575 195 Q620 190 660 188 Q710 190 745 195" stroke="#FFFFFF" stroke-width="1.6" fill="none" opacity=".7">
-            <animate attributeName="opacity" values=".7;.35;.7" dur="2.4s" begin=".8s" repeatCount="indefinite"/>
-          </path>
-          <rect x="635" y="88" width="50" height="55" fill="#3A4E75"/>
-          <polygon points="628,88 660,66 692,88" fill="#2E3E5C"/>
-          <rect x="640" y="98" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="653" y="98" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="666" y="98" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="638" y="115" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="668" y="115" width="7" height="10" fill="#DDE7F5"/>
-          <rect x="652" y="115" width="12" height="28" fill="#0F1A30"/>
-          <path d="M652 118 Q658 113 664 118" stroke="#0F1A30" stroke-width="2" fill="none"/>
-          <!-- PERSON C standing IN FRONT of door, waving left (toward B) -->
-          <g transform="translate(658 143)">
-            <circle cx="0" cy="-22" r="4.2" fill="#F5D6B0"/>
-            <rect x="-4" y="-18" width="8" height="14" fill="#F5D06B" rx="1"/>
-            <line x1="-2" y1="-4" x2="-2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
-            <line x1="2" y1="-4" x2="2.5" y2="4" stroke="#243554" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- LEFT arm, pivots at shoulder, waves up toward Bank B -->
-            <line x1="-4" y1="-16" x2="-10" y2="-24" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round">
-              <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="-10 -4 -16; 35 -4 -16; -10 -4 -16" dur="1s" begin=".3s" repeatCount="indefinite"/>
-            </line>
-            <!-- RIGHT arm resting down -->
-            <line x1="4" y1="-16" x2="5" y2="-6" stroke="#F5D6B0" stroke-width="2.2" stroke-linecap="round"/>
-          </g>
-        </g>
-
-        <!-- Island labels — white, high contrast, no platform-specific sublabels -->
-        <g font-family="JetBrains Mono, monospace" font-size="13" letter-spacing=".2em" font-weight="800" fill="#FFFFFF" text-anchor="middle">
-          <text x="140" y="228">BANK A</text>
-          <text x="430" y="228">BANK B</text>
-          <text x="660" y="228">BANK C</text>
-        </g>
-      </svg>
-    </div>
-
-    <div class="isle-note">Each bank builds its own tokenization platform. None of them connect to each other. An asset at one bank cannot reach a buyer at another without leaving the country.</div>
-    <div class="flow-metrics">
-      <div class="fm"><div class="fmn" style="color:var(--ink)">No shared route</div><div class="fml">No settlement path exists between any two Canadian bank platforms today.</div></div>
-      <div class="fm"><div class="fmn" style="color:var(--ink)">Duplicated cost</div><div class="fml">Every bank builds and pays for the same infrastructure separately.</div></div>
-      <div class="fm"><div class="fmn" style="color:var(--ink)">Money leaves Canada</div><div class="fml">Cross-bank transfers settle on US infrastructure. Fees, control, and data go with them.</div></div>
-    </div>
-  </div>
-
-  <!-- ON 4ORM: 3-layer stack, institutions above, canonical settlement engine in middle, tokenized asset types below -->
-  <div class="flow-block onform onform-v2">
-    <div class="flow-tag" style="color:#1F9D6B">4ORM INDUSTRY SOLUTION</div>
-    <div class="flow-title">One canonical settlement engine. Three commits. Every asset. Every institution.</div>
-
-    <div class="stack-scene">
-      <svg class="stack-canvas" viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="stack-core" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#0F1A30"/>
-            <stop offset=".5" stop-color="#1B2E52"/>
-            <stop offset="1" stop-color="#0F1A30"/>
-          </linearGradient>
-          <radialGradient id="stack-aura" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="#1F9D6B" stop-opacity=".22"/>
-            <stop offset="1" stop-color="#1F9D6B" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-
-        <!-- SIX INSTITUTION NODES ON TOP -->
-        <g font-family="Inter,sans-serif" font-weight="800" font-size="11.5" fill="#142036">
-          <g transform="translate(90 34)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CCE9DA" stroke-width="1.5"/>
-            <g transform="translate(-20 12)"><polygon points="0,10 20,-2 40,10" fill="#3A4E75"/><rect x="2" y="10" width="36" height="24" fill="#3A4E75"/><rect x="7" y="16" width="4" height="14" fill="#fff"/><rect x="18" y="16" width="4" height="14" fill="#fff"/><rect x="29" y="16" width="4" height="14" fill="#fff"/></g>
-            <text y="62" text-anchor="middle">Tier-1 bank</text>
-          </g>
-          <g transform="translate(258 34)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CCE9DA" stroke-width="1.5"/>
-            <g transform="translate(-14 12)"><path d="M14 0 L28 6 L28 22 Q28 32 14 36 Q0 32 0 22 L0 6 Z" fill="#3A4E75"/><circle cx="14" cy="18" r="4" fill="#F5D06B"/></g>
-            <text y="62" text-anchor="middle">Custodian</text>
-          </g>
-          <g transform="translate(426 34)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CCE9DA" stroke-width="1.5"/>
-            <g transform="translate(-14 14)"><circle cx="14" cy="14" r="14" fill="#3A4E75"/><path d="M6 10 Q14 5 22 10 M6 14 Q14 9 22 14 M6 18 Q14 13 22 18" stroke="#fff" stroke-width="1.5" fill="none"/></g>
-            <text y="62" text-anchor="middle">Credit union</text>
-          </g>
-          <g transform="translate(594 34)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CCE9DA" stroke-width="1.5"/>
-            <g transform="translate(-14 12)"><rect x="0" y="0" width="28" height="34" rx="2" fill="#3A4E75"/><line x1="5" y1="8" x2="23" y2="8" stroke="#fff" stroke-width="1.5"/><line x1="5" y1="14" x2="23" y2="14" stroke="#fff" stroke-width="1.5"/><line x1="5" y1="20" x2="23" y2="20" stroke="#fff" stroke-width="1.5"/><line x1="5" y1="26" x2="15" y2="26" stroke="#fff" stroke-width="1.5"/></g>
-            <text y="62" text-anchor="middle">Issuer</text>
-          </g>
-          <g transform="translate(762 34)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CCE9DA" stroke-width="1.5"/>
-            <g transform="translate(-14 12)"><circle cx="14" cy="14" r="12" fill="#3A4E75"/><text x="14" y="18" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="12" fill="#F5D06B">AM</text></g>
-            <text y="62" text-anchor="middle">Asset manager</text>
-          </g>
-          <g transform="translate(890 34)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CCE9DA" stroke-width="1.5"/>
-            <g transform="translate(-20 12)"><polygon points="0,10 20,-2 40,10" fill="#3A4E75"/><rect x="2" y="10" width="36" height="24" fill="#3A4E75"/><rect x="7" y="16" width="4" height="14" fill="#fff"/><rect x="18" y="16" width="4" height="14" fill="#fff"/><rect x="29" y="16" width="4" height="14" fill="#fff"/></g>
-            <text y="62" text-anchor="middle">Regional bank</text>
-          </g>
-        </g>
-
-        <!-- STRAIGHT vertical connectors from top nodes DOWN into the layer -->
-        <g stroke="#1F9D6B" stroke-width="2" stroke-linecap="round" fill="none" opacity=".85">
-          <line x1="90" y1="106" x2="90" y2="192"/>
-          <line x1="258" y1="106" x2="258" y2="192"/>
-          <line x1="426" y1="106" x2="426" y2="192"/>
-          <line x1="594" y1="106" x2="594" y2="192"/>
-          <line x1="762" y1="106" x2="762" y2="192"/>
-          <line x1="890" y1="106" x2="890" y2="192"/>
-        </g>
-
-        <!-- LAYER — outer glow + core panel -->
-        <ellipse cx="480" cy="284" rx="440" ry="110" fill="url(#stack-aura)">
-          <animate attributeName="rx" values="420;460;420" dur="3.4s" repeatCount="indefinite"/>
-        </ellipse>
-        <rect x="20" y="192" width="920" height="184" rx="14" fill="url(#stack-core)" stroke="#1F9D6B" stroke-width="2"/>
-        <text x="40" y="212" font-family="JetBrains Mono,monospace" font-size="10" font-weight="800" letter-spacing=".18em" fill="#7BE3B0">4ORM SETTLEMENT LAYER</text>
-        <text x="40" y="226" font-family="JetBrains Mono,monospace" font-size="9" letter-spacing=".14em" fill="#9AB6FF">CANONICAL LEDGER, CANADIAN DOLLARS, REGULATED</text>
-        <text x="940" y="212" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="10" font-weight="800" letter-spacing=".18em" fill="#7BE3B0">COMMIT AS ONE</text>
-
-        <!-- THREE STACKED COMMIT ROWS — dots flow straight up through all three -->
-        <!-- TITLE row (top) -->
-        <rect x="40" y="238" width="880" height="34" rx="8" fill="rgba(154,182,255,.10)" stroke="rgba(154,182,255,.55)" stroke-width="1.5"/>
-        <text x="60" y="260" font-family="Inter,sans-serif" font-weight="900" font-size="14" fill="#9AB6FF">TITLE</text>
-        <text x="150" y="260" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing=".14em" fill="rgba(154,182,255,.75)">ASSET LEDGER</text>
-        <text x="900" y="260" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="11" fill="#7BE3B0">&#10003;</text>
-
-        <!-- CASH LEG row (middle) -->
-        <rect x="40" y="282" width="880" height="34" rx="8" fill="rgba(123,227,176,.10)" stroke="rgba(123,227,176,.55)" stroke-width="1.5"/>
-        <text x="60" y="304" font-family="Inter,sans-serif" font-weight="900" font-size="14" fill="#7BE3B0">CASH LEG</text>
-        <text x="180" y="304" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing=".14em" fill="rgba(123,227,176,.75)">BANK-ISSUED TOKENIZED DEPOSIT</text>
-        <text x="900" y="304" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="11" fill="#7BE3B0">&#10003;</text>
-
-        <!-- RULES row (bottom) -->
-        <rect x="40" y="326" width="880" height="34" rx="8" fill="rgba(245,208,107,.10)" stroke="rgba(245,208,107,.55)" stroke-width="1.5"/>
-        <text x="60" y="348" font-family="Inter,sans-serif" font-weight="900" font-size="14" fill="#F5D06B">RULES</text>
-        <text x="150" y="348" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing=".14em" fill="rgba(245,208,107,.75)">IDENTITY, ELIGIBILITY, COMPLIANCE</text>
-        <text x="900" y="348" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="11" fill="#7BE3B0">&#10003;</text>
-
-        <!-- STRAIGHT vertical connectors from layer DOWN to asset types -->
-        <g stroke="#1F9D6B" stroke-width="2" stroke-linecap="round" fill="none" opacity=".85">
-          <line x1="90" y1="376" x2="90" y2="450"/>
-          <line x1="258" y1="376" x2="258" y2="450"/>
-          <line x1="426" y1="376" x2="426" y2="450"/>
-          <line x1="594" y1="376" x2="594" y2="450"/>
-          <line x1="762" y1="376" x2="762" y2="450"/>
-          <line x1="890" y1="376" x2="890" y2="450"/>
-        </g>
-
-        <!-- SIX ASSET TYPES ON BOTTOM -->
-        <g font-family="Inter,sans-serif" font-weight="800" font-size="11.5" fill="#142036">
-          <g transform="translate(90 452)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CBDAFB" stroke-width="1.5"/>
-            <g transform="translate(-16 14)"><polygon points="0,6 8,0 16,6" fill="#2E6BF2"/><rect x="0" y="6" width="16" height="14" fill="#2E6BF2"/><rect x="5" y="10" width="6" height="10" fill="#0B1220"/></g>
-            <text y="62" text-anchor="middle">REITs</text>
-          </g>
-          <g transform="translate(258 452)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CBDAFB" stroke-width="1.5"/>
-            <g transform="translate(-14 12)"><circle cx="14" cy="14" r="14" fill="#1F9D6B"/><text x="14" y="19" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="13" fill="#fff">$</text></g>
-            <text y="62" text-anchor="middle">Tokenized deposits</text>
-          </g>
-          <g transform="translate(426 452)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CBDAFB" stroke-width="1.5"/>
-            <g transform="translate(-14 12)"><polygon points="0,20 14,4 28,20" fill="#F5D06B"/><rect x="2" y="20" width="24" height="6" fill="#B58A28"/></g>
-            <text y="62" text-anchor="middle">Commodities</text>
-          </g>
-          <g transform="translate(594 452)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CBDAFB" stroke-width="1.5"/>
-            <g transform="translate(-14 12)"><circle cx="14" cy="14" r="14" fill="#9AB6FF"/><text x="14" y="18" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="10" fill="#0B1220">CAD</text></g>
-            <text y="62" text-anchor="middle">Stablecoins</text>
-          </g>
-          <g transform="translate(762 452)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CBDAFB" stroke-width="1.5"/>
-            <g transform="translate(-14 12)"><rect x="0" y="0" width="28" height="30" rx="2" fill="#2E6BF2"/><text x="14" y="20" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="12" fill="#fff">%</text></g>
-            <text y="62" text-anchor="middle">Private credit</text>
-          </g>
-          <g transform="translate(890 452)">
-            <rect x="-58" y="0" width="116" height="72" rx="10" fill="#fff" stroke="#CBDAFB" stroke-width="1.5"/>
-            <g transform="translate(-14 12)"><rect x="0" y="0" width="28" height="30" rx="2" fill="#2E6BF2"/><line x1="4" y1="8" x2="24" y2="8" stroke="#fff" stroke-width="1.5"/><line x1="4" y1="15" x2="24" y2="15" stroke="#fff" stroke-width="1.5"/><line x1="4" y1="22" x2="24" y2="22" stroke="#fff" stroke-width="1.5"/></g>
-            <text y="62" text-anchor="middle">Bonds</text>
-          </g>
-        </g>
-
-        <!-- STRAIGHT VERTICAL DOT FLOWS — each column: asset UP through TITLE, CASH, RULES rows UP to institution above -->
-        <circle r="5" fill="#2E6BF2"><animateMotion dur="3s" repeatCount="indefinite" path="M90 450 L90 308 L258 308 L258 106"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="3s" repeatCount="indefinite"/></circle>
-        <circle r="5" fill="#1F9D6B"><animateMotion dur="3.4s" begin=".4s" repeatCount="indefinite" path="M258 450 L258 308 L90 308 L90 106"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="3.4s" begin=".4s" repeatCount="indefinite"/></circle>
-        <circle r="5" fill="#F5D06B"><animateMotion dur="3.6s" begin=".8s" repeatCount="indefinite" path="M426 450 L426 308 L762 308 L762 106"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="3.6s" begin=".8s" repeatCount="indefinite"/></circle>
-        <circle r="5" fill="#9AB6FF"><animateMotion dur="3.2s" begin="1.2s" repeatCount="indefinite" path="M594 450 L594 308 L890 308 L890 106"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="3.2s" begin="1.2s" repeatCount="indefinite"/></circle>
-        <circle r="5" fill="#2E6BF2"><animateMotion dur="3.5s" begin="1.6s" repeatCount="indefinite" path="M762 450 L762 308 L426 308 L426 106"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="3.5s" begin="1.6s" repeatCount="indefinite"/></circle>
-        <circle r="5" fill="#7BE3B0"><animateMotion dur="3.3s" begin="2s" repeatCount="indefinite" path="M890 450 L890 308 L594 308 L594 106"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="3.3s" begin="2s" repeatCount="indefinite"/></circle>
-      </svg>
-      <div class="hub-caption">Every settlement travels one straight path. Title, cash leg, and rules all commit together, or nothing settles.</div>
-    </div>
-    </div>
-
-    <div class="flow-metrics">
-      <div class="fm"><div class="fmn" style="color:#1F9D6B">Canonical ledger</div><div class="fml">One authoritative record of title. Every institution, every regulator, and every auditor reads from the same source.</div></div>
-      <div class="fm"><div class="fmn" style="color:#1F9D6B">Delivery vs payment finality</div><div class="fml">Title, cash leg, and rules commit together in the same block. Either all three settle or none do.</div></div>
-      <div class="fm"><div class="fmn" style="color:#1F9D6B">Interoperable, onshore</div><div class="fml">Any regulated Canadian counterparty. Any tokenized real-world asset. In Canadian dollars, on Canadian infrastructure.</div></div>
-    </div>
-  </div>
-
-  </div>
-
-  <p class="src" style="margin-top:24px">4orm target design; production deployment subject to regulatory approvals. Companies named elsewhere on this page are independent third parties referenced as market context; inclusion does not imply partnership.</p>
-</div></section>
-
-<!-- MARKET FORCE (merged Inevitability + Challenge lead) -->
-<section class="sec dark" id="tide"><div class="wrap">
-  <span class="eyebrow">The tide is already here</span>
-  <h2 class="sec-h">Tokenization is growing in Canada either way. The only question is how much of it settles here.</h2>
-  <p class="sec-sub">Real-world assets are already moving on-chain in size. The decision in front of the country is who operates the layer they settle on, and in which currency. Canadians will live with the answer for a generation.</p>
-  <div class="inev-nums">
-    <div class="in reveal"><div class="bn"><span data-count="31" data-pre="$" data-suf="B">$31B</span></div><div class="bl">of real-world assets are already on-chain today, up roughly 5x since early 2025.</div></div>
-    <div class="in reveal"><div class="bn"><span data-count="300" data-pre="~$" data-suf="B">~$300B</span></div><div class="bl">sits in the on-chain money layer, about 99% of it US dollars. The Canadian dollar is barely present.</div></div>
-    <div class="in reveal"><div class="bn"><span data-count="2" data-pre="$" data-suf="T+">$2T+</span></div><div class="bl">is the conservative 2030 forecast for tokenized real-world assets.</div></div>
-  </div>
-</div></section>
-<!-- THE CHALLENGE -->
-<section class="sec alt" id="challenge"><div class="wrap">
-  <span class="eyebrow">The Canadian gap</span>
-  <h2 class="sec-h">Canada currently keeps the assets but exports the settlement process.</h2>
-  <p class="sec-sub">Real issuers, domestic regulated infrastructure, bank-grade custody: all live in Canada. The one thing missing is a neutral place to settle. Without it, the settlement, liquidity, and money layer runs on foreign infrastructure, and Canadian assets cannot easily offload at home.</p>
-  <div class="grid g2" style="margin-top:44px">
-
-    <!-- LEFT CARD — THE ACTUAL CANADIAN GAP -->
-    <div class="chart gap-card">
-      <div class="ct">Canada has every layer except one</div>
-      <div class="cs">Canadian tokenization stack by function, 2026</div>
-
-      <div class="gap-stack">
-        <div class="gap-row has">
-          <div class="gap-count">10+</div>
-          <div class="gap-body">
-            <div class="gap-label">Canadian asset issuers</div>
-            <div class="gap-detail">T-RIZE, Ocree, Pineapple, AuCan Gold, SORS and more</div>
+    </section>
+
+    <section class="section tight">
+      <div class="wrap">
+        <div class="hero-stats">
+          <div class="ahs-card">
+            <div class="l">Duty in force since</div>
+            <div class="v blue">8 Sep 2025</div>
+            <div class="d">Bank of Canada began supervising payment firms</div>
           </div>
-          <div class="gap-check">&#10003;</div>
-        </div>
-        <div class="gap-row has">
-          <div class="gap-count">3</div>
-          <div class="gap-body">
-            <div class="gap-label">Canadian qualified custodians</div>
-            <div class="gap-detail">Tetra Trust, Balance, Brane</div>
+          <div class="ahs-card">
+            <div class="l">Times the daily duty falls</div>
+            <div class="v gold">365</div>
+            <div class="d">one record for every day of the year, weekends included</div>
           </div>
-          <div class="gap-check">&#10003;</div>
-        </div>
-        <div class="gap-row has">
-          <div class="gap-count">3</div>
-          <div class="gap-body">
-            <div class="gap-label">Canadian tokenized cash issuers</div>
-            <div class="gap-detail">Stablecorp (QCAD), Cybrid, Loon</div>
+          <div class="ahs-card">
+            <div class="l">Ceiling, very serious breach</div>
+            <div class="v"><span class="cur">CA$</span>10M</div>
+            <div class="d">Retail Payment Activities Act</div>
           </div>
-          <div class="gap-check">&#10003;</div>
-        </div>
-        <div class="gap-row has">
-          <div class="gap-count">2</div>
-          <div class="gap-body">
-            <div class="gap-label">Bank-captive tokenization pilots</div>
-            <div class="gap-detail">BMO with CME, RBC/TD via Project Samara</div>
+          <div class="ahs-card">
+            <div class="l">First outside review due</div>
+            <div class="v blue">8 Sep 2028</div>
+            <div class="d">and it reads the three years before it</div>
           </div>
-          <div class="gap-check">&#10003;</div>
         </div>
-        <div class="gap-row missing">
-          <div class="gap-count">0</div>
-          <div class="gap-body">
-            <div class="gap-label">Neutral settlement layer</div>
-            <div class="gap-detail">Multi-bank, canonical ledger, Canadian-dollar</div>
+      </div>
+    </section>
+
+    <section class="section tight">
+      <div class="wrap">
+      <div class="sh">
+        <div class="s-eye"><span class="tick"></span><span class="dot"></span><span class="txt">Start here</span></div>
+        <h2>Five steps, and every one of them is somebody's job.</h2>
+        <p>This is the whole idea. If you follow these five lines you understand what this company is for.</p>
+      </div>
+
+        <div class="steps">
+          <div class="step"><div class="sn">1</div><h4>Money comes in</h4>
+            <p>A customer's pay, a deposit on a house, a month's rent, money collected on somebody's behalf.</p></div>
+          <div class="step"><div class="sn">2</div><h4>It is not the firm's money</h4>
+            <p>The firm is only holding it. It belongs to the person who sent it or the person waiting for it.</p></div>
+          <div class="step"><div class="sn">3</div><h4>It has to be kept apart</h4>
+            <p>In its own account, not mixed with the money the firm runs on. That is what a trust account is.</p></div>
+          <div class="step"><div class="sn">4</div><h4>It has to be checked on a clock</h4>
+            <p>What the firm says it holds for each person, against what the bank says is actually there. Every day for some firms, every month for others.</p></div>
+          <div class="step"><div class="sn">5</div><h4>It has to be produced later</h4>
+            <p>An inspector, an auditor or a court asks for a specific day, sometimes years afterwards, and the firm has to hand it over.</p></div>
+        </div>
+
+        <div class="callout">
+          <p><strong>The whole difficulty is step five.</strong> <span class="gold-key">Doing the work is
+          one thing. Proving you did it, on a day two years ago, is another.</span> Most firms can do
+          the first. The second is where the trouble is.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-band" id="fines">
+      <div class="wrap">
+      <div class="sh">
+        <div class="s-eye"><span class="tick"></span><span class="dot"></span><span class="txt">What happens if you get it wrong</span></div>
+        <h2>The ceiling went up <span class="accent">by up to forty times.</span></h2>
+        <p>A ceiling is the most a regulator may impose. Until March 2026 the money laundering ceiling for a company was five hundred thousand dollars. It is now twenty million, and for a single notice covering several breaches it can instead be three per cent of the company's worldwide revenue, whichever of the two is greater.</p>
+      </div>
+
+        <div class="bars">
+          <div class="bar-row">
+            <div class="bar-lab"><span class="bl">Money laundering, one breach by a company, before 26 March 2026</span><span class="bv">CA$500,000</span></div>
+            <div class="bar-tr"><div class="bar-fl g" style="width:2.5%"></div></div>
           </div>
-          <div class="gap-x">&#10007;</div>
+          <div class="bar-row">
+            <div class="bar-lab"><span class="bl">Payment rules, a serious breach</span><span class="bv">CA$1,000,000</span></div>
+            <div class="bar-tr"><div class="bar-fl" style="width:5%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-lab"><span class="bl">Money laundering, one breach by a person, now</span><span class="bv">CA$4,000,000</span></div>
+            <div class="bar-tr"><div class="bar-fl" style="width:20%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-lab"><span class="bl">Payment rules, a very serious breach</span><span class="bv">CA$10,000,000</span></div>
+            <div class="bar-tr"><div class="bar-fl" style="width:50%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-lab"><span class="bl">Money laundering, one breach by a company, now</span><span class="bv">CA$20,000,000</span></div>
+            <div class="bar-tr"><div class="bar-fl d" style="width:100%"></div></div>
+          </div>
+        </div>
+        <p class="bars-note">
+          The money laundering figures come from section 73.1 of the Proceeds of Crime (Money
+          Laundering) and Terrorist Financing Act, as amended by Bill C-12, which received Royal Assent
+          and came into force on 26 March 2026. The Act sets the maximum for one prescribed violation at
+          four million dollars for a person and twenty million for a company. Where one notice covers
+          several violations, the cap is the greater of that amount and three per cent of gross global
+          income or revenue. The regulator has described the change as raising limits up to forty times.
+          All bars share one scale.
+        </p>
+
+        <div class="callout">
+          <p><strong>These are not theoretical numbers.</strong> <span class="gold-key">In October 2025
+          the money laundering regulator imposed a single penalty of $176,960,190 on one company.</span>
+          That penalty is recorded as under appeal, so it is not a final figure, but it shows the size
+          the regime now operates at. In its 2024 to 2025 financial year the same regulator issued
+          twenty three notices of violation totalling more than twenty five million dollars.</p>
+        </div>
+
+        <div class="callout" style="margin-top:18px">
+          <p><strong>Losing the registration is the other consequence.</strong> <span class="gold-key">For
+          most of these businesses it is the heavier one.</span> A fine can be argued about. A cancelled
+          registration means the firm stops trading.</p>
         </div>
       </div>
+    </section>
 
-      <div class="gap-callout"><b>The single missing layer is what 4orm Finance is being built to be.</b></div>
+    <section class="section">
+      <div class="wrap">
+      <div class="sh">
+        <div class="s-eye"><span class="tick"></span><span class="dot"></span><span class="txt">Who this is about</span></div>
+        <h2>If your firm holds money for other people, <span class="accent">this is your duty and not your bank's.</span></h2>
+        <p>The duty attaches to the firm holding the money. No bank, processor or sponsor carries it for you. Here are six of the ten kinds of firm this covers.</p>
+      </div>
 
-      <!-- v96: Explicit honesty on what Canada DOES have + where the settlement layer actually runs today -->
-      <div class="gap-honest">
-        <div class="gap-honest-eye">Where Canadian tokenization actually settles today</div>
-        <p><b>Canada is not without tokenization capability.</b> Polymath (Canadian-built, security-token protocol), Stablecorp (QCAD), Cybrid, and Loon all issue tokenized instruments; T-RIZE, Ocree, Pineapple, and AuCan Gold originate tokenized real-world assets domestically. That capability is real.</p>
-        <p style="margin-top:8px"><b>What Canada does not have is the neutral settlement layer.</b> The tokens above settle, list, and clear on foreign infrastructure: Ethereum L1 and L2s (Base, Arbitrum, Polygon), US-based custodians, and US-dollar stablecoin rails (USDC, USDT, PYUSD). ~99% of the on-chain money layer is US-dollar denominated. Canada originates the assets; the settlement, secondary liquidity, and money leg run offshore.</p>
-        <div class="gap-honest-src">
-          <b>Sources:</b> RWA.xyz platform tracker (Jul 2026); DefiLlama stablecoin dashboard (2026); Bank of Canada Staff Analytical Paper 2026-8 (Project Samara); Polymath / Polymesh public documentation; company disclosures for T-RIZE, Ocree, Stablecorp, and Tetra Trust; CSA Project Tokenization (Q2 2026).
+        <div class="tile-grid c3">
+          <div class="tile">
+            <span class="kicker">Daily &#183; Bank of Canada</span>
+            <h3>Payment firms</h3>
+            <p>Payroll companies, money transfer apps, gift card businesses. Anyone holding or moving money for other people without being a bank.</p>
+          </div>
+          <div class="tile gold">
+            <span class="kicker">Monthly &#183; law societies</span>
+            <h3>Law firms</h3>
+            <p>A lawyer holding your house deposit is the everyday example. The money is yours the whole time it sits there.</p>
+          </div>
+          <div class="tile mint">
+            <span class="kicker">Monthly &#183; federal</span>
+            <h3>Insolvency trustees</h3>
+            <p>When a person or a company goes bankrupt, the trustee holds money that is owed to the people who are waiting to be paid.</p>
+          </div>
+          <div class="tile">
+            <span class="kicker">Six years &#183; Ontario</span>
+            <h3>Mortgage brokerages</h3>
+            <p>Money paid in advance on a mortgage is treated by law as money held in trust from the moment it arrives.</p>
+          </div>
+          <div class="tile gold">
+            <span class="kicker">Monthly &#183; provincial</span>
+            <h3>Property managers</h3>
+            <p>Rent and damage deposits belong to landlords and tenants. The manager is holding them, unit by unit.</p>
+          </div>
+          <div class="tile mint">
+            <span class="kicker">Two banking days &#183; Ontario</span>
+            <h3>Collection agencies</h3>
+            <p>Money collected from a debtor belongs to the creditor. It has to reach a trust account almost immediately.</p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:26px">
+          <p><strong>Ten kinds of firm, one shape of work.</strong> <span class="gold-key">Different
+          regulators, different deadlines, near identical jobs.</span>
+          <a href="/the-rules#who">See all ten and what each one owes</a>.</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- RIGHT CARD — CAD ABSENT FROM $300B MONEY LAYER -->
-    <div class="chart">
-      <div class="ct">The money layer is almost entirely US dollars</div>
-      <div class="cs">Stablecoin supply by currency of denomination, ~$300B total</div>
-      <div class="donut-wrap">
-        <svg width="180" height="180" viewBox="0 0 180 180">
-          <circle cx="90" cy="90" r="70" fill="none" stroke="#D7DEEA" stroke-width="26"></circle>
-          <circle cx="90" cy="90" r="70" fill="none" stroke="#142036" stroke-width="26"
-            stroke-dasharray="435.4 4.4" transform="rotate(-90 90 90)"></circle>
-          <circle cx="90" cy="90" r="70" fill="none" stroke="#2E6BF2" stroke-width="26"
-            stroke-dasharray="4.4 435.4" stroke-dashoffset="-435.4" transform="rotate(-90 90 90)"></circle>
-          <text x="90" y="84" text-anchor="middle" font-family="Inter" font-size="30" font-weight="800" fill="#142036">99%</text>
-          <text x="90" y="104" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="1" fill="#5E6E88">US DOLLAR</text>
-        </svg>
-        <div class="legend">
-          <div class="li"><span class="sw" style="background:#142036"></span><b>~99%</b>&nbsp;US-dollar stablecoins</div>
-          <div class="li"><span class="sw" style="background:#2E6BF2"></span><b>~1%</b>&nbsp;all other currencies, including CAD</div>
-          <div class="li" style="color:var(--slate);font-size:12.5px;margin-top:4px;max-width:230px">The Canadian dollar is effectively absent from a $300B on-chain money layer.</div>
+    <section class="section section-band">
+      <div class="wrap">
+      <div class="sh">
+        <div class="s-eye"><span class="tick"></span><span class="dot"></span><span class="txt">Where to go next</span></div>
+        <h2>Three short pages. <span class="accent">Read them in any order.</span></h2>
+      </div>
+
+        <div class="cx-grid">
+          <div class="cx-card accent-top">
+            <div class="s-eye"><span class="tick"></span><span class="dot"></span><span class="txt">The rules</span></div>
+            <h3>What the law actually says.</h3>
+            <p style="color:var(--text-2); font-size:.98rem; line-height:1.6; margin-top:10px">
+              The dates, the deadlines, the fines and the ten kinds of firm, each one named with the
+              instrument it comes from so you can go and read it.</p>
+            <div style="margin-top:22px"><a class="btn btn-primary" href="/the-rules">Read the rules
+              <svg class="arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+          </div>
+          <div class="cx-card">
+            <div class="s-eye"><span class="tick"></span><span class="dot"></span><span class="txt">Why it is hard</span></div>
+            <h3>Four firms, four bad months.</h3>
+            <p style="color:var(--text-2); font-size:.98rem; line-height:1.6; margin-top:10px">
+              What this work is actually like today, told through four ordinary businesses, and why
+              nobody has built the thing that fixes it.</p>
+            <div style="margin-top:22px"><a class="btn btn-ghost" href="/the-problem">See the four firms</a></div>
+          </div>
         </div>
       </div>
+    </section>
+  </main>
 
-      <!-- Compounding growth numbers, cleaned up + centered -->
-      <div class="gap-metric-row">
-        <div class="gap-metric">
-          <div class="gap-metric-n">$6B &rarr; $31B</div>
-          <div class="gap-metric-l">RWA value on public blockchains, early 2025 to July 2026 (~5x)</div>
-        </div>
-        <div class="gap-metric">
-          <div class="gap-metric-n">961,073</div>
-          <div class="gap-metric-l">on-chain asset holders globally</div>
-        </div>
-      </div>
-      <div class="src">Source: DefiLlama; The Block, "Stablecoin Market Cap Tops $321B" (2026); RWA.xyz (2026).</div>
-    </div>
-  </div>
-  <div class="card pad reveal" style="margin-top:22px">
-    <div class="kicker">What stays and what leaves</div>
-    <h3 style="margin-top:12px;font-size:20px">Canadian issuers currently have already put $14B+ of assets on-chain at home</h3>
-    <p style="font-size:14.5px;max-width:840px">The origination is happening here. What leaves is the layer on top: distribution, secondary-market liquidity, settlement, and the money leg, which is where value compounds. <b>4orm Finance is built to bring that layer home.</b></p>
-    <div class="split">
-      <div class="col keep">
-        <h4><span style="color:var(--ok)">&#9679;</span> What Canada keeps today</h4>
-        <ul>
-          <li><span class="mk">&#10003;</span><span><b>Asset origination and issuance</b> - Pineapple $13.7B mortgages, T-RIZE $300M+, Ocree $51.9M</span></li>
-          <li><span class="mk">&#10003;</span><span><b>A domestic regulated chain</b> - Polymesh, purpose-built for real-world assets</span></li>
-          <li><span class="mk">&#10003;</span><span><b>A Canadian-dollar stablecoin</b> - QCAD and other CAD stablecoins</span></li>
-          <li><span class="mk">&#10003;</span><span><b>Qualified custody</b> - Tetra, Brane, Balance</span></li>
-        </ul>
-      </div>
-      <div class="col exp">
-        <h4><span style="color:var(--blue)">&#9679;</span> What defaults offshore</h4>
-        <ul>
-          <li><span class="mk">&#8594;</span><span><b>Institutional distribution</b> - foreign broker and investor platforms</span></li>
-          <li><span class="mk">&#8594;</span><span><b>Secondary-market liquidity</b> - foreign venues and allocators</span></li>
-          <li><span class="mk">&#8594;</span><span><b>The settlement layer and market data</b> - where durable value accrues</span></li>
-          <li><span class="mk">&#8594;</span><span><b>The money layer</b> - a $300B pool that is roughly 99% US dollars</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="src">Assets-originated figure aggregates disclosed Canadian issuance (Pineapple, T-RIZE, Ocree). Money-layer split per DefiLlama and The Block (2026).</div>
-  </div>
-  <div class="grid g2" style="margin-top:22px">
-    <div class="card pad">
-      <div class="kicker">The infrastructure is offshore</div>
-      <h3 style="margin-top:12px;font-size:20px">Canadian assets are distributed on someone else's infrastructure</h3>
-      <p style="font-size:14.5px">Canada has a domestic regulated chain in Polymesh and strong issuers, yet the marketplaces, liquidity networks, and distribution partners with scale sit abroad. When a Canadian asset needs institutional distribution or a secondary market, it reaches for foreign platforms, and the settlement fees, custody revenue, and market data go with it.</p>
-      <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:8px">
-        <span class="lead-tag" style="margin:0;background:var(--cloud);padding:7px 12px;border-radius:7px">US MARKETPLACES</span>
-        <span class="lead-tag" style="margin:0;background:var(--cloud);padding:7px 12px;border-radius:7px">FOREIGN LIQUIDITY NETWORKS</span>
-        <span class="lead-tag" style="margin:0;background:var(--cloud);padding:7px 12px;border-radius:7px">OFFSHORE DISTRIBUTION</span>
-      </div>
-    </div>
-    <div class="chart">
-      <div class="ct">Resources the world is tokenizing that Canada is not</div>
-      <div class="cs">Fastest-growing on-chain segments, 2026</div>
-      <div class="bar">
-        <div class="row"><div class="lab">Tokenized commodities</div><div class="track"><div class="fill" style="width:100%">$8B</div></div></div>
-        <div class="row"><div class="lab">Tokenized gold</div><div class="track"><div class="fill ink" style="width:75%">$6B</div></div></div>
-        <div class="row"><div class="lab">Private credit</div><div class="track"><div class="fill steel" style="width:72%">~$18B*</div></div></div>
-        <div class="row"><div class="lab">US Treasuries (BUIDL)</div><div class="track"><div class="fill mist" style="width:32%">$2.5B</div></div></div>
-      </div>
-      <p style="font-size:13px;color:var(--steel);margin-top:14px">Canada is an energy, mining, real estate, and mortgage economy. Almost none of that resource wealth is on-chain, even as Pineapple Financial has moved a <b>$13.7B</b> mortgage portfolio toward tokenization.</p>
-      <div class="src">Source: BingX / DWF Labs tokenized commodities (2026); RWA.xyz; CoinGecko Q1 2026. *Broad count including platform-locked assets.</div>
-    </div>
-  </div>
-  <div class="card pad" style="margin-top:22px">
-    <div class="kicker">The structural gap</div>
-    <h3 style="margin-top:12px;font-size:20px">Canada built the supply and the plumbing, but never the settlement layer</h3>
-    <p style="font-size:14.5px;max-width:820px">The stack has three layers. Canada has strong players in the first two. The third layer, where durable infrastructure value accrues, does not yet exist. It is the neutral settlement layer that provides finality, interoperability across institutions, and a canonical ledger every regulated party can trust.</p>
-    <div class="layers" style="margin-top:22px">
-      <div class="layer"><div class="tag">Layer 1 - Issuers</div><div class="names">T-RIZE - Ocree - Pineapple - SORS</div></div>
-      <div class="layer"><div class="tag">Layer 2 - Chains, custody &amp; tokenized cash</div><div class="names">Polymesh - QCAD (Stablecorp) - Cybrid - Loon - Tetra, Brane, Balance custody</div></div>
-      <div class="layer missing"><div class="tag">Layer 3 - Settlement</div><div class="names">Neutral, regulated, multi-institution settlement and exchange layer</div><span class="badge-miss">MISSING IN CANADA</span></div>
-    </div>
-    <div class="src">Source: 4orm Finance market analysis, Canadian RWA and tokenization ecosystem (2024-2026), with entity roles per company disclosures.</div>
-  </div>
-</div></section>
-<!-- DARK PULL-QUOTE BAND: strategic bet -->
-<section class="sec dark"><div class="wrap" style="text-align:center;max-width:900px;margin:0 auto">
-  <span class="eyebrow">The strategic bet</span>
-  <h2 class="sec-h" style="margin-top:18px">Whoever builds the layer keeps the fees. Whoever settles the transaction keeps the relationship.</h2>
-  <p class="sec-sub" style="margin:22px auto 0;max-width:720px">Every durable settlement infrastructure in modern finance is built on three commitments: settlement finality, interoperability across institutions, and a canonical ledger every party can trust. That layer is forming globally for tokenized real-world assets right now. No one has built the Canadian one. It is the piece Canada is missing, and it is the piece that compounds.</p>
-  <div class="inev-nums" style="margin-top:44px">
-    <div class="in reveal"><div class="bn" style="font-size:26px;letter-spacing:.02em">FINALITY</div><div class="bl">Title, cash leg, and rules commit as one, in the same block. No open windows, no reversal, no reconciliation later. When it commits, it is done.</div></div>
-    <div class="in reveal"><div class="bn" style="font-size:26px;letter-spacing:.02em">INTEROPERABILITY</div><div class="bl">Every regulated Canadian institution plugs into the same shared settlement layer. No walled gardens. No captive platforms. Any counterparty to any counterparty.</div></div>
-    <div class="in reveal"><div class="bn" style="font-size:26px;letter-spacing:.02em">CANONICAL LEDGER</div><div class="bl">One authoritative record of title, in Canadian dollars. Every institution, every regulator, and every auditor reads from the same source. One version of the truth.</div></div>
-  </div>
-</div></section>
-
-<!-- THE OPPORTUNITY -->
-<section class="sec" id="opportunity"><div class="wrap">
-  <span class="eyebrow">The Opportunity</span>
-  <h2 class="sec-h">A first-mover window on the layer that captures the value.</h2>
-  <p class="sec-sub">In every mature market, the settlement layer is where durable value and network effects accrue. That layer is forming globally right now for tokenized real-world assets. No one has built the Canadian one.</p>
-  <div class="grid g2" style="margin-top:44px">
-    <div class="chart">
-      <div class="ct">Independent forecasts for tokenized assets by 2030</div>
-      <div class="cs">Total tokenized real-world asset value, by source</div>
-      <div class="bar fcast">
-        <div class="row"><div class="lab">McKinsey (base, 2030)</div><div class="track"><div class="fill mist" style="width:7%"></div></div><div class="fv">$2T</div></div>
-        <div class="row"><div class="lab">BCG x Ripple (2030)</div><div class="track"><div class="fill steel" style="width:31%"></div></div><div class="fv">$9.4T</div></div>
-        <div class="row"><div class="lab">BCG (2030)</div><div class="track"><div class="fill ink" style="width:53%"></div></div><div class="fv">$16T</div></div>
-        <div class="row"><div class="lab">Standard Chartered (2034)</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="fv">$30T</div></div>
-      </div>
-      <p style="font-size:13px;color:var(--steel);margin-top:14px">Even the conservative case is a <b>60x-plus</b> expansion from today's ~$31B on-chain.</p>
-      <div class="src">Source: McKinsey (2024); BCG x Ripple, "Approaching the Tokenization Tipping Point" (2025); Standard Chartered (2024).</div>
-    </div>
-    <div class="chart" style="background:var(--ink);border-color:var(--ink)">
-      <div class="ct" style="color:#fff">The settlement model has directional support in Canada</div>
-      <div class="cs" style="color:#AEBBD2">Project Samara, March 2026</div>
-      <div style="font-size:52px;font-weight:900;color:#fff;letter-spacing:-.02em;margin:20px 0 4px">C$100M</div>
-      <p style="font-size:14.5px;color:#C7D2E4;line-height:1.55">The Bank of Canada, Export Development Canada, RBC, and TD settled Canada's first tokenized bond against <b style="color:#fff">wholesale central-bank money (W-CAD)</b>, with cash and bond moving on the same ledger. 4orm's model uses a tokenized commercial-bank deposit for the cash leg, so this is directional support, not validation of 4orm's specific model.</p>
-      <p style="font-size:13px;color:#9FB0CC;margin-top:14px;border-top:1px solid #26364f;padding-top:14px">It was a research experiment, and the Bank has not moved to a production system. It shows settlement finality for tokenized assets works in Canada. By design it was a single, one-time issuance, not a neutral layer that issuers and banks can use every day.</p>
-      <div class="src" style="color:#5E6E88">Source: Bank of Canada Staff Analytical Paper 2026-8; Osler; EDC. 4orm is not affiliated with the Bank of Canada or the Samara consortium.</div>
-    </div>
-  </div>
-  <h3 style="font-size:20px;font-weight:750;margin:46px 0 0">The pattern in Canadian market infrastructure: validate, permit, build</h3>
-  <p style="font-size:14.5px;color:var(--steel);margin-top:8px;max-width:840px">The custody standard is published, the settlement model has directional support, and the national workstream is open. The build window is open now, and it will not stay empty.</p>
-  <div class="tl">
-    <div class="n reveal"><div class="dt">Feb 3, 2026</div><h4>CIRO custody framework</h4><p>CIRO published the Digital Asset Custody Framework, the permission structure for regulated custody of tokenized assets in Canada.</p><div class="st">Permission structure</div></div>
-    <div class="n reveal"><div class="dt">Mar 6, 2026</div><h4>Bank of Canada, Project Samara</h4><p>A C$100M tokenized bond settled against wholesale central-bank money with RBC, TD, and EDC. OSC, AMF, and CIRO participated in the pilot.</p><div class="st">Directional support</div></div>
-    <div class="n reveal"><div class="dt">Q2 2026</div><h4>CSA Project Tokenization</h4><p>The Canadian Securities Administrators launched a national tokenization workstream, inviting industry to build inside the perimeter with the regulators.</p><div class="st">National initiative</div></div>
-    <div class="n reveal"><div class="dt">2025-2026</div><h4>Tier-1 banks moving</h4><p>BMO announced tokenized cash and deposit infrastructure with CME and Google Cloud. International tokenized-settlement systems have processed more than $1.5T cumulatively.</p><div class="st">Market is forming</div></div>
-  </div>
-  <div class="vpb"><span class="a">Validate</span><span class="ar">&#8594;</span><span>Permit</span><span class="ar">&#8594;</span><span>Build</span><span class="ar">&#8594;</span><span style="border-color:var(--blue);color:var(--blue)">4orm operates the layer</span></div>
-  <div class="src">Sources: CIRO Digital Asset Custody Framework (2026); Bank of Canada Staff Analytical Paper 2026-8; CSA Project Tokenization (2026); company announcements (BMO, CME, Google Cloud); third-party industry reports. 4orm is not affiliated with any regulator or the Samara consortium.</div>
-  <h3 style="font-size:20px;font-weight:750;margin:46px 0 0">The supply is already here, and growing</h3>
-  <p style="font-size:14.5px;color:var(--steel);margin-top:8px;max-width:820px">Canadian issuers are putting real assets on-chain today. What they lack is a domestic venue to aggregate issuers, banks, and custodians and give those assets liquidity and finality.</p>
-  <div class="grid g4" style="margin-top:24px">
-    <div class="card"><div class="n" style="font-size:30px;font-weight:800;color:var(--blue)">$13.7B</div><div class="l" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:8px;text-transform:uppercase;letter-spacing:.06em">Pineapple Financial mortgage portfolio moving on-chain</div></div>
-    <div class="card"><div class="n" style="font-size:30px;font-weight:800">$300M+</div><div class="l" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:8px;text-transform:uppercase;letter-spacing:.06em">T-RIZE tokenized Quebec real estate developments</div></div>
-    <div class="card"><div class="n" style="font-size:30px;font-weight:800">$51.9M</div><div class="l" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:8px;text-transform:uppercase;letter-spacing:.06em">Ocree commercial property on Polymesh, Winnipeg</div></div>
-    <div class="card"><div class="n" style="font-size:30px;font-weight:800">$14M</div><div class="l" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:8px;text-transform:uppercase;letter-spacing:.06em">Rails raise for a hybrid exchange, backed by Kraken</div></div>
-  </div>
-  <div class="card pad" style="margin-top:24px;background:var(--tint);border-color:#CBDAFB">
-    <div class="grid g2" style="align-items:center;gap:30px">
-      <div>
-        <div class="kicker">The prize</div>
-        <h3 style="margin-top:12px;font-size:22px">Whoever settles it, keeps it</h3>
-        <p style="font-size:14.5px;color:var(--steel)">Banks do not build shared infrastructure. Crypto exchanges are retail-native. Issuers focus on issuance. Global platforms are not built for Canadian rules. That is why the neutral settlement layer is still open, and why it is defensible once built: regulatory precedent, embedded institutional workflows, and network effects compound to the first mover.</p>
-      </div>
-      <div class="askbox" style="background:#fff">
-        <div class="askrow"><span class="k">Canadian RWA fee pool by 2030</span><span class="v b">C$350M - $1.9B / yr</span></div>
-        <div class="askrow"><span class="k">Revenue surfaces</span><span class="v">Settlement, issuance, custody</span></div>
-        <div class="askrow"><span class="k">plus</span><span class="v">Trading and platform SaaS</span></div>
-        <div class="askrow"><span class="k">Position</span><span class="v">First neutral layer in market</span></div>
-        <div style="font-family:var(--mono);font-size:10px;color:var(--slate);margin-top:14px;line-height:1.5">Fee-pool figure is a 4orm management estimate, bottom-up, subject to adoption and regulatory approvals.</div>
-      </div>
-    </div>
-  </div>
-</div></section>
-<!-- THE SOLUTION -->
-<section class="sec dark" id="solution"><div class="wrap">
-  <span class="eyebrow">The Solution</span>
-  <h2 class="sec-h">One enterprise layer where everything settles with finality.</h2>
-  <p class="sec-sub">4orm settles title, the cash leg, and the rules together, as one event, in Canadian dollars. It connects every tokenized project to every bank, so issuers get liquidity and can offload, and any token movement needed across Canada clears through one regulated venue instead of a dozen disconnected ones.</p>
-  <div class="subhead" style="margin:48px 0 18px">Delivery versus payment, animated</div>
-  <div class="dvp-scene">
-    <svg class="dvp-svg" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <linearGradient id="asset-glow" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9AB6FF" stop-opacity="0"/><stop offset=".5" stop-color="#9AB6FF" stop-opacity=".55"/><stop offset="1" stop-color="#9AB6FF" stop-opacity="0"/></linearGradient>
-        <linearGradient id="cash-glow" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#7BE3B0" stop-opacity="0"/><stop offset=".5" stop-color="#7BE3B0" stop-opacity=".55"/><stop offset="1" stop-color="#7BE3B0" stop-opacity="0"/></linearGradient>
-        <radialGradient id="commit-pulse" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#7BE3B0" stop-opacity=".55"/><stop offset="1" stop-color="#7BE3B0" stop-opacity="0"/></radialGradient>
-      </defs>
-
-      <!-- Left column: ISSUERS -->
-      <g transform="translate(60 100)">
-        <text x="0" y="-20" font-family="JetBrains Mono,monospace" font-size="11" font-weight="800" letter-spacing=".14em" fill="#9AB6FF">ISSUERS</text>
-        <!-- Real estate -->
-        <g transform="translate(0 0)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(154,182,255,.08)" stroke="rgba(154,182,255,.35)"/><g transform="translate(10 8)"><rect x="0" y="4" width="14" height="14" fill="#9AB6FF"/><polygon points="0,4 7,-2 14,4" fill="#9AB6FF"/><rect x="4" y="8" width="6" height="10" fill="#0B1220"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Real estate</text></g>
-        <!-- Bonds -->
-        <g transform="translate(0 46)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(154,182,255,.08)" stroke="rgba(154,182,255,.35)"/><g transform="translate(10 8)"><rect x="0" y="0" width="18" height="18" rx="1" fill="#9AB6FF"/><line x1="4" y1="4" x2="14" y2="4" stroke="#0B1220" stroke-width="1.5"/><line x1="4" y1="9" x2="14" y2="9" stroke="#0B1220" stroke-width="1.5"/><line x1="4" y1="14" x2="14" y2="14" stroke="#0B1220" stroke-width="1.5"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Bonds</text></g>
-        <!-- Private credit -->
-        <g transform="translate(0 92)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(154,182,255,.08)" stroke="rgba(154,182,255,.35)"/><g transform="translate(10 8)"><circle cx="9" cy="9" r="8" fill="#9AB6FF"/><text x="9" y="13" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="10" fill="#0B1220">%</text></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Credit</text></g>
-        <!-- Gold -->
-        <g transform="translate(0 138)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(154,182,255,.08)" stroke="rgba(154,182,255,.35)"/><g transform="translate(10 10)"><polygon points="0,14 9,0 18,14" fill="#F5D06B"/><rect x="1" y="14" width="16" height="4" fill="#B58A28"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Bullion</text></g>
-      </g>
-
-      <!-- Right column: BANKS / LIQUIDITY -->
-      <g transform="translate(720 100)">
-        <text x="120" y="-20" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="11" font-weight="800" letter-spacing=".14em" fill="#7BE3B0">BANKS &amp; LIQUIDITY</text>
-        <g transform="translate(0 0)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(123,227,176,.08)" stroke="rgba(123,227,176,.35)"/><g transform="translate(10 8)"><polygon points="0,6 9,0 18,6" fill="#7BE3B0"/><rect x="1" y="6" width="16" height="12" fill="#7BE3B0"/><rect x="4" y="10" width="2" height="6" fill="#0B1220"/><rect x="8" y="10" width="2" height="6" fill="#0B1220"/><rect x="12" y="10" width="2" height="6" fill="#0B1220"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Tier-1 bank</text></g>
-        <g transform="translate(0 46)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(123,227,176,.08)" stroke="rgba(123,227,176,.35)"/><g transform="translate(10 8)"><path d="M9 0 L18 4 L18 12 Q18 18 9 20 Q0 18 0 12 L0 4 Z" fill="#7BE3B0"/><circle cx="9" cy="10" r="2" fill="#0B1220"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Custodian</text></g>
-        <g transform="translate(0 92)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(123,227,176,.08)" stroke="rgba(123,227,176,.35)"/><g transform="translate(10 6)"><circle cx="9" cy="9" r="9" fill="#7BE3B0"/><path d="M4 7 Q9 4 14 7 M4 10 Q9 7 14 10" stroke="#0B1220" stroke-width="1.4" fill="none"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Credit union</text></g>
-        <g transform="translate(0 138)"><rect x="0" y="0" width="120" height="34" rx="8" fill="rgba(123,227,176,.08)" stroke="rgba(123,227,176,.35)"/><g transform="translate(10 8)"><path d="M0 12 L9 4 L18 12 L18 18 L0 18 Z" fill="#7BE3B0"/><rect x="7" y="4" width="4" height="4" fill="#0B1220"/></g><text x="35" y="21" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">Pension</text></g>
-      </g>
-
-      <!-- TWO LANES (asset flow top, cash flow bottom) -->
-      <!-- lane backgrounds -->
-      <rect x="190" y="118" width="510" height="30" rx="15" fill="rgba(154,182,255,.06)" stroke="rgba(154,182,255,.18)"/>
-      <rect x="190" y="192" width="510" height="30" rx="15" fill="rgba(123,227,176,.06)" stroke="rgba(123,227,176,.18)"/>
-
-      <!-- lane labels -->
-      <text x="200" y="112" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing=".12em" fill="#9AB6FF" font-weight="700">TITLE / ASSET LEG &rarr;</text>
-      <text x="690" y="242" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing=".12em" fill="#7BE3B0" font-weight="700">&larr; CASH LEG (TOKENIZED DEPOSIT)</text>
-
-      <!-- animated asset tokens flowing left → right -->
-      <g fill="#9AB6FF">
-        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" path="M195 133 L695 133"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" repeatCount="indefinite"/></circle>
-        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" begin="1.3s" path="M195 133 L695 133"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" begin="1.3s" repeatCount="indefinite"/></circle>
-        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" begin="2.6s" path="M195 133 L695 133"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" begin="2.6s" repeatCount="indefinite"/></circle>
-      </g>
-      <!-- animated cash tokens flowing right → left -->
-      <g fill="#7BE3B0">
-        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" path="M695 207 L195 207"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" repeatCount="indefinite"/></circle>
-        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" begin="1.3s" path="M695 207 L195 207"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" begin="1.3s" repeatCount="indefinite"/></circle>
-        <circle r="6"><animateMotion dur="4s" repeatCount="indefinite" begin="2.6s" path="M695 207 L195 207"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.05;.5;.95;1" dur="4s" begin="2.6s" repeatCount="indefinite"/></circle>
-      </g>
-
-      <!-- CENTER 4ORM COMMIT hub -->
-      <g transform="translate(445 170)">
-        <!-- commit pulse aura -->
-        <circle r="65" fill="url(#commit-pulse)">
-          <animate attributeName="r" values="55;80;55" dur="2s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
-        </circle>
-        <!-- hub core box -->
-        <rect x="-72" y="-52" width="144" height="104" rx="14" fill="#0F1A30" stroke="#7BE3B0" stroke-width="2"/>
-        <text y="-28" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="16" fill="#fff">4ORM</text>
-        <text y="-14" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" letter-spacing=".14em" fill="#7BE3B0">COMMIT AS ONE</text>
-        <!-- three commit rows: title + cash + rules -->
-        <g transform="translate(-56 0)">
-          <rect x="0" y="0" width="112" height="14" rx="3" fill="rgba(154,182,255,.16)" stroke="rgba(154,182,255,.4)"/>
-          <text x="6" y="10" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#9AB6FF" font-weight="700">TITLE</text>
-          <text x="106" y="10" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#9AB6FF">&#10003;</text>
-        </g>
-        <g transform="translate(-56 18)">
-          <rect x="0" y="0" width="112" height="14" rx="3" fill="rgba(123,227,176,.16)" stroke="rgba(123,227,176,.4)"/>
-          <text x="6" y="10" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#7BE3B0" font-weight="700">CASH</text>
-          <text x="106" y="10" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#7BE3B0">&#10003;</text>
-        </g>
-        <g transform="translate(-56 36)">
-          <rect x="0" y="0" width="112" height="14" rx="3" fill="rgba(245,208,107,.16)" stroke="rgba(245,208,107,.4)"/>
-          <text x="6" y="10" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#F5D06B" font-weight="700">RULES</text>
-          <text x="106" y="10" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#F5D06B">&#10003;</text>
-        </g>
-      </g>
-
-      <!-- caption -->
-      <text x="450" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#fff">All three commit together in the same block, or nothing settles.</text>
-      <text x="450" y="308" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing=".12em" fill="#9FB0CC">DELIVERY VERSUS PAYMENT &middot; T+0 &middot; CANADIAN DOLLARS</text>
-    </svg>
-  </div>
-  <p style="text-align:center;font-size:13px;color:#8A97AD;margin-top:16px;font-family:var(--mono);letter-spacing:.04em">The bank issues and holds the tokenized deposit. 4orm takes no deposits and needs no banking licence.</p>
-  <div class="subhead" style="margin:52px 0 18px">Built to be safe to adopt</div>
-  <div class="grid g3">
-    <div class="card reveal" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)"><h3 style="color:#fff">Starts as a read-only module</h3><p style="color:#9FB0CC">It sits beside a bank's existing systems, touches no funds, and proves settlement finality on a single tokenized deposit inside a supervised sandbox. The smallest thing that is both real and safe to run.</p></div>
-    <div class="card reveal" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)"><h3 style="color:#fff">Compliance native, Canadian hosted</h3><p style="color:#9FB0CC">Permissioned ERC-3643 tokens carry identity and transfer controls. Hyperledger Besu now, with a path to 4orm Native Chain, hosted in AWS Canada Central.</p></div>
-    <div class="card reveal" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)"><h3 style="color:#fff">Regulated from day one</h3><p style="color:#9FB0CC">Alberta Securities Commission as primary regulator, engaged through the Alberta Financial Regulatory Sandbox, with a phased CIRO custody pathway.</p></div>
-  </div>
-  <div class="subhead" style="margin:52px 0 18px">Five ways it earns</div>
-  <div class="streams" style="margin-top:0">
-    <div class="stream"><div class="sn">01</div><div class="st">Settlement</div><div class="sd">Delivery-versus-payment finality between institutions</div></div>
-    <div class="stream"><div class="sn">02</div><div class="st">Issuance</div><div class="sd">Compliant tokenization on the ERC-3643 standard</div></div>
-    <div class="stream"><div class="sn">03</div><div class="st">Custody &amp; registry</div><div class="sd">Asset lifecycle, records, and institution-facing controls</div></div>
-    <div class="stream"><div class="sn">04</div><div class="st">Trading</div><div class="sd">Institutional secondary market via 4orm Exchange</div></div>
-    <div class="stream"><div class="sn">05</div><div class="st">Platform SaaS</div><div class="sd">Recurring APIs and integration per institution</div></div>
-  </div>
-</div></section>
-<!-- WHO WE ARE + WHAT 4ORM IS / IS NOT (merged) -->
-<section class="sec alt" id="what"><div class="wrap">
-  <span class="eyebrow">Who we are &middot; For the record</span>
-  <h2 class="sec-h">A regulated settlement layer. Not another exchange.</h2>
-  <p class="sec-sub">4orm Finance is an Alberta-incorporated infrastructure company. We operate the neutral, Canadian-dollar layer where a tokenized asset and a tokenized cash leg settle against each other with finality. The institutional trading venue, 4ormEx, sits on top of it. We take no deposits and compete with no bank, which is exactly what lets every bank settle on us.</p>
-  <div class="grid g3" style="margin:36px 0 44px">
-    <div class="card"><div class="kicker">Neutral</div><h3 style="margin-top:12px">Owned by no bank</h3><p>Infrastructure, not a competitor. Issuers, banks, and custodians connect to one shared layer instead of each bank's private island.</p></div>
-    <div class="card"><div class="kicker">Regulated</div><h3 style="margin-top:12px">Built inside the rules</h3><p>Alberta Securities Commission as primary regulator, engaged through a supervised sandbox pathway, with compliance native to the asset itself.</p></div>
-    <div class="card"><div class="kicker">Canadian</div><h3 style="margin-top:12px">Settled in Canadian dollars</h3><p>Issuance, custody, settlement, and the economics stay onshore, hosted in Canada, denominated in the Canadian dollar.</p></div>
-  </div>
-  <div class="isnot">
-    <div class="col is reveal">
-      <h4>4orm is</h4>
-      <h3>Settlement-layer software and the record of title</h3>
-      <ul>
-        <li><span class="mk">+</span>The settlement layer that makes a transfer final and legal across two institutions.</li>
-        <li><span class="mk">+</span>The authoritative record of title and the token registry for tokenized assets.</li>
-        <li><span class="mk">+</span>The connector to a bank-issued tokenized deposit that provides the cash leg.</li>
-        <li><span class="mk">+</span>A neutral, independently governed Canadian entity that no single bank owns.</li>
-      </ul>
-    </div>
-    <div class="col isnt reveal">
-      <h4>4orm is not</h4>
-      <h3>Not a bank. Not a custodian. Not a stablecoin issuer.</h3>
-      <ul>
-        <li><span class="mk">&#45;</span>Not a bank, and does not take deposits or carry on banking under the Bank Act. It touches no CDIC funds and needs no banking licence.</li>
-        <li><span class="mk">&#45;</span>Not a custodian of customer assets; custody sits under a separate regulated function.</li>
-        <li><span class="mk">&#45;</span>Not a stablecoin issuer; the deposit token is the bank's own liability.</li>
-        <li><span class="mk">&#45;</span>Not the AML officer of record; regulated institutions keep their own obligations.</li>
-      </ul>
-    </div>
-  </div>
-  <p style="font-size:12.5px;color:var(--slate);margin-top:18px;font-style:italic">All activities are subject to receipt of required regulatory approvals. No regulator has reviewed, endorsed, or approved 4orm Finance or any securities described here.</p>
-</div></section>
-<!-- ECOSYSTEM SHOUT-OUT -->
-<section class="sec" id="ecosystem"><div class="wrap">
-  <span class="eyebrow">The players we connect</span>
-  <h2 class="sec-h">Canada already has the pieces. It has never had the layer that links them.</h2>
-  <p class="sec-sub">The talent and the building blocks are already here. Real issuers, a domestic regulated chain, Canadian-dollar stablecoin issuers, and qualified custodians are all live today. They are not competitors to route around. They are the network 4orm is built to connect, so their assets can settle and offload at home.</p>
-  <div class="ecogroup reveal">
-    <div class="gl">Issuers and tokenization platforms</div>
-    <div class="eco">
-      <span class="chip">Polymath / Polymesh<span class="r">RWA CHAIN</span></span>
-      <span class="chip">T-RIZE<span class="r">REAL ESTATE</span></span>
-      <span class="chip">Ocree Capital<span class="r">COMMERCIAL RE</span></span>
-      <span class="chip">Pineapple Financial<span class="r">MORTGAGES</span></span>
-      <span class="chip">SORS Capital<span class="r">SOCIAL HOUSING</span></span>
-    </div>
-  </div>
-  <div class="ecogroup reveal">
-    <div class="gl">Stablecoins and payments</div>
-    <div class="eco">
-      <span class="chip">Stablecorp / QCAD<span class="r">CAD STABLECOIN</span></span>
-      <span class="chip">Cybrid<span class="r">PAYMENTS</span></span>
-      <span class="chip">Loon<span class="r">CAD STABLECOIN</span></span>
-      <span class="chip">Rails<span class="r">HYBRID EXCHANGE</span></span>
-    </div>
-  </div>
-  <div class="ecogroup reveal">
-    <div class="gl">Custody and trust</div>
-    <div class="eco">
-      <span class="chip">Tetra Trust<span class="r">CUSTODY</span></span>
-      <span class="chip">Brane<span class="r">CUSTODY</span></span>
-      <span class="chip">Balance<span class="r">CUSTODY</span></span>
-    </div>
-  </div>
-  <p style="font-size:13px;color:var(--slate);margin-top:26px;font-style:italic;max-width:820px">Companies shown are independent third parties referenced as market context. Their inclusion reflects publicly reported activity and does not imply any partnership or endorsement.</p>
-</div></section>
-<!-- THE RAISE -->
-<section class="sec alt" id="raise"><div class="wrap">
-  <div style="background:#EAF1FE;border:1px solid #CBDAFB;border-radius:12px;padding:20px 24px;margin-bottom:36px;display:flex;gap:24px;align-items:center;flex-wrap:wrap">
-    <div style="display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.12em;color:#2E6BF2;text-transform:uppercase">
-      <span style="width:8px;height:8px;border-radius:50%;background:#2E6BF2;box-shadow:0 0 0 0 rgba(46,107,242,.5);animation:pulse 2.4s infinite"></span>
-      Pre-Seed &middot; Opening August 1, 2026 &middot; 90-day window
-    </div>
-    <div style="flex:1;min-width:280px;font-size:12.5px;color:#46556E;line-height:1.55">
-      <strong style="color:#142036">For accredited investors only.</strong> Information on this website is for accredited investors as defined in National Instrument 45-106. It is not an offer to sell or a solicitation of an offer to buy securities. No securities regulatory authority has assessed the merits of any securities described herein.
-    </div>
-  </div>
-  <span class="eyebrow">The Raise</span>
-  <h2 class="sec-h">Pre-seed, open August 1, 2026.</h2>
-  <div class="ask" style="margin-top:40px">
-    <div>
-      <p class="sec-sub" style="margin-top:0">4orm is raising a $2M pre-seed on a post-money SAFE to build the settlement module, clear the regulatory pathway, run the first institutional pilot, and execute the first two bank MOUs. The round opens to accredited investors on August 1, 2026. The SAFE is structured to be TFSA and RRSP eligible.</p>
-      <div class="cta" style="margin-top:28px">
-        <a class="btn lg" href="https://www.4ormdr.com">Enter the data room</a>
-        <a class="btn ghost lg" href="mailto:office@4ormfinance.com?subject=4orm%20Finance%20-%20Investor%20meeting%20request">Book an investor meeting</a>
-      </div>
-    </div>
-    <div class="askbox reveal">
-      <div class="askrow"><span class="k">Round</span><span class="v">Pre-seed</span></div>
-      <div class="askrow"><span class="k">Instrument</span><span class="v">Post-money SAFE</span></div>
-      <div class="askrow"><span class="k">Target</span><span class="v b">$2,000,000</span></div>
-      <div class="askrow"><span class="k">Valuation cap</span><span class="v">$12,000,000</span></div>
-      <div class="askrow"><span class="k">Discount</span><span class="v">15%, with MFN</span></div>
-      <div class="askrow"><span class="k">Opens</span><span class="v">August 1, 2026</span></div>
-      <div class="askrow"><span class="k">Eligibility</span><span class="v">TFSA / RRSP</span></div>
-    </div>
-  </div>
-
-  <!-- STANDALONE COMMITMENT LINE — separated from SAFE structure by design -->
-  <div style="margin:56px auto 0;max-width:640px;text-align:center;padding:22px 28px;background:rgba(31,157,107,.06);border:1px solid rgba(31,157,107,.28);border-radius:14px">
-    <div style="display:inline-flex;align-items:center;gap:10px">
-      <span style="width:8px;height:8px;border-radius:50%;background:#1F9D6B;display:inline-block"></span>
-      <span style="font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#1F9D6B;font-weight:800">Traction</span>
-    </div>
-    <p style="margin:10px 0 0;font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.4">Two angel investors committed for <span style="color:#1F9D6B">$570,000</span> to date.</p>
-  </div>
-
-  <!-- USE OF PROCEEDS -->
-  <div style="margin-top:64px;padding-top:52px;border-top:1px solid var(--line)">
-    <span class="eyebrow">Use of proceeds</span>
-    <h2 class="sec-h" style="font-size:clamp(24px,2.4vw,32px)">Where the $2M gets deployed.</h2>
-    <p class="sec-sub" style="margin-top:14px">Split by function, sized against a 24-month runway. A meaningful reserve is carried explicitly for the regulatory pathway, which is the item most likely to move on the calendar. Full line-item deployment plan is in the data room.</p>
-
-    <div style="margin-top:32px;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start">
-      <div>
-        <!-- Stacked horizontal bar (relative sizing, no printed percentages) -->
-        <div style="display:flex;height:44px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#fff">
-          <div style="flex:43;background:#2E6BF2"></div>
-          <div style="flex:14;background:#5C89F5"></div>
-          <div style="flex:6;background:#8DAFF8"></div>
-          <div style="flex:4;background:#A9C3FA"></div>
-          <div style="flex:4;background:#C4D6FC"></div>
-          <div style="flex:4;background:#D9E4FD"></div>
-          <div style="flex:25;background:#142036"></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;margin-top:22px;font-size:14px;color:var(--steel)">
-          <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;background:#2E6BF2;border-radius:3px"></span> Talent</div>
-          <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;background:#5C89F5;border-radius:3px"></span> Product &amp; engineering</div>
-          <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;background:#8DAFF8;border-radius:3px"></span> Legal</div>
-          <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;background:#A9C3FA;border-radius:3px"></span> Compliance advisory</div>
-          <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;background:#C4D6FC;border-radius:3px"></span> Business development &amp; travel</div>
-          <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;background:#D9E4FD;border-radius:3px"></span> General &amp; administrative</div>
-          <div style="display:flex;align-items:center;gap:10px;grid-column:span 2"><span style="width:12px;height:12px;background:#142036;border-radius:3px"></span> Reserve &amp; contingency</div>
-        </div>
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="card" style="padding:22px 24px">
-          <div class="kicker" style="color:var(--blue)">01 · Regulatory pathway</div>
-          <h3 style="margin-top:10px;font-size:16px">FINTRAC, OSFI, CIRO, Alberta Sandbox</h3>
-          <p style="margin-top:8px;font-size:13.5px">FINTRAC registration, the OSFI classification memo, CIRO framework work, and the Q3 2026 Alberta Sandbox application.</p>
-        </div>
-        <div class="card" style="padding:22px 24px">
-          <div class="kicker" style="color:var(--blue)">02 · Founding build team</div>
-          <h3 style="margin-top:10px;font-size:16px">CTO plus smart-contract, backend, DevOps</h3>
-          <p style="margin-top:8px;font-size:13.5px">A full-time CTO plus smart-contract, backend, and DevOps engineering, alongside the standing architecture and compliance advisors.</p>
-        </div>
-        <div class="card" style="padding:22px 24px">
-          <div class="kicker" style="color:var(--blue)">03 · Production hardening</div>
-          <h3 style="margin-top:10px;font-size:16px">MVP validated, sandbox pilot, first deposit flows</h3>
-          <p style="margin-top:8px;font-size:13.5px">MVP built and validated, a sandbox pilot with the lead institution, and the first tokenized deposit flows in a controlled environment.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- COMPARABLE FINANCINGS -->
-  <div style="margin-top:64px;padding-top:52px;border-top:1px solid var(--line)">
-    <span class="eyebrow">Comparable financings</span>
-    <h2 class="sec-h" style="font-size:clamp(24px,2.4vw,32px)">Priced against real Canadian and global comps.</h2>
-    <p class="sec-sub" style="margin-top:14px">The $2M pre-seed at a $12M cap sits at the low end of the range for infrastructure companies at this stage. Canadian precedent below, global analogs beneath that.</p>
-
-    <div style="margin-top:32px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden">
-      <div style="display:grid;grid-template-columns:1.2fr .9fr 2fr;padding:14px 22px;background:var(--paper);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)">
-        <div>Company</div><div>Stage</div><div>Detail</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.2fr .9fr 2fr;padding:18px 22px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.55">
-        <div><b>Cybrid</b><div style="color:var(--slate);font-size:12px;margin-top:2px">Toronto</div></div>
-        <div style="color:var(--steel)">Seed → Series A</div>
-        <div style="color:var(--steel)">Closest Canadian precedent. $3.8M CAD seed (2022) → $10M USD Series A (2025, BDC Capital lead).</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.2fr .9fr 2fr;padding:18px 22px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.55">
-        <div><b>Tetra Trust</b><div style="color:var(--slate);font-size:12px;margin-top:2px">Calgary</div></div>
-        <div style="color:var(--steel)">Multi-round</div>
-        <div style="color:var(--steel)">~$15M CAD across rounds. Backers include ATB Financial, National Bank, Wealthsimple, and Coinbase Ventures.</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.2fr .9fr 2fr;padding:18px 22px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.55">
-        <div><b>Balance Trust</b><div style="color:var(--slate);font-size:12px;margin-top:2px">Toronto</div></div>
-        <div style="color:var(--steel)">Regulatory launch</div>
-        <div style="color:var(--steel)">$10M CAD committed regulatory capital (2024).</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.2fr .9fr 2fr;padding:18px 22px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.55;background:var(--paper)">
-        <div><b>Ondo Finance</b><div style="color:var(--slate);font-size:12px;margin-top:2px">United States</div></div>
-        <div style="color:var(--steel)">Seed</div>
-        <div style="color:var(--steel)">$4M USD (2021) at ~$130M post-money.</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.2fr .9fr 2fr;padding:18px 22px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.55;background:var(--paper)">
-        <div><b>Fnality</b><div style="color:var(--slate);font-size:12px;margin-top:2px">United Kingdom</div></div>
-        <div style="color:var(--steel)">Series B / C</div>
-        <div style="color:var(--steel)">Global bank-settlement analog. $95M USD Series B (2023), $133M USD Series C (2025).</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.2fr .9fr 2fr;padding:18px 22px;font-size:14px;line-height:1.55;background:var(--paper)">
-        <div><b>BondbloX</b><div style="color:var(--slate);font-size:12px;margin-top:2px">Singapore</div></div>
-        <div style="color:var(--steel)">Series A / B</div>
-        <div style="color:var(--steel)">~$12M USD total across A and B.</div>
-      </div>
-    </div>
-    <p style="font-size:12.5px;color:var(--slate);margin-top:16px;font-style:italic">Sources: BetaKit, Crunchbase, PitchBook, company disclosures. Canadian and global comps shown for reference; each is an independent third party. Inclusion does not imply endorsement or affiliation.</p>
-  </div>
-</div></section>
-
-<!-- Sources block (from the sales landing) -->
-<section class="landing-sources">
-  <div class="wrap">
-    SOURCES: RWA.xyz; PYMNTS (2026); Yellow Research (2026); DefiLlama; The Block; Bitcoin Foundation (2026); McKinsey (2024); BCG x Ripple (2025); Standard Chartered (2024); Bank of Canada Project Samara research paper (2026); Osler; EDC; BingX / DWF Labs tokenized commodities (2026); CoinGecko (2026); company disclosures for T-RIZE, Ocree, Pineapple Financial, SORS, Polymesh, Stablecorp, Cybrid, Loon, Tetra, Brane, Rails.
-  </div>
-</section>
-
-<footer style="background:#0C1626;color:#8A97AD;padding:56px 0 40px;font-size:13px">
-  <div class="wrap">
-    <div style="display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;border-bottom:1px solid #1E2A40;padding-bottom:28px">
-      <div>
-        <img src="assets/4orm-logo.png" alt="4orm Finance" style="height:60px;filter:brightness(0) invert(1)">
-        <p style="margin-top:14px;max-width:420px;color:#8A97AD">Canada's neutral, regulated, Canadian-dollar settlement layer for tokenized real-world assets. Incorporated in Alberta.</p>
-      </div>
-      <div style="text-align:right">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#AEBBD2">GET IN TOUCH</div>
-        <div style="margin-top:10px"><a href="mailto:office@4ormfinance.com" style="color:#AEBBD2">office@4ormfinance.com</a></div>
-        <div><a href="https://www.4ormdr.com" style="color:#AEBBD2">www.4ormdr.com</a></div>
-        <div style="margin-top:8px;color:#5E6E88">Unit 400, 718 8 Ave SW, Calgary, AB</div>
-      </div>
-    </div>
-    <div style="border-bottom:1px solid #1E2A40;padding:26px 0 22px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:#AEBBD2;text-transform:uppercase;margin-bottom:16px">The 4orm Finance family</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-        <a href="https://4ormdr.com" style="border:1px solid #1E2A40;border-radius:12px;padding:20px 22px;background:#0F1B2E;display:block;transition:.15s">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#5E6E88;text-transform:uppercase">01 &middot; Data Room</div>
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-top:8px">4orm Data Room &#8599;</div>
-          <div style="font-size:12.5px;color:#8A97AD;margin-top:6px">Vetted access for institutional and accredited investors.</div>
-        </a>
-        <a href="https://4ormex.com" target="_blank" rel="noopener" style="border:1px solid #1E2A40;border-radius:12px;padding:20px 22px;background:#0F1B2E;display:block;transition:.15s">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#5E6E88;text-transform:uppercase">02 &middot; Exchange</div>
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-top:8px">4ormEx &#8599;</div>
-          <div style="font-size:12.5px;color:#8A97AD;margin-top:6px">Institutional trading venue. Settlement finality.</div>
-        </a>
-        <a href="https://kcs-capital.com" target="_blank" rel="noopener" style="border:1px solid #1E2A40;border-radius:12px;padding:20px 22px;background:#0F1B2E;display:block;transition:.15s">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#5E6E88;text-transform:uppercase">Sister &middot; Developer</div>
-          <div style="font-size:16px;font-weight:700;color:#fff;margin-top:8px">KCS Capital &#8599;</div>
-          <div style="font-size:12.5px;color:#8A97AD;margin-top:6px">Independent technology and research firm.</div>
-        </a>
-      </div>
-    </div>
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;padding:22px 0 8px;font-size:12px;color:#5E6E88">
-      <span>&copy; 2026 4orm Finance &middot; Calgary, AB</span>
-      <span style="display:flex;gap:18px;flex-wrap:wrap"><a href="faq.html#sources" style="color:#FFD9A8;font-weight:700">Sources &amp; references</a><a href="faq.html" style="color:#AEBBD2">FAQ</a><a href="privacy.html" style="color:#AEBBD2">Privacy</a><a href="terms.html" style="color:#AEBBD2">Terms</a><a href="mailto:compliance@4ormfinance.com" style="color:#AEBBD2">compliance@4ormfinance.com</a></span>
-    </div>
-    <div style="margin-top:18px;font-size:11px;color:#5E6E88;line-height:1.7;max-width:960px">
-      <p style="margin-bottom:12px"><b style="color:#AEBBD2">Accredited investors only.</b> The securities referenced on this website are being offered only to "accredited investors" as defined in National Instrument 45-106. This is not an offer to sell or a solicitation of an offer to buy securities in any jurisdiction where such offer is not permitted. No securities regulatory authority has assessed the merits of any securities described on this website.</p>
-      <p style="margin-bottom:12px"><b style="color:#AEBBD2">Forward-looking statements.</b> This website contains forward-looking statements within the meaning of applicable Canadian securities laws, including statements about 4orm Finance's planned operations, regulatory pathway, market opportunity, and capital raise. These are based on assumptions current as of the date stated and are subject to material risks and uncertainties, including the receipt of required regulatory approvals. Actual results may differ materially.</p>
-      <p style="margin-bottom:12px"><b style="color:#AEBBD2">No affiliation or endorsement.</b> References to third-party companies, regulators, and initiatives are for market-context and educational purposes only and do not imply any partnership, endorsement, or affiliation. All third-party names and trademarks are the property of their respective owners. 4orm Finance is not affiliated with the Bank of Canada, OSFI, the CSA (or its members including OSC, AMF, BCSC, ASC), CIRO, FINTRAC, or any other regulator. No regulator has reviewed, endorsed, or approved 4orm Finance, its planned platform, or any securities described on this website. 4orm Finance is informed by, but not a participant in, the Bank of Canada's Project Samara experiment (Staff Analytical Paper 2026-8) and the CSA Project Tokenization initiative.</p>
-      <p><b style="color:#AEBBD2">FINTRAC.</b> 4orm Finance will register with FINTRAC as required prior to commencing regulated activity. FINTRAC registration is not an endorsement.</p>
-    </div>
-  </div>
-</footer>
-
-<script src="assets/mobile-nav.js?v=1" defer></script>
-<script>
-(function(){
-  var d=document; d.documentElement.classList.add('js');
-  d.querySelectorAll('.chart,.card,.layer,.split,.stream,.askbox,.ecogroup,.inev-nums .in').forEach(function(el){el.classList.add('reveal')});
-  d.querySelectorAll('.reveal').forEach(function(el){
-    var i=Array.prototype.indexOf.call(el.parentNode.children, el);
-    el.style.transitionDelay=(Math.min(i,6)*70)+'ms';
-  });
-  function grow(root){
-    root.querySelectorAll('.bar .fill, .cols .cbar').forEach(function(el){
-      var w=el.style.width, h=el.style.height;
-      if(w){el.style.width='0';requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.width=w})});}
-      if(h){el.style.height='0';requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.height=h})});}
-    });
-  }
-  function count(root){
-    root.querySelectorAll('[data-count]').forEach(function(el){
-      if(el._c)return; el._c=1;
-      var t=+el.getAttribute('data-count'), pre=el.getAttribute('data-pre')||'', suf=el.getAttribute('data-suf')||'', dur=1100, s=performance.now();
-      (function f(now){var k=Math.min(1,(now-s)/dur);var v=Math.round(t*(1-Math.pow(1-k,3)));el.textContent=pre+v.toLocaleString()+suf;if(k<1)requestAnimationFrame(f);})(s);
-    });
-  }
-  var els=d.querySelectorAll('.reveal');
-  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');grow(e);count(e);});return;}
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var el=e.target;el.classList.add('in');grow(el);count(el);io.unobserve(el);}});},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
-  els.forEach(function(el){io.observe(el);});
-})();
-</script>
-<script src="assets/scroll-animate.js?v=105" defer></script>
-<script src="assets/nav-scroll.js?v=105" defer></script>
-
-<!-- v102: Data room access-request modal (single-source across all pages) -->
-<div id="request-access-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="access-modal-title">
-  <div class="modal-backdrop" data-close></div>
-  <div class="modal-card">
-    <button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
-    <div class="modal-eyebrow">DATA ROOM ACCESS</div>
-    <h2 id="access-modal-title" class="modal-title">Request access to the 4orm Finance data room.</h2>
-    <p class="modal-sub">Approved counterparties get access within one business day. Every request is reviewed by the founding team; we vet before we share.</p>
-    <form class="access-form" id="access-form">
-      <div class="ff-row">
-        <label><span>First name</span><input type="text" name="firstname" required autocomplete="given-name"></label>
-        <label><span>Last name</span><input type="text" name="lastname" required autocomplete="family-name"></label>
-      </div>
-      <div class="ff-row">
-        <label><span>Email</span><input type="email" name="email" required autocomplete="email"></label>
-        <label><span>Phone</span><input type="tel" name="phone" required autocomplete="tel"></label>
-      </div>
-      <label><span>Firm / Organization</span><input type="text" name="firm" required autocomplete="organization"></label>
-      <label><span>Your role</span><input type="text" name="role" placeholder="e.g. Managing Partner, Head of Digital Assets, CIO" autocomplete="organization-title"></label>
-      <label><span>Investor classification</span>
-        <select name="classification" required>
-          <option value="" disabled selected>Select one</option>
-          <option>Accredited investor (individual)</option>
-          <option>Institutional counterparty</option>
-          <option>Family office</option>
-          <option>Financial advisor</option>
-          <option>Bank / Credit union / Custodian</option>
-          <option>Other</option>
-        </select>
-      </label>
-      <label><span>Area of interest</span>
-        <select name="interest" required>
-          <option value="" disabled selected>Select one</option>
-          <option>Direct investment in the pre-seed round</option>
-          <option>Institutional partnership / integration</option>
-          <option>General exploration / research</option>
-        </select>
-      </label>
-      <label><span>Timeline</span>
-        <select name="timeline" required>
-          <option value="" disabled selected>Select one</option>
-          <option>This week</option>
-          <option>Within 30 days</option>
-          <option>30 to 60 days</option>
-          <option>Just exploring, no specific timeline</option>
-        </select>
-      </label>
-      <label><span>Anything you would like us to know before we speak? (optional)</span><textarea name="notes" rows="3"></textarea></label>
-      <label class="ff-check">
-        <input type="checkbox" name="consent" required>
-        <span>I confirm the information above is accurate, and I understand that any data room materials shared with me are confidential and provided for my evaluation only.</span>
-      </label>
-      <div class="ff-actions">
-        <button type="button" class="mbtn ghost" data-close>Cancel</button>
-        <button type="submit" class="mbtn primary">Request access</button>
-      </div>
-      <div class="ff-fine">A member of the founding team will review your request and reach out within one business day.</div>
-    </form>
-    <div class="access-thankyou">
-      <h3>Request opened in your email client.</h3>
-      <p>Please review and send the pre-filled message to complete your request. We will reach out within one business day.</p>
-    </div>
-  </div>
-</div>
-<script src="assets/access-modal.js?v=105" defer></script>
-
+  <div id="cta-mount"></div>
+  <div id="footer-mount"></div>
+  <script src="/assets/chrome.js" defer></script>
 </body>
 </html>
