@@ -2,29 +2,162 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/who", "destination": "/the-rules", "permanent": true },
-    { "source": "/who.html", "destination": "/the-rules", "permanent": true },
-    { "source": "/market", "destination": "/the-problem", "permanent": true },
-    { "source": "/market.html", "destination": "/the-problem", "permanent": true },
-    { "source": "/regulatory", "destination": "/the-rules", "permanent": true },
-    { "source": "/regulatory.html", "destination": "/the-rules", "permanent": true },
-    { "source": "/faq", "destination": "/the-rules", "permanent": true },
-    { "source": "/faq.html", "destination": "/the-rules", "permanent": true },
-    { "source": "/leadership", "destination": "/contact", "permanent": true },
-    { "source": "/leadership.html", "destination": "/contact", "permanent": true },
-    { "source": "/platform", "destination": "/what-we-do", "permanent": true },
-    { "source": "/platform.html", "destination": "/what-we-do", "permanent": true },
-    { "source": "/the-duty", "destination": "/the-rules", "permanent": true }
+    {
+      "source": "/who",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/who.html",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/market",
+      "destination": "/the-problem",
+      "permanent": true
+    },
+    {
+      "source": "/market.html",
+      "destination": "/the-problem",
+      "permanent": true
+    },
+    {
+      "source": "/regulatory",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/regulatory.html",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/faq.html",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/leadership",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/leadership.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/platform",
+      "destination": "/what-we-do",
+      "permanent": true
+    },
+    {
+      "source": "/platform.html",
+      "destination": "/what-we-do",
+      "permanent": true
+    },
+    {
+      "source": "/the-duty",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/who-its-for",
+      "destination": "/the-rules#who",
+      "permanent": true
+    },
+    {
+      "source": "/who-its-for.html",
+      "destination": "/the-rules#who",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-serve",
+      "destination": "/the-rules#who",
+      "permanent": true
+    },
+    {
+      "source": "/inside-the-platform",
+      "destination": "/what-we-do",
+      "permanent": true
+    },
+    {
+      "source": "/inside-the-platform.html",
+      "destination": "/what-we-do",
+      "permanent": true
+    },
+    {
+      "source": "/insidetheplatform",
+      "destination": "/what-we-do",
+      "permanent": true
+    },
+    {
+      "source": "/insidetheplatform.html",
+      "destination": "/what-we-do",
+      "permanent": true
+    },
+    {
+      "source": "/theduty",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/theduty.html",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/the-duty.html",
+      "destination": "/the-rules",
+      "permanent": true
+    },
+    {
+      "source": "/4ormex",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/data-room",
+      "destination": "/contact",
+      "permanent": true
+    }
   ],
   "headers": [
-    { "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/(.*)",
+    {
+      "source": "/assets/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
-      ] }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    }
   ]
 }
