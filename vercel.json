@@ -44,12 +44,12 @@
     },
     {
       "source": "/leadership",
-      "destination": "/contact",
+      "destination": "/team",
       "permanent": true
     },
     {
       "source": "/leadership.html",
-      "destination": "/contact",
+      "destination": "/team",
       "permanent": true
     },
     {

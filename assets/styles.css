@@ -1027,3 +1027,70 @@ table.tbl tbody tr.lv-3 td.num{ color:var(--danger) }
 .dcol{ display:flex; flex-direction:column }
 .dcol .dsrc{ margin-top:auto }
 .dcol .dsay{ margin-bottom:16px }
+
+/* ============================================================
+   v6 · People — three across, stacked card
+   ============================================================ */
+.people{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:34px }
+@media (max-width:1040px){ .people{ grid-template-columns:repeat(2,1fr) } }
+@media (max-width:660px){ .people{ grid-template-columns:1fr } }
+
+.person{
+  display:flex; flex-direction:column;
+  padding:22px; background:var(--surface);
+  border:1px solid var(--border); border-top:3px solid var(--border-strong);
+  border-radius:var(--r-lg);
+}
+.people .person:nth-child(-n+3){ border-top-color:var(--brand) }
+.people .person:nth-child(n+4):nth-child(-n+6){ border-top-color:var(--gold-2) }
+.people .person:nth-child(n+7){ border-top-color:var(--brand-100) }
+
+.p-top{ display:flex; align-items:center; gap:16px }
+.p-shot{
+  position:relative; flex:0 0 auto; width:76px; height:76px; border-radius:var(--r);
+  overflow:hidden; background:#0B1220; border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+}
+.p-shot img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
+.p-ini{ font-family:var(--font-mono); font-size:1.05rem; font-weight:800; letter-spacing:.06em; color:#7B93BC }
+
+.p-id{ min-width:0 }
+.p-kick{
+  font-family:var(--font-mono); font-size:.58rem; font-weight:800;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--brand-700);
+}
+.person h3{ margin-top:6px; font-size:1.06rem; letter-spacing:-.02em }
+.p-role{
+  margin-top:4px; font-family:var(--font-mono); font-size:.66rem;
+  color:var(--text-3); line-height:1.5;
+}
+.p-short{
+  margin-top:16px; padding-top:16px; border-top:1px solid var(--border);
+  font-size:.9rem; line-height:1.6; color:var(--text-2);
+}
+
+.p-more{ margin-top:14px }
+.p-more > summary{
+  list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:.62rem; font-weight:800;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--brand-700);
+  padding:6px 0; border-bottom:1px solid var(--brand-100);
+}
+.p-more > summary::-webkit-details-marker{ display:none }
+.p-more > summary:hover{ color:var(--brand-600); border-bottom-color:var(--brand) }
+.p-more > summary::after{ content:"+"; font-size:.9rem; line-height:1 }
+.p-more[open] > summary::after{ content:"\2212" }
+.p-more > summary .cl{ display:none }
+.p-more[open] > summary .op{ display:none }
+.p-more[open] > summary .cl{ display:inline }
+
+.p-bio{ margin-top:14px; padding-top:14px; border-top:1px solid var(--border) }
+.p-bio p{ font-size:.86rem; line-height:1.68; color:var(--text-2) }
+.p-bio p + p{ margin-top:11px }
+
+.pl-link{
+  display:inline-flex; align-items:center; gap:6px; margin-top:auto; padding-top:16px;
+  font-family:var(--font-mono); font-size:.62rem; font-weight:800;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--text-3);
+}
+.pl-link:hover{ color:var(--brand-700) }

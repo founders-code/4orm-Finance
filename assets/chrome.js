@@ -25,7 +25,8 @@
     { label:'The rules',       href:'/the-rules',    slug:'rules' },
     { label:'Why it is hard',  href:'/the-problem',  slug:'problem' },
     { label:'What we do',      href:'/what-we-do',   slug:'what' },
-    { label:'Contact',         href:'/contact',      slug:'contact' }
+    { label:'Team',            href:'/team',         slug:'team' },
+  { label:'Contact',         href:'/contact',      slug:'contact' }
   ];
 
   var CTA_LABEL = 'Talk to us';
