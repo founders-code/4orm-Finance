@@ -157,12 +157,30 @@
     return f;
   }
 
+
+  /* ========================================================
+     Live day counters. Any element carrying data-days-since
+     gets the whole number of days from that date to today.
+     ======================================================== */
+  function fillDayCounters(){
+    var els = document.querySelectorAll('[data-days-since]');
+    for (var i = 0; i < els.length; i++) {
+      var parts = (els[i].getAttribute('data-days-since') || '').split('-');
+      if (parts.length !== 3) continue;
+      var from = Date.UTC(+parts[0], +parts[1] - 1, +parts[2]);
+      var now  = new Date();
+      var today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+      var days = Math.floor((today - from) / 86400000);
+      if (days > 0) els[i].textContent = days.toLocaleString('en-CA');
+    }
+  }
   /* ========================================================
      Mount
      ======================================================== */
   mount('nav-mount',    buildNav());
   mount('cta-mount',    buildCTA());
   mount('footer-mount', buildFooter());
+  fillDayCounters();
 
   /* ========================================================
      App mock - five-screen switcher on /inside-the-platform

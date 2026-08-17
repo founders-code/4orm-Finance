@@ -1094,3 +1094,41 @@ table.tbl tbody tr.lv-3 td.num{ color:var(--danger) }
   letter-spacing:.12em; text-transform:uppercase; color:var(--text-3);
 }
 .pl-link:hover{ color:var(--brand-700) }
+
+/* ---------- Tally: a counted list where the number is the point ---------- */
+.tally{ border:1px solid var(--border); border-radius:var(--r); overflow:hidden; background:var(--surface) }
+.ty-row{
+  display:grid; grid-template-columns:4.4rem 1fr; align-items:baseline; gap:16px;
+  padding:13px 18px; border-bottom:1px solid var(--border);
+}
+.ty-row:last-child{ border-bottom:none }
+.ty-n{
+  font-family:var(--font-mono); font-size:1.35rem; font-weight:800;
+  color:var(--brand-700); font-variant-numeric:tabular-nums; text-align:right;
+}
+.ty-row.zero .ty-n{ color:var(--danger) }
+.ty-t{ font-size:.9rem; line-height:1.55; color:var(--text-2) }
+@media (max-width:520px){ .ty-row{ grid-template-columns:3.4rem 1fr; gap:12px } }
+
+/* Mobile record cards: the table box was still sizing to content, so long
+   cells pushed it past the viewport. Take it out of table layout entirely. */
+@media (max-width:760px){
+  table.tbl{ display:block; width:100%; max-width:100% }
+  table.tbl tbody{ display:block; width:100% }
+  table.tbl tbody tr{ width:100% }
+  table.tbl tbody td{
+    grid-template-columns:7.6rem minmax(0,1fr);
+    min-width:0; overflow-wrap:anywhere;
+  }
+  table.tbl tbody td::before{ overflow-wrap:normal }
+  .tbl-cap{ font-size:.6rem }
+}
+@media (max-width:760px){
+  /* the hidden header row still had layout width; collapse it properly */
+  table.tbl thead{ display:block; position:static; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0) }
+  table.tbl thead tr{ display:block; width:1px }
+  table.tbl thead th{ display:block; position:static; width:1px; height:1px; padding:0; white-space:nowrap; overflow:hidden }
+}
+@media (max-width:760px){
+  table.tbl tbody td.k{ white-space:normal }
+}
