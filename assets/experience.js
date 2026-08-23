@@ -14,7 +14,54 @@ var el = function (t, c, h) { var n = document.createElement(t); if (c) n.classN
 var ARROW = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
 var CHEV  = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
 
+
+/* ---------------- industries ---------------- */
+var IND = {
+  mortgage: {
+    label: 'Mortgage', first: 'Buy a home',
+    goals: ['Buy a home', 'Refinance', 'Renew my mortgage', 'Understand an offer'],
+    q2: 'When are you hoping to buy?',
+    timing: ['0 to 3 months', '3 to 6 months', '6 to 12 months', 'Just exploring'],
+    pro: 'mortgage professional', proName: 'Alex Chen', proInit: 'AC',
+    proFirm: 'Northbridge Mortgage Group', subject: 'mortgage application',
+    fields: [['Purchase price', '$620,000'], ['Down payment', '$124,000'], ['Term', '5 year fixed']],
+    tx: 'MTG-2026-0417'
+  },
+  auto: {
+    label: 'Auto', first: 'Finance a vehicle',
+    goals: ['Finance a vehicle', 'Lease a vehicle', 'Refinance my loan', 'Understand an offer'],
+    q2: 'When are you hoping to buy?',
+    timing: ['This month', '1 to 3 months', '3 to 6 months', 'Just exploring'],
+    pro: 'finance manager', proName: 'Dana Whitfield', proInit: 'DW',
+    proFirm: 'Rideau Motors', subject: 'finance application',
+    fields: [['Vehicle price', '$54,800'], ['Down payment', '$8,000'], ['Term', '72 months']],
+    tx: 'AUT-2026-0912'
+  },
+  insurance: {
+    label: 'Insurance', first: 'Insure a property',
+    goals: ['Insure a property', 'Insure a vehicle', 'Review my coverage', 'Understand a renewal'],
+    q2: 'When does cover need to start?',
+    timing: ['Immediately', 'Within 30 days', '1 to 3 months', 'Just comparing'],
+    pro: 'insurance broker', proName: 'Priya Raman', proInit: 'PR',
+    proFirm: 'Kettle Valley Insurance', subject: 'application for cover',
+    fields: [['Sum insured', '$740,000'], ['Deductible', '$1,000'], ['Term', '12 months']],
+    tx: 'INS-2026-0338'
+  },
+  lending: {
+    label: 'Lending', first: 'Borrow for a project',
+    goals: ['Borrow for a project', 'Consolidate debt', 'Open a line of credit', 'Understand an offer'],
+    q2: 'When do you need the funds?',
+    timing: ['This month', '1 to 3 months', '3 to 6 months', 'Just exploring'],
+    pro: 'lending adviser', proName: 'Marcus Hale', proInit: 'MH',
+    proFirm: 'Bow River Credit Union', subject: 'credit application',
+    fields: [['Amount requested', '$45,000'], ['Purpose', 'Home renovation'], ['Term', '60 months']],
+    tx: 'LND-2026-0574'
+  }
+};
+function I() { return IND[S.industry] || IND.mortgage; }
+
 var S = {
+  industry: 'mortgage',
   view: 'personal',
   step: 0,
   goal: null, timing: null,
@@ -83,8 +130,7 @@ function drawLines() {
 /* ============================================================
    The phone
    ============================================================ */
-var GOALS = ['Buy a home', 'Finance a vehicle', 'Refinance', 'Renew my mortgage', 'Understand an offer'];
-var TIMING = ['0 to 3 months', '3 to 6 months', '6 to 12 months', 'Just exploring'];
+
 
 function opt(label, action, arg, done) {
   return '<button class="opt' + (done ? ' done' : '') + '" data-act="' + action + '" data-arg="' + (arg || '') + '">' +
@@ -97,7 +143,7 @@ function renderPhone() {
 
   if (S.view === 'professional') {
     t.textContent = 'Sarah\u2019s 4orm';
-    s.textContent = S.changed ? 'Something needs your attention' : 'Shared with Alex Chen';
+    s.textContent = S.changed ? 'Something needs your attention' : 'Shared with ' + I().proName;
     b.innerHTML = S.changed ? phoneAlert() : phoneShared();
     return;
   }
@@ -109,16 +155,16 @@ function renderPhone() {
   var h = '';
   if (S.step === 0) {
     h += '<div class="greet">Good afternoon, Sarah.<span>What are you thinking about?</span></div>';
-    h += GOALS.map(function (g) { return opt(g, 'goal', g); }).join('');
+    h += I().goals.map(function (g) { return opt(g, 'goal', g); }).join('');
     h += '<div class="ask"><span class="dot"></span>Ask 4orm anything about your decision</div>';
   } else if (S.step === 1) {
     h += '<div class="msg me">' + S.goal + '</div>';
-    h += '<div class="msg ai"><div class="k">4orm</div>When are you hoping to buy?</div>';
-    h += TIMING.map(function (x) { return opt(x, 'timing', x); }).join('');
+    h += '<div class="msg ai"><div class="k">4orm</div>' + I().q2 + '</div>';
+    h += I().timing.map(function (x) { return opt(x, 'timing', x); }).join('');
   } else if (S.step === 2) {
     h += '<div class="msg me">' + S.timing + '</div>';
     h += '<div class="msg ai"><div class="k">4orm</div>Would you like me to help you understand what you will ' +
-         'need before speaking with a mortgage professional?</div>';
+         'need before speaking with a ' + I().pro + '?</div>';
     h += opt('Yes, walk me through it', 'yes') + opt('Not yet', 'notyet');
   } else {
     h += '<div class="msg ai"><div class="k">4orm</div>Here is what a mortgage professional will ask you for. ' +
@@ -131,7 +177,7 @@ function renderPhone() {
       h += '<div class="msg ai" style="margin-top:4px"><div class="k">4orm</div>You are ready to speak to ' +
            'someone. You choose who, and you choose what they receive.</div>';
       h += '<button class="opt" data-act="share" style="border-color:#B9CDF5;background:#F4F8FF">' +
-           '<span style="color:#1B4ABE">Share with a mortgage professional</span>' +
+           '<span style="color:#1B4ABE">Share with a ' + I().pro + '</span>' +
            '<span class="ch">' + ARROW + '</span></button>';
     }
     h += '<div class="ask"><span class="dot"></span>Ask 4orm anything about your decision</div>';
@@ -166,7 +212,7 @@ function phoneAlert() {
     'supports approximately <b>$118,400</b>.</div>' +
     '<div class="aacts">' +
       '<button data-act="rev">Review</button>' +
-      '<button data-act="ask">Ask Alex</button>' +
+      '<button data-act="ask">Ask ' + I().proName.split(' ')[0] + '</button>' +
       '<button data-act="rec" data-arg="yes">I recognize this</button>' +
       '<button data-act="rec" data-arg="no">I do not</button>' +
     '</div></div>' + extra;
@@ -226,14 +272,14 @@ function railProfessional() {
 
   return '<div class="bezel"><div class="core">' +
     '<div class="pro-h">' +
-      '<div class="who"><span class="av">AC</span><div><div class="wn">Alex Chen</div>' +
-        '<div class="ws">Northbridge Mortgage Group &middot; broker view</div></div></div>' +
+      '<div class="who"><span class="av">' + I().proInit + '</span><div><div class="wn">' + I().proName + '</div>' +
+        '<div class="ws">' + I().proFirm + ' \u00b7 professional view</div></div></div>' +
       '<span class="chip ' + (S.changed ? 'c-bad' : 'c-ok') + '"><span class="d"></span>' +
         (S.changed ? '1 exception' : 'File in good order') + '</span>' +
     '</div>' +
     '<div class="pro-h" style="border-bottom:0;padding-bottom:14px">' +
       '<div class="who"><span class="av" style="background:#5E6E88">SM</span>' +
-      '<div><div class="wn">Sarah Mitchell</div><div class="ws">Received prepared &middot; MTG-2026-0417</div></div></div>' +
+      '<div><div class="wn">Sarah Mitchell</div><div class="ws">Received prepared \u00b7 ' + I().tx + '</div></div></div>' +
       '<span class="chip c-ok"><span class="d"></span>Consent active</span>' +
     '</div>' +
     '<div class="facts">' +
@@ -243,9 +289,7 @@ function railProfessional() {
     '</div>' +
     '<div style="padding:6px 0 2px">' +
       appline('Annual income', S.changed ? '$136,000' : '$118,000', S.changed) +
-      appline('Purchase price', '$620,000') +
-      appline('Down payment', '$124,000') +
-      appline('Term', '5 year fixed') +
+      I().fields.map(function (f) { return appline(f[0], f[1]); }).join('') +
     '</div>' +
     exc +
     '<div style="padding:0 24px 24px">' +
@@ -329,12 +373,14 @@ function renderRail() {
 /* ============================================================
    View switching
    ============================================================ */
-function movePip() {
-  var on = $('#views button.on'), pip = $('#pip');
+function movePipOf(sel) {
+  var wrap = $(sel); if (!wrap) return;
+  var on = wrap.querySelector('button.on'), pip = wrap.querySelector('.pip');
   if (!on || !pip) return;
   pip.style.width = on.offsetWidth + 'px';
   pip.style.transform = 'translateX(' + (on.offsetLeft - 5) + 'px)';
 }
+function movePip() { movePipOf('#views'); movePipOf('#inds'); }
 
 function setView(v) {
   S.view = v;
@@ -359,12 +405,25 @@ var DO = {
 };
 
 document.addEventListener('click', function (e) {
-  var t = e.target.closest ? e.target.closest('[data-act],[data-v],[data-go]') : null;
+  var t = e.target.closest ? e.target.closest('[data-act],[data-v],[data-go],[data-ind]') : null;
   if (!t) return;
   var v = t.getAttribute('data-v'), go = t.getAttribute('data-go'), a = t.getAttribute('data-act'),
       arg = t.getAttribute('data-arg');
 
   if (v) { setView(v); return; }
+  var ind = t.getAttribute('data-ind');
+  if (ind) {
+    S.industry = ind;
+    S.step = 0; S.goal = null; S.timing = null;
+    S.identity = S.income = S.financial = false; S.docs = 0;
+    S.readiness = 12; S.events = []; S.shared = false; S.changed = false; S.resolved = null;
+    Array.prototype.slice.call(document.querySelectorAll('[data-ind]')).forEach(function (b) {
+      b.classList.toggle('on', b.getAttribute('data-ind') === ind);
+    });
+    movePipOf('#inds');
+    drawLines(); setView('personal');
+    return;
+  }
   if (go) {
     e.preventDefault(); setView(go);
     $('#stage').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -374,7 +433,7 @@ document.addEventListener('click', function (e) {
 
   if (a === 'goal') {
     S.goal = arg; S.step = 1;
-    addEvent('Transaction opened. Goal recorded: ' + arg.toLowerCase() + '.', 'MTG-2026-0417 \u00b7 CONSUMER STATED');
+    addEvent('Transaction opened. Goal recorded: ' + arg.toLowerCase() + '.', I().tx + ' \u00b7 CONSUMER STATED');
     renderPhone(); renderRail(); return;
   }
   if (a === 'timing') {
@@ -397,7 +456,7 @@ document.addEventListener('click', function (e) {
 
   if (a === 'share') {
     S.shared = true;
-    addEvent('Passport shared with Alex Chen', 'PERMISSION GRANTED \u00b7 SCOPED \u00b7 WITHDRAWABLE', true);
+    addEvent('Passport shared with ' + I().proName, 'PERMISSION GRANTED \u00b7 SCOPED \u00b7 WITHDRAWABLE', true);
     setView('professional');
     return;
   }
