@@ -5,13 +5,13 @@
         <div class="sh-side sh-you">
           <span class="sh-tag">You</span>
           <h1>Know before<br />you decide.</h1>
-          <span class="sh-form">Form your discovery.</span>
+          <span class="sh-form">4orm your discovery.</span>
         </div>
         <span class="sh-rule" aria-hidden="true"></span>
         <div class="sh-side sh-them">
           <span class="sh-tag">Your firm</span>
           <h1 class="b">Prove what<br />happened after.</h1>
-          <span class="sh-form b">Form your evidence.</span>
+          <span class="sh-form b">4orm your evidence.</span>
         </div>
       </div>
 
@@ -48,7 +48,14 @@
               <div class="pbody" id="phBody"></div>
             </div>
           </div>
-          <span class="tapin" id="tapin">Tap to enter</span>
+          <button class="lure" id="lure" type="button" aria-label="Open the 4orm experience">
+            <span class="lure-t">4orm your curiosity.</span>
+            <svg class="lure-a" width="17" height="26" viewBox="0 0 17 26" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" aria-hidden="true">
+              <path d="M8.5 2v20" /><path d="M2.5 16l6 6 6-6" />
+            </svg>
+          </button>
         </div>
 
         <div class="rail" id="rail"></div>
@@ -120,55 +127,107 @@
   </div>
 </section>
 
-<section class="sec" id="trust">
-  <div class="wrap">
-    <div class="sec-head rv" style="margin:0 auto;text-align:center;max-width:760px">
-      <span class="kick" style="justify-content:center">Where the three meet</span>
-      <h2>Three parties. One record. That overlap is the product.</h2>
-      <p>Each of them wants a different thing from the same transaction. Trust is not a value any one of
-        them can produce alone, and it is not a promise anybody has to take on faith. It is what is left
-        when all three are reading the same evidence.</p>
+<section class="tr-sec" id="trust">
+  <div class="tr-wrap">
+
+    <header class="tr-head">
+      <p class="tr-kicker">Where the three meet</p>
+      <h2 class="tr-h2">Three parties. One record. That overlap is the product.</h2>
+      <p class="tr-stand">Each of them wants a different thing from the same transaction. Trust is not a value any one of them can produce alone, and it is not a promise anybody has to take on faith. It is what is left when all three are reading the same evidence.</p>
+    </header>
+
+    <div class="tr-figwrap">
+      <div class="tr-stage" id="tr-stage">
+
+        <svg id="tr-svg" viewBox="0 0 1000 700" role="img" aria-label="Three concentric rings — you, your firm and the regulator — each closing around a shared centre marked Trust.">
+          <defs>
+            <linearGradient id="tr-gYou" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#5E6E88"/><stop offset="52%" stop-color="#46556E"/><stop offset="100%" stop-color="#142036"/>
+            </linearGradient>
+            <linearGradient id="tr-gFirm" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#5B8CFF"/><stop offset="50%" stop-color="#2E6BF2"/><stop offset="100%" stop-color="#1B4ABE"/>
+            </linearGradient>
+            <linearGradient id="tr-gReg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E7C76C"/><stop offset="52%" stop-color="#D8B052"/><stop offset="100%" stop-color="#C49A3A"/>
+            </linearGradient>
+            <radialGradient id="tr-gDisc" cx="50%" cy="46%" r="50%">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/>
+              <stop offset="62%" stop-color="#FFFFFF" stop-opacity=".92"/>
+              <stop offset="100%" stop-color="#EAF1FE" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="tr-fYou" x="-35%" y="-35%" width="170%" height="170%">
+              <feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#142036" flood-opacity=".16"/>
+            </filter>
+            <filter id="tr-fFirm" x="-35%" y="-35%" width="170%" height="170%">
+              <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#2E6BF2" flood-opacity=".26"/>
+            </filter>
+            <filter id="tr-fReg" x="-35%" y="-35%" width="170%" height="170%">
+              <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#C49A3A" flood-opacity=".24"/>
+            </filter>
+          </defs>
+
+          <circle class="tr-disc" cx="500" cy="300" r="132" fill="url(#tr-gDisc)"/>
+
+          <!-- leaders sit under the rings: hairlines pass behind the strokes.
+               all three run radially, 120 apart, identical 42.5u length -->
+          <g class="tr-leaders">
+            <g class="tr-you">
+              <polyline class="tr-ghost" pathLength="1" stroke="#142036" points="377.0,229.0 277.0,171.25"/>
+              <polyline class="tr-lead"  pathLength="1" stroke="#142036" points="277.0,171.25 240.2,150.0"/>
+              <circle class="tr-tip" cx="240.2" cy="150.0" r="4.6" fill="#142036"/>
+            </g>
+            <g class="tr-firm">
+              <polyline class="tr-ghost" pathLength="1" stroke="#2E6BF2" points="669.7,202.0 723.0,171.25"/>
+              <polyline class="tr-lead"  pathLength="1" stroke="#2E6BF2" points="723.0,171.25 759.8,150.0"/>
+              <circle class="tr-tip" cx="759.8" cy="150.0" r="4.6" fill="#2E6BF2"/>
+            </g>
+            <g class="tr-reg">
+              <polyline class="tr-lead" pathLength="1" stroke="#C49A3A" points="500,557.5 500,600"/>
+              <circle class="tr-tip" cx="500" cy="600" r="4.6" fill="#C49A3A"/>
+            </g>
+          </g>
+
+          <circle class="tr-track" cx="500" cy="300" r="250" stroke="#FBF3DC"/>
+          <circle class="tr-track" cx="500" cy="300" r="196" stroke="#EAF1FE"/>
+          <circle class="tr-track" cx="500" cy="300" r="142" stroke="#EFF3F9"/>
+
+          <g class="tr-reg" filter="url(#tr-fReg)">
+            <circle class="tr-fg tr-rot" cx="500" cy="300" r="250" stroke="url(#tr-gReg)" pathLength="1000"/>
+            <circle class="tr-halo" cx="500" cy="300" r="250" stroke="#C49A3A"/>
+            <circle class="tr-sheen" cx="500" cy="300" r="250" stroke="#FBF3DC" pathLength="1000"/>
+            <g class="tr-dot"><circle cx="750" cy="300" r="8.5" fill="#C49A3A"/></g>
+          </g>
+
+          <g class="tr-firm" filter="url(#tr-fFirm)">
+            <circle class="tr-fg tr-rot" cx="500" cy="300" r="196" stroke="url(#tr-gFirm)" pathLength="1000"/>
+            <circle class="tr-halo" cx="500" cy="300" r="196" stroke="#2E6BF2"/>
+            <circle class="tr-sheen" cx="500" cy="300" r="196" stroke="#CFE0FD" pathLength="1000"/>
+            <g class="tr-dot"><circle cx="696" cy="300" r="8.5" fill="#2E6BF2"/></g>
+          </g>
+
+          <g class="tr-you" filter="url(#tr-fYou)">
+            <circle class="tr-fg tr-rot" cx="500" cy="300" r="142" stroke="url(#tr-gYou)" pathLength="1000"/>
+            <circle class="tr-halo" cx="500" cy="300" r="142" stroke="#142036"/>
+            <circle class="tr-sheen" cx="500" cy="300" r="142" stroke="#CCD6E4" pathLength="1000"/>
+            <g class="tr-dot"><circle cx="642" cy="300" r="8.5" fill="#142036"/></g>
+          </g>
+        </svg>
+
+        <div class="tr-centre"><span>Trust</span></div>
+
+        <div class="tr-lbl tr-lbl-you tr-you"><span class="tr-n">You</span><span class="tr-s">Know before you decide.</span></div>
+        <div class="tr-lbl tr-lbl-firm tr-firm"><span class="tr-n">Your firm</span><span class="tr-s">Prove what happened after.</span></div>
+        <div class="tr-lbl tr-lbl-reg tr-reg"><span class="tr-n">The regulator</span><span class="tr-s">Trust what you can see.</span></div>
+
+      </div>
     </div>
 
-    <div class="vennwrap rv d1">
-      <svg class="venn" viewBox="0 0 760 640" role="img"
-           aria-label="Three overlapping circles. The consumer knows before deciding, the firm proves what happened after, the regulator trusts what it can see. Trust sits where all three overlap.">
-        <circle class="vc vc-you"  cx="380" cy="228" r="176" />
-        <circle class="vc vc-firm" cx="278" cy="404" r="176" />
-        <circle class="vc vc-reg"  cx="482" cy="404" r="176" />
+    <ul class="tr-legend">
+      <li class="tr-lg-you"><span class="tr-mk"><i></i><b></b></span><span><span class="tr-n">You</span><span class="tr-s">Know before you decide.</span></span></li>
+      <li class="tr-lg-firm"><span class="tr-mk"><i></i><b></b></span><span><span class="tr-n">Your firm</span><span class="tr-s">Prove what happened after.</span></span></li>
+      <li class="tr-lg-reg"><span class="tr-mk"><i></i><b></b></span><span><span class="tr-n">The regulator</span><span class="tr-s">Trust what you can see.</span></span></li>
+    </ul>
 
-        <text class="vlab" x="380" y="132" text-anchor="middle">You</text>
-        <text class="vsub" x="380" y="158" text-anchor="middle">Know before you decide.</text>
-
-        <text class="vlab" x="212" y="470" text-anchor="middle">Your firm</text>
-        <text class="vsub" x="212" y="496" text-anchor="middle">Prove what</text>
-        <text class="vsub" x="212" y="516" text-anchor="middle">happened after.</text>
-
-        <text class="vlab" x="548" y="470" text-anchor="middle">The regulator</text>
-        <text class="vsub" x="548" y="496" text-anchor="middle">Trust what</text>
-        <text class="vsub" x="548" y="516" text-anchor="middle">you can see.</text>
-
-        <text class="vcore" x="380" y="352" text-anchor="middle">Trust</text>
-      </svg>
-    </div>
-
-    <div class="three" style="margin-top:56px">
-      <div class="tcard rv d1"><div class="ti">
-        <span class="tw">YOU</span><h3>Know before you decide.</h3>
-        <p>Understand the decision in front of you, in plain words, before you have chosen anybody. Arrive
-          prepared rather than empty handed, and be told the moment something on your file moves.</p>
-      </div></div>
-      <div class="tcard rv d2"><div class="ti">
-        <span class="tw">YOUR FIRM</span><h3>Prove what happened after.</h3>
-        <p>The rationale, the disclosures and the submissions recorded while the work happens. A file another
-          professional could re-perform, without anybody reassembling a year of email.</p>
-      </div></div>
-      <div class="tcard g rv d3"><div class="ti">
-        <span class="tw">THE REGULATOR</span><h3>Trust what you can see.</h3>
-        <p>Name a date and the transaction rebuilds itself from the record: who said what, what supported it,
-          who received it, and which version each decision was made on.</p>
-      </div></div>
-    </div>
   </div>
 </section>
 

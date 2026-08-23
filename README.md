@@ -37,15 +37,23 @@ under each side:
 
     You                            Your firm
     Know before you decide.        Prove what happened after.
-    Form your discovery.           Form your evidence.
+    4orm your discovery.           4orm your evidence.
 
 The "One transaction, three views" eyebrow is gone. The four promises that
 used to sit under it now sit **below** the phone, numbered, because they
 happen in that order: ask, check, understand, connect.
 
+4orm is a verb now. The nav call to action matches: **4orm your experience.**
+
 **Tap the phone and the room steps back.** It translates to the centre of
 the viewport, a cool grey scrim fades up, and two halos breathe behind it on
-an 8.5 second loop. Escape or a tap outside leaves.
+an 8.5 second loop. Escape or a tap outside leaves. There is no hint label
+and no close button.
+
+Above the phone, one line with a bobbing arrow pointing down at it:
+**4orm your curiosity.** It opens focus mode itself, and it disappears once
+the visitor is inside or has tapped anything. The invitation is spent once
+it works.
 
 The lights come back up at the handoff. The moment the consumer shares with
 a professional, focus releases, because somebody else is involved now and
@@ -121,6 +129,35 @@ with the name in the query string.
 **Before this goes live**, have counsel read `assets/check.js`. Nothing in it
 asserts anything about a real company, but the register list and the "what a hit
 means" lines are the part worth a second pair of eyes.
+
+## Where the three meet
+
+Three concentric rings, in the three party colours, closing on one shared
+centre with the word "Trust" at the middle. Apple Watch activity rings,
+reinterpreted for evidence.
+
+Each ring draws itself on a stagger, led by a travelling head dot, finishing
+with a halo pulse and a slow sheen that runs forever once closed. Each party
+closes their own loop; all three enclose the same centre.
+
+This replaced a three-circle venn diagram. Four directions were built and
+compared: the rings, a particle convergence field, one record re-annotated
+three ways, and a three-strand braid. The rings won on life and legibility.
+The record-read-three-ways version is worth revisiting for a different slot,
+because it makes the argument literally rather than by metaphor.
+
+## The Apple pass
+
+Three defects the design scan turned up and fixed:
+
+- **Measure.** Running text was reaching 143 characters a line on the wider
+  research pages. Everything is now capped between 66 and 78.
+- **Capitalisation.** Six carried headlines were Title Case while every
+  authored page was sentence case. Converted at build time by an explicit
+  map in `build/build.py`, so the content modules stay untouched.
+- **Air.** Sections went from a flat 110px to
+  `clamp(96px, 9.4vw, 150px)`, and the stage around the phone opened up on
+  both sides.
 
 ## assets/
 

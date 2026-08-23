@@ -460,6 +460,10 @@ document.addEventListener('click', function (e) {
     renderPhone(); renderRail(); return;
   }
 
+  /* the invitation is spent once they are playing with it */
+  var _lure = document.getElementById('lure');
+  if (_lure) _lure.classList.add('gone');
+
   if (a === 'share') {
     S.shared = true;
     addEvent('Passport shared with ' + I().proName, 'PERMISSION GRANTED \u00b7 SCOPED \u00b7 WITHDRAWABLE', true);
@@ -532,7 +536,7 @@ function focusPlace() {
 function focusEnter() {
   if (FOCUS.on) return;
   var w = document.getElementById('phoneW'), sc = document.getElementById('scrim'),
-      t = document.getElementById('tapin');
+      lure = document.getElementById('lure');
   if (!w || !sc) return;
   FOCUS.on = true;
   if (window.innerWidth <= 900) {
@@ -547,19 +551,17 @@ function focusEnter() {
   }
   w.classList.add('focused');
   sc.classList.add('on');
+  if (lure) lure.classList.add('gone');
   focusPlace();
-  if (t) t.textContent = 'Tap outside to leave';
 }
 
 function focusLeave() {
   if (!FOCUS.on) return;
-  var w = document.getElementById('phoneW'), sc = document.getElementById('scrim'),
-      t = document.getElementById('tapin');
+  var w = document.getElementById('phoneW'), sc = document.getElementById('scrim');
   FOCUS.on = false;
   if (w) { w.classList.remove('focused'); w.style.transform = ''; }
   if (sc) sc.classList.remove('on');
   document.body.classList.remove('infocus');
-  if (t) t.textContent = 'Tap to enter';
 }
 
 function initFocus() {
@@ -571,6 +573,13 @@ function initFocus() {
     if (e.target.closest('[data-act]') || e.target.closest('button')) return;
     focusEnter();
   });
+  var lure = document.getElementById('lure');
+  if (lure) {
+    lure.addEventListener('click', function (e) {
+      e.stopPropagation();
+      focusEnter();
+    });
+  }
   sc.addEventListener('click', focusLeave);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') focusLeave(); });
   window.addEventListener('resize', focusPlace);

@@ -67,7 +67,7 @@ function buildNav() {
         '</span>' +
         '<a href="/team"' + (page === 'team' ? ' aria-current="page"' : '') + '>About</a>' +
       '</nav>' +
-      '<a class="nav-cta" href="/#stage">Form your experience. <span class="cir">' + ARROW + '</span></a>' +
+      '<a class="nav-cta" href="/#stage">4orm your experience. <span class="cir">' + ARROW + '</span></a>' +
       '<button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false">' +
         '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
     '</div>';
@@ -231,4 +231,40 @@ function boot() {
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
 else boot();
 
+})();
+
+
+/* ============================================================
+   The trust rings
+   ============================================================ */
+(function(){
+  var sec   = document.getElementById('trust');
+  if (!sec) return;
+  var stage = document.getElementById('tr-stage');
+  if (!stage) return;
+  var svg   = document.getElementById('tr-svg');
+
+  var mq = window.matchMedia('(max-width:899px)');
+  function setBox(){
+    svg.setAttribute('viewBox', mq.matches ? '222 22 556 556' : '0 0 1000 700');
+  }
+  setBox();
+  if (mq.addEventListener) mq.addEventListener('change', setBox);
+  else if (mq.addListener) mq.addListener(setBox);
+
+  function run(){ sec.classList.add('tr-run'); }
+
+  if (!('IntersectionObserver' in window)) { run(); return; }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting){ run(); io.disconnect(); } });
+  }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
+
+  io.observe(stage);
+
+  requestAnimationFrame(function(){
+    var r = stage.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (r.top < vh * 0.9 && r.bottom > 0){ run(); io.disconnect(); }
+  });
 })();

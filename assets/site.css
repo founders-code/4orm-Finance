@@ -110,7 +110,7 @@ p{margin:0}
 /* ============================================================
    Stage
    ============================================================ */
-.stage{position:relative;z-index:1;padding:64px 0 110px}
+.stage{position:relative;z-index:1;padding:76px 0 132px}
 .stage-in{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:56px;align-items:center;
   transition:grid-template-columns .9s var(--spring)}
 .stage-in.pro{grid-template-columns:minmax(0,330px) minmax(0,1fr)}
@@ -316,13 +316,13 @@ p{margin:0}
 /* ============================================================
    Sections
    ============================================================ */
-.sec{position:relative;z-index:1;padding:110px 0}
+.sec{position:relative;z-index:1;padding:clamp(96px,9.4vw,150px) 0}
 .sec.alt{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .sec-head{max-width:760px}
 .kick{font-family:var(--mono);font-size:10.5px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
   color:var(--tx-3);margin-bottom:20px;display:inline-flex;align-items:center;gap:10px}
 .kick::before{content:'';width:16px;height:2px;background:var(--gold-dp);border-radius:2px}
-.sec-head p{margin-top:22px;font-size:17.5px;color:var(--tx-2);line-height:1.65}
+.sec-head p{margin-top:24px;font-size:17.5px;color:var(--tx-2);line-height:1.65}
 
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
 @media (max-width:900px){ .three{grid-template-columns:1fr} }
@@ -901,17 +901,237 @@ body.infocus .stage{z-index:300}
 .phone-w{transition:transform .78s var(--spring)}
 .phone-w.focused{z-index:200}
 .phone-w.focused .lines{opacity:0;transition:opacity .4s var(--ease)}
-.tapin{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);
-  font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--tx-3);opacity:0;white-space:nowrap;
-  pointer-events:none;transition:opacity .4s var(--ease),color .4s var(--ease)}
-.phone-w:hover .tapin{opacity:1}
-.phone-w.focused .tapin{opacity:1;color:rgba(255,255,255,.7)}
+.lure{position:absolute;left:50%;bottom:100%;transform:translateX(-50%);
+  margin-bottom:18px;z-index:3;cursor:pointer;background:transparent;border:0;
+  padding:6px 10px 0;display:flex;flex-direction:column;align-items:center;gap:4px;
+  font-family:var(--sans);color:var(--blue-dp);
+  transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.lure-t{font-size:15px;font-weight:650;letter-spacing:-.022em;white-space:nowrap}
+.lure-a{color:var(--blue);animation:lurebob 2.4s var(--ease) infinite}
+.lure:hover .lure-t{color:var(--blue)}
+.lure:hover .lure-a{animation-duration:1.4s}
+.lure.gone{opacity:0;transform:translateX(-50%) translateY(-8px);pointer-events:none}
+@keyframes lurebob{
+  0%,100%{transform:translateY(-3px);opacity:.55}
+  50%    {transform:translateY(4px); opacity:1}}
+@media (max-width:900px){
+  .phone-w{flex-direction:column;align-items:center}
+  .lure{position:static;transform:none;margin:0 0 16px;order:-1}
+  .lure.gone{transform:translateY(-8px)}
+}
+@media (prefers-reduced-motion:reduce){ .lure-a{animation:none} }
 @media (prefers-reduced-motion:reduce){
   .scrim::after,.scrim::before{animation:none}
   .phone-w{transition:none}
 }
 @media (max-width:900px){
   .phone-w.focused{transform:none !important}
-  .tapin{display:none}
 }
+
+
+/* ============================================================
+   Where the three meet: three rings closing on one centre
+   ============================================================ */
+/* ── tokens: already defined by the site sheet; repeated here only so this
+standalone page renders. NOT part of the hand-off CSS block. ───────── */
+/* ══ BEGIN HAND-OFF BLOCK ══════════════════════════════════════════════ */
+.tr-sec{
+  --tr-dur:1500ms;
+  --tr-d1:140ms;  --tr-d2:440ms;  --tr-d3:740ms;
+  --tr-e1:1640ms; --tr-e2:1940ms; --tr-e3:2240ms;
+
+  position:relative;
+  box-sizing:border-box;
+  background:var(--bg);
+  padding:clamp(96px,9.4vw,150px) 0;
+  overflow:hidden;
+  isolation:isolate;
+}
+.tr-sec *,.tr-sec *::before,.tr-sec *::after{box-sizing:border-box}
+.tr-sec::before{
+  content:"";
+  position:absolute; z-index:-2;
+  left:50%; top:38%;
+  width:min(1500px,150vw); aspect-ratio:1/1;
+  transform:translate(-50%,-40%);
+  background:
+    radial-gradient(circle at 44% 46%, var(--blue-50) 0%, rgba(234,241,254,0) 46%),
+    radial-gradient(circle at 60% 62%, var(--gold-50) 0%, rgba(251,243,220,0) 44%);
+  opacity:.9; pointer-events:none;
+}
+.tr-sec::after{
+  content:"";
+  position:absolute; z-index:-1; inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 20%,rgba(255,255,255,0) 76%,rgba(255,255,255,.95) 100%);
+  pointer-events:none;
+}
+.tr-wrap{max-width:1220px;margin:0 auto;padding:0 28px}
+/* ── head: centred ───────────────────────────────────────── */
+.tr-head{max-width:760px;margin:0 auto;text-align:center}
+.tr-kicker{
+  display:inline-flex; align-items:center; gap:12px;
+  font-family:var(--mono);
+  font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--tx-3);
+  margin:0 0 24px;
+}
+.tr-kicker::before{
+  content:""; display:block;
+  width:26px; height:1px; flex:none;
+  background:var(--gold-dp);
+}
+.tr-h2{
+  margin:0 0 24px;
+  font-size:clamp(31px,4.9vw,58px);
+  line-height:1.04;
+  letter-spacing:-.03em;
+  font-weight:700;
+  text-wrap:balance;
+  color:var(--tx);
+}
+.tr-stand{
+  margin:0 auto;
+  max-width:66ch;
+  font-size:clamp(15.5px,1.32vw,18.5px);
+  line-height:1.62;
+  letter-spacing:-.005em;
+  color:var(--tx-2);
+  text-wrap:pretty;
+}
+/* ── figure ──────────────────────────────────────────────── */
+.tr-figwrap{
+  margin:clamp(72px,8vw,100px) 0 0;
+  display:flex; justify-content:center;
+}
+.tr-stage{
+  position:relative;
+  width:100%;
+  max-width:1000px;
+  aspect-ratio:1000/700;
+}
+.tr-stage svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.tr-rot{transform:rotate(-90deg);transform-box:view-box;transform-origin:500px 300px}
+.tr-track{fill:none;stroke-width:15}
+.tr-fg{fill:none;stroke-width:15;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:1000}
+.tr-halo{fill:none;stroke-width:15;opacity:0;transform-box:view-box;transform-origin:500px 300px}
+.tr-sheen{fill:none;stroke-width:5;stroke-linecap:round;stroke-dasharray:44 956;opacity:0;transform-box:view-box;transform-origin:500px 300px}
+.tr-disc{transform-box:view-box;transform-origin:500px 300px}
+.tr-dot{transform-box:view-box;transform-origin:500px 300px;transform:rotate(-90deg);opacity:0}
+.tr-dot circle{stroke:#fff;stroke-width:3.5}
+.tr-lead{fill:none;stroke-width:1;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.tr-ghost{fill:none;stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;opacity:.3}
+.tr-tip{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(0)}
+/* ── labels: 120° apart on one radius, equal 42.5u leaders ── */
+.tr-lbl{position:absolute;line-height:1.28;opacity:0;filter:blur(3px)}
+.tr-lbl .tr-n{
+  display:block;
+  font-size:clamp(14px,1.28vw,17px);
+  font-weight:650; letter-spacing:-.018em;
+  margin:0 0 5px;
+}
+.tr-lbl .tr-s{
+  display:block;
+  font-size:clamp(12px,1.06vw,14px);
+  font-weight:450; line-height:1.42; letter-spacing:-.004em;
+  color:var(--tx-3);
+  text-wrap:pretty;
+}
+.tr-lbl-you{left:22.6%;top:21.43%;transform:translate(-100%,-50%);text-align:right;max-width:20%}
+.tr-lbl-firm{left:77.4%;top:21.43%;transform:translate(0,-50%);text-align:left;max-width:20%}
+.tr-lbl-reg{left:50%;top:88%;transform:translate(-50%,0);text-align:center;max-width:34%}
+.tr-lbl-you .tr-n{color:var(--tx)}
+.tr-lbl-firm .tr-n{color:var(--blue-dp)}
+.tr-lbl-reg .tr-n{color:var(--gold-dp)}
+/* ── centre word ─────────────────────────────────────────── */
+.tr-centre{
+  position:absolute; left:50%; top:42.857%;
+  transform:translate(-50%,-50%) scale(.84);
+  opacity:0; text-align:center; pointer-events:none;
+}
+.tr-centre span{
+  display:block;
+  font-size:clamp(30px,4.6vw,54px);
+  font-weight:700; letter-spacing:-.035em; line-height:1;
+  color:var(--tx);
+}
+/* ── small-screen legend ─────────────────────────────────── */
+.tr-legend{display:none;margin:34px auto 0;padding:0;max-width:430px;list-style:none}
+.tr-legend li{display:flex;align-items:flex-start;padding:14px 0;border-top:1px solid var(--border)}
+.tr-legend li:first-child{border-top:0}
+.tr-legend .tr-mk{display:flex;align-items:center;flex:none;padding-top:6px;margin-right:12px}
+.tr-legend .tr-mk i{display:block;width:9px;height:9px;border-radius:50%;flex:none}
+.tr-legend .tr-mk b{display:block;width:26px;height:1px;flex:none}
+.tr-legend .tr-n{display:block;font-size:15.5px;font-weight:650;letter-spacing:-.018em;margin:0 0 3px}
+.tr-legend .tr-s{display:block;font-size:13.5px;line-height:1.45;color:var(--tx-3)}
+.tr-lg-you i{background:var(--tx)}   .tr-lg-you b{background:var(--border-strong)} .tr-lg-you .tr-n{color:var(--tx)}
+.tr-lg-firm i{background:var(--blue)} .tr-lg-firm b{background:var(--blue-100)}    .tr-lg-firm .tr-n{color:var(--blue-dp)}
+.tr-lg-reg i{background:var(--gold-dp)} .tr-lg-reg b{background:var(--gold)}       .tr-lg-reg .tr-n{color:var(--gold-dp)}
+/* ── choreography ────────────────────────────────────────── */
+@keyframes tr-draw{to{stroke-dashoffset:0}}
+@keyframes tr-spin{to{transform:rotate(270deg)}}
+@keyframes tr-dotin{0%{opacity:0}12%{opacity:1}100%{opacity:1}}
+@keyframes tr-haloout{0%{opacity:.5;transform:scale(1)}100%{opacity:0;transform:scale(1.085)}}
+@keyframes tr-sheenspin{0%{transform:rotate(-90deg)}100%{transform:rotate(270deg)}}
+@keyframes tr-sheenin{to{opacity:.85}}
+@keyframes tr-pop{to{opacity:1;transform:scale(1)}}
+@keyframes tr-lblin{to{opacity:1;filter:blur(0)}}
+@keyframes tr-centrein{to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes tr-breathe{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.012);opacity:.9}}
+.tr-you{--tr-dly:var(--tr-d1);--tr-end:var(--tr-e1)}
+.tr-firm{--tr-dly:var(--tr-d2);--tr-end:var(--tr-e2)}
+.tr-reg{--tr-dly:var(--tr-d3);--tr-end:var(--tr-e3)}
+.tr-run .tr-fg{animation:tr-draw var(--tr-dur) var(--spring) var(--tr-dly) forwards}
+.tr-run .tr-dot{animation:tr-spin var(--tr-dur) var(--spring) var(--tr-dly) forwards, tr-dotin var(--tr-dur) linear var(--tr-dly) forwards}
+.tr-run .tr-halo{animation:tr-haloout 900ms var(--ease) var(--tr-end) forwards}
+.tr-run .tr-sheen{animation:tr-sheenin 700ms var(--ease) var(--tr-end) forwards, tr-sheenspin 7s linear var(--tr-end) infinite}
+.tr-run .tr-ghost{animation:tr-draw 460ms var(--ease) var(--tr-end) forwards}
+.tr-run .tr-lead{animation:tr-draw 560ms var(--ease) calc(var(--tr-end) + 120ms) forwards}
+.tr-run .tr-tip{animation:tr-pop 560ms var(--pop) calc(var(--tr-end) + 380ms) forwards}
+.tr-run .tr-lbl{animation:tr-lblin 700ms var(--ease) calc(var(--tr-end) + 300ms) forwards}
+.tr-run .tr-centre{animation:tr-centrein 900ms var(--pop) calc(var(--tr-e3) + 140ms) forwards}
+.tr-run .tr-disc{animation:tr-breathe 5.4s ease-in-out calc(var(--tr-e3) + 200ms) infinite}
+/* ── responsive ──────────────────────────────────────────── */
+@media (max-width:899px){
+  .tr-stage{aspect-ratio:1/1;max-width:520px}
+  .tr-lbl,.tr-leaders{display:none}
+  .tr-centre{top:50%}
+  .tr-legend{display:block}
+  .tr-stand{font-size:16px}
+}
+@media (max-width:420px){
+  .tr-wrap{padding:0 22px}
+  .tr-h2{font-size:30px}
+  .tr-legend .tr-n{font-size:15px}
+}
+/* ── reduced motion: completed state, no movement ────────── */
+@media (prefers-reduced-motion:reduce){
+  .tr-fg{stroke-dashoffset:0}
+  .tr-dot{opacity:1;transform:rotate(270deg)}
+  .tr-halo{opacity:0}
+  .tr-sheen{opacity:.8;transform:rotate(-30deg)}
+  .tr-lead,.tr-ghost{stroke-dashoffset:0}
+  .tr-tip{opacity:1;transform:scale(1)}
+  .tr-lbl{opacity:1;filter:none}
+  .tr-centre{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  .tr-run .tr-fg,.tr-run .tr-dot,.tr-run .tr-halo,.tr-run .tr-sheen,
+  .tr-run .tr-lead,.tr-run .tr-ghost,.tr-run .tr-tip,.tr-run .tr-lbl,
+  .tr-run .tr-centre,.tr-run .tr-disc{animation:none!important}
+}
+/* ══ END HAND-OFF BLOCK ════════════════════════════════════════════════ */
+
+/* ============================================================
+   Measure
+   Running text was reaching 143 characters a line on the wider
+   research pages. Nothing on this site reads past roughly 78.
+   ============================================================ */
+.sec p{max-width:74ch}
+.sec-head p{max-width:66ch}
+.sec-head[style*="text-align:center"] p,
+.sec-head[style*="text-align: center"] p{margin-left:auto;margin-right:auto}
+.duty .dv{max-width:70ch}
+.tb,.th,.tev .tb{max-width:76ch}
+.fstep p,.flow p{max-width:74ch}
+.bignum .t{max-width:34ch}
+.note{max-width:78ch}
+.soft p,.four p,.tcard p,.ck-card p,.ck-what,.ck-means{max-width:none}
+.panel p,.pane p{max-width:72ch}
