@@ -44,7 +44,7 @@
       <span class="lwk">Personal</span>
       <span class="lww">If you are about to borrow, buy or invest</span>
       <span class="lwh">Understand it before you sign it.</span>
-      <span class="lws">Everyone gets their own 4orm Guardian. Ask it the questions you would
+      <span class="lws">Ask 4orm the questions you would
         rather not ask out loud. It checks who you are dealing with, tells you what to have
         ready, and stays with you through the whole decision.</span>
       <span class="lwe">Pick up the phone <b>&#8594;</b></span>
@@ -106,7 +106,7 @@
               <div class="askbar">
                 <form class="askform" id="askform" autocomplete="off">
                   <input id="askinput" type="text" maxlength="120"
-                         placeholder="Ask your 4orm Guardian anything" aria-label="Ask your 4orm Guardian" />
+                         placeholder="Ask 4orm anything" aria-label="Ask 4orm" />
                   <button type="submit" aria-label="Send">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -151,13 +151,13 @@
     <div class="aithree">
       <div class="ai">
         <span class="ain">Which files are ready</span>
-        <p>Every stage of every file, and how much of the required record is actually present.
-          Green means it would survive being asked about.</p>
+        <p>Every stage of every file, and how much of the required record is present. Green means
+          complete enough to reconstruct from the available record.</p>
       </div>
       <div class="ai">
         <span class="ain">Which need a person today</span>
         <p>Seven of the 148. An unanswered client question, a number that stopped matching, a
-          change nobody acknowledged. Small things, caught early.</p>
+          change waiting to be acknowledged. Small things, caught early.</p>
       </div>
       <div class="ai">
         <span class="ain">What it is worth</span>
@@ -165,8 +165,21 @@
           the difference between an afternoon and six weeks.</p>
       </div>
     </div>
-    <p class="aihint">Click anything. The rail, the tiles, the bars, the checklist. It is
-      all live.</p>
+
+    <!-- The opening reading, before any of the reporting. Four numbers, and
+         one question. Everything else waits until it is asked for. -->
+    <div class="ri">
+      <span class="rik">Relationship integrity</span>
+      <div class="rinums">
+        <div class="rin"><span class="rif">148</span><span class="ril">Active relationships</span></div>
+        <div class="rin"><span class="rif ok">141</span><span class="ril">On track</span></div>
+        <div class="rin"><span class="rif warn">7</span><span class="ril">Need attention</span></div>
+        <div class="rin"><span class="rif">94%</span><span class="ril">Questions resolved</span></div>
+      </div>
+      <button class="riopen" type="button" data-openapp>What needs attention today <b>&#8594;</b></button>
+    </div>
+
+    <p class="aihint">Interactive demonstration &middot; synthetic data</p>
   </div>
 
   <div class="app">

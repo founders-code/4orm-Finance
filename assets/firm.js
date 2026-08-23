@@ -192,3 +192,22 @@ $$('[data-view]').forEach(function (b) {
 
 drawBars(); drawWho(); drawCk(); drawEp(); drawFlags(); initAssemble();
 })();
+
+
+/* ------------------------------------------------------------------
+   The reporting stays folded until somebody asks for it. Opening on
+   evidence completeness and red flags reads as a compliance tool;
+   opening on four numbers reads as knowing how your clients are.
+   ------------------------------------------------------------------ */
+document.addEventListener('click', function (e) {
+  if (!e.target.closest) return;
+  var t = e.target.closest('[data-openapp]');
+  if (!t) return;
+  var d = document.getElementById('d-firm');
+  if (!d) return;
+  d.classList.add('opened');
+  setTimeout(function () {
+    var app = d.querySelector('.app');
+    if (app) app.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 260);
+});

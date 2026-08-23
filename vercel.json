@@ -224,12 +224,12 @@
     },
     {
       "source": "/legal",
-      "destination": "/why-4orm",
+      "destination": "/website-privacy",
       "permanent": true
     },
     {
       "source": "/legal.html",
-      "destination": "/why-4orm",
+      "destination": "/website-privacy",
       "permanent": true
     },
     {
@@ -303,6 +303,16 @@
       "permanent": true
     },
     {
+      "source": "/privacy-policy",
+      "destination": "/website-privacy",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy.html",
+      "destination": "/website-privacy",
+      "permanent": true
+    },
+    {
       "source": "/psp",
       "destination": "/industries/banking",
       "permanent": true
@@ -350,6 +360,16 @@
     {
       "source": "/regulatory.html",
       "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/security",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/security.html",
+      "destination": "/privacy",
       "permanent": true
     },
     {

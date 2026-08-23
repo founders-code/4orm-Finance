@@ -59,23 +59,49 @@ function buildAtmos() {
   document.body.insertBefore(c, document.body.firstChild);
 }
 
+/* The landing carries one control. The moment the menu opens, the full header
+   arrives with it, so the visitor can move between Home, Personal, Professional
+   and 4orm Family without going back first. */
+function buildMenuHeader() {
+  var h = el('header', 'nav nav-inmenu');
+  h.innerHTML =
+    '<div class="nav-in">' +
+      '<a class="nav-brand" href="/" aria-label="Back to the start">' +
+        '<img src="/assets/logo.png" alt="4orm Finance" /></a>' +
+      '<nav class="nav-links" aria-label="Primary">' +
+        '<a href="/home">Home</a>' +
+        '<a href="/#personal">Personal</a>' +
+        '<a href="/#professional">Professional</a>' +
+        '<a href="/company">4orm Family</a>' +
+      '</nav>' +
+      '<button class="nav-cta" type="button" data-closemenu>Close ' +
+        '<span class="cir">' + ARROW + '</span></button>' +
+    '</div>';
+  return h;
+}
+
 function buildBareNav() {
   /* The first screen is the headline and the split and almost nothing else.
      Two corners, no navigation bar. */
   var wrap = el('div');
   var h = el('header', 'nav nav-bare');
+  /* The mark and the one control, top right, in the blue pill the rest of the
+     site uses. Nothing else competes with the three ways in. */
   h.innerHTML =
     '<div class="nav-in">' +
       '<span></span>' +
-      '<button class="bare-menu" id="burger" type="button" aria-expanded="false" ' +
-        'aria-controls="omenu" aria-label="Open the menu">' +
-        '4orm your experience <span class="bm-i" aria-hidden="true">' +
-        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
-        'stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
-        '</span></button>' +
+      '<div class="bare-right">' +
+        '<img class="bare-mark" src="/assets/mark.png" alt="4orm" width="30" height="30" />' +
+        '<button class="bare-menu" id="burger" type="button" aria-expanded="false" ' +
+          'aria-controls="omenu">4orm your experience. ' +
+          '<span class="cir" aria-hidden="true">' + ARROW + '</span></button>' +
+      '</div>' +
     '</div>';
   wrap.appendChild(h);
-  wrap.appendChild(buildMenu());
+  var menu = buildMenu();
+  menu.insertBefore(buildMenuHeader(), menu.firstChild);
+  menu.classList.add('withhead');
+  wrap.appendChild(menu);
   return wrap;
 }
 
@@ -124,8 +150,14 @@ function buildMenu() {
         '<div class="ocol ofoot"><a class="obig" href="/contact">Talk to us</a></div>' +
       '</div>' +
     '</div>' +
-    /* The page keeps showing through underneath. Clicking down there means
-       "take me back to what I was reading", so make that a real control. */
+    /* The shoreline, and the water below it. The page keeps showing through
+       under the waterline, so clicking down there means "take me back". */
+    '<div class="owave a" aria-hidden="true">' +
+      '<svg viewBox="0 0 1200 170" preserveAspectRatio="none">' +
+        '<path class="w1" d="M0,70 C100,30 200,110 300,70 C400,30 500,110 600,70 C700,30 800,110 900,70 C1000,30 1100,110 1200,70 L1200,170 L0,170 Z"/></svg></div>' +
+    '<div class="owave b" aria-hidden="true">' +
+      '<svg viewBox="0 0 1200 170" preserveAspectRatio="none">' +
+        '<path class="w2" d="M0,86 C150,52 250,120 400,86 C550,52 650,120 800,86 C950,52 1050,120 1200,86 L1200,170 L0,170 Z"/></svg></div>' +
     '<button class="oback" type="button" aria-label="Close the menu and go back to the page">' +
       '</button>';
   return m;
@@ -223,6 +255,7 @@ function initNav() {
     });
     m.addEventListener('click', function (e) {
       if (e.target === m || e.target.classList.contains('oback')) { openMenu(false); return; }
+      if (e.target.closest('[data-closemenu]')) { openMenu(false); return; }
       /* Picking something is the end of using the menu, whether it navigates
          away or opens a way in on this same page. */
       var a = e.target.closest && e.target.closest('a.oitem, a.obig');

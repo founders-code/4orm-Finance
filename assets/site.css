@@ -1286,21 +1286,44 @@ body.infocus .lure{opacity:0 !important;visibility:hidden}
    One overlay, on every screen size. The old drawer was built
    for a phone and was opening on desktop.
    ============================================================ */
-/* The menu is a sheet of white that stops before the bottom of the screen, so
-   the page you were reading stays visible underneath it. That visible strip is
-   the way back, and it is a real button. */
+/* ============================================================
+   The menu is a tide.
+
+   A sheet of light blue comes in over the page and breaks against
+   a shore near the bottom. Below the waterline the page you were
+   reading is still there, still legible, and clicking it takes
+   you back. White on white gave no edge at all; the blue does.
+   ============================================================ */
 .omenu{position:fixed;inset:0;z-index:95;display:flex;align-items:flex-start;
-  justify-content:center;padding:150px 28px 0;overflow:hidden;
-  background:transparent;
-  opacity:0;visibility:hidden;transition:opacity .42s var(--ease),visibility .42s}
-.omenu::before{content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(255,255,255,.985) 0%,rgba(255,255,255,.985) 44%,
-    rgba(255,255,255,.86) 62%,rgba(255,255,255,.42) 78%,rgba(255,255,255,0) 93%);
-  backdrop-filter:saturate(180%) blur(22px);
-  -webkit-backdrop-filter:saturate(180%) blur(22px);
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 46%,rgba(0,0,0,.55) 68%,transparent 90%);
-  mask-image:linear-gradient(180deg,#000 0%,#000 46%,rgba(0,0,0,.55) 68%,transparent 90%)}
-.oback{position:absolute;left:0;right:0;bottom:0;height:30vh;z-index:3;
+  justify-content:center;padding:150px 28px 0;overflow:hidden;background:transparent;
+  opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s}
+
+/* the body of the water */
+.omenu::before{content:'';position:absolute;left:0;right:0;top:0;height:74%;
+  pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(233,241,254,.97) 0%,
+    rgba(228,238,254,.96) 46%,
+    rgba(219,232,253,.93) 74%,
+    rgba(209,226,252,.88) 100%);
+  backdrop-filter:saturate(150%) blur(20px);
+  -webkit-backdrop-filter:saturate(150%) blur(20px)}
+
+/* the shoreline: two crests, drifting at different speeds so the edge
+   never repeats the same shape twice */
+.owave{position:absolute;left:-50%;right:-50%;top:calc(74% - 60px);height:170px;
+  pointer-events:none;z-index:1;opacity:0;transition:opacity .6s var(--ease) .12s}
+.omenu.open .owave{opacity:1}
+.owave svg{display:block;width:200%;height:100%}
+.owave .w1{fill:rgba(219,232,253,.93)}
+.owave .w2{fill:rgba(233,241,254,.7)}
+.owave.a{animation:tide 13s linear infinite}
+.owave.b{top:calc(74% - 38px);animation:tide 19s linear infinite reverse}
+@keyframes tide{from{transform:translateX(0)}to{transform:translateX(-25%)}}
+@media (prefers-reduced-motion:reduce){ .owave.a,.owave.b{animation:none} }
+
+/* below the waterline the page shows through, and it is the way back */
+.oback{position:absolute;left:0;right:0;bottom:0;height:26vh;z-index:3;
   border:0;background:transparent;cursor:pointer;display:block}
 .oback:focus-visible{outline:2px solid var(--blue);outline-offset:-6px;border-radius:14px}
 .omenu.open{opacity:1;visibility:visible}
@@ -2042,14 +2065,18 @@ button.nav-cta{cursor:pointer;border:0;font-family:var(--sans)}
 .flow.two .fn{font-size:12px}
 @media (max-width:840px){ .flow.two{grid-template-columns:1fr;column-gap:0} }
 
-/* The one control on the landing. It is the way into everything else, so it
-   carries the brand verb and the brand colour rather than reading as chrome. */
-.bare-menu{color:var(--blue);font-weight:650}
-.bare-menu:hover{color:var(--blue-dp)}
-.bare-menu .bm-i{border-color:var(--blue-100);color:var(--blue);background:var(--blue-50)}
-.bare-menu:hover .bm-i{background:var(--blue);border-color:var(--blue);color:#fff}
-.bare-menu[aria-expanded="true"]{color:var(--blue-dp)}
-.bare-menu[aria-expanded="true"] .bm-i{background:var(--blue);border-color:var(--blue);color:#fff}
+/* The landing header: the mark, then the one control, in the same blue pill
+   the rest of the site uses so it reads as the same button everywhere. */
+.bare-right{display:flex;align-items:center;gap:14px}
+.bare-mark{height:30px;width:auto;display:block}
+.bare-menu{cursor:pointer;display:inline-flex;align-items:center;gap:10px;
+  background:var(--blue);border:0;padding:11px 10px 11px 20px;border-radius:999px;
+  font-family:var(--sans);font-size:14px;font-weight:650;letter-spacing:-.017em;color:#fff;
+  transition:background .28s var(--ease),transform .28s var(--ease)}
+.bare-menu:hover{background:var(--blue-dp);transform:translateY(-1px)}
+.bare-menu .cir{display:inline-flex;align-items:center;justify-content:center;width:26px;
+  height:26px;border-radius:50%;background:rgba(255,255,255,.22)}
+.bare-menu[aria-expanded="true"]{background:var(--blue-dp)}
 
 /* ============================================================
    THE HOME PAGE
@@ -2394,3 +2421,96 @@ body.menu-open .nav{z-index:120;transform:none;opacity:1;pointer-events:auto}
 @media (min-width:1100px){
   .appdest .tile .tl{white-space:nowrap}
 }
+
+/* The header that rides on top of the tide, on the landing only. */
+.nav-inmenu{position:absolute;top:0;left:0;right:0;z-index:6;padding-top:22px}
+.omenu.withhead{padding-top:172px}
+.nav-inmenu .nav-in{background:#1A1F2B;border-radius:999px;padding:9px 9px 9px 22px;
+  display:flex;align-items:center;gap:26px;max-width:940px;margin:0 auto;
+  box-shadow:0 20px 46px -18px rgba(11,13,18,.5)}
+.nav-inmenu .nav-brand img{height:26px;width:auto;display:block}
+.nav-inmenu .nav-links{display:flex;align-items:center;gap:24px;margin-left:6px}
+.nav-inmenu .nav-links a{color:rgba(255,255,255,.82);text-decoration:none;font-size:14px;
+  font-weight:600;letter-spacing:-.014em;transition:color .24s var(--ease)}
+.nav-inmenu .nav-links a:hover{color:#fff}
+.nav-inmenu .nav-cta{margin-left:auto;display:inline-flex;align-items:center;gap:9px;
+  background:var(--blue);color:#fff;border:0;border-radius:999px;cursor:pointer;
+  padding:10px 10px 10px 20px;font-family:var(--sans);font-size:14px;font-weight:650}
+.nav-inmenu .nav-cta:hover{background:var(--blue-dp)}
+.nav-inmenu .nav-cta .cir{display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.22)}
+@media (max-width:820px){
+  .nav-inmenu .nav-links{display:none}
+  .omenu.withhead{padding-top:150px}
+}
+
+/* Contact: three routes, sized so the right one is obvious at a glance. */
+.croutes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;
+  margin-top:clamp(40px,4vw,60px);border-top:1px solid var(--border)}
+@media (max-width:820px){ .croutes{grid-template-columns:1fr} }
+.croute{display:block;padding:30px 30px 30px 0;border-bottom:1px solid var(--border);
+  text-decoration:none;transition:background .3s var(--ease)}
+.croute:hover{background:var(--bg-2)}
+.croute:hover .crc b{transform:translateX(4px)}
+.crk{display:block;font-size:clamp(18px,1.9vw,23px);font-weight:730;letter-spacing:-.03em;
+  color:var(--tx);line-height:1.2}
+.crb{margin:11px 0 0;font-size:14px;line-height:1.56;color:var(--tx-2);max-width:34ch}
+.crc{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:13.6px;
+  font-weight:650;color:var(--blue)}
+.crc b{transition:transform .3s var(--spring)}
+.cmail{margin:34px 0 0;font-size:16px;color:var(--tx-2)}
+.cmail a{color:var(--blue);text-decoration:none;font-weight:650}
+.cmail a:hover{color:var(--blue-dp)}
+
+/* Privacy and security: My 4orm, and the sharing demonstration. */
+.my4{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;
+  margin-top:clamp(38px,4vw,56px);border-top:1px solid var(--border)}
+@media (max-width:840px){ .my4{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:520px){ .my4{grid-template-columns:1fr} }
+.m4{padding:24px 26px 24px 0;border-bottom:1px solid var(--border)}
+.m4k{display:block;font-size:16.5px;font-weight:700;letter-spacing:-.024em;color:var(--tx)}
+.m4 p{margin:8px 0 0;font-size:13.8px;line-height:1.55;color:var(--tx-2);max-width:32ch}
+
+.shdemo{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(18px,3vw,44px);
+  align-items:start;margin-top:clamp(38px,4vw,56px)}
+@media (max-width:760px){
+  .shdemo{grid-template-columns:1fr;gap:18px}
+  .sharrow{transform:rotate(90deg);justify-self:center}
+}
+.shcol{display:flex;flex-direction:column;gap:8px}
+.shk{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--tx-3);margin-bottom:6px}
+.shi{padding:12px 15px;border-radius:12px;font-size:14px;font-weight:600;
+  border:1px solid var(--border);background:#fff;color:var(--tx)}
+.shi.off{color:var(--tx-3);background:var(--bg-3);border-style:dashed;
+  text-decoration:line-through;text-decoration-color:var(--tx-3)}
+.sharrow{align-self:center;font-size:24px;color:var(--blue);padding-top:26px}
+
+/* The opening reading. Four numbers and one question, before any reporting. */
+.ri{margin-top:clamp(40px,4vw,58px);padding-top:clamp(32px,3.2vw,44px);
+  border-top:1px solid var(--border)}
+.rik{display:block;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--tx-3);margin-bottom:22px}
+.rinums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,3vw,44px)}
+@media (max-width:760px){ .rinums{grid-template-columns:repeat(2,1fr);gap:24px} }
+.rif{display:block;font-size:clamp(38px,5vw,62px);font-weight:790;letter-spacing:-.05em;
+  line-height:1;color:var(--tx)}
+.rif.ok{color:var(--ok)} .rif.warn{color:#B8891F}
+.ril{display:block;margin-top:9px;font-size:13.4px;color:var(--tx-3)}
+.riopen{margin-top:clamp(30px,3vw,42px);display:inline-flex;align-items:center;gap:11px;
+  background:var(--blue);color:#fff;border:0;border-radius:999px;cursor:pointer;
+  padding:14px 24px;font-family:var(--sans);font-size:14.8px;font-weight:650;
+  transition:background .28s var(--ease),transform .28s var(--ease)}
+.riopen:hover{background:var(--blue-dp);transform:translateY(-2px)}
+.riopen b{transition:transform .3s var(--spring)}
+.riopen:hover b{transform:translateX(4px)}
+
+/* The reporting itself stays folded away until it is asked for. */
+.appdest .app{max-height:0;opacity:0;overflow:hidden;margin:0 auto;border-width:0;
+  transition:max-height .8s var(--ease),opacity .5s var(--ease),margin .8s var(--ease)}
+.appdest.opened .app{max-height:2200px;opacity:1;margin:34px auto 90px;border-width:1px}
+.appdest.opened .ri .riopen{opacity:.4;pointer-events:none}
+
+/* On the landing the menu brings its own header, so the single control that
+   opened it steps aside rather than sitting beside its replacement. */
+body.menu-open .nav-bare{opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}

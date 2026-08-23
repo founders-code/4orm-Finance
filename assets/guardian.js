@@ -1,7 +1,7 @@
 /* ============================================================
    The 4orm phone.
 
-   One rule governs this file: the Guardian may talk, but it may
+   One rule governs this file: 4orm may talk, but it may
    never invent a fact about the person. Everything the person is
    told about their own record comes out of ST.pass, and every
    entry there carries where it came from and how sure we are.
@@ -159,7 +159,7 @@ var IND = {
 function I() { return IND[ST.ind]; }
 
 /* ============================================================
-   The Guardian.
+   Ask 4orm.
 
    Answers are written, not generated. That is a deliberate
    choice: a scripted answer can be checked by a person before
@@ -369,7 +369,7 @@ SCREEN.open = function () {
 
 /* --- the conversation -------------------------------------
 
-   Everything the Guardian says goes through think(). It never
+   Everything 4orm says goes through think(). It never
    answers instantly, because a considered answer that arrives
    instantly reads as a lookup table, which is exactly what the
    old click-face felt like.
@@ -408,7 +408,7 @@ function push(who, html) {
 /* the person */
 function me(text) { return push('me', esc(text)); }
 
-/* the Guardian, always after a beat of thinking */
+/* 4orm answering, always after a beat of thinking */
 function think(html, chipList, ms) {
   var th = thread();
   var dots = document.createElement('div');
@@ -426,7 +426,7 @@ function think(html, chipList, ms) {
   return wait;
 }
 
-/* Several Guardian turns in a row, each waiting for the one before it. */
+/* Several 4orm turns in a row, each waiting for the one before it. */
 function thinkSeq(turns) {
   var t = 0;
   turns.forEach(function (turn) {
@@ -442,7 +442,7 @@ function ask(q) {
   ST.asked++;
   me(q);
 
-  /* If the person is answering a question the Guardian asked, that is a
+  /* If the person is answering a question 4orm asked, that is a
      different kind of turn from a question of their own. */
   if (ST.awaiting) {
     var slot = ST.awaiting;
@@ -1313,6 +1313,9 @@ document.addEventListener('click', function (e) {
     /* Two chips are navigation rather than conversation. */
     if (q === 'Show me mortgage') { switchTo('mortgage'); return; }
     if (q === 'Show me auto')     { switchTo('auto');     return; }
+    /* Checking who you are dealing with is a real page, not an answer in a
+       thread. Send them to the registers. */
+    if (q === 'Take me to the checks') { window.location.href = '/check-a-firm'; return; }
     if (q === 'Use the example')  { ask(I().ex);          return; }
     ask(q);
     return;

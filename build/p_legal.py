@@ -13,13 +13,17 @@ def _prose(slug):
 
 
 def build():
-    for slug, title, a, b, lede in [
-        ("privacy", "Privacy", "How we handle", "information.",
-         "What 4orm Finance collects, why, how long it is kept, and what you can ask us to do with it."),
-        ("terms", "Terms", "Terms of", "use.",
+    # slug, url, title, headline halves, lede
+    for slug, url, title, a, b, lede in [
+        ("privacy", "/website-privacy", "Website privacy policy",
+         "How this website handles", "information.",
+         "What 4ormfinance.com collects, why, how long it is kept, and what you can ask us to do "
+         "with it. The product privacy page is at /privacy."),
+        ("terms", "/terms", "Terms", "Terms of", "use.",
          "The terms on which this website is provided, and the limits of what anything on it means."),
     ]:
         body = hero("Legal", a, b, lede) + (
             '\n<section class="sec" style="padding-top:40px">\n  <div class="wrap">\n'
             '    <div class="prose rv">%s</div>\n  </div>\n</section>\n' % _prose(slug))
-        yield kit.write(slug, "/" + slug, title, lede, body)
+        yield kit.write(slug, url, title, lede, body,
+                        filename=url.strip("/") + ".html")

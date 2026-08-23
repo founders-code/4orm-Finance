@@ -156,7 +156,7 @@ CONSUMER = """
         <span class="psrow">Auto</span>
         <span class="psrow soon2">Insurance</span>
         <span class="psrow soon2">Lending</span>
-        <span class="psask">Ask your 4orm Guardian anything</span>
+        <span class="psask">Ask 4orm anything</span>
         <span class="psgo">Pick up 4orm {a}</span>
       </a>
     </div>

@@ -8,7 +8,7 @@ REAL_KIT = kit                     # keep a handle before the swap
 
 CARRIED = []
 AUTHORED = ["p_home", "p_homepage", "p_explore", "p_industries", "p_check",
-            "p_contact", "p_legal"]
+            "p_security", "p_contact", "p_legal"]
 
 # The carried v8 modules set their headlines in Title Case. Every authored page
 # on this site is sentence case, and mixed capitalisation is the loudest thing
