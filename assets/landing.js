@@ -35,7 +35,7 @@ function back(){
   cameFromMenu = false;
   if (history.replaceState) history.replaceState(null, '', location.pathname);
   /* There are two landing surfaces: the three doors, and the menu. Coming out
-     of the phone or the dashboard, the menu is the one that is useful — it is
+     of the phone or the dashboard, the menu is the one that is useful. It is
      where the person can go somewhere next rather than start over. */
   setTimeout(function(){
     var b = document.getElementById('burger');

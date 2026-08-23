@@ -5,6 +5,7 @@ The rule these five obey: every regulatory figure appears as an answer to
 "what are we protecting, and from what". Never as a threat, never as a
 compliance pitch.
 """
+import io
 import kit
 from pkit import hero, sec, softs, flow, note, cta, duty, timeline, bignums, sources
 
@@ -54,7 +55,7 @@ def why():
 
     S.append(sec("What the regulators said", "Three sectors. Three regulators. One complaint.",
         timeline([
-            ("2024&ndash;25", "FSRA, on private mortgage files",
+            ("2024 to 2025", "FSRA, on private mortgage files",
              "Every file reviewed had no documented suitability assessment. Seventy-three per cent "
              "were missing adequate disclosure of material risk. Sixty-five per cent were missing "
              "adequate disclosure of the relationship or the conflict. In every entity examined, "
@@ -262,9 +263,9 @@ def standard():
           "the reasoning. Keep records that show what happened and why. Five regulators, five "
           "products, one direction."))
 
-    S.append(cta("A higher standard for financial relationships.",
-        "Every principle here exists because a regulator has already described what happens "
-        "without it."))
+    S.append(cta("Every one of these exists because it was missing somewhere.",
+        "None of these principles were invented at a whiteboard. Each answers something a "
+        "regulator has already found, written down, and published."))
 
     body = hero("The Standard", "A higher standard",
                 "for financial relationships.",
@@ -278,7 +279,7 @@ def standard():
 def gap():
     S = []
 
-    S.append(sec("The shape of it", "Regulators describe the outcome. Systems record the pieces.",
+    S.append(sec("Where it actually lives", "Six systems. Each one doing its own job well.",
         softs([
             ("The conversation", "Where the reasoning actually lives",
              "It happens by phone, by message, across a desk. It is the part that explains "
@@ -303,7 +304,7 @@ def gap():
 
     S.append(sec("What it costs", "The record is what fails, not the work.",
         bignums([
-            ("100%", "gold", "of private mortgage files reviewed by FSRA in 2024&ndash;25 had no "
+            ("100%", "gold", "of private mortgage files reviewed by FSRA in 2024 to 2025 had no "
                              "documented suitability assessment"),
             ("73%", "gold", "were missing or had inadequate disclosure of material risk"),
             ("65%", "blue", "were missing or had inadequate disclosure of the relationship or the "
@@ -333,105 +334,52 @@ def gap():
     S.append(cta("The requirement exists. The evidence is scattered.",
         "Closing that distance is the whole of what 4orm does."))
 
-    body = hero("The evidence gap", "Regulators describe the outcome.",
-                "Existing systems record the pieces.",
-                "The duty is clear and increasingly explicit. The record of it still lives in "
-                "systems that were never joined up, and gets reassembled by hand under "
-                "deadline.") + "".join(S)
-    return kit.write("gap", "/evidence-gap", "Regulators describe the outcome. Systems record the pieces.",
+    body = hero("The evidence gap", "The duty is one sentence.",
+                "The record of it is in six places.",
+                "Understand the client, explain the decision, keep what shows how it was reached. "
+                "Every regulator now says a version of that. Almost no firm can produce it without "
+                "assembling it by hand, under deadline.") + "".join(S)
+    return kit.write("gap", "/evidence-gap", "The duty is one sentence. The record of it is in six places.",
                      "Where the record of a financial relationship actually lives, why it cannot "
                      "answer the question, and what closing it requires.", body)
 
 
 def company():
-    S = []
+    """The company page is the team page.
 
-    S.append(sec("Why", "Because financial decisions change people&rsquo;s lives.",
-        '<div class="mission">'
-        '<p>A person should understand what they are agreeing to.</p>'
-        '<p>A professional doing the right thing should be able to demonstrate it.</p>'
-        '<p>A firm should know how its client relationships are actually being handled.</p>'
-        '</div>' +
-        note("b", "<b>None of those three is controversial.</b> All three are currently hard, and "
-                  "they are hard for the same reason: the relationship and the record of it live "
-                  "in different places."),
-        p="4orm is being built because the largest decisions most people make are the ones they "
-          "understand least at the moment they make them, and because the firms serving them "
-          "frequently did the work and cannot show it."))
+    The headline claims a record is only worth the people behind it, so the
+    very next thing on the page had better be those people. Nothing goes
+    after them.
+    """
+    import json, os
+    here = os.path.dirname(os.path.abspath(__file__))
+    with io.open(os.path.join(here, "content", "team.json"), encoding="utf-8") as f:
+        TEAM = json.load(f)
 
-    S.append(sec("How we work", "Four commitments that constrain what we build.",
-        softs([
-            ("Sources", "Every figure traces to a primary source",
-             "Nothing on this site is quoted from a summary of a summary. If a number cannot be "
-             "traced to the body that published it, it does not appear.", "blue"),
-            ("Trends", "A number that is improving is shown as improving",
-             "Nearly half of Canadian homebuyers report uncertainty. That is down from close to "
-             "two thirds. Both halves of that sentence get said.", "blue"),
-            ("Names", "We do not label anybody",
-             "This site points at published registers and published findings. It does not "
-             "characterise any real person or firm, and it never will.", "gold"),
-            ("Limits", "We say what we cannot do",
-             "4orm does not certify quality, guarantee outcomes, or control what a third party "
-             "does with information downstream. Where a regulated firm has its own retention "
-             "duties, those survive anything we offer.", "gold"),
-        ], cols=2), alt=True))
+    cards = "".join(
+        '<article class="tm rv">'
+        '<div class="tmph"><img src="%s" alt="%s" loading="lazy" width="480" height="480" />'
+        '<span class="tmini" aria-hidden="true">%s</span></div>'
+        '<span class="tmk">%s</span>'
+        '<h3 class="tmn">%s</h3>'
+        '<p class="tmr">%s</p>'
+        '<p class="tmb">%s</p>'
+        '</article>' % (m["img"], m["name"], m["ini"], m["kick"], m["name"], m["role"], m["short"])
+        for m in TEAM)
 
-    S.append(sec("What we are not building", "Three things we have deliberately left alone.",
-        flow([
-            ("Not the verification infrastructure",
-             "Identity checking, open banking, credit and signature are specialist industries with "
-             "good operators in them. 4orm connects to that work rather than rebuilding it. Those "
-             "are integration layers, not the reason to exist."),
-            ("Not a replacement for the professional",
-             "The regulated judgment stays with the person licensed to make it. 4orm makes their "
-             "reasoning explicable and their work demonstrable. It does not make the decision."),
-            ("Not a surveillance product",
-             "A firm should feel it can finally see whether client relationships are being handled "
-             "properly. A professional should feel it helps them take care of a client. If it ever "
-             "reads as monitoring installed by an employer, we have built it wrong."),
-        ])))
+    S = [sec("Who we are", "The people building it.",
+             '<div class="tmgrid">' + cards + '</div>',
+             p="Nine people, most of whom have spent a career somewhere the record mattered. "
+               "Reach any of us at <a href=\'mailto:office@4ormfinance.com\'>office@4ormfinance.com</a>.")]
 
-    S.append(sec("Where the claims come from", "Read the sources yourself.",
-        sources([
-            ("Regulators", [
-                ("Mortgage and insurance", "Financial Services Regulatory Authority of Ontario",
-                 "https://www.fsrao.ca/"),
-                ("Banking conduct", "Financial Consumer Agency of Canada",
-                 "https://www.canada.ca/en/financial-consumer-agency.html"),
-                ("Investing", "Canadian Securities Administrators",
-                 "https://www.securities-administrators.ca/"),
-                ("Dealers and advisors", "Canadian Investment Regulatory Organization",
-                 "https://www.ciro.ca/"),
-            ]),
-            ("Registers", [
-                ("Investment registration", "CSA National Registration Search",
-                 "https://info.securities-administrators.ca/nrsmobile/NrsSearch.aspx"),
-                ("Advisor history", "CIRO Advisor Report", "https://www.ciro.ca/advisor-report-search"),
-                ("Car dealers, Ontario", "OMVIC dealer search", "https://www.omvic.ca/dealer-search/"),
-                ("Bank complaints", "Ombudsman for Banking Services and Investments",
-                 "https://www.obsi.ca/"),
-            ]),
-            ("Research", [
-                ("Homebuyer experience", "CMHC Mortgage Consumer Survey",
-                 "https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research"),
-                ("Fraud reporting", "Canadian Anti-Fraud Centre",
-                 "https://antifraudcentre-centreantifraude.ca/"),
-                ("Insolvency", "Office of the Superintendent of Bankruptcy",
-                 "https://ised-isde.canada.ca/site/office-superintendent-bankruptcy/en"),
-            ]),
-        ])))
-
-    S.append(cta("Tell us what your firm does, and who regulates it.",
-        "Thirty minutes, no client data, and at the end you will know whether we can help. "
-        "Sometimes we cannot, and we would rather say so early."))
-
-    body = hero("Company", "A record is only worth",
+    body = hero("4orm Family", "A record is only worth",
                 "the people behind it.",
-                "Why 4orm is being built, the commitments that constrain what goes into it, and "
-                "the three things we have deliberately decided not to build.") + "".join(S)
+                "A person should understand what they are agreeing to. A professional doing the "
+                "right thing should be able to demonstrate it. A firm should know how its client "
+                "relationships are actually being handled. That is why we are building "
+                "this.") + "".join(S)
     return kit.write("company", "/company", "A record is only worth the people behind it.",
-                     "Why 4orm exists, how we handle claims and sources, and what we are "
-                     "deliberately not building.", body)
+                     "The people building 4orm, and why.", body)
 
 
 def build():

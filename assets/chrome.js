@@ -98,14 +98,6 @@ function buildMenu() {
 
   m.innerHTML =
     '<div class="omenu-shell">' +
-      '<div class="osearch">' +
-        '<svg class="osi" width="16" height="16" viewBox="0 0 24 24" fill="none" ' +
-          'stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">' +
-          '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>' +
-        '<input id="omq" class="osq" type="text" autocomplete="off" spellcheck="false" ' +
-          'placeholder="Search for a page" aria-label="Search 4orm" />' +
-        '<button class="oclr" id="omclr" type="button" hidden aria-label="Clear the search">Clear</button>' +
-      '</div>' +
       /* Three ways in, and nothing else. A menu that lists everything is a
          sitemap; a menu that names the three kinds of visitor is navigation. */
       '<div class="omenu-in">' +
@@ -131,9 +123,11 @@ function buildMenu() {
         ]) +
         '<div class="ocol ofoot"><a class="obig" href="/contact">Talk to us</a></div>' +
       '</div>' +
-      '<p class="ono" id="omno" hidden>Nothing here matches that. Try <b>mortgage</b>, ' +
-        '<b>evidence</b>, <b>privacy</b> or <b>company</b>.</p>' +
-    '</div>';
+    '</div>' +
+    /* The page keeps showing through underneath. Clicking down there means
+       "take me back to what I was reading", so make that a real control. */
+    '<button class="oback" type="button" aria-label="Close the menu and go back to the page">' +
+      '</button>';
   return m;
 }
 
@@ -154,6 +148,7 @@ function buildNav() {
       '<a class="nav-brand" href="/" aria-label="Back to the start">' +
         '<img src="/assets/logo.png" alt="4orm Finance" /></a>' +
       '<nav class="nav-links" aria-label="Primary">' +
+        '<a href="/home"' + (page === 'homepage' ? ' aria-current="page"' : '') + '>Home</a>' +
         '<a href="/#personal">Personal</a>' +
         '<a href="/#professional">Professional</a>' +
         '<a href="/company"' + (famOn ? ' aria-current="page"' : '') + '>4orm Family</a>' +
@@ -173,7 +168,7 @@ function buildFooter() {
   var f = el('footer', 'site-foot');
   f.innerHTML =
     '<div class="wrap"><div class="fgrid">' +
-      '<div><span class="flogo-chip"><img class="flogo" src="/assets/logo.png" alt="4orm Finance" /></span>' +
+      '<div><span class="flogo-chip"><img class="flogo" src="/assets/logo-light.png" alt="4orm Finance" /></span>' +
         '<p class="fab">The intelligence and evidence layer for major financial decisions. ' +
         'An Alberta company. Pre-revenue, and the product is under development.</p></div>' +
       '<div><div class="fh">Views</div>' +
@@ -212,11 +207,12 @@ function initNav() {
         c.classList.toggle('x', on);
       });
       document.documentElement.style.overflow = on ? 'hidden' : '';
+      document.body.classList.toggle('menu-open', on);
+      /* Never leave the header tucked away behind an open menu. */
+      if (on) { var nv = document.querySelector('.nav'); if (nv) nv.classList.remove('tucked'); }
       if (on) {
-        var f = m.querySelector('#omq');
-        if (f) setTimeout(function () { f.focus(); }, 300);
-      } else if (m.__resetSearch) {
-        m.__resetSearch();
+        var f = m.querySelector('.oitem');
+        if (f) setTimeout(function () { f.focus({ preventScroll: true }); }, 300);
       }
     };
     controls.forEach(function (c) {
@@ -226,7 +222,7 @@ function initNav() {
       });
     });
     m.addEventListener('click', function (e) {
-      if (e.target === m) { openMenu(false); return; }
+      if (e.target === m || e.target.classList.contains('oback')) { openMenu(false); return; }
       /* Picking something is the end of using the menu, whether it navigates
          away or opens a way in on this same page. */
       var a = e.target.closest && e.target.closest('a.oitem, a.obig');

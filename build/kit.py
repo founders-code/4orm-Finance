@@ -6,6 +6,7 @@ standard: section 10 banned words, canonical facts, no em or en dashes,
 Canadian spelling, headings that make a claim rather than name a topic.
 """
 import datetime, os, re
+from html import unescape as _unescape
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://www.4ormfinance.com"
@@ -90,6 +91,13 @@ BANNED = [
     (r"(?i)\borganis(e|ed|ation)\b", "British spelling"),
     (r"(?i)\brecognise\b", "British spelling"),
 ]
+# Entities are decoded before scanning now, so the literal dash rules above
+# catch &mdash; too. These are the constructions that were never covered.
+BANNED += [
+    (r"(?i)\bnavigat(e|ing|es) (the|this|these)\b", "navigate as a metaphor"),
+    (r"(?i)\bgame[- ]changer\b", "a game changer"),
+]
+
 ADVISORY = [(r"(?i)\bsomebody\b(?! else)", 'the universal "somebody"')]
 
 
@@ -103,7 +111,14 @@ def _scan(txt, rules, name):
 
 
 def gate(html, name):
+    """Scan what a reader actually sees.
+
+    Entities are decoded first. A dash written as &mdash; renders as a dash on
+    the page, and scanning the raw markup let every one of them through until
+    this was fixed.
+    """
     txt = re.sub(r"<[^>]+>", " ", html)
+    txt = _unescape(txt)
     return _scan(txt, BANNED, name), _scan(txt, ADVISORY, name)
 
 

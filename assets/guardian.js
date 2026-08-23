@@ -164,7 +164,7 @@ function I() { return IND[ST.ind]; }
    Answers are written, not generated. That is a deliberate
    choice: a scripted answer can be checked by a person before
    it ships, and this one is about money. ANSWER() is the single
-   seam — swap its body for a call to a service later and every
+   seam. Swap its body for a call to a service later and every
    screen below keeps working unchanged.
    ============================================================ */
 var KB = [
@@ -194,13 +194,13 @@ var KB = [
 
   { k: ['amortization', 'amortisation'],
     a: 'Amortization is the total time it would take to pay the mortgage off completely. Your term ' +
-       'is the shorter stretch you are locked into with one lender — often five years. A longer ' +
+       'is the shorter stretch you are locked into with one lender, often five years. A longer ' +
        'amortization lowers the payment and raises what you pay overall.',
     c: ['What is a term then?', 'What will this cost me in total?'] },
 
   { k: ['default insurance', 'cmhc', 'mortgage insurance'],
     a: 'If your down payment is under twenty per cent, mortgage default insurance is generally ' +
-       'required. It protects the lender, not you, and you pay the premium — usually added to the ' +
+       'required. It protects the lender, not you, and you pay the premium, usually added to the ' +
        'loan. It is worth knowing which one of you it protects.',
     c: ['How much is the premium?', 'How do I avoid it?'] },
 
@@ -493,7 +493,7 @@ var SITUATE = {
           'the process and get together what you will be asked for. Three things change the ' +
           'answer more than anything else.</p>',
     qs: [
-      { k: 'incomeKind', q: 'First &mdash; is that $120,000 salary, or does it move?',
+      { k: 'incomeKind', q: 'First. Is that $120,000 salary, or does it move?',
         chips: ['Salary, steady', 'It varies'],
         take: function (a) {
           var varies = /var|move|commis|hour|self|bonus/i.test(a);
@@ -507,7 +507,7 @@ var SITUATE = {
               'settle quickly.</p>');
           nextQ();
         } },
-      { k: 'truck', q: 'Second &mdash; what is the vehicle payment each month?',
+      { k: 'truck', q: 'Second. What is the vehicle payment each month?',
         chips: ['$720', 'Something else'],
         take: function (a) {
           var m = String(a).match(/([\d,]{3,})/);
@@ -518,7 +518,7 @@ var SITUATE = {
                 'more than almost anything else on this list, which is why they ask early.</p>');
           nextQ();
         } },
-      { k: 'funds', q: 'Third &mdash; is the $35,000 all your own savings?',
+      { k: 'funds', q: 'Third. Is the $35,000 all your own savings?',
         chips: ['All mine', 'Some is a gift'],
         take: function (a) {
           var gift = /gift|parent|famil|help|mom|dad|some/i.test(a);
@@ -528,7 +528,7 @@ var SITUATE = {
               gift ? 'NEEDS SUPPORTING INFORMATION' : 'STATED BY THE PERSON', gift ? 'amber' : 'blue');
           think(gift
             ? '<p>Then you will be asked for a gift letter, and for the money to have been in ' +
-              'your account for a while. Not a difficulty &mdash; just something to have ready ' +
+              'your account for a while. Not a difficulty, just something to have ready ' +
               'rather than be surprised by.</p>'
             : '<p>That is the straightforward case. You will still be asked for about ninety ' +
               'days of account history to show where it came from.</p>');
@@ -588,7 +588,7 @@ var SITUATE = {
           }
           nextQ();
         } },
-      { k: 'addons', q: 'Has anything been added &mdash; warranty, protection, fees?',
+      { k: 'addons', q: 'Has anything been added? Warranty, protection, fees?',
         chips: ['Warranty and a package', 'Not that I know of'],
         take: function (a) {
           if (/not|no |none|dunno|know of/i.test(a)) {
@@ -648,7 +648,7 @@ function shallow(lbl) {
     ['<p>' + lbl + '. Tell me what is happening and I will keep it.</p>' +
      '<p class="gm">' + i.shallow + '</p>', null, 950],
     ['<p><b>Modelling coming.</b> The ' + i.name.toLowerCase() + ' experience is designed and not ' +
-     'yet built. Mortgage and auto are, all the way through &mdash; and they are the same 4orm, ' +
+     'yet built. Mortgage and auto are, all the way through, and they are the same 4orm, ' +
      'so what you see there is what this becomes.</p>',
      ['Show me mortgage', 'Show me auto'], 1200]
   ]);
@@ -916,7 +916,7 @@ function readiness() {
   paint(
     '<div class="ghead"><h3>You&rsquo;re ready to have a better conversation.</h3>' +
     '<p>Your identity is verified and your income is supported. Your down payment still needs ' +
-    'supporting information &mdash; that is fine, and worth knowing before you walk in.</p></div>' +
+    'supporting information. That is fine, and worth knowing before you walk in.</p></div>' +
     '<div class="gnote amber">This is not an approval, and I will never tell you that you are ' +
     'approved. Only a lender can do that.</div>' +
     opt('prepare', 'Keep preparing', 'Close the last gaps') +
@@ -1052,7 +1052,7 @@ function submissions() {
         '<b>' + r[0] + '</b><span>Submitted ' + r[1] + '</span>' +
         (r[2] ? '<em>appears again</em>' : '') + '</div>';
     }).join('') + '</div>' +
-    '<div class="gnote">Lender A appears more than once. I am showing you the event, not naming it &mdash; ' +
+    '<div class="gnote">Lender A appears more than once. I am showing you the event, not naming it. ' +
     'there can be ordinary reasons for a second submission, and I would rather you ask than assume.</div>' +
     opt('ask-open', 'Ask about this', '') +
     '<button class="gcta wide" data-act="dealchange">Continue &#8594;</button>'
@@ -1068,7 +1068,7 @@ function dealChange() {
   paint(
     '<div class="ghead sm amberh"><h3>Your deal changed.</h3>' +
     '<p>Three things moved between the sheet you were shown and the paperwork. Only the changes ' +
-    'are below &mdash; everything else is the same.</p></div>' +
+    'are below. Everything else is the same.</p></div>' +
     '<div class="chgs">' +
       dRow('Protection package', '$1,495', '$2,295') +
       dRow('Term', '72 months', '84 months') +
