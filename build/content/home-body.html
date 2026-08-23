@@ -1,21 +1,23 @@
 <section class="hero">
     <div class="wrap">
       <span class="eyebrow rv"><i></i>One transaction &middot; three views</span>
-      <h1 class="rv d1">Know before you decide.<span class="b">Prove what happened after.</span></h1>
+
+      <div class="split-h rv d1">
+        <div class="sh-side sh-you">
+          <span class="sh-tag">You</span>
+          <h1>Know before<br />you decide.</h1>
+        </div>
+        <span class="sh-rule" aria-hidden="true"></span>
+        <div class="sh-side sh-them">
+          <span class="sh-tag">Your firm</span>
+          <h1 class="b">Prove what<br />happened after.</h1>
+        </div>
+      </div>
+
       <p class="sub rv d2">4orm is the intelligence and evidence layer for major financial decisions.
         The same transaction, seen from three sides.</p>
 
       <div class="views-w rv d3">
-        <div class="views" id="views">
-          <span class="pip" id="pip"></span>
-          <button data-v="personal" class="on">Personal</button>
-          <button data-v="professional">Professional</button>
-          <button data-v="regulator">Regulator</button>
-        </div>
-      </div>
-      <div class="viewsub rv d3" id="viewsub"><b>Understand it.</b> Start here. Use the phone.</div>
-
-      <div class="views-w rv d3" style="margin-top:22px">
         <div class="views inds" id="inds">
           <span class="pip"></span>
           <button data-ind="mortgage" class="on">Mortgage</button>
@@ -24,7 +26,7 @@
           <button data-ind="lending">Lending</button>
         </div>
       </div>
-      <div class="viewsub rv d3" style="margin-top:12px">Change the industry. Same product, different transaction.</div>
+      <div class="viewsub rv d3" id="viewsub"><b>Understand it.</b> Pick a transaction, then use the phone.</div>
     </div>
   </section>
 
@@ -52,6 +54,88 @@
       </div>
     </div>
   </section>
+
+  
+<section class="sec alt" id="redflag">
+  <div class="wrap">
+    <div class="sec-head rv" style="margin:0 auto;text-align:center;max-width:780px">
+      <span class="kick" style="justify-content:center">Before any of it</span>
+      <h2>Check them before you hand anybody your file.</h2>
+      <p>Type a company, a brokerage or a person. 4orm routes the name into the registers Canadian
+        regulators publish themselves, tells you what a hit in each one would mean, and keeps a dated
+        record that you did the reading. We hold no list of our own and we publish no opinion about
+        any firm.</p>
+    </div>
+
+    <form class="ck-form rv d1" id="hf-form" action="/check-a-firm" method="get" autocomplete="off">
+      <div class="ck-row">
+        <input id="hf-input" type="text" name="firm" maxlength="90"
+               placeholder="Type a company, a brokerage or a person"
+               aria-label="Company, brokerage or person to check" />
+        <button type="submit">Check the registers</button>
+      </div>
+    </form>
+
+    <div class="rv d2" style="margin:22px auto 0;max-width:760px;text-align:center;
+         font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.14em;
+         text-transform:uppercase;color:var(--tx-3);line-height:2.1">
+      Canadian Securities Administrators &middot; CIRO &middot; FINTRAC &middot;
+      Bank of Canada &middot; FSRA Ontario &middot; RIBO &middot; Canadian Anti-Fraud Centre
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="trust">
+  <div class="wrap">
+    <div class="sec-head rv" style="margin:0 auto;text-align:center;max-width:760px">
+      <span class="kick" style="justify-content:center">Where the three meet</span>
+      <h2>Three parties. One record. That overlap is the product.</h2>
+      <p>Each of them wants a different thing from the same transaction. Trust is not a value any one of
+        them can produce alone, and it is not a promise anybody has to take on faith. It is what is left
+        when all three are reading the same evidence.</p>
+    </div>
+
+    <div class="vennwrap rv d1">
+      <svg class="venn" viewBox="0 0 760 640" role="img"
+           aria-label="Three overlapping circles. The consumer knows before deciding, the firm proves what happened after, the regulator trusts what it can see. Trust sits where all three overlap.">
+        <circle class="vc vc-you"  cx="380" cy="228" r="176" />
+        <circle class="vc vc-firm" cx="278" cy="404" r="176" />
+        <circle class="vc vc-reg"  cx="482" cy="404" r="176" />
+
+        <text class="vlab" x="380" y="132" text-anchor="middle">You</text>
+        <text class="vsub" x="380" y="158" text-anchor="middle">Know before you decide.</text>
+
+        <text class="vlab" x="212" y="470" text-anchor="middle">Your firm</text>
+        <text class="vsub" x="212" y="496" text-anchor="middle">Prove what</text>
+        <text class="vsub" x="212" y="516" text-anchor="middle">happened after.</text>
+
+        <text class="vlab" x="548" y="470" text-anchor="middle">The regulator</text>
+        <text class="vsub" x="548" y="496" text-anchor="middle">Trust what</text>
+        <text class="vsub" x="548" y="516" text-anchor="middle">you can see.</text>
+
+        <text class="vcore" x="380" y="352" text-anchor="middle">Trust</text>
+      </svg>
+    </div>
+
+    <div class="three" style="margin-top:56px">
+      <div class="tcard rv d1"><div class="ti">
+        <span class="tw">YOU</span><h3>Know before you decide.</h3>
+        <p>Understand the decision in front of you, in plain words, before you have chosen anybody. Arrive
+          prepared rather than empty handed, and be told the moment something on your file moves.</p>
+      </div></div>
+      <div class="tcard rv d2"><div class="ti">
+        <span class="tw">YOUR FIRM</span><h3>Prove what happened after.</h3>
+        <p>The rationale, the disclosures and the submissions recorded while the work happens. A file another
+          professional could re-perform, without anybody reassembling a year of email.</p>
+      </div></div>
+      <div class="tcard g rv d3"><div class="ti">
+        <span class="tw">THE REGULATOR</span><h3>Trust what you can see.</h3>
+        <p>Name a date and the transaction rebuilds itself from the record: who said what, what supported it,
+          who received it, and which version each decision was made on.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
 
   <section class="sec" id="three">
     <div class="wrap">

@@ -76,7 +76,7 @@ var S = {
 };
 
 var VIEWSUB = {
-  personal:     '<b>Understand it.</b> Start here. Use the phone.',
+  personal:     '<b>Understand it.</b> Pick a transaction, then use the phone.',
   professional: '<b>Prove it.</b> The same file, from the broker&rsquo;s side.',
   regulator:    '<b>Reconstruct it.</b> Name a date and rebuild the transaction.'
 };
@@ -386,7 +386,7 @@ function setView(v) {
   S.view = v;
   $$('#views button').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-v') === v); });
   movePip();
-  $('#viewsub').innerHTML = VIEWSUB[v];
+  var vs = $('#viewsub'); if (vs) vs.innerHTML = VIEWSUB[v];
   var stage = $('#stageIn'), pw = $('#phoneW');
   stage.classList.toggle('pro', v === 'professional');
   if (v === 'regulator') { pw.style.display = 'none'; stage.style.gridTemplateColumns = 'minmax(0,1fr)'; }
@@ -405,7 +405,7 @@ var DO = {
 };
 
 document.addEventListener('click', function (e) {
-  var t = e.target.closest ? e.target.closest('[data-act],[data-v],[data-go],[data-ind]') : null;
+  var t = e.target.closest ? e.target.closest('[data-act],[data-v],[data-go],[data-ind],[data-navview]') : null;
   if (!t) return;
   var v = t.getAttribute('data-v'), go = t.getAttribute('data-go'), a = t.getAttribute('data-act'),
       arg = t.getAttribute('data-arg');
@@ -422,6 +422,12 @@ document.addEventListener('click', function (e) {
     });
     movePipOf('#inds');
     drawLines(); setView('personal');
+    return;
+  }
+  var nv = t.getAttribute('data-navview');
+  if (nv) {
+    e.preventDefault(); setView(nv);
+    $('#stage').scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
   if (go) {
@@ -502,6 +508,8 @@ function initReveal() {
 }
 
 function boot() {
+  var h = (location.hash || '').replace('#', '');
+  if (h === 'personal' || h === 'professional' || h === 'regulator') S.view = h;
   buildLines();
   renderPhone();
   renderRail();

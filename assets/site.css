@@ -664,3 +664,172 @@ p{margin:0}
 .ladder .what{font-size:17px; font-weight:700}
 .ladder .desc{font-size:14.2px; color:var(--tx-2); margin-top:5px; line-height:1.55}
 @media (max-width:620px){ .ladder .rung{grid-template-columns:1fr; gap:6px} }
+
+/* ============================================================
+   Hero, split. You on the left, your firm on the right.
+   ============================================================ */
+.split-h{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:start;
+  margin:34px auto 0;max-width:1120px}
+.sh-side{padding:0 40px}
+.sh-you{text-align:right}
+.sh-them{text-align:left}
+.sh-tag{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--tx-3);margin-bottom:16px}
+.sh-them .sh-tag{color:var(--blue-dp)}
+.split-h h1{font-size:clamp(30px,3.9vw,52px);line-height:1.04;letter-spacing:-.035em;margin:0}
+.split-h h1.b{color:var(--blue-dp)}
+.sh-rule{width:1px;align-self:stretch;background:linear-gradient(180deg,transparent,var(--border-strong) 22%,
+  var(--border-strong) 78%,transparent);margin-top:6px}
+@media (max-width:900px){
+  .split-h{grid-template-columns:1fr;gap:26px;margin-top:28px}
+  .sh-side{padding:0;text-align:center}
+  .sh-rule{width:64px;height:1px;align-self:center;justify-self:center;margin:0;
+    background:linear-gradient(90deg,transparent,var(--border-strong),transparent)}
+}
+
+/* ============================================================
+   The trust venn
+   ============================================================ */
+.vennwrap{display:flex;justify-content:center;margin-top:46px}
+.venn{width:min(760px,100%);height:auto}
+.vc{mix-blend-mode:multiply;stroke-width:1.4;transition:opacity .8s var(--ease)}
+.vc-you {fill:rgba(20,32,54,.10);   stroke:rgba(20,32,54,.34)}
+.vc-firm{fill:rgba(46,107,242,.13); stroke:rgba(46,107,242,.44)}
+.vc-reg {fill:rgba(196,154,58,.14); stroke:rgba(196,154,58,.48)}
+.vennwrap:hover .vc{opacity:.72}
+.vennwrap:hover .vc:hover{opacity:1}
+.vlab{font-family:var(--sans);font-size:19px;font-weight:750;letter-spacing:-.022em;fill:var(--tx)}
+.vsub{font-family:var(--sans);font-size:14px;font-weight:500;fill:var(--tx-2)}
+.vcore{font-family:var(--sans);font-size:40px;font-weight:800;letter-spacing:-.04em;fill:var(--tx)}
+@media (max-width:620px){
+  .vlab{font-size:22px} .vsub{font-size:16px} .vcore{font-size:46px}
+}
+
+/* ============================================================
+   The red flag check
+   ============================================================ */
+.ck-form{max-width:760px;margin:38px auto 0}
+.ck-row{display:flex;gap:10px;align-items:stretch;
+  background:#fff;border:1px solid var(--border-strong);border-radius:18px;
+  padding:9px 9px 9px 20px;box-shadow:0 2px 3px rgba(20,32,54,.03),0 14px 40px -22px rgba(20,32,54,.30);
+  transition:box-shadow .3s var(--ease),border-color .3s var(--ease)}
+.ck-row:focus-within{border-color:var(--blue);
+  box-shadow:0 0 0 4px var(--blue-50),0 18px 46px -22px rgba(46,107,242,.42)}
+.ck-row input{flex:1;border:0;outline:0;background:transparent;font-family:var(--sans);
+  font-size:17px;font-weight:500;color:var(--tx);letter-spacing:-.011em;min-width:0}
+.ck-row input::placeholder{color:var(--tx-3);font-weight:450}
+.ck-row button{flex:none;border:0;cursor:pointer;background:var(--blue);color:#fff;
+  font-family:var(--sans);font-size:14.5px;font-weight:650;letter-spacing:-.01em;
+  padding:0 22px;border-radius:12px;display:inline-flex;align-items:center;gap:9px;
+  transition:background .22s var(--ease),transform .22s var(--pop)}
+.ck-row button:hover{background:var(--blue-dp);transform:translateY(-1px)}
+.ck-row button:active{transform:translateY(0)}
+
+.ck-tracks{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin:18px auto 0}
+.ck-tracks button{cursor:pointer;font-family:var(--sans);font-size:12.5px;font-weight:550;
+  color:var(--tx-2);background:#fff;border:1px solid var(--border);border-radius:999px;
+  padding:7px 14px;transition:all .2s var(--ease)}
+.ck-tracks button:hover{border-color:var(--border-strong);color:var(--tx)}
+.ck-tracks button.on{background:var(--tx);border-color:var(--tx);color:#fff}
+
+.ck-demos{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px auto 0}
+.ck-demos button{cursor:pointer;font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.06em;color:var(--tx-3);background:var(--bg-2);border:1px dashed var(--border-strong);
+  border-radius:10px;padding:9px 13px;transition:all .2s var(--ease)}
+.ck-demos button:hover{color:var(--tx);border-color:var(--tx-3);background:#fff}
+
+#check-out{margin-top:46px}
+#check-out:empty{margin:0}
+
+.ck-head{display:flex;gap:32px;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.ck-hl{max-width:640px}
+.ck-kick{display:block;font-family:var(--mono);font-size:10px;font-weight:800;
+  letter-spacing:.19em;text-transform:uppercase;color:var(--blue);margin-bottom:9px}
+.ck-hl h3{font-size:clamp(24px,2.6vw,33px);line-height:1.1;letter-spacing:-.031em;
+  margin:0 0 10px;color:var(--tx)}
+.ck-hl p{margin:0;font-size:14.5px;line-height:1.62;color:var(--tx-2)}
+.ck-meter{flex:none;min-width:210px}
+.ck-mn{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--tx-3);margin-bottom:8px}
+.ck-mn b{font-size:26px;color:var(--tx);font-weight:800;letter-spacing:-.02em}
+.ck-mb{height:5px;border-radius:99px;background:var(--border);overflow:hidden}
+.ck-mb i{display:block;height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--blue),var(--blue-lt));
+  transition:width .55s var(--spring)}
+.ck-ms{margin-top:8px;font-size:12px;color:var(--tx-3)}
+
+.ck-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-top:26px}
+.ck-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px 20px 16px;
+  display:flex;flex-direction:column;transition:border-color .28s var(--ease),
+  box-shadow .28s var(--ease),transform .28s var(--ease)}
+.ck-card:hover{border-color:var(--border-strong);transform:translateY(-2px);
+  box-shadow:0 16px 40px -26px rgba(20,32,54,.34)}
+.ck-card.on{border-color:var(--blue-100);background:linear-gradient(180deg,var(--blue-50),#fff 62%)}
+.ck-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:11px}
+.ck-k{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--blue-dp);background:var(--blue-50);
+  border-radius:6px;padding:4px 7px}
+.ck-who{font-size:11.5px;color:var(--tx-3);letter-spacing:-.005em}
+.ck-card h4{margin:0 0 9px;font-size:17.5px;line-height:1.22;letter-spacing:-.024em;
+  font-weight:700;color:var(--tx)}
+.ck-what{margin:0 0 12px;font-size:13.5px;line-height:1.58;color:var(--tx-2)}
+.ck-means{margin:0 0 16px;font-size:12.8px;line-height:1.55;color:var(--tx-2);
+  padding-left:12px;border-left:2px solid var(--gold)}
+.ck-means span{display:block;font-family:var(--mono);font-size:9.5px;font-weight:800;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dp);margin-bottom:5px}
+.ck-act{margin-top:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ck-open{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
+  color:#fff;background:var(--tx);border-radius:10px;padding:9px 14px;
+  transition:background .2s var(--ease)}
+.ck-open:hover{background:#000}
+.ck-mark{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);
+  font-size:12.5px;font-weight:600;color:var(--tx-2);background:transparent;
+  border:1px solid var(--border-strong);border-radius:10px;padding:9px 13px;
+  transition:all .2s var(--ease)}
+.ck-mark:hover{color:var(--tx);border-color:var(--tx-3)}
+.ck-card.on .ck-mark{color:var(--ok);border-color:rgba(14,138,95,.42);background:rgba(14,138,95,.07)}
+
+.ck-rec{margin-top:34px;border:1px solid var(--blue-100);border-radius:22px;
+  background:linear-gradient(160deg,var(--blue-50),#fff 58%);padding:34px}
+.ck-rec h3{margin:0 0 12px;font-size:clamp(22px,2.4vw,30px);line-height:1.12;
+  letter-spacing:-.03em;color:var(--tx)}
+.ck-rec p{margin:0 0 22px;max-width:660px;font-size:14.8px;line-height:1.64;color:var(--tx-2)}
+.ck-recline{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;background:#fff;
+  border:1px solid var(--border);border-radius:14px;padding:15px 18px;margin-bottom:24px}
+.ck-rt{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--tx-3);flex:none}
+.ck-rd{font-size:13.5px;color:var(--tx);font-weight:500}
+
+.ck-demo{border:1px solid var(--border);border-radius:22px;background:#fff;padding:32px;
+  box-shadow:0 22px 60px -34px rgba(20,32,54,.34)}
+.ck-demo.ok  {border-top:3px solid var(--ok)}
+.ck-demo.warn{border-top:3px solid var(--gold-dp)}
+.ck-demo.bad {border-top:3px solid var(--bad)}
+.ck-dh h3{margin:0 0 8px;font-size:clamp(22px,2.4vw,30px);line-height:1.12;letter-spacing:-.03em}
+.ck-verdict{margin:0 0 22px;font-size:15.5px;font-weight:600;color:var(--tx-2)}
+.ck-lines{display:flex;flex-direction:column;gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.ck-line{display:grid;grid-template-columns:150px 1fr;gap:18px;background:#fff;padding:14px 18px}
+.ck-lk{font-family:var(--mono);font-size:10.5px;font-weight:800;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--tx-3);padding-top:2px}
+.ck-lv{font-size:13.8px;line-height:1.56;color:var(--tx)}
+.ck-line.ok   .ck-lk{color:var(--ok)}
+.ck-line.warn .ck-lk{color:var(--warn)}
+.ck-line.bad  .ck-lk{color:var(--bad)}
+.ck-line.note{background:var(--bg-2)}
+.ck-line.note .ck-lv{color:var(--tx-2)}
+.ck-dfoot{margin:20px 0 0;font-size:12.8px;line-height:1.6;color:var(--tx-3);max-width:640px}
+.ck-back{margin-top:20px;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;
+  color:var(--tx-2);background:transparent;border:1px solid var(--border-strong);
+  border-radius:10px;padding:9px 15px;transition:all .2s var(--ease)}
+.ck-back:hover{color:var(--tx);border-color:var(--tx-3)}
+
+@media (max-width:640px){
+  .ck-row{flex-direction:column;padding:14px;border-radius:16px}
+  .ck-row input{padding:4px 4px 12px}
+  .ck-row button{padding:13px 22px;justify-content:center}
+  .ck-head{align-items:flex-start}
+  .ck-meter{min-width:100%}
+  .ck-grid{grid-template-columns:1fr}
+  .ck-rec,.ck-demo{padding:24px}
+  .ck-line{grid-template-columns:1fr;gap:6px}
+}

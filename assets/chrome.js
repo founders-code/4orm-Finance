@@ -10,9 +10,9 @@
 var EMAIL = 'office@4ormfinance.com';
 
 var VIEWS = [
-  { label: 'Personal',     href: '/#personal' },
-  { label: 'Professional', href: '/#professional' },
-  { label: 'Regulator',    href: '/#regulator' }
+  { label: 'Personal',     href: '/#personal',     v: 'personal' },
+  { label: 'Professional', href: '/#professional', v: 'professional' },
+  { label: 'Regulator',    href: '/#regulator',    v: 'regulator' }
 ];
 
 var INDUSTRIES = [
@@ -30,6 +30,7 @@ var MORE = [
   { label: 'Why it is hard',href: '/the-problem',   slug: 'problem' },
   { label: 'What we do',    href: '/what-we-do',    slug: 'what' },
   { label: 'Who it is for', href: '/who-it-is-for', slug: 'who' },
+  { label: 'Check a firm',  href: '/check-a-firm',  slug: 'check' },
   { label: 'Team',          href: '/team',          slug: 'team' }
 ];
 
@@ -58,7 +59,7 @@ function buildNav() {
     '<div class="nav-in">' +
       '<a class="nav-brand" href="/" aria-label="4orm home"><img src="/assets/logo.png" alt="4orm" /></a>' +
       '<nav class="nav-links" aria-label="Primary">' +
-        VIEWS.map(function (v) { return '<a href="' + v.href + '">' + v.label + '</a>'; }).join('') +
+        VIEWS.map(function (v) { return '<a href="' + v.href + '" data-navview="' + v.v + '">' + v.label + '</a>'; }).join('') +
         '<span class="navdrop" id="navdrop">' +
           '<button type="button" aria-expanded="false" aria-haspopup="true"' +
             (industryOn ? ' aria-current="true"' : '') + '>Industries ' + CHEV + '</button>' +
@@ -66,7 +67,7 @@ function buildNav() {
         '</span>' +
         '<a href="/team"' + (page === 'team' ? ' aria-current="page"' : '') + '>About</a>' +
       '</nav>' +
-      '<a class="nav-cta" href="/contact">Experience 4orm <span class="cir">' + ARROW + '</span></a>' +
+      '<a class="nav-cta" href="/#stage">Form your experience. <span class="cir">' + ARROW + '</span></a>' +
       '<button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false">' +
         '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
     '</div>';
@@ -76,7 +77,7 @@ function buildNav() {
     '<div class="mg">Views</div>' + VIEWS.map(function (v) { return '<a href="' + v.href + '">' + v.label + '</a>'; }).join('') +
     '<div class="mg">Industries</div>' + INDUSTRIES.map(link).join('') +
     '<div class="mg">More</div>' + MORE.map(link).join('') +
-    '<a href="/contact" style="color:#7BA6FF;font-weight:650">Experience 4orm</a>';
+    '<a href="/contact" style="color:#7BA6FF;font-weight:650">Talk to us</a>';
 
   wrap.appendChild(h); wrap.appendChild(mob);
   return wrap;

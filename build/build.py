@@ -7,7 +7,7 @@ import kit, pkit, shim
 REAL_KIT = kit                     # keep a handle before the swap
 
 CARRIED = ["p_hub", "p_real_estate", "p_payments", "p_credit_unions", "p_insurance", "p_law_firms"]
-AUTHORED = ["p_home", "p_passport", "p_rules", "p_hard", "p_whatwedo", "p_mortgage", "p_team", "p_contact", "p_legal"]
+AUTHORED = ["p_home", "p_passport", "p_rules", "p_hard", "p_whatwedo", "p_mortgage", "p_check", "p_team", "p_contact", "p_legal"]
 
 hard, soft, built = [], [], []
 
