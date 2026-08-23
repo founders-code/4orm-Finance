@@ -30,6 +30,31 @@ wash. The nav is a floating dark pill, which is how the first demo carried the
 logo, so your existing white wordmark reads with no new asset. **No brand asset
 was generated, traced, recoloured or placeheld.**
 
+## The hero and the focus mode
+
+The hero is the split headline, raised and enlarged, with the brand verb
+under each side:
+
+    You                            Your firm
+    Know before you decide.        Prove what happened after.
+    Form your discovery.           Form your evidence.
+
+The "One transaction, three views" eyebrow is gone. The four promises that
+used to sit under it now sit **below** the phone, numbered, because they
+happen in that order: ask, check, understand, connect.
+
+**Tap the phone and the room steps back.** It translates to the centre of
+the viewport, a cool grey scrim fades up, and two halos breathe behind it on
+an 8.5 second loop. Escape or a tap outside leaves.
+
+The lights come back up at the handoff. The moment the consumer shares with
+a professional, focus releases, because somebody else is involved now and
+the professional panel beside the phone has to have somewhere to land. Focus
+is a narrative device, not a mode you sit in.
+
+Below 900px the phone does not translate. The page scrolls it to centre
+first, then locks.
+
 ## index.html, the experience
 
 Two levels of navigation, exactly the hierarchy you described.

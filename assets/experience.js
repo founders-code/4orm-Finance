@@ -463,6 +463,8 @@ document.addEventListener('click', function (e) {
   if (a === 'share') {
     S.shared = true;
     addEvent('Passport shared with ' + I().proName, 'PERMISSION GRANTED \u00b7 SCOPED \u00b7 WITHDRAWABLE', true);
+    /* somebody else is involved now, so the room comes back */
+    focusLeave();
     setView('professional');
     return;
   }
@@ -507,6 +509,74 @@ function initReveal() {
   els.forEach(function (e) { io.observe(e); });
 }
 
+
+/* ============================================================
+   Focus mode
+   Tap the phone and the room steps back. The lights come up
+   again at the handoff, so the professional panel has somewhere
+   to land.
+   ============================================================ */
+var FOCUS = { on: false };
+
+function focusPlace() {
+  var w = document.getElementById('phoneW');
+  if (!w) return;
+  if (!FOCUS.on || window.innerWidth <= 900) { w.style.transform = ''; return; }
+  w.style.transform = '';
+  var r = w.getBoundingClientRect();
+  var dx = (window.innerWidth / 2) - (r.left + r.width / 2);
+  var dy = (window.innerHeight / 2) - (r.top + r.height / 2);
+  w.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(1.05)';
+}
+
+function focusEnter() {
+  if (FOCUS.on) return;
+  var w = document.getElementById('phoneW'), sc = document.getElementById('scrim'),
+      t = document.getElementById('tapin');
+  if (!w || !sc) return;
+  FOCUS.on = true;
+  if (window.innerWidth <= 900) {
+    /* narrow screens cannot translate the phone anywhere useful, so bring the
+       page to it before the scroll lock goes on */
+    var r0 = w.getBoundingClientRect();
+    window.scrollTo({ top: r0.top + window.pageYOffset - (window.innerHeight - r0.height) / 2,
+                      behavior: 'smooth' });
+    setTimeout(function () { document.body.classList.add('infocus'); }, 460);
+  } else {
+    document.body.classList.add('infocus');
+  }
+  w.classList.add('focused');
+  sc.classList.add('on');
+  focusPlace();
+  if (t) t.textContent = 'Tap outside to leave';
+}
+
+function focusLeave() {
+  if (!FOCUS.on) return;
+  var w = document.getElementById('phoneW'), sc = document.getElementById('scrim'),
+      t = document.getElementById('tapin');
+  FOCUS.on = false;
+  if (w) { w.classList.remove('focused'); w.style.transform = ''; }
+  if (sc) sc.classList.remove('on');
+  document.body.classList.remove('infocus');
+  if (t) t.textContent = 'Tap to enter';
+}
+
+function initFocus() {
+  var w = document.getElementById('phoneW'), sc = document.getElementById('scrim');
+  if (!w || !sc) return;
+  w.addEventListener('click', function (e) {
+    if (FOCUS.on) return;
+    /* entering is the whole gesture; do not also fire the control underneath */
+    if (e.target.closest('[data-act]') || e.target.closest('button')) return;
+    focusEnter();
+  });
+  sc.addEventListener('click', focusLeave);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') focusLeave(); });
+  window.addEventListener('resize', focusPlace);
+  window.addEventListener('scroll', function () { if (FOCUS.on) focusPlace(); }, { passive: true });
+}
+
 function boot() {
   var h = (location.hash || '').replace('#', '');
   if (h === 'personal' || h === 'professional' || h === 'regulator') S.view = h;
@@ -514,6 +584,7 @@ function boot() {
   renderPhone();
   renderRail();
   initReveal();
+  initFocus();
   requestAnimationFrame(movePip);
   window.addEventListener('resize', movePip);
 }

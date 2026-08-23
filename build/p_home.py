@@ -10,8 +10,9 @@ def build():
     with open(os.path.join(_C, "home-body.html"), encoding="utf-8") as f:
         body = f.read()
     # the shared chrome supplies the nav and footer, so drop the standalone ones
-    body = body.split('<section class="hero">', 1)
-    body = '<section class="hero">' + body[1]
+    i = body.find('<section class="hero')
+    if i > 0:
+        body = body[i:]
     yield kit.write(
         "home", "/",
         "Know before you decide. Prove what happened after.",

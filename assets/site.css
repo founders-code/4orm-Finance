@@ -833,3 +833,85 @@ p{margin:0}
   .ck-rec,.ck-demo{padding:24px}
   .ck-line{grid-template-columns:1fr;gap:6px}
 }
+
+/* ============================================================
+   Hero, second pass: bigger, higher, with the brand verb
+   ============================================================ */
+.hero.tight{padding-top:126px}
+.hero.tight .split-h{margin-top:8px}
+.split-h h1{font-size:clamp(33px,4.5vw,60px)}
+.sh-form{display:block;margin-top:14px;font-size:clamp(14px,1.35vw,17.5px);
+  font-weight:600;letter-spacing:-.018em;color:var(--tx-3)}
+.sh-form.b{color:var(--blue)}
+.sh-you .sh-form{text-align:right}
+.sh-them .sh-form{text-align:left}
+@media (max-width:900px){
+  .hero.tight{padding-top:112px}
+  .sh-you .sh-form,.sh-them .sh-form{text-align:center}
+}
+
+/* ============================================================
+   The four promises, under the phone
+   ============================================================ */
+.fours{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-top:1px solid var(--border)}
+.four{padding:30px 26px 6px;border-right:1px solid var(--border)}
+.four:last-child{border-right:0}
+.four .fn{display:block;font-family:var(--mono);font-size:11px;font-weight:800;
+  letter-spacing:.16em;color:var(--gold-dp);margin-bottom:14px}
+.four h3{margin:0 0 10px;font-size:18px;line-height:1.22;letter-spacing:-.026em;
+  font-weight:700;color:var(--tx);text-wrap:balance}
+.four p{margin:0;font-size:13.6px;line-height:1.6;color:var(--tx-2)}
+@media (max-width:1080px){
+  .fours{grid-template-columns:repeat(2,1fr)}
+  .four:nth-child(2n){border-right:0}
+  .four:nth-child(-n+2){border-bottom:1px solid var(--border);padding-bottom:26px}
+}
+@media (max-width:620px){
+  .fours{grid-template-columns:1fr}
+  .four{border-right:0;border-bottom:1px solid var(--border);padding:26px 0}
+  .four:last-child{border-bottom:0}
+}
+
+/* ============================================================
+   Focus mode: tap the phone, the room steps back
+   ============================================================ */
+.scrim{position:fixed;inset:0;z-index:180;opacity:0;pointer-events:none;
+  transition:opacity .62s var(--ease);
+  background:radial-gradient(1200px 980px at 50% 48%,
+    rgba(238,243,250,.52), rgba(150,165,188,.60) 46%,
+    rgba(74,88,112,.72) 78%, rgba(46,58,80,.80) 100%);
+  backdrop-filter:blur(3px) saturate(.88)}
+.scrim.on{opacity:1;pointer-events:auto;cursor:zoom-out}
+.scrim::after{content:'';position:absolute;left:50%;top:50%;width:1320px;height:1320px;
+  margin:-660px 0 0 -660px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle, rgba(226,236,250,.62), rgba(206,222,244,.24) 42%,
+             rgba(206,222,244,0) 68%);
+  animation:breathe 8.5s cubic-bezier(.42,0,.58,1) infinite}
+.scrim::before{content:'';position:absolute;left:50%;top:50%;width:820px;height:820px;
+  margin:-410px 0 0 -410px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle, rgba(255,255,255,.34), rgba(255,255,255,0) 66%);
+  animation:breathe 8.5s cubic-bezier(.42,0,.58,1) infinite reverse}
+@keyframes breathe{
+  0%,100%{transform:scale(.90);opacity:.50}
+  50%    {transform:scale(1.10);opacity:1}}
+
+body.infocus{overflow:hidden}
+body.infocus .stage{z-index:300}
+.phone-w{transition:transform .78s var(--spring)}
+.phone-w.focused{z-index:200}
+.phone-w.focused .lines{opacity:0;transition:opacity .4s var(--ease)}
+.tapin{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);
+  font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--tx-3);opacity:0;white-space:nowrap;
+  pointer-events:none;transition:opacity .4s var(--ease),color .4s var(--ease)}
+.phone-w:hover .tapin{opacity:1}
+.phone-w.focused .tapin{opacity:1;color:rgba(255,255,255,.7)}
+@media (prefers-reduced-motion:reduce){
+  .scrim::after,.scrim::before{animation:none}
+  .phone-w{transition:none}
+}
+@media (max-width:900px){
+  .phone-w.focused{transform:none !important}
+  .tapin{display:none}
+}
