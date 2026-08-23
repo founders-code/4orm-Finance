@@ -11,8 +11,7 @@ var EMAIL = 'office@4ormfinance.com';
 
 var VIEWS = [
   { label: 'Personal',     href: '/#personal',     v: 'personal' },
-  { label: 'Professional', href: '/#professional', v: 'professional' },
-  { label: 'Regulator',    href: '/#regulator',    v: 'regulator' }
+  { label: 'Professional', href: '/#professional', v: 'professional' }
 ];
 
 var INDUSTRIES = [
@@ -46,7 +45,54 @@ function link(l) {
   return '<a href="' + l.href + '"' + (l.slug === page ? ' aria-current="page"' : '') + '>' + l.label + '</a>';
 }
 
+function buildAtmos() {
+  /* Depth for the whole site: three enormous slow lights and a field of
+     dust behind them. Injected once, before anything else paints. */
+  if (document.getElementById('atmos')) return;
+  var a = el('div', 'aurora'); a.setAttribute('aria-hidden', 'true');
+  a.innerHTML = '<i></i><i></i><i></i>';
+  var c = document.createElement('canvas');
+  c.id = 'atmos'; c.setAttribute('aria-hidden', 'true');
+  document.body.insertBefore(a, document.body.firstChild);
+  document.body.insertBefore(c, document.body.firstChild);
+}
+
+function buildBareNav() {
+  /* The first screen is the headline and the split and almost nothing else.
+     Two corners, no navigation bar. */
+  var wrap = el('div');
+  var h = el('header', 'nav nav-bare');
+  h.innerHTML =
+    '<div class="nav-in">' +
+      '<a class="bare-brand" href="/" aria-label="4orm Finance home">' +
+        '<span class="bb-1">4orm</span><span class="bb-2">FINANCE</span></a>' +
+      '<button class="bare-menu" id="burger" type="button" aria-expanded="false" ' +
+        'aria-controls="mobnav" aria-label="Open the menu">' +
+        '4orm your experience <span class="bm-i" aria-hidden="true">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+        'stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
+        '</span></button>' +
+    '</div>';
+  wrap.appendChild(h);
+  wrap.appendChild(buildMobNav());
+  return wrap;
+}
+
+function buildMobNav() {
+  var mob = el('div', 'mobnav'); mob.id = 'mobnav';
+  mob.innerHTML =
+    '<div class="mg">Experience</div>' +
+      VIEWS.map(function (v) { return '<a href="' + v.href + '">' + v.label + '</a>'; }).join('') +
+      '<a href="/check-a-firm">Check a firm</a>' +
+    '<div class="mg">Explore 4orm</div>' + MORE.map(link).join('') +
+    '<div class="mg">Industries</div>' + INDUSTRIES.map(link).join('') +
+    '<a href="/contact" style="color:#7BA6FF;font-weight:650">Talk to us</a>';
+  return mob;
+}
+
 function buildNav() {
+  if (page === 'home') return buildBareNav();
+
   var wrap = el('div');
   var industryOn = INDUSTRIES.some(function (i) { return i.slug === page; });
 
@@ -62,7 +108,7 @@ function buildNav() {
         VIEWS.map(function (v) { return '<a href="' + v.href + '" data-navview="' + v.v + '">' + v.label + '</a>'; }).join('') +
         '<span class="navdrop" id="navdrop">' +
           '<button type="button" aria-expanded="false" aria-haspopup="true"' +
-            (industryOn ? ' aria-current="true"' : '') + '>Industries ' + CHEV + '</button>' +
+            (industryOn ? ' aria-current="true"' : '') + '>Explore ' + CHEV + '</button>' +
           '<span class="navmenu" role="menu">' + menu + '</span>' +
         '</span>' +
         '<a href="/team"' + (page === 'team' ? ' aria-current="page"' : '') + '>About</a>' +
@@ -72,14 +118,7 @@ function buildNav() {
         '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
     '</div>';
 
-  var mob = el('div', 'mobnav'); mob.id = 'mobnav';
-  mob.innerHTML =
-    '<div class="mg">Views</div>' + VIEWS.map(function (v) { return '<a href="' + v.href + '">' + v.label + '</a>'; }).join('') +
-    '<div class="mg">Industries</div>' + INDUSTRIES.map(link).join('') +
-    '<div class="mg">More</div>' + MORE.map(link).join('') +
-    '<a href="/contact" style="color:#7BA6FF;font-weight:650">Talk to us</a>';
-
-  wrap.appendChild(h); wrap.appendChild(mob);
+  wrap.appendChild(h); wrap.appendChild(buildMobNav());
   return wrap;
 }
 
@@ -224,6 +263,7 @@ function initReady() {
 }
 
 function boot() {
+  buildAtmos();
   mount('nav-mount', buildNav());
   mount('foot-mount', buildFooter());
   initNav(); initReveal(); initSeg(); initBars(); initCounters(); initCheck(); initReady();

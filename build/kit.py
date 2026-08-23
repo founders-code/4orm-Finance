@@ -51,7 +51,8 @@ HEAD = """<!doctype html>
 {body}
 </main>
 <div id="foot-mount"></div>
-<script src="/assets/chrome.js?v={v}" defer></script>{extra}
+<script src="/assets/chrome.js?v={v}" defer></script>
+<script src="/assets/atmos.js?v={v}" defer></script>{extra}
 </body>
 </html>
 """

@@ -72,7 +72,9 @@ var S = {
   changed: false,
   alertOpen: false,
   resolved: null,
-  packOpen: false
+  packOpen: false,
+  name: 'Sarah',
+  named: true
 };
 
 var VIEWSUB = {
@@ -137,24 +139,68 @@ function opt(label, action, arg, done) {
     '<span>' + label + '</span><span class="ch">' + (done ? '&#10003;' : CHEV) + '</span></button>';
 }
 
+/* ------------------------------------------------------------
+   The visitor's own name
+   The demo is about their decision, so it carries their name
+   rather than a stranger's. Held in memory only: nothing is
+   stored, sent or remembered after the tab closes.
+   ------------------------------------------------------------ */
+function who()  { return S.name || 'you'; }
+function whoP() { return (S.name || 'Your') + '’s'; }
+
+function cleanName(v) {
+  v = String(v || '').replace(/\s+/g, ' ').trim().slice(0, 24);
+  /* letters, spaces, apostrophes and hyphens: a name, not markup */
+  v = v.replace(/[^\p{L}\p{M}'’ .-]/gu, '');
+  if (!v) return '';
+  return v.charAt(0).toUpperCase() + v.slice(1);
+}
+
+function nameScreen() {
+  return '<div class="greet">First, what should I call you?' +
+           '<span>It is only used to make this yours. Nothing is stored or sent.</span></div>' +
+         '<form class="namef" id="namef" autocomplete="off">' +
+           '<input id="namei" type="text" maxlength="24" placeholder="Your first name" ' +
+             'aria-label="Your first name" enterkeyhint="go" />' +
+           '<button type="submit" aria-label="Continue">' +
+             '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+             'stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">' +
+             '<path d="M5 12h14M13 5l7 7-7 7"/></svg></button>' +
+         '</form>' +
+         '<button class="skipname" type="button" data-act="skipname">Skip this</button>';
+}
+
+function wireName() {
+  var f = document.getElementById('namef'), i = document.getElementById('namei');
+  if (!f || !i) return;
+  setTimeout(function () { i.focus({ preventScroll: true }); }, 260);
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    S.name = cleanName(i.value);
+    S.named = true;
+    renderPhone(); renderRail();
+  });
+}
+
 function renderPhone() {
   var b = $('#phBody'), t = $('#phTitle'), s = $('#phSub');
   if (!b) return;
 
   if (S.view === 'professional') {
-    t.textContent = 'Sarah\u2019s 4orm';
+    t.textContent = whoP() + ' 4orm';
     s.textContent = S.changed ? 'Something needs your attention' : 'Shared with ' + I().proName;
     b.innerHTML = S.changed ? phoneAlert() : phoneShared();
     return;
   }
 
-  t.textContent = 'Sarah\u2019s 4orm';
+  t.textContent = whoP() + ' 4orm';
   s.textContent = ['Before a mortgage professional exists', 'Understanding the decision',
                    'Understanding the decision', 'Getting ready'][Math.min(S.step, 3)];
 
   var h = '';
   if (S.step === 0) {
-    h += '<div class="greet">Good afternoon, Sarah.<span>What are you thinking about?</span></div>';
+    h += '<div class="greet">Good afternoon, ' + who() + '.' +
+         '<span>What are you thinking about?</span></div>';
     h += I().goals.map(function (g) { return opt(g, 'goal', g); }).join('');
     h += '<div class="ask"><span class="dot"></span>Ask 4orm anything about your decision</div>';
   } else if (S.step === 1) {
@@ -279,7 +325,7 @@ function railProfessional() {
     '</div>' +
     '<div class="pro-h" style="border-bottom:0;padding-bottom:14px">' +
       '<div class="who"><span class="av" style="background:#5E6E88">SM</span>' +
-      '<div><div class="wn">Sarah Mitchell</div><div class="ws">Received prepared \u00b7 ' + I().tx + '</div></div></div>' +
+      '<div><div class="wn">' + who() + '</div><div class="ws">Received prepared \u00b7 ' + I().tx + '</div></div></div>' +
       '<span class="chip c-ok"><span class="d"></span>Consent active</span>' +
     '</div>' +
     '<div class="facts">' +
@@ -314,7 +360,7 @@ function appline(k, v, hit) {
 }
 
 var TIMELINE = [
-  ['14 Feb 2026 \u00b7 19:02', 'Sarah opens 4orm. No professional involved.', 'key'],
+  ['14 Feb 2026 \u00b7 19:02', who() + ' opens 4orm. No professional involved.', 'key'],
   ['14 Feb 2026 \u00b7 19:12', 'Financial passport created', ''],
   ['21 Feb 2026 \u00b7 10:19', 'Identity verified', ''],
   ['23 Feb 2026 \u00b7 18:05', 'Financial information verified', ''],
@@ -464,6 +510,8 @@ document.addEventListener('click', function (e) {
   var _lure = document.getElementById('lure');
   if (_lure) _lure.classList.add('gone');
 
+  if (a === 'skipname') { S.named = true; S.name = ''; renderPhone(); renderRail(); return; }
+
   if (a === 'share') {
     S.shared = true;
     addEvent('Passport shared with ' + I().proName, 'PERMISSION GRANTED \u00b7 SCOPED \u00b7 WITHDRAWABLE', true);
@@ -515,17 +563,50 @@ function initReveal() {
 
 
 /* ============================================================
-   Focus mode
-   Tap the phone and the room steps back. The lights come up
-   again at the handoff, so the professional panel has somewhere
-   to land.
+   Product Mode
+   Before pickup the phone is a physical object: a restrained
+   cursor tilt, nothing more. On pickup the website goes to
+   true black and the phone is the only lit thing left.
    ============================================================ */
-var FOCUS = { on: false };
+var FOCUS = { on: false, lastActive: null, tilt: true };
+
+function phoneEl() { return document.getElementById('phoneW'); }
+
+/* ---- before pickup: the object responds, the controls do not ---- */
+function initTilt() {
+  var w = phoneEl();
+  if (!w) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
+
+  var raf = 0, tx = 0, ty = 0;
+  function apply() {
+    raf = 0;
+    if (FOCUS.on) return;
+    w.style.transform = 'perspective(1600px) rotateY(' + tx + 'deg) rotateX(' + ty + 'deg)';
+  }
+  window.addEventListener('mousemove', function (e) {
+    if (FOCUS.on || !FOCUS.tilt) return;
+    var r = w.getBoundingClientRect();
+    if (!r.width) return;
+    var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    /* 3 degrees at the edge of a comfortable radius, and no more */
+    tx = Math.max(-3, Math.min(3, (e.clientX - cx) / 260));
+    ty = Math.max(-3, Math.min(3, (cy - e.clientY) / 320));
+    if (!raf) raf = requestAnimationFrame(apply);
+  }, { passive: true });
+  window.addEventListener('mouseleave', function () {
+    if (FOCUS.on) return;
+    tx = 0; ty = 0;
+    if (!raf) raf = requestAnimationFrame(apply);
+  });
+}
 
 function focusPlace() {
-  var w = document.getElementById('phoneW');
+  var w = phoneEl();
   if (!w) return;
-  if (!FOCUS.on || window.innerWidth <= 900) { w.style.transform = ''; return; }
+  if (!FOCUS.on) { w.style.transform = ''; return; }
+  if (window.innerWidth <= 900) { w.style.transform = ''; return; }
   w.style.transform = '';
   var r = w.getBoundingClientRect();
   var dx = (window.innerWidth / 2) - (r.left + r.width / 2);
@@ -533,15 +614,32 @@ function focusPlace() {
   w.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(1.05)';
 }
 
+/* ---- keyboard stays inside the phone while it is in hand ---- */
+function trapKeys(e) {
+  if (!FOCUS.on || e.key !== 'Tab') return;
+  var root = document.getElementById('stage');
+  if (!root) return;
+  var f = [].slice.call(root.querySelectorAll(
+    'button:not([disabled]), a[href], input, [tabindex]:not([tabindex="-1"])'
+  )).filter(function (el) { return el.offsetParent !== null; });
+  var away = document.getElementById('putaway');
+  if (away) f.unshift(away);
+  if (!f.length) return;
+  var first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+}
+
 function focusEnter() {
   if (FOCUS.on) return;
-  var w = document.getElementById('phoneW'), sc = document.getElementById('scrim'),
-      lure = document.getElementById('lure');
+  var w = phoneEl(), sc = document.getElementById('scrim'),
+      lure = document.getElementById('lure'), away = document.getElementById('putaway');
   if (!w || !sc) return;
+
+  FOCUS.lastActive = document.activeElement;
   FOCUS.on = true;
+
   if (window.innerWidth <= 900) {
-    /* narrow screens cannot translate the phone anywhere useful, so bring the
-       page to it before the scroll lock goes on */
     var r0 = w.getBoundingClientRect();
     window.scrollTo({ top: r0.top + window.pageYOffset - (window.innerHeight - r0.height) / 2,
                       behavior: 'smooth' });
@@ -549,41 +647,53 @@ function focusEnter() {
   } else {
     document.body.classList.add('infocus');
   }
+
   w.classList.add('focused');
   sc.classList.add('on');
   if (lure) lure.classList.add('gone');
+  if (away) away.hidden = false;
+  var scr = document.getElementById('screen');
+  if (scr) setTimeout(function () { scr.focus({ preventScroll: true }); }, 620);
   focusPlace();
+  document.addEventListener('keydown', trapKeys, true);
 }
 
 function focusLeave() {
   if (!FOCUS.on) return;
-  var w = document.getElementById('phoneW'), sc = document.getElementById('scrim');
+  var w = phoneEl(), sc = document.getElementById('scrim'),
+      away = document.getElementById('putaway');
   FOCUS.on = false;
   if (w) { w.classList.remove('focused'); w.style.transform = ''; }
   if (sc) sc.classList.remove('on');
+  if (away) away.hidden = true;
   document.body.classList.remove('infocus');
+  document.removeEventListener('keydown', trapKeys, true);
+  /* the page comes back exactly as it was, including where the visitor was */
+  if (FOCUS.lastActive && FOCUS.lastActive.focus) FOCUS.lastActive.focus();
 }
 
 function initFocus() {
-  var w = document.getElementById('phoneW'), sc = document.getElementById('scrim');
+  var w = phoneEl(), sc = document.getElementById('scrim');
   if (!w || !sc) return;
+
   w.addEventListener('click', function (e) {
     if (FOCUS.on) return;
-    /* entering is the whole gesture; do not also fire the control underneath */
     if (e.target.closest('[data-act]') || e.target.closest('button')) return;
     focusEnter();
   });
+
   var lure = document.getElementById('lure');
-  if (lure) {
-    lure.addEventListener('click', function (e) {
-      e.stopPropagation();
-      focusEnter();
-    });
-  }
+  if (lure) lure.addEventListener('click', function (e) { e.stopPropagation(); focusEnter(); });
+
+  var away = document.getElementById('putaway');
+  if (away) away.addEventListener('click', function (e) { e.stopPropagation(); focusLeave(); });
+
   sc.addEventListener('click', focusLeave);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') focusLeave(); });
   window.addEventListener('resize', focusPlace);
   window.addEventListener('scroll', function () { if (FOCUS.on) focusPlace(); }, { passive: true });
+
+  initTilt();
 }
 
 function boot() {

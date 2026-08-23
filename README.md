@@ -30,6 +30,57 @@ wash. The nav is a floating dark pill, which is how the first demo carried the
 logo, so your existing white wordmark reads with no new asset. **No brand asset
 was generated, traced, recoloured or placeheld.**
 
+## The master specification build
+
+`4orm_Master_Website_UX_Relationship_Integrity_Rebuild` is now the source of
+truth. Phases 1, 2 and 8 of its build sequence are in, plus the positioning
+change that runs through everything.
+
+**The thesis changed.** The company headline is now *Better financial
+decisions start with better relationships.* YOUR FIRM changed from "Prove
+what happened after" to **Protect the relationship. Prove the work.**
+
+**The regulator left the consumer experience.** Not in the nav, not in the
+hero, not in the phone, not in the rings. It survives as institutional proof
+on the pages where the FSRA and FCAC language does the work. This is the
+doc's rule and it reverses an earlier decision.
+
+**The first screen strips down.** Two corners: the wordmark left, "4orm your
+experience" right. No navigation bar. The mark, the headline, the split, and
+the phone below it. Every other page keeps the dark pill.
+
+**Product Mode is true black.** Picking up the phone takes the site to
+#000000, not a grey overlay. One control above it: Put phone away. Keyboard
+focus is trapped and returned. The page comes back exactly as it was.
+
+**Atmosphere.** Three enormous lights drift on 66 to 94 second loops, and a
+deterministic dust field drifts behind everything. On white it is the
+faintest grey; inside Product Mode it becomes starlight. The relationship
+line carries one slow pulse of blue.
+
+**The proof strip** carries four numbers, each linked to its primary source
+and each verified against that source before it went on the page.
+
+### Verified, not transcribed
+
+    $704M / 112,000 reports   Canadian Anti-Fraud Centre, 2025      confirmed
+    47% uncertain             CMHC 2026 Mortgage Consumer Survey    confirmed
+    100% no suitability doc   FSRA supervision plan 2025 to 2026    confirmed
+    73% / 65% disclosure      FSRA, same sample                     confirmed
+    4.4 years to save         CMHC 2026                             confirmed
+
+Two corrections to the source document. The 47% is **down** from 62% the year
+before, so it cannot be framed as rising, and the page says so. The 16%
+figure about model tooling in mortgage research cannot appear on this site at
+all: no screen mentions that technology.
+
+### Still to build
+
+Phases 3 to 7 and 9 to 10 of the master sequence: the human-sentence first
+screen inside the phone, the Relationship Integrity view for firms, the
+4orm Standard, the evidence gap systems map, State of Financial Trust,
+Integrations, Security and Privacy, How 4orm works, and Company.
+
 ## The hero and the focus mode
 
 The hero is the split headline, raised and enlarged, with the brand verb
