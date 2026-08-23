@@ -109,6 +109,26 @@ market figures, so it needs no disclosure line. The CMHC statistic about
 information seekers is not on the page: I could not verify it, and it is a claim
 about AI use.
 
+## Caching, and the trap that already bit once
+
+`vercel.json` serves `/assets/*` with `max-age=31536000, immutable`. One year, and
+the browser is told never to revalidate. That is correct for performance and
+dangerous with stable filenames: the v7 site shipped `/assets/chrome.js?v=1`, so
+any browser that loaded it holds that file until 2027 and will not ask again.
+
+Two changes stop it recurring.
+
+1. The cache-busting token is now the build date, set in `build/sitekit.py`.
+   Every build stamps a fresh `?v=YYYYMMDD` on `site.css`, `chrome.js` and the
+   mortgage scripts, so a new deploy can never request a URL that is already
+   sitting in somebody's cache.
+2. Everything that is not under `/assets/` now carries
+   `max-age=0, must-revalidate`, so pages are always checked against the server.
+
+If a page ever looks stale again, hard reload once (Cmd+Shift+R) or open it in a
+private window. That distinguishes a cache problem from a deploy problem in about
+five seconds.
+
 ## What is not here
 
 No analytics, no tracking, no cookies, no third-party scripts. The only

@@ -1,9 +1,14 @@
 """4orm Finance site kit. One head, one body shell, thirteen pages."""
-import os, re
+import datetime, os, re
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://www.4ormfinance.com"
-V = "1"
+
+# Asset cache-busting token. /assets/* is served with a one year immutable
+# cache, so a stable filename plus a repeated version string will serve a
+# stale file for a year. This changes on every build date, which makes a
+# collision with anything already in a browser cache impossible.
+V = datetime.date.today().strftime("%Y%m%d")
 
 HEAD = """<!doctype html>
 <html lang="en">

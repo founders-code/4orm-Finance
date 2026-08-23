@@ -41,8 +41,9 @@ _mbody = _m["body"] + """
 </section>
 """ + _m["tail"]
 out, (h, sf) = sitekit.write("mortgage", "/mortgage", _m["title"], _m["desc"], _mbody,
-                             extra_scripts='\n<script src="/assets/mortgage-data.js?v=1"></script>'
-                                           '\n<script src="/assets/mortgage-demo.js?v=1"></script>')
+                             extra_scripts='\n<script src="/assets/mortgage-data.js?v=%s"></script>'
+                                           '\n<script src="/assets/mortgage-demo.js?v=%s"></script>'
+                                           % (sitekit.V, sitekit.V))
 built.append(out); hard += h; soft += sf
 
 # --- legal pages -------------------------------------------------------------
