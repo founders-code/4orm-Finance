@@ -348,7 +348,9 @@ P["lending"] = dict(
 def page(key, label, path, d):
     S = []
 
-    S.append(sec("The decision", d["h1"].rstrip(',') + " " + d["h1b"],
+    # Never repeat the hero headline as the first section heading. Read one
+    # after the other it sounds like the page stuttered.
+    S.append(sec("The decision", "What is actually being decided.",
         '<div class="dgrid">' +
         duty("What is being decided", d["decision"]) +
         duty("Who oversees it", d["who"]) +
@@ -384,7 +386,7 @@ def build():
         '<span class="d">%s</span><span class="a">&#8594;</span></a>' % (p, lab, P[k]["decision"])
         for k, lab, p, live in IND)
 
-    S = [sec("Seven decisions", "Same relationship. Different decision.",
+    S = [sec("Seven decisions", "Pick the one you are in.",
              '<div class="enav">' + rows + '</div>',
              p="A mortgage, a vehicle, a policy, a portfolio, an account, a loan, a home. Different "
                "products, different regulators, different rulebooks. The same person, trying to "

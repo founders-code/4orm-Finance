@@ -12,7 +12,7 @@ from pkit import hero, sec, softs, flow, note, cta, duty, timeline, bignums, sou
 def why():
     S = []
 
-    S.append(sec("The gap", "Financial relationships are breaking in the gaps.",
+    S.append(sec("The gap", "Four things going wrong at once.",
         softs([
             ("Confusion", "The person does not understand what they are agreeing to",
              "Nearly half of Canadian homebuyers told CMHC they felt uncertain or concerned during "

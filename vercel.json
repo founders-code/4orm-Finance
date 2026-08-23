@@ -3,6 +3,16 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/4orm-family",
+      "destination": "/company",
+      "permanent": true
+    },
+    {
+      "source": "/4orm-family.html",
+      "destination": "/company",
+      "permanent": true
+    },
+    {
       "source": "/4ormex",
       "destination": "/",
       "permanent": true
@@ -90,6 +100,16 @@
     {
       "source": "/data-room.html",
       "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/explore",
+      "destination": "/home",
+      "permanent": true
+    },
+    {
+      "source": "/explore.html",
+      "destination": "/home",
       "permanent": true
     },
     {
@@ -430,6 +450,16 @@
     {
       "source": "/who-its-for.html",
       "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-are",
+      "destination": "/company",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-are.html",
+      "destination": "/company",
       "permanent": true
     },
     {

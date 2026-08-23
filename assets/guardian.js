@@ -44,7 +44,11 @@ function fresh(ind) {
     perms: [],
     connected: null,
     asked: 0,
-    step: 0
+    step: 0,
+    opened: false,
+    situated: false,
+    awaiting: null,
+    qi: 0
   };
 }
 
@@ -102,6 +106,7 @@ var IND = {
     pro: { n: 'Jordan Wells', r: 'Real Estate Salesperson', f: 'Harbourline Realty' },
     opens: [['list','Sell my home'], ['buy2','Buy a home'], ['rep','Understand representation'],
             ['off','Review an offer']],
+    shallow: 'A representation agreement decides who owes a duty to whom, for how long, and what happens if the same brokerage ends up on both sides.',
     ex: 'I’m about to sign with an agent. I don’t understand what I’m agreeing to, ' +
         'how long it lasts, or what happens if the same brokerage represents the buyer too.'
   },
@@ -112,6 +117,7 @@ var IND = {
     pro: { n: 'Ruth Okafor', r: 'Insurance Agent', f: 'Meridian Insurance' },
     opens: [['life','Life coverage'], ['home','Home and property'], ['claim','Understand a claim'],
             ['rev','Review what I have']],
+    shallow: 'The questions that matter are what is covered, what is excluded, and whether replacing a policy you hold is better for you or better for the person recommending it.',
     ex: 'Someone is recommending I replace a policy I already have. I don’t know whether that ' +
         'is better for me or better for them.'
   },
@@ -122,6 +128,7 @@ var IND = {
     pro: { n: 'Elena Cho', r: 'Investment Advisor', f: 'Kestrel Wealth Partners' },
     opens: [['start','Start investing'], ['move','Move an account'], ['why','Why this recommendation'],
             ['risk','Check my risk profile']],
+    shallow: 'You are entitled to ask why this option and not another, and to get more back than the word suitable.',
     ex: 'My advisor is recommending I move everything into one fund. I asked why and got told it ' +
         'was suitable for me. I would like to understand what else was considered.'
   },
@@ -132,6 +139,7 @@ var IND = {
     pro: { n: 'Tomas Reyes', r: 'Financial Advisor', f: 'Meridian Trust Bank' },
     opens: [['acct','Open an account'], ['credit','A credit product'], ['ins','Creditor insurance'],
             ['fees','Understand my fees']],
+    shallow: 'The bank is the custodian of your money and is running a sales operation on you at the same moment. Both are true at once.',
     ex: 'I went in to open a chequing account and came out with a credit card and insurance on it. ' +
         'I am not sure I needed either of them.'
   },
@@ -142,6 +150,7 @@ var IND = {
     pro: { n: 'Priya Anand', r: 'Lending Specialist', f: 'Northstar Credit' },
     opens: [['need','I need money quickly'], ['consol','Consolidate what I owe'],
             ['cost','What will this cost me'], ['lic','Is this lender licensed']],
+    shallow: 'The number that matters is the total cost of borrowing over the full term, in dollars, not the monthly payment.',
     ex: 'I need $4,000 and the only place that said yes wants a lot back. I do not know if the rate ' +
         'they quoted is even legal.'
   }
@@ -358,65 +367,299 @@ SCREEN.open = function () {
   );
 };
 
-/* --- the conversation ------------------------------------- */
-SCREEN.talk = function () {
-  paint('<div class="gthread" id="gthread">' +
-    ST.thread.map(function (t) {
-      return bubble(t.w, t.h);
-    }).join('') + '</div>');
-  toBottom();
-};
+/* --- the conversation -------------------------------------
 
-function say(who, html, chipList) {
-  ST.thread.push({ w: who, h: html + (chipList ? chips(chipList) : '') });
-  if (ST.screen === 'talk') {
-    var th = $('#gthread');
-    if (th) {
-      var d = document.createElement('div');
-      d.className = 'gb ' + who;
-      d.innerHTML = html + (chipList ? chips(chipList) : '');
-      th.appendChild(d);
-      toBottom();
-    }
-  } else {
-    ST.screen = 'talk';
-    SCREEN.talk();
-  }
+   Everything the Guardian says goes through think(). It never
+   answers instantly, because a considered answer that arrives
+   instantly reads as a lookup table, which is exactly what the
+   old click-face felt like.
+   ----------------------------------------------------------- */
+SCREEN.talk = function () { thread(); };
+
+/* Make sure the thread element exists and holds what has been said.
+   Painting is idempotent, so calling this twice costs nothing. */
+function thread() {
+  var th = $('#gthread');
+  if (th) return th;
+  ST.screen = 'talk';
+  paint('<div class="gthread" id="gthread"></div>');
+  th = $('#gthread');
+  ST.thread.forEach(function (t) {
+    var d = document.createElement('div');
+    d.className = 'gb ' + t.w;
+    d.innerHTML = t.h;
+    th.appendChild(d);
+  });
+  toBottom();
+  return th;
 }
 
-function typing(then) {
-  var th = $('#gthread');
-  if (!th) { then(); return; }
+function push(who, html) {
+  ST.thread.push({ w: who, h: html });
+  var th = thread();
   var d = document.createElement('div');
-  d.className = 'gb g typing';
-  d.innerHTML = '<i></i><i></i><i></i>';
+  d.className = 'gb ' + who;
+  d.innerHTML = html;
   th.appendChild(d);
   toBottom();
-  setTimeout(function () { d.parentNode && d.parentNode.removeChild(d); then(); }, 720);
+  return d;
+}
+
+/* the person */
+function me(text) { return push('me', esc(text)); }
+
+/* the Guardian, always after a beat of thinking */
+function think(html, chipList, ms) {
+  var th = thread();
+  var dots = document.createElement('div');
+  dots.className = 'gb g typing';
+  dots.innerHTML = '<i></i><i></i><i></i>';
+  th.appendChild(dots);
+  toBottom();
+  /* Long answers take longer to arrive, the way they would from a person
+     who was actually reading the question. */
+  var wait = ms || Math.min(1900, 620 + String(html).length * 3.1);
+  setTimeout(function () {
+    if (dots.parentNode) dots.parentNode.removeChild(dots);
+    push('g', html + (chipList && chipList.length ? chips(chipList) : ''));
+  }, wait);
+  return wait;
+}
+
+/* Several Guardian turns in a row, each waiting for the one before it. */
+function thinkSeq(turns) {
+  var t = 0;
+  turns.forEach(function (turn) {
+    setTimeout(function () { think(turn[0], turn[1], turn[2]); }, t);
+    t += (turn[2] || Math.min(1900, 620 + String(turn[0]).length * 3.1)) + 340;
+  });
+  return t;
 }
 
 function ask(q) {
   q = String(q || '').trim();
   if (!q) return;
   ST.asked++;
-  say('me', esc(q));
-  typing(function () {
-    var r = ANSWER(q);
-    say('g', '<p>' + r.a + '</p>' + (r.m ? '<p class="gm">' + r.m + '</p>' : ''), r.c);
-    /* The record has to say what was actually asked. Three identical lines
-       reading "question answered" prove nothing to anybody. */
-    var short = q.length > 58 ? q.slice(0, 55).replace(/\s+\S*$/, '') + '\u2026' : q;
-    evt('Asked: \u201c' + esc(short) + '\u201d',
-        (r === FALLBACK ? 'ANSWERED HONESTLY \u00b7 NO ANSWER GIVEN' : 'ANSWERED \u00b7 BEFORE ANY DECISION'));
-    if (ST.asked === 1) offerPrepare();
-  });
+  me(q);
+
+  /* If the person is answering a question the Guardian asked, that is a
+     different kind of turn from a question of their own. */
+  if (ST.awaiting) {
+    var slot = ST.awaiting;
+    ST.awaiting = null;
+    if (slot.take) { slot.take(q); return; }
+  }
+
+  var r = ANSWER(q);
+  var short = q.length > 58 ? q.slice(0, 55).replace(/\s+\S*$/, '') + '\u2026' : q;
+  evt('Asked: \u201c' + esc(short) + '\u201d',
+      (r === FALLBACK ? 'ANSWERED HONESTLY \u00b7 NO ANSWER GIVEN'
+                      : 'ANSWERED \u00b7 BEFORE ANY DECISION'));
+
+  /* The opening statement is not a question. It is somebody describing their
+     situation, and it deserves to be read back before anything is answered. */
+  if (ST.opened && !ST.situated && DEEP[ST.ind] && q.length > 60) {
+    ST.situated = true;
+    situate(q);
+    return;
+  }
+
+  var w = think('<p>' + r.a + '</p>' + (r.m ? '<p class="gm">' + r.m + '</p>' : ''), r.c);
+  if (ST.asked === 1 && !ST.opened) offerPrepare(w + 700);
 }
 
-function offerPrepare() {
+/* ============================================================
+   The deep arcs.
+
+   Mortgage and auto are modelled all the way through. The other
+   five open, take one turn, and say plainly that they are not
+   built yet rather than pretending.
+   ============================================================ */
+var DEEP = { mortgage: true, auto: true };
+
+/* Read the situation back, then ask the three things that actually
+   change the answer. This is the moment the phone stops feeling like
+   a set of buttons. */
+var SITUATE = {
+  mortgage: {
+    read: '<p>Let me say that back, so you know I have it.</p>' +
+          '<p class="gm">You are looking at homes around <b>$600,000</b>, you earn about ' +
+          '<b>$120,000</b>, you have <b>$35,000</b> saved, and you still have a vehicle payment. ' +
+          'Somebody has told you to get pre-approved and nobody has told you what that means.</p>',
+    then: '<p>A pre-approval is a lender saying, in advance, roughly what they would lend and ' +
+          'holding a rate for a while. It is not a promise to fund, and it is based on what you ' +
+          'have told them before anybody has checked it.</p>' +
+          '<p class="gm">Before you speak to a mortgage professional I can help you understand ' +
+          'the process and get together what you will be asked for. Three things change the ' +
+          'answer more than anything else.</p>',
+    qs: [
+      { k: 'incomeKind', q: 'First &mdash; is that $120,000 salary, or does it move?',
+        chips: ['Salary, steady', 'It varies'],
+        take: function (a) {
+          var varies = /var|move|commis|hour|self|bonus/i.test(a);
+          put('income', 'Income', '$120,000', 'told',
+              varies ? 'Variable \u00b7 a lender will average it' : 'Salaried, steady');
+          evt('Income and how steady it is', 'STATED BY THE PERSON \u00b7 NOT YET SUPPORTED');
+          think(varies
+            ? '<p>Then a lender will likely average it over two years rather than take this ' +
+              'year. Worth knowing now, because it usually lands lower than people expect.</p>'
+            : '<p>Good. Steady salary is the simplest case, and it is the one a document can ' +
+              'settle quickly.</p>');
+          nextQ();
+        } },
+      { k: 'truck', q: 'Second &mdash; what is the vehicle payment each month?',
+        chips: ['$720', 'Something else'],
+        take: function (a) {
+          var m = String(a).match(/([\d,]{3,})/);
+          var v = m ? '$' + m[1].replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',') : '$720';
+          put('debts', 'Debts', v + ' a month', 'told', 'Vehicle payment');
+          evt('Existing obligations recorded', 'STATED BY THE PERSON');
+          think('<p>' + v + ' a month. That single number moves what a lender will advance you ' +
+                'more than almost anything else on this list, which is why they ask early.</p>');
+          nextQ();
+        } },
+      { k: 'funds', q: 'Third &mdash; is the $35,000 all your own savings?',
+        chips: ['All mine', 'Some is a gift'],
+        take: function (a) {
+          var gift = /gift|parent|famil|help|mom|dad|some/i.test(a);
+          put('funds', 'Available funds', '$35,000', gift ? 'needs' : 'told',
+              gift ? 'Part gift \u00b7 will need a letter' : 'All own savings');
+          evt(gift ? 'Down payment includes a gift' : 'Available funds recorded',
+              gift ? 'NEEDS SUPPORTING INFORMATION' : 'STATED BY THE PERSON', gift ? 'amber' : 'blue');
+          think(gift
+            ? '<p>Then you will be asked for a gift letter, and for the money to have been in ' +
+              'your account for a while. Not a difficulty &mdash; just something to have ready ' +
+              'rather than be surprised by.</p>'
+            : '<p>That is the straightforward case. You will still be asked for about ninety ' +
+              'days of account history to show where it came from.</p>');
+          nextQ();
+        } }
+    ],
+    done: '<p>That is enough for me to be useful.</p>' +
+          '<p class="gm">Everything you just told me is in your record marked as something you ' +
+          'said, not something anybody has checked. Turning it into something a lender can rely ' +
+          'on is the next step, and it takes about four minutes.</p>'
+  },
+  auto: {
+    read: '<p>Let me say that back to you.</p>' +
+          '<p class="gm">You are looking at a <b>$52,000</b> truck, they have asked what monthly ' +
+          'payment you want, and they are about to send your credit application out to see who ' +
+          'approves you.</p>',
+    then: '<p>Being asked what payment you want, before the price and the term are settled, ' +
+          'moves the conversation away from what the vehicle costs. Any payment can be reached ' +
+          'by stretching the term or moving what sits inside the loan.</p>' +
+          '<p class="gm">Three numbers decide what you actually pay: the total amount financed, ' +
+          'the rate, and the term. Everything else on that sheet is arrangement around those ' +
+          'three. Let me get yours.</p>',
+    qs: [
+      { k: 'trade', q: 'Are you trading something in?',
+        chips: ['Yes, an SUV', 'No trade'],
+        take: function (a) {
+          if (/no|nope|nothing/i.test(a)) {
+            put('trade', 'Your trade', 'None', 'told');
+            think('<p>Simpler. One less place for a number to move.</p>');
+          } else {
+            put('trade', 'Your trade', '$18,500 offered', 'pro', 'Dealer provided');
+            put('owing', 'Still owing on it', '$11,200', 'told', 'You told us');
+            evt('Trade and payout recorded separately', 'TWO NUMBERS, NEVER SHOWN AS ONE');
+            think('<p>Then there are two numbers here, and dealers often show you one. They are ' +
+                  'offering <b>$18,500</b> and you still owe <b>$11,200</b>, so the trade is ' +
+                  'worth <b>$7,300</b> to this deal, not $18,500.</p>' +
+                  '<p class="gm">The $11,200 does not disappear. If it goes into the new loan, ' +
+                  'you are financing part of the last vehicle inside the payments for this one.</p>');
+          }
+          nextQ();
+        } },
+      { k: 'sheet', q: 'What term and rate have they shown you so far?',
+        chips: ['72 months at 7.49%', 'They have not said'],
+        take: function (a) {
+          put('vehicle', 'The vehicle', '$52,000', 'pro', '2026 example truck \u00b7 dealer provided');
+          if (/not|haven|no/i.test(a)) {
+            put('financing', 'Financing', 'Not disclosed yet', 'needs', 'Ask before you agree');
+            evt('Terms not disclosed', 'NEEDS CONFIRMATION', 'amber');
+            think('<p>Then do not authorise anything yet. Ask for the term, the rate and the ' +
+                  'total amount financed, and have them written down before your credit goes ' +
+                  'anywhere.</p>');
+          } else {
+            put('financing', 'Financing', '72 months at 7.49%', 'pro', 'As shown to you');
+            evt('Financing terms recorded as shown', 'FIRST VERSION \u00b7 KEPT');
+            think('<p>Recorded, with today&rsquo;s date on it. That matters more than it sounds ' +
+                  'like: if the paperwork later says something else, I can show you both.</p>');
+          }
+          nextQ();
+        } },
+      { k: 'addons', q: 'Has anything been added &mdash; warranty, protection, fees?',
+        chips: ['Warranty and a package', 'Not that I know of'],
+        take: function (a) {
+          if (/not|no |none|dunno|know of/i.test(a)) {
+            put('addons', 'Add-ons', 'None disclosed', 'needs', 'Worth asking directly');
+            evt('Add-ons not disclosed', 'NEEDS CONFIRMATION', 'amber');
+            think('<p>Ask directly, because they are usually financed into the loan rather than ' +
+                  'paid separately, which means you pay interest on them for the whole term.</p>');
+          } else {
+            put('addons', 'Add-ons', '$1,495 protection package', 'pro',
+                'Plus warranty $3,200, fees $895');
+            evt('Add-ons recorded separately from the vehicle', 'SO THEY STAY A SEPARATE DECISION');
+            think('<p>Then <b>$5,590</b> of what you are financing is not the truck. Those may ' +
+                  'well be worth having. They should be a separate decision from the vehicle, ' +
+                  'and right now they are inside the same number.</p>');
+          }
+          nextQ();
+        } }
+    ],
+    done: '<p>Now you can walk back in knowing what you are looking at.</p>' +
+          '<p class="gm">Everything you told me is in your record, dated. If any of it changes ' +
+          'between now and the paperwork, I will show you what moved.</p>'
+  }
+};
+
+function situate(q) {
+  var S2 = SITUATE[ST.ind];
+  if (!S2) return;
+  evt('Described the situation in their own words', 'THE STARTING POINT \u00b7 KEPT');
+  ST.qi = 0;
+  var t = thinkSeq([[S2.read, null, 1100], [S2.then, null, 1500]]);
+  setTimeout(nextQ, t);
+}
+
+function nextQ() {
+  var S2 = SITUATE[ST.ind];
+  if (!S2) return;
   setTimeout(function () {
-    say('g', '<p>Want to see what you&rsquo;re likely to need, before you speak to anyone?</p>' +
-      '<button class="gcta" data-act="prepare">Prepare me &#8594;</button>');
-  }, 900);
+    if (ST.qi >= S2.qs.length) {
+      var w = think(S2.done, null, 1000);
+      setTimeout(function () {
+        think('<p>Shall I show you what to have ready?</p>' +
+              '<button class="gcta" data-act="prepare">Prepare me &#8594;</button>', null, 640);
+      }, w + 420);
+      return;
+    }
+    var Q = S2.qs[ST.qi++];
+    ST.awaiting = Q;
+    think('<p>' + Q.q + '</p>', Q.chips, 800);
+    setTimeout(focusAsk, 900);
+  }, 620);
+}
+
+/* The five that are not modelled yet. Two turns, then the truth. */
+function shallow(lbl) {
+  var i = I();
+  thinkSeq([
+    ['<p>' + lbl + '. Tell me what is happening and I will keep it.</p>' +
+     '<p class="gm">' + i.shallow + '</p>', null, 950],
+    ['<p><b>Modelling coming.</b> The ' + i.name.toLowerCase() + ' experience is designed and not ' +
+     'yet built. Mortgage and auto are, all the way through &mdash; and they are the same 4orm, ' +
+     'so what you see there is what this becomes.</p>',
+     ['Show me mortgage', 'Show me auto'], 1200]
+  ]);
+  setTimeout(focusAsk, 1400);
+}
+
+function offerPrepare(after) {
+  setTimeout(function () {
+    think('<p>Want to see what you&rsquo;re likely to need, before you speak to anyone?</p>' +
+      '<button class="gcta" data-act="prepare">Prepare me &#8594;</button>', null, 700);
+  }, after || 900);
 }
 
 /* --- the passport ----------------------------------------- */
@@ -927,14 +1170,26 @@ var ACT = {
     var i = I();
     var lbl = (i.opens.filter(function (o) { return o[0] === arg; })[0] || [, arg])[1];
     put('goal', 'Goal', lbl, 'told');
-    evt('Told 4orm what they are trying to do', 'IN THEIR OWN WORDS · BEFORE A PROFESSIONAL EXISTS');
-    ST.screen = 'talk'; ST.thread = [];
-    say('g', '<p>' + lbl + '. Good &mdash; that is enough to start.</p>' +
-      '<p class="gm">Tell me what is actually happening, in your own words. Do not tidy it up.</p>',
-      [i.ex.slice(0, 44) + '…']);
-    setTimeout(function () { focusAsk(); }, 400);
+    evt('Said what they are trying to do', 'IN THEIR OWN WORDS · BEFORE A PROFESSIONAL EXISTS');
+    ST.thread = [];
+    ST.opened = true;
+    thread();
+    me(lbl);
+
+    if (!DEEP[ST.ind]) { shallow(lbl); return; }
+
+    thinkSeq([
+      ['<p>' + lbl + '. That is enough to start with.</p>' +
+       '<p class="gm">I am not going to hand you an article. Tell me what is actually ' +
+       'happening, the way you would say it out loud. Do not tidy it up.</p>', null, 900],
+      ['<p>If it is easier, use the example below and I will work from that.</p>',
+       ['Use the example'], 780]
+    ]);
+    ST.opened = true;
+    setTimeout(focusAsk, 1200);
   },
   example: function () { ask(I().ex); },
+  'Use the example': function () { ask(I().ex); },
   prepare: function () { go('prepare'); },
   passport: function () { go('passport'); },
   perms: function () { go('perms'); },
@@ -1032,25 +1287,36 @@ function boot(ind) {
   go('open');
 }
 
+function switchTo(ind) {
+  $$('[data-ind]').forEach(function (b) {
+    b.classList.toggle('on', b.getAttribute('data-ind') === ind);
+  });
+  var pip = $('#inds .pip'), on = $('#inds button.on');
+  if (pip && on) {
+    pip.style.width = on.offsetWidth + 'px';
+    pip.style.transform = 'translateX(' + (on.offsetLeft - 5) + 'px)';
+  }
+  boot(ind);
+}
+
 document.addEventListener('click', function (e) {
   if (!e.target.closest) return;
 
   var pick = e.target.closest('[data-ind]');
   if (pick) {
-    $$('[data-ind]').forEach(function (b) {
-      b.classList.toggle('on', b.getAttribute('data-ind') === pick.getAttribute('data-ind'));
-    });
-    var pip = $('#inds .pip'), on = $('#inds button.on');
-    if (pip && on) {
-      pip.style.width = on.offsetWidth + 'px';
-      pip.style.transform = 'translateX(' + (on.offsetLeft - 5) + 'px)';
-    }
-    boot(pick.getAttribute('data-ind'));
+    switchTo(pick.getAttribute('data-ind'));
     return;
   }
-
   var chipEl = e.target.closest('[data-ask]');
-  if (chipEl) { ask(chipEl.getAttribute('data-ask')); return; }
+  if (chipEl) {
+    var q = chipEl.getAttribute('data-ask');
+    /* Two chips are navigation rather than conversation. */
+    if (q === 'Show me mortgage') { switchTo('mortgage'); return; }
+    if (q === 'Show me auto')     { switchTo('auto');     return; }
+    if (q === 'Use the example')  { ask(I().ex);          return; }
+    ask(q);
+    return;
+  }
 
   var t = e.target.closest('[data-act]');
   if (!t || !$('#phBody') || !$('#phBody').contains(t)) {

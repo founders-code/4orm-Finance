@@ -94,11 +94,19 @@ def softs(items, cols=3):
         % (tone, _D[min(i, 3)], k, h, b) for i, (k, h, b, tone) in enumerate(items)))
 
 
-def flow(steps):
-    """steps: list of (heading, body)."""
-    return '<div class="flow rv">%s</div>' % "".join(
+def flow(steps, two=None):
+    """steps: list of (heading, body).
+
+    Anything four steps or longer runs in two columns by default. A single
+    column of numbered steps is most of a screen on its own, and the page is
+    already asking for more scrolling than it has earned. The numbers carry
+    the order, so reading across rather than down costs nothing.
+    """
+    if two is None:
+        two = len(steps) >= 4
+    return '<div class="flow%s rv">%s</div>' % (" two" if two else "", "".join(
         '<div class="fstep"><span class="fn">%02d</span><div><h4>%s</h4><p>%s</p></div></div>'
-        % (i + 1, h, b) for i, (h, b) in enumerate(steps))
+        % (i + 1, h, b) for i, (h, b) in enumerate(steps)))
 
 
 def note(kind, html):

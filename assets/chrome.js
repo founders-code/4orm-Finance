@@ -69,7 +69,7 @@ function buildBareNav() {
       '<span></span>' +
       '<button class="bare-menu" id="burger" type="button" aria-expanded="false" ' +
         'aria-controls="omenu" aria-label="Open the menu">' +
-        'Menu <span class="bm-i" aria-hidden="true">' +
+        '4orm your experience <span class="bm-i" aria-hidden="true">' +
         '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
         'stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
         '</span></button>' +
@@ -106,14 +106,29 @@ function buildMenu() {
           'placeholder="Search for a page" aria-label="Search 4orm" />' +
         '<button class="oclr" id="omclr" type="button" hidden aria-label="Clear the search">Clear</button>' +
       '</div>' +
+      /* Three ways in, and nothing else. A menu that lists everything is a
+         sitemap; a menu that names the three kinds of visitor is navigation. */
       '<div class="omenu-in">' +
-        col('Experience', [
-          { label: 'Personal',     href: '/#personal',   k: 'you consumer buyer mortgage decision phone guardian' },
-          { label: 'Professional', href: '/#professional', k: 'firm dashboard broker adviser agent evidence' },
-          { label: 'Check a firm', href: '/check-a-firm', slug: 'check', k: 'licence licensed register red flag scam verify' }
+        col('Personal', [
+          { label: 'Pick up the phone', href: '/#personal',
+            k: 'you consumer buyer mortgage auto decision guardian understand prepare' },
+          { label: 'Check a firm', href: '/check-a-firm', slug: 'check',
+            k: 'licence licensed register red flag scam verify who am i dealing with' }
         ]) +
-        col('Explore', MORE.filter(function (i) { return i.slug !== 'check'; })) +
-        col('Industries', INDUSTRIES) +
+        col('Professional', [
+          { label: 'See the dashboard', href: '/#professional',
+            k: 'firm broker adviser agent evidence supervision clients exceptions' },
+          { label: 'The Standard', href: '/the-standard', slug: 'standard',
+            k: 'principles rules regulators expect participating firm' }
+        ]) +
+        col('About us', [
+          { label: 'Why 4orm',      href: '/why-4orm',     slug: 'why',        k: 'gap trust relationship breaking' },
+          { label: 'How it works',  href: '/how-it-works', slug: 'how',        k: 'line person permission evidence record' },
+          { label: 'The evidence gap', href: '/evidence-gap', slug: 'gap',     k: 'scattered systems reconstruct' },
+          { label: 'Industries',    href: '/industries',   slug: 'industries', k: 'seven decisions sectors mortgage auto' },
+          { label: 'Security and privacy', href: '/privacy', slug: 'privacy',  k: 'data held corrected' },
+          { label: 'Company',       href: '/company',      slug: 'company',    k: 'team mission who is building this' }
+        ]) +
         '<div class="ocol ofoot"><a class="obig" href="/contact">Talk to us</a></div>' +
       '</div>' +
       '<p class="ono" id="omno" hidden>Nothing here matches that. Try <b>mortgage</b>, ' +
@@ -126,24 +141,25 @@ function buildNav() {
   if (page === 'home') return buildBareNav();
 
   var wrap = el('div');
-  var industryOn = INDUSTRIES.some(function (i) { return i.slug === page; });
-
-  var menu = INDUSTRIES.concat(MORE).map(function (i) {
-    return '<a href="' + i.href + '">' + i.label + '</a>';
-  }).join('');
+  /* The pill carries the same three ways in as the menu. The blue control
+     opens that menu rather than navigating, so there is one way to browse
+     the site and it behaves identically everywhere. The mark on the left goes
+     back to the landing, which is the one place it can go that the pill does
+     not already offer. */
+  var famOn = page === 'company' || page === 'team';
 
   var h = el('header', 'nav');
   h.innerHTML =
     '<div class="nav-in">' +
-      '<a class="nav-brand" href="/" aria-label="4orm home"><img src="/assets/logo.png" alt="4orm" /></a>' +
+      '<a class="nav-brand" href="/" aria-label="Back to the start">' +
+        '<img src="/assets/logo.png" alt="4orm Finance" /></a>' +
       '<nav class="nav-links" aria-label="Primary">' +
-        VIEWS.map(function (v) { return '<a href="' + v.href + '" data-navview="' + v.v + '">' + v.label + '</a>'; }).join('') +
-        '<button class="navmore" id="burger" type="button" aria-expanded="false" ' +
-          'aria-controls="omenu"' + (industryOn ? ' aria-current="true"' : '') +
-          '>Explore ' + CHEV + '</button>' +
-        '<a href="/company"' + (page === 'company' ? ' aria-current="page"' : '') + '>About</a>' +
+        '<a href="/#personal">Personal</a>' +
+        '<a href="/#professional">Professional</a>' +
+        '<a href="/company"' + (famOn ? ' aria-current="page"' : '') + '>4orm Family</a>' +
       '</nav>' +
-      '<a class="nav-cta" href="/">4orm your experience. <span class="cir">' + ARROW + '</span></a>' +
+      '<button class="nav-cta" id="burger" type="button" aria-expanded="false" ' +
+        'aria-controls="omenu">4orm your experience. <span class="cir">' + ARROW + '</span></button>' +
       '<button class="burger" id="burger-m" type="button" aria-label="Menu" aria-expanded="false" ' +
         'aria-controls="omenu">' +
         '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
@@ -261,6 +277,34 @@ function initMenuSearch(m) {
   run();
 }
 
+/* The nav floats over the page, so while somebody is reading downward it sits
+   on top of whatever they are reading and cuts a dark band through it. It
+   steps out of the way on the way down and comes straight back on the way up,
+   which is where it is wanted anyway. */
+function initNavHide() {
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+  var last = window.pageYOffset, ticking = false;
+
+  function update() {
+    var y = window.pageYOffset;
+    var menuOpen = document.querySelector('.omenu.open');
+    if (menuOpen || y < 140) {
+      nav.classList.remove('tucked');
+    } else if (y > last + 6) {
+      nav.classList.add('tucked');
+    } else if (y < last - 6) {
+      nav.classList.remove('tucked');
+    }
+    last = y;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+}
+
 function initReveal() {
   var els = Array.prototype.slice.call(document.querySelectorAll('.rv'));
   if (!els.length) return;
@@ -360,7 +404,7 @@ function boot() {
   buildAtmos();
   mount('nav-mount', buildNav());
   mount('foot-mount', buildFooter());
-  initNav(); initReveal(); initSeg(); initBars(); initCounters(); initCheck(); initReady();
+  initNav(); initNavHide(); initReveal(); initSeg(); initBars(); initCounters(); initCheck(); initReady();
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
 else boot();
