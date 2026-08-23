@@ -91,7 +91,7 @@ def build():
               "Reading a register protects you on the day. Holding the dated record of what you read, beside "
               "the transaction it belongs to, protects you for the years afterwards. That is the rest of 4orm.",
               primary=("Form your experience", "/#stage"),
-              secondary=("How it works", "/how-it-works"))
+              secondary=("How it works", "/form"))
     )
     yield kit.write(
         "check", "/check-a-firm",

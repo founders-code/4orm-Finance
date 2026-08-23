@@ -63,6 +63,16 @@
       "permanent": true
     },
     {
+      "source": "/company",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/company.html",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
       "source": "/credit-union",
       "destination": "/industries/banking",
       "permanent": true
@@ -103,6 +113,16 @@
       "permanent": true
     },
     {
+      "source": "/evidence-gap",
+      "destination": "/form",
+      "permanent": true
+    },
+    {
+      "source": "/evidence-gap.html",
+      "destination": "/form",
+      "permanent": true
+    },
+    {
       "source": "/explore",
       "destination": "/home",
       "permanent": true
@@ -120,6 +140,16 @@
     {
       "source": "/faq.html",
       "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/how-it-works",
+      "destination": "/form",
+      "permanent": true
+    },
+    {
+      "source": "/how-it-works.html",
+      "destination": "/form",
       "permanent": true
     },
     {
@@ -264,12 +294,12 @@
     },
     {
       "source": "/passport",
-      "destination": "/how-it-works",
+      "destination": "/personal",
       "permanent": true
     },
     {
       "source": "/passport.html",
-      "destination": "/how-it-works",
+      "destination": "/personal",
       "permanent": true
     },
     {
@@ -374,12 +404,12 @@
     },
     {
       "source": "/team",
-      "destination": "/company",
+      "destination": "/why-4orm",
       "permanent": true
     },
     {
       "source": "/team.html",
-      "destination": "/company",
+      "destination": "/why-4orm",
       "permanent": true
     },
     {
@@ -424,12 +454,12 @@
     },
     {
       "source": "/what-we-do",
-      "destination": "/how-it-works",
+      "destination": "/form",
       "permanent": true
     },
     {
       "source": "/what-we-do.html",
-      "destination": "/how-it-works",
+      "destination": "/form",
       "permanent": true
     },
     {

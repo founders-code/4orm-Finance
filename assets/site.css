@@ -1289,41 +1289,37 @@ body.infocus .lure{opacity:0 !important;visibility:hidden}
 /* ============================================================
    The menu is a tide.
 
-   A sheet of light blue comes in over the page and breaks against
-   a shore near the bottom. Below the waterline the page you were
-   reading is still there, still legible, and clicking it takes
-   you back. White on white gave no edge at all; the blue does.
+   A sheet of light blue comes in over the page and ends in one
+   soft drifting line near the middle of the screen. Below it the
+   page is still there, still legible, and clicking it takes you
+   back. White on white gave no edge at all; the blue does.
    ============================================================ */
 .omenu{position:fixed;inset:0;z-index:95;display:flex;align-items:flex-start;
   justify-content:center;padding:150px 28px 0;overflow:hidden;background:transparent;
   opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s}
 
-/* the body of the water */
-.omenu::before{content:'';position:absolute;left:0;right:0;top:0;height:74%;
+/* the body of the water, ending well up the screen */
+.omenu::before{content:'';position:absolute;left:0;right:0;top:0;height:56%;
   pointer-events:none;
   background:linear-gradient(180deg,
     rgba(233,241,254,.97) 0%,
-    rgba(228,238,254,.96) 46%,
-    rgba(219,232,253,.93) 74%,
-    rgba(209,226,252,.88) 100%);
+    rgba(229,239,254,.96) 52%,
+    rgba(223,235,253,.94) 100%);
   backdrop-filter:saturate(150%) blur(20px);
   -webkit-backdrop-filter:saturate(150%) blur(20px)}
 
-/* the shoreline: two crests, drifting at different speeds so the edge
-   never repeats the same shape twice */
-.owave{position:absolute;left:-50%;right:-50%;top:calc(74% - 60px);height:170px;
+/* one line, floating, never breaking into a second crest */
+.owave{position:absolute;left:-30%;right:-30%;top:calc(56% - 42px);height:96px;
   pointer-events:none;z-index:1;opacity:0;transition:opacity .6s var(--ease) .12s}
 .omenu.open .owave{opacity:1}
-.owave svg{display:block;width:200%;height:100%}
-.owave .w1{fill:rgba(219,232,253,.93)}
-.owave .w2{fill:rgba(233,241,254,.7)}
-.owave.a{animation:tide 13s linear infinite}
-.owave.b{top:calc(74% - 38px);animation:tide 19s linear infinite reverse}
-@keyframes tide{from{transform:translateX(0)}to{transform:translateX(-25%)}}
-@media (prefers-reduced-motion:reduce){ .owave.a,.owave.b{animation:none} }
+.owave svg{display:block;width:160%;height:100%}
+.owave .w1{fill:rgba(223,235,253,.94)}
+.owave.a{animation:tide 26s linear infinite}
+@keyframes tide{from{transform:translateX(0)}to{transform:translateX(-18.75%)}}
+@media (prefers-reduced-motion:reduce){ .owave.a{animation:none} }
 
 /* below the waterline the page shows through, and it is the way back */
-.oback{position:absolute;left:0;right:0;bottom:0;height:26vh;z-index:3;
+.oback{position:absolute;left:0;right:0;bottom:0;height:42vh;z-index:3;
   border:0;background:transparent;cursor:pointer;display:block}
 .oback:focus-visible{outline:2px solid var(--blue);outline-offset:-6px;border-radius:14px}
 .omenu.open{opacity:1;visibility:visible}
@@ -2514,3 +2510,298 @@ body.menu-open .nav{z-index:120;transform:none;opacity:1;pointer-events:auto}
 /* On the landing the menu brings its own header, so the single control that
    opened it steps aside rather than sitting beside its replacement. */
 body.menu-open .nav-bare{opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+
+/* ============================================================
+   The six pages: shared visual components
+   ============================================================ */
+/* Four large verbs. One idea each, not a feature grid. */
+.verbs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;
+  margin-top:clamp(38px,4vw,58px);border-top:1px solid var(--border)}
+@media (max-width:720px){ .verbs{grid-template-columns:1fr} }
+.vb{padding:30px 34px 30px 0;border-bottom:1px solid var(--border)}
+.vbw{display:block;font-size:clamp(24px,3vw,38px);font-weight:760;letter-spacing:-.04em;
+  color:var(--tx);line-height:1}
+.vb p{margin:14px 0 0;font-size:14.6px;line-height:1.58;color:var(--tx-2);max-width:40ch}
+
+/* The same value, changing what is known about it. */
+.chain{margin-top:clamp(36px,4vw,54px);border-top:1px solid var(--border)}
+.chl{display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  padding:20px 2px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.chl.att{background:rgba(196,154,58,.07);margin:0 -14px;padding-left:14px;padding-right:14px;
+  border-radius:12px}
+.chv{font-size:clamp(24px,3vw,36px);font-weight:770;letter-spacing:-.04em;color:var(--tx)}
+.chs{font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;padding:5px 10px;border-radius:6px}
+.chs.told{background:var(--bg-3);color:var(--tx-3)}
+.chs.doc{background:var(--blue-50);color:var(--blue-dp)}
+.chs.ver{background:rgba(196,154,58,.16);color:#8A6412}
+.chs.chg{background:rgba(196,154,58,.22);color:#7A5709}
+
+/* Before and after, only the changes carrying weight. */
+.cmp2{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(16px,3vw,40px);
+  align-items:center;margin-top:clamp(36px,4vw,54px)}
+@media (max-width:760px){ .cmp2{grid-template-columns:1fr}
+  .cmarrow{transform:rotate(90deg);justify-self:center} }
+.cmpc2{border:1px solid var(--border);border-radius:18px;background:#fff;padding:20px 22px}
+.cmpc2.now{border-color:rgba(196,154,58,.4)}
+.cmk{display:block;font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--tx-3);margin-bottom:14px}
+.cmr{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:10px 0;
+  border-bottom:1px solid var(--border);font-size:14px;color:var(--tx-2)}
+.cmr:last-child{border-bottom:0}
+.cmr b{font-weight:700;color:var(--tx);font-size:16px;letter-spacing:-.02em}
+.cmr.chg{background:rgba(196,154,58,.08);margin:0 -10px;padding-left:10px;padding-right:10px;
+  border-radius:9px}
+.cmr.chg b{color:#7A5709}
+.cmarrow{font-size:22px;color:var(--blue)}
+
+/* The relationship drawn as a line of steps. */
+.chainflow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+  margin-top:clamp(34px,3.6vw,50px)}
+.cf{position:relative;padding:11px 17px;border-radius:999px;border:1px solid var(--border);
+  background:#fff;font-size:13.6px;font-weight:600;color:var(--tx-2);
+  opacity:0;transform:translateY(6px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease);
+  transition-delay:calc(var(--i) * .07s)}
+.rv.in .cf,.chainflow.in .cf{opacity:1;transform:none}
+.cf:not(:last-child)::after{content:'\2192';position:absolute;right:-16px;top:50%;
+  transform:translateY(-50%);color:var(--tx-3);font-size:12px}
+
+/* Sample questions, as somebody would type them. */
+.qs{display:flex;flex-direction:column;gap:9px;margin-top:clamp(34px,3.6vw,50px);max-width:640px}
+.q{padding:14px 18px;border-radius:16px;border:1px solid var(--border);background:var(--bg-2);
+  font-size:15px;color:var(--tx-2);border-bottom-left-radius:6px}
+
+/* Concern levels, never a verdict. */
+.lvls{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.lv{padding:9px 16px;border-radius:999px;font-size:13.4px;font-weight:650}
+.lv.ok{background:var(--ok-bg);color:var(--ok)}
+.lv.warn{background:rgba(196,154,58,.18);color:#7A5709}
+.lv.bad{background:rgba(214,51,78,.12);color:#B02840}
+
+/* The architecture diagram on Form. */
+.archdiag{display:flex;flex-direction:column;align-items:center;gap:14px;
+  margin-top:clamp(36px,4vw,54px);text-align:center}
+.ad{padding:12px 22px;border-radius:999px;font-size:14px;font-weight:650;
+  border:1px solid var(--border);background:#fff;color:var(--tx-2)}
+.ad.core{background:var(--blue-50);border-color:var(--blue-100);color:var(--blue-dp);
+  font-size:19px;font-weight:750;padding:14px 30px;letter-spacing:-.02em}
+.ad.p{background:var(--tx);border-color:var(--tx);color:#fff}
+.adarr{color:var(--tx-3);font-size:16px}
+.adrow{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
+
+/* What the conversation can and cannot do. */
+.cando{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px);
+  margin-top:clamp(36px,4vw,54px)}
+@media (max-width:720px){ .cando{grid-template-columns:1fr} }
+.cd{display:flex;flex-direction:column;gap:8px;padding-top:22px;border-top:2px solid var(--blue)}
+.cd.no{border-top-color:#C49A3A}
+.cdk{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--tx-3);margin-bottom:6px}
+.cd span:not(.cdk){font-size:15px;font-weight:600;color:var(--tx);padding:7px 0;
+  border-bottom:1px solid var(--border)}
+.cd.no span:not(.cdk){color:var(--tx-3)}
+
+/* Family: one person, several connections, each with its own permission. */
+.famdiag{margin-top:clamp(36px,4vw,54px);text-align:center}
+.fc{display:inline-block;padding:12px 22px;border-radius:999px;font-size:14px;font-weight:650;
+  border:1px solid var(--border);background:#fff;color:var(--tx-2)}
+.fc.core{background:var(--tx);border-color:var(--tx);color:#fff;font-size:18px;padding:14px 34px}
+.fc.pro{background:var(--blue-50);border-color:var(--blue-100);color:var(--blue-dp)}
+.frow{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:30px;
+  position:relative;padding-top:26px}
+.frow::before{content:'';position:absolute;top:0;left:50%;width:1px;height:20px;
+  background:var(--border-strong)}
+.fnote{margin:22px 0 0;font-size:13.6px;color:var(--tx-3)}
+
+/* Progressive disclosure, so the deep version is there without being in the way. */
+.expand{margin-top:28px}
+.expand summary{cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  font-size:14.6px;font-weight:650;color:var(--blue);list-style:none}
+.expand summary::-webkit-details-marker{display:none}
+.expand summary::after{content:'+';font-size:17px;transition:transform .3s var(--spring)}
+.expand[open] summary::after{content:'\2212'}
+.expin{margin-top:8px}
+.expin .cf{opacity:1;transform:none}
+
+.minirec.wide{max-width:620px}
+.mrflag.standalone{border:1px solid rgba(196,154,58,.4);border-radius:18px;
+  margin-top:clamp(34px,3.6vw,50px);max-width:560px}
+.nots.left{text-align:left;margin-left:0;max-width:none}
+.nots.left p{font-size:clamp(19px,2.2vw,28px)}
+
+/* The six-column menu. */
+.omenu-in.six{grid-template-columns:repeat(3,minmax(0,1fr)) minmax(150px,.6fr)}
+
+/* ============================================================
+   Research: a figure, what it means, and what it covers
+   ============================================================ */
+.rfil{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(34px,3.6vw,50px)}
+.rf{padding:9px 17px;border-radius:999px;border:1px solid var(--border);background:#fff;
+  font-family:var(--sans);font-size:13.4px;font-weight:600;color:var(--tx-2);cursor:pointer;
+  transition:all .24s var(--ease)}
+.rf:hover{border-color:var(--blue-100);color:var(--blue-dp)}
+.rf.on{background:var(--tx);border-color:var(--tx);color:#fff}
+.rlist{margin-top:30px;border-top:1px solid var(--border)}
+.rd{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:20px 46px;
+  padding:clamp(26px,2.8vw,38px) 0;border-bottom:1px solid var(--border);align-items:start}
+@media (max-width:760px){ .rd{grid-template-columns:1fr;gap:12px} }
+.rdf{font-size:clamp(34px,4.6vw,58px);font-weight:790;letter-spacing:-.045em;line-height:1;
+  color:var(--blue-dp)}
+.rdm{margin:0;font-size:clamp(15px,1.35vw,17px);line-height:1.55;color:var(--tx-2);max-width:52ch}
+.rdmeta{margin:16px 0 0;display:flex;flex-wrap:wrap;gap:6px 34px}
+.rdmeta div{display:flex;flex-direction:column;gap:2px}
+.rdmeta dt{font-family:var(--mono);font-size:8.6px;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--tx-3)}
+.rdmeta dd{margin:0;font-size:12.8px;color:var(--tx-2);max-width:36ch}
+.rdmeta a{color:var(--blue);text-decoration:none;font-weight:600}
+.rdmeta a:hover{color:var(--blue-dp);text-decoration:underline}
+
+/* ============================================================
+   Ask 4orm: the landing greeting
+
+   The page opens on nothing, loads for a beat, asks one question,
+   then gets out of the way. Somebody who has already answered in
+   this session never sees it again.
+   ============================================================ */
+.ask4{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  background:#fff;transition:opacity .48s var(--ease)}
+.ask4.out{opacity:0;pointer-events:none}
+body.greeting{overflow:hidden}
+body.greeting .nav-bare,body.greeting .lland > *:not(.ask4){opacity:0}
+.a4in{width:100%;max-width:820px;padding:0 30px;text-align:center}
+
+.a4load{display:flex;flex-direction:column;align-items:center;gap:20px;
+  animation:a4fade .5s var(--ease) both}
+@keyframes a4fade{from{opacity:0}to{opacity:1}}
+.a4dots{display:flex;gap:7px}
+.a4dots i{width:8px;height:8px;border-radius:50%;background:var(--blue);
+  animation:a4d 1.05s infinite ease-in-out}
+.a4dots i:nth-child(2){animation-delay:.16s}
+.a4dots i:nth-child(3){animation-delay:.32s}
+@keyframes a4d{0%,62%,100%{opacity:.24;transform:translateY(0)}
+  30%{opacity:1;transform:translateY(-5px)}}
+.a4lt{font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--tx-3)}
+
+.a4ask{opacity:0;transform:translateY(10px);
+  transition:opacity .6s var(--ease),transform .6s var(--spring)}
+.a4ask.in{opacity:1;transform:none}
+.a4q{margin:0 0 clamp(34px,4vw,52px);font-size:clamp(28px,4.4vw,50px);font-weight:750;
+  letter-spacing:-.038em;line-height:1.1;color:var(--tx)}
+.a4opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:760px){ .a4opts{grid-template-columns:1fr} }
+.a4o{display:flex;flex-direction:column;gap:6px;align-items:flex-start;text-align:left;
+  padding:22px 24px;border-radius:18px;border:1px solid var(--border);background:#fff;
+  cursor:pointer;font-family:var(--sans);
+  transition:border-color .3s var(--ease),transform .3s var(--spring),box-shadow .3s var(--ease)}
+.a4o:hover{border-color:var(--blue-100);transform:translateY(-3px);
+  box-shadow:0 18px 40px -22px rgba(16,32,64,.3)}
+.a4o b{font-size:19px;font-weight:720;letter-spacing:-.026em;color:var(--tx)}
+.a4o i{font-style:normal;font-size:13.4px;color:var(--tx-3);line-height:1.45}
+.a4skip{margin-top:30px;background:none;border:0;cursor:pointer;font-family:var(--sans);
+  font-size:14px;font-weight:600;color:var(--tx-3);transition:color .24s var(--ease)}
+.a4skip:hover{color:var(--blue)}
+/* display:flex outranks the hidden attribute, so say it explicitly. */
+.a4load[hidden]{display:none}
+
+/* ============================================================
+   4orm Assist on the landing
+
+   It waits rather than interrupts. The headline is readable from
+   the first paint; Assist offers a way forward from the corner.
+   ============================================================ */
+.assist{display:flex;justify-content:center;margin:clamp(30px,3.4vw,46px) 0 0;
+  transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.assist.done{opacity:0;transform:translateY(-8px);pointer-events:none;height:0;margin:0}
+.asbtn{display:inline-flex;align-items:center;gap:15px;cursor:pointer;text-align:left;
+  padding:12px 14px 12px 13px;border-radius:999px;border:1px solid var(--border);
+  background:#fff;font-family:var(--sans);
+  box-shadow:0 16px 40px -22px rgba(16,32,64,.34);
+  animation:asrise .7s var(--spring) .5s both;
+  transition:border-color .3s var(--ease),transform .3s var(--spring),box-shadow .3s var(--ease)}
+@keyframes asrise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.asbtn:hover{border-color:var(--blue-100);transform:translateY(-2px);
+  box-shadow:0 22px 50px -22px rgba(46,107,242,.42)}
+.ashead{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;
+  border-radius:50%;background:var(--blue-50);color:var(--blue);flex:none;
+  animation:asnod 4.2s ease-in-out infinite}
+@keyframes asnod{0%,88%,100%{transform:rotate(0)}92%{transform:rotate(-7deg)}96%{transform:rotate(7deg)}}
+.asbtn:hover .ashead{background:var(--blue);color:#fff}
+.astxt{display:flex;flex-direction:column;gap:2px}
+.astxt b{font-size:14.8px;font-weight:700;letter-spacing:-.02em;color:var(--tx)}
+.astxt i{font-style:normal;font-size:12.6px;color:var(--tx-3)}
+.ascir{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;
+  border-radius:50%;background:var(--blue);color:#fff;font-size:14px;flex:none;
+  transition:transform .3s var(--spring)}
+.asbtn:hover .ascir{transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){ .asbtn,.ashead{animation:none} }
+
+/* The ways in arrive when Assist is taken up. */
+.lways[hidden]{display:none}
+.lways{opacity:0;transform:translateY(14px);
+  transition:opacity .7s var(--ease),transform .7s var(--spring)}
+.lways.in{opacity:1;transform:none}
+
+/* ============================================================
+   4orm Assist: the chat that wakes up on the landing
+   ============================================================ */
+.a4chat{width:min(720px,100%);margin:clamp(30px,3.4vw,48px) auto 0;
+  border:1px solid var(--border);border-radius:24px;background:#fff;overflow:hidden;
+  box-shadow:0 30px 70px -34px rgba(16,32,64,.3);
+  opacity:0;transform:translateY(18px) scale(.985);
+  transition:opacity .7s var(--ease),transform .8s var(--spring)}
+.a4chat.awake{opacity:1;transform:none}
+.a4chat.handed{opacity:.35;pointer-events:none;transition:opacity .5s var(--ease)}
+
+.a4top{display:flex;align-items:center;gap:11px;padding:14px 20px;
+  border-bottom:1px solid var(--border);background:var(--bg-2)}
+.a4face{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;
+  border-radius:50%;background:var(--blue-50);color:var(--blue);flex:none;
+  animation:a4nod 5s ease-in-out infinite}
+@keyframes a4nod{0%,90%,100%{transform:rotate(0)}94%{transform:rotate(-7deg)}97%{transform:rotate(7deg)}}
+.a4name{font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--tx)}
+.a4stat{margin-left:auto;display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ok)}
+.a4stat i{width:7px;height:7px;border-radius:50%;background:var(--ok);
+  animation:a4pulse 2.4s ease-in-out infinite}
+@keyframes a4pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.a4thread{padding:22px 20px;min-height:clamp(200px,26vh,270px);max-height:44vh;
+  overflow-y:auto;display:flex;flex-direction:column;gap:10px;text-align:left}
+.a4thread::-webkit-scrollbar{width:0}
+.a4b{max-width:88%;padding:13px 16px;border-radius:18px;font-size:14.6px;line-height:1.5;
+  animation:a4in .42s var(--pop) both}
+@keyframes a4in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.a4b p{margin:0}
+.a4b p + p{margin-top:8px}
+.a4b .a4m{font-size:12.8px;color:var(--tx-3)}
+.a4b.a4{align-self:flex-start;background:var(--bg-2);border:1px solid var(--border);
+  color:var(--tx-2);border-bottom-left-radius:6px}
+.a4b.me{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:6px}
+.a4b.typing{display:flex;gap:4px;padding:15px}
+.a4b.typing i{width:6px;height:6px;border-radius:50%;background:var(--tx-3);
+  animation:a4dot 1s infinite ease-in-out}
+.a4b.typing i:nth-child(2){animation-delay:.16s}
+.a4b.typing i:nth-child(3){animation-delay:.32s}
+@keyframes a4dot{0%,60%,100%{opacity:.28;transform:translateY(0)}
+  30%{opacity:1;transform:translateY(-3px)}}
+.a4chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.a4chip{border:1px solid var(--blue-100);background:#fff;color:var(--blue-dp);
+  font-family:var(--sans);font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;
+  cursor:pointer;transition:all .24s var(--ease)}
+.a4chip:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+.a4bar{display:flex;gap:9px;align-items:center;padding:13px 16px;
+  border-top:1px solid var(--border);background:#fff}
+.a4bar input{flex:1;min-width:0;border:1px solid var(--border);border-radius:999px;
+  padding:11px 18px;font-family:var(--sans);font-size:14.4px;color:var(--tx);outline:none;
+  transition:border-color .24s var(--ease)}
+.a4bar input:focus{border-color:var(--blue-100)}
+.a4bar input::placeholder{color:var(--tx-3)}
+.a4bar button{flex:none;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--blue);color:#fff;display:inline-flex;align-items:center;
+  justify-content:center;transition:background .24s var(--ease)}
+.a4bar button:hover{background:var(--blue-dp)}
+@media (prefers-reduced-motion:reduce){ .a4face,.a4stat i{animation:none} }

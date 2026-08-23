@@ -1,0 +1,154 @@
+# 4orm website — the full build checklist
+Every item mentioned, in one place. QC column filled at the end of the pass.
+
+## The governing shape
+
+Six primary pages. Everything else supports them.
+
+| Page | Its one job |
+|---|---|
+| **Home** | Explains 4orm |
+| **Personal** | Makes me want it |
+| **Professional** | Makes the firm want it |
+| **Form** | Explains how it works |
+| **Family** | Shows how trusted people take part without losing control |
+| **Why 4orm** | Who you are, why you are doing this, what you stand for |
+
+Primary menu, everywhere past the landing:
+`Home | Personal | Professional | Form | Family | Why 4orm`
+
+Footer and contextual links carry: Research, Industries and the seven sectors, The Standard,
+Privacy and Security, Contact, Legal.
+
+**The design rule that outranks everything below.** Do not make a page longer because more
+information arrived. One dominant idea per viewport, large type, large whitespace, restrained
+motion, short supporting copy, progressive disclosure. Whenever a paragraph can become an
+interaction, an animation, a before-and-after, a timeline or a sourced data visual, it becomes
+the visual. Nobody should need to understand regulation, identity checking or evidence
+architecture to see why 4orm is useful.
+
+---
+
+## A. Menu and routing
+
+| # | Item | Done | QC |
+|---|---|---|---|
+| A1 | Blue sheet sits too low. Raise the waterline | | |
+| A2 | One squiggly line floating at the bottom, not two breaking crests | | |
+| A3 | Menu reads Home, Personal, Professional, Form, Family, Why 4orm | | |
+| A4 | "4orm your experience" routes to `/home` | | |
+| A5 | "Why 4orm" routes to `/why-4orm` | | |
+| A6 | Landing itself unchanged apart from routing | | |
+| A7 | Footer carries the secondary material | | |
+| A8 | **4orm Assist on the landing.** Headline and lede show straight away. A small assistant head sits in the corner offering to help. Clicking it reveals the three doors | | |
+| A8b | The product is named **4orm Assist** wherever it appears | | |
+| A9 | "4orm your experience" goes to `/home` with the pill header | | |
+| A10 | "Why 4orm" door goes to `/why-4orm` | | |
+| A11 | Delete every page, module and asset no longer used | | |
+
+## B. Home — fifteen screens
+
+| # | Screen | Done | QC |
+|---|---|---|---|
+| B1 | Thesis. Two pathways only. No statistics, no regulators | | |
+| B2 | **What is 4orm?** YOU ── 4ORM ── YOUR FIRM. Understand/Prepare/Verify/Control against Serve/Explain/Resolve/Evidence | | |
+| B3 | Four giant verbs: UNDERSTAND, PREPARE, CHECK, PROTECT | | |
+| B4 | Why care. One statistic per viewport, each with year and scope | | |
+| B5 | Fragmentation. Objects float, then the line connects them | | |
+| B6 | **Your information. Your decision.** My 4orm, seven objects entering | | |
+| B7 | Information status animation. $120,000 told → supported → verified → changed | | |
+| B8 | Permission. Six requested, two toggled off, four cross the line | | |
+| B9 | Personal. The phone returns | | |
+| B10 | Professional. Sarah, and the mismatch | | |
+| B11 | The firm. 148/141/7/94%, sparse | | |
+| B12 | Evidence reveal as a timeline | | |
+| B13 | Regulatory validation, late. FSRA language | | |
+| B14 | Security. Four vertical objects | | |
+| B15 | Human support. 24/7 Canadian | | |
+| B16 | Close, looping to Why 4orm | | |
+
+## C. New pages
+
+| # | Page | Done | QC |
+|---|---|---|---|
+| C1 | **Personal** `/personal` | | |
+| C2 | **Professional** `/professional` | | |
+| C3 | **Form** `/form` — absorbs How it works | | |
+| C4 | **Family** `/family` — new | | |
+| C5 | **Research** `/research` — State of Financial Trust, filterable | | |
+| C6 | **Why 4orm** rebuilt as the company page, absorbing the team | | |
+
+## D. Existing pages
+
+| # | Page | Change | Done | QC |
+|---|---|---|---|---|
+| D1 | Industries | Three tiers: Experience now / Expanding / Where the architecture extends | | |
+| D2 | Mortgage | Product first. Passport, permission, change detection, then data | | |
+| D3 | Auto | Deal comparison first, permission, submissions, then OMVIC data | | |
+| D4 | Insurance | Coverage comparison. Marked Expanding | | |
+| D5 | Lending | "The payment isn't the price." Total cost comparison. Broadened past payday | | |
+| D6 | Real estate | Representation agreement, and the change event | | |
+| D7 | Investing | Decision Record chain | | |
+| D8 | Banking | "One relationship. Several roles." Tone corrected | | |
+| D9 | The Standard | Four pillars, expanding to the ten | | |
+| D10 | Privacy and Security | Already built. Add the AI-processing section | | |
+| D11 | Contact | Already rebuilt. Add 24/7 support | | |
+| D12 | Terms | Strip the legacy statutory material, add the synthetic statement | | |
+
+## E. Language corrections, one by one
+
+| # | Page | From | To | Done | QC |
+|---|---|---|---|---|---|
+| E1 | Home | "before it becomes an argument" | "while there's still time to fix it" | | |
+| E2 | Home | "Not employee surveillance. Relationship integrity." | "See the relationship, not the employee." | | |
+| E3 | Why 4orm | "The person does not understand what they are agreeing to" | "People can be asked to make consequential decisions before they fully understand them" | | |
+| E4 | Why 4orm | "a firm that did the work and could not show it" | "the record could not adequately demonstrate the work, reasoning or disclosure required" | | |
+| E5 | Why 4orm | "Three sectors. Three regulators. One complaint." | "Different sectors. The same evidence challenge." | | |
+| E6 | Why 4orm | "Utility first. Distribution through professionals." | "Useful before the transaction. Valuable throughout the relationship." | | |
+| E7 | Mortgage | "The person signed without being told what could go wrong." | "The file could not adequately demonstrate that material risks had been disclosed." | | |
+| E8 | Mortgage | "It was nobody watching." | "The findings extended beyond individual files to firm-level supervision." | | |
+| E9 | Auto | "Any payment can be reached by stretching the term." | "A lower monthly payment can sometimes come from a longer term, changing how long the debt lasts and its total cost." | | |
+| E10 | Real estate | "Most people meet them for the first time afterwards." | Removed | | |
+| E11 | Real estate | "Very little of it reaches the file." | Softened | | |
+| E12 | Banking | "running a sales operation on them" | "One relationship can contain several roles." | | |
+| E13 | Banking | "the most common mistake a person makes" | Removed | | |
+| E14 | Standard | "worth precisely what it cost" | "Participation cannot be purchased without meeting the operating requirements." | | |
+| E15 | Standard | "belongs to them as much as to the firm" | "Give the person access to an appropriate record of what they were shown, agreed to and shared." | | |
+| E16 | Standard | "Every principle here exists because a regulator has already described..." | "The principles reflect recurring expectations found across Canadian financial-sector regulation and guidance." | | |
+| E17 | Dashboard | "Green means it would survive being asked about." | "Complete enough to reconstruct from the available record." | | |
+| E18 | Industries | "Almost nobody knows they exist." | Softened | | |
+| E19 | How it works | "nobody is watching" | "privately, before a professional is involved" | | |
+| E20 | How it works | "Supervision has something to supervise." | "Management can see where a relationship needs attention." | | |
+
+## F. Data discipline
+
+Every number on the site carries: **the figure, what it means, the year, the scope, the source.**
+Never let 100% read as all Canadian mortgages.
+
+| Figure | Meaning | Year | Scope | Source |
+|---|---|---|---|---|
+| 47% | Homebuyers reporting concern or uncertainty | 2026 | CMHC survey respondents | CMHC Mortgage Consumer Survey |
+| 26% | Mortgage-process concern or uncertainty | 2026 | CMHC survey respondents | CMHC Mortgage Consumer Survey |
+| $704M+ | Reported fraud losses | 2025 | Reports to the CAFC, 112,000+ | Canadian Anti-Fraud Centre |
+| 5 to 10% | Estimated share of frauds reported | ongoing | Government partner estimate | CAFC |
+| 100 / 73 / 65 / 100% | Suitability, material risk, relationship disclosure, supervision | 2024-25 | FSRA private-mortgage supervision sample | FSRA |
+| 2,332 / $1.9M / $1.5M / $825,552 | Charges, fines, compensation paid, returned | 2025 | Ontario | OMVIC Annual Report |
+| 712 | Mystery-shop interactions | fieldwork 2019 | Six largest banks | FCAC |
+| 105 firms | Registered firms reviewed | Dec 2025 | Canada | Joint CSA/CIRO Staff Notice 31-368 |
+
+Banned: the 16% AI figure anywhere on the site. No screen references AI or model tooling.
+
+## G. Final QC gate — run 2026-08-23
+
+| # | Check | Result |
+|---|---|---|
+| G1 | Written-word gate: zero hard failures | **PASS** 0 hard, 0 style |
+| G2 | Zero em or en dashes in visible copy | **PASS** 0 across 22 pages |
+| G3 | No bare-label or stuttering headings | **PASS** 0 remaining |
+| G4 | Every internal link resolves | **PASS** |
+| G5 | No console errors, no 4xx | **PASS** |
+| G6 | No overflow or clipping at 1440 and 390 | **PASS** |
+| G7 | Every figure carries year, scope and source | **PASS** 16 of 16 on /research |
+| G8 | Every source link opens the primary source | **PASS** all outbound, rel=noopener |
+| G9 | Six primary pages reachable from every page | **PASS** PRIMARY drives nav and footer |
+| G10 | No page past three screens except Home | **PARTIAL** why-4orm runs 7,300px because it now carries the nine team photographs |

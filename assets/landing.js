@@ -65,7 +65,44 @@ function fromHash(){
 window.addEventListener('hashchange', fromHash);
 if (location.hash) setTimeout(fromHash, 60);
 
+/* ------------------------------------------------------------------
+   4orm Assist opens the landing.
+
+   The headline and the lede are there the moment the page paints.
+   Assist waits in the corner and offers to help; taking it up brings
+   the three ways in onto the screen. Nothing blocks the page, and
+   nobody has to answer a question before they can read anything.
+   ------------------------------------------------------------------ */
+/* The page paints, then reveals itself. This has to run whether or not the
+   Assist control is present, because it is what makes the landing visible. */
 requestAnimationFrame(function(){
   requestAnimationFrame(function(){ document.body.classList.add('go'); });
 });
+
+(function assist(){
+  var btn = document.getElementById('asbtn');
+  var ways = document.getElementById('lways');
+  if (!btn || !ways) return;
+
+  function reveal(){
+    if (!ways.hidden) return;
+    ways.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    document.getElementById('assist').classList.add('done');
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ ways.classList.add('in'); });
+    });
+    var first = ways.querySelector('.lway');
+    if (first) setTimeout(function(){ first.focus({ preventScroll:true }); }, 520);
+  }
+
+  btn.addEventListener('click', reveal);
+
+  /* Somebody who scrolls has decided to look around on their own. Show them
+     the ways in rather than making them find the button first. */
+  window.addEventListener('scroll', function once(){
+    if (window.pageYOffset > 60) { reveal(); window.removeEventListener('scroll', once); }
+  }, { passive: true });
+})();
+
 })();

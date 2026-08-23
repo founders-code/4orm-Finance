@@ -144,7 +144,7 @@ CONSUMER = """
         moves.</p>
       <div class="hbtns rv d3">
         <a class="hb hb-p" href="/#personal">Pick up 4orm <span class="cir">{a}</span></a>
-        <a class="hb hb-g" href="/how-it-works">How it works</a>
+        <a class="hb hb-g" href="/form">How it works</a>
       </div>
     </div>
     <div class="hcol hphone rv d1">

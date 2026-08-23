@@ -11,173 +11,111 @@ from pkit import hero, sec, softs, flow, note, cta, duty, timeline, bignums, sou
 
 
 def why():
+    """Why 4orm is now the company page.
+
+    The research it used to carry lives on /research. What stays is the
+    answer to four questions: why are you doing this, what do you believe,
+    who are you, and why are you different.
+    """
+    import json, os
+    here = os.path.dirname(os.path.abspath(__file__))
+    with io.open(os.path.join(here, "content", "team.json"), encoding="utf-8") as f:
+        TEAM = json.load(f)
+
     S = []
 
-    S.append(sec("The gap", "Four things going wrong at once.",
-        softs([
-            ("Confusion", "The person does not understand what they are agreeing to",
-             "Nearly half of Canadian homebuyers told CMHC they felt uncertain or concerned during "
-             "the process. That figure has improved a great deal in recent years, from close to "
-             "two thirds. It is still nearly half.", "blue"),
-            ("Fraud", "$704 million reported lost in a single year",
-             "The Canadian Anti-Fraud Centre recorded more than 112,000 reports and over $704 "
-             "million in reported losses in 2025, including $351 million in investment fraud "
-             "alone. Reported. The real number is larger.", "gold"),
-            ("Fragmentation", "The relationship lives in eight systems",
-             "The conversation is in one place, the documents in another, the consent somewhere "
-             "else again, and the reasoning is usually in one person&rsquo;s head.", "ok"),
-            ("Evidence gaps", "The conclusion survives, the reason does not",
-             "Regulators in three separate sectors have now published the same finding: the file "
-             "records what was decided and cannot show why.", "blue"),
-        ], cols=2),
-        p="Not one thing going wrong. Four, at once, in the space between a person making an "
-          "important financial decision and the firm serving them."))
+    S.append(sec("Why now", "Three numbers, and what each one covers.",
+        bignums([
+            ("47%", "gold", "of homebuyers reported concern or uncertainty during the process. "
+                            "CMHC survey respondents, 2026."),
+            ("$704M+", "blue", "in reported fraud losses across more than 112,000 reports. "
+                               "Canadian Anti-Fraud Centre, 2025."),
+            ("100%", "gold", "of files in one FSRA private-mortgage supervision sample had no "
+                             "documented suitability assessment. 2024 to 2025."),
+        ]) +
+        note("b", "<b>Read the scope, not just the number.</b> A supervision sample is not a "
+                  "national rate. Every figure this site uses carries its year, its scope and its "
+                  "source on the <a href=\'/research\'>research page</a>."),
+        p="Finance has more technology than it has ever had. That has not always made the "
+          "relationship any clearer."))
 
-    S.append(sec("What we are protecting", "Two things, and they are the same thing.",
+    S.append(sec("What makes us different", "Five things, and each one is a choice.",
         flow([
-            ("The person, before the decision rather than at it",
-             "A disclosure handed over at signing is not information. Information is what a person "
-             "gets early enough to change their mind. 4orm exists in the weeks before anybody has "
-             "anything to sell, which is the only time understanding is free."),
-            ("The person, afterwards",
-             "The record is not only the firm&rsquo;s defence. It is the person&rsquo;s proof that "
-             "they were told, that they understood, and that they agreed knowing what they were "
-             "agreeing to. That has never belonged to them before."),
-            ("The firm, from the gap in its own file",
-             "Every finding on this page describes a firm that did the work and could not show it. "
-             "That is the exposure. Not bad intent, an absent record."),
-            ("The relationship, which is what both of them actually have",
-             "A person who understands the decision is a better client. A firm that can explain "
-             "its reasoning is a better firm. The evidence is what falls out of doing both."),
-        ]), alt=True,
-        p="The fines and the findings on this site are not a threat. They are the answer to one "
-          "question: what are we protecting, and from what."))
-
-    S.append(sec("What the regulators said", "Three sectors. Three regulators. One complaint.",
-        timeline([
-            ("2024 to 2025", "FSRA, on private mortgage files",
-             "Every file reviewed had no documented suitability assessment. Seventy-three per cent "
-             "were missing adequate disclosure of material risk. Sixty-five per cent were missing "
-             "adequate disclosure of the relationship or the conflict. In every entity examined, "
-             "supervision was inadequate.",
-             "Financial Services Regulatory Authority of Ontario", "gold"),
-            ("10 Dec 2025", "The CSA and CIRO, on 105 registered firms",
-             "Some firms had little or no documentation, or recorded only that an investment was "
-             "suitable without showing the basis for that determination. In many cases registrants "
-             "could not show evidence that a reasonable range of alternatives was considered.",
-             "Joint CSA/CIRO Staff Notice 31-368", "gold"),
-            ("31 Jul 2025", "FCAC, on how banks handle complaints",
-             "Employees did not fully understand what counted as a complaint, so it was never "
-             "recorded. A complaint never recorded never starts the clock and never reaches "
-             "anybody.",
-             "Financial Consumer Agency of Canada", "blue"),
-        ]),
-        p="These were published independently, in different years, about different products, by "
-          "people who were not talking to each other. They describe the same failure."))
-
-    S.append(sec("Why this becomes a category", "Utility first. Distribution through professionals.",
-        flow([
-            ("The usefulness starts before the transaction",
-             "A person preparing for a decision has a reason to use 4orm before any firm is "
-             "involved. That is where trust is cheap to earn and impossible to buy later."),
-            ("Distribution comes through the professional",
-             "A better-prepared client is worth more to a broker, an agent or an advisor than any "
-             "marketing. The professional brings 4orm to the person, because it makes their own "
-             "work easier."),
-            ("Evidence grows while the relationship happens",
-             "Nobody has to remember to create it. The record is a by-product of the conversation, "
-             "which is the only version of this that survives contact with a busy week."),
-            ("The same architecture crosses the sectors",
-             "Mortgage, auto, real estate, insurance, investing, banking, lending. Seven different "
-             "rulebooks, one relationship."),
+            ("We start with the person, not the compliance department",
+             "The first useful minute of 4orm happens before any firm is involved, because that is "
+             "the only moment understanding is free."),
+            ("The professional stays the professional",
+             "4orm supports the relationship. It does not replace the expertise, and it does not "
+             "make the regulated recommendation."),
+            ("The record starts before anything goes wrong",
+             "Evidence grows while the interaction happens, rather than being assembled afterwards "
+             "by a person trying to remember."),
+            ("Both sides get something from the same interaction",
+             "Clarity for the person and evidence for the firm are not two products. They fall out "
+             "of one conversation."),
+            ("We care about what happens between systems",
+             "Identity checking, documents, credit and messaging are all pieces. What 4orm "
+             "protects is the relationship running between them."),
         ]), alt=True))
 
-    S.append(cta("Better financial decisions start with better relationships.",
-        "Everything else on this site is an argument for that sentence."))
+    S.append(sec("What we stand for", "Four values, and they describe the product.",
+        softs([
+            ("Protect people", "Leave the person safer than you found them",
+             "Financial technology should leave a person clearer and more capable than it found "
+             "them, not merely further along a funnel.", "blue"),
+            ("Tell the truth", "Three kinds of knowing are not one kind",
+             "What a person said, what a document supports, what has been independently verified "
+             "and what remains unknown are different things. We will not present them as though "
+             "they are the same.", "gold"),
+            ("Sovereignty", "Your information. Your decisions. Your record.",
+             "A person's information, choices and understanding should not disappear simply "
+             "because they entered a complicated financial process.", "blue"),
+            ("Transparency", "Show the request, the reason and the result",
+             "What is being asked for. Why. What changed. Who received it. What happened next.",
+             "gold"),
+        ], cols=2)))
 
-    body = hero("Why 4orm", "Financial relationships are breaking",
-                "in the gaps.",
-                "Not in the products, and not in the rules. In the space between a person making a "
-                "decision that will shape their life and the firm that is meant to be helping them "
-                "make it.") + "".join(S)
-    return kit.write("why", "/why-4orm", "Financial relationships are breaking in the gaps.",
-                     "Confusion, fraud, fragmentation and evidence gaps. What 4orm protects, and "
-                     "what three Canadian regulators independently found.", body)
+    S.append(sec("When a person is needed", "Technology when it helps. A person when you need one.",
+        note("b", "<b>Launching with Canadian client support, around the clock.</b> We do not "
+                  "believe the last thing a worried person can reach should be a screen."),
+        p="The moment a person most needs help with a financial decision is rarely between nine "
+          "and five.", alt=True))
 
+    S.append(sec("Built in Canada", "For the relationships Canadians already have.",
+        '<div class="chainflow rv">' + "".join(
+            '<span class="cf" style="--i:%d">%s</span>' % (i, x) for i, x in enumerate(
+                ["Mortgage", "Auto", "Insurance", "Lending", "Canadian privacy law",
+                 "Canadian regulators", "Canadian support"])) + '</div>',
+        p="Canadian deadlines, Canadian regulators, Canadian registers. This is a statement of "
+          "where we are focused rather than a flag on a page."))
 
-def how():
-    S = []
+    cards = "".join(
+        '<article class="tm rv">'
+        '<div class="tmph"><img src="%s" alt="%s" loading="lazy" width="480" height="480" />'
+        '<span class="tmini" aria-hidden="true">%s</span></div>'
+        '<span class="tmk">%s</span><h3 class="tmn">%s</h3>'
+        '<p class="tmr">%s</p><p class="tmb">%s</p></article>'
+        % (m["img"], m["name"], m["ini"], m["kick"], m["name"], m["role"], m["short"])
+        for m in TEAM)
 
-    LINE = ["The person", "The conversation", "The information", "The permission",
-            "The verification", "The professional", "The action", "The change",
-            "The decision", "The evidence", "The outcome"]
+    S.append(sec("The people building it", "Nine of us, and why each one is here.",
+        '<div class="tmgrid">' + cards + '</div>',
+        p="Most of us have spent a career somewhere the record mattered. Reach any of us at "
+          "<a href=\'mailto:office@4ormfinance.com\'>office@4ormfinance.com</a>.", alt=True))
 
-    S.append(sec("The line", "One relationship, end to end.",
-        '<div class="lline">' + "".join(
-            '<span class="lnode"><b>%02d</b>%s</span>' % (i + 1, n) for i, n in enumerate(LINE)) +
-        '</div>' +
-        note("b", "<b>Everything 4orm does sits on this line.</b> Not a product suite. One "
-                  "relationship, followed from before it starts to after it ends, with each step "
-                  "answering the same five questions: what happened, when, who was involved, what "
-                  "was shown, and what was agreed."),
-        p="Most software owns one node and calls it a platform. The gap is not inside any single "
-          "node. It is in the joins between them."))
+    S.append(cta("This is what we are building, and what we are building it around.",
+        "Use it, or tell us where it falls short. Both are useful to us.",
+        primary=("Experience 4orm", "/#personal"), secondary=("Talk to the team", "/contact")))
 
-    S.append(sec("What the person gets", "Understand it, prepare for it, check them, keep it.",
-        flow([
-            ("Understand what you are actually deciding",
-             "In your own words, before anybody has anything to sell you. Ask the awkward "
-             "questions here, where they cost nothing and nobody is watching."),
-            ("Walk in prepared",
-             "Identity verified once. Income supported by a document rather than stated. The "
-             "things a professional will ask for, gathered before they ask."),
-            ("Check who you are dealing with",
-             "Every sector has a public register. 4orm takes you to the right one and tells you "
-             "what it does and does not cover."),
-            ("Keep what happened",
-             "Everything in your record carries where it came from. What you said, what a document "
-             "supports, and what has been independently verified never look the same."),
-        ])))
-
-    S.append(sec("How sure are we", "Five labels, never blurred.",
-        '<div class="dgrid">' +
-        duty("You told us", "The person said it. Useful, and not yet evidence.") +
-        duty("Document supported", "A document backs it, and the document is in the record.") +
-        duty("Verified", "Checked independently, and the result of that check is kept.") +
-        duty("Professional provided", "It came from the firm, not the person.") +
-        duty("Needs confirmation", "Something is missing, and everybody can see which thing.") +
-        duty("Changed", "It used to say something else, and the previous version is still there.") +
-        '</div>',
-        p="This is the smallest idea in 4orm and the one that carries the most weight. Nothing on a "
-          "screen is allowed to look more certain than it is.", alt=True))
-
-    S.append(sec("What the firm gets", "The record assembles itself.",
-        flow([
-            ("Better-prepared clients arrive",
-             "Identity done, income supported, the obvious questions already answered. The first "
-             "meeting starts where the third one used to."),
-            ("Material events surface while they are still fixable",
-             "When the application stops matching the record, that is a difference today rather "
-             "than an allegation in eighteen months."),
-            ("Supervision has something to supervise",
-             "Which files are complete, which are waiting, which need a person. Not a monthly "
-             "report assembled by hand."),
-            ("The evidence pack already exists",
-             "Conversations, documents, consent, versions, reasoning, and the resolution of "
-             "anything that went sideways. Assembled continuously, not reconstructed on demand."),
-        ])))
-
-    S.append(cta("The same conversation, doing two jobs.",
-        "The person understands the decision. The firm can show how it was handled. Neither of "
-        "them has to do extra work for the other one to get what they need."))
-
-    body = hero("How it works", "One line, from before the relationship",
-                "to long after it.",
-                "4orm is not a suite of tools. It is a single line through a financial "
-                "relationship, and everything it does happens somewhere on that line.") + "".join(S)
-    return kit.write("how", "/how-it-works", "One line, from before the relationship to long after it.",
-                     "Person, conversation, information, permission, verification, professional, "
-                     "action, change, decision, evidence, outcome.", body)
+    body = hero("Why 4orm", "Finance has more technology",
+                "than it has ever had.",
+                "That has not always made the relationship clearer. We believe a person should "
+                "understand an important financial decision before they make it, and a firm "
+                "should be able to demonstrate how it took care of the "
+                "relationship.") + "".join(S)
+    return kit.write("why", "/why-4orm", "Why 4orm.",
+                     "Why we are building this, what we believe, and the nine people building "
+                     "it.", body)
 
 
 def standard():
@@ -276,115 +214,8 @@ def standard():
                      "and what the Standard does not claim.", body)
 
 
-def gap():
-    S = []
-
-    S.append(sec("Where it actually lives", "Six systems. Each one doing its own job well.",
-        softs([
-            ("The conversation", "Where the reasoning actually lives",
-             "It happens by phone, by message, across a desk. It is the part that explains "
-             "everything and the part least likely to reach a file.", "blue"),
-            ("The documents", "Correct, and mute",
-             "A signed form proves a signature. It does not prove the person understood what they "
-             "were signing, or what they were told beforehand.", "blue"),
-            ("The consent", "In a third system",
-             "Captured somewhere, by someone, usually in a tool bought for a different purpose.",
-             "gold"),
-            ("The versions", "Overwritten",
-             "The application says what it says today. What it said in March, and who changed it, "
-             "is frequently unrecoverable.", "gold"),
-            ("The supervision", "A monthly report, assembled by hand",
-             "By the time a pattern is visible in it, the file it describes has closed.", "ok"),
-            ("The reasoning", "In one person&rsquo;s head",
-             "Which is fine until the person leaves, or until enough time passes that they no "
-             "longer remember. Both of those are certainties.", "ok"),
-        ], cols=3),
-        p="Every one of these systems does its own job well. The duty a firm is held to spans all "
-          "of them, and nothing spans all of them."))
-
-    S.append(sec("What it costs", "The record is what fails, not the work.",
-        bignums([
-            ("100%", "gold", "of private mortgage files reviewed by FSRA in 2024 to 2025 had no "
-                             "documented suitability assessment"),
-            ("73%", "gold", "were missing or had inadequate disclosure of material risk"),
-            ("65%", "blue", "were missing or had inadequate disclosure of the relationship or the "
-                            "conflict"),
-            ("100%", "blue", "of the entities examined had inadequate supervision"),
-        ]),
-        p="Read those four figures together. They do not describe firms that gave bad advice. They "
-          "describe firms whose files could not show what advice was given, or why, or by whom, or "
-          "who was watching.", alt=True))
-
-    S.append(sec("Closing it", "Evidence as a by-product, not a project.",
-        flow([
-            ("It has to come from the conversation",
-             "Any system that asks a busy professional to go and create evidence afterwards will "
-             "be defeated by a busy week. The record has to fall out of the work itself."),
-            ("It has to carry its own provenance",
-             "Every item knows where it came from and how sure anybody is about it. Otherwise "
-             "reassembling it later is guesswork with better formatting."),
-            ("It has to keep what changed",
-             "The previous version, who changed it, and when. A record that overwrites itself "
-             "cannot answer the only question that ever gets asked."),
-            ("It has to belong to both sides",
-             "The firm needs it to explain the work. The person needs it to prove they were "
-             "informed. It is the same record."),
-        ])))
-
-    S.append(cta("The requirement exists. The evidence is scattered.",
-        "Closing that distance is the whole of what 4orm does."))
-
-    body = hero("The evidence gap", "The duty is one sentence.",
-                "The record of it is in six places.",
-                "Understand the client, explain the decision, keep what shows how it was reached. "
-                "Every regulator now says a version of that. Almost no firm can produce it without "
-                "assembling it by hand, under deadline.") + "".join(S)
-    return kit.write("gap", "/evidence-gap", "The duty is one sentence. The record of it is in six places.",
-                     "Where the record of a financial relationship actually lives, why it cannot "
-                     "answer the question, and what closing it requires.", body)
-
-
-def company():
-    """The company page is the team page.
-
-    The headline claims a record is only worth the people behind it, so the
-    very next thing on the page had better be those people. Nothing goes
-    after them.
-    """
-    import json, os
-    here = os.path.dirname(os.path.abspath(__file__))
-    with io.open(os.path.join(here, "content", "team.json"), encoding="utf-8") as f:
-        TEAM = json.load(f)
-
-    cards = "".join(
-        '<article class="tm rv">'
-        '<div class="tmph"><img src="%s" alt="%s" loading="lazy" width="480" height="480" />'
-        '<span class="tmini" aria-hidden="true">%s</span></div>'
-        '<span class="tmk">%s</span>'
-        '<h3 class="tmn">%s</h3>'
-        '<p class="tmr">%s</p>'
-        '<p class="tmb">%s</p>'
-        '</article>' % (m["img"], m["name"], m["ini"], m["kick"], m["name"], m["role"], m["short"])
-        for m in TEAM)
-
-    S = [sec("Who we are", "The people building it.",
-             '<div class="tmgrid">' + cards + '</div>',
-             p="Nine people, most of whom have spent a career somewhere the record mattered. "
-               "Reach any of us at <a href=\'mailto:office@4ormfinance.com\'>office@4ormfinance.com</a>.")]
-
-    body = hero("4orm Family", "A record is only worth",
-                "the people behind it.",
-                "A person should understand what they are agreeing to. A professional doing the "
-                "right thing should be able to demonstrate it. A firm should know how its client "
-                "relationships are actually being handled. That is why we are building "
-                "this.") + "".join(S)
-    return kit.write("company", "/company", "A record is only worth the people behind it.",
-                     "The people building 4orm, and why.", body)
-
-
 def build():
+    # /form replaced how(), /research and /form absorbed gap(), and the team
+    # moved onto why(). Those three pages are gone rather than orphaned.
     yield why()
-    yield how()
     yield standard()
-    yield gap()
-    yield company()

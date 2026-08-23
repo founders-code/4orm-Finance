@@ -2,10 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.4ormfinance.com/</loc><lastmod>2026-08-23</lastmod><priority>1.0</priority></url>
   <url><loc>https://www.4ormfinance.com/home</loc><lastmod>2026-08-23</lastmod><priority>1.0</priority></url>
-  <url><loc>https://www.4ormfinance.com/why-4orm</loc><lastmod>2026-08-23</lastmod><priority>0.9</priority></url>
-  <url><loc>https://www.4ormfinance.com/how-it-works</loc><lastmod>2026-08-23</lastmod><priority>0.9</priority></url>
-  <url><loc>https://www.4ormfinance.com/the-standard</loc><lastmod>2026-08-23</lastmod><priority>0.9</priority></url>
-  <url><loc>https://www.4ormfinance.com/evidence-gap</loc><lastmod>2026-08-23</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.4ormfinance.com/personal</loc><lastmod>2026-08-23</lastmod><priority>1.0</priority></url>
+  <url><loc>https://www.4ormfinance.com/professional</loc><lastmod>2026-08-23</lastmod><priority>1.0</priority></url>
+  <url><loc>https://www.4ormfinance.com/form</loc><lastmod>2026-08-23</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.4ormfinance.com/family</loc><lastmod>2026-08-23</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.4ormfinance.com/why-4orm</loc><lastmod>2026-08-23</lastmod><priority>1.0</priority></url>
+  <url><loc>https://www.4ormfinance.com/research</loc><lastmod>2026-08-23</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.4ormfinance.com/the-standard</loc><lastmod>2026-08-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://www.4ormfinance.com/industries</loc><lastmod>2026-08-23</lastmod><priority>0.9</priority></url>
   <url><loc>https://www.4ormfinance.com/industries/mortgage</loc><lastmod>2026-08-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://www.4ormfinance.com/industries/auto</loc><lastmod>2026-08-23</lastmod><priority>0.8</priority></url>
@@ -16,7 +19,6 @@
   <url><loc>https://www.4ormfinance.com/industries/lending</loc><lastmod>2026-08-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://www.4ormfinance.com/check-a-firm</loc><lastmod>2026-08-23</lastmod><priority>0.9</priority></url>
   <url><loc>https://www.4ormfinance.com/privacy</loc><lastmod>2026-08-23</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.4ormfinance.com/company</loc><lastmod>2026-08-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.4ormfinance.com/contact</loc><lastmod>2026-08-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.4ormfinance.com/website-privacy</loc><lastmod>2026-08-23</lastmod><priority>0.3</priority></url>
   <url><loc>https://www.4ormfinance.com/terms</loc><lastmod>2026-08-23</lastmod><priority>0.3</priority></url>

@@ -24,15 +24,16 @@ var INDUSTRIES = [
   { label: 'Lending',     href: '/industries/lending',     slug: 'lending',    k: 'loan payday credit rate' }
 ];
 
-var MORE = [
-  { label: 'Why 4orm',      href: '/why-4orm',      slug: 'why',        k: 'gap trust relationship breaking' },
-  { label: 'How it works',  href: '/how-it-works',  slug: 'how',        k: 'line person permission evidence passport' },
-  { label: 'The Standard',  href: '/the-standard',  slug: 'standard',   k: 'principles rules regulators expect' },
-  { label: 'The evidence gap', href: '/evidence-gap', slug: 'gap',      k: 'record scattered systems reconstruct' },
-  { label: 'Industries',    href: '/industries',    slug: 'industries', k: 'seven decisions sectors' },
-  { label: 'Check a firm',  href: '/check-a-firm',  slug: 'check',      k: 'licence register red flag scam verify' },
-  { label: 'Security and privacy', href: '/privacy', slug: 'privacy',   k: 'data held corrected' },
-  { label: 'Company',       href: '/company',       slug: 'company',    k: 'team mission who is building this' }
+
+/* The six pages the whole site hangs off. Everything else is secondary and
+   lives in the footer or in context. */
+var PRIMARY = [
+  { label: 'Home',         href: '/home',      slug: 'homepage' },
+  { label: 'Personal',     href: '/personal',  slug: 'personal' },
+  { label: 'Professional', href: '/professional', slug: 'professional' },
+  { label: 'Form',         href: '/form',      slug: 'form' },
+  { label: 'Family',       href: '/family',    slug: 'family' },
+  { label: 'Why 4orm',     href: '/why-4orm',  slug: 'why' }
 ];
 
 var page = document.body.getAttribute('data-page') || '';
@@ -69,10 +70,7 @@ function buildMenuHeader() {
       '<a class="nav-brand" href="/" aria-label="Back to the start">' +
         '<img src="/assets/logo.png" alt="4orm Finance" /></a>' +
       '<nav class="nav-links" aria-label="Primary">' +
-        '<a href="/home">Home</a>' +
-        '<a href="/#personal">Personal</a>' +
-        '<a href="/#professional">Professional</a>' +
-        '<a href="/company">4orm Family</a>' +
+        PRIMARY.map(function (i) { return '<a href="' + i.href + '">' + i.label + '</a>'; }).join('') +
       '</nav>' +
       '<button class="nav-cta" type="button" data-closemenu>Close ' +
         '<span class="cir">' + ARROW + '</span></button>' +
@@ -126,38 +124,27 @@ function buildMenu() {
     '<div class="omenu-shell">' +
       /* Three ways in, and nothing else. A menu that lists everything is a
          sitemap; a menu that names the three kinds of visitor is navigation. */
-      '<div class="omenu-in">' +
-        col('Personal', [
-          { label: 'Pick up the phone', href: '/#personal',
-            k: 'you consumer buyer mortgage auto decision guardian understand prepare' },
-          { label: 'Check a firm', href: '/check-a-firm', slug: 'check',
-            k: 'licence licensed register red flag scam verify who am i dealing with' }
-        ]) +
-        col('Professional', [
-          { label: 'See the dashboard', href: '/#professional',
-            k: 'firm broker adviser agent evidence supervision clients exceptions' },
-          { label: 'The Standard', href: '/the-standard', slug: 'standard',
-            k: 'principles rules regulators expect participating firm' }
-        ]) +
-        col('About us', [
-          { label: 'Why 4orm',      href: '/why-4orm',     slug: 'why',        k: 'gap trust relationship breaking' },
-          { label: 'How it works',  href: '/how-it-works', slug: 'how',        k: 'line person permission evidence record' },
-          { label: 'The evidence gap', href: '/evidence-gap', slug: 'gap',     k: 'scattered systems reconstruct' },
-          { label: 'Industries',    href: '/industries',   slug: 'industries', k: 'seven decisions sectors mortgage auto' },
-          { label: 'Security and privacy', href: '/privacy', slug: 'privacy',  k: 'data held corrected' },
-          { label: 'Company',       href: '/company',      slug: 'company',    k: 'team mission who is building this' }
+      '<div class="omenu-in six">' +
+        col('Go', PRIMARY) +
+        col('Industries', INDUSTRIES) +
+        col('More', [
+          { label: 'Research',   href: '/research',    slug: 'research',  k: 'data numbers sources trust canada' },
+          { label: 'The Standard', href: '/the-standard', slug: 'standard', k: 'principles operating' },
+          { label: 'Check a firm', href: '/check-a-firm', slug: 'check',  k: 'licence register verify' },
+          { label: 'Privacy and security', href: '/privacy', slug: 'privacy', k: 'my 4orm information' },
+          { label: 'Contact',    href: '/contact',     slug: 'contact',   k: 'talk support walkthrough' }
         ]) +
         '<div class="ocol ofoot"><a class="obig" href="/contact">Talk to us</a></div>' +
       '</div>' +
     '</div>' +
-    /* The shoreline, and the water below it. The page keeps showing through
-       under the waterline, so clicking down there means "take me back". */
+    /* One soft line, drifting. The page keeps showing through below it, so
+       clicking down there means "take me back to what I was reading". */
     '<div class="owave a" aria-hidden="true">' +
-      '<svg viewBox="0 0 1200 170" preserveAspectRatio="none">' +
-        '<path class="w1" d="M0,70 C100,30 200,110 300,70 C400,30 500,110 600,70 C700,30 800,110 900,70 C1000,30 1100,110 1200,70 L1200,170 L0,170 Z"/></svg></div>' +
-    '<div class="owave b" aria-hidden="true">' +
-      '<svg viewBox="0 0 1200 170" preserveAspectRatio="none">' +
-        '<path class="w2" d="M0,86 C150,52 250,120 400,86 C550,52 650,120 800,86 C950,52 1050,120 1200,86 L1200,170 L0,170 Z"/></svg></div>' +
+      '<svg viewBox="0 0 1600 96" preserveAspectRatio="none">' +
+        '<path class="w1" d="M0,46 C90,22 150,64 240,52 C330,40 380,18 470,30 '
+        'C560,42 610,70 700,58 C790,46 840,20 930,28 C1020,36 1080,66 1170,56 '
+        'C1260,46 1310,22 1400,32 C1490,42 1540,60 1600,50 L1600,96 L0,96 Z"/>' +
+      '</svg></div>' +
     '<button class="oback" type="button" aria-label="Close the menu and go back to the page">' +
       '</button>';
   return m;
@@ -180,10 +167,10 @@ function buildNav() {
       '<a class="nav-brand" href="/" aria-label="Back to the start">' +
         '<img src="/assets/logo.png" alt="4orm Finance" /></a>' +
       '<nav class="nav-links" aria-label="Primary">' +
-        '<a href="/home"' + (page === 'homepage' ? ' aria-current="page"' : '') + '>Home</a>' +
-        '<a href="/#personal">Personal</a>' +
-        '<a href="/#professional">Professional</a>' +
-        '<a href="/company"' + (famOn ? ' aria-current="page"' : '') + '>4orm Family</a>' +
+        PRIMARY.map(function (i) {
+          return '<a href="' + i.href + '"' +
+            (i.slug === page ? ' aria-current="page"' : '') + '>' + i.label + '</a>';
+        }).join('') +
       '</nav>' +
       '<button class="nav-cta" id="burger" type="button" aria-expanded="false" ' +
         'aria-controls="omenu">4orm your experience. <span class="cir">' + ARROW + '</span></button>' +
@@ -203,17 +190,19 @@ function buildFooter() {
       '<div><span class="flogo-chip"><img class="flogo" src="/assets/logo-light.png" alt="4orm Finance" /></span>' +
         '<p class="fab">The intelligence and evidence layer for major financial decisions. ' +
         'An Alberta company. Pre-revenue, and the product is under development.</p></div>' +
-      '<div><div class="fh">Views</div>' +
-        VIEWS.map(function (v) { return '<a href="' + v.href + '">' + v.label + '</a>'; }).join('') +
-        '<a href="/how-it-works">How it works</a></div>' +
+      '<div><div class="fh">Go</div>' +
+        PRIMARY.map(function (i) { return '<a href="' + i.href + '">' + i.label + '</a>'; }).join('') +
+      '</div>' +
       '<div><div class="fh">Industries</div>' + INDUSTRIES.map(function (i) {
         return '<a href="' + i.href + '">' + i.label + '</a>'; }).join('') + '</div>' +
-      '<div><div class="fh">Company</div>' +
-        '<a href="/why-4orm">Why 4orm</a><a href="/the-standard">The Standard</a>' +
-        '<a href="/evidence-gap">The evidence gap</a><a href="/company">Company</a>' +
+      '<div><div class="fh">More</div>' +
+        '<a href="/research">Research</a>' +
+        '<a href="/the-standard">The Standard</a>' +
+        '<a href="/check-a-firm">Check a firm</a>' +
+        '<a href="/privacy">Privacy and security</a>' +
         '<a href="/contact">Contact</a>' +
         '<a href="mailto:' + EMAIL + '">' + EMAIL + '</a>' +
-        '<a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>' +
+        '<a href="/website-privacy">Website privacy</a><a href="/terms">Terms</a></div>' +
     '</div>' +
     '<div class="fbase"><span>&copy; ' + new Date().getFullYear() + ' 4orm Finance. All rights reserved.</span>' +
       '<span>Alberta, Canada</span></div>' +

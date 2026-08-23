@@ -141,7 +141,7 @@ def partners_section():
         "It is not a statement that the firm has been engaged by 4orm Finance, and it is not an "
         "endorsement by that firm.",
         'Where we name an individual, that individual is who we work with. The full bench, with bios, '
-        'is on the <a href="/company" style="color:var(--blue-dp)">company page</a>.')
+        'is on the <a href="/why-4orm" style="color:var(--blue-dp)">Why 4orm page</a>.')
 
     return section("Who we work with", "The people behind this, named.", body,
                    p="You are being asked to put your record keeping in the hands of a company you have "

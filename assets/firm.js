@@ -211,3 +211,34 @@ document.addEventListener('click', function (e) {
     if (app) app.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 260);
 });
+
+
+/* ------------------------------------------------------------------
+   If the visitor named their firm on the way in, the reading carries
+   it instead of our example brokerage.
+   ------------------------------------------------------------------ */
+(function nameTheFirm(){
+  function apply(){
+    var f = (window.FourmWho && window.FourmWho.firm && window.FourmWho.firm()) || '';
+    if (!f) return;
+    var el = document.querySelector('.abfirm');
+    if (el && el.textContent !== f) el.textContent = f;
+    var h = document.querySelector('.aih');
+    if (h && h.getAttribute('data-named') !== '1') {
+      h.setAttribute('data-named', '1');
+      h.innerHTML = 'Monday morning at ' + f.replace(/[<>&]/g, '') +
+                    ',<br />with 148 live client files.';
+    }
+  }
+  apply();
+  /* The dashboard can be reached by click or by hash, and the firm name may
+     arrive after this file first ran. Cover every route in. */
+  document.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('[data-go="firm"], [data-openapp]')) {
+      setTimeout(apply, 60);
+    }
+  });
+  window.addEventListener('hashchange', function(){ setTimeout(apply, 80); });
+  setTimeout(apply, 500);
+  setTimeout(apply, 1600);
+})();

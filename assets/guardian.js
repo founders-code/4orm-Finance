@@ -156,7 +156,19 @@ var IND = {
   }
 };
 
-function I() { return IND[ST.ind]; }
+function I() {
+  var i = IND[ST.ind];
+  /* If the visitor told 4orm Assist their name on the way in, the whole
+     experience uses it. It never left their browser to get here. */
+  var given = (window.FourmWho && window.FourmWho.name && window.FourmWho.name()) || '';
+  if (given) {
+    var first = given.split(/\s+/)[0];
+    i = Object.keys(i).reduce(function (o, k) { o[k] = i[k]; return o; }, {});
+    i.who = first;
+    i.person = given;
+  }
+  return i;
+}
 
 /* ============================================================
    Ask 4orm.
@@ -1342,6 +1354,24 @@ document.addEventListener('submit', function (e) {
 
 if (document.getElementById('phBody')) {
   boot('mortgage');
+
+  /* The name may arrive after this file has already painted a screen, because
+     4orm Assist asks for it on the landing. Re-open with it the first time the
+     phone is actually picked up. */
+  (function adoptName(){
+    var applied = '';
+    function refresh(){
+      var given = (window.FourmWho && window.FourmWho.name && window.FourmWho.name()) || '';
+      if (!given || given === applied) return;
+      applied = given;
+      if (ST) boot(ST.ind);
+    }
+    window.addEventListener('hashchange', function(){ setTimeout(refresh, 40); });
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('[data-go="you"]')) setTimeout(refresh, 40);
+    });
+    setTimeout(refresh, 400);
+  })();
   /* Readiness is checked whenever the record grows enough to earn it. */
   var seen = 0;
   setInterval(function () {
