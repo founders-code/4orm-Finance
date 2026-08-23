@@ -87,6 +87,17 @@ def build():
         p="You approve item by item. What you decline does not travel, and the decision is part of "
           "your record too.", alt=True))
 
+    S.append(sec("People you invite", "A partner or a parent is a permission, not an account.",
+        flow([
+            ("Invite", "Name the person you want involved."),
+            ("Choose the purpose", "The down payment, the offer, the message you want checked."),
+            ("Choose the information", "Only what that purpose needs. Nothing travels by default."),
+            ("Confirm", "They see what you granted, and so do you."),
+            ("Review it later", "Access can be narrowed or ended, and the change is recorded."),
+        ]),
+        p="Someone can take part in a decision with you without receiving the record around it. "
+          "The same rules that govern a firm's access govern a person's."))
+
     # --- security -------------------------------------------------------
     S.append(sec("Security", "What is in place, and what is still being built.",
         softs([

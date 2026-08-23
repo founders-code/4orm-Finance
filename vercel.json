@@ -403,13 +403,13 @@
       "permanent": true
     },
     {
-      "source": "/team",
-      "destination": "/why-4orm",
+      "source": "/family",
+      "destination": "/team",
       "permanent": true
     },
     {
-      "source": "/team.html",
-      "destination": "/why-4orm",
+      "source": "/family.html",
+      "destination": "/team",
       "permanent": true
     },
     {

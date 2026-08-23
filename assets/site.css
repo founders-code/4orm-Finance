@@ -2039,9 +2039,24 @@ body[data-page="home"] .glow{display:none}
 .abback:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:2px}
 .abback span{font-size:13px;line-height:1}
 
-/* The nav pill's blue control opens the menu, so it is a button now and has to
-   carry the anchor's styling rather than the browser's. */
+/* The nav pill is a link to the home page. The menu opens from the control
+   beside it, which is now present at every width rather than only on a phone,
+   so there is one place to reach the white menu and it never moves. */
 button.nav-cta{cursor:pointer;border:0;font-family:var(--sans)}
+a.nav-cta{text-decoration:none}
+.burger.wide{display:flex}
+.nav-in .burger.wide{margin-left:10px}
+/* On a phone the row is the mark, the pill and the menu. The pill loses its
+   words there and keeps its arrow, so nothing wraps. */
+@media (max-width:520px){
+  .nav-cta{padding:9px;font-size:0;gap:0}
+  .nav-cta .cir{font-size:13px}
+}
+/* On the landing the control sits on white, so it needs the opposite colours. */
+.bare-right .burger{display:flex;color:var(--tx);background:var(--bg-3);
+  border:1px solid var(--border);cursor:pointer}
+.bare-right .burger:hover{background:var(--tx);border-color:var(--tx);color:#fff}
+a.bare-menu{text-decoration:none}
 
 /* ============================================================
    Length discipline
@@ -2342,12 +2357,16 @@ body[data-page="homepage"]{background:#fff}
   gap:clamp(30px,3.4vw,52px);margin-top:clamp(40px,4vw,60px)}
 @media (max-width:900px){ .tmgrid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:560px){ .tmgrid{grid-template-columns:1fr} }
-.tm{display:flex;flex-direction:column}
+/* `.tm` was already the dashboard tile's meta line. The team card is `.tmc`,
+   because two different things wearing one class name is how a layout ends up
+   sideways on a page nobody was looking at. */
+.tmc{display:flex;flex-direction:column;text-align:left;background:none;border:0;padding:0;
+  font-family:var(--sans);cursor:pointer;position:relative}
 .tmph{position:relative;aspect-ratio:1/1;border-radius:20px;overflow:hidden;
   background:var(--bg-3);margin-bottom:18px}
 .tmph img{width:100%;height:100%;object-fit:cover;display:block;
   transition:transform .7s var(--ease)}
-.tm:hover .tmph img{transform:scale(1.035)}
+.tmc:hover .tmph img{transform:scale(1.035)}
 /* If a photograph ever fails to load, the initials sit behind it rather than
    leaving a grey hole where a person should be. */
 .tmini{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
@@ -2355,9 +2374,81 @@ body[data-page="homepage"]{background:#fff}
   color:var(--tx-3);z-index:-1}
 .tmk{font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.18em;
   text-transform:uppercase;color:var(--blue)}
-.tmn{margin:9px 0 0;font-size:19.5px;font-weight:720;letter-spacing:-.028em;color:var(--tx)}
-.tmr{margin:3px 0 0;font-size:13.4px;color:var(--tx-3)}
-.tmb{margin:12px 0 0;font-size:14.2px;line-height:1.58;color:var(--tx-2)}
+.tmn{margin:9px 0 0;font-size:19.5px;font-weight:720;letter-spacing:-.028em;color:var(--tx);
+  display:block}
+.tmr{margin:3px 0 0;font-size:13.4px;color:var(--tx-3);display:block}
+/* The short line grows, so "Read more" lands on the same line across the row
+   however long each person's summary runs. */
+.tmb{margin:12px 0 0;font-size:14.2px;line-height:1.58;color:var(--tx-2);display:block;flex:1}
+.tmk{display:block}
+
+/* Read more, and the LinkedIn mark. Both only matter once a face has been
+   looked at, so neither competes with the face until then. */
+.tmmore{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:13.6px;
+  font-weight:650;letter-spacing:-.015em;color:var(--blue);
+  transition:gap .3s var(--spring),color .24s var(--ease)}
+.tmc:hover .tmmore{gap:12px;color:var(--blue-dp)}
+.tmli{position:absolute;top:14px;right:14px;display:inline-flex;align-items:center;
+  justify-content:center;width:34px;height:34px;border-radius:50%;color:#fff;
+  background:rgba(12,22,40,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  opacity:0;transform:translateY(-4px);
+  transition:opacity .3s var(--ease),transform .3s var(--spring),background .24s var(--ease)}
+.tmc:hover .tmli,.tmli:focus-visible{opacity:1;transform:none}
+.tmli:hover{background:var(--blue)}
+.tmc:focus-visible{outline:2px solid var(--blue);outline-offset:6px;border-radius:22px}
+
+/* Why this group: three things all nine have seen. */
+.tmwhy{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(26px,3vw,44px)}
+@media (max-width:860px){ .tmwhy{grid-template-columns:1fr} }
+.tw{border-top:2px solid var(--blue);padding-top:18px}
+.twk{font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--blue)}
+.tw h3{margin:10px 0 0;font-size:19px;font-weight:700;letter-spacing:-.028em;color:var(--tx)}
+.tw p{margin:9px 0 0;font-size:14.4px;line-height:1.6;color:var(--tx-2)}
+
+/* The person, brought forward. Same behaviour as the phone: the rest of the
+   page darkens and stays where it was. */
+.tmdest{position:fixed;inset:0;z-index:140;display:none;opacity:0;
+  background:rgba(9,16,30,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:opacity .45s var(--ease);padding:clamp(14px,4vh,56px) 16px;overflow-y:auto}
+.tmdest.on{display:flex;align-items:flex-start;justify-content:center}
+.tmdest.lit{opacity:1}
+.tmpanel{position:relative;width:min(760px,100%);background:#fff;border-radius:26px;
+  padding:clamp(26px,3.4vw,44px);box-shadow:0 50px 110px -40px rgba(10,20,40,.5);
+  transform:translateY(20px) scale(.985);transition:transform .55s var(--spring)}
+.tmdest.lit .tmpanel{transform:none}
+.tmx{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--border);background:var(--bg-2);color:var(--tx-2);cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background .24s var(--ease),color .24s var(--ease)}
+.tmx:hover{background:var(--tx);border-color:var(--tx);color:#fff}
+.tmhead{display:flex;gap:22px;align-items:flex-start;padding-right:44px}
+.tmbig{width:112px;height:112px;border-radius:20px;object-fit:cover;flex:none;
+  background:var(--bg-3)}
+.tmbn{margin:8px 0 0;font-size:clamp(24px,2.6vw,31px);font-weight:750;letter-spacing:-.038em;
+  color:var(--tx);line-height:1.08}
+.tmbr{margin:6px 0 0;font-size:14.4px;color:var(--tx-3)}
+.tmbl{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-size:13.4px;
+  font-weight:650;color:var(--blue);text-decoration:none}
+.tmbl:hover{color:var(--blue-dp)}
+.tmtext{margin-top:26px;border-top:1px solid var(--border);padding-top:22px}
+.tmtext p{margin:0 0 15px;font-size:15.4px;line-height:1.68;color:var(--tx-2)}
+.tmtext p:last-child{margin-bottom:0}
+@media (max-width:560px){
+  .tmhead{flex-direction:column;gap:16px;padding-right:38px}
+  .tmbig{width:88px;height:88px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tmdest,.tmpanel{transition:none}
+}
+
+/* The row of nine faces on Why 4orm, standing in for the page itself. */
+.teamteaser{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.teamteaser .tt{display:block;width:clamp(56px,6vw,74px);height:clamp(56px,6vw,74px);
+  border-radius:50%;overflow:hidden;background:var(--bg-3);flex:none;
+  box-shadow:0 0 0 3px #fff;transition:transform .4s var(--spring)}
+.teamteaser .tt:hover{transform:translateY(-4px)}
+.teamteaser .tt img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* The header stays above the menu, so a person can keep switching between
    Home, Personal, Professional and 4orm Family without closing anything first. */
@@ -2737,20 +2828,43 @@ body.greeting .nav-bare,body.greeting .lland > *:not(.ask4){opacity:0}
 .asbtn:hover .ascir{transform:translateX(3px)}
 @media (prefers-reduced-motion:reduce){ .asbtn,.ashead{animation:none} }
 
-/* The ways in arrive when Assist is taken up. */
+/* The three ways in are on the first screen, under the chat, from the moment
+   the page paints. Hiding them until Assist was taken up put the one thing a
+   visitor came to choose below the fold and behind a conversation. */
 .lways[hidden]{display:none}
 .lways{opacity:0;transform:translateY(14px);
   transition:opacity .7s var(--ease),transform .7s var(--spring)}
-.lways.in{opacity:1;transform:none}
+.lways.in,body.go .lways{opacity:1;transform:none}
 
 /* ============================================================
    4orm Assist: the chat that wakes up on the landing
    ============================================================ */
+/* Wide and short. The conversation is one question at a time, so it never
+   needs the depth of a messaging app, and the width lets the three ways in
+   sit on the same screen underneath it. */
 .a4chat{width:min(720px,100%);margin:clamp(30px,3.4vw,48px) auto 0;
   border:1px solid var(--border);border-radius:24px;background:#fff;overflow:hidden;
   box-shadow:0 30px 70px -34px rgba(16,32,64,.3);
   opacity:0;transform:translateY(18px) scale(.985);
   transition:opacity .7s var(--ease),transform .8s var(--spring)}
+.a4chat.wide{width:min(1080px,100%);margin:clamp(14px,1.8vh,26px) auto clamp(20px,2.6vh,34px)}
+.a4chat.wide .a4thread{min-height:104px;max-height:min(200px,22vh);padding:16px 22px;gap:8px}
+.a4chat.wide .a4top{padding:10px 22px}
+.a4chat.wide .a4bar{padding:10px 18px}
+.a4chat.wide .a4b{max-width:74%;padding:11px 15px}
+.a4chat.wide .a4bar input{padding:9px 16px}
+.a4chat.wide .a4bar button{width:36px;height:36px}
+
+/* The landing is one screen: the mark, the line, the chat, and the three ways
+   in. Everything above the chat gives up room so the ways in are on it. */
+body[data-page="home"] .lland{padding-top:clamp(72px,8.5vh,98px);
+  padding-bottom:clamp(20px,3vh,36px)}
+body[data-page="home"] .lmark{margin-bottom:clamp(14px,2vh,24px)}
+body[data-page="home"] .lmark img{height:clamp(50px,4.4vw,62px)}
+body[data-page="home"] .lh1{margin-bottom:clamp(12px,1.6vh,18px)}
+body[data-page="home"] .llede{margin-bottom:0;max-width:56ch}
+body[data-page="home"] .lway{padding-top:clamp(18px,2.4vh,26px);
+  padding-bottom:clamp(18px,2.4vh,26px)}
 .a4chat.awake{opacity:1;transform:none}
 .a4chat.handed{opacity:.35;pointer-events:none;transition:opacity .5s var(--ease)}
 

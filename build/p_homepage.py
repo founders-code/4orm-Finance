@@ -369,8 +369,8 @@ INTEG = """
 CLOSE = """
 <section class="hs hs-close">
   <div class="hwrap">
-    <h2 class="hbig rv">Better financial decisions<br />start with <span class="bl">better
-      relationships.</span></h2>
+    <h2 class="hbig rv">Two ways in.<br />Both start with the <span class="bl">same
+      conversation.</span></h2>
     <div class="htwo rv d1">
       <div class="hside">
         <span class="hk">I am making a decision</span>

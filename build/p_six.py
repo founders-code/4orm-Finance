@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Personal, Professional, Form and Family.
+"""Personal, Professional and Form.
 
-Four of the six pages the site hangs off. Each one answers a different
+Three of the pages the site hangs off. Each one answers a different
 person's question, and none of them requires the reader to understand
 regulation or evidence architecture to see the point.
 
@@ -130,6 +130,32 @@ def personal():
           "million in reported losses, and government partners estimate only five to ten per cent "
           "of frauds are reported at all."))
 
+    S.append(sec("Bring someone in", "Being involved does not mean seeing everything.",
+        '<div class="famdiag">'
+        '<span class="fc core">Sarah</span>'
+        '<div class="frow">'
+          '<span class="fc">Partner</span>'
+          '<span class="fc">Parent</span>'
+          '<span class="fc">Someone she trusts</span>'
+          '<span class="fc pro">Her professional</span>'
+        '</div>'
+        '<p class="fnote">Each connection carries its own permission.</p>'
+        '</div>' +
+        softs([
+            ("Together", "Buying a home with someone",
+             "Both people understand what is being decided, what it will cost and what is still "
+             "missing, without either of them relaying it second hand.", "blue"),
+            ("Helping", "A parent contributing to a down payment",
+             "Share only what relates to the contribution. A gift letter and the funds it "
+             "supports, rather than the whole file.", "blue"),
+            ("Checking", "Looking at something that feels wrong",
+             "A trusted person can help review a suspicious message without automatically "
+             "receiving the whole financial record it arrived beside.", "gold"),
+        ], cols=3),
+        p="A partner, a parent, a child or someone you trust can take part in a decision without "
+          "seeing everything in it. You choose what each connection can see, and you can change "
+          "it later."))
+
     S.append(cta("Nothing you do in there reaches anybody until you say so.",
         "Pick it up and use it. Ask the awkward question. Nobody is watching, and nothing moves "
         "without you.",
@@ -229,7 +255,7 @@ def professional():
         p="This one is not negotiable, and it is written into the Standard a participating firm "
           "adopts."))
 
-    S.append(cta("Start where the third meeting used to.",
+    S.append(cta("Four minutes, and you will know whether this fits.",
         "See the professional experience end to end, with synthetic data, in about four minutes.",
         primary=("See the dashboard", "/#professional"),
         secondary=("The Standard", "/the-standard")))
@@ -350,69 +376,7 @@ def form():
                      "the systems 4orm connects.", body)
 
 
-# ============================================================== 4. FAMILY
-
-def family():
-    S = []
-
-    S.append(sec("How it looks", "Being involved does not mean seeing everything.",
-        '<div class="famdiag">'
-        '<span class="fc core">Sarah</span>'
-        '<div class="frow">'
-          '<span class="fc">Partner</span>'
-          '<span class="fc">Parent</span>'
-          '<span class="fc">Someone she trusts</span>'
-          '<span class="fc pro">Her professional</span>'
-        '</div>'
-        '<p class="fnote">Each connection carries its own permission.</p>'
-        '</div>',
-        p="One household, different information. The person at the centre decides what each "
-          "connection can see, and can change it later."))
-
-    S.append(sec("Three situations", "The same control, three different shapes.",
-        softs([
-            ("Together", "Buying a home with someone",
-             "Both people can understand what is being decided, what it will cost and what is "
-             "still missing, without either of them having to relay it second hand.", "blue"),
-            ("Helping", "A parent contributing to a down payment",
-             "Share only what relates to the contribution. A gift letter and the funds it "
-             "supports, rather than the whole file.", "blue"),
-            ("Checking", "Looking at something that feels wrong",
-             "A trusted person can help review a suspicious message without automatically "
-             "receiving the whole financial record it arrived beside.", "gold"),
-        ], cols=3), alt=True))
-
-    S.append(sec("Who comes in", "You decide, and you can undo it.",
-        steps(["Invite", "Choose the purpose", "Choose the information", "Confirm",
-               "Review it later"]),
-        p="Role-appropriate access, set by the person whose decision it is."))
-
-    S.append(sec("When a person is needed", "Someone is there.",
-        note("b", "<b>Canadian client support, around the clock.</b> Launching with 24/7 support "
-                  "for 4orm clients, so the last thing a worried person reaches is never a "
-                  "screen."),
-        p="Financial worry does not keep office hours, and the moment a person most needs help "
-          "is usually the moment it is hardest to get."))
-
-    S.append(cta("One household. Different information.",
-        "A home purchase, a loan, an insurance decision or a suspicious request can involve a "
-        "partner, a parent, a child or someone trusted. Each of them sees what their part "
-        "requires, and no more than that.",
-        primary=("Experience 4orm", "/#personal"),
-        secondary=("Privacy and security", "/privacy")))
-
-    body = hero("Family", "Financial decisions rarely",
-                "affect only one person.",
-                "A partner, a parent, a child or someone you trust can take part in a decision "
-                "without seeing everything in it.") + "".join(S)
-    return kit.write("family", "/family",
-                     "Financial decisions rarely affect only one person.",
-                     "How a partner, a parent or a trusted person takes part in a financial "
-                     "decision with role-appropriate access.", body)
-
-
 def build():
     yield personal()
     yield professional()
     yield form()
-    yield family()

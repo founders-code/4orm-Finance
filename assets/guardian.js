@@ -1200,8 +1200,18 @@ var ACT = {
     ST.opened = true;
     setTimeout(focusAsk, 1200);
   },
-  example: function () { ask(I().ex); },
-  'Use the example': function () { ask(I().ex); },
+  /* Taking the example straight from the opening screen has to reach the same
+     place as choosing a goal first. Without this it skipped the read-back and
+     the three questions entirely, which is what made the phone feel broken. */
+  example: function () {
+    if (!ST.opened) {
+      ST.opened = true;
+      ST.thread = [];
+      thread();
+    }
+    ask(I().ex);
+  },
+  'Use the example': function () { ACT.example(); },
   prepare: function () { go('prepare'); },
   passport: function () { go('passport'); },
   perms: function () { go('perms'); },

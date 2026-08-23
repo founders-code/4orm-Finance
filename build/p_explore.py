@@ -81,27 +81,22 @@ def why():
         p="The moment a person most needs help with a financial decision is rarely between nine "
           "and five.", alt=True))
 
+    S.append(sec("Who is building it", "Nine people, and why each one is here.",
+        '<div class="teamteaser">' +
+        "".join('<span class="tt"><img src="%s" alt="%s" loading="lazy" '
+                'width="120" height="120" /></span>' % (m["img"], m["name"]) for m in TEAM) +
+        '</div>'
+        '<a class="hlink" href="/team">Meet the 4orm family &#8594;</a>',
+        p="Most of us have spent a career somewhere the record mattered. The full team, with what "
+          "each person actually does, is on its own page.", alt=True))
+
     S.append(sec("Built in Canada", "For the relationships Canadians already have.",
         '<div class="chainflow rv">' + "".join(
             '<span class="cf" style="--i:%d">%s</span>' % (i, x) for i, x in enumerate(
                 ["Mortgage", "Auto", "Insurance", "Lending", "Canadian privacy law",
                  "Canadian regulators", "Canadian support"])) + '</div>',
         p="Canadian deadlines, Canadian regulators, Canadian registers. This is a statement of "
-          "where we are focused rather than a flag on a page."))
-
-    cards = "".join(
-        '<article class="tm rv">'
-        '<div class="tmph"><img src="%s" alt="%s" loading="lazy" width="480" height="480" />'
-        '<span class="tmini" aria-hidden="true">%s</span></div>'
-        '<span class="tmk">%s</span><h3 class="tmn">%s</h3>'
-        '<p class="tmr">%s</p><p class="tmb">%s</p></article>'
-        % (m["img"], m["name"], m["ini"], m["kick"], m["name"], m["role"], m["short"])
-        for m in TEAM)
-
-    S.append(sec("The people building it", "Nine of us, and why each one is here.",
-        '<div class="tmgrid">' + cards + '</div>',
-        p="Most of us have spent a career somewhere the record mattered. Reach any of us at "
-          "<a href=\'mailto:office@4ormfinance.com\'>office@4ormfinance.com</a>.", alt=True))
+          "where we are focused rather than a flag on a page.", alt=False))
 
     S.append(cta("This is what we are building, and what we are building it around.",
         "Use it, or tell us where it falls short. Both are useful to us.",

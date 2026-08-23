@@ -89,11 +89,11 @@ function seq(turns) {
 function open(){
   var t = seq([
     ['<p>Hello. I am 4orm Assist.</p>', null, 800],
-    ['<p>Before you look around, tell me what brings you here and I will take you ' +
-     'straight to it.</p>',
-     [['you', 'I have a decision to make'],
-      ['firm', 'I look after clients'],
-      ['look', 'Just looking']], 1100]
+    ['<p>Are you here for yourself, for your business, or would you like to know what ' +
+     '4orm does?</p>',
+     [['you', 'For me'],
+      ['firm', 'For my business'],
+      ['about', 'What 4orm does']], 1100]
   ]);
   return t;
 }
@@ -129,21 +129,9 @@ function takeName(kind, value) {
 
 /* Hand over to the experience the visitor asked for. */
 function enter(kind) {
-  if (ways) { ways.hidden = false; requestAnimationFrame(function(){ ways.classList.add('in'); }); }
+  if (ways) { ways.hidden = false; ways.classList.add('in'); }
   if (panel) panel.classList.add('handed');
   location.hash = kind === 'firm' ? '#professional' : '#personal';
-}
-
-function showWays() {
-  if (!ways) return;
-  ways.hidden = false;
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () { ways.classList.add('in'); });
-  });
-  setTimeout(function () {
-    var w = ways.querySelector('.lway');
-    if (w) w.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 380);
 }
 
 /* ---------------------------------------------------------
@@ -158,9 +146,12 @@ thread.addEventListener('click', function (e) {
     c.remove();
   });
   me(label);
-  if (k === 'look') {
-    say('<p>Of course. Here are the three ways in.</p>', null, 700);
-    setTimeout(showWays, 1200);
+  if (k === 'about') {
+    /* "What 4orm does" is a page, not a question. Answering it here would be a
+       worse version of the page it is standing in front of. */
+    say('<p>Then start on the home page. It walks through what 4orm is, what it does and ' +
+        'what it will not do.</p>', null, 700);
+    setTimeout(function () { location.href = '/home'; }, 1500);
     return;
   }
   askName(k);
@@ -177,11 +168,6 @@ bar.addEventListener('submit', function (e) {
   say('<p>Let me get you to the right place first.</p>', null, 650);
   setTimeout(function () { askName('you'); }, 1200);
 });
-
-/* Somebody who scrolls has decided to look on their own. */
-window.addEventListener('scroll', function once() {
-  if (window.pageYOffset > 90) { showWays(); window.removeEventListener('scroll', once); }
-}, { passive: true });
 
 /* Wake up shortly after the page settles, so the headline is read first. */
 setTimeout(function () {

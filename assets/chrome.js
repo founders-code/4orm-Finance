@@ -25,15 +25,19 @@ var INDUSTRIES = [
 ];
 
 
-/* The six pages the whole site hangs off. Everything else is secondary and
-   lives in the footer or in context. */
+/* The five pages the whole site hangs off. Everything else is secondary and
+   lives in the footer or in context.
+
+   Why 4orm is not in this row. It is one of the three doors on the landing,
+   which is where a person meets it, and it is in the footer for anyone who
+   wants it later. Repeating it in the header made the row six wide and made
+   the one door that is already on the first screen look like an afterthought. */
 var PRIMARY = [
   { label: 'Home',         href: '/home',      slug: 'homepage' },
   { label: 'Personal',     href: '/personal',  slug: 'personal' },
   { label: 'Professional', href: '/professional', slug: 'professional' },
   { label: 'Form',         href: '/form',      slug: 'form' },
-  { label: 'Family',       href: '/family',    slug: 'family' },
-  { label: 'Why 4orm',     href: '/why-4orm',  slug: 'why' }
+  { label: '4orm Family',  href: '/team',      slug: 'team' }
 ];
 
 var page = document.body.getAttribute('data-page') || '';
@@ -90,9 +94,15 @@ function buildBareNav() {
       '<span></span>' +
       '<div class="bare-right">' +
         '<img class="bare-mark" src="/assets/mark.png" alt="4orm" width="30" height="30" />' +
-        '<button class="bare-menu" id="burger" type="button" aria-expanded="false" ' +
-          'aria-controls="omenu">4orm your experience. ' +
-          '<span class="cir" aria-hidden="true">' + ARROW + '</span></button>' +
+        /* The hamburger opens the white menu. The blue pill goes to the home
+           page, because that is what "4orm your experience" promises: the page
+           that explains 4orm, not a list of links. */
+        '<button class="burger" id="burger" type="button" aria-label="Menu" ' +
+          'aria-expanded="false" aria-controls="omenu">' +
+          '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+          'stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
+        '<a class="bare-menu" href="/home">4orm your experience. ' +
+          '<span class="cir" aria-hidden="true">' + ARROW + '</span></a>' +
       '</div>' +
     '</div>';
   wrap.appendChild(h);
@@ -128,6 +138,7 @@ function buildMenu() {
         col('Go', PRIMARY) +
         col('Industries', INDUSTRIES) +
         col('More', [
+          { label: 'Why 4orm',   href: '/why-4orm',    slug: 'why',       k: 'company belief values story who' },
           { label: 'Research',   href: '/research',    slug: 'research',  k: 'data numbers sources trust canada' },
           { label: 'The Standard', href: '/the-standard', slug: 'standard', k: 'principles operating' },
           { label: 'Check a firm', href: '/check-a-firm', slug: 'check',  k: 'licence register verify' },
@@ -159,8 +170,6 @@ function buildNav() {
      the site and it behaves identically everywhere. The mark on the left goes
      back to the landing, which is the one place it can go that the pill does
      not already offer. */
-  var famOn = page === 'company' || page === 'team';
-
   var h = el('header', 'nav');
   h.innerHTML =
     '<div class="nav-in">' +
@@ -172,9 +181,12 @@ function buildNav() {
             (i.slug === page ? ' aria-current="page"' : '') + '>' + i.label + '</a>';
         }).join('') +
       '</nav>' +
-      '<button class="nav-cta" id="burger" type="button" aria-expanded="false" ' +
-        'aria-controls="omenu">4orm your experience. <span class="cir">' + ARROW + '</span></button>' +
-      '<button class="burger" id="burger-m" type="button" aria-label="Menu" aria-expanded="false" ' +
+      /* The pill is a link now. It says "4orm your experience", so it goes to
+         the page that gives you one. The white menu has its own control beside
+         it, at every width rather than only on a phone. */
+      '<a class="nav-cta" href="/home">4orm your experience. ' +
+        '<span class="cir">' + ARROW + '</span></a>' +
+      '<button class="burger wide" id="burger-m" type="button" aria-label="Menu" aria-expanded="false" ' +
         'aria-controls="omenu">' +
         '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
     '</div>';
@@ -196,6 +208,7 @@ function buildFooter() {
       '<div><div class="fh">Industries</div>' + INDUSTRIES.map(function (i) {
         return '<a href="' + i.href + '">' + i.label + '</a>'; }).join('') + '</div>' +
       '<div><div class="fh">More</div>' +
+        '<a href="/why-4orm">Why 4orm</a>' +
         '<a href="/research">Research</a>' +
         '<a href="/the-standard">The Standard</a>' +
         '<a href="/check-a-firm">Check a firm</a>' +

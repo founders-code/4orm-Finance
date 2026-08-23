@@ -35,14 +35,14 @@ architecture to see why 4orm is useful.
 |---|---|---|---|
 | A1 | Blue sheet sits too low. Raise the waterline | | |
 | A2 | One squiggly line floating at the bottom, not two breaking crests | | |
-| A3 | Menu reads Home, Personal, Professional, Form, Family, Why 4orm | | |
-| A4 | "4orm your experience" routes to `/home` | | |
+| A3 | Menu reads Home, Personal, Professional, Form, 4orm Family | **DONE** | Why 4orm left the header on request. It is a landing door and a footer link. |
+| A4 | "4orm your experience" routes to `/home` | **DONE** | Was a button that opened the white menu. Now a link. Verified it lands on /home. |
 | A5 | "Why 4orm" routes to `/why-4orm` | | |
 | A6 | Landing itself unchanged apart from routing | | |
 | A7 | Footer carries the secondary material | | |
 | A8 | **4orm Assist on the landing.** Headline and lede show straight away. A small assistant head sits in the corner offering to help. Clicking it reveals the three doors | | |
 | A8b | The product is named **4orm Assist** wherever it appears | | |
-| A9 | "4orm your experience" goes to `/home` with the pill header | | |
+| A9 | "4orm your experience" goes to `/home` with the pill header | **DONE** | The white menu now opens from its own control, present at every width. |
 | A10 | "Why 4orm" door goes to `/why-4orm` | | |
 | A11 | Delete every page, module and asset no longer used | | |
 
@@ -151,4 +151,16 @@ Banned: the 16% AI figure anywhere on the site. No screen references AI or model
 | G7 | Every figure carries year, scope and source | **PASS** 16 of 16 on /research |
 | G8 | Every source link opens the primary source | **PASS** all outbound, rel=noopener |
 | G9 | Six primary pages reachable from every page | **PASS** PRIMARY drives nav and footer |
-| G10 | No page past three screens except Home | **PARTIAL** why-4orm runs 7,300px because it now carries the nine team photographs |
+| G10 | No page past three screens except Home | **PASS** why-4orm down to 5,699px once the team moved to /team. Longest of the rest is /personal at 6,966px, in line with /form and /privacy |
+
+### Added 2026-08-23, second run
+
+| # | Item | Result |
+|---|---|---|
+| H1 | Landing chat wider and shorter, three doors on the first screen | **DONE** chat 1080px wide, 296px tall; the doors start at 744px in a 950px viewport |
+| H2 | Chat asks personal, business, or what 4orm does | **DONE** "What 4orm does" hands off to /home |
+| H3 | "4orm your experience" goes to /home, not the white menu | **DONE** |
+| H4 | 4orm Family is the team page | **DONE** /team built from team.json, nine faces, full biography on click |
+| H5 | The shared-permission material found a home | **DONE** "Bring someone in" on /personal, "People you invite" on /privacy, /family redirects to /team |
+| H6 | `.tm` class collision resolved | **DONE** team card is `.tmc`; the dashboard tile keeps `.tm` |
+| H7 | Re-run of the full gate after all of the above | **PASS** gate 0/0, stutters 0, links all resolve, no console errors, no overflow at 1440 or 390 |
