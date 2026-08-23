@@ -1,82 +1,115 @@
-# 4orm Finance, company site
+# 4ormfinance.com
 
-Rebuilt 15 August 2026 after a language audit. Five pages.
+A complete rebuild. Fifteen static pages, no build step required to deploy.
+Everything in this folder is the site.
 
-| Page | Hook |
-|---|---|
-| index.html | The money is where it should be. Can you prove it was there in March? |
-| the-rules.html | Every rule we cite, with the section it comes from |
-| the-problem.html | You are typing the same number into four different places |
-| what-we-do.html | One place that tells you what you owe, and shows you it is done |
-| contact.html | Not sure whether this applies to you? Ask. |
+    index.html            passport.html         the-rules.html
+    the-problem.html      what-we-do.html       who-it-is-for.html
+    mortgage.html         payments.html         real-estate.html
+    insurance.html        law-firms.html        credit-unions.html
+    team.html             contact.html          privacy.html
+    terms.html
+    robots.txt            sitemap.xml           vercel.json
+    assets/               build/
 
-## The writing rule this rebuild enforces
+Drop the whole folder into the repo. Vercel serves it with the existing
+`cleanUrls` config and all 39 redirects are preserved in `vercel.json`.
 
-Copy states the thing. It never narrates the writing of it. Six shapes are
-banned outright and the counts below are from before and after the rewrite.
+## assets/
 
-| Banned shape | Before | After |
-|---|---|---|
-| Negative definition ("not X, Y" / "rather than") | 45 | 12, all load-bearing |
-| "somebody" as the universal human | 20 | 0 |
-| Announcing plainness or candour | 13 | 0 |
-| Elbowing the reader ("notice that", "here is the thing") | 8 | 0 |
-| British idiom, British spelling | 6 | 0 |
-| Invented personas with a disclaimer | 4 | 0 |
+    site.css              one stylesheet, the whole design system
+    chrome.js             injects the nav and footer on every page,
+                          plus scroll reveal, the live day counter
+                          and the animated penalty scales
+    mortgage-data.js      the seeded Mortgage Guardian transaction
+    mortgage-demo.js      the 15-scene demo engine
+    logo.png              your existing lockup, untouched
+    favicon*, og-image    your existing icons, untouched
+    team/                 your existing team photographs, untouched
 
-The 12 surviving negatives are the boundary list on what-we-do, where the
-negation carries the meaning: we do not hold money, we do not create evidence,
-we do not certify compliance, we do not file with a regulator, we give no legal
-advice. Plus "we never touch the money" and "the product is not finished."
+Nav and footer are defined once, in `chrome.js`. To add a page to the menu,
+edit the `NAV` or `INDUSTRIES` array at the top of that file.
 
-Also enforced: sentence case headlines, numerals for anything actionable,
-Canadian spelling, hyphens on month-end and cut-off and pre-revenue, roles named
-rather than "somebody", one date format throughout.
+## build/
 
-Removed in this pass: the top legend bar. Its text announced the site's own
-plainness, which is the same violation.
+The pages are generated, so the copy lives in one place and the design lives
+in another. `python3 build/build.py` regenerates all fifteen.
 
-## Facts and their sources
+    sitekit.py            page shell, head, and the language gate
+    ikit.py               the component emitter
+    p_*.py                one module per page, content only
 
-Every figure is traced to a primary source. Verified 15 August 2026.
+`ikit.py` is a drop-in replacement for the emitter in the v8 build, which is
+why the six industry pages carry their existing copy across unchanged. Their
+`p_*.py` modules were not edited.
 
-- Bank of Canada supervision and safeguarding in force 8 September 2025
-- Annual report due 31 March; first independent review due 8 September 2028
-- Bill C-12, Royal Assent and in force 26 March 2026, S.C. 2026 c. 4
-- Proceeds of Crime Act s. 73.1(2): $4,000,000 individual, $20,000,000 company
-- s. 73.1(3): the greater of that and 3 per cent of gross global revenue where
-  one notice covers several violations
-- Prior maximums: $500,000 company, $100,000 individual
-- FINTRAC assessed $176,960,190 against Xeltox Enterprises Ltd, October 2025,
-  under appeal
-- FINTRAC issued 23 notices totalling more than $25 million in fiscal 2024-25
-- Large cash transaction reports within 15 calendar days; terrorist property
-  immediately; suspicious transactions as soon as practicable
-- Compliance program effectiveness review every 2 years at a minimum
-- About 1,600 payment providers registered in Canada in 2025
+## The language gate
 
-### Claims cut during the build, do not reinstate without a primary citation
+`sitekit.gate()` runs over the visible copy of every page at build time and
+splits what it finds in two.
 
-- "30 penalties in 2025 against 8 in 2021." No regulator publishes either.
-- "More than $197 million since July 2025." No regulator publishes this total.
-- "$30,000,000 for breach of a compliance order." Not in s. 73.1.
-- "Minor $40,000 / serious $4M / very serious $20M." The Act splits by person
-  and company, not by that tiering.
-- "Suspicious transaction reports within 30 days." The standard is as soon as
-  practicable.
-- "50 registrations cancelled in 2026, 47 crypto." Unsourceable, and it
-  conflates cancelled with revoked.
+**Hard gate, must not ship.** Em dashes, en dashes, "the problem" in any form,
+"754 days", "three-year lookback", "224 firms", any claim that 4orm performs or
+signs the independent review, any claim that the reviewer must be external, any
+published first-review date, any reference to AI or model tooling, British
+spellings, and the whole banned-word list from section 10 of the house standard:
+really, clearly, quietly, substantially, genuinely, honestly, straightforward,
+delve, leverage as a verb, robust, seamless, crucial, vital, pivotal,
+comprehensive, holistic, underscore, testament, "in today's landscape", "in an
+era of", "the rapidly evolving", "not just X but Y", "let's dive in", "at the end
+of the day", "when it comes to", "plays a key role", "a game changer", "in
+conclusion", and sentences opening with Moreover, Furthermore, Additionally or
+Notably. **Currently zero.**
 
-## Before deploying
+**Style notes, reported only.** 14 uses of "somebody" as the universal person,
+across five pages that were written before this gate existed. The house rule
+says name the role instead. They are listed on every build so you can decide;
+nothing was changed.
 
-1. Nav, closing CTA and footer are injected by `assets/chrome.js`. The config
-   block at the top of that file holds the nav links, the CTA label and the
-   contact address.
-2. Run the sweep. All four return nothing:
+### Two words I did change, both in your own bio on the team page
 
-```
-grep -rE '—|–|…' *.html
-grep -rE '&mdash;|&ndash;|&rsquo;|&ldquo;' *.html
-grep -rinE '\b(AI|LLM|artificial intelligence)\b' *.html assets/chrome.js
-grep -rinE 'in plain words|our opinion|held against us|Notice that|programme' *.html
-```
+- "pointed at a narrower problem than the one he set out to solve" became
+  "a narrower challenge". "The problem" is an absolute house rule.
+- "the importance of robust governance" became "disciplined governance".
+  "Robust" is on the banned list.
+
+Revert either in `build/content/team.json` if you would rather keep them.
+
+Two claims were corrected on the way through, both from the old
+"why it is hard" page:
+
+- "Every registered firm owes an independent review by 8 September 2028"
+  became a statement that the review falls at least once every three years on
+  each firm's own clock, because no first date is published anywhere.
+- "reading the 3 years before it" was removed. The regulation imposes no
+  period the review must cover.
+
+## Headline capitalisation
+
+The six industry pages, `who-it-is-for` and `team` carry the Title Case
+headlines you wrote. `index`, `mortgage`, `the-problem`, `what-we-do`,
+`the-rules` and `contact` use sentence case, matching the mortgage page.
+Pick one and I will normalise the rest in a single pass.
+
+## The consumer page
+
+`/passport` is the 4orm Financial Passport: ASK, PREPARE, CHECK, PROTECT, the
+readiness score, share-my-passport, "Check before I sign" and the ladder out to
+auto financing, insurance, lending, investments and real estate. Two things on
+it are interactive: the readiness meter fills on scroll, and the check panel
+reveals its three findings when you press the button.
+
+Mortgage Guardian is what the Passport looks like inside a mortgage. In the
+demo the companion is personalised to the client, so it reads "Sarah's Guardian"
+rather than a product name. That string is built in `mortgage-demo.js` from
+`D.meta.client`, so changing the client name changes it everywhere.
+
+The page says nothing about AI, per the standing house rule, and it carries no
+market figures, so it needs no disclosure line. The CMHC statistic about
+information seekers is not on the page: I could not verify it, and it is a claim
+about AI use.
+
+## What is not here
+
+No analytics, no tracking, no cookies, no third-party scripts. The only
+external request any page makes is to Google Fonts.

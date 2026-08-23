@@ -69,17 +69,17 @@
     },
     {
       "source": "/who-its-for",
-      "destination": "/the-rules#who",
+      "destination": "/who-it-is-for",
       "permanent": true
     },
     {
       "source": "/who-its-for.html",
-      "destination": "/the-rules#who",
+      "destination": "/who-it-is-for",
       "permanent": true
     },
     {
       "source": "/who-we-serve",
-      "destination": "/the-rules#who",
+      "destination": "/who-it-is-for",
       "permanent": true
     },
     {
@@ -125,6 +125,76 @@
     {
       "source": "/data-room",
       "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/industries",
+      "destination": "/who-it-is-for",
+      "permanent": true
+    },
+    {
+      "source": "/who-for",
+      "destination": "/who-it-is-for",
+      "permanent": true
+    },
+    {
+      "source": "/brokerages",
+      "destination": "/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/realestate",
+      "destination": "/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate-brokerages",
+      "destination": "/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/psp",
+      "destination": "/payments",
+      "permanent": true
+    },
+    {
+      "source": "/payment-service-providers",
+      "destination": "/payments",
+      "permanent": true
+    },
+    {
+      "source": "/creditunions",
+      "destination": "/credit-unions",
+      "permanent": true
+    },
+    {
+      "source": "/credit-union",
+      "destination": "/credit-unions",
+      "permanent": true
+    },
+    {
+      "source": "/insurance-brokerages",
+      "destination": "/insurance",
+      "permanent": true
+    },
+    {
+      "source": "/insurance-agencies",
+      "destination": "/insurance",
+      "permanent": true
+    },
+    {
+      "source": "/lawyers",
+      "destination": "/law-firms",
+      "permanent": true
+    },
+    {
+      "source": "/law",
+      "destination": "/law-firms",
+      "permanent": true
+    },
+    {
+      "source": "/legal",
+      "destination": "/law-firms",
       "permanent": true
     }
   ],
