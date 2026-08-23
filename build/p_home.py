@@ -9,14 +9,17 @@ _C = os.path.join(os.path.dirname(os.path.abspath(__file__)), "content")
 def build():
     with open(os.path.join(_C, "home-body.html"), encoding="utf-8") as f:
         body = f.read()
-    # the shared chrome supplies the nav and footer, so drop the standalone ones
-    i = body.find('<section class="hero')
-    if i > 0:
-        body = body[i:]
+    # the shared chrome supplies the nav and footer, so drop anything before the
+    # first real block. `>= 0`, because the landing starts at index zero.
+    for tag in ('<main', '<section'):
+        i = body.find(tag)
+        if i >= 0:
+            body = body[i:]
+            break
     yield kit.write(
         "home", "/",
-        "Know before you decide. Prove what happened after.",
-        "4orm is the intelligence and evidence layer for major financial decisions. One transaction, "
-        "seen from three sides: Personal, Professional and Regulator.",
+        "4orm Finance",
+        "4orm helps you understand a financial decision before you make it, and helps the firm "
+        "serving you keep the record of how it was made.",
         body,
-        extra='\n<script src="/assets/experience.js?v=%s" defer></script>' % kit.V)
+        extra='\n<script src="/assets/landing.js?v=%s" defer></script>' % kit.V)

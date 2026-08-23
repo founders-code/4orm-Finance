@@ -64,30 +64,51 @@ function buildBareNav() {
   var h = el('header', 'nav nav-bare');
   h.innerHTML =
     '<div class="nav-in">' +
-      '<a class="bare-brand" href="/" aria-label="4orm Finance home">' +
-        '<span class="bb-1">4orm</span><span class="bb-2">FINANCE</span></a>' +
+      '<span></span>' +
       '<button class="bare-menu" id="burger" type="button" aria-expanded="false" ' +
-        'aria-controls="mobnav" aria-label="Open the menu">' +
+        'aria-controls="omenu" aria-label="Open the menu">' +
         '4orm your experience <span class="bm-i" aria-hidden="true">' +
         '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
         'stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
         '</span></button>' +
     '</div>';
   wrap.appendChild(h);
-  wrap.appendChild(buildMobNav());
+  wrap.appendChild(buildMenu());
   return wrap;
 }
 
-function buildMobNav() {
-  var mob = el('div', 'mobnav'); mob.id = 'mobnav';
-  mob.innerHTML =
-    '<div class="mg">Experience</div>' +
-      VIEWS.map(function (v) { return '<a href="' + v.href + '">' + v.label + '</a>'; }).join('') +
-      '<a href="/check-a-firm">Check a firm</a>' +
-    '<div class="mg">Explore 4orm</div>' + MORE.map(link).join('') +
-    '<div class="mg">Industries</div>' + INDUSTRIES.map(link).join('') +
-    '<a href="/contact" style="color:#7BA6FF;font-weight:650">Talk to us</a>';
-  return mob;
+function buildMenu() {
+  var m = el('div', 'omenu'); m.id = 'omenu';
+  m.setAttribute('aria-hidden', 'true');
+
+  function col(title, items) {
+    return '<div class="ocol"><div class="och">' + title + '</div>' +
+      items.map(function (i) {
+        if (i.soon) {
+          return '<span class="oitem soon">' + i.label +
+                 '<em>Coming soon</em></span>';
+        }
+        return '<a class="oitem" href="' + i.href + '"' +
+               (i.slug === page ? ' aria-current="page"' : '') + '>' + i.label + '</a>';
+      }).join('') + '</div>';
+  }
+
+  m.innerHTML =
+    '<div class="omenu-in">' +
+      col('Experience', [
+        { label: 'Personal',     href: '/#personal' },
+        { label: 'Professional', href: '/#professional' },
+        { label: 'Check a firm', href: '/check-a-firm', slug: 'check' }
+      ]) +
+      col('Explore 4orm', MORE.filter(function (i) { return i.slug !== 'check'; })) +
+      col('Industries', INDUSTRIES.concat([
+        { label: 'Auto',      soon: true },
+        { label: 'Investing', soon: true },
+        { label: 'Banking',   soon: true }
+      ])) +
+      '<div class="ocol ofoot"><a class="obig" href="/contact">Talk to us</a></div>' +
+    '</div>';
+  return m;
 }
 
 function buildNav() {
@@ -106,19 +127,18 @@ function buildNav() {
       '<a class="nav-brand" href="/" aria-label="4orm home"><img src="/assets/logo.png" alt="4orm" /></a>' +
       '<nav class="nav-links" aria-label="Primary">' +
         VIEWS.map(function (v) { return '<a href="' + v.href + '" data-navview="' + v.v + '">' + v.label + '</a>'; }).join('') +
-        '<span class="navdrop" id="navdrop">' +
-          '<button type="button" aria-expanded="false" aria-haspopup="true"' +
-            (industryOn ? ' aria-current="true"' : '') + '>Explore ' + CHEV + '</button>' +
-          '<span class="navmenu" role="menu">' + menu + '</span>' +
-        '</span>' +
+        '<button class="navmore" id="burger" type="button" aria-expanded="false" ' +
+          'aria-controls="omenu"' + (industryOn ? ' aria-current="true"' : '') +
+          '>Explore ' + CHEV + '</button>' +
         '<a href="/team"' + (page === 'team' ? ' aria-current="page"' : '') + '>About</a>' +
       '</nav>' +
       '<a class="nav-cta" href="/#stage">4orm your experience. <span class="cir">' + ARROW + '</span></a>' +
-      '<button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false">' +
+      '<button class="burger" id="burger-m" type="button" aria-label="Menu" aria-expanded="false" ' +
+        'aria-controls="omenu">' +
         '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
     '</div>';
 
-  wrap.appendChild(h); wrap.appendChild(buildMobNav());
+  wrap.appendChild(h); wrap.appendChild(buildMenu());
   return wrap;
 }
 
@@ -151,20 +171,35 @@ function buildFooter() {
 
 /* ---------- behaviour ---------- */
 function initNav() {
-  var d = document.getElementById('navdrop');
-  if (d) {
-    var b = d.querySelector('button');
-    var close = function () { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); };
-    b.addEventListener('click', function (e) { e.stopPropagation();
-      var o = d.classList.toggle('open'); b.setAttribute('aria-expanded', o ? 'true' : 'false'); });
-    d.addEventListener('mouseenter', function () { d.classList.add('open'); });
-    d.addEventListener('mouseleave', close);
-    document.addEventListener('click', close);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  var m = document.getElementById('omenu');
+  var controls = [document.getElementById('burger'), document.getElementById('burger-m')]
+    .filter(Boolean);
+  var bu = controls[0];
+  if (bu && m) {
+    var openMenu = function (on) {
+      m.classList.toggle('open', on);
+      m.setAttribute('aria-hidden', on ? 'false' : 'true');
+      controls.forEach(function (c) {
+        c.setAttribute('aria-expanded', on ? 'true' : 'false');
+        c.classList.toggle('x', on);
+      });
+      document.documentElement.style.overflow = on ? 'hidden' : '';
+      if (on) {
+        var f = m.querySelector('.oitem');
+        if (f) setTimeout(function () { f.focus(); }, 260);
+      }
+    };
+    controls.forEach(function (c) {
+      c.addEventListener('click', function (e) {
+        e.stopPropagation();
+        openMenu(!m.classList.contains('open'));
+      });
+    });
+    m.addEventListener('click', function (e) { if (e.target === m) openMenu(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && m.classList.contains('open')) { openMenu(false); bu.focus(); }
+    });
   }
-  var bu = document.getElementById('burger'), m = document.getElementById('mobnav');
-  if (bu && m) bu.addEventListener('click', function () {
-    var o = m.classList.toggle('open'); bu.setAttribute('aria-expanded', o ? 'true' : 'false'); });
 }
 
 function initReveal() {

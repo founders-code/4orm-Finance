@@ -30,6 +30,52 @@ wash. The nav is a floating dark pill, which is how the first demo carried the
 logo, so your existing white wordmark reads with no new asset. **No brand asset
 was generated, traced, recoloured or placeheld.**
 
+## The landing
+
+White. Apple-clean. One screen, no scrolling.
+
+    Better financial decisions start with better relationships.
+    4orm helps you understand a financial decision before you make it, and helps
+    the firm serving you keep the record of how it was made.
+
+Then three ways in, side by side, divided by hairlines and nothing else. Each one
+says who it is for, what it does, and what the click opens:
+
+    PERSONAL       If you are about to borrow, buy or invest
+                   Understand it before you sign it.          Pick up the phone
+    PROFESSIONAL   If you run or work at a firm
+                   Show your work, without more work.         See my dashboard
+    EXPLORE 4ORM   If you want to know what this is first
+                   See what 4orm is, and why it exists.       Read the company
+
+They stay side by side down to 800px and stack only on a phone.
+
+**Everyone gets their own 4orm Guardian.** That is the consumer product, and the
+landing says so in plain words rather than in brand language.
+
+**Only the phone goes black.** Picking it up takes the screen to #000000 with the
+phone the one lit object and a single control top right: Put phone away. The
+firm's reading and Explore stay white.
+
+## The menu
+
+One overlay, on every page and every screen size. It replaced two separate
+systems: a small dropdown on desktop and a phone drawer that was also firing on
+desktop, which is what made the menu look wrong.
+
+Auto, Investing and Banking are marked **Coming soon** rather than looking
+selectable.
+
+## Audit
+
+Run across all seventeen pages: no links without a destination, no in-page
+anchors pointing at nothing, no duplicate ids, no console errors, no horizontal
+overflow at 1440 or 390, and every internal link resolves.
+
+The written-word gate caught one live defect during this build: the figure
+**754 days** had reached the firm dashboard, and that string is banned by the
+canonical facts. Changed.
+
 ## The master specification build
 
 `4orm_Master_Website_UX_Relationship_Integrity_Rebuild` is now the source of
