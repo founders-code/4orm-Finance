@@ -22,7 +22,7 @@ def build():
         '</div><div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">'
         '<a class="btn btn-p btn-sm" href="mailto:office@4ormfinance.com">Email us '
         '<span class="cir">' + ARROW + '</span></a>'
-        '<a class="btn btn-g btn-sm" href="/the-rules">Read the rules first</a></div></div>'
+        '<a class="btn btn-g btn-sm" href="/the-standard">Read the Standard first</a></div></div>'
         '<div class="soft blue rv d1"><span class="sk">The first call</span>'
         '<h3>Five questions, thirty minutes.</h3>' +
         flow([

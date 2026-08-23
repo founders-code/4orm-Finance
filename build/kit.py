@@ -111,6 +111,10 @@ def write(slug, path, title, desc, body, extra="", filename=None):
     html = HEAD.format(title=title, desc=desc, site=SITE, path=path, slug=slug,
                        body=body, v=V, extra=extra)
     out = os.path.join(BASE, filename or (("index" if path == "/" else path.strip("/")) + ".html"))
+    # Nested paths such as /industries/mortgage need their folder to exist.
+    d = os.path.dirname(out)
+    if d and not os.path.isdir(d):
+        os.makedirs(d)
     with open(out, "w", encoding="utf-8") as f:
         f.write(html)
     return out, gate(body, os.path.basename(out))

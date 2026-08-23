@@ -22,4 +22,6 @@ def build():
         "4orm helps you understand a financial decision before you make it, and helps the firm "
         "serving you keep the record of how it was made.",
         body,
-        extra='\n<script src="/assets/landing.js?v=%s" defer></script>' % kit.V)
+        extra=('\n<script src="/assets/landing.js?v=%s" defer></script>'
+               '\n<script src="/assets/guardian.js?v=%s" defer></script>'
+               '\n<script src="/assets/firm.js?v=%s" defer></script>') % (kit.V, kit.V, kit.V))

@@ -3,123 +3,83 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/who",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
-      "source": "/who.html",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
-      "source": "/market",
-      "destination": "/the-problem",
-      "permanent": true
-    },
-    {
-      "source": "/market.html",
-      "destination": "/the-problem",
-      "permanent": true
-    },
-    {
-      "source": "/regulatory",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
-      "source": "/regulatory.html",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
-      "source": "/faq",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
-      "source": "/faq.html",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
-      "source": "/leadership",
-      "destination": "/team",
-      "permanent": true
-    },
-    {
-      "source": "/leadership.html",
-      "destination": "/team",
-      "permanent": true
-    },
-    {
-      "source": "/platform",
-      "destination": "/what-we-do",
-      "permanent": true
-    },
-    {
-      "source": "/platform.html",
-      "destination": "/what-we-do",
-      "permanent": true
-    },
-    {
-      "source": "/the-duty",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
-      "source": "/who-its-for",
-      "destination": "/who-it-is-for",
-      "permanent": true
-    },
-    {
-      "source": "/who-its-for.html",
-      "destination": "/who-it-is-for",
-      "permanent": true
-    },
-    {
-      "source": "/who-we-serve",
-      "destination": "/who-it-is-for",
-      "permanent": true
-    },
-    {
-      "source": "/inside-the-platform",
-      "destination": "/what-we-do",
-      "permanent": true
-    },
-    {
-      "source": "/inside-the-platform.html",
-      "destination": "/what-we-do",
-      "permanent": true
-    },
-    {
-      "source": "/insidetheplatform",
-      "destination": "/what-we-do",
-      "permanent": true
-    },
-    {
-      "source": "/insidetheplatform.html",
-      "destination": "/what-we-do",
-      "permanent": true
-    },
-    {
-      "source": "/theduty",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
-      "source": "/theduty.html",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
-      "source": "/the-duty.html",
-      "destination": "/the-rules",
-      "permanent": true
-    },
-    {
       "source": "/4ormex",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/4ormex.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/company",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/company",
+      "permanent": true
+    },
+    {
+      "source": "/auto",
+      "destination": "/industries/auto",
+      "permanent": true
+    },
+    {
+      "source": "/auto.html",
+      "destination": "/industries/auto",
+      "permanent": true
+    },
+    {
+      "source": "/banking",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/banking.html",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/brokerages",
+      "destination": "/industries/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/brokerages.html",
+      "destination": "/industries/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/credit-union",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/credit-union.html",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/credit-unions",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/credit-unions.html",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/creditunions",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/creditunions.html",
+      "destination": "/industries/banking",
       "permanent": true
     },
     {
@@ -128,73 +88,358 @@
       "permanent": true
     },
     {
-      "source": "/industries",
-      "destination": "/who-it-is-for",
+      "source": "/data-room.html",
+      "destination": "/contact",
       "permanent": true
     },
     {
-      "source": "/who-for",
-      "destination": "/who-it-is-for",
+      "source": "/faq",
+      "destination": "/the-standard",
       "permanent": true
     },
     {
-      "source": "/brokerages",
-      "destination": "/real-estate",
+      "source": "/faq.html",
+      "destination": "/the-standard",
       "permanent": true
     },
     {
-      "source": "/realestate",
-      "destination": "/real-estate",
+      "source": "/inside-the-platform",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
-      "source": "/real-estate-brokerages",
-      "destination": "/real-estate",
+      "source": "/inside-the-platform.html",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
-      "source": "/psp",
-      "destination": "/payments",
+      "source": "/insidetheplatform",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
-      "source": "/payment-service-providers",
-      "destination": "/payments",
+      "source": "/insidetheplatform.html",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
-      "source": "/creditunions",
-      "destination": "/credit-unions",
+      "source": "/insurance",
+      "destination": "/industries/insurance",
       "permanent": true
     },
     {
-      "source": "/credit-union",
-      "destination": "/credit-unions",
-      "permanent": true
-    },
-    {
-      "source": "/insurance-brokerages",
-      "destination": "/insurance",
+      "source": "/insurance.html",
+      "destination": "/industries/insurance",
       "permanent": true
     },
     {
       "source": "/insurance-agencies",
-      "destination": "/insurance",
+      "destination": "/industries/insurance",
       "permanent": true
     },
     {
-      "source": "/lawyers",
-      "destination": "/law-firms",
+      "source": "/insurance-agencies.html",
+      "destination": "/industries/insurance",
+      "permanent": true
+    },
+    {
+      "source": "/insurance-brokerages",
+      "destination": "/industries/insurance",
+      "permanent": true
+    },
+    {
+      "source": "/insurance-brokerages.html",
+      "destination": "/industries/insurance",
+      "permanent": true
+    },
+    {
+      "source": "/investing",
+      "destination": "/industries/investing",
+      "permanent": true
+    },
+    {
+      "source": "/investing.html",
+      "destination": "/industries/investing",
       "permanent": true
     },
     {
       "source": "/law",
-      "destination": "/law-firms",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/law.html",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/law-firms",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/law-firms.html",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/lawyers",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/lawyers.html",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/leadership",
+      "destination": "/company",
+      "permanent": true
+    },
+    {
+      "source": "/leadership.html",
+      "destination": "/company",
       "permanent": true
     },
     {
       "source": "/legal",
-      "destination": "/law-firms",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/legal.html",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/lending",
+      "destination": "/industries/lending",
+      "permanent": true
+    },
+    {
+      "source": "/lending.html",
+      "destination": "/industries/lending",
+      "permanent": true
+    },
+    {
+      "source": "/market",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/market.html",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/mortgage",
+      "destination": "/industries/mortgage",
+      "permanent": true
+    },
+    {
+      "source": "/mortgage.html",
+      "destination": "/industries/mortgage",
+      "permanent": true
+    },
+    {
+      "source": "/passport",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/passport.html",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/payment-service-providers",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/payment-service-providers.html",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/payments",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/payments.html",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/platform",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/platform.html",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/psp",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/psp.html",
+      "destination": "/industries/banking",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate",
+      "destination": "/industries/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate.html",
+      "destination": "/industries/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate-brokerages",
+      "destination": "/industries/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate-brokerages.html",
+      "destination": "/industries/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/realestate",
+      "destination": "/industries/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/realestate.html",
+      "destination": "/industries/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/regulatory",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/regulatory.html",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/team",
+      "destination": "/company",
+      "permanent": true
+    },
+    {
+      "source": "/team.html",
+      "destination": "/company",
+      "permanent": true
+    },
+    {
+      "source": "/the-duty",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/the-duty.html",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/the-problem",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/the-problem.html",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/the-rules",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/the-rules.html",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/theduty",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/theduty.html",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/what-we-do",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/what-we-do.html",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/who",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/who.html",
+      "destination": "/the-standard",
+      "permanent": true
+    },
+    {
+      "source": "/who-for",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/who-for.html",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/who-it-is-for",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/who-it-is-for.html",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/who-its-for",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/who-its-for.html",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-serve",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-serve.html",
+      "destination": "/industries",
       "permanent": true
     }
   ],

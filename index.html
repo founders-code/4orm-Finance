@@ -60,7 +60,7 @@
     </a>
 
     <a class="lway" href="#explore" data-go="explore">
-      <span class="lwk">Explore 4orm</span>
+      <span class="lwk">4orm your experience</span>
       <span class="lww">If you want to know what this is first</span>
       <span class="lwh">See what 4orm is, and why it exists.</span>
       <span class="lws">The research behind it, what regulators now expect a firm to be able to
@@ -71,129 +71,206 @@
 </main>
 
 <!-- Personal -->
-<section class="dest" id="d-you" aria-label="The 4orm consumer experience">
-  <button class="away" type="button" data-back>Put phone away</button>
-  <div class="pwrap">
-    <div class="phone">
-      <div class="screen">
-        <span class="notch"></span>
-        <div class="sbar"><span>9:41</span><span>4ORM</span></div>
-        <div class="phead">
-          <div class="t1">Your 4orm Guardian</div>
-          <div class="t2">Yours. No account. Nothing shared yet.</div>
+<section class="dest expdest" id="d-you" aria-label="The 4orm consumer experience">
+  <button class="away" id="putaway" type="button" data-back>Put phone away</button>
+  <div class="expwrap">
+      <div class="pickrow">
+        <span class="pickl">Pick a decision, then use the phone.</span>
+        <div class="views inds" id="inds">
+          <span class="pip"></span>
+          <button data-ind="mortgage" class="on">Mortgage</button>
+          <button data-ind="auto">Auto</button>
+          <button data-ind="realestate">Real estate</button>
+          <button data-ind="insurance">Insurance</button>
+          <button data-ind="investing">Investing</button>
+          <button data-ind="banking">Banking</button>
+          <button data-ind="lending">Lending</button>
         </div>
-        <div class="pbody">
-          <div class="pq">What&rsquo;s on your mind?</div>
-          <div class="pqs">Say it the way you would say it out loud. I am here for the whole decision.</div>
-          <div class="plist">
-            <button class="popt" type="button"><span class="ptxt">I am thinking about buying a home.<span class="psub">Understand mortgages before you start.</span></span><i>&#8250;</i></button>
-            <button class="popt" type="button"><span class="ptxt">I am buying or financing a vehicle.<span class="psub">Understand the deal before you commit.</span></span><i>&#8250;</i></button>
-            <button class="popt" type="button"><span class="ptxt">I am considering an investment.<span class="psub">Understand what you are being offered.</span></span><i>&#8250;</i></button>
-            <button class="popt" type="button"><span class="ptxt">Someone is asking me for money or information.<span class="psub">Check something that does not feel right.</span></span><i>&#8250;</i></button>
-            <button class="popt" type="button"><span class="ptxt">I already have a mortgage, loan or policy.<span class="psub">Understand what you have, or what changed.</span></span><i>&#8250;</i></button>
-            <button class="popt" type="button"><span class="ptxt">I do not know where to start.<span class="psub">Talk to 4orm.</span></span><i>&#8250;</i></button>
+        <div class="viewsub" id="viewsub"><b>Understand it.</b> Tap through it the way a client would.</div>
+      </div>
+<section class="stage" id="stage">
+      <div class="wrap">
+        <div class="stage-in" id="stageIn">
+  
+          <div class="phone-w" id="phoneW">
+            <svg class="lines" id="lines" viewBox="0 0 520 820" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div class="phone">
+              <div class="screen" id="screen" tabindex="-1">
+                <span class="notch"></span>
+                <div class="sbar"><span>9:41</span><span>4ORM</span></div>
+                <div class="phead">
+                  <div class="t1" id="phTitle">Sarah&rsquo;s 4orm</div>
+                  <div class="t2" id="phSub">Before a mortgage professional exists</div>
+                </div>
+                <div class="pbody" id="phBody"></div>
+              <div class="askbar">
+                <form class="askform" id="askform" autocomplete="off">
+                  <input id="askinput" type="text" maxlength="120"
+                         placeholder="Ask your 4orm Guardian anything" aria-label="Ask your 4orm Guardian" />
+                  <button type="submit" aria-label="Send">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+                </form>
+              </div>
+              </div>
+            </div>
+            <button class="lure" id="lure" type="button" aria-label="Open the 4orm experience">
+              <span class="lure-t">Pick up 4orm</span>
+              <svg class="lure-a" width="17" height="26" viewBox="0 0 17 26" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" aria-hidden="true">
+                <path d="M8.5 2v20" /><path d="M2.5 16l6 6 6-6" />
+              </svg>
+            </button>
           </div>
+  
+          <div class="rail" id="rail"></div>
+  
         </div>
       </div>
-    </div>
+      <button class="putaway" id="putaway-legacy" type="button" hidden>Put phone away</button>
+      <div class="scrim" id="scrim"></div>
+    </section>
+  
+  
   </div>
 </section>
 
 <!-- Professional -->
-<section class="dest" id="d-firm" aria-label="Relationship integrity">
-  <button class="back" type="button" data-back><i>&#8592;</i> Back</button>
-  <div class="dwrap">
-    <div class="dhead">
-      <div>
-        <span class="dk">Relationship integrity</span>
-        <h2 class="dh">Your clients are being served properly,<br />and you can show it.</h2>
-        <p class="dsub">One reading of every live relationship in the firm. It reports on material
-          events, not on conversations, and it exists so a manager can act on an exception while it
-          can still be fixed.</p>
+<section class="dest appdest" id="d-firm" aria-label="Relationship integrity">
+  <div class="app">
+
+    <header class="appbar">
+      <div class="abL">
+        <span class="abmark">4orm</span><span class="abdiv"></span>
+        <span class="abfirm">Northbridge Mortgage Group</span>
       </div>
-      <div class="dstamp"><b>06:00</b>Daily reading<br />24 Feb 2026</div>
-    </div>
-
-    <div class="dmetrics">
-      <div class="dm"><span class="v">148</span><span class="l">Active client<br />relationships</span></div>
-      <div class="dm"><span class="v">91%</span><span class="l">Prepared for<br />current stage</span></div>
-      <div class="dm"><span class="v">94%</span><span class="l">Material questions<br />resolved</span></div>
-      <div class="dm"><span class="v">89%</span><span class="l">Evidence<br />complete</span></div>
-      <div class="dm warn"><span class="v">7</span><span class="l">Need attention<br />today</span></div>
-    </div>
-
-    <div class="dsec">
-      <h3 class="dsh">The systems you already run, reporting into one record.</h3>
-      <p class="dsp">4orm does not replace the software a firm has bought. It connects the material
-        events across it, so the relationship stops living in eight places at once. Each line below
-        is a capability category. A vendor is named only once a commercial connection exists.</p>
-      <div class="dlist">
-        <div class="dln"><span class="n">Identity</span><span class="d">Client verification, government identity documents, liveness.</span><span class="dpill live"><i></i>Connected</span></div>
-        <div class="dln"><span class="n">Financial data</span><span class="d">Client permitted bank data, income confirmation, account ownership.</span><span class="dpill live"><i></i>Connected</span></div>
-        <div class="dln"><span class="n">Credit</span><span class="d">Bureau data, inquiry authorisation, the inputs a decision relied on.</span><span class="dpill live"><i></i>Connected</span></div>
-        <div class="dln"><span class="n">Documents</span><span class="d">Secure upload, document reading, signature, and which version was signed.</span><span class="dpill live"><i></i>Connected</span></div>
-        <div class="dln"><span class="n">Evidence store</span><span class="d">Sealed storage, audit log, provenance, key management.</span><span class="dpill live"><i></i>Connected</span></div>
-        <div class="dln"><span class="n">Your workflow system</span><span class="d">Origination, client records, dealer or brokerage back office.</span><span class="dpill"><i></i>Ready to connect</span></div>
-        <div class="dln"><span class="n">Public registers</span><span class="d">Licence and registration status, published warnings, enforcement notices.</span><span class="dpill"><i></i>Ready to connect</span></div>
-        <div class="dln"><span class="n">Export</span><span class="d">Client authorised sharing, firm evidence packages, reporting pathways.</span><span class="dpill"><i></i>Planned</span></div>
+      <div class="abR">
+        <span class="abstamp">Daily reading &middot; 24 Feb 2026 &middot; 06:00</span>
+        <button class="away" type="button" data-back>Put away</button>
       </div>
-    </div>
+    </header>
 
-    <div class="dsec">
-      <h3 class="dsh">What the record holds this morning.</h3>
-      <p class="dsp">The evidence layer measured, not described. Every figure below is a count of
-        something that either exists in the record or does not.</p>
-      <div class="dsplit">
-        <div>
-          <span class="dpt">The evidence layer</span>
-          <h4 class="dph">What is in the record, counted.</h4>
-          <div class="drow"><span class="k">Oldest relationship on record</span><span class="v">612 days</span></div>
-          <div class="drow"><span class="k">Average age of an open file</span><span class="v">96 days</span></div>
-          <div class="drow"><span class="k">Material events captured</span><span class="v">41,208</span></div>
-          <div class="drow"><span class="k">Events added since 06:00 yesterday</span><span class="v">312</span></div>
-          <div class="drow"><span class="k">Consent grants active</span><span class="v">148</span></div>
-          <div class="drow"><span class="k">Consent grants withdrawn or expired</span><span class="v">9</span></div>
-          <div class="drow"><span class="k">Chain unbroken</span><span class="v ok">All 148 files</span></div>
-          <div class="drow"><span class="k">Oldest file rebuilt end to end</span><span class="v ok">In 4.2 seconds</span></div>
+    <div class="appbody">
+      <nav class="apprail" aria-label="Sections">
+        <button class="ar on" type="button" data-view="overview">Overview</button>
+        <button class="ar" type="button" data-view="clients">Clients<em>148</em></button>
+        <button class="ar" type="button" data-view="evidence">Evidence pack</button>
+        <button class="ar" type="button" data-view="exceptions">Exceptions<em class="w">7</em></button>
+        <button class="ar" type="button" data-view="flags">Red flags<em class="r">2</em></button>
+      </nav>
+
+      <main class="appmain">
+
+        <div class="tiles">
+          <button class="tile" type="button" data-view="clients"><span class="tl"><i class="lt ok"></i>Active relationships</span><span class="tv">148</span><span class="tm up">+6 this week</span></button>
+          <button class="tile" type="button" data-view="clients"><span class="tl"><i class="lt ok"></i>Prepared for stage</span><span class="tv">91<em>%</em></span><span class="tm up">+3 pts</span></button>
+          <button class="tile" type="button" data-view="exceptions"><span class="tl"><i class="lt ok"></i>Questions resolved</span><span class="tv">94<em>%</em></span><span class="tm flat">no change</span></button>
+          <button class="tile" type="button" data-view="evidence"><span class="tl"><i class="lt warn"></i>Evidence complete</span><span class="tv">89<em>%</em></span><span class="tm down">2 pts down</span></button>
+          <button class="tile alert" type="button" data-view="exceptions"><span class="tl"><i class="lt warn"></i>Need attention</span><span class="tv">7</span><span class="tm">4 due today</span></button>
         </div>
-        <div>
-          <span class="dpt">Needs attention today</span>
-          <h4 class="dph">Seven things a manager can still fix.</h4>
-          <div class="datt"><span class="n">01</span><span class="t"><b>Two clients waiting</b> more than four days for a reply on an open question.</span></div>
-          <div class="datt"><span class="n">02</span><span class="t"><b>One application changed</b> after submission with no rationale recorded against it.</span></div>
-          <div class="datt"><span class="n">03</span><span class="t"><b>One disclosure sent</b> and never opened, eleven days before closing.</span></div>
-          <div class="datt"><span class="n">04</span><span class="t"><b>Two files hold conflicting income figures</b> from two sources, neither marked as correct.</span></div>
-          <div class="datt"><span class="n">05</span><span class="t"><b>One consent grant expired</b> while the file is still being worked.</span></div>
+
+        <div class="pane on" data-pane="overview">
+          <div class="grid2">
+            <section class="panel">
+              <div class="ph"><h3>Evidence completeness, by stage</h3>
+                <span class="phn">Share of files at each stage with every required record present. Hover a bar.</span></div>
+              <div class="pb bars" id="stagebars"></div>
+              <div class="pf"><span class="lg"><i class="sw b"></i>At or above target</span><span class="lg"><i class="sw g"></i>Below target</span></div>
+            </section>
+            <section class="panel">
+              <div class="ph"><h3>Material events captured</h3>
+                <span class="phn">Fourteen days. An event is something that happened on a file.</span></div>
+              <div class="pb">
+                <div class="trend">
+                  <svg viewBox="0 0 300 64" preserveAspectRatio="none" role="img" aria-label="Material events captured per day over fourteen days, ending at 298.">
+                    <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#2E6BF2" stop-opacity=".22"/>
+                      <stop offset="1" stop-color="#2E6BF2" stop-opacity="0"/></linearGradient></defs>
+                    <polygon points="6,58 6.0,38.0 28.2,34.0 50.3,41.3 72.5,26.4 94.6,21.1 116.8,25.1 138.9,35.3 161.1,52.4 183.2,58.0 205.4,23.6 227.5,15.1 249.7,20.2 271.8,10.0 294.0,13.1 294,58" fill="url(#tg)"/>
+                    <polyline points="6.0,38.0 28.2,34.0 50.3,41.3 72.5,26.4 94.6,21.1 116.8,25.1 138.9,35.3 161.1,52.4 183.2,58.0 205.4,23.6 227.5,15.1 249.7,20.2 271.8,10.0 294.0,13.1" fill="none" stroke="#2E6BF2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="294" cy="13.1" r="3.4" fill="#2E6BF2" stroke="#fff" stroke-width="2"/>
+                  </svg>
+                  <div class="trendf"><span>11 Feb</span><span class="tnow">298 yesterday</span><span>24 Feb</span></div>
+                </div>
+                <div class="minis">
+                  <div class="mini"><span class="mn">96%</span><span class="ml">Identity verified</span><span class="mb"><i style="width:96%"></i></span></div>
+                  <div class="mini"><span class="mn">88%</span><span class="ml">Income supported</span><span class="mb"><i style="width:88%"></i></span></div>
+                  <div class="mini"><span class="mn">73%</span><span class="ml">Source of funds traced</span><span class="mb"><i class="g" style="width:73%"></i></span></div>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
-      </div>
-      <p class="dnote">This reports on material transaction and relationship events. It does not
-        monitor conversations and it does not score people. A manager sees where a client is not
-        being served, in time to do something about it. Every figure on this screen is invented for
-        the demonstration.</p>
+
+        <div class="pane" data-pane="clients">
+          <section class="panel wide">
+            <div class="ph"><h3>Who to contact today</h3><span class="phn">Click a client to open their file.</span></div>
+            <div class="pb" id="wholist"></div>
+          </section>
+        </div>
+
+        <div class="pane" data-pane="exceptions">
+          <section class="panel wide">
+            <div class="ph"><h3>What is needed next</h3><span class="phn">Ordered by how soon each stops being fixable. Click to resolve.</span></div>
+            <div class="pb" id="cklist"></div>
+          </section>
+        </div>
+
+        <div class="pane" data-pane="flags">
+          <section class="panel wide">
+            <div class="ph"><h3>Red flags</h3>
+              <span class="phn">Raised against a counterparty or a pattern. Nothing here is a finding: it is something published, or something that does not add up.</span></div>
+            <div class="pb">
+              <div class="flag"><i class="lt bad"></i><span class="ft"><b>A lender on one file appears on a published warning list.</b>Raised from a public register, with the date and the source attached.</span><button class="fbtn" type="button" data-flag="0">Open the register entry</button></div>
+              <div class="flag"><i class="lt warn"></i><span class="ft"><b>Two files share a down payment source that traces to one account.</b>Not an allegation. A pattern worth a question before either one closes.</span><button class="fbtn" type="button" data-flag="1">See both files</button></div>
+              <div class="flagout" id="flagout"></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="pane" data-pane="evidence">
+          <section class="panel wide">
+            <div class="ph"><h3>The evidence pack</h3>
+              <span class="phn">Everything a regulator, an insurer or a court would ask for, already assembled. Nothing is created for the pack: it is what was captured as the work happened. Click any row.</span></div>
+            <div class="pb">
+              <div class="epk" id="epk"></div>
+              <div class="epout" id="epout"></div>
+              <div class="epact">
+                <div class="epmeta"><b>Oldest relationship</b> 612 days<span class="dot"></span><b>Chain unbroken</b> all 148 files<span class="dot"></span><b>Oldest file rebuilt</b> 4.2 seconds</div>
+                <button class="epbtn" type="button" id="assemble">Assemble an evidence pack</button>
+              </div>
+              <div class="asm" id="asm"></div>
+            </div>
+          </section>
+        </div>
+
+      </main>
     </div>
   </div>
 </section>
 
 <!-- Explore -->
-<section class="dest" id="d-explore" aria-label="Explore 4orm">
+<section class="dest" id="d-explore" aria-label="4orm your experience">
   <button class="back" type="button" data-back><i>&#8592;</i> Back</button>
   <div class="ewrap">
-    <span class="dk">Explore 4orm</span>
+    <span class="dk">4orm your experience</span>
     <h2 class="eh">The requirement exists. The evidence is scattered.</h2>
     <p class="esub">Regulators increasingly expect firms to understand the client, explain the
       decision, and keep records that support what happened. The duty is clear. The record of it
       still lives in eight systems that were never joined up.</p>
     <div class="enav">
-      <a class="eln" href="#why"><span class="n">Why 4orm</span><span class="d">What is breaking in the gaps between people, firms and their systems.</span><span class="a">&#8594;</span></a>
-      <a class="eln" href="#how"><span class="n">How it works</span><span class="d">One line through person, information, permission, decision and evidence.</span><span class="a">&#8594;</span></a>
-      <a class="eln" href="#people"><span class="n">For people</span><span class="d">Understand, prepare, check and protect, before anybody sells you anything.</span><span class="a">&#8594;</span></a>
-      <a class="eln" href="#firms"><span class="n">For firms</span><span class="d">Relationship integrity, supervision, and evidence when it is legitimately required.</span><span class="a">&#8594;</span></a>
-      <a class="eln" href="#industries"><span class="n">Industries</span><span class="d">Mortgage, auto, insurance, real estate, investing, banking and payments.</span><span class="a">&#8594;</span></a>
-      <a class="eln" href="#standard"><span class="n">The Standard</span><span class="d">Ten operating principles a participating firm adopts, and what they do not promise.</span><span class="a">&#8594;</span></a>
-      <a class="eln" href="#research"><span class="n">Research</span><span class="d">The state of financial trust in Canada, every figure linked to its source.</span><span class="a">&#8594;</span></a>
-      <a class="eln" href="#integrations"><span class="n">Integrations</span><span class="d">The capability categories 4orm connects, and the ones still to come.</span><span class="a">&#8594;</span></a>
-      <a class="eln" href="#privacy"><span class="n">Security and privacy</span><span class="d">What is held, who can see it, and how it is corrected.</span><span class="a">&#8594;</span></a>
-      <a class="eln" href="#company"><span class="n">Company</span><span class="d">Why this is being built, by whom, and how to reach us.</span><span class="a">&#8594;</span></a>
+      <a class="eln" href="/why-4orm"><span class="n">Why 4orm</span><span class="d">What is breaking in the gaps between people, firms and the systems between them.</span><span class="a">&#8594;</span></a>
+      <a class="eln" href="/how-it-works"><span class="n">How it works</span><span class="d">One line through person, conversation, permission, decision and evidence.</span><span class="a">&#8594;</span></a>
+      <a class="eln" href="/the-standard"><span class="n">The Standard</span><span class="d">Ten operating principles a firm adopts, and the four things they do not promise.</span><span class="a">&#8594;</span></a>
+      <a class="eln" href="/evidence-gap"><span class="n">The evidence gap</span><span class="d">Where the record of a relationship actually lives, and why it cannot answer.</span><span class="a">&#8594;</span></a>
+      <a class="eln" href="/industries"><span class="n">Industries</span><span class="d">Seven decisions. Mortgage, auto, real estate, insurance, investing, banking, lending.</span><span class="a">&#8594;</span></a>
+      <a class="eln" href="/check-a-firm"><span class="n">Check a firm</span><span class="d">Before you trust them, read what is already published about them.</span><span class="a">&#8594;</span></a>
+      <a class="eln" href="/privacy"><span class="n">Security and privacy</span><span class="d">What is held, who can see it, and how it gets corrected.</span><span class="a">&#8594;</span></a>
+      <a class="eln" href="/company"><span class="n">Company</span><span class="d">Why this is being built, what we will not build, and how to reach us.</span><span class="a">&#8594;</span></a>
+      <span class="eln soon"><span class="n">Research<em>Coming soon</em></span><span class="d">The state of financial trust in Canada, every figure linked to its source.</span><span class="a"></span></span>
+      <span class="eln soon"><span class="n">Integrations<em>Coming soon</em></span><span class="d">The capability categories 4orm connects, and the ones still to come.</span><span class="a"></span></span>
     </div>
   </div>
 </section>
@@ -204,5 +281,7 @@
 <script src="/assets/chrome.js?v=20260823" defer></script>
 <script src="/assets/atmos.js?v=20260823" defer></script>
 <script src="/assets/landing.js?v=20260823" defer></script>
+<script src="/assets/guardian.js?v=20260823" defer></script>
+<script src="/assets/firm.js?v=20260823" defer></script>
 </body>
 </html>

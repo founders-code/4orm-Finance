@@ -15,22 +15,24 @@ var VIEWS = [
 ];
 
 var INDUSTRIES = [
-  { label: 'Mortgage',      href: '/mortgage',      slug: 'mortgage' },
-  { label: 'Payments',      href: '/payments',      slug: 'payments' },
-  { label: 'Real estate',   href: '/real-estate',   slug: 'real-estate' },
-  { label: 'Insurance',     href: '/insurance',     slug: 'insurance' },
-  { label: 'Law firms',     href: '/law-firms',     slug: 'law-firms' },
-  { label: 'Credit unions', href: '/credit-unions', slug: 'credit-unions' }
+  { label: 'Mortgage',    href: '/industries/mortgage',    slug: 'mortgage',   k: 'home broker fsra lender renewal' },
+  { label: 'Auto',        href: '/industries/auto',        slug: 'auto',       k: 'car vehicle dealer omvic truck financing' },
+  { label: 'Real estate', href: '/industries/real-estate', slug: 'realestate', k: 'agent reco representation offer' },
+  { label: 'Insurance',   href: '/industries/insurance',   slug: 'insurance',  k: 'policy coverage claim ribo' },
+  { label: 'Investing',   href: '/industries/investing',   slug: 'investing',  k: 'advisor portfolio ciro csa suitability' },
+  { label: 'Banking',     href: '/industries/banking',     slug: 'banking',    k: 'bank account chequing fcac obsi' },
+  { label: 'Lending',     href: '/industries/lending',     slug: 'lending',    k: 'loan payday credit rate' }
 ];
 
 var MORE = [
-  { label: 'The passport',  href: '/passport',      slug: 'passport' },
-  { label: 'The rules',     href: '/the-rules',     slug: 'rules' },
-  { label: 'Why it is hard',href: '/the-problem',   slug: 'problem' },
-  { label: 'What we do',    href: '/what-we-do',    slug: 'what' },
-  { label: 'Who it is for', href: '/who-it-is-for', slug: 'who' },
-  { label: 'Check a firm',  href: '/check-a-firm',  slug: 'check' },
-  { label: 'Team',          href: '/team',          slug: 'team' }
+  { label: 'Why 4orm',      href: '/why-4orm',      slug: 'why',        k: 'gap trust relationship breaking' },
+  { label: 'How it works',  href: '/how-it-works',  slug: 'how',        k: 'line person permission evidence passport' },
+  { label: 'The Standard',  href: '/the-standard',  slug: 'standard',   k: 'principles rules regulators expect' },
+  { label: 'The evidence gap', href: '/evidence-gap', slug: 'gap',      k: 'record scattered systems reconstruct' },
+  { label: 'Industries',    href: '/industries',    slug: 'industries', k: 'seven decisions sectors' },
+  { label: 'Check a firm',  href: '/check-a-firm',  slug: 'check',      k: 'licence register red flag scam verify' },
+  { label: 'Security and privacy', href: '/privacy', slug: 'privacy',   k: 'data held corrected' },
+  { label: 'Company',       href: '/company',       slug: 'company',    k: 'team mission who is building this' }
 ];
 
 var page = document.body.getAttribute('data-page') || '';
@@ -67,7 +69,7 @@ function buildBareNav() {
       '<span></span>' +
       '<button class="bare-menu" id="burger" type="button" aria-expanded="false" ' +
         'aria-controls="omenu" aria-label="Open the menu">' +
-        '4orm your experience <span class="bm-i" aria-hidden="true">' +
+        'Menu <span class="bm-i" aria-hidden="true">' +
         '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
         'stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
         '</span></button>' +
@@ -84,29 +86,38 @@ function buildMenu() {
   function col(title, items) {
     return '<div class="ocol"><div class="och">' + title + '</div>' +
       items.map(function (i) {
+        var k = (i.label + ' ' + title + ' ' + (i.k || '')).toLowerCase();
         if (i.soon) {
-          return '<span class="oitem soon">' + i.label +
+          return '<span class="oitem soon" data-k="' + k + '">' + i.label +
                  '<em>Coming soon</em></span>';
         }
-        return '<a class="oitem" href="' + i.href + '"' +
+        return '<a class="oitem" href="' + i.href + '" data-k="' + k + '"' +
                (i.slug === page ? ' aria-current="page"' : '') + '>' + i.label + '</a>';
       }).join('') + '</div>';
   }
 
   m.innerHTML =
-    '<div class="omenu-in">' +
-      col('Experience', [
-        { label: 'Personal',     href: '/#personal' },
-        { label: 'Professional', href: '/#professional' },
-        { label: 'Check a firm', href: '/check-a-firm', slug: 'check' }
-      ]) +
-      col('Explore 4orm', MORE.filter(function (i) { return i.slug !== 'check'; })) +
-      col('Industries', INDUSTRIES.concat([
-        { label: 'Auto',      soon: true },
-        { label: 'Investing', soon: true },
-        { label: 'Banking',   soon: true }
-      ])) +
-      '<div class="ocol ofoot"><a class="obig" href="/contact">Talk to us</a></div>' +
+    '<div class="omenu-shell">' +
+      '<div class="osearch">' +
+        '<svg class="osi" width="16" height="16" viewBox="0 0 24 24" fill="none" ' +
+          'stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">' +
+          '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>' +
+        '<input id="omq" class="osq" type="text" autocomplete="off" spellcheck="false" ' +
+          'placeholder="Search for a page" aria-label="Search 4orm" />' +
+        '<button class="oclr" id="omclr" type="button" hidden aria-label="Clear the search">Clear</button>' +
+      '</div>' +
+      '<div class="omenu-in">' +
+        col('Experience', [
+          { label: 'Personal',     href: '/#personal',   k: 'you consumer buyer mortgage decision phone guardian' },
+          { label: 'Professional', href: '/#professional', k: 'firm dashboard broker adviser agent evidence' },
+          { label: 'Check a firm', href: '/check-a-firm', slug: 'check', k: 'licence licensed register red flag scam verify' }
+        ]) +
+        col('Explore', MORE.filter(function (i) { return i.slug !== 'check'; })) +
+        col('Industries', INDUSTRIES) +
+        '<div class="ocol ofoot"><a class="obig" href="/contact">Talk to us</a></div>' +
+      '</div>' +
+      '<p class="ono" id="omno" hidden>Nothing here matches that. Try <b>mortgage</b>, ' +
+        '<b>evidence</b>, <b>privacy</b> or <b>company</b>.</p>' +
     '</div>';
   return m;
 }
@@ -130,9 +141,9 @@ function buildNav() {
         '<button class="navmore" id="burger" type="button" aria-expanded="false" ' +
           'aria-controls="omenu"' + (industryOn ? ' aria-current="true"' : '') +
           '>Explore ' + CHEV + '</button>' +
-        '<a href="/team"' + (page === 'team' ? ' aria-current="page"' : '') + '>About</a>' +
+        '<a href="/company"' + (page === 'company' ? ' aria-current="page"' : '') + '>About</a>' +
       '</nav>' +
-      '<a class="nav-cta" href="/#stage">4orm your experience. <span class="cir">' + ARROW + '</span></a>' +
+      '<a class="nav-cta" href="/">4orm your experience. <span class="cir">' + ARROW + '</span></a>' +
       '<button class="burger" id="burger-m" type="button" aria-label="Menu" aria-expanded="false" ' +
         'aria-controls="omenu">' +
         '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
@@ -151,12 +162,13 @@ function buildFooter() {
         'An Alberta company. Pre-revenue, and the product is under development.</p></div>' +
       '<div><div class="fh">Views</div>' +
         VIEWS.map(function (v) { return '<a href="' + v.href + '">' + v.label + '</a>'; }).join('') +
-        '<a href="/passport">The passport</a></div>' +
+        '<a href="/how-it-works">How it works</a></div>' +
       '<div><div class="fh">Industries</div>' + INDUSTRIES.map(function (i) {
         return '<a href="' + i.href + '">' + i.label + '</a>'; }).join('') + '</div>' +
       '<div><div class="fh">Company</div>' +
-        '<a href="/the-rules">The rules</a><a href="/what-we-do">What we do</a>' +
-        '<a href="/team">Team</a><a href="/contact">Contact</a>' +
+        '<a href="/why-4orm">Why 4orm</a><a href="/the-standard">The Standard</a>' +
+        '<a href="/evidence-gap">The evidence gap</a><a href="/company">Company</a>' +
+        '<a href="/contact">Contact</a>' +
         '<a href="mailto:' + EMAIL + '">' + EMAIL + '</a>' +
         '<a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>' +
     '</div>' +
@@ -185,8 +197,10 @@ function initNav() {
       });
       document.documentElement.style.overflow = on ? 'hidden' : '';
       if (on) {
-        var f = m.querySelector('.oitem');
-        if (f) setTimeout(function () { f.focus(); }, 260);
+        var f = m.querySelector('#omq');
+        if (f) setTimeout(function () { f.focus(); }, 300);
+      } else if (m.__resetSearch) {
+        m.__resetSearch();
       }
     };
     controls.forEach(function (c) {
@@ -195,11 +209,56 @@ function initNav() {
         openMenu(!m.classList.contains('open'));
       });
     });
-    m.addEventListener('click', function (e) { if (e.target === m) openMenu(false); });
+    m.addEventListener('click', function (e) {
+      if (e.target === m) { openMenu(false); return; }
+      /* Picking something is the end of using the menu, whether it navigates
+         away or opens a way in on this same page. */
+      var a = e.target.closest && e.target.closest('a.oitem, a.obig');
+      if (a) openMenu(false);
+    });
+    initMenuSearch(m);
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && m.classList.contains('open')) { openMenu(false); bu.focus(); }
     });
   }
+}
+
+function initMenuSearch(m) {
+  var q = m.querySelector('#omq');
+  var clr = m.querySelector('#omclr');
+  var no = m.querySelector('#omno');
+  if (!q) return;
+  var items = Array.prototype.slice.call(m.querySelectorAll('.oitem'));
+  var cols = Array.prototype.slice.call(m.querySelectorAll('.ocol'));
+
+  function run() {
+    var v = q.value.trim().toLowerCase();
+    m.classList.toggle('searching', v.length > 0);
+    if (clr) clr.hidden = v.length === 0;
+    var hits = 0;
+    items.forEach(function (it) {
+      var on = !v || (it.getAttribute('data-k') || '').indexOf(v) > -1;
+      it.classList.toggle('hid', !on);
+      if (on) hits++;
+    });
+    cols.forEach(function (c) {
+      var any = c.querySelector('.oitem:not(.hid)');
+      c.classList.toggle('hid', !!v && !any && !c.classList.contains('ofoot'));
+    });
+    if (no) no.hidden = !(v && hits === 0);
+  }
+
+  q.addEventListener('input', run);
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      var first = m.querySelector('a.oitem:not(.hid)');
+      if (first) { e.preventDefault(); window.location.href = first.getAttribute('href'); }
+    }
+    if (e.key === 'Escape' && q.value) { e.stopPropagation(); q.value = ''; run(); }
+  });
+  if (clr) clr.addEventListener('click', function () { q.value = ''; run(); q.focus(); });
+  m.__resetSearch = function () { q.value = ''; run(); };
+  run();
 }
 
 function initReveal() {

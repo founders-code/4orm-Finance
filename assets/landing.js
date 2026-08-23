@@ -36,6 +36,19 @@ document.querySelectorAll('[data-go]').forEach(function(a){
 document.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click', back); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape') back(); });
 
+/* Someone can arrive on a way in from the menu, from a link, or from a
+   bookmark. #personal, #professional and #explore all open the right one. */
+var HASH = { personal:'you', professional:'firm', explore:'explore' };
+function fromHash(){
+  var k = HASH[(location.hash || '').replace('#','')];
+  if (!k) { if (open) back(); return; }
+  if (open === document.getElementById(DEST[k])) return;
+  if (open) back();
+  setTimeout(function(){ go(k); }, open ? 720 : 0);
+}
+window.addEventListener('hashchange', fromHash);
+if (location.hash) setTimeout(fromHash, 60);
+
 requestAnimationFrame(function(){
   requestAnimationFrame(function(){ document.body.classList.add('go'); });
 });
