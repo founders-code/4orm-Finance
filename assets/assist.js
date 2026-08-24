@@ -1,14 +1,14 @@
 /* ============================================================
    4orm Assist, on the landing.
 
-   The page lands, the panel wakes up, and it asks one thing at a
-   time. Answering "guidance" or "support" leads to a name, and
-   from then on the phone and the dashboard use that name instead
-   of ours. That is the whole point: it should read as theirs
-   before they have handed over anything at all.
+   The phone on the landing is not a picture of the product. It is
+   the product, asking the one question worth asking: what can I
+   help you with. The answers are decisions people recognise, so
+   the landing explains what 4orm is by offering to do it.
 
-   The name never leaves the browser. It sits in sessionStorage
-   and is gone when the tab closes.
+   Answering opens the full experience on that decision. Anything
+   the visitor types stays in this browser and goes when the tab
+   closes.
    ============================================================ */
 (function () {
 'use strict';
@@ -28,6 +28,7 @@ var esc = function (s) {
    What Assist is waiting for
    --------------------------------------------------------- */
 var WAIT = null;
+var GOAL = '';
 
 function remember(key, value) {
   try { sessionStorage.setItem('4orm.' + key, value); } catch (e) {}
@@ -85,17 +86,26 @@ function seq(turns) {
 
 /* ---------------------------------------------------------
    The conversation
+
+   One question, and the answers are the things a person actually
+   came here to do. Naming them is the fastest way to say what the
+   product is: nobody reads "financial decision infrastructure",
+   everybody understands "buy a home".
    --------------------------------------------------------- */
+var GOALS = [
+  ['mortgage', 'Buy a home'],
+  ['auto',     'Buy a car'],
+  ['insurance','Buy insurance'],
+  ['mortgage', 'Renew a mortgage']
+];
+
 function open(){
-  var t = seq([
+  return seq([
     ['<p>Hello. I am 4orm Assist.</p>', null, 800],
-    ['<p>Are you here for yourself, for your business, or would you like to know what ' +
-     '4orm does?</p>',
-     [['you', 'For me'],
-      ['firm', 'For my business'],
-      ['about', 'What 4orm does']], 1100]
+    ['<p>What can I help you with?</p>', GOALS.map(function (g) {
+      return ['goal:' + g[0] + ':' + g[1], g[1]];
+    }), 1000]
   ]);
-  return t;
 }
 
 function askName(kind) {
@@ -128,10 +138,17 @@ function takeName(kind, value) {
 }
 
 /* Hand over to the experience the visitor asked for. */
-function enter(kind) {
-  if (ways) { ways.hidden = false; ways.classList.add('in'); }
-  if (panel) panel.classList.add('handed');
+function enter(kind, ind) {
+  if (ind) { try { sessionStorage.setItem('4orm.ind', ind); } catch (e) {} }
   location.hash = kind === 'firm' ? '#professional' : '#personal';
+  /* The industry buttons live inside the experience. Pressing the right one
+     once it is open is what actually loads the right story. */
+  if (ind) {
+    setTimeout(function () {
+      var b = document.querySelector('.dest.on [data-ind="' + ind + '"]');
+      if (b && !b.classList.contains('on')) b.click();
+    }, 420);
+  }
 }
 
 /* ---------------------------------------------------------
@@ -140,34 +157,71 @@ function enter(kind) {
 thread.addEventListener('click', function (e) {
   var b = e.target.closest && e.target.closest('[data-pick]');
   if (!b) return;
+  e.stopPropagation();
   var k = b.getAttribute('data-pick');
   var label = b.textContent;
   Array.prototype.slice.call(thread.querySelectorAll('.a4chips')).forEach(function (c) {
     c.remove();
   });
   me(label);
-  if (k === 'about') {
-    /* "What 4orm does" is a page, not a question. Answering it here would be a
-       worse version of the page it is standing in front of. */
-    say('<p>Then start on the home page. It walks through what 4orm is, what it does and ' +
-        'what it will not do.</p>', null, 700);
-    setTimeout(function () { location.href = '/home'; }, 1500);
+
+  /* A goal is a decision. One short beat for a name, so the whole experience
+     reads as theirs, and then it opens on that decision. */
+  if (k.indexOf('goal:') === 0) {
+    GOAL = k.split(':')[1];
+    WAIT = 'goal';
+    say('<p>Good. And your first name?</p>' +
+        '<p class="a4m">Everything you see from here on will use it. It stays in this browser ' +
+        'and goes when you close the tab.</p>',
+        [['skip', 'Skip this']], 780);
+    setTimeout(function () { input.focus(); }, 900);
     return;
   }
+  if (k === 'skip') { WAIT = null; enter('you', GOAL); return; }
   askName(k);
 });
 
+bar.addEventListener('click', function (e) { e.stopPropagation(); });
+
 bar.addEventListener('submit', function (e) {
   e.preventDefault();
+  e.stopPropagation();
   var v = input.value.trim();
   if (!v) return;
   input.value = '';
   me(v);
+  if (WAIT === 'goal') {
+    WAIT = null;
+    var clean = v.replace(/[^\w\s'&.-]/g, '').trim().slice(0, 40);
+    if (clean) remember('name', clean);
+    say('<p>Thank you' + (clean ? ', ' + esc(clean) : '') + '. Opening 4orm now.</p>', null, 700);
+    setTimeout(function () { enter('you', GOAL); }, 1300);
+    return;
+  }
   if (WAIT) { var k = WAIT; WAIT = null; takeName(k, v); return; }
-  /* Anything typed before Assist has asked anything is treated as "help me". */
-  say('<p>Let me get you to the right place first.</p>', null, 650);
-  setTimeout(function () { askName('you'); }, 1200);
+  /* Anything typed before Assist has been answered is a goal in the visitor's
+     own words. Match it against what 4orm covers, and open there. */
+  var t = v.toLowerCase(), ind = '';
+  if (/home|house|mortgage|condo|renew|refinan/.test(t)) ind = 'mortgage';
+  else if (/car|vehicle|truck|auto|lease/.test(t)) ind = 'auto';
+  else if (/insur|policy|cover/.test(t)) ind = 'insurance';
+  else if (/invest|portfolio|advis/.test(t)) ind = 'investing';
+  else if (/firm|client|broker|dealer|my business/.test(t)) {
+    say('<p>Then let me open the firm view.</p>', null, 650);
+    setTimeout(function () { enter('firm'); }, 1250);
+    return;
+  }
+  say('<p>Opening 4orm so you can ask it properly.</p>', null, 650);
+  setTimeout(function () { enter('you', ind); }, 1250);
 });
+
+/* Clicking the phone anywhere else is the same as saying "show me". */
+if (panel) {
+  panel.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('.a4bar, .a4chip')) return;
+    enter('you');
+  });
+}
 
 /* Wake up shortly after the page settles, so the headline is read first. */
 setTimeout(function () {

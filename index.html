@@ -40,66 +40,100 @@
   <p class="llede">4orm helps you understand a financial decision before you make it, and helps the
     firm serving you keep the record of how it was made.</p>
 
-  <!-- 4orm Assist. It wakes up when the page lands, greets the visitor, and
-       asks what they need. The three ways in sit underneath, on screen from
-       the first moment, for anyone who would rather just choose one. -->
-  <section class="a4chat wide" id="a4chat" aria-label="4orm Assist">
-    <header class="a4top">
-      <span class="a4face" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
-          <rect x="6" y="9" width="20" height="16" rx="6" fill="currentColor" />
-          <circle cx="12.5" cy="16.5" r="2.1" fill="#fff" />
-          <circle cx="19.5" cy="16.5" r="2.1" fill="#fff" />
-          <path d="M16 4v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
-          <circle cx="16" cy="3" r="1.9" fill="currentColor" />
-          <path d="M12.5 21.5h7" stroke="#fff" stroke-width="1.7" stroke-linecap="round"
-                opacity=".55" />
-        </svg>
-      </span>
-      <span class="a4name">4orm Assist</span>
-      <span class="a4stat"><i></i>Here now</span>
-    </header>
+  <!-- The landing is two demonstrations and a door.
 
-    <div class="a4thread" id="a4thread"></div>
+       Row one is the live 4orm Assist phone with Personal beside it. Row two is
+       the firm dashboard with Professional beside it. Why 4orm sits underneath
+       both. Nothing here is a screenshot: the phone on the left is the real
+       assistant, and answering it opens the full experience.  -->
+  <div class="lrows" id="lways">
 
-    <form class="a4bar" id="a4bar" autocomplete="off">
-      <input id="a4input" type="text" maxlength="60" placeholder="Type your answer"
-             aria-label="Answer 4orm Assist" />
-      <button type="submit" aria-label="Send">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </button>
-    </form>
-  </section>
+    <section class="lrow rv">
+      <div class="lvis">
+        <div class="a4phone" id="a4chat">
+          <span class="a4pn" aria-hidden="true"></span>
+          <div class="a4top">
+            <span class="a4face" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
+                <rect x="6" y="9" width="20" height="16" rx="6" fill="currentColor" />
+                <circle cx="12.5" cy="16.5" r="2.1" fill="#fff" />
+                <circle cx="19.5" cy="16.5" r="2.1" fill="#fff" />
+                <path d="M16 4v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+                <circle cx="16" cy="3" r="1.9" fill="currentColor" />
+                <path d="M12.5 21.5h7" stroke="#fff" stroke-width="1.7" stroke-linecap="round"
+                      opacity=".55" />
+              </svg>
+            </span>
+            <span class="a4name">4orm Assist</span>
+            <span class="a4stat"><i></i>Here now</span>
+          </div>
 
+          <div class="a4thread" id="a4thread"></div>
 
-  <div class="lways" id="lways">
-    <a class="lway" href="#personal" data-go="you">
-      <span class="lwk">Personal</span>
-      <span class="lww">If you are about to borrow, buy or invest</span>
-      <span class="lwh">Understand it before you sign it.</span>
-      <span class="lws">Ask 4orm the questions you would
-        rather not ask out loud. It checks who you are dealing with, tells you what to have
-        ready, and stays with you through the whole decision.</span>
-      <span class="lwe">Pick up the phone <b>&#8594;</b></span>
-    </a>
+          <form class="a4bar" id="a4bar" autocomplete="off">
+            <input id="a4input" type="text" maxlength="60"
+                   placeholder="Or say it in your own words"
+                   aria-label="Tell 4orm Assist what you need" />
+            <button type="submit" aria-label="Send">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
 
-    <a class="lway" href="#professional" data-go="firm">
-      <span class="lwk">Professional</span>
-      <span class="lww">If you run or work at a firm</span>
-      <span class="lwh">Show your work, without more work.</span>
-      <span class="lws">See which clients are waiting, which files are missing something, and keep
-        the record of how each decision was reached. It builds itself as you go.</span>
-      <span class="lwe">See my dashboard <b>&#8594;</b></span>
-    </a>
+      <div class="ltxt">
+        <span class="lwk">Personal</span>
+        <span class="lww">If you are about to borrow, buy or invest</span>
+        <h2 class="lwh">Understand it before you sign it.</h2>
+        <p class="lws">Ask 4orm the questions you would rather not ask out loud. It checks who you
+          are dealing with, tells you what to have ready, and stays with you through the whole
+          decision.</p>
+        <a class="ltry" href="#personal" data-go="you">Try it <b>&#8594;</b></a>
+      </div>
+    </section>
 
-    <a class="lway" href="/why-4orm">
+    <section class="lrow rv">
+      <div class="lvis">
+        <button class="dashmini" type="button" data-go="firm"
+                aria-label="Open the firm dashboard">
+          <span class="dmtop"><i></i><i></i><i></i><em>Relationship integrity</em></span>
+          <span class="dmbody">
+            <span class="dmtiles">
+              <span class="dmt"><b>128</b><span>Active files</span></span>
+              <span class="dmt"><b>94%</b><span>Evidence complete</span></span>
+              <span class="dmt"><b>6</b><span>Waiting on you</span></span>
+            </span>
+            <span class="dmchart" aria-hidden="true">
+              <i style="--h:38%"></i><i style="--h:56%"></i><i style="--h:44%"></i>
+              <i style="--h:71%"></i><i style="--h:63%"></i><i style="--h:88%"></i>
+              <i style="--h:79%"></i><i style="--h:96%"></i>
+            </span>
+            <span class="dmrows">
+              <span class="dmr"><s class="lt ok"></s>Alvarez, M.<em>Complete</em></span>
+              <span class="dmr"><s class="lt warn"></s>Chen, R.<em>Disclosure missing</em></span>
+              <span class="dmr"><s class="lt ok"></s>Okafor, D.<em>Complete</em></span>
+            </span>
+          </span>
+        </button>
+      </div>
+
+      <div class="ltxt">
+        <span class="lwk">Professional</span>
+        <span class="lww">If you run or work at a firm</span>
+        <h2 class="lwh">Show your work, without more work.</h2>
+        <p class="lws">See which clients are waiting, which files are missing something, and keep
+          the record of how each decision was reached. It builds itself as you go.</p>
+        <a class="ltry" href="#professional" data-go="firm">Try it <b>&#8594;</b></a>
+      </div>
+    </section>
+
+    <a class="lwhy rv" href="/why-4orm">
       <span class="lwk">Why 4orm</span>
-      <span class="lww">If you want to know what this is first</span>
       <span class="lwh">See what 4orm is, and why it exists.</span>
-      <span class="lws">What is breaking in the gaps between people, firms and the systems
-        between them, what the research says, and who is building this.</span>
+      <span class="lws">What is breaking in the gaps between people, firms and the systems between
+        them, what the research says, and who is building this.</span>
       <span class="lwe">See why 4orm exists <b>&#8594;</b></span>
     </a>
   </div>

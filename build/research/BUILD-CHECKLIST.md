@@ -174,3 +174,19 @@ Banned: the 16% AI figure anywhere on the site. No screen references AI or model
 | H15 | More air on the landing | **DONE** type came down rather than the gaps closing up; the three ways in are still on the first screen |
 | H16 | Re-run of the full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow at 1440 or 390 |
 
+### Landing rebuild, 2026-08-24
+
+| # | Item | Result |
+|---|---|---|
+| J1 | Landing type and spacing back to what they were | **DONE** the compressed one-screen version is gone |
+| J2 | Row one: the phone on the left, Personal on the right | **DONE** and the phone is the live assistant, not a picture of one |
+| J3 | Row two: the firm dashboard on the left, Professional on the right | **DONE** drawn from the same tokens the real dashboard uses |
+| J4 | Why 4orm underneath both | **DONE** one wide door rather than a third column |
+| J5 | "Try it" beside Personal and beside Professional | **DONE** both open the blacked-out screen |
+| J6 | Clicking the phone or the dashboard opens the blacked-out screen | **DONE** the input and the chips are the exceptions, since those are the conversation |
+| J7 | Assist asks "What can I help you with?" | **DONE** Buy a home, Buy a car, Buy insurance, Renew a mortgage |
+| J8 | A goal opens the experience already on that decision | **DONE** verified: Buy a car lands on auto, Buy insurance on insurance |
+| J9 | The name still personalises everything, and is skippable | **DONE** one beat after the goal, with a Skip chip. Verified "Chad's 4orm" |
+| J10 | Pill reads "4orm my experience" | **DONE** |
+| J11 | Full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow at 1440 or 390 |
+

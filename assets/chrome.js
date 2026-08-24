@@ -96,7 +96,7 @@ function buildBareNav() {
       '<span></span>' +
       '<div class="bare-right">' +
         '<img class="bare-mark" src="/assets/mark.png" alt="4orm" width="30" height="30" />' +
-        '<a class="bare-menu" href="/home">My Experience ' +
+        '<a class="bare-menu" href="/home">4orm my experience ' +
           '<span class="cir" aria-hidden="true">' + ARROW + '</span></a>' +
       '</div>' +
     '</div>';
