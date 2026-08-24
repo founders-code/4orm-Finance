@@ -36,8 +36,8 @@ var PRIMARY = [
   { label: 'Home',         href: '/home',      slug: 'homepage' },
   { label: 'Personal',     href: '/personal',  slug: 'personal' },
   { label: 'Professional', href: '/professional', slug: 'professional' },
-  { label: 'Form',         href: '/form',      slug: 'form' },
-  { label: '4orm Family',  href: '/team',      slug: 'team' }
+  { label: 'How it works', href: '/how-it-works', slug: 'howitworks' },
+  { label: 'Family',       href: '/team',      slug: 'team' }
 ];
 
 var page = document.body.getAttribute('data-page') || '';
@@ -89,19 +89,14 @@ function buildBareNav() {
   var h = el('header', 'nav nav-bare');
   /* The mark and the one control, top right, in the blue pill the rest of the
      site uses. Nothing else competes with the three ways in. */
+  /* One control on the landing, and it goes to the home page. The white menu
+     lives on the other side of that door, where there is somewhere to go. */
   h.innerHTML =
     '<div class="nav-in">' +
       '<span></span>' +
       '<div class="bare-right">' +
         '<img class="bare-mark" src="/assets/mark.png" alt="4orm" width="30" height="30" />' +
-        /* The hamburger opens the white menu. The blue pill goes to the home
-           page, because that is what "4orm your experience" promises: the page
-           that explains 4orm, not a list of links. */
-        '<button class="burger" id="burger" type="button" aria-label="Menu" ' +
-          'aria-expanded="false" aria-controls="omenu">' +
-          '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
-          'stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
-        '<a class="bare-menu" href="/home">4orm your experience. ' +
+        '<a class="bare-menu" href="/home">My Experience ' +
           '<span class="cir" aria-hidden="true">' + ARROW + '</span></a>' +
       '</div>' +
     '</div>';
@@ -175,18 +170,21 @@ function buildNav() {
     '<div class="nav-in">' +
       '<a class="nav-brand" href="/" aria-label="Back to the start">' +
         '<img src="/assets/logo.png" alt="4orm Finance" /></a>' +
+      /* Five destinations and Menu. "My Experience" is not repeated here,
+         because this is already the experience: the visitor came through that
+         door to get to this page. */
       '<nav class="nav-links" aria-label="Primary">' +
         PRIMARY.map(function (i) {
           return '<a href="' + i.href + '"' +
             (i.slug === page ? ' aria-current="page"' : '') + '>' + i.label + '</a>';
         }).join('') +
+        '<button class="nav-menu" id="burger-m" type="button" aria-expanded="false" ' +
+          'aria-controls="omenu">' +
+          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+          'stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
+          'Menu</button>' +
       '</nav>' +
-      /* The pill is a link now. It says "4orm your experience", so it goes to
-         the page that gives you one. The white menu has its own control beside
-         it, at every width rather than only on a phone. */
-      '<a class="nav-cta" href="/home">4orm your experience. ' +
-        '<span class="cir">' + ARROW + '</span></a>' +
-      '<button class="burger wide" id="burger-m" type="button" aria-label="Menu" aria-expanded="false" ' +
+      '<button class="burger" id="burger-s" type="button" aria-label="Menu" aria-expanded="false" ' +
         'aria-controls="omenu">' +
         '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
     '</div>';
@@ -229,10 +227,10 @@ function buildFooter() {
 /* ---------- behaviour ---------- */
 function initNav() {
   var m = document.getElementById('omenu');
-  var controls = [document.getElementById('burger'), document.getElementById('burger-m')]
-    .filter(Boolean);
+  var controls = [document.getElementById('burger'), document.getElementById('burger-m'),
+                  document.getElementById('burger-s')].filter(Boolean);
   var bu = controls[0];
-  if (bu && m) {
+  if (m) {
     var openMenu = function (on) {
       m.classList.toggle('open', on);
       m.setAttribute('aria-hidden', on ? 'false' : 'true');
@@ -255,6 +253,11 @@ function initNav() {
         openMenu(!m.classList.contains('open'));
       });
     });
+    /* The landing has no visible menu control, but putting the phone away still
+       has to land somewhere useful. That is what this is for. */
+    window.FourmMenu = { open: function () { openMenu(true); },
+                         close: function () { openMenu(false); },
+                         isOpen: function () { return m.classList.contains('open'); } };
     m.addEventListener('click', function (e) {
       if (e.target === m || e.target.classList.contains('oback')) { openMenu(false); return; }
       if (e.target.closest('[data-closemenu]')) { openMenu(false); return; }
@@ -265,7 +268,10 @@ function initNav() {
     });
     initMenuSearch(m);
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && m.classList.contains('open')) { openMenu(false); bu.focus(); }
+      if (e.key === 'Escape' && m.classList.contains('open')) {
+        openMenu(false);
+        if (bu) bu.focus();
+      }
     });
   }
 }

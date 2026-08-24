@@ -144,7 +144,7 @@ CONSUMER = """
         moves.</p>
       <div class="hbtns rv d3">
         <a class="hb hb-p" href="/#personal">Pick up 4orm <span class="cir">{a}</span></a>
-        <a class="hb hb-g" href="/form">How it works</a>
+        <a class="hb hb-g" href="/how-it-works">How it works</a>
       </div>
     </div>
     <div class="hcol hphone rv d1">
@@ -351,7 +351,7 @@ INTEG = """
     <h2 class="hh rv">Built to work with<br />the financial system.</h2>
     <div class="orbit rv d1">
       <div class="orow">{top}</div>
-      <span class="ocore">4orm</span>
+      <span class="ocore"><img src="/assets/mark.png" alt="4orm" width="132" height="132" /></span>
       <div class="orow">{bottom}</div>
     </div>
     <p class="hsub rv d2">4orm does not need to replace the systems a firm already runs. It

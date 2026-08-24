@@ -114,12 +114,12 @@
     },
     {
       "source": "/evidence-gap",
-      "destination": "/form",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
       "source": "/evidence-gap.html",
-      "destination": "/form",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
@@ -143,13 +143,13 @@
       "permanent": true
     },
     {
-      "source": "/how-it-works",
-      "destination": "/form",
+      "source": "/form",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
-      "source": "/how-it-works.html",
-      "destination": "/form",
+      "source": "/form.html",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
@@ -454,12 +454,12 @@
     },
     {
       "source": "/what-we-do",
-      "destination": "/form",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
       "source": "/what-we-do.html",
-      "destination": "/form",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {

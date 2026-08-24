@@ -5,15 +5,11 @@
 'use strict';
 var DEST = { you:'d-you', firm:'d-firm' };
 var open = null, lastFocus = null;
-/* Where the person was standing when they picked this up. Putting the phone
-   away should return them there, not somewhere they never chose to be. */
-var cameFromMenu = false;
 
-function go(k, viaMenu){
+function go(k){
   var el = document.getElementById(DEST[k]);
   if (!el) return;
   lastFocus = document.activeElement;
-  cameFromMenu = !!viaMenu;
   open = el;
   el.classList.add('on');
   document.body.classList.add('indest');
@@ -24,7 +20,12 @@ function go(k, viaMenu){
     if (b) b.focus({ preventScroll:true });
   }, 420);
 }
-function back(){
+/* `onward` is true when the person deliberately put the thing away, by the
+   button or by Escape. Then they go to the home page, which is where somebody
+   who has just seen the product wants to be. It is false when the browser's
+   own back button cleared the hash, because sending them forward to a page
+   they were trying to leave would trap them. */
+function back(onward){
   if (!open) return;
   var el = open; open = null;
   el.classList.remove('lit');
@@ -32,35 +33,28 @@ function back(){
   document.body.style.overflow = '';
   setTimeout(function(){ el.classList.remove('on'); el.scrollTop = 0; }, 700);
   if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll:true });
-  cameFromMenu = false;
   if (history.replaceState) history.replaceState(null, '', location.pathname);
-  /* There are two landing surfaces: the three doors, and the menu. Coming out
-     of the phone or the dashboard, the menu is the one that is useful. It is
-     where the person can go somewhere next rather than start over. */
-  setTimeout(function(){
-    var b = document.getElementById('burger');
-    if (b && !document.querySelector('.omenu.open')) b.click();
-  }, 780);
+  if (onward) setTimeout(function(){ location.href = '/home'; }, 620);
 }
 
 document.querySelectorAll('[data-go]').forEach(function(a){
   a.addEventListener('click', function(e){ e.preventDefault(); go(a.getAttribute('data-go')); });
 });
-document.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click', back); });
-document.addEventListener('keydown', function(e){ if (e.key === 'Escape') back(); });
+document.querySelectorAll('[data-back]').forEach(function(b){
+  b.addEventListener('click', function(){ back(true); });
+});
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') back(true); });
 
 /* Someone can arrive on a way in from the menu, from a link, or from a
    bookmark. #personal and #professional each open the right one. */
 var HASH = { personal:'you', professional:'firm' };
 function fromHash(){
   var k = HASH[(location.hash || '').replace('#','')];
-  if (!k) { if (open) back(); return; }
+  if (!k) { if (open) back(false); return; }
   if (open === document.getElementById(DEST[k])) return;
   var was = open;
-  /* Arriving by hash while the menu is open means they picked it in the menu. */
-  var viaMenu = !!document.querySelector('.omenu.open');
-  if (was) back();
-  setTimeout(function(){ go(k, viaMenu); }, was ? 720 : 0);
+  if (was) back(false);
+  setTimeout(function(){ go(k); }, was ? 720 : 0);
 }
 window.addEventListener('hashchange', fromHash);
 if (location.hash) setTimeout(fromHash, 60);

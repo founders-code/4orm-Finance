@@ -2039,23 +2039,21 @@ body[data-page="home"] .glow{display:none}
 .abback:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:2px}
 .abback span{font-size:13px;line-height:1}
 
-/* The nav pill is a link to the home page. The menu opens from the control
-   beside it, which is now present at every width rather than only on a phone,
-   so there is one place to reach the white menu and it never moves. */
+/* The header pill is five destinations and Menu. Menu is the sixth item in the
+   same row, in the same shape as its neighbours, so it reads as a place to go
+   rather than as a control bolted onto the end. */
 button.nav-cta{cursor:pointer;border:0;font-family:var(--sans)}
 a.nav-cta{text-decoration:none}
-.burger.wide{display:flex}
-.nav-in .burger.wide{margin-left:10px}
-/* On a phone the row is the mark, the pill and the menu. The pill loses its
-   words there and keeps its arrow, so nothing wraps. */
-@media (max-width:520px){
-  .nav-cta{padding:9px;font-size:0;gap:0}
-  .nav-cta .cir{font-size:13px}
-}
-/* On the landing the control sits on white, so it needs the opposite colours. */
-.bare-right .burger{display:flex;color:var(--tx);background:var(--bg-3);
-  border:1px solid var(--border);cursor:pointer}
-.bare-right .burger:hover{background:var(--tx);border-color:var(--tx);color:#fff}
+.nav-menu{display:inline-flex;align-items:center;gap:8px;margin-left:6px;cursor:pointer;
+  padding:9px 17px 9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.07);font-family:var(--sans);font-size:13.5px;font-weight:600;
+  letter-spacing:-.01em;color:rgba(255,255,255,.9);
+  transition:background .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease)}
+.nav-menu:hover{background:#fff;border-color:#fff;color:var(--tx)}
+.nav-menu svg{transition:transform .4s var(--spring)}
+.nav-menu.x svg{transform:rotate(90deg)}
+@media (max-width:900px){ .nav-menu{display:none} }
+/* The landing carries one control, and it is the way forward. */
 a.bare-menu{text-decoration:none}
 
 /* ============================================================
@@ -2334,10 +2332,12 @@ body[data-page="homepage"]{background:#fff}
 .orbit{position:relative;display:flex;flex-direction:column;align-items:center;
   gap:clamp(18px,2.4vw,30px);margin:clamp(48px,5vw,76px) auto 0;max-width:880px}
 .orow{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
-.ocore{font-family:var(--sans);font-size:clamp(26px,3.2vw,40px);font-weight:790;
-  letter-spacing:-.04em;color:var(--blue-dp);padding:18px 40px;border-radius:999px;
+/* The hub is the mark, never the word set in a typeface that is not ours. */
+.ocore{display:inline-flex;align-items:center;justify-content:center;
+  width:clamp(96px,10vw,132px);height:clamp(96px,10vw,132px);border-radius:50%;
   background:var(--blue-50);border:1px solid var(--blue-100);
   box-shadow:0 18px 44px -22px rgba(46,107,242,.5)}
+.ocore img{width:58%;height:auto;display:block}
 .ocap{font-size:14px;font-weight:600;color:var(--tx-2);padding:11px 18px;border-radius:999px;
   border:1px solid var(--border);background:#fff;opacity:0;transform:scale(.94);
   transition:opacity .6s var(--ease),transform .6s var(--spring);
@@ -2847,24 +2847,28 @@ body.greeting .nav-bare,body.greeting .lland > *:not(.ask4){opacity:0}
   box-shadow:0 30px 70px -34px rgba(16,32,64,.3);
   opacity:0;transform:translateY(18px) scale(.985);
   transition:opacity .7s var(--ease),transform .8s var(--spring)}
-.a4chat.wide{width:min(1080px,100%);margin:clamp(14px,1.8vh,26px) auto clamp(20px,2.6vh,34px)}
-.a4chat.wide .a4thread{min-height:104px;max-height:min(200px,22vh);padding:16px 22px;gap:8px}
-.a4chat.wide .a4top{padding:10px 22px}
-.a4chat.wide .a4bar{padding:10px 18px}
+.a4chat.wide{width:min(1000px,100%);margin:clamp(30px,4.2vh,54px) auto clamp(34px,4.6vh,58px)}
+.a4chat.wide .a4thread{min-height:96px;max-height:min(178px,20vh);padding:16px 24px;gap:8px}
+.a4chat.wide .a4top{padding:10px 24px}
+.a4chat.wide .a4bar{padding:10px 20px}
 .a4chat.wide .a4b{max-width:74%;padding:11px 15px}
 .a4chat.wide .a4bar input{padding:9px 16px}
 .a4chat.wide .a4bar button{width:36px;height:36px}
 
-/* The landing is one screen: the mark, the line, the chat, and the three ways
-   in. Everything above the chat gives up room so the ways in are on it. */
-body[data-page="home"] .lland{padding-top:clamp(72px,8.5vh,98px);
-  padding-bottom:clamp(20px,3vh,36px)}
-body[data-page="home"] .lmark{margin-bottom:clamp(14px,2vh,24px)}
-body[data-page="home"] .lmark img{height:clamp(50px,4.4vw,62px)}
-body[data-page="home"] .lh1{margin-bottom:clamp(12px,1.6vh,18px)}
-body[data-page="home"] .llede{margin-bottom:0;max-width:56ch}
-body[data-page="home"] .lway{padding-top:clamp(18px,2.4vh,26px);
-  padding-bottom:clamp(18px,2.4vh,26px)}
+/* The landing is one screen and it should feel like it has room to breathe.
+   The type gets smaller rather than the gaps getting tighter, because air is
+   what makes the three ways in feel like a calm choice instead of a form. */
+body[data-page="home"] .lland{padding-top:clamp(78px,9vh,108px);
+  padding-bottom:clamp(34px,4.5vh,58px)}
+body[data-page="home"] .lmark{margin-bottom:clamp(26px,3.4vh,42px)}
+body[data-page="home"] .lmark img{height:clamp(46px,3.9vw,56px)}
+body[data-page="home"] .lh1{margin-bottom:clamp(20px,2.6vh,30px);max-width:19ch;
+  font-size:clamp(28px,3.15vw,44px)}
+body[data-page="home"] .llede{margin-bottom:0;max-width:52ch;
+  font-size:clamp(15px,1.15vw,17px)}
+body[data-page="home"] .lways{max-width:1140px}
+body[data-page="home"] .lway{padding:clamp(26px,3.2vh,38px) clamp(26px,2.2vw,40px)}
+body[data-page="home"] .lws{font-size:13.4px;line-height:1.6}
 .a4chat.awake{opacity:1;transform:none}
 .a4chat.handed{opacity:.35;pointer-events:none;transition:opacity .5s var(--ease)}
 

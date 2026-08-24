@@ -164,3 +164,13 @@ Banned: the 16% AI figure anywhere on the site. No screen references AI or model
 | H5 | The shared-permission material found a home | **DONE** "Bring someone in" on /personal, "People you invite" on /privacy, /family redirects to /team |
 | H6 | `.tm` class collision resolved | **DONE** team card is `.tmc`; the dashboard tile keeps `.tm` |
 | H7 | Re-run of the full gate after all of the above | **PASS** gate 0/0, stutters 0, links all resolve, no console errors, no overflow at 1440 or 390 |
+| H8 | Brand mark, never the word, as the hub of the integrations diagram | **DONE** /form and /home both carry `/assets/mark.png` |
+| H9 | Landing pill reads "My Experience" and goes to /home | **DONE** |
+| H10 | No hamburger on the landing; the menu opens on the far side of that door | **DONE** putting the phone away still lands on the menu, through `window.FourmMenu` rather than a click on a button that is no longer there |
+| H11 | Header row is Home, Personal, Professional, Form, Family, Menu | **DONE** the pill is gone; Menu is the sixth item in the same row |
+| H12 | Re-run of the full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow at 1440 or 390 |
+| H13 | Putting the phone away, or leaving the firm dashboard, lands on the home page | **DONE** deliberate exits go to /home; the browser's own back button still just closes, so nobody is pushed forward out of a page they were leaving |
+| H14 | The word "Form" is gone from navigation. The page is "How it works" at `/how-it-works` | **DONE** `/form` redirects to it. Two sentences still use "form" to mean a piece of paperwork, which is the contrast they are drawing |
+| H15 | More air on the landing | **DONE** type came down rather than the gaps closing up; the three ways in are still on the first screen |
+| H16 | Re-run of the full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow at 1440 or 390 |
+

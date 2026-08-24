@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Personal, Professional and Form.
+"""Personal, Professional and How it works.
 
 Three of the pages the site hangs off. Each one answers a different
 person's question, and none of them requires the reader to understand
@@ -159,7 +159,7 @@ def personal():
     S.append(cta("Nothing you do in there reaches anybody until you say so.",
         "Pick it up and use it. Ask the awkward question. Nobody is watching, and nothing moves "
         "without you.",
-        primary=("Pick up 4orm", "/#personal"), secondary=("How it works", "/form")))
+        primary=("Pick up 4orm", "/#personal"), secondary=("How it works", "/how-it-works")))
 
     body = hero("Personal", "Know before",
                 "you decide.",
@@ -271,9 +271,9 @@ def professional():
                      "get caught early, and what management actually sees.", body)
 
 
-# ================================================================ 3. FORM
+# ======================================================== 3. HOW IT WORKS
 
-def form():
+def howitworks():
     S = []
 
     S.append(sec("The line", "Six steps first. The other five when you want them.",
@@ -350,7 +350,7 @@ def form():
           '<span class="ocap" style="--i:2">Credit</span>'
           '<span class="ocap" style="--i:3">Documents</span>'
         '</div>'
-        '<span class="ocore">4orm</span>'
+        '<span class="ocore"><img src="/assets/mark.png" alt="4orm" width="132" height="132" /></span>'
         '<div class="orow">'
           '<span class="ocap" style="--i:4">Broker and dealer systems</span>'
           '<span class="ocap" style="--i:5">Signature</span>'
@@ -366,12 +366,12 @@ def form():
         primary=("Experience 4orm", "/#personal"),
         secondary=("Privacy and security", "/privacy")))
 
-    body = hero("Form", "One relationship.",
+    body = hero("How it works", "One relationship.",
                 "One line.",
                 "How 4orm actually works: where the information sits, who has to permit what, and "
                 "why the evidence is a by-product of the conversation rather than a second "
                 "job.") + "".join(S)
-    return kit.write("form", "/form", "One relationship. One line.",
+    return kit.write("howitworks", "/how-it-works", "One relationship. One line.",
                      "The architecture: My 4orm, identity, permission, provenance, evidence and "
                      "the systems 4orm connects.", body)
 
@@ -379,4 +379,4 @@ def form():
 def build():
     yield personal()
     yield professional()
-    yield form()
+    yield howitworks()

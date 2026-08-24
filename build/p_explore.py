@@ -210,7 +210,7 @@ def standard():
 
 
 def build():
-    # /form replaced how(), /research and /form absorbed gap(), and the team
+    # /how-it-works replaced how(), /research and /how-it-works absorbed gap(), and the team
     # moved onto why(). Those three pages are gone rather than orphaned.
     yield why()
     yield standard()
