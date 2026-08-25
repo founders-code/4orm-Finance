@@ -189,4 +189,9 @@ Banned: the 16% AI figure anywhere on the site. No screen references AI or model
 | J9 | The name still personalises everything, and is skippable | **DONE** one beat after the goal, with a Skip chip. Verified "Chad's 4orm" |
 | J10 | Pill reads "4orm my experience" | **DONE** |
 | J11 | Full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow at 1440 or 390 |
+| J12 | No mark in the landing corner | **DONE** the full logo is already on the page; the corner carried it twice |
+| J13 | Landing starts lower, from the logo down | **DONE** top padding up from 88-118px to 124-168px |
+| J14 | Page heroes start lower | **DONE** `.phero` 214px to 262px, and the home page's opening screen with it. Applies to every page that has a hero |
+| J15 | The page you are on is marked in the header | **DONE** a white pill in the dark bar, and a blue underline in the header that rides over the open menu |
+| J16 | Menu water covers its own contents at every height | **FIXED** the waterline was a flat 56%, so on any screen under about 950px the links floated over the page below. It now rises as the screen shortens. Verified at 1080, 950, 860, 760 and 680 |
 

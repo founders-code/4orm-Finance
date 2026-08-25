@@ -74,7 +74,10 @@ function buildMenuHeader() {
       '<a class="nav-brand" href="/" aria-label="Back to the start">' +
         '<img src="/assets/logo.png" alt="4orm Finance" /></a>' +
       '<nav class="nav-links" aria-label="Primary">' +
-        PRIMARY.map(function (i) { return '<a href="' + i.href + '">' + i.label + '</a>'; }).join('') +
+        PRIMARY.map(function (i) {
+          return '<a href="' + i.href + '"' +
+            (i.slug === page ? ' aria-current="page"' : '') + '>' + i.label + '</a>';
+        }).join('') +
       '</nav>' +
       '<button class="nav-cta" type="button" data-closemenu>Close ' +
         '<span class="cir">' + ARROW + '</span></button>' +
@@ -95,7 +98,6 @@ function buildBareNav() {
     '<div class="nav-in">' +
       '<span></span>' +
       '<div class="bare-right">' +
-        '<img class="bare-mark" src="/assets/mark.png" alt="4orm" width="30" height="30" />' +
         '<a class="bare-menu" href="/home">4orm my experience ' +
           '<span class="cir" aria-hidden="true">' + ARROW + '</span></a>' +
       '</div>' +

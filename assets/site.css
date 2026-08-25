@@ -68,6 +68,12 @@ p{margin:0}
 .nav-links a{padding:9px 15px;border-radius:999px;font-size:13.5px;font-weight:550;
   color:rgba(255,255,255,.82);transition:background .5s var(--spring),color .3s var(--ease)}
 .nav-links a:hover{background:rgba(255,255,255,.09);color:#fff}
+/* The page you are on. A person should be able to glance at the bar and know
+   where they are standing without reading the address. */
+.nav-links a[aria-current="page"]{background:#fff;color:var(--tx);font-weight:650}
+.nav-links a[aria-current="page"]:hover{background:#fff;color:var(--tx)}
+.nav-inmenu .nav-links a[aria-current="page"]{background:none;color:#fff;
+  box-shadow:inset 0 -2px 0 var(--blue-lt)}
 .nav-cta{display:inline-flex;align-items:center;gap:10px;padding:9px 9px 9px 20px;border-radius:999px;
   background:var(--blue);color:#fff;font-size:13.5px;font-weight:650;
   box-shadow:0 10px 26px rgba(46,107,242,.34);transition:transform .6s var(--spring),background .3s}
@@ -375,7 +381,9 @@ p{margin:0}
    The hero sits lower than the nav pill needs it to, and the section under it
    comes up to meet it. Two headings a screen apart read as two separate pages;
    close enough together they read as one thought continuing. */
-.phero{position:relative;z-index:1;padding:214px 0 0;text-align:center}
+/* The hero starts lower than the nav needs it to. A headline that begins
+   right under the pill reads as cramped against it. */
+.phero{position:relative;z-index:1;padding:262px 0 0;text-align:center}
 .phero .wrap{max-width:900px}
 .phero h1{margin:26px auto 0;font-size:clamp(36px,5vw,60px)}
 .phero h1 .b{color:var(--blue-dp)}
@@ -1294,12 +1302,20 @@ body.infocus .lure{opacity:0 !important;visibility:hidden}
    page is still there, still legible, and clicking it takes you
    back. White on white gave no edge at all; the blue does.
    ============================================================ */
-.omenu{position:fixed;inset:0;z-index:95;display:flex;align-items:flex-start;
+/* The waterline. On a tall screen it sits a little past halfway and the page
+   shows through below it, which is what makes clicking down there mean "take
+   me back". On a shorter screen that same 56% cut the menu in half and left
+   the links floating over the page, so the water rises to keep them on it. */
+.omenu{--water:56%;
+  position:fixed;inset:0;z-index:95;display:flex;align-items:flex-start;
   justify-content:center;padding:150px 28px 0;overflow:hidden;background:transparent;
   opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s}
+@media (max-height:1020px){ .omenu{--water:72%;padding-top:132px} }
+@media (max-height:820px){ .omenu{--water:84%;padding-top:118px} }
+@media (max-height:700px){ .omenu{--water:100%;padding-top:104px} }
 
 /* the body of the water, ending well up the screen */
-.omenu::before{content:'';position:absolute;left:0;right:0;top:0;height:56%;
+.omenu::before{content:'';position:absolute;left:0;right:0;top:0;height:var(--water);
   pointer-events:none;
   background:linear-gradient(180deg,
     rgba(233,241,254,.97) 0%,
@@ -1309,7 +1325,7 @@ body.infocus .lure{opacity:0 !important;visibility:hidden}
   -webkit-backdrop-filter:saturate(150%) blur(20px)}
 
 /* one line, floating, never breaking into a second crest */
-.owave{position:absolute;left:-30%;right:-30%;top:calc(56% - 42px);height:96px;
+.owave{position:absolute;left:-30%;right:-30%;top:calc(var(--water) - 42px);height:96px;
   pointer-events:none;z-index:1;opacity:0;transition:opacity .6s var(--ease) .12s}
 .omenu.open .owave{opacity:1}
 .owave svg{display:block;width:160%;height:100%}
@@ -2142,7 +2158,7 @@ body[data-page="homepage"]{background:#fff}
 .hbtns{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
 
 /* 01 thesis, and 14 close */
-.hs-thesis{padding-top:clamp(150px,15vw,220px);text-align:center}
+.hs-thesis{padding-top:clamp(188px,17vw,262px);text-align:center}
 .hs-thesis .hlede{margin-left:auto;margin-right:auto}
 .htwo{display:flex;align-items:stretch;justify-content:center;gap:clamp(30px,6vw,88px);
   margin-top:clamp(56px,6vw,84px);text-align:left;flex-wrap:wrap}
@@ -2915,7 +2931,7 @@ body.greeting .nav-bare,body.greeting .lland > *:not(.ask4){opacity:0}
    so the landing shows the product rather than describing it.
    ============================================================ */
 body[data-page="home"] .lland{display:block;text-align:center;
-  padding:clamp(88px,10vh,118px) 40px clamp(64px,7vh,92px)}
+  padding:clamp(124px,14vh,168px) 40px clamp(64px,7vh,92px)}
 body[data-page="home"] .llede{margin-bottom:clamp(52px,6vh,82px)}
 
 .lrows{width:100%;max-width:1160px;margin:0 auto;text-align:left;
