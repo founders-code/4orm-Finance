@@ -195,3 +195,39 @@ Banned: the 16% AI figure anywhere on the site. No screen references AI or model
 | J15 | The page you are on is marked in the header | **DONE** a white pill in the dark bar, and a blue underline in the header that rides over the open menu |
 | J16 | Menu water covers its own contents at every height | **FIXED** the waterline was a flat 56%, so on any screen under about 950px the links floated over the page below. It now rises as the screen shortens. Verified at 1080, 950, 860, 760 and 680 |
 
+
+
+## K. The phone actually does four things — 2026-08-25
+
+The open screen is no longer a list of goals. It is the four moments 4orm
+exists for, and each one runs.
+
+| # | Mode | What it does now | Verified |
+|---|---|---|---|
+| K1 | **Know before you send** | Paste a message, or open one of three prepared cases. Five registers check in turn, then a concern level, findings that each name their source, and what to do next | Investment offer returns High concern with the CSA National Registration Search cited. Typed text is matched to the right reading rather than returning nothing |
+| K2 | **Know before you look** | Home, vehicle, insurance or investing, then the guided questions that already existed: say it in your own words, get read back, answer the three that change the answer | Full arc still runs to the passport, sharing and the honest limit, with no errors |
+| K3 | **Know before you sign** | Choose a file or open a commitment, bill of sale, policy or account form. Four reading passes, then flags with the page, what it says and the question it turns into | Bill of sale returns 4 questions, 2 marked High because they contradict the quote |
+| K4 | **Join a professional** | The invitation from the firm, what they are asking for, granting item by item with two things shown as not asked for, then what it produces on both sides | Toggling a grant off changes the count. Joined screen names suitability evidence and reporting |
+
+### Where a real service plugs in
+
+Three functions, each one taking input and returning findings. Every screen
+reads from what they return, so replacing a body changes nothing else.
+
+| Seam | In | Out |
+|---|---|---|
+| `runSend(key, typed)` | pasted text or a case key | level, findings with sources, what to do |
+| `readDoc(key)` | a document | flags with page, finding and the question |
+| `ANSWER(q)` | a question in the person's words | the answer, or an honest no answer |
+
+### The lines that are on the screen, not in a footnote
+
+- **Send** ends with: this is not a finding that any person or company has broken the law.
+- **Sign** ends with: whether to sign is your decision, and a legal reading is a lawyer's job.
+- **Join** ends with: a regulated firm may have its own duty to keep what it already holds, and narrowing access does not undo that.
+
+| # | Check | Result |
+|---|---|---|
+| K5 | No AI or model language on any screen or in any script | **PASS** scanned all six scripts and all 22 pages |
+| K6 | No real person or firm called a scammer | **PASS** concern levels only, every finding cited to a register or to the message itself |
+| K7 | Full gate after the build | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow at 1440 or 390 |

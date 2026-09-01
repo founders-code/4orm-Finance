@@ -48,7 +48,11 @@ function fresh(ind) {
     opened: false,
     situated: false,
     awaiting: null,
-    qi: 0
+    qi: 0,
+    mode: '',
+    check: null,
+    doc: null,
+    grant: null
   };
 }
 
@@ -366,7 +370,11 @@ function toBottom() {
 var SCREEN = {};
 
 /* --- the way in ------------------------------------------- */
-SCREEN.open = function () {
+SCREEN.open = function () { SCREEN.modes(); };
+
+/* The goal screen. This is where "Know before you look" arrives, once the
+   person has said which decision they are thinking about. */
+SCREEN.goals = function () {
   var i = I();
   head(i.who + '&rsquo;s 4orm', i.sub);
   paint(
@@ -375,7 +383,9 @@ SCREEN.open = function () {
     i.opens.map(function (o) { return opt('goal', o[1], '', o[0]); }).join('') +
     '<div class="gor">or just say it in your own words</div>' +
     '<button class="opt ghost" data-act="example"><span class="ptxt"><b>Use the example</b>' +
-    '<i>' + esc(i.ex.slice(0, 62)) + '&hellip;</i></span><span class="ch">&#8250;</span></button>'
+    '<i>' + esc(i.ex.slice(0, 62)) + '&hellip;</i></span><span class="ch">&#8250;</span></button>' +
+    '<button class="opt ghost" data-act="modes"><span class="ptxt"><b>The other three</b>' +
+    '<i>Send, sign, or join a professional</i></span><span class="ch">&#8250;</span></button>'
   );
 };
 
@@ -1168,6 +1178,596 @@ function drawRail() {
     '</div></div>';
 }
 
+
+/* ============================================================
+   THE FOUR THINGS 4orm DOES
+
+   Every one of them is the same promise at a different moment:
+   know the thing before the thing is irreversible.
+
+     send   a message, a link or a request arrived, and money or
+            information is about to move
+     look   nobody is selling yet, and there is time to work out
+            what is actually needed
+     sign   a document is in front of the person and the reading
+            of it is the last chance
+     join   a professional has invited them in, and the evidence
+            starts being built by both sides
+
+   THE SEAMS. Each mode has one function that produces its
+   findings: runSend(), readDoc(), and ANSWER() for the guided
+   questions. They take input and return findings. Swap a body
+   for a service call and every screen below keeps working.
+   ============================================================ */
+
+var MODES = [
+  ['send',   'Know before you send',  'Money or documents are about to move'],
+  ['look',   'Know before you look',  'Nobody is selling yet'],
+  ['sign',   'Know before you sign',  'A document is in front of you'],
+  ['invite', 'Join a professional',   'A firm has invited you in']
+];
+
+SCREEN.modes = function () {
+  var i = I();
+  head(i.who + '&rsquo;s 4orm', 'Nothing here reaches anybody until you say so');
+  paint(
+    '<div class="ghead"><h3>Good afternoon, ' + i.who + '.</h3>' +
+    '<p>Four things, each one before the part you cannot take back.</p></div>' +
+    MODES.map(function (m) { return opt('mode', m[1], m[2], m[0]); }).join('')
+  );
+};
+
+/* ============================================================
+   1. KNOW BEFORE YOU SEND
+
+   The check that runs against what is published, and stops
+   there. It reports what a register says and what a message
+   does. It never concludes that a person or a company is a
+   criminal, because we are not in a position to conclude that
+   and saying it about a real firm would be wrong.
+   ============================================================ */
+
+var SENDS = [
+  { k: 'refund',
+    t: 'Text message',
+    p: 'CRA: Your 2025 refund of $1,482.60 could not be deposited. Confirm your banking ' +
+       'details within 24 hours at cra-refund-secure.ca/verify or the amount will be returned ' +
+       'to the treasury.',
+    level: 'bad',
+    find: [
+      ['Where it wants you to go', 'The address is not a Government of Canada address. ' +
+       'Federal services sit on canada.ca.', 'The link in the message'],
+      ['What it is asking for', 'Banking details, entered on a page reached from a message ' +
+       'you did not expect.', 'The message'],
+      ['The clock', 'A deadline measured in hours. Urgency is what stops a person checking.',
+       'The message'],
+      ['What a refund actually does', 'A refund you are owed does not expire, and is not ' +
+       'collected by confirming your account from a text.', 'How the process works']
+    ],
+    doing: [
+      'Do not open the link, and do not enter anything on the page behind it.',
+      'If you want to know whether a refund is waiting, sign in to your own account ' +
+      'the way you normally do, or telephone the number on a document you already had.',
+      'Report the message to the Canadian Anti-Fraud Centre. Reporting it is what makes ' +
+      'the next person’s check work.'
+    ] },
+
+  { k: 'invest',
+    t: 'Investment offer',
+    p: 'Hi, following up from the group. We are opening a small allocation in the arbitrage ' +
+       'fund this week. 4 to 6 per cent monthly, principal protected, audited. Minimum ' +
+       '$25,000, funded by wire or transfer today to hold your place.',
+    level: 'bad',
+    find: [
+      ['Is the person registered', 'No individual or firm is named in a way that can be ' +
+       'looked up. Anyone advising on or selling securities in Canada is normally required ' +
+       'to be registered, or to fit an exemption.', 'CSA National Registration Search'],
+      ['The return being promised', 'A fixed monthly return described as protected is not ' +
+       'how an investment behaves. A return that cannot fall is not an investment.',
+       'What the words mean'],
+      ['How the money is meant to move', 'Wire or transfer, today, to hold a place. ' +
+       'Once it has gone it is usually gone.', 'The message'],
+      ['The clock', 'This week, today, a place to hold. Every one of those exists to ' +
+       'stop you checking.', 'The message']
+    ],
+    doing: [
+      'Do not send anything today. Nothing that is real needs the money before you can ' +
+      'check who is asking.',
+      'Ask for the full legal name of the firm and the individual, then look both up on ' +
+      'the CSA National Registration Search and the CSA Disciplined List.',
+      'If they will not give you a name you can look up, that is the answer.'
+    ] },
+
+  { k: 'renewal',
+    t: 'Renewal email',
+    p: 'Good afternoon. Ahead of your renewal we need updated documents. Please reply to ' +
+       'this address with your two most recent pay stubs, a void cheque and a photo of your ' +
+       'driver’s licence. Sent from a personal address, not the firm domain.',
+    level: 'warn',
+    find: [
+      ['Who sent it', 'The address is a personal one, not the firm’s. That can be ' +
+       'somebody working from a phone, and it can be somebody who is not them at all.',
+       'The sender address'],
+      ['What it is asking for', 'A void cheque and a licence photograph, by ordinary email. ' +
+       'Email is not a safe place to put either of those.', 'The message'],
+      ['What is normal here', 'A renewal genuinely does need documents. That part is not ' +
+       'unusual, which is what makes the sender address worth checking.', 'How the process works']
+    ],
+    doing: [
+      'Do not reply to that address with anything.',
+      'Telephone the firm on the number from your original agreement and ask whether they ' +
+      'sent it.',
+      'If they did, ask them to send you a secure upload link rather than taking documents ' +
+      'by email.'
+    ] }
+];
+
+var LEVEL = {
+  ok:   { l: 'Low concern',  k: 'ok',   s: 'Nothing came back that should stop you' },
+  warn: { l: 'Caution',      k: 'warn', s: 'Some of this is worth confirming before you act' },
+  bad:  { l: 'High concern', k: 'bad',  s: 'Do not send anything until this is resolved' }
+};
+
+var REGISTERS = [
+  ['CSA National Registration Search', 'Is the person or firm registered'],
+  ['CSA Disciplined List',             'Has action been taken before'],
+  ['CIRO Advisor Report',              'Investment advisor history'],
+  ['Canadian Anti-Fraud Centre',       'Reported patterns'],
+  ['Provincial regulator registers',   'FSRA, OMVIC, RIBO, VSA']
+];
+
+SCREEN.send = function () {
+  head('Know before you send', 'Check it while checking still costs nothing');
+  paint(
+    '<div class="ghead"><h3>What came in?</h3>' +
+    '<p>Paste it below, or open one of these and I will run the same check on it.</p></div>' +
+    SENDS.map(function (s) {
+      return opt('sendrun', s.t, esc(s.p.slice(0, 74)) + '&hellip;', s.k);
+    }).join('') +
+    '<div class="gor">or paste what you received</div>' +
+    '<form class="gpaste" id="sendform">' +
+      '<textarea id="sendinput" rows="3" maxlength="600" ' +
+        'placeholder="Paste the message, the email or the link"></textarea>' +
+      '<button class="gcta wide" type="submit">Run the check &#8594;</button>' +
+    '</form>' +
+    note('The check reads what is published and what the message does. It does not conclude ' +
+         'that anybody has committed a crime.')
+  );
+};
+
+function note(txt) {
+  return '<div class="gnote"><b>Where the line sits.</b> ' + txt + '</div>';
+}
+
+/* THE SEAM. Give it text, get findings back. */
+function runSend(key, typed) {
+  var s = null;
+  if (key) { s = SENDS.filter(function (x) { return x.k === key; })[0]; }
+  if (!s && typed) { s = matchSend(typed); }
+  return s;
+}
+
+/* Typed text is matched against the patterns the prepared cases stand for, so
+   pasting something real still lands on the right reading rather than nothing. */
+function matchSend(t) {
+  var x = String(t).toLowerCase();
+  if (/refund|cra|revenue agency|tax|deposit|benefit/.test(x)) return SENDS[0];
+  if (/invest|fund|return|per cent|percent|%|crypto|wire|guarantee|arbitrage/.test(x)) return SENDS[1];
+  if (/renew|pay stub|void cheque|licence|license|document|upload/.test(x)) return SENDS[2];
+  return {
+    k: 'unclear', t: 'What you pasted', p: String(t).slice(0, 240), level: 'warn',
+    find: [
+      ['What I can see', 'There is not enough in this on its own to place it. That is not ' +
+       'the same as it being fine.', 'What you pasted'],
+      ['The two questions that settle most of these', 'Who exactly is asking, by full legal ' +
+       'name, and where is the money or the document going.', 'How to check anything']
+    ],
+    doing: [
+      'Ask for the full legal name of the firm and the individual.',
+      'Look that name up on the published register for what they are selling.',
+      'Do not send money or documents until both of those come back.'
+    ]
+  };
+}
+
+function sendRun(key, typed) {
+  var s = runSend(key, typed);
+  ST.check = s;
+  ST.screen = 'sendrun';
+  head('Know before you send', 'Checking what is published');
+
+  paint(
+    '<div class="gquote"><span class="gqk">' + s.t + '</span><p>' + esc(s.p) + '</p></div>' +
+    '<div class="gruns" id="gruns">' +
+      REGISTERS.map(function (r, n) {
+        return '<div class="grun" data-n="' + n + '"><span class="gspin"></span>' +
+          '<span class="ptxt"><b>' + r[0] + '</b><i>' + r[1] + '</i></span></div>';
+      }).join('') +
+    '</div>'
+  );
+
+  /* Each register lands in turn. A check that finished instantly would not
+     read as a check. */
+  REGISTERS.forEach(function (r, n) {
+    setTimeout(function () {
+      var el = $('#gruns .grun[data-n="' + n + '"]');
+      if (el) el.className = 'grun done';
+      if (n === REGISTERS.length - 1) setTimeout(sendResult, 700);
+    }, 620 + n * 560);
+  });
+
+  evt('Checked something before acting on it', 'AGAINST WHAT IS PUBLISHED', 'gold');
+}
+
+function sendResult() {
+  var s = ST.check;
+  if (!s) return;
+  var L = LEVEL[s.level];
+  ST.screen = 'sendresult';
+  head('Know before you send', L.l);
+
+  put('checked', 'Checked before acting', s.t + ' · ' + L.l, 'verified',
+      'Against published registers');
+
+  paint(
+    '<div class="glevel ' + L.k + '"><span class="glv">' + L.l + '</span>' +
+      '<span class="gls">' + L.s + '</span></div>' +
+
+    '<div class="gsec">What I found</div>' +
+    s.find.map(function (f) {
+      return '<div class="gfind"><b>' + f[0] + '</b><p>' + f[1] + '</p>' +
+        '<span class="gsrc">' + f[2] + '</span></div>';
+    }).join('') +
+
+    '<div class="gsec">What to do</div>' +
+    '<ol class="gdo">' + s.doing.map(function (d) { return '<li>' + d + '</li>'; }).join('') + '</ol>' +
+
+    note('This is what the registers say and what the message does. It is not a finding that ' +
+         'any person or company has broken the law, and I will not say that it is.') +
+
+    '<button class="gcta wide" data-act="modes">Done &#8594;</button>' +
+    '<button class="opt ghost" data-act="send"><span class="ptxt"><b>Check something else</b>' +
+    '</span><span class="ch">&#8250;</span></button>'
+  );
+
+  evt('Kept what was checked, and when', 'PART OF THE RECORD · ' + L.l.toUpperCase(), 'gold');
+}
+
+/* ============================================================
+   2. KNOW BEFORE YOU LOOK
+
+   Four decisions, and then the guided questions. This is the
+   arc that already existed: say it in your own words, get read
+   back what you actually said, answer three questions that
+   change the answer, and end up with something a professional
+   can work from.
+   ============================================================ */
+
+var LOOKS = [
+  ['mortgage',  'A home',      'Buying, refinancing or renewing'],
+  ['auto',      'A vehicle',   'Buying, financing or trading one in'],
+  ['insurance', 'Insurance',   'Taking out cover, or replacing what you hold'],
+  ['investing', 'Investing',   'Starting, moving an account, or checking a recommendation']
+];
+
+SCREEN.look = function () {
+  head('Know before you look', 'Before anybody is selling');
+  paint(
+    '<div class="ghead"><h3>What are you thinking about?</h3>' +
+    '<p>Pick the one closest to it. I will ask you a few things, and none of it goes ' +
+    'anywhere.</p></div>' +
+    LOOKS.map(function (l) { return opt('lookpick', l[1], l[2], l[0]); }).join('') +
+    note('Asking me costs you nothing and commits you to nothing. No professional can see ' +
+         'any of this unless you send it to one.')
+  );
+};
+
+/* ============================================================
+   3. KNOW BEFORE YOU SIGN
+
+   A document goes in and what is worth asking about comes back.
+   Every flag says where in the document it is and what question
+   it turns into, because a flag a person cannot act on is just
+   a worry.
+
+   The line is absolute and appears on the screen: this is not
+   legal advice, and 4orm is not telling anybody whether to sign.
+   ============================================================ */
+
+var DOCS = [
+  { k: 'commit', t: 'Mortgage commitment', sub: '6 pages · from a lender',
+    flags: [
+      ['warn', 'The rate is held until a date', 'Page 1, Rate and term',
+       'The rate you were quoted is held to a date on page one. After that date it is ' +
+       'repriced at whatever is current.',
+       'Ask what happens to my rate if closing moves past that date, and get the answer ' +
+       'in writing.'],
+      ['warn', 'The penalty is a formula, not a number', 'Page 4, Prepayment',
+       'Breaking early is calculated by a formula rather than stated as an amount. On a ' +
+       'fixed rate that formula can produce a far larger number than three months of interest.',
+       'Ask them to work out the penalty in dollars on today’s numbers, as an example.'],
+      ['info', 'Conditions still to satisfy', 'Page 2, Conditions',
+       'Three conditions are outstanding. Until they are met this is an offer, not a ' +
+       'commitment.',
+       'Ask which of these are on me and what the deadline is for each one.'],
+      ['warn', 'Creditor insurance is pre-ticked', 'Page 5, Optional products',
+       'An optional product is selected by default. Optional means you can decline it, ' +
+       'and declining it cannot change the lending decision.',
+       'Ask what it costs over the full term in dollars, and what it does not cover.']
+    ] },
+
+  { k: 'bill', t: 'Bill of sale', sub: '2 pages · from a dealership',
+    flags: [
+      ['bad', 'The term is longer than the quote', 'Page 1, Payment schedule',
+       'The paperwork shows 84 months. The quote you were shown was 72. The payment looks ' +
+       'similar because the term moved, not because the price did.',
+       'Ask why the term changed, and what the total cost of borrowing is at each one.'],
+      ['bad', 'The rate is higher than the quote', 'Page 1, Annual percentage rate',
+       'The rate on the paperwork is above the one on the quote.',
+       'Ask what changed between the quote and this sheet.'],
+      ['warn', 'Added products', 'Page 2, Protection',
+       'A protection package appears at a higher price than the one discussed.',
+       'Ask for the price of the vehicle with every added product removed, then decide ' +
+       'about each one separately.'],
+      ['info', 'Total cost of borrowing', 'Page 2, Disclosure',
+       'The dollar total you will pay over the full term is disclosed here. It is the ' +
+       'number that actually compares two deals.',
+       'Read that number out loud before you sign anything.']
+    ] },
+
+  { k: 'policy', t: 'Insurance policy', sub: '14 pages · from an insurer',
+    flags: [
+      ['warn', 'Exclusions sit apart from coverage', 'Pages 3 and 9',
+       'What is covered is on page three. What is excluded is on page nine. They have to ' +
+       'be read together to mean anything.',
+       'Ask which exclusions apply to the thing I actually bought this for.'],
+      ['warn', 'A replacement is being recommended', 'Page 1, Application',
+       'This replaces cover you already hold. A replacement restarts contestability and ' +
+       'can be priced on your age now rather than your age then.',
+       'Ask for a written comparison of the policy I have against this one.'],
+      ['info', 'Claims deadline', 'Page 11, Claims',
+       'There is a time limit for reporting a claim. Missing it can end an otherwise ' +
+       'valid claim.',
+       'Note that deadline somewhere you will find it under stress.']
+    ] },
+
+  { k: 'kyc', t: 'Account opening form', sub: '4 pages · from an investment firm',
+    flags: [
+      ['warn', 'The risk box does not match what you said', 'Page 2, Risk tolerance',
+       'The form records a higher risk tolerance than the one described in the conversation.',
+       'Ask them to change it to what I actually said, and to initial the change.'],
+      ['warn', 'Time horizon is blank', 'Page 2, Objectives',
+       'Horizon is one of the things suitability is judged against. Leaving it empty makes ' +
+       'almost anything defensible later.',
+       'Fill it in before signing, in my own words.'],
+      ['info', 'How they are paid', 'Page 3, Fees',
+       'The fee arrangement is disclosed here, including anything paid by a third party.',
+       'Ask them to say out loud how they get paid on what they are recommending.']
+    ] }
+];
+
+var FLAG = { bad: 'High', warn: 'Worth asking', info: 'Note' };
+
+SCREEN.sign = function () {
+  head('Know before you sign', 'The reading is the last chance');
+  paint(
+    '<div class="ghead"><h3>Add the document.</h3>' +
+    '<p>I will read it and point at the parts worth a question. Choose a file, or open ' +
+    'one of these.</p></div>' +
+    '<button class="gdrop" data-act="signpick" data-arg="commit">' +
+      '<span class="gdi">&#8593;</span><b>Choose a file</b>' +
+      '<i>PDF or a photograph of the pages</i></button>' +
+    DOCS.map(function (d) { return opt('signpick', d.t, d.sub, d.k); }).join('') +
+    note('I point at what is worth asking about. I do not tell you whether to sign, and ' +
+         'nothing here is legal advice.')
+  );
+};
+
+/* THE SEAM. Give it a document, get flags back. */
+function readDoc(key) {
+  return DOCS.filter(function (d) { return d.k === key; })[0] || DOCS[0];
+}
+
+function signRead(key) {
+  var d = readDoc(key);
+  ST.doc = d;
+  ST.screen = 'signread';
+  head('Know before you sign', 'Reading ' + esc(d.t.toLowerCase()));
+  paint(
+    '<div class="gquote"><span class="gqk">' + d.t + '</span><p>' + d.sub + '</p></div>' +
+    '<div class="gruns" id="gruns">' +
+      [['Pages', 'Reading every page'],
+       ['Numbers', 'Rate, term, totals and dates'],
+       ['Options', 'What is added and what is optional'],
+       ['Against what you were told', 'Comparing it with your record']]
+      .map(function (r, n) {
+        return '<div class="grun" data-n="' + n + '"><span class="gspin"></span>' +
+          '<span class="ptxt"><b>' + r[0] + '</b><i>' + r[1] + '</i></span></div>';
+      }).join('') +
+    '</div>'
+  );
+  [0, 1, 2, 3].forEach(function (n) {
+    setTimeout(function () {
+      var el = $('#gruns .grun[data-n="' + n + '"]');
+      if (el) el.className = 'grun done';
+      if (n === 3) setTimeout(signResult, 700);
+    }, 600 + n * 620);
+  });
+  evt('Added a document to be read', 'BEFORE SIGNING · ' + d.t.toUpperCase());
+}
+
+function signResult() {
+  var d = ST.doc;
+  if (!d) return;
+  ST.screen = 'signresult';
+  var worst = d.flags.filter(function (f) { return f[0] === 'bad'; }).length;
+  head('Know before you sign', d.flags.length + ' things worth asking');
+
+  put('reviewed', 'Document read', d.t + ' · ' + d.flags.length + ' questions', 'doc',
+      worst ? worst + ' of them do not match what you were told' : '');
+
+  paint(
+    '<div class="glevel ' + (worst ? 'bad' : 'warn') + '">' +
+      '<span class="glv">' + d.flags.length + ' questions</span>' +
+      '<span class="gls">' + (worst
+        ? worst + ' of these do not match what you told me you were shown'
+        : 'None of these say do not sign. They say ask first') + '</span></div>' +
+
+    d.flags.map(function (f) {
+      return '<div class="gflag ' + f[0] + '">' +
+        '<span class="gfh"><span class="gft">' + FLAG[f[0]] + '</span>' +
+        '<span class="gfw">' + f[2] + '</span></span>' +
+        '<b>' + f[1] + '</b><p>' + f[3] + '</p>' +
+        '<span class="gask">Ask: ' + f[4] + '</span></div>';
+    }).join('') +
+
+    note('These are the parts of the document worth a question. Whether to sign is your ' +
+         'decision, and if you need it read as a legal matter that is a lawyer’s job, not ' +
+         'mine.') +
+
+    '<button class="gcta wide" data-act="record">Keep this with my record &#8594;</button>' +
+    '<button class="opt ghost" data-act="sign"><span class="ptxt"><b>Read another document</b>' +
+    '</span><span class="ch">&#8250;</span></button>'
+  );
+
+  evt(d.flags.length + ' questions raised from the document',
+      'KEPT WITH WHAT YOU WERE SHOWN', worst ? 'amber' : 'blue');
+}
+
+/* ============================================================
+   4. JOIN A PROFESSIONAL
+
+   The invitation comes from the firm, and the consumer decides
+   what to grant, item by item. What it produces is the thing
+   both sides actually need: the professional gets the evidence
+   that the recommendation was suitable and reportable, and the
+   person gets a record of what was asked, what they gave and
+   what was said back.
+
+   The firm never sees anything the person did not grant, and
+   the honest limit about a regulated firm's own retention
+   duties is on the screen rather than in a footnote.
+   ============================================================ */
+
+var ASKS = [
+  ['identity',   'Identity',            'Verified once, so you are not photographed again', true],
+  ['income',     'Income',              'What you said, and what a document supports', true],
+  ['employment', 'Employment',          'Where you work and since when', true],
+  ['goal',       'What you are trying to do', 'In the words you used, not a form field', true],
+  ['funds',      'Available funds',     'The amount, and whether any of it is a gift', true],
+  ['history',    'Everything else in your record', 'Other decisions, other firms, other years', false],
+  ['contacts',   'Your contacts',       'Not needed for this, and not asked for', false]
+];
+
+SCREEN.invite = function () {
+  var i = I();
+  var pro = i.pro;
+  head('An invitation', 'From a firm you are working with');
+  paint(
+    '<div class="ginv">' +
+      '<span class="givk">Invitation</span>' +
+      '<div class="givp"><span class="giva">' + pro.n.split(' ').map(function (w) {
+        return w[0]; }).join('') + '</span>' +
+        '<span class="ptxt"><b>' + pro.n + '</b><i>' + pro.r + ' &middot; ' + pro.f + '</i>' +
+        '</span></div>' +
+      '<p class="givm">&ldquo;I have opened a file for you. If you join, I will only see what ' +
+      'you grant me, and everything I ask for will be on the record with the reason I asked.&rdquo;</p>' +
+      '<span class="givs">Sent today, 2:14 PM &middot; expires in 7 days</span>' +
+    '</div>' +
+    '<div class="gsec">What joining does</div>' +
+    '<div class="gwhat">' +
+      '<div class="gwr"><b>You choose what they see</b><p>Item by item, and you can narrow ' +
+      'it later.</p></div>' +
+      '<div class="gwr"><b>They stop asking you twice</b><p>What is already verified does ' +
+      'not get asked for again.</p></div>' +
+      '<div class="gwr"><b>The record builds itself</b><p>What was asked, what was shown and ' +
+      'what was agreed, on both sides, as it happens.</p></div>' +
+    '</div>' +
+    '<button class="gcta wide" data-act="invreview">See what they are asking for &#8594;</button>' +
+    '<button class="opt ghost" data-act="modes"><span class="ptxt"><b>Not now</b>' +
+    '<i>The invitation stays open for seven days</i></span><span class="ch">&#8250;</span></button>' +
+    note('Declining costs you nothing and is not reported to anybody.')
+  );
+};
+
+SCREEN.invreview = function () {
+  var pro = I().pro;
+  ST.grant = ST.grant || ASKS.filter(function (a) { return a[3]; })
+                              .map(function (a) { return a[0]; });
+  head('What ' + esc(pro.n.split(' ')[0]) + ' is asking for', 'Turn off anything you do not want to send');
+  paint(
+    '<div class="ghead"><h3>Five things, not everything.</h3>' +
+    '<p>Each one carries the reason it was asked for. The two at the bottom were not ' +
+    'requested, and I am showing them so you can see the difference.</p></div>' +
+    ASKS.map(function (a) {
+      var on = ST.grant.indexOf(a[0]) >= 0;
+      if (!a[3]) {
+        return '<div class="ggrant off"><span class="ptxt"><b>' + a[1] + '</b><i>' + a[2] +
+          '</i></span><span class="gno">Not asked for</span></div>';
+      }
+      return '<button class="ggrant' + (on ? ' on' : '') + '" data-act="toggle" data-arg="' +
+        a[0] + '"><span class="ptxt"><b>' + a[1] + '</b><i>' + a[2] + '</i></span>' +
+        '<span class="gsw"></span></button>';
+    }).join('') +
+    '<button class="gcta wide" data-act="invjoin">Join, and send ' +
+      '<span id="gcount">' + ST.grant.length + '</span> things &#8594;</button>' +
+    note('What you decline does not travel, and the decision that you declined it is part ' +
+         'of your record too.')
+  );
+};
+
+function invJoin() {
+  var i = I(), pro = i.pro;
+  ST.connected = pro;
+  ST.screen = 'invjoined';
+  head('Joined', pro.f);
+
+  ST.grant.forEach(function (k) {
+    var a = ASKS.filter(function (x) { return x[0] === k; })[0];
+    if (a) ST.perms.push(a[1]);
+  });
+  put('professional', 'Professional', pro.n + ' · ' + pro.f, 'verified',
+      ST.grant.length + ' things shared, by you');
+
+  evt('Joined a professional, on their invitation',
+      ST.grant.length + ' THINGS GRANTED · ' + (ASKS.length - ST.grant.length) +
+      ' WITHHELD', 'gold');
+
+  paint(
+    '<div class="glevel ok"><span class="glv">You are in</span>' +
+      '<span class="gls">' + pro.n + ' can see ' + ST.grant.length + ' things, and nothing ' +
+      'else</span></div>' +
+
+    '<div class="gsec">What this now produces</div>' +
+    '<div class="gwhat">' +
+      '<div class="gwr"><b>For you</b><p>What was asked for, what you sent, what was ' +
+      'recommended and why, each with the date it happened.</p></div>' +
+      '<div class="gwr"><b>For ' + esc(pro.f) + '</b><p>The suitability evidence behind the ' +
+      'recommendation, and the reporting that goes with it, built while the work happened ' +
+      'rather than assembled afterwards.</p></div>' +
+    '</div>' +
+
+    '<div class="gsec">Already on the record</div>' +
+    '<div class="gchain">' +
+      '<div class="gcr"><span class="gcd"></span>Invitation sent by ' + esc(pro.n) +
+        '<em>2:14 PM</em></div>' +
+      '<div class="gcr"><span class="gcd"></span>You read what was being asked for' +
+        '<em>2:31 PM</em></div>' +
+      '<div class="gcr on"><span class="gcd"></span>You granted ' + ST.grant.length +
+        ' of ' + ASKS.length + '<em>2:32 PM</em></div>' +
+    '</div>' +
+
+    note('Once information reaches a regulated firm, that firm may have its own legal duty ' +
+         'to keep records of it. Narrowing what they can see from here does not undo what ' +
+         'they are already required to hold. I would rather say that than promise you ' +
+         'something I cannot deliver.') +
+
+    '<button class="gcta wide" data-act="perms">Review what they can see &#8594;</button>' +
+    '<button class="opt ghost" data-act="record"><span class="ptxt"><b>See the whole record</b>' +
+    '</span><span class="ch">&#8250;</span></button>'
+  );
+}
+
 /* ============================================================
    Routing
    ============================================================ */
@@ -1212,6 +1812,31 @@ var ACT = {
     ask(I().ex);
   },
   'Use the example': function () { ACT.example(); },
+
+  /* The four things, and the way back to them. */
+  modes: function () { ST.mode = ''; go('modes'); },
+  mode: function (arg) {
+    ST.mode = arg;
+    if (arg === 'look') { go('look'); return; }
+    go(arg);
+  },
+  lookpick: function (arg) {
+    /* Picking the decision here is the same act as picking it on the rail
+       outside the phone, so it goes through the same door. */
+    switchTo(arg, 'goals');
+  },
+  sendrun:  function (arg) { sendRun(arg); },
+  send:     function () { go('send'); },
+  sign:     function () { go('sign'); },
+  signpick: function (arg) { signRead(arg); },
+  invite:   function () { go('invite'); },
+  invreview: function () { go('invreview'); },
+  invjoin:  invJoin,
+  toggle: function (arg) {
+    var n = ST.grant.indexOf(arg);
+    if (n >= 0) { ST.grant.splice(n, 1); } else { ST.grant.push(arg); }
+    go('invreview');
+  },
   prepare: function () { go('prepare'); },
   passport: function () { go('passport'); },
   perms: function () { go('perms'); },
@@ -1304,12 +1929,14 @@ function focusAsk() {
 /* ============================================================
    Wiring
    ============================================================ */
-function boot(ind) {
+function boot(ind, screen) {
   ST = fresh(ind);
-  go('open');
+  go(screen || 'open');
 }
 
-function switchTo(ind) {
+/* `screen` is what "Know before you look" passes, so picking a decision inside
+   the phone lands on the goal screen rather than back at the four things. */
+function switchTo(ind, screen) {
   $$('[data-ind]').forEach(function (b) {
     b.classList.toggle('on', b.getAttribute('data-ind') === ind);
   });
@@ -1318,7 +1945,7 @@ function switchTo(ind) {
     pip.style.width = on.offsetWidth + 'px';
     pip.style.transform = 'translateX(' + (on.offsetLeft - 5) + 'px)';
   }
-  boot(ind);
+  boot(ind, screen);
 }
 
 document.addEventListener('click', function (e) {
@@ -1352,6 +1979,15 @@ document.addEventListener('click', function (e) {
 });
 
 document.addEventListener('submit', function (e) {
+  var sf = e.target.closest('#sendform');
+  if (sf) {
+    e.preventDefault();
+    var ta = $('#sendinput');
+    var v = ta ? ta.value.trim() : '';
+    if (!v) return;
+    sendRun(null, v);
+    return;
+  }
   var f = e.target.closest('#askform');
   if (!f) return;
   e.preventDefault();

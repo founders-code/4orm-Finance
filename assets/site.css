@@ -3049,3 +3049,160 @@ body.go .dashmini{opacity:1;transform:none;transition-delay:.2s}
 @media (prefers-reduced-motion:reduce){
   .a4phone,.dashmini{transition:none}
 }
+
+/* ============================================================
+   THE FOUR THINGS, INSIDE THE PHONE
+
+   Send, look, sign and join. Each one ends in a verdict the
+   person can act on, so the screens are built around a level,
+   a set of findings that each name their source, and a list of
+   what to do next. Nothing here shows a conclusion the record
+   cannot support.
+   ============================================================ */
+
+/* what came in, quoted back */
+.gquote{padding:14px 16px;border-radius:14px;background:var(--bg-2);
+  border:1px solid var(--border);margin-bottom:14px}
+.gqk{display:block;font-family:var(--mono);font-size:8.5px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--tx-3);margin-bottom:7px}
+.gquote p{margin:0;font-size:13.2px;line-height:1.52;color:var(--tx-2)}
+
+/* pasting something in */
+.gpaste{margin-bottom:14px}
+.gpaste textarea{width:100%;border:1px solid var(--border);border-radius:14px;padding:12px 14px;
+  font-family:var(--sans);font-size:13.4px;line-height:1.5;color:var(--tx);background:#fff;
+  resize:none;outline:none;transition:border-color .24s var(--ease)}
+.gpaste textarea:focus{border-color:var(--blue-100)}
+.gpaste textarea::placeholder{color:var(--tx-3)}
+
+/* the checks landing one at a time */
+.gruns{display:flex;flex-direction:column;gap:8px;margin:4px 0 6px}
+.grun{display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:13px;
+  background:#fff;border:1px solid var(--border);opacity:.5;
+  transition:opacity .4s var(--ease),border-color .4s var(--ease)}
+.grun b{display:block;font-size:13.4px;font-weight:650;color:var(--tx)}
+.grun i{display:block;font-style:normal;font-size:11.6px;color:var(--tx-3);margin-top:2px}
+.gspin{width:15px;height:15px;border-radius:50%;flex:none;
+  border:2px solid var(--blue-100);border-top-color:var(--blue);
+  animation:gspin .75s linear infinite}
+@keyframes gspin{to{transform:rotate(360deg)}}
+.grun.done{opacity:1;border-color:var(--ok-br,#B9E3CE)}
+.grun.done .gspin{border-color:var(--ok,#0E8A5F);border-top-color:var(--ok,#0E8A5F);
+  animation:none;position:relative}
+.grun.done .gspin::after{content:'';position:absolute;left:3.5px;top:1px;width:4px;height:8px;
+  border:2px solid var(--ok,#0E8A5F);border-top:0;border-left:0;transform:rotate(42deg)}
+@media (prefers-reduced-motion:reduce){ .gspin{animation:none} }
+
+/* the verdict */
+.glevel{display:flex;flex-direction:column;gap:5px;padding:16px 17px;border-radius:16px;
+  margin-bottom:16px;border:1px solid}
+.glv{font-size:19px;font-weight:750;letter-spacing:-.03em}
+.gls{font-size:12.8px;line-height:1.45}
+.glevel.ok{background:#F2FBF7;border-color:#B9E3CE}
+.glevel.ok .glv{color:#0B6E4C}.glevel.ok .gls{color:#2F7A5E}
+.glevel.warn{background:#FFFBF2;border-color:#E9D3A0}
+.glevel.warn .glv{color:#8A6412}.glevel.warn .gls{color:#8C7233}
+.glevel.bad{background:#FFF5F6;border-color:#F0C2C9}
+.glevel.bad .glv{color:#A81E36}.glevel.bad .gls{color:#9B4353}
+
+.gsec{font-family:var(--mono);font-size:8.5px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--tx-3);margin:18px 0 9px}
+
+/* a finding, and where it came from */
+.gfind{padding:13px 15px;border-radius:13px;background:#fff;border:1px solid var(--border);
+  margin-bottom:8px}
+.gfind b{display:block;font-size:13.6px;font-weight:680;color:var(--tx);letter-spacing:-.014em}
+.gfind p{margin:6px 0 0;font-size:12.9px;line-height:1.52;color:var(--tx-2)}
+.gsrc{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:8.5px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--blue-dp);
+  background:var(--blue-50);padding:4px 8px;border-radius:6px}
+
+/* what to do about it */
+.gdo{margin:0;padding-left:19px}
+.gdo li{font-size:13px;line-height:1.55;color:var(--tx-2);margin-bottom:9px}
+.gdo li::marker{color:var(--blue);font-weight:700}
+
+/* a flag on a document */
+.gflag{padding:13px 15px;border-radius:13px;background:#fff;border:1px solid var(--border);
+  border-left-width:3px;margin-bottom:8px}
+.gflag.bad{border-left-color:#D6334E}
+.gflag.warn{border-left-color:#C49A3A}
+.gflag.info{border-left-color:var(--blue)}
+.gfh{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.gft{font-family:var(--mono);font-size:8px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;padding:3px 7px;border-radius:5px}
+.gflag.bad .gft{background:#FFF0F2;color:#A81E36}
+.gflag.warn .gft{background:#FFFAF0;color:#8A6412}
+.gflag.info .gft{background:var(--blue-50);color:var(--blue-dp)}
+.gfw{font-size:11.4px;color:var(--tx-3)}
+.gflag b{display:block;font-size:13.6px;font-weight:680;color:var(--tx);letter-spacing:-.014em}
+.gflag p{margin:6px 0 0;font-size:12.9px;line-height:1.52;color:var(--tx-2)}
+.gask{display:block;margin-top:10px;padding:9px 11px;border-radius:9px;background:var(--bg-2);
+  font-size:12.4px;line-height:1.48;color:var(--tx);border:1px solid var(--border)}
+
+/* choose a file */
+.gdrop{width:100%;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:20px 16px;margin-bottom:10px;border-radius:16px;background:var(--bg-2);
+  border:1.5px dashed var(--blue-100);cursor:pointer;font-family:var(--sans);
+  transition:background .26s var(--ease),border-color .26s var(--ease)}
+.gdrop:hover{background:var(--blue-50);border-color:var(--blue)}
+.gdi{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;
+  border-radius:50%;background:var(--blue);color:#fff;font-size:15px;margin-bottom:5px}
+.gdrop b{font-size:14px;font-weight:680;color:var(--tx)}
+.gdrop i{font-style:normal;font-size:11.8px;color:var(--tx-3)}
+
+/* the honest limit, on the screen rather than in a footnote */
+.gnote{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--bg-2);
+  border:1px solid var(--border);font-size:12.2px;line-height:1.5;color:var(--tx-2)}
+.gnote b{color:var(--tx);font-weight:680}
+
+/* the invitation */
+.ginv{padding:17px;border-radius:16px;background:#fff;border:1px solid var(--blue-100);
+  box-shadow:0 14px 34px -18px rgba(46,107,242,.34);margin-bottom:6px}
+.givk{display:block;font-family:var(--mono);font-size:8.5px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--blue-dp);margin-bottom:12px}
+.givp{display:flex;align-items:center;gap:11px}
+.giva{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;
+  border-radius:50%;background:var(--blue-50);color:var(--blue-dp);flex:none;
+  font-family:var(--mono);font-size:13px;font-weight:800;letter-spacing:.04em}
+.givp b{display:block;font-size:15px;font-weight:720;letter-spacing:-.022em;color:var(--tx)}
+.givp i{display:block;font-style:normal;font-size:12.2px;color:var(--tx-3);margin-top:2px}
+.givm{margin:14px 0 0;font-size:13.2px;line-height:1.55;color:var(--tx-2)}
+.givs{display:block;margin-top:12px;font-family:var(--mono);font-size:8.5px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--tx-3)}
+
+.gwhat{display:flex;flex-direction:column;gap:8px}
+.gwr{padding:12px 14px;border-radius:12px;background:#fff;border:1px solid var(--border)}
+.gwr b{display:block;font-size:13.4px;font-weight:680;color:var(--tx)}
+.gwr p{margin:5px 0 0;font-size:12.7px;line-height:1.5;color:var(--tx-2)}
+
+/* granting, item by item */
+.ggrant{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:13px 15px;margin-bottom:8px;border-radius:13px;background:#fff;
+  border:1px solid var(--border);text-align:left;font-family:var(--sans);cursor:pointer;
+  transition:border-color .26s var(--ease),background .26s var(--ease)}
+.ggrant b{display:block;font-size:13.4px;font-weight:650;color:var(--tx)}
+.ggrant i{display:block;font-style:normal;font-size:11.8px;color:var(--tx-3);margin-top:2px}
+.ggrant.on{border-color:var(--blue-100);background:#FAFCFF}
+.ggrant.off{cursor:default;opacity:.62;background:var(--bg-2)}
+.gsw{position:relative;width:38px;height:22px;border-radius:999px;flex:none;
+  background:var(--bg-3);border:1px solid var(--border);transition:background .3s var(--ease)}
+.gsw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(16,32,64,.28);
+  transition:transform .3s var(--spring)}
+.ggrant.on .gsw{background:var(--blue);border-color:var(--blue)}
+.ggrant.on .gsw::after{transform:translateX(16px)}
+.gno{font-family:var(--mono);font-size:8px;font-weight:800;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--tx-3);flex:none}
+
+/* what has happened so far, on both sides */
+.gchain{display:flex;flex-direction:column}
+.gcr{display:flex;align-items:center;gap:11px;padding:9px 0;font-size:12.9px;color:var(--tx-2);
+  position:relative}
+.gcr em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:8.5px;
+  font-weight:800;letter-spacing:.1em;color:var(--tx-3)}
+.gcd{width:9px;height:9px;border-radius:50%;flex:none;background:var(--bg-3);
+  border:2px solid var(--border)}
+.gcr.on{color:var(--tx);font-weight:600}
+.gcr.on .gcd{background:var(--blue);border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(46,107,242,.16)}
