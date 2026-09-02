@@ -81,86 +81,43 @@ var IND = {
     name: 'Mortgage', who: 'Sarah', person: 'Sarah Mitchell',
     sub: 'Before a mortgage professional exists',
     ref: 'MTG-2026-0417',
-    pro: { n: 'Alex Morgan', r: 'Mortgage Professional', f: 'Northstar Mortgage' },
-    opens: [
-      ['buy',    'Buy a home'],
-      ['refi',   'Refinance'],
-      ['renew',  'Renew my mortgage'],
-      ['offer',  'Understand an offer']
-    ],
-    ex: 'I’m looking at homes around $600,000. I make about $120,000, have $35,000 saved and ' +
-        'still have a truck payment. My realtor said I should get pre-approved, but I don’t ' +
-        'really understand what that means.'
+    pro: { n: 'Alex Morgan', r: 'Mortgage Professional', f: 'Northstar Mortgage' }
   },
   auto: {
     name: 'Auto', who: 'Sarah', person: 'Sarah Mitchell',
     sub: 'Standing in the dealership right now',
     ref: 'AUT-2026-0912',
-    pro: { n: 'Dana Iqbal', r: 'Financial Services Manager', f: 'Northstar Auto' },
-    opens: [
-      ['buying',  'Buying a vehicle'],
-      ['finance', 'Financing a vehicle'],
-      ['trade',   'Trading a vehicle'],
-      ['atdealer','I’m already at the dealership']
-    ],
-    ex: 'I’m looking at a $52,000 truck. They’re asking what monthly payment I want and ' +
-        'said they’re going to send my credit out to see who approves me. I don’t really ' +
-        'understand what they’re doing.'
+    pro: { n: 'Dana Iqbal', r: 'Financial Services Manager', f: 'Northstar Auto' }
   },
   realestate: {
     name: 'Real estate', who: 'Priya', person: 'Priya Raman',
     sub: 'Before signing a representation agreement',
     ref: 'RES-2026-1188',
-    pro: { n: 'Jordan Wells', r: 'Real Estate Salesperson', f: 'Harbourline Realty' },
-    opens: [['list','Sell my home'], ['buy2','Buy a home'], ['rep','Understand representation'],
-            ['off','Review an offer']],
-    shallow: 'A representation agreement decides who owes a duty to whom, for how long, and what happens if the same brokerage ends up on both sides.',
-    ex: 'I’m about to sign with an agent. I don’t understand what I’m agreeing to, ' +
-        'how long it lasts, or what happens if the same brokerage represents the buyer too.'
+    pro: { n: 'Jordan Wells', r: 'Real Estate Salesperson', f: 'Harbourline Realty' }
   },
   insurance: {
     name: 'Insurance', who: 'Sarah', person: 'Sarah Mitchell',
     sub: 'Before a policy is bound',
     ref: 'INS-2026-0655',
-    pro: { n: 'Ruth Okafor', r: 'Insurance Agent', f: 'Meridian Insurance' },
-    opens: [['life','Life coverage'], ['home','Home and property'], ['claim','Understand a claim'],
-            ['rev','Review what I have']],
-    shallow: 'The questions that matter are what is covered, what is excluded, and whether replacing a policy you hold is better for you or better for the person recommending it.',
-    ex: 'Someone is recommending I replace a policy I already have. I don’t know whether that ' +
-        'is better for me or better for them.'
+    pro: { n: 'Ruth Okafor', r: 'Insurance Agent', f: 'Meridian Insurance' }
   },
   investing: {
     name: 'Investing', who: 'Marcus', person: 'Marcus Bell',
     sub: 'Before money is moved',
     ref: 'INV-2026-0233',
-    pro: { n: 'Elena Cho', r: 'Investment Advisor', f: 'Kestrel Wealth Partners' },
-    opens: [['start','Start investing'], ['move','Move an account'], ['why','Why this recommendation'],
-            ['risk','Check my risk profile']],
-    shallow: 'You are entitled to ask why this option and not another, and to get more back than the word suitable.',
-    ex: 'My advisor is recommending I move everything into one fund. I asked why and got told it ' +
-        'was suitable for me. I would like to understand what else was considered.'
+    pro: { n: 'Elena Cho', r: 'Investment Advisor', f: 'Kestrel Wealth Partners' }
   },
   banking: {
     name: 'Banking', who: 'Elena', person: 'Elena Vos',
     sub: 'Before signing at the branch',
     ref: 'BNK-2026-0761',
-    pro: { n: 'Tomas Reyes', r: 'Financial Advisor', f: 'Meridian Trust Bank' },
-    opens: [['acct','Open an account'], ['credit','A credit product'], ['ins','Creditor insurance'],
-            ['fees','Understand my fees']],
-    shallow: 'The bank is the custodian of your money and is running a sales operation on you at the same moment. Both are true at once.',
-    ex: 'I went in to open a chequing account and came out with a credit card and insurance on it. ' +
-        'I am not sure I needed either of them.'
+    pro: { n: 'Tomas Reyes', r: 'Financial Advisor', f: 'Meridian Trust Bank' }
   },
   lending: {
     name: 'Lending', who: 'Sarah', person: 'Sarah Mitchell',
     sub: 'Before the agreement is signed',
     ref: 'LND-2026-0388',
-    pro: { n: 'Priya Anand', r: 'Lending Specialist', f: 'Northstar Credit' },
-    opens: [['need','I need money quickly'], ['consol','Consolidate what I owe'],
-            ['cost','What will this cost me'], ['lic','Is this lender licensed']],
-    shallow: 'The number that matters is the total cost of borrowing over the full term, in dollars, not the monthly payment.',
-    ex: 'I need $4,000 and the only place that said yes wants a lot back. I do not know if the rate ' +
-        'they quoted is even legal.'
+    pro: { n: 'Priya Anand', r: 'Lending Specialist', f: 'Northstar Credit' }
   }
 };
 
@@ -390,22 +347,10 @@ function wipeThread() {
   if (old && old.parentNode) old.parentNode.removeChild(old);
 }
 
-/* The goal screen. This is where "Know before you look" arrives, once the
-   person has said which decision they are thinking about. */
-SCREEN.goals = function () {
-  var i = I();
-  head(i.who + '&rsquo;s 4orm', i.sub);
-  paint(
-    '<div class="ghead"><h3>Good afternoon, ' + i.who + '.</h3>' +
-    '<p>You don&rsquo;t need to know what matters yet. Tell me what you&rsquo;re thinking about doing.</p></div>' +
-    i.opens.map(function (o) { return opt('goal', o[1], '', o[0]); }).join('') +
-    '<div class="gor">or just say it in your own words</div>' +
-    '<button class="opt ghost" data-act="example"><span class="ptxt"><b>Use the example</b>' +
-    '<i>' + esc(i.ex.slice(0, 62)) + '&hellip;</i></span><span class="ch">&#8250;</span></button>' +
-    '<button class="opt ghost" data-act="modes"><span class="ptxt"><b>The other three</b>' +
-    '<i>Send, sign, or join a professional</i></span><span class="ch">&#8250;</span></button>'
-  );
-};
+/* There used to be a goal screen and a four-item menu here, both opening
+   "Good afternoon, Sarah." Both are gone. A menu is what a product offers
+   when it does not know what to say first, and every decision now knows.
+   Everything opens in the conversation instead. */
 
 /* --- the conversation -------------------------------------
 
@@ -700,20 +645,6 @@ function nextQ() {
     think('<p>' + Q.q + '</p>', Q.chips, 800);
     setTimeout(focusAsk, 900);
   }, 620);
-}
-
-/* The five that are not modelled yet. Two turns, then the truth. */
-function shallow(lbl) {
-  var i = I();
-  thinkSeq([
-    ['<p>' + lbl + '. Tell me what is happening and I will keep it.</p>' +
-     '<p class="gm">' + i.shallow + '</p>', null, 950],
-    ['<p><b>Modelling coming.</b> The ' + i.name.toLowerCase() + ' experience is designed and not ' +
-     'yet built. Mortgage and auto are, all the way through, and they are the same 4orm, ' +
-     'so what you see there is what this becomes.</p>',
-     ['Show me mortgage', 'Show me auto'], 1200]
-  ]);
-  setTimeout(focusAsk, 1400);
 }
 
 function offerPrepare(after) {
@@ -1383,23 +1314,6 @@ function drawRail() {
    for a service call and every screen below keeps working.
    ============================================================ */
 
-var MODES = [
-  ['send',   'Check something',        'Money or documents are about to move'],
-  ['look',   'Work out what I need',   'Nobody is selling yet'],
-  ['sign',   'Read a document with me','It is in front of me now'],
-  ['invite', 'Join a professional',    'A firm has invited me in']
-];
-
-SCREEN.modes = function () {
-  var i = I();
-  head('4ormIQ', 'Nothing here reaches anybody until you say so');
-  paint(
-    '<div class="ghead"><h3>Good afternoon, ' + i.who + '.</h3>' +
-    '<p>Four things, each one before the part you cannot take back.</p></div>' +
-    MODES.map(function (m) { return opt('mode', m[1], m[2], m[0]); }).join('')
-  );
-};
-
 /* ============================================================
    1. KNOW BEFORE YOU SEND
 
@@ -1608,7 +1522,7 @@ function sendResult() {
     note('That&rsquo;s what the registers say and what the message does. It&rsquo;s not a '
          + 'finding that anyone broke the law, and I won&rsquo;t pretend it is.') +
 
-    '<button class="gcta wide" data-act="modes">Done &#8594;</button>' +
+    '<button class="gcta wide" data-act="talkback">Done &#8594;</button>' +
     '<button class="opt ghost" data-act="send"><span class="ptxt"><b>Check something else</b>' +
     '</span><span class="ch">&#8250;</span></button>'
   );
@@ -1627,10 +1541,10 @@ function sendResult() {
    ============================================================ */
 
 var LOOKS = [
-  ['mortgage',  'A home',      'Buying, refinancing or renewing'],
-  ['auto',      'A vehicle',   'Buying, financing or trading one in'],
-  ['insurance', 'Insurance',   'Taking out cover, or replacing what you hold'],
-  ['investing', 'Investing',   'Starting, moving an account, or checking a recommendation']
+  ['mortgage',   'A mortgage',   'Renewing, buying or refinancing'],
+  ['realestate', 'Selling or buying a home', 'Before you sign with an agent'],
+  ['auto',       'A vehicle',    'Buying, financing or trading one in'],
+  ['insurance',  'Insurance',    'Taking out cover, or replacing what you hold']
 ];
 
 SCREEN.look = function () {
@@ -1866,7 +1780,7 @@ SCREEN.invite = function () {
       'what was agreed, on both sides, as it happens.</p></div>' +
     '</div>' +
     '<button class="gcta wide" data-act="invreview">See what they are asking for &#8594;</button>' +
-    '<button class="opt ghost" data-act="modes"><span class="ptxt"><b>Not now</b>' +
+    '<button class="opt ghost" data-act="talkback"><span class="ptxt"><b>Not now</b>' +
     '<i>The invitation stays open for seven days</i></span><span class="ch">&#8250;</span></button>' +
     note('Declining changes nothing and is not reported to anybody.')
   );
@@ -2895,6 +2809,39 @@ NODE.i_range = {
   next: '@done'
 };
 
+/* ====================================================================
+   THE DECISIONS WITHOUT THEIR OWN QUESTION SET YET
+
+   Investing, banking and lending have not had their discovery written,
+   because each needs its questions traced to its own regulator the way
+   the other four were, and a half-built discovery is worse than none.
+
+   What they get is not a menu and not an apology. The three things that
+   work on any decision work here too: checking something before money
+   moves, reading a document, and joining a professional who has invited
+   you. Those are offered as a conversation, because that is what the
+   rest of the product is.
+   ==================================================================== */
+NODE.g_open = {
+  ask: '<p>Hello, {who}. What&rsquo;s in front of you?</p>'
+     + '<p class="gm">However it comes out. None of this goes to anyone.</p>',
+  replies: [
+    ['money', 'Someone wants money from me'],
+    ['doc',   'I don&rsquo;t understand a document'],
+    ['inv',   'A professional invited me in']
+  ],
+  store: ['doing', 'What&rsquo;s going on'],
+  react: {
+    money: ['<p>Then nothing moves till we&rsquo;ve looked at it.</p>',
+            '<p>Most of what goes wrong here goes wrong because someone felt rushed.</p>'],
+    doc:   ['<p>Send it over, we&rsquo;ll read it together.</p>',
+            '<p>Right order. Much harder to unpick after you&rsquo;ve signed.</p>'],
+    inv:   ['<p>Then let&rsquo;s see what they&rsquo;re asking for before you agree to any of '
+            + 'it.</p>']
+  },
+  go: { money: '@send', doc: '@sign', inv: '@invite' }
+};
+
 /* Which conversation opens, by decision. Everything else in the graph is
    reached from one of these. */
 var OPEN = {
@@ -2904,7 +2851,7 @@ var OPEN = {
   insurance:  'i_open'
 };
 
-function openNode() { return OPEN[ST.ind] || 'open'; }
+function openNode() { return OPEN[ST.ind] || 'g_open'; }
 
 /* ============================================================
    Running it
@@ -3002,6 +2949,7 @@ function reply(v, typedLabel) {
     if (dest === '@redo')  { GEN++; boot(ST.ind); return; }
     if (dest === '@send') { GEN++; ST.mode = 'send'; go('send'); return; }
     if (dest === '@sign') { GEN++; ST.mode = 'sign'; go('sign'); return; }
+    if (dest === '@invite') { GEN++; ST.mode = 'invite'; go('invite'); return; }
     if (dest === '@done') { convoDone(); return; }
     runNode(dest);
   }), t + 520);
@@ -3281,43 +3229,9 @@ function step(key, label, value, status, event) {
 }
 
 var ACT = {
-  goal: function (arg) {
-    var i = I();
-    var lbl = (i.opens.filter(function (o) { return o[0] === arg; })[0] || [, arg])[1];
-    put('goal', 'Goal', lbl, 'told');
-    evt('Said what they are trying to do', 'IN THEIR OWN WORDS · BEFORE A PROFESSIONAL EXISTS');
-    ST.thread = [];
-    ST.opened = true;
-    thread();
-    me(lbl);
-
-    if (!DEEP[ST.ind]) { shallow(lbl); return; }
-
-    thinkSeq([
-      ['<p>' + lbl + '. That is enough to start with.</p>' +
-       '<p class="gm">I am not going to hand you an article. Tell me what is actually ' +
-       'happening, the way you would say it out loud. Do not tidy it up.</p>', null, 900],
-      ['<p>If it is easier, use the example below and I will work from that.</p>',
-       ['Use the example'], 780]
-    ]);
-    ST.opened = true;
-    setTimeout(focusAsk, 1200);
-  },
-  /* Taking the example straight from the opening screen has to reach the same
-     place as choosing a goal first. Without this it skipped the read-back and
-     the three questions entirely, which is what made the phone feel broken. */
-  example: function () {
-    if (!ST.opened) {
-      ST.opened = true;
-      ST.thread = [];
-      thread();
-    }
-    ask(I().ex);
-  },
-  'Use the example': function () { ACT.example(); },
-
-  /* The four things, and the way back to them. */
-  modes: function () { ST.mode = ''; go('modes'); },
+  /* Leaving a check, a reading or an invitation goes back into the
+     conversation for whatever decision the person is on, not to a menu. */
+  talkback: function () { ST.mode = ''; GEN++; go('open'); },
   restart: function () { boot(ST.ind); },
   mode: function (arg) {
     ST.mode = arg;
@@ -3326,13 +3240,9 @@ var ACT = {
   },
   lookpick: function (arg) {
     /* Picking the decision here is the same act as picking it on the rail
-       outside the phone, so it goes through the same door.
-
-       Mortgage, auto, real estate and insurance each have a question set
-       traced to their own regulator, so all four open the conversation. The
-       rest still open the goal screen, because a half-built discovery is worse
-       than none. */
-    switchTo(arg, DEEP[arg] ? 'open' : 'goals');
+       outside the phone, so it goes through the same door, and that door is
+       always the conversation. */
+    switchTo(arg, 'open');
   },
   discover: function () { go('discover'); },
   dpick:   function (arg) { discPick(arg); },
@@ -3576,7 +3486,6 @@ document.addEventListener('click', function (e) {
     /* Checking who you are dealing with is a real page, not an answer in a
        thread. Send them to the registers. */
     if (q === 'Take me to the checks') { window.location.href = '/check-a-firm'; return; }
-    if (q === 'Use the example')  { ask(I().ex);          return; }
     ask(q);
     return;
   }
