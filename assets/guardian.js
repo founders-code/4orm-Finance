@@ -318,6 +318,10 @@ function paint(html) {
   if (!b) return;
   b.innerHTML = html;
   b.scrollTop = 0;
+  /* The console is dark and everything else is light. The skin goes on the
+     scrolling container rather than the panel inside it, because a panel only
+     paints as far as the fold and the report is taller than that. */
+  b.classList.toggle('iqskin', /class="iqr?[ "]/.test(html));
 }
 
 function toBottom() {
@@ -1581,6 +1585,333 @@ SCREEN.send = function () {
 
 function note(txt) {
   return '<div class="gnote"><b>Where the line sits.</b> ' + txt + '</div>';
+}
+
+/* ====================================================================
+   THE 4ormIQ DEMONSTRATION
+
+   Somebody about to send an investment gets the real thing rather than
+   a description of it: the console asks for a name, reads the
+   registers, and hands back a report card. It ends by offering to run
+   the live check at 4ormIQ.
+
+   THE SUBJECT IS INVENTED, AND THE SCREEN SAYS SO IN THREE PLACES.
+   This is a static page. It cannot re-read a register, so anything it
+   asserts is frozen the day it is written. Putting a real firm and a
+   real person in here would mean this site carrying an allegation
+   about them for as long as the page exists, with no way to correct
+   itself when a case moves. Live names belong in the live product,
+   which is exactly what the button at the end is for.
+
+   The facts on the loading cards are different. They are general and
+   sourced, and none of them is about anybody in particular.
+   ==================================================================== */
+var IQ = {
+  firm:   'Meridian Arbitrage Partners',
+  domain: 'meridian-arbitrage-partners.example',
+  ref:    'DEMO-4971-MA',
+  said:   'Fixed 4 to 6 per cent monthly, principal protected, funded today by wire.'
+};
+
+/* The cards that play while the registers are read. General, sourced, and
+   about nobody in particular. */
+var IQCARDS = [
+  { k: 'WHO WE ARE', n: '4orm', tone: 'blue',
+    h: 'A verification desk, not a rating agency',
+    p: 'We read public records and show you what they say, with the source and the date '
+     + 'beside every finding, so you can open them and judge for yourself.',
+    s: '4orm Finance' },
+  { k: 'THE NUMBER BEHIND EVERY NUMBER', n: '5 to 10%', tone: 'gold',
+    h: 'Of fraud in Canada is ever reported at all',
+    p: 'Every headline total you have read is the visible fraction of something much larger, '
+     + 'and the rest never reaches a form.',
+    s: 'RCMP, and Competition Bureau Canada' },
+  { k: 'WHAT IT ACTUALLY COSTS', n: 'Everything', tone: 'red',
+    h: 'For most people it was never spare money',
+    p: 'It is the deposit, the retirement, the money that was meant to go to a child. The '
+     + 'hardest hour is not the transfer. It is telling the family.',
+    s: '4orm Finance' },
+  { k: 'THE PART NOBODY TELLS YOU', n: 'Hours', tone: 'green',
+    h: 'Is how long you have to freeze a wire',
+    p: 'When a fraudulent transfer reaches a recovery team fast enough, much of the money gets '
+     + 'frozen. Almost nobody gets there in time. If money has gone, telephone your bank '
+     + 'today, not tomorrow.',
+    s: 'FBI IC3 Recovery Asset Team' },
+  { k: 'WHAT COMES AFTER', n: 'Months', tone: 'red',
+    h: 'Of sending the same documents to anybody who will take them',
+    p: 'Statements, screenshots, wire receipts, identity documents, sent to the bank, the '
+     + 'exchange, the police, the regulator, and then sent again.',
+    s: '4orm Finance' }
+];
+
+var IQPHASE = [
+  'Opening the registers',
+  'Assembling what no single page answers',
+  'Cross-examining the evidence',
+  'Writing it down with the sources'
+];
+
+/* What the demonstration finds. Invented, and labelled as invented. */
+var IQFIND = [
+  ['bad',  'Corporate registration',
+   'No active company is registered under this name in the province the firm gave us.'],
+  ['bad',  'Securities registration',
+   'The firm does not appear on the national registration search. Anyone advising on or '
+   + 'selling securities is normally required to be registered, or to fit an exemption.'],
+  ['bad',  'The return being promised',
+   'A fixed monthly return described as protected is not how an investment behaves. A return '
+   + 'that cannot fall is not an investment.'],
+  ['warn', 'The website',
+   'The domain was created five weeks ago and the owner is concealed behind a privacy '
+   + 'service.'],
+  ['warn', 'How the money is meant to move',
+   'A wire, today, to hold a place. Urgency is the part that stops a person checking.'],
+  ['ok',   'Sanctions and enforcement lists',
+   'Nothing came back under this name. An absence is not proof of anything.']
+];
+
+var IQCARD = [
+  ['The website we checked',        IQ.domain,                                  'link'],
+  ['When this website was made',    'Five weeks ago',                           'bad'],
+  ['How long it has existed',       'Five weeks',                               'bad'],
+  ['Are they allowed to hold your money?', 'Not on the register we can read',   'bad'],
+  ['People named in these records', 'None we can publish',                      ''],
+  ['What they present as',          'An arbitrage fund',                        ''],
+  ['When we looked',                'Just now',                                 '']
+];
+
+/* --- the console ------------------------------------------ */
+SCREEN.iq = function () {
+  ST.screen = 'iq';
+  head('4ormIQ', 'Know before you send');
+  paint(
+    '<div class="iq">' +
+      '<div class="iqdemo">Demonstration &middot; invented subject</div>' +
+      '<h3 class="iqh">A company name is enough to start.</h3>' +
+      '<p class="iqp">Give us a company, a website, an email address or a wallet. We will show ' +
+        'you what the public record can, and cannot, verify.</p>' +
+      '<form class="iqbar" id="iqform">' +
+        '<span class="iqcaret">&gt;</span>' +
+        '<input id="iqinput" autocomplete="off" spellcheck="false" maxlength="60" ' +
+          'placeholder="Type a name" value="' + esc(IQ.firm.toLowerCase()) + '" />' +
+        '<button class="iqgo" type="submit">Check</button>' +
+      '</form>' +
+      '<p class="iqfine">Two questions to get started, then we read the registers.</p>' +
+    '</div>'
+  );
+  setTimeout(function () { var i = $('#iqinput'); if (i) i.focus(); }, 260);
+};
+
+/* --- the two questions ------------------------------------ */
+var IQQ = [
+  { q: 'What is this about?',
+    a: ['An investment', 'A mortgage or a loan', 'A vehicle', 'Insurance', 'Something else'] },
+  { q: 'Where are you with it?',
+    a: ['I have not sent anything yet', 'I already sent money', 'I am just doing my homework'] }
+];
+
+function iqAsk(step, typed) {
+  if (typed !== undefined) { ST.iqname = typed || IQ.firm; ST.iqsaid = []; }
+  ST.screen = 'iqask';
+  ST.iqstep = step;
+  var Q = IQQ[step];
+  head('4ormIQ', 'Two quick questions');
+  paint(
+    '<div class="iq iqthread">' +
+      '<div class="iqb me">' + esc(ST.iqname) + '</div>' +
+      (step === 0 ? '<div class="iqb them sm">2 quick questions.</div>' : '') +
+      (ST.iqsaid[0] ? '<div class="iqb them sm">' + IQQ[0].q + '</div>' +
+                      '<div class="iqb me">' + esc(ST.iqsaid[0]) + '</div>' : '') +
+      '<div class="iqb them q">' + Q.q + '</div>' +
+      '<div class="iqchips">' +
+        Q.a.map(function (a) {
+          return '<button class="iqchip" data-act="iqpick" data-arg="' + esc(a) + '">' + a +
+                 '</button>';
+        }).join('') +
+      '</div>' +
+    '</div>'
+  );
+}
+
+function iqPick(answer) {
+  ST.iqsaid[ST.iqstep] = answer;
+  if (ST.iqstep === 0) { setTimeout(function () { iqAsk(1); }, 240); return; }
+  setTimeout(iqLoad, 240);
+}
+
+/* --- reading the registers -------------------------------- */
+function iqLoad() {
+  ST.screen = 'iqload';
+  head('4ormIQ', 'Reading the registers');
+  paint(
+    '<div class="iq iqload">' +
+      '<div class="iqtop">' +
+        '<span class="iqdot"></span><span class="iqtopl">Know before you send</span>' +
+        '<span class="iqsubj">' + esc(ST.iqname) + '</span>' +
+      '</div>' +
+      '<div class="iqbar2"><i id="iqfill"></i></div>' +
+      '<div class="iqmeta"><span id="iqphase">Opening the registers</span>' +
+        '<span id="iqpct">0%</span></div>' +
+      '<div class="iqcard" id="iqcard"></div>' +
+      '<div class="iqconst" id="iqconst" aria-hidden="true"></div>' +
+      '<div class="iqcount" id="iqcount">Reading</div>' +
+      '<p class="iqfine">A research tool, not advice. We report what public records show, with ' +
+        'the source beside every finding. An absence is not proof.</p>' +
+    '</div>'
+  );
+
+  /* The constellation. Each dot is a place that might hold a record, and it
+     resolves to one of three states, including "we could not reach it",
+     because a check that never admits a gap is not a check. */
+  var host = $('#iqconst');
+  if (host) {
+    var n = 64, s = '<svg viewBox="0 0 320 150" width="100%" height="100%">';
+    for (var i = 0; i < n; i++) {
+      var a = Math.PI * (i / (n - 1)), rx = 128 + (i % 3) * 11, ry = 58 + (i % 4) * 5;
+      var x = (160 + Math.cos(a) * rx).toFixed(1), y = (128 - Math.sin(a) * ry).toFixed(1);
+      s += '<line class="iqray" data-i="' + i + '" x1="160" y1="128" x2="' + x + '" y2="' + y +
+           '"/><circle class="iqnode" data-i="' + i + '" cx="' + x + '" cy="' + y + '" r="2.6"/>';
+    }
+    s += '<circle class="iqcore" cx="160" cy="128" r="9"/></svg>';
+    host.innerHTML = s;
+  }
+
+  var t0 = Date.now(), DUR = 11000, ci = -1, done = 0, none = 0, gap = 0;
+  var order = []; for (var k = 0; k < 64; k++) order.push(k);
+  order.sort(function () { return Math.random() - 0.5; });
+
+  ST.iqtimer = setInterval(function () {
+    var el = Date.now() - t0, p = Math.min(1, el / DUR);
+    var fill = $('#iqfill'), pct = $('#iqpct'), ph = $('#iqphase');
+    if (!fill) { clearInterval(ST.iqtimer); return; }
+    fill.style.width = (p * 100).toFixed(1) + '%';
+    pct.textContent = Math.round(p * 100) + '%';
+    ph.textContent = IQPHASE[Math.min(IQPHASE.length - 1, Math.floor(p * IQPHASE.length))];
+
+    /* Resolve the registers as the sweep runs. */
+    var want = Math.floor(p * 58);
+    while (done + none + gap < want) {
+      var idx = order[done + none + gap];
+      var node = host && host.querySelector('.iqnode[data-i="' + idx + '"]');
+      var ray  = host && host.querySelector('.iqray[data-i="' + idx + '"]');
+      var r = Math.random(), cls = r < 0.36 ? 'hit' : (r < 0.96 ? 'none' : 'gap');
+      if (cls === 'hit') done++; else if (cls === 'none') none++; else gap++;
+      if (node) node.classList.add(cls);
+      if (ray) ray.classList.add(cls);
+    }
+    var c = $('#iqcount');
+    if (c) {
+      c.innerHTML = '<b>' + done + '</b> returned a record &nbsp; <b>' + none +
+        '</b> answered with no entry &nbsp; <b>' + gap + '</b> not reached, published as gaps';
+    }
+
+    /* A card every 2.2 seconds. */
+    var want2 = Math.min(IQCARDS.length - 1, Math.floor(el / 2200));
+    if (want2 !== ci) {
+      ci = want2;
+      var C = IQCARDS[ci], box = $('#iqcard');
+      if (box) {
+        box.className = 'iqcard ' + C.tone;
+        box.innerHTML = '<span class="iqk">' + C.k + '</span>' +
+          '<span class="iqn">' + C.n + '</span>' +
+          '<b class="iqch">' + C.h + '</b>' +
+          '<p>' + C.p + '</p>' +
+          '<span class="iqs">Source: ' + C.s + '</span>' +
+          '<div class="iqpager">' + IQCARDS.map(function (x, j) {
+            return '<i class="' + (j === ci ? 'on' : '') + '"></i>'; }).join('') + '</div>';
+      }
+    }
+
+    if (p >= 1) {
+      clearInterval(ST.iqtimer);
+      ST.iqstats = { hit: done, none: none, gap: gap };
+      setTimeout(iqResult, 500);
+    }
+  }, 90);
+
+  evt('Ran a check before sending anything', 'AGAINST WHAT IS PUBLISHED', 'gold');
+}
+
+/* --- the report ------------------------------------------- */
+function iqResult() {
+  ST.screen = 'iqresult';
+  head('4ormIQ', 'What the records say');
+  var st = ST.iqstats || { hit: 25, none: 37, gap: 2 };
+  var wrong = IQFIND.filter(function (f) { return f[0] !== 'ok'; }).length;
+
+  put('checked', 'Checked before acting', ST.iqname + ' · High concern', 'verified',
+      'Against published registers');
+
+  /* The person typed a name and is about to be shown a report on a different
+     one. Say so first, in their words, rather than hoping they do not notice.
+     It is also the honest reason the button at the end exists. */
+  var theirs = (ST.iqname || '').trim();
+  var swapped = theirs && theirs.toLowerCase() !== IQ.firm.toLowerCase();
+
+  paint(
+    '<div class="iqr">' +
+      (swapped
+        ? '<div class="iqswap">You asked about <b>' + esc(theirs) + '</b>. This is a ' +
+          'demonstration, so it reports on an invented firm instead. A page that cannot open a ' +
+          'live register has no business publishing findings about a real one.</div>'
+        : '') +
+      '<div class="iqalert">A register has already recorded a concern about this firm.</div>' +
+      '<h3 class="iqrh">' + esc(IQ.firm) + '</h3>' +
+      '<p class="iqrd">' + IQ.domain + '</p>' +
+
+      '<div class="iqstop"><b>Do not send anything tonight.</b>' +
+        '<span>Waiting until the morning costs you nothing. Sending tonight could cost you ' +
+        'everything.</span></div>' +
+
+      '<div class="iqsec">In our own words</div>' +
+      '<p class="iqsay">Nothing we can read says this firm is allowed to take your money, and ' +
+      'what it is promising is not how an investment behaves. That is not a finding that '
+      + 'anybody has broken the law. It is a reason to stop and ask.</p>' +
+
+      '<div class="iqsec">What the records say</div>' +
+      '<div class="iqrows">' +
+        IQFIND.map(function (f) {
+          return '<div class="iqrow ' + f[0] + '"><b>' + f[1] + '</b><span>' + f[2] +
+                 '</span></div>';
+        }).join('') +
+      '</div>' +
+
+      '<div class="iqsec">The report card</div>' +
+      '<div class="iqcardp">' +
+        '<div class="iqcref"><span>Reference</span><b>' + IQ.ref + '</b></div>' +
+        IQCARD.map(function (r) {
+          return '<div class="iqcrow"><span>' + r[0] + '</span><b class="' + r[2] + '">' +
+                 r[1] + '</b></div>';
+        }).join('') +
+      '</div>' +
+
+      '<div class="iqtiles">' +
+        '<div class="iqtile"><b>' + wrong + ' of ' + IQFIND.length + '</b>' +
+          '<span>checks we finished found something wrong.</span></div>' +
+        '<div class="iqtile"><b>' + st.hit + ' of ' + (st.hit + st.none + st.gap) + '</b>' +
+          '<span>places that might hold a record answered us.</span></div>' +
+        '<div class="iqtile"><b>' + st.gap + '</b>' +
+          '<span>we could not reach. Published as gaps, not as clean.</span></div>' +
+      '</div>' +
+
+      '<div class="iqgap"><b>What we could not answer.</b> ' +
+        (st.gap === 1 ? 'One register did not respond. It is'
+                      : st.gap + ' registers did not respond. They are') +
+        ' named in the working so you can see the shape of what is missing. An absence is ' +
+        'never proof that something is fine.</div>' +
+
+      '<div class="iqcta">' +
+        '<a class="iqreal" href="https://4ormiq.com" target="_blank" rel="noopener noreferrer">' +
+          (swapped ? 'Check ' + esc(theirs) + ' for real &#8594;'
+                   : 'Check a real name at 4ormIQ &#8594;') + '</a>' +
+        '<button class="iqagain" data-act="iq">Run the demonstration again</button>' +
+      '</div>' +
+
+      '<p class="iqfine">This report is a demonstration and the firm in it is invented. ' +
+      'Real checks read live registers and are only as current as the day they run. A research ' +
+      'tool, not advice.</p>' +
+    '</div>'
+  );
 }
 
 /* THE SEAM. Give it text, get findings back. */
@@ -3977,6 +4308,10 @@ var ACT = {
   /* Leaving a check, a reading or an invitation goes back into the
      conversation for whatever decision the person is on, not to a menu. */
   talkback: function () { ST.mode = ''; GEN++; go('open'); },
+
+  /* The 4ormIQ demonstration. */
+  iq:     function () { GEN++; go('iq'); },
+  iqpick: function (arg) { iqPick(arg); },
   restart: function () { boot(ST.ind); },
   mode: function (arg) {
     ST.mode = arg;
@@ -4206,8 +4541,10 @@ function boot(ind, screen) {
   if (intent) { markInd(ind); }
   if (!screen && intent === 'invest') {
     try { sessionStorage.removeItem('4orm.intent'); } catch (e) {}
+    /* Somebody about to send an investment gets the console itself, not a
+       description of it. It ends by offering the live check. */
     ST.mode = 'send';
-    sendRun('invest');
+    go('iq');
     return;
   }
   if (!screen && intent === 'decide') {
@@ -4257,6 +4594,14 @@ function switchTo(ind, screen) {
   markInd(ind);
   boot(ind, screen);
 }
+
+/* The console's own submit. */
+document.addEventListener('submit', function (e) {
+  if (!e.target.closest || !e.target.closest('#iqform')) return;
+  e.preventDefault();
+  var i = $('#iqinput');
+  iqAsk(0, (i && i.value.trim().slice(0, 60)) || '');
+});
 
 document.addEventListener('click', function (e) {
   if (!e.target.closest) return;
