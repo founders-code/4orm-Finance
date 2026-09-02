@@ -547,3 +547,39 @@ that sends a person somewhere other than 4orm.
 | W15 | Shape consistent | **PASS** five turns each, opener, two facts, the nosy one, what matters most, then the change and the read-back |
 | W16 | Every prepare step renders | **PASS** all seven decisions swept step by step |
 | W17 | Full regression | **PASS** all seven paths end to end, no old screen reachable from any entry, both landing handoffs, money to Checking it, document to Reading it with you, put-away to home, links resolve, gate 0/0, stutters 0, no AI language, nothing confidential, no defects at 1440 or 390 |
+
+
+## X. The 4ormIQ demonstration inside the phone — 2026-09-02
+
+Choosing to send an investment now opens the console itself rather than a
+description of it: a name goes in, two questions get asked, the registers
+are read, and a report card comes back. It ends by offering the live
+check at 4ormIQ.
+
+| # | Item | Result |
+|---|---|---|
+| X1 | The console | **DONE** dark takeover inside the phone, "A company name is enough to start", input prefilled with the demonstration subject |
+| X2 | Two questions | **DONE** what this is about, and where they are with it, as chat |
+| X3 | The read | **DONE** progress, four named phases, five sourced cards on a timer, and a live constellation where every dot resolves to returned a record, no entry, or not reached |
+| X4 | Gaps are shown, not hidden | **DONE** the counter names what could not be reached, and the report repeats it. A check that never admits a gap is not a check |
+| X5 | The report | **DONE** alert, verdict, "do not send anything tonight", what the records say, the report card with a reference, three tiles, and what could not be answered |
+| X6 | The close | **DONE** "Check {what they typed} for real" to 4ormIQ, and "Run the demonstration again" |
+| X7 | Background covered the whole report | **FIXED** the dark skin was on the panel, which only paints to the fold. It is now on the scrolling container |
+| X8 | Plural | **FIXED** "1 registers did not respond" |
+| X9 | The substitution is owned, not hidden | **FIXED** a person types one name and is shown a report on another. The report now opens by saying so, and it is the reason the closing button exists |
+
+### The subject is invented, and the screen says so three times
+
+The live product reads live registers. This page cannot. Anything it
+asserts is frozen the day it is written, so a real firm named here would
+be carrying an allegation on this site for as long as the page exists,
+with no way to correct itself when a case moves, and no individual should
+be named on a marketing page at all.
+
+So the demonstration reports on an invented firm, and says so in the
+badge at the top of the console, in the panel that opens the report, and
+in the line under the closing buttons. Live names belong in the live
+product, which is what the button is for.
+
+The facts on the reading cards are different in kind. They are general,
+they are sourced, and none of them is about anybody in particular.
