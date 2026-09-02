@@ -452,3 +452,39 @@ regulator. Sources and every question's derivation are in
 **Still open.** Investing, banking and lending open the goal screen. Each
 needs the same treatment: CSA and CIRO know-your-client for investing,
 FCAC for banking, and the cost-of-borrowing disclosure rules for lending.
+
+
+## V. The menus removed, and the repository trimmed — 2026-09-02
+
+**The two old screens are gone.**
+
+Both opened "Good afternoon, Sarah." and both were menus. A menu is what a
+product offers when it does not know what to say first, and every decision
+now knows.
+
+| # | Item | Result |
+|---|---|---|
+| V1 | The goal screen deleted | **DONE** it listed four goals and an example transcript, and it was where "Know before you look" landed for anything without its own question set |
+| V2 | The four-item menu deleted | **DONE** finishing a fraud check and pressing Done landed here, which is where it was being seen |
+| V3 | "Modelling coming" deleted | **DONE** a dead end that told the person what had not been built yet |
+| V4 | Done and Not now go somewhere real | **DONE** leaving a check, a reading or an invitation returns to the conversation for whatever decision the person is on |
+| V5 | Investing, banking and lending open a conversation | **DONE** they have no question set yet, so they open on the three things that work on any decision: check something, read a document, join a professional. No menu, no apology, no dead end |
+| V6 | Every entry point checked | **PASS** all seven decision pills opened cold, all six landing chips with a name typed and with the name skipped, "Know before you look", and Done after a check. No old screen is reachable from anywhere |
+| V7 | Dead data removed from the file | **DONE** the goal lists, the example transcripts and the "not modelled yet" lines, now that nothing renders them |
+
+**The repository trimmed.**
+
+| Removed | Why |
+|---|---|
+| `assets/mark-16.png`, `mark-32.png`, `mark-180.png`, `mark-192.png` | Byte-for-byte duplicates of the favicon files that replaced them |
+| `assets/mark-512.png` | Referenced by nothing |
+| `build/__pycache__/` | Python bytecode, 192K, should never have been committed |
+
+A `.gitignore` now covers `__pycache__`, `.pyc`, `.DS_Store`, `.vercel` and
+`node_modules` so the cache cannot come back.
+
+**What the zip contains.** Only what gets served: the pages, `industries/`,
+`assets/`, `robots.txt`, `sitemap.xml` and `vercel.json`. 57 files, 712K,
+down from 1.0M. The build kit and the research stay in the repository,
+because they are how the site is produced and why it says what it says,
+but they are not part of a deployment.
