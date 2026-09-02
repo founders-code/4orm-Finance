@@ -1447,6 +1447,21 @@ body.go .llede{opacity:1;transform:none;transition:opacity .9s var(--ease) .26s,
   text-transform:uppercase;color:var(--blue);margin-bottom:14px;
   transition:color .4s var(--ease)}
 .lway:hover .lwk{color:var(--blue-dp)}
+/* The enterprise row wears the mark itself rather than a typed 4, the way the
+   product lockups do. It drops out of the mono uppercase the other kickers
+   use, because uppercasing a lowercase wordmark turns "orm" into "ORM" and a
+   brand name is not something a text-transform gets to decide. */
+.lwkl{display:inline-flex;align-items:baseline;gap:0;text-transform:none;
+  font-family:var(--sans);font-size:14px;font-weight:750;letter-spacing:-.015em;
+  line-height:1;color:var(--blue)}
+.lwkm{width:17px;height:17px;margin-right:.5px;align-self:center;flex:none}
+.lwko{font-weight:750}
+.lwke{font-weight:620;letter-spacing:-.005em;margin-left:.42em;color:var(--blue)}
+@media (max-width:700px){
+  .lwkl{font-size:13px}
+  .lwkm{width:15px;height:15px}
+}
+
 .lwh{font-size:clamp(20px,1.95vw,26px);line-height:1.12;letter-spacing:-.03em;
   font-weight:700;margin:0 0 14px;text-wrap:balance}
 .lwv{font-size:15.5px;font-weight:600;letter-spacing:-.02em;color:var(--blue);margin-bottom:16px}
