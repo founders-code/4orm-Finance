@@ -730,6 +730,34 @@ var PREP = {
     ['range',     'What they can sell',    'range'],
     ['reason',    'The reason in writing', 'reasonwhy'],
     ['docs',      'Documents',             'docs']
+  ],
+  /* Investing. These are the know-your-client elements a registrant is
+     required to collect, in the order the person can actually supply them. */
+  investing: [
+    ['identity',  'Identity',                'ident'],
+    ['horizon',   'When you would need it',  'horizon'],
+    ['risk',      'Willing against able',    'risktwo'],
+    ['elsewhere', 'What you hold elsewhere', 'holdings'],
+    ['matters',   'What you want from it',   'wantinv'],
+    ['reason',    'The reason in writing',   'reasonwhy'],
+    ['docs',      'Documents',               'docs']
+  ],
+  banking: [
+    ['identity',  'Identity',                'ident'],
+    ['asked',     'What they asked you',     'wasasked'],
+    ['extras',    'What came with it',       'extras'],
+    ['cost',      'What it costs a month',   'monthly'],
+    ['consent',   'What you agreed to',      'consent'],
+    ['docs',      'Documents',               'docs']
+  ],
+  lending: [
+    ['identity',  'Identity',                'ident'],
+    ['income',    'Income',                  'income'],
+    ['disclosed', 'The written statement',   'disclose'],
+    ['added',     'What is added on',        'addons2'],
+    ['owed',      'What you already owe',    'debts'],
+    ['matters',   'What matters most',       'wantloan'],
+    ['docs',      'Documents',               'docs']
   ]
 };
 
@@ -1031,6 +1059,125 @@ SCREEN.reasonwhy = function () {
     'one cannot be undone.</p></div>' +
     opt('why-set', 'I have it', 'Recorded here') +
     opt('why-ask', 'I need to ask for it', 'Adds it to your list') +
+    opt('prepare', 'Not now', ''));
+};
+
+/* --- investing --------------------------------------------
+   These are the know-your-client elements a registrant is required to
+   collect. Putting them here lets a person arrive with them already
+   answered, which is the whole point.
+   ----------------------------------------------------------- */
+SCREEN.horizon = function () {
+  head('When you would need it', 'Time and liquidity');
+  paint('<div class="ghead sm"><h3>When you would need this money back</h3>' +
+    '<p>Two things sit here. How long before you need it, and how quickly you could get at it '
+    + 'if you had to. Both are required, and both were routinely found missing.</p></div>' +
+    opt('hor-set', 'Use what I said', 'From the conversation') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.risktwo = function () {
+  head('Willing against able', 'The two halves of risk');
+  paint('<div class="ghead sm"><h3>What you would accept, and what you could absorb</h3>' +
+    '<p>Risk is two separate things. What you are willing to lose, and what you could afford to '
+    + 'lose. Your profile is supposed to follow the smaller of the two.</p>' +
+    '<p>Almost every form asks them as one question. If yours did, this is the answer it could '
+    + 'not record.</p></div>' +
+    opt('risk-set', 'Use what I said', 'From the conversation') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.holdings = function () {
+  head('What you hold elsewhere', 'So nobody doubles you up');
+  paint('<div class="ghead sm"><h3>What you hold somewhere else</h3>' +
+    '<p>Without it nobody can tell whether you are concentrated in one thing, and concentration '
+    + 'is the risk that does the damage. Rough is better than nothing.</p></div>' +
+    opt('hold2-set', 'Put in what I have', 'Roughly is fine') +
+    opt('hold2-ask', 'I need to gather it', 'Adds it to your list') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.wantinv = function () {
+  head('What you want from it', 'In your words');
+  paint('<div class="ghead sm"><h3>What you actually want from this money</h3>' +
+    '<p>Growth, income, keeping it, or being able to reach it. This is your investment '
+    + 'objective, and it belongs in your words rather than a tick box.</p></div>' +
+    opt('wanti-set', 'Use what I said', 'From the conversation') +
+    opt('prepare', 'Not now', ''));
+};
+
+/* --- banking ---------------------------------------------- */
+SCREEN.wasasked = function () {
+  head('What they asked you', 'Before naming a product');
+  paint('<div class="ghead sm"><h3>What you were asked before a product was named</h3>' +
+    '<p>A bank has to offer what suits your circumstances, having collected them first. Four in '
+    + 'five card recommendations were made without anybody asking about income.</p></div>' +
+    opt('ask2-set', 'Record what happened', 'Whatever it was') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.extras = function () {
+  head('What came with it', 'Each one its own decision');
+  paint('<div class="ghead sm"><h3>What came with it</h3>' +
+    '<p>Insurance on a balance, an overdraft, a card, a line. Each optional thing needs its own '
+    + 'agreement and your own clear yes. They cannot be folded into one.</p></div>' +
+    opt('ext-set', 'Put in what came with it', 'From the conversation') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.monthly = function () {
+  head('What it costs a month', 'All of it, in one number');
+  paint('<div class="ghead sm"><h3>What all of it costs you</h3>' +
+    '<p>Account fee, transaction fees, anything optional, anything charged monthly. A fee that '
+    + 'was never disclosed to you is refundable, with interest, but somebody has to notice '
+    + 'it.</p></div>' +
+    opt('cost-set', 'Put in what I know', 'Even roughly') +
+    opt('cost-ask', 'I need to check the statement', 'Adds it to your list') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.consent = function () {
+  head('What you agreed to', 'And what you did not');
+  paint('<div class="ghead sm"><h3>What you actually said yes to</h3>' +
+    '<p>Nothing can be provided without your express consent, given in writing or out loud, for '
+    + 'each thing separately.</p>' +
+    '<p>If something is on your account that you do not remember agreeing to, that is worth '
+    + 'raising. The bank has 56 days, and after that it goes to the ombudsman.</p></div>' +
+    opt('cons-set', 'I know what I agreed to', 'Recorded here') +
+    opt('cons-ask', 'Something is on there I do not recognise', 'Adds it to your list') +
+    opt('prepare', 'Not now', ''));
+};
+
+/* --- lending ---------------------------------------------- */
+SCREEN.disclose = function () {
+  head('The written statement', 'Owed to you before signing');
+  paint('<div class="ghead sm"><h3>The statement you are owed before signing</h3>' +
+    '<p>The rate as an APR, the total cost of credit in dollars, the payment schedule, what is '
+    + 'charged if you are late, and whether you can pay it off early. In writing, before you '
+    + 'sign anything.</p>' +
+    '<p>Above 35% APR is not a lawful rate in Canada for most consumer lending, so the APR is '
+    + 'worth having on its own.</p></div>' +
+    opt('disc-set', 'I have it', 'Recorded here') +
+    opt('disc-ask', 'I need to ask for it', 'Before signing, not after') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.addons2 = function () {
+  head('What is added on', 'And what it costs over the term');
+  paint('<div class="ghead sm"><h3>What is being added to the loan</h3>' +
+    '<p>Optional insurance and fees are financed at the same rate as the loan, so you pay '
+    + 'interest on them for the whole term. Ask what they cost over the term, not per '
+    + 'month.</p></div>' +
+    opt('add2-set', 'Put in what is added', 'From the conversation') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.wantloan = function () {
+  head('What matters most', 'In your words');
+  paint('<div class="ghead sm"><h3>What matters most to you here</h3>' +
+    '<p>The smallest payment, paying it off fastest, the least total cost, or being approved at '
+    + 'all. They pull against each other, and the last one is a real answer.</p></div>' +
+    opt('wantl-set', 'Use what I said', 'From the conversation') +
     opt('prepare', 'Not now', ''));
 };
 
@@ -1544,7 +1691,10 @@ var LOOKS = [
   ['mortgage',   'A mortgage',   'Renewing, buying or refinancing'],
   ['realestate', 'Selling or buying a home', 'Before you sign with an agent'],
   ['auto',       'A vehicle',    'Buying, financing or trading one in'],
-  ['insurance',  'Insurance',    'Taking out cover, or replacing what you hold']
+  ['insurance',  'Insurance',    'Taking out cover, or replacing what you hold'],
+  ['investing',  'Investing',    'Starting, moving, or checking a recommendation'],
+  ['banking',    'A bank account or card', 'And whatever comes with it'],
+  ['lending',    'Borrowing money', 'Before the agreement is signed']
 ];
 
 SCREEN.look = function () {
@@ -2354,7 +2504,7 @@ NODE.r_matters = {
               '<p>Lower payment costs more overall. Certainty costs more than gambling. '
               + 'Flexibility costs more than being locked in.</p>']
   },
-  next: '@done'
+  next: 'news'
 };
 
 /* -------------------------------------------------------------- buying */
@@ -2584,7 +2734,7 @@ NODE.a_matters = {
               '<p>Lower payment costs more overall and keeps you underwater longer. Shorter term '
               + 'costs more monthly and less in total.</p>']
   },
-  next: '@done'
+  next: 'news'
 };
 
 /* ====================================================================
@@ -2698,7 +2848,7 @@ NODE.e_matters = {
               '<p>Holding out costs time. Moving fast costs price. A long agreement costs you '
               + 'the option to leave.</p>']
   },
-  next: '@done'
+  next: 'news'
 };
 
 /* ====================================================================
@@ -2806,21 +2956,489 @@ NODE.i_range = {
     dunno:['<p>Most people don&rsquo;t. It&rsquo;s not on you to know to ask.</p>',
            '<p>Ask it before anything is signed, and ask for the reason in writing.</p>']
   },
+  next: 'news'
+};
+
+/* ====================================================================
+   INVESTING
+
+   Sourced in build/research/INVESTING-BANKING-LENDING-DISCOVERY.md.
+
+   The third question is the one worth the whole conversation. Risk is
+   two things: how much loss a person is willing to accept, and how much
+   they can afford to absorb. The profile is supposed to be the lower of
+   the two. When the CSA and CIRO reviewed 105 firms, relying on
+   willingness alone, or blending both into a single question nobody can
+   answer honestly, was the most common deficiency they found.
+
+   So it is asked as two numbers and one comparison, in plain words.
+   ==================================================================== */
+NODE.v_open = {
+  ask: '<p>Hello, {who}. Tell me what&rsquo;s going on and I&rsquo;ll tell you what to watch '
+     + 'for.</p>'
+     + '<p class="gm">However it comes out. None of this goes to anyone.</p>',
+  replies: [
+    ['rec',   'Someone&rsquo;s recommending something'],
+    ['move',  'Moving an account'],
+    ['start', 'Starting out'],
+    ['doc',   'I don&rsquo;t understand a document']
+  ],
+  store: ['doing', 'What&rsquo;s going on'],
+  react: {
+    rec:   ['<p>Then the question is why that one and not something else.</p>',
+            '<p>You&rsquo;re allowed to ask, and they&rsquo;re meant to be able to answer.</p>'],
+    move:  ['<p>Moving. Worth knowing what follows you and what doesn&rsquo;t.</p>',
+            '<p>Anything held in the new place has to be looked at fresh. That often gets '
+            + 'skipped.</p>'],
+    start: ['<p>Best time to talk. Nothing&rsquo;s been decided.</p>'],
+    doc:   ['<p>Send it over, we&rsquo;ll read it together.</p>',
+            '<p>Right order. Much harder to unpick after you&rsquo;ve signed.</p>']
+  },
+  go: { rec: 'v_when', move: 'v_when', start: 'v_when', doc: '@sign' }
+};
+
+NODE.v_when = {
+  ask: '<p>When would you need this money back?</p>',
+  replies: [['near', 'Within a couple of years'], ['mid', 'Five to ten years'],
+            ['far', 'Not for a long time'], ['some', 'Some of it sooner than the rest'],
+            ['dunno', 'I&rsquo;d have to think']],
+  store: ['horizon', 'When you&rsquo;d need it'],
+  react: {
+    near:  ['<p>That&rsquo;s short, and it should rule things out on its own.</p>',
+            '<p>Say the date out loud. It&rsquo;s the fastest way to narrow what should be put '
+            + 'in front of you.</p>'],
+    mid:   ['<p>Middle distance. Enough room to ride something out, not enough to ignore it.</p>'],
+    far:   ['<p>Long horizon. That widens what makes sense, but it isn&rsquo;t a licence for '
+            + 'anything.</p>'],
+    some:  ['<p>Then it&rsquo;s really two pots, and it should be treated as two.</p>',
+            '<p>Money you need soon and money you don&rsquo;t are different decisions.</p>'],
+    dunno: ['<p>Fair, and it&rsquo;s a question that&rsquo;s often skipped entirely.</p>',
+            '<p>Even a rough answer changes what&rsquo;s suitable. Adding it to your list.</p>']
+  },
+  next: 'v_risk'
+};
+
+/* The two-factor risk question. Split, because blended is exactly the
+   form the regulator flagged as unanswerable. */
+NODE.v_risk = {
+  ask: '<p>Nosy one. Two different numbers here. What you&rsquo;d be willing to lose, and what '
+     + 'you could afford to lose.</p>'
+     + '<p class="gm">Which of the two is smaller?</p>',
+  replies: [['afford', 'What I could afford is smaller'],
+            ['willing', 'What I&rsquo;m willing to is smaller'],
+            ['same', 'About the same'], ['skip', 'Rather not say']],
+  store: ['risk', 'Willing against able'],
+  react: {
+    afford:  ['<p>That&rsquo;s the important answer, and it&rsquo;s the one forms lose.</p>',
+              '<p>Your profile is meant to be the lower of the two. Say it in those words: '
+              + 'I could stomach it, I couldn&rsquo;t absorb it.</p>'],
+    willing: ['<p>Then caution is the binding one, and that&rsquo;s allowed.</p>',
+              '<p>Being able to take a loss doesn&rsquo;t oblige you to want one.</p>'],
+    same:    ['<p>Simpler, then. One number does the work of two.</p>'],
+    skip:    ['<p>Understood. Skipping it.</p>']
+  },
+  next: 'v_else'
+};
+
+NODE.v_else = {
+  ask: '<p>Does whoever&rsquo;s advising you know what you hold elsewhere?</p>',
+  replies: [['yes', 'Yes, they have all of it'], ['some', 'Some of it'],
+            ['no', 'No'], ['none', 'There isn&rsquo;t anything else']],
+  store: ['elsewhere', 'What you hold elsewhere'],
+  react: {
+    yes:  ['<p>Good. Then they can see whether you&rsquo;re doubling up.</p>'],
+    some: ['<p>Partial is the awkward one, because it looks complete from their side.</p>',
+           '<p>Worth handing over the rest, even roughly.</p>'],
+    no:   ['<p>Sounds like nobody&rsquo;s asked you for it.</p>',
+           '<p>Then nobody can tell whether you&rsquo;re concentrated in one thing. It was '
+           + 'routinely not collected across the firms a regulator reviewed.</p>'],
+    none: ['<p>Clean picture, then. Everything in one view.</p>']
+  },
+  next: 'v_matters'
+};
+
+NODE.v_matters = {
+  ask: '<p>Last one. What matters most?</p>',
+  replies: [['grow', 'Growing it'], ['income', 'Income from it'],
+            ['keep', 'Not losing it'], ['reach', 'Being able to reach it'],
+            ['dunno', 'What&rsquo;s the trade?']],
+  store: ['matters', 'What matters most'],
+  react: {
+    grow:   ['<p>Then ask what a bad year looks like in dollars, not percentages.</p>'],
+    income: ['<p>Then ask where the income comes from, and what happens if it stops.</p>',
+             '<p>Income paid out of your own capital is not income.</p>'],
+    keep:   ['<p>Sounds like a fall is the part that would actually bother you.</p>',
+             '<p>Say it plainly. It&rsquo;s meant to constrain what gets recommended.</p>'],
+    reach:  ['<p>Then ask how quickly you could get it out, and what that costs.</p>',
+             '<p>Some things take days. Some take a lot longer than anyone mentions.</p>'],
+    dunno:  ['<p>Seems like nobody&rsquo;s laid the trade out for you.</p>',
+             '<p>Growth costs steadiness. Income costs growth. Reaching it quickly costs '
+             + 'return.</p>']
+  },
+  next: 'news'
+};
+
+/* ====================================================================
+   BANKING
+
+   FCAC mystery-shopped the retail banks. A premium credit card was
+   recommended without anybody asking about income 80% of the time, and
+   16% of those conversations included a question about spending.
+
+   Since June 2022 a bank has to offer what is appropriate for the
+   person, having actually collected their circumstances. The second
+   question is that obligation checked from the other side, and it takes
+   four seconds to answer.
+   ==================================================================== */
+NODE.k_open = {
+  ask: '<p>Hello, {who}. What&rsquo;s the bank asking you to do?</p>'
+     + '<p class="gm">However it comes out. None of this goes to anyone.</p>',
+  replies: [
+    ['open',  'Opening an account'],
+    ['extra', 'They offered me something extra'],
+    ['fees',  'Working out what I&rsquo;m paying'],
+    ['doc',   'I don&rsquo;t understand a document']
+  ],
+  store: ['doing', 'What&rsquo;s going on'],
+  react: {
+    open:  ['<p>Fine. It&rsquo;s what comes with it that&rsquo;s worth watching.</p>'],
+    extra: ['<p>Then let&rsquo;s slow that bit down.</p>',
+            '<p>Anything optional needs its own agreement and your own yes. It can&rsquo;t be '
+            + 'folded into the main one.</p>'],
+    fees:  ['<p>Good question to ask, and most people never do.</p>',
+            '<p>A fee that was never disclosed to you is refundable, with interest.</p>'],
+    doc:   ['<p>Send it over, we&rsquo;ll read it together.</p>',
+            '<p>Right order. Much harder to unpick after you&rsquo;ve signed.</p>']
+  },
+  go: { open: 'k_asked', extra: 'k_asked', fees: 'k_asked', doc: '@sign' }
+};
+
+NODE.k_asked = {
+  ask: '<p>Did they ask what you needed it for, before naming a product?</p>',
+  replies: [['yes', 'Yes, properly'], ['bit', 'A couple of questions'],
+            ['no', 'No'], ['dunno', 'I can&rsquo;t remember']],
+  store: ['asked', 'Asked before recommending'],
+  react: {
+    yes:  ['<p>Good. That&rsquo;s what&rsquo;s supposed to happen every time.</p>'],
+    bit:  ['<p>A couple isn&rsquo;t the same as knowing what you earn and what you spend.</p>',
+           '<p>Both are meant to come before a product is named.</p>'],
+    no:   ['<p>Sounds like it went straight to the product.</p>',
+           '<p>Four in five card recommendations were made without anyone asking about income. '
+           + 'You&rsquo;re not the exception.</p>'],
+    dunno:['<p>If it stuck, it usually happened. If it didn&rsquo;t, it usually didn&rsquo;t.</p>']
+  },
+  next: 'k_extras'
+};
+
+NODE.k_extras = {
+  ask: '<p>What came with it?</p>',
+  replies: [['ins', 'Insurance on the balance'], ['card', 'A credit card'],
+            ['over', 'Overdraft protection'], ['several', 'More than one of those'],
+            ['nothing', 'Nothing extra']],
+  store: ['extras', 'What came with it'],
+  react: {
+    ins:     ['<p>Creditor insurance. Optional, always.</p>',
+              '<p>Ask what it pays, when it doesn&rsquo;t, and what it costs a year.</p>'],
+    card:    ['<p>Separate product, separate decision, separate agreement.</p>'],
+    over:    ['<p>Worth knowing what it costs per use and per month, not just that it&rsquo;s '
+              + 'there.</p>'],
+    several: ['<p>Then each one needs its own agreement and its own yes from you.</p>',
+              '<p>One in five things sold alongside something else were found not to suit the '
+              + 'person buying them.</p>'],
+    nothing: ['<p>Straightforward, then. One thing, one decision.</p>']
+  },
+  next: 'k_cost'
+};
+
+NODE.k_cost = {
+  ask: '<p>Nosy one. Do you know what all of it costs you a month?</p>',
+  replies: [['yes', 'Yes, to the dollar'], ['rough', 'Roughly'],
+            ['no', 'No idea'], ['skip', 'Rather not say']],
+  store: ['cost', 'What it costs a month'],
+  react: {
+    yes:   ['<p>Then you&rsquo;re in a small minority, and you can compare properly.</p>'],
+    rough: ['<p>Roughly is where the small ones hide.</p>',
+            '<p>Ask for it in dollars a year, everything included. It reads very differently.</p>'],
+    no:    ['<p>Sounds like it&rsquo;s never been put in one place for you.</p>',
+            '<p>It&rsquo;s on your statement and they have to tell you. Adding it to your '
+            + 'list.</p>'],
+    skip:  ['<p>Understood. Skipping it.</p>']
+  },
+  next: 'k_matters'
+};
+
+NODE.k_matters = {
+  ask: '<p>Last one. What matters most?</p>',
+  replies: [['fees', 'Paying as little as possible'], ['branch', 'Being able to walk in'],
+            ['one', 'One place for everything'], ['credit', 'Building a credit history'],
+            ['dunno', 'What&rsquo;s the trade?']],
+  store: ['matters', 'What matters most'],
+  react: {
+    fees:   ['<p>Then ask what the account costs with no minimum balance held.</p>',
+             '<p>Most fee waivers are bought with money sitting still.</p>'],
+    branch: ['<p>Fair, and it&rsquo;s worth paying something for. Just know what.</p>'],
+    one:    ['<p>Convenient, and it&rsquo;s also how things get added quietly.</p>',
+             '<p>Keep the yes separate for each one and you get both.</p>'],
+    credit: ['<p>Then ask which of these actually reports, and how often.</p>',
+             '<p>Not everything sold as credit-building does much.</p>'],
+    dunno:  ['<p>Seems like nobody&rsquo;s laid the trade out for you.</p>',
+             '<p>Low fees usually cost you access. Everything in one place usually costs you '
+             + 'the ability to compare.</p>']
+  },
+  next: 'news'
+};
+
+/* ====================================================================
+   LENDING
+
+   FCAC found that 43% of payday borrowers understood their loan cost
+   more than the alternatives open to them. So the useful thing is not a
+   warning. It is the comparison they were never shown.
+
+   Since January 2025 an APR above 35% is a criminal rate for most
+   consumer lending. That is stated as a fact about the law and never as
+   an accusation about anybody's offer.
+   ==================================================================== */
+NODE.l_open = {
+  ask: '<p>Hello, {who}. What&rsquo;s the money for?</p>'
+     + '<p class="gm">However it comes out. None of this goes to anyone.</p>',
+  replies: [
+    ['sudden', 'Something unexpected'],
+    ['bills',  'Bills I&rsquo;m behind on'],
+    ['consol', 'Putting debts together'],
+    ['doc',    'I don&rsquo;t understand a document']
+  ],
+  store: ['doing', 'What it&rsquo;s for'],
+  react: {
+    sudden: ['<p>Right. That&rsquo;s what most of this borrowing is for.</p>',
+             '<p>45% of people borrowing this way were covering something that broke.</p>'],
+    bills:  ['<p>Thanks for saying it plainly. That&rsquo;s the most common reason there is.</p>',
+             '<p>Four in ten are covering rent or a utility bill. It&rsquo;s ordinary, and '
+             + 'nobody says so.</p>'],
+    consol: ['<p>Then the only number that matters is what the whole thing costs, end to '
+             + 'end.</p>',
+             '<p>A smaller payment over longer is not the same as owing less.</p>'],
+    doc:    ['<p>Send it over, we&rsquo;ll read it together.</p>',
+             '<p>Right order. Much harder to unpick after you&rsquo;ve signed.</p>']
+  },
+  go: { sudden: 'l_rate', bills: 'l_rate', consol: 'l_rate', doc: '@sign' }
+};
+
+NODE.l_rate = {
+  ask: '<p>Have they given you the rate and the total in dollars?</p>',
+  replies: [['both', 'Both, in writing'], ['rate', 'The rate only'],
+            ['payment', 'Only the payment'], ['no', 'Neither']],
+  store: ['disclosed', 'What you were given'],
+  react: {
+    both:    ['<p>Then you&rsquo;ve got what you need to compare it against anything else.</p>'],
+    rate:    ['<p>Half of it. The total in dollars is the half people react to.</p>',
+              '<p>Both have to be in writing before you sign.</p>'],
+    payment: ['<p>The payment is the number that tells you least.</p>',
+              '<p>Any payment can be made small by stretching it. Ask for the rate and the '
+              + 'total.</p>'],
+    no:      ['<p>Sounds like nothing&rsquo;s been put in front of you yet.</p>',
+              '<p>You&rsquo;re owed a written statement before signing: the rate, the total in '
+              + 'dollars, the schedule, and what happens if you pay it off early.</p>']
+  },
+  next: 'l_added'
+};
+
+NODE.l_added = {
+  ask: '<p>Is anything else being added to it?</p>',
+  replies: [['ins', 'Insurance on the loan'], ['fees', 'Fees of some kind'],
+            ['both', 'Both'], ['no', 'Nothing else'], ['dunno', 'I&rsquo;m not sure']],
+  store: ['added', 'What&rsquo;s added on'],
+  react: {
+    ins:   ['<p>Optional, and financed at the same rate as the loan.</p>',
+            '<p>So you pay interest on it for the whole term. Ask what it costs over the '
+            + 'term, not per month.</p>'],
+    fees:  ['<p>They belong in the rate. That&rsquo;s what makes the APR different from the '
+            + 'interest rate.</p>'],
+    both:  ['<p>Then the number they quoted you and the number you&rsquo;ll pay are different '
+            + 'numbers.</p>',
+            '<p>Ask for the APR with everything in it.</p>'],
+    no:    ['<p>Cleaner. One amount, one rate.</p>'],
+    dunno: ['<p>Sounds like it wasn&rsquo;t itemised for you.</p>',
+            '<p>It has to be. Adding it to your list.</p>']
+  },
+  next: 'l_again'
+};
+
+/* Repeat borrowing is the difference between a gap and a treadmill, and
+   nobody volunteers it. Asked without a flinch, and skippable. */
+NODE.l_again = {
+  ask: '<p>Nosy one. Is this the first one this year?</p>',
+  replies: [['first', 'First one'], ['second', 'There was one before'],
+            ['more', 'A few'], ['skip', 'Rather not say']],
+  store: ['again', 'First one this year'],
+  react: {
+    first:  ['<p>Then this is a gap, and it should be treated as one.</p>'],
+    second: ['<p>Worth noticing now rather than on the third.</p>',
+             '<p>Most people who borrow this way borrow again. That&rsquo;s the pattern, not a '
+             + 'failing.</p>'],
+    more:   ['<p>Sounds like that wasn&rsquo;t easy to say.</p>',
+             '<p>Around a quarter of people are in the same position. It also means the next '
+             + 'useful conversation is about the whole picture, not this one loan.</p>'],
+    skip:   ['<p>Understood. Skipping it.</p>']
+  },
+  next: 'l_matters'
+};
+
+NODE.l_matters = {
+  ask: '<p>Last one. What matters most?</p>',
+  replies: [['small', 'The smallest payment'], ['fast', 'Paying it off fastest'],
+            ['total', 'The least total cost'], ['yes', 'Getting approved at all'],
+            ['dunno', 'What&rsquo;s the trade?']],
+  store: ['matters', 'What matters most'],
+  react: {
+    small: ['<p>Then watch the term. Smaller payment, longer, more.</p>',
+            '<p>Ask for the total in dollars on each option before you pick.</p>'],
+    fast:  ['<p>Then check you can overpay without a penalty. Often you can.</p>'],
+    total: ['<p>That&rsquo;s the number almost nobody asks for.</p>',
+            '<p>Total cost of credit, in dollars, over the full term. Only fair way to compare '
+            + 'two offers.</p>'],
+    yes:   ['<p>Straight answer, and a common one.</p>',
+            '<p>It&rsquo;s still worth asking your own bank or a credit union first. Being '
+            + 'turned down there costs you nothing but a conversation.</p>'],
+    dunno: ['<p>Seems like nobody&rsquo;s laid the trade out for you.</p>',
+            '<p>A smaller payment costs more overall. Paying it off fast costs more each '
+            + 'month. Speed of approval usually costs the most of all.</p>']
+  },
+  next: 'news'
+};
+
+/* ====================================================================
+   WHAT CHANGED
+
+   Every one of these decisions has had a rule change in the last two
+   years that moves real money, and almost nobody has been told. A
+   lender has no reason to mention that you can now leave without
+   requalifying. A bank has no reason to mention that the complaint
+   you lost patience with has somewhere else to go.
+
+   So each conversation ends by asking whether anybody has told them,
+   as a no-oriented question, and then telling them, with the regulator's
+   own page to read. One turn, and it is the only turn in the product
+   that sends a person somewhere other than 4orm.
+
+   Rules for anything added here: it must be a real change with a date,
+   it must actually affect what the person just told us they are doing,
+   and the link must go to the regulator or the government, never to a
+   company that profits from the change.
+   ==================================================================== */
+var CHANGE = {
+  mortgage: {
+    open: 'One last thing.',
+    when: 'about renewals in 2024',
+    body: 'You used to have to requalify at the stress-test rate to move your mortgage to '
+        + 'another lender at renewal. Since November 2024 you don&rsquo;t, as long as the '
+        + 'amount and the amortisation stay the same.',
+    so:   'It means shopping your renewal costs you nothing. Staying put was never the safe '
+        + 'option, it was the easy one.',
+    link: 'https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/osfi-exempts-uninsured-'
+        + 'mortgage-straight-switches-prescribed-mqr-implements-portfolio-lti-limits',
+    src:  'Read it on OSFI'
+  },
+  auto: {
+    open: 'One last thing.',
+    when: 'about the federal rebate this year',
+    body: 'A new federal incentive started on 16 February 2026. Up to $5,000 off a battery '
+        + 'electric vehicle and $2,500 off a plug-in hybrid, on vehicles up to $50,000.',
+    so:   'It comes off the price, so it changes the amount you finance and every number '
+        + 'built on top of it.',
+    link: 'https://tc.canada.ca/en/road-transportation/innovative-technologies/zero-emission-'
+        + 'vehicles/electric-vehicle-affordability-program-evap',
+    src:  'The eligible vehicle list, from Transport Canada'
+  },
+  realestate: {
+    open: 'One last thing.',
+    when: 'about listings being held back',
+    body: 'Since January 2024 a home marketed publicly has to go on the MLS system within '
+        + 'three days. If it is kept off, that has to be your written decision, not '
+        + 'somebody else&rsquo;s.',
+    so:   'If you are selling, being asked to stay exclusive is a choice you are entitled to '
+        + 'refuse. If you are buying, it is why you may not be seeing everything.',
+    link: 'https://www.crea.ca/media-hub/news/a-new-duty-of-cooperation-added-to-the-realtor-code/',
+    src:  'The change, from the association that made it'
+  },
+  insurance: {
+    /* This one is a different corner of insurance from the conversation we
+       just had, so it says so rather than pretending to follow from it. It
+       stays because it is the largest change to ordinary people's cover in
+       years and almost nobody has been told. */
+    open: 'One last thing, and it&rsquo;s a different corner of insurance.',
+    when: 'in Ontario on the first of July',
+    body: 'From 1 July 2026, only medical, rehabilitation and attendant care stay mandatory '
+        + 'in Ontario accident benefits. Everything else became optional.',
+    so:   'At your next renewal you are choosing coverage you used to have automatically. '
+        + 'A cheaper premium may be cover you dropped without noticing.',
+    link: 'https://www.fsrao.ca/industry/auto-insurance/changes-statutory-accident-benefits-'
+        + 'coverage-ontario-july-1-2026',
+    src:  'What changed, from FSRA'
+  },
+  investing: {
+    open: 'One last thing.',
+    when: 'about what your statement will show',
+    body: 'From 1 January 2026, firms have to report the ongoing cost of the funds you hold '
+        + 'as a dollar figure, not just a percentage. Your first one covers this year and '
+        + 'arrives early next.',
+    so:   'Fees that were taken inside the fund are about to appear as a number. It is worth '
+        + 'asking now what that number will be.',
+    link: 'https://www.securities-administrators.ca/news/canadian-financial-regulators-enhance-'
+        + 'cost-reporting-requirements-for-investment-funds-and-individual-segregated-fund-'
+        + 'contracts/',
+    src:  'The rule, from the Canadian Securities Administrators'
+  },
+  banking: {
+    open: 'One last thing.',
+    when: 'about bank complaints in 2024',
+    body: 'Since 1 November 2024 every bank in Canada answers to the same ombudsman. Banks '
+        + 'used to be able to pick between two.',
+    so:   'Your bank has 56 days. After that it goes to one place, it is free, and you do '
+        + 'not need the bank&rsquo;s permission.',
+    link: 'https://www.canada.ca/en/financial-consumer-agency/news/2024/10/canadians-now-have-'
+        + 'a-single-external-complaints-body-for-banking.html',
+    src:  'The announcement, from the federal consumer agency'
+  },
+  lending: {
+    open: 'One last thing.',
+    when: 'about the legal rate limit',
+    body: 'On 1 January 2025 the maximum lawful rate in Canada dropped to 35% APR, from '
+        + 'around 48%. Payday lending sits outside it, capped at $14 per $100.',
+    so:   'It gives you one number to hold any offer against. Ask for the APR with every fee '
+        + 'inside it, and you can check it yourself.',
+    link: 'https://gazette.gc.ca/rp-pr/p2/2024/2024-06-19/html/sor-dors114-eng.html',
+    src:  'The regulation, in the Canada Gazette'
+  }
+};
+
+/* The last turn of every conversation. No-oriented, because "no" is the
+   answer that lets us be useful, and it is one tap either way. */
+NODE.news = {
+  ask: '<p>{chg.open} Has anyone told you what changed {chg.when}?</p>',
+  replies: [['no', 'No, what changed?'], ['yes', 'Yes, I know about that']],
+  /* Deliberately not stored. The record is the person's situation, and
+     whether they had heard a piece of news is not part of it. */
+  react: {
+    no:  ['<p>{chg.body}</p>',
+          '<p>{chg.so}</p>'
+        + '<p><a class="glink" href="{chg.link}" target="_blank" rel="noopener noreferrer">'
+        + '{chg.src} &#8594;</a></p>'],
+    yes: ['<p>Then you&rsquo;re ahead of most people.</p>',
+          '<p><a class="glink" href="{chg.link}" target="_blank" rel="noopener noreferrer">'
+        + '{chg.src} &#8594;</a></p>']
+  },
   next: '@done'
 };
 
 /* ====================================================================
-   THE DECISIONS WITHOUT THEIR OWN QUESTION SET YET
+   THE FALLBACK
 
-   Investing, banking and lending have not had their discovery written,
-   because each needs its questions traced to its own regulator the way
-   the other four were, and a half-built discovery is worse than none.
-
-   What they get is not a menu and not an apology. The three things that
-   work on any decision work here too: checking something before money
-   moves, reading a document, and joining a professional who has invited
-   you. Those are offered as a conversation, because that is what the
-   rest of the product is.
+   Every decision 4orm covers now has its own question set. This one
+   exists for a decision added before its questions have been written,
+   so that the answer is never a menu. The three things that work on any
+   decision work here: checking something before money moves, reading a
+   document, and joining a professional who has invited you.
    ==================================================================== */
 NODE.g_open = {
   ask: '<p>Hello, {who}. What&rsquo;s in front of you?</p>'
@@ -2848,7 +3466,10 @@ var OPEN = {
   mortgage:   'open',
   auto:       'a_open',
   realestate: 'e_open',
-  insurance:  'i_open'
+  insurance:  'i_open',
+  investing:  'v_open',
+  banking:    'k_open',
+  lending:    'l_open'
 };
 
 function openNode() { return OPEN[ST.ind] || 'g_open'; }
@@ -2866,7 +3487,12 @@ function rchips(list) {
 }
 
 function fill(h) {
-  return String(h).replace(/\{who\}/g, I().who);
+  var c = CHANGE[ST.ind] || {};
+  return String(h)
+    .replace(/\{who\}/g, I().who)
+    /* {chg.body} and friends. The change is per decision, so the node is
+       written once and resolved against whichever conversation is running. */
+    .replace(/\{chg\.(\w+)\}/g, function (m, k) { return c[k] || ''; });
 }
 
 /* Play a node: whatever it has to say, then the question, then the replies. */
@@ -3046,7 +3672,71 @@ var TYPED = {
   'realestate:matters': [[/price|most money|top dollar|highest/i, 'price'],
             [/quick|fast|speed|soon|done with/i, 'speed'],
             [/close|certain|actually|fall through|firm/i, 'certain'],
-            [/tied|locked|free|stuck|leave|out of it/i, 'free']]
+            [/tied|locked|free|stuck|leave|out of it/i, 'free']],
+
+  /* Investing */
+  'investing:doing': [[/recommend|suggest|advis|pitch|told me to/i, 'rec'],
+            [/mov|transfer|switch|new firm|another/i, 'move'],
+            [/start|begin|first time|new to/i, 'start'],
+            [/document|statement|paper|read|prospect/i, 'doc']],
+  'investing:horizon': [[/year or two|couple of year|soon|short|next year/i, 'near'],
+            [/five|ten|5|10|medium/i, 'mid'],
+            [/long|retire|decades|never|ages/i, 'far'],
+            [/some of|part of|split|half/i, 'some']],
+  'investing:risk': [[/afford|absorb|can.t take|couldn.t take|capacity/i, 'afford'],
+            [/willing|stomach|comfortable|nerve|tolerance/i, 'willing'],
+            [/same|both|equal|no differ/i, 'same']],
+  'investing:elsewhere': [[/all of it|everything|yes|they have/i, 'yes'],
+            [/some|part|most|bit/i, 'some'],
+            [/nothing else|no other|only|just this/i, 'none'],
+            [/no |never asked|haven.t/i, 'no']],
+  'investing:matters': [[/grow|growth|more|bigger|return/i, 'grow'],
+            [/income|payout|dividend|monthly|draw/i, 'income'],
+            [/not los|safe|protect|keep|preserve/i, 'keep'],
+            [/reach|access|get at|liquid|take it out/i, 'reach']],
+
+  /* Banking */
+  'banking:doing': [[/open|new account|chequing|savings/i, 'open'],
+            [/offer|extra|added|upsell|cross|threw in/i, 'extra'],
+            [/fee|paying|cost|charge/i, 'fees'],
+            [/document|agreement|paper|read/i, 'doc']],
+  'banking:asked': [[/yes|properly|thorough|went through/i, 'yes'],
+            [/couple|few|some|bit/i, 'bit'],
+            [/no |never|straight to|didn.t ask/i, 'no'],
+            [/remember|can.t recall|not sure/i, 'dunno']],
+  'banking:extras': [[/more than one|both|several|couple of/i, 'several'],
+            [/insur|balance protection|creditor/i, 'ins'],
+            [/card|credit card|visa|mastercard/i, 'card'],
+            [/overdraft|odp/i, 'over'],
+            [/nothing|none|just the/i, 'nothing']],
+  'banking:cost': [[/yes|to the dollar|exactly|know it/i, 'yes'],
+            [/rough|about|approx|ish/i, 'rough'],
+            [/no idea|don.t know|never|no /i, 'no']],
+  'banking:matters': [[/fee|cheap|little as|free|cost/i, 'fees'],
+            [/branch|walk in|in person|teller|face/i, 'branch'],
+            [/one place|everything|together|same bank/i, 'one'],
+            [/credit|score|history|build/i, 'credit']],
+
+  /* Lending */
+  'lending:doing': [[/unexpected|broke|repair|emergency|sudden|car/i, 'sudden'],
+            [/behind|rent|hydro|utility|bill|late/i, 'bills'],
+            [/consolidat|together|combine|one payment/i, 'consol'],
+            [/document|agreement|contract|paper|read/i, 'doc']],
+  'lending:disclosed': [[/both|writing|all of it|yes/i, 'both'],
+            [/rate only|just the rate|percent|apr/i, 'rate'],
+            [/payment|monthly|a month/i, 'payment'],
+            [/neither|nothing|no |not yet/i, 'no']],
+  'lending:added': [[/both/i, 'both'],
+            [/insur|protection|coverage/i, 'ins'],
+            [/fee|charge|admin|setup/i, 'fees'],
+            [/nothing|none|no /i, 'no']],
+  'lending:again': [[/first|only one|one so far/i, 'first'],
+            [/one before|second|another|two/i, 'second'],
+            [/few|several|three|four|five|lots|many/i, 'more']],
+  'lending:matters': [[/small|lowest payment|afford|monthly/i, 'small'],
+            [/fast|quick|paid off|rid of|sooner/i, 'fast'],
+            [/total|overall|least cost|cheapest/i, 'total'],
+            [/approv|accepted|say yes|qualify|anyone/i, 'yes']]
 };
 
 /* Read a typed answer against the question that was actually asked. */
@@ -3070,7 +3760,10 @@ function NOTADVICE() {
   return { mortgage:   'mortgage to take',
            auto:       'vehicle to buy or how to finance it',
            realestate: 'agent to sign with',
-           insurance:  'policy to take' }[ST.ind] || 'option to take';
+           insurance:  'policy to take',
+           investing:  'investment to make',
+           banking:    'account or card to take',
+           lending:    'loan to take, or whether to borrow at all' }[ST.ind] || 'option to take';
 }
 
 /* The read-back. Not a summary: what it means, and what to do next. */
@@ -3138,6 +3831,58 @@ function convoDone() {
       acts.push('If you are being moved off a policy you already hold, ask for the two side by '
               + 'side, and do not cancel the old one until the new one is in force.');
     }
+  }
+
+  /* ---- investing ---- */
+  if (ST.ind === 'investing') {
+    if (got('risk') && /afford is smaller/i.test(got('risk'))) {
+      acts.push('Tell them your profile should follow the smaller of the two, and ask them to '
+              + 'write down which one they used.');
+    }
+    if (got('elsewhere') && /^no$|some of it/i.test(got('elsewhere'))) {
+      acts.push('Give them a list of what you hold elsewhere, even roughly. Without it nobody '
+              + 'can tell whether you are concentrated in one thing.');
+    }
+    acts.push('Ask what else was considered and why not that. A recommendation is supposed to '
+            + 'have been weighed against a reasonable range of alternatives.');
+    acts.push('Ask what it costs you a year, in dollars, all in. Cost comes straight off '
+            + 'whatever it returns.');
+    acts.push('Ask for the reason in writing. The word suitable on its own is not a reason.');
+  }
+
+  /* ---- banking ---- */
+  if (ST.ind === 'banking') {
+    if (got('asked') && /^no$|couple|remember/i.test(got('asked'))) {
+      acts.push('Ask them to start again from what you need it for. A bank has to offer what '
+              + 'suits your circumstances, having actually collected them.');
+    }
+    if (got('extras') && !/nothing/i.test(got('extras') || '')) {
+      acts.push('Ask for a separate agreement for each optional thing. They cannot be bundled '
+              + 'into one, and each needs your own clear yes.');
+    }
+    acts.push('Ask for everything you pay on the account in dollars a year. A fee that was '
+            + 'never disclosed to you is refundable, with interest.');
+    acts.push('If you raise a complaint, they have 56 days. After that you can take it to the '
+            + 'ombudsman for banking services and investments.');
+  }
+
+  /* ---- lending ---- */
+  if (ST.ind === 'lending') {
+    if (got('disclosed') && !/both, in writing/i.test(got('disclosed'))) {
+      acts.push('Ask for the written statement before you sign anything: the rate, the total '
+              + 'cost in dollars, the payment schedule, what happens if you are late, and '
+              + 'whether you can pay it off early.');
+    }
+    acts.push('Check the rate is stated as an APR with the fees inside it. Above 35% APR is a '
+            + 'criminal rate in Canada for most consumer lending, so it is worth knowing the '
+            + 'number.');
+    if (got('added') && !/nothing else/i.test(got('added') || '')) {
+      acts.push('Ask what the add-ons cost over the whole term, not per month. They are '
+              + 'financed at the same rate as the loan.');
+    }
+    acts.push('Before you sign, ask your own bank or a credit union what they would do. Being '
+            + 'turned down there costs you a conversation and tells you what this offer is '
+            + 'worth.');
   }
 
   /* ---- mortgage ---- */
@@ -3288,6 +4033,17 @@ var ACT = {
   runway: function () { go('runway'); },
   range: function () { go('range'); },
   reasonwhy: function () { go('reasonwhy'); },
+  horizon: function () { go('horizon'); },
+  risktwo: function () { go('risktwo'); },
+  holdings: function () { go('holdings'); },
+  wantinv: function () { go('wantinv'); },
+  wasasked: function () { go('wasasked'); },
+  extras: function () { go('extras'); },
+  monthly: function () { go('monthly'); },
+  consent: function () { go('consent'); },
+  disclose: function () { go('disclose'); },
+  addons2: function () { go('addons2'); },
+  wantloan: function () { go('wantloan'); },
   back: function () { go('prepare'); },
 
   /* The prepare steps for real estate and insurance. Each one either records
@@ -3326,6 +4082,42 @@ var ACT = {
                     'Reason for the recommendation held in writing'),
   'why-ask':   step('reason', 'The reason in writing', 'Still to ask for', 'needs',
                     'Reason for the recommendation still to be asked for'),
+
+  /* Investing */
+  'hor-set':   step('horizon', 'When you would need it', 'In their own words', 'told',
+                    'Time horizon and liquidity recorded'),
+  'risk-set':  step('risk', 'Willing against able', 'Both halves recorded', 'told',
+                    'Risk recorded as two factors, not one'),
+  'hold2-set': step('elsewhere', 'What you hold elsewhere', 'Recorded', 'told',
+                    'Outside holdings recorded'),
+  'hold2-ask': step('elsewhere', 'What you hold elsewhere', 'Still to gather', 'needs',
+                    'Outside holdings still to be gathered'),
+  'wanti-set': step('matters', 'What you want from it', 'In their own words', 'told',
+                    'Investment objective recorded'),
+
+  /* Banking */
+  'ask2-set':  step('asked', 'What they asked you', 'Recorded', 'told',
+                    'What was asked before a product was named'),
+  'ext-set':   step('extras', 'What came with it', 'Recorded', 'told',
+                    'What came with it recorded'),
+  'cost-set':  step('cost', 'What it costs a month', 'Recorded', 'told',
+                    'Monthly cost recorded'),
+  'cost-ask':  step('cost', 'What it costs a month', 'Still to check', 'needs',
+                    'Monthly cost still to be checked'),
+  'cons-set':  step('consent', 'What you agreed to', 'Known', 'told',
+                    'What they consented to recorded'),
+  'cons-ask':  step('consent', 'What you agreed to', 'Something unrecognised', 'needs',
+                    'Something on the account they do not recognise'),
+
+  /* Lending */
+  'disc-set':  step('disclosed', 'The written statement', 'I have it', 'doc',
+                    'Cost of borrowing statement held'),
+  'disc-ask':  step('disclosed', 'The written statement', 'Still to ask for', 'needs',
+                    'Cost of borrowing statement still to be asked for'),
+  'add2-set':  step('added', 'What is added on', 'Recorded', 'told',
+                    'Add-ons recorded'),
+  'wantl-set': step('matters', 'What matters most', 'In their own words', 'told',
+                    'What matters most recorded'),
 
   runident: runIdent,
   incdoc: incomeDoc,

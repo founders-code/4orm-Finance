@@ -1940,6 +1940,15 @@ body[data-page="home"] .glow{display:none}
 .gnote{margin-top:14px;padding:12px 14px;border-radius:13px;background:var(--bg-3);
   font-size:12.2px;line-height:1.55;color:var(--tx-2)}
 .gnote b{color:var(--tx)}
+
+/* The one link in the phone that leaves 4orm. It goes to a regulator, so it
+   is allowed to look like a destination rather than a footnote. */
+.glink{display:inline-flex;align-items:center;gap:.4em;margin-top:2px;
+  font-weight:650;color:var(--blue);text-decoration:none;
+  border-bottom:1.5px solid rgba(46,107,242,.32);padding-bottom:1px}
+.glink:hover{border-bottom-color:var(--blue)}
+.glink:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}
+
 .gnote.amber{background:rgba(196,154,58,.11);color:#6E4F0B}
 .gnote.gold{background:rgba(196,154,58,.11);color:#6E4F0B}
 .expdest .away{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.20);
