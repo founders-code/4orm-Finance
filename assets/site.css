@@ -3308,3 +3308,13 @@ body.go .dashmini{opacity:1;transform:none;transition-delay:.2s}
   font-family:var(--mono);font-size:7.5px;font-weight:800;letter-spacing:.14em;color:#B08A32}
 
 @media (prefers-reduced-motion:reduce){ .dopt,.dwhyb{transition:none;animation:none} }
+
+/* The conversation's own controls, sitting inside the last thing 4ormIQ said
+   rather than bolted to the bottom of a screen. */
+.gacts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.gacts .gcta{margin-top:0}
+.gacts .gchip{align-self:flex-start}
+.gb.g .gsec{margin:14px 0 8px}
+.gb.g .drecap{border-top:1px solid var(--border);margin-top:2px}
+.gb.g .gdo{margin:0;padding-left:18px}
+.gb.g .gdo li{font-size:13.2px;line-height:1.55;margin-bottom:9px}

@@ -92,11 +92,17 @@ function seq(turns) {
    product is: nobody reads "financial decision infrastructure",
    everybody understands "buy a home".
    --------------------------------------------------------- */
+/* Four of these are decisions with time in front of them, and they open the
+   discovery. The fifth is money about to leave, which is a different kind of
+   moment and opens the check instead. Same architecture underneath, different
+   entry, because a person about to wire funds today should not be handed a ten
+   question interview. */
 var GOALS = [
-  ['mortgage', 'Buy a home'],
-  ['auto',     'Buy a car'],
-  ['insurance','Buy insurance'],
-  ['mortgage', 'Renew a mortgage']
+  ['mortgage:renew', 'Renewing my mortgage'],
+  ['mortgage:buy',   'Buying a home'],
+  ['auto:buy',       'Buying a car'],
+  ['insurance:buy',  'Buying insurance'],
+  ['send:invest',    'Sending an investment']
 ];
 
 function open(){
@@ -137,18 +143,28 @@ function takeName(kind, value) {
   setTimeout(function () { enter(kind); }, 1500);
 }
 
-/* Hand over to the experience the visitor asked for. */
+/* Hand over to the experience the visitor asked for.
+
+   `ind` is a decision and opens the discovery for it. `ind` prefixed with
+   "send:" is money about to move, and opens the check on that case instead. */
 function enter(kind, ind) {
-  if (ind) { try { sessionStorage.setItem('4orm.ind', ind); } catch (e) {} }
-  location.hash = kind === 'firm' ? '#professional' : '#personal';
-  /* The industry buttons live inside the experience. Pressing the right one
-     once it is open is what actually loads the right story. */
-  if (ind) {
-    setTimeout(function () {
-      var b = document.querySelector('.dest.on [data-ind="' + ind + '"]');
-      if (b && !b.classList.contains('on')) b.click();
-    }, 420);
+  var intent = '', said = '';
+  if (ind && ind.indexOf(':') > 0) {
+    var bits = ind.split(':');
+    ind = bits[0]; said = bits[1];
+    if (ind === 'send') { intent = said; ind = 'investing'; }
+    else { intent = 'decide'; }
   }
+  try {
+    if (ind) sessionStorage.setItem('4orm.ind', ind);
+    sessionStorage.setItem('4orm.intent', intent);
+    sessionStorage.setItem('4orm.said', said);
+  } catch (e) {}
+  /* The phone reads the decision and the intent out of the browser itself and
+     opens on the right screen. Clicking the industry button from here as well
+     used to re-open the phone a second time and land the person back on the
+     menu they had already answered. */
+  location.hash = kind === 'firm' ? '#professional' : '#personal';
 }
 
 /* ---------------------------------------------------------
@@ -168,7 +184,7 @@ thread.addEventListener('click', function (e) {
   /* A goal is a decision. One short beat for a name, so the whole experience
      reads as theirs, and then it opens on that decision. */
   if (k.indexOf('goal:') === 0) {
-    GOAL = k.split(':')[1];
+    GOAL = k.slice(5).replace(/:[^:]*$/, '');
     WAIT = 'goal';
     say('<p>Good. And your first name?</p>' +
         '<p class="a4m">Everything you see from here on will use it. It stays in this browser ' +

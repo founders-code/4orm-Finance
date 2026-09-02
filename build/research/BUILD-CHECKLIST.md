@@ -280,3 +280,138 @@ every question are in `MORTGAGE-DISCOVERY.md`.
 | N8 | Back preserves the answer | **DONE** verified |
 | N9 | The read-back says what it means | **DONE** gift needs a letter, variable income is proved differently, existing payments move the number, lowest payment is not lowest cost |
 | N10 | Full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow, no AI language, nothing confidential |
+
+
+## O. Send an investment, and one shared spine — 2026-09-02
+
+| # | Item | Result |
+|---|---|---|
+| O1 | Fifth chip on the landing chat | **DONE** Buy a home, Buy a car, Buy insurance, Renew a mortgage, **Send an investment** |
+| O2 | The fifth chip opens the check, not the discovery | **DONE** it lands on Know before you send, on the investment case, with the Investing pill already selected. A person about to wire funds today does not get a ten question interview |
+| O3 | A decision chip goes straight to its discovery | **FIXED** picking "Buy a home" was landing on the four things menu, because the industry never changed so the button that re-opened the phone never fired. The phone now reads the decision and the intent out of the browser itself |
+| O4 | Full regression | **PASS** discovery, renewal branch, unknown path, name adoption, all four modes, put-away, gate 0/0, stutters 0, no defects at 1440 or 390 |
+
+
+## P. The phone is a conversation now — 2026-09-02
+
+The four cards are gone. "Know before you send" was a filing system, not
+something a person says, and a grid of cards with a chat bolted underneath is
+a click-face wearing a chat's clothes.
+
+| # | Item | Result |
+|---|---|---|
+| P1 | The phone opens by asking, not by listing | **DONE** "Hello, Sarah. What is going on? Say it however it comes out." |
+| P2 | It reacts before it asks again | **DONE** every answer gets a real reaction carrying a sourced fact, then the next question arrives because of that answer |
+| P3 | Typing is a first class answer | **DONE** "about two months I think" is read as within three months, and the read-back keeps the person's own words |
+| P4 | It admits when it does not follow | **DONE** rather than guessing, it says so and offers the closest options |
+| P5 | Questions follow from answers | **DONE** a renewal is never asked about a down payment; buying is never told about an increase it has not had |
+| P6 | The four modes are reached by saying something, not by picking a label | **DONE** "Someone is asking me for money" opens the check, "I have a document I do not understand" opens the read |
+| P7 | The landing hands the conversation over mid-sentence | **DONE** picking "Renewing my mortgage" on the landing means the phone reacts to it rather than asking again |
+| P8 | Old turns cannot bleed into a new conversation | **FIXED** every conversation carries a number and anything queued by an older one is dropped when it comes due |
+| P9 | Full regression | **PASS** renewal and buying end to end, the check, the read, put-away, gate 0/0, stutters 0, no defects at 1440 or 390 |
+
+
+## Q. The conversation rewritten to a standard — 2026-09-02
+
+Two lines were called out and both were wrong for the same reason. The fix was
+not to reword them, it was to write down what good sounds like and hold every
+line to it. That is now `4orm-conversation-standard`.
+
+| Line | Why it failed | Now |
+|---|---|---|
+| "That is the one most people let happen to them." | Vague, and faintly accusing the person of something they had not done. It was about most people rather than about them. | "Renewing. And you are looking at it before the letter forces you to, which is the part most people skip." |
+| "Then you have time, but not a lot of it." | Manufactured urgency, which is the exact tactic the fraud check warns people about. | "Within three months. That is enough room to have a real conversation about it." |
+
+| # | Item | Result |
+|---|---|---|
+| Q1 | Research, then a standard | **DONE** motivational interviewing OARS, The Mom Test, Google conversation design, Cornell on money and anxiety, chatbot UX. Proposed as a skill |
+| Q2 | Every reaction does two of reflect, affirm, teach, bridge | **DONE** 49 reaction blocks rewritten across the renewal and buying paths |
+| Q3 | Affirmations point at the person and name specific evidence | **DONE** no "I think", no "great question", no "well done" anywhere |
+| Q4 | No manufactured urgency | **DONE** |
+| Q5 | Every hard admission is met before it is used | **DONE** "Thank you for being straight about that" and "That is not an easy thing to say" now precede the advice |
+| Q6 | Summaries hand control back | **DONE** the read-back opens "Let me make sure I have this right" and closes "What did I miss?" |
+| Q7 | Screen titles say what is happening | **DONE** Checking it · Working it out · Reading it with you |
+| Q8 | Handing off to a screen ends the conversation cleanly | **FIXED** queued turns were repainting over the screen after the handoff |
+| Q9 | Full regression | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no defects at 1440 or 390 |
+
+
+## R. The language rewritten as speech — 2026-09-02
+
+The previous pass fixed the content and missed the register. It still read like
+an essay: balanced three-clause sentences, no contractions, and connective
+tissue that belongs in prose.
+
+**The measurement.** Before: 0 contractions in the whole conversation, sentences
+running to 19 words with three clauses. After: 66 contractions, average line
+11 words, nothing over 20.
+
+| Before | After |
+|---|---|
+| "Renewing. And you are looking at it before the letter forces you to, which is the part most people skip." | "Renewing. Good, you're early." / "Most people open the letter three weeks out and sign it. You've got room to actually look." |
+| "That is the honest answer and it is the common one. In a survey of a thousand Canadians, 59 per cent could not say what their current rate was." | "Honestly, most people can't." / "59% of Canadians couldn't name their own rate. 58% couldn't name their payment." |
+| "I have not followed that, and I would rather ask than guess at it." | "Didn't catch that. Closest one?" |
+
+| # | Item | Result |
+|---|---|---|
+| R1 | Contractions throughout | **DONE** the original phone always spoke this way. The previous rewrite had removed them, which is what made it stiff |
+| R2 | One idea per bubble, 8 to 14 words | **DONE** 103 spoken lines, average 11 words |
+| R3 | Connective tissue removed | **DONE** no "which is", "it is worth", "the thing to watch is" |
+| R4 | Everyday words | **DONE** "when's your term up" not "when does your term end" |
+| R5 | The check and read screens swept too | **DONE** they were still speaking the old way |
+| R6 | Chip labels stopped double-escaping | **FIXED** apostrophes were rendering as raw entities in the suggested replies and in the person's own echoed answer |
+| R7 | Full regression | **PASS** renewal and buying end to end, both handoffs, gate 0/0, stutters 0, no defects at 1440 or 390 |
+
+
+## S. Voss, and going towards no — 2026-09-02
+
+Chris Voss and Chase Hughes researched, the standard updated, and every
+conversational surface rewritten to it.
+
+| # | Item | Result |
+|---|---|---|
+| S1 | The opener is a no-oriented question | **DONE** "Is now a bad time?" with "No, go ahead" as the reply that moves things on. The person refuses and advances in the same tap |
+| S2 | Saying yes to a bad time is not a dead end | **DONE** "Fair enough. I'll be here." then a way back in |
+| S3 | An accusation audit before the money questions | **DONE** "Next bit's about money, and it's the nosy part." Then "Would it be unreasonable to ask?" with "No, ask away" |
+| S4 | Declining the money questions still produces a read-back | **DONE** verified, and the record shows what was not asked |
+| S5 | Labels lead the reactions | **DONE** "Sounds like nobody's made that easy to find." before the statistic, not after |
+| S6 | The read-back aims for "That's right" | **DONE** closes with "Anything I've got wrong?" and offers "That's right" and "Not quite". Not quite restarts, that's right goes on |
+| S7 | The final call to action is no-oriented | **DONE** "No, show me what I'll be asked for" |
+| S8 | Nothing from the excluded elicitation list | **PASS** no flattery-to-deflect, no complaint baiting, no provocative or presumptive statements |
+| S9 | The read-back buttons stopped racing the last bubble | **FIXED** a fixed 3,600ms delay was attaching them to a typing indicator that was then removed. They now wait for the last thing said |
+| S10 | Full regression | **PASS** renewal, buying, the bad-time exit, declining the money questions, both handoffs, the check, the read, gate 0/0, stutters 0, no defects at 1440 or 390 |
+
+
+## T. Turn economy — 2026-09-02
+
+The Voss and Hughes work was right about *what* to say and wrong about *how
+much*. Applied literally it had added two turns to the front of every path:
+a permission question before the conversation started, and a second one
+before the money questions. Both of those are the person being asked to
+agree to talk instead of being helped.
+
+Researched what the best assistants do in 2026 and rebuilt against it.
+
+**What the research says**
+
+| Source | Finding | What it changed |
+|---|---|---|
+| Intercom, on Fin | Answer first. Skip qualification gatekeeping, because people prefer help to being screened | The opener now helps in its first line |
+| Chatbot UX studies, 2026 | People decide inside about five seconds whether this is worth their time | Greeting, promise and question arrive in one turn, not three |
+| Same | A long welcome is spent before anything useful happens | The welcome is eleven words |
+| Same | Exits must be visible, not requested up front | "Rather not say" sits on the question itself instead of a gate in front of it |
+
+**What changed**
+
+| # | Item | Result |
+|---|---|---|
+| T1 | The bad-time gate removed | **DONE** "Hello, {name}. Tell me what's going on and I'll tell you what to watch for." Greeting, promise, question, one turn |
+| T2 | The money permission gate removed | **DONE** the accusation audit is now inside the question line: "Nosy one. If the payment went up $375 a month, what happens?" |
+| T3 | Declining moved onto the question | **DONE** "Rather not say" is a reply option, so the exit is always visible and costs nothing to reach |
+| T4 | Reactions capped at two bubbles | **DONE** 0 reactions with three or more |
+| T5 | Renewal path length | **DONE** 9 turns to 7, every one of them delivering something |
+| T6 | No-orientation kept where it is free | **DONE** "No, show me what I'll be asked for" and the close "Anything I've got wrong?" with *That's right* / *Not quite* |
+| T7 | Honest about what "Not quite" does | **FIXED** it restarts rather than editing one answer, and now says so |
+| T8 | Stale turns cannot bleed between conversations | **FIXED** a generation counter drops anything queued by a conversation that has been left |
+| T9 | The meter stopped counting unknowns as progress | **FIXED** an all-unknown discovery read 98%. It now reads 10%, which is the truth, and the truth is the product |
+| T10 | Measured | **DONE** 96 spoken lines, average 11.0 words, longest 22, 65 contractions |
+| T11 | Full regression | **PASS** renewal, buying, declining the money questions, money to Checking it, document to Reading it with you, both landing handoffs, put-away to home, links all resolve, gate 0/0, stutters 0, no AI language, nothing confidential, no defects at 1440 or 390 |

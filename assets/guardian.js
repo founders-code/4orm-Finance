@@ -55,7 +55,8 @@ function fresh(ind) {
     grant: null,
     disc: {},
     di: 0,
-    dwhy: false
+    dwhy: false,
+    node: ''
   };
 }
 
@@ -373,7 +374,11 @@ function toBottom() {
 var SCREEN = {};
 
 /* --- the way in ------------------------------------------- */
-SCREEN.open = function () { SCREEN.modes(); };
+SCREEN.open = function () {
+  ST.thread = [];
+  ST.opened = true;
+  runNode('open');
+};
 
 /* The goal screen. This is where "Know before you look" arrives, once the
    person has said which decision they are thinking about. */
@@ -464,6 +469,21 @@ function thinkSeq(turns) {
 function ask(q) {
   q = String(q || '').trim();
   if (!q) return;
+
+  /* If a question is on the table, what the person typed is an answer to it,
+     not a new topic. Reading it against that question is what makes typing
+     feel like being listened to rather than being ignored. */
+  if (ST.node && NODE[ST.node]) {
+    var v = readTyped(q);
+    if (v) { ST.asked++; reply(v, q); return; }
+    var n = NODE[ST.node];
+    ST.asked++;
+    me(q);
+    think('<p>Didn&rsquo;t catch that. I&rsquo;d rather ask than guess.</p>' +
+          '<p class="gm">Closest one?</p>' + rchips(n.replies), null, 900);
+    return;
+  }
+
   ST.asked++;
   me(q);
 
@@ -1213,10 +1233,10 @@ function drawRail() {
    ============================================================ */
 
 var MODES = [
-  ['send',   'Know before you send',  'Money or documents are about to move'],
-  ['look',   'Know before you look',  'Nobody is selling yet'],
-  ['sign',   'Know before you sign',  'A document is in front of you'],
-  ['invite', 'Join a professional',   'A firm has invited you in']
+  ['send',   'Check something',        'Money or documents are about to move'],
+  ['look',   'Work out what I need',   'Nobody is selling yet'],
+  ['sign',   'Read a document with me','It is in front of me now'],
+  ['invite', 'Join a professional',    'A firm has invited me in']
 ];
 
 SCREEN.modes = function () {
@@ -1329,21 +1349,21 @@ var REGISTERS = [
 ];
 
 SCREEN.send = function () {
-  head('Know before you send', 'Check it while checking still costs nothing');
+  head('Checking it', 'Before anything moves');
   paint(
     '<div class="ghead"><h3>What came in?</h3>' +
-    '<p>Paste it below, or open one of these and I will run the same check on it.</p></div>' +
+    '<p>Paste it below. Or open one of these and I&rsquo;ll run the same check.</p></div>' +
     SENDS.map(function (s) {
       return opt('sendrun', s.t, esc(s.p.slice(0, 74)) + '&hellip;', s.k);
     }).join('') +
-    '<div class="gor">or paste what you received</div>' +
+    '<div class="gor">or paste what you got</div>' +
     '<form class="gpaste" id="sendform">' +
       '<textarea id="sendinput" rows="3" maxlength="600" ' +
-        'placeholder="Paste the message, the email or the link"></textarea>' +
-      '<button class="gcta wide" type="submit">Run the check &#8594;</button>' +
+        'placeholder="Paste the message, email or link"></textarea>' +
+      '<button class="gcta wide" type="submit">Check it &#8594;</button>' +
     '</form>' +
-    note('4ormIQ reads what is published and what the message does. It does not conclude that ' +
-         'anybody has committed a crime.')
+    note('I read what&rsquo;s published and what the message does. I don&rsquo;t conclude that ' +
+         'anyone has committed a crime.')
   );
 };
 
@@ -1386,7 +1406,7 @@ function sendRun(key, typed) {
   var s = runSend(key, typed);
   ST.check = s;
   ST.screen = 'sendrun';
-  head('Know before you send', 'Checking what is published');
+  head('Checking it', 'Reading the published registers');
 
   paint(
     '<div class="gquote"><span class="gqk">' + s.t + '</span><p>' + esc(s.p) + '</p></div>' +
@@ -1416,7 +1436,7 @@ function sendResult() {
   if (!s) return;
   var L = LEVEL[s.level];
   ST.screen = 'sendresult';
-  head('Know before you send', L.l);
+  head('Checking it', L.l);
 
   put('checked', 'Checked before acting', s.t + ' · ' + L.l, 'verified',
       'Against published registers');
@@ -1431,11 +1451,11 @@ function sendResult() {
         '<span class="gsrc">' + f[2] + '</span></div>';
     }).join('') +
 
-    '<div class="gsec">What to do</div>' +
+    '<div class="gsec">What to do now</div>' +
     '<ol class="gdo">' + s.doing.map(function (d) { return '<li>' + d + '</li>'; }).join('') + '</ol>' +
 
-    note('This is what the registers say and what the message does. It is not a finding that ' +
-         'any person or company has broken the law, and I will not say that it is.') +
+    note('That&rsquo;s what the registers say and what the message does. It&rsquo;s not a '
+         + 'finding that anyone broke the law, and I won&rsquo;t pretend it is.') +
 
     '<button class="gcta wide" data-act="modes">Done &#8594;</button>' +
     '<button class="opt ghost" data-act="send"><span class="ptxt"><b>Check something else</b>' +
@@ -1463,7 +1483,7 @@ var LOOKS = [
 ];
 
 SCREEN.look = function () {
-  head('Know before you look', 'Before anybody is selling');
+  head('Working it out', 'Before anybody is selling');
   paint(
     '<div class="ghead"><h3>What are you thinking about?</h3>' +
     '<p>Pick the one closest to it. I will ask you a few things, and none of it goes ' +
@@ -1561,17 +1581,17 @@ var DOCS = [
 var FLAG = { bad: 'High', warn: 'Worth asking', info: 'Note' };
 
 SCREEN.sign = function () {
-  head('Know before you sign', 'The reading is the last chance');
+  head('Reading it with you', 'Before you initial anything');
   paint(
     '<div class="ghead"><h3>Add the document.</h3>' +
-    '<p>I will read it and point at the parts worth a question. Choose a file, or open ' +
-    'one of these.</p></div>' +
+    '<p>I&rsquo;ll read it and point at what&rsquo;s worth asking about. Choose a file, or open '
+    + 'one of these.</p></div>' +
     '<button class="gdrop" data-act="signpick" data-arg="commit">' +
       '<span class="gdi">&#8593;</span><b>Choose a file</b>' +
-      '<i>PDF or a photograph of the pages</i></button>' +
+      '<i>PDF, or a photo of the pages</i></button>' +
     DOCS.map(function (d) { return opt('signpick', d.t, d.sub, d.k); }).join('') +
-    note('I point at what is worth asking about. I do not tell you whether to sign, and ' +
-         'nothing here is legal advice.')
+    note('I point at what&rsquo;s worth asking about. I won&rsquo;t tell you whether to sign, '
+         + 'and none of this is legal advice.')
   );
 };
 
@@ -1584,13 +1604,13 @@ function signRead(key) {
   var d = readDoc(key);
   ST.doc = d;
   ST.screen = 'signread';
-  head('Know before you sign', 'Reading ' + esc(d.t.toLowerCase()));
+  head('Reading it with you', esc(d.t));
   paint(
     '<div class="gquote"><span class="gqk">' + d.t + '</span><p>' + d.sub + '</p></div>' +
     '<div class="gruns" id="gruns">' +
       [['Pages', 'Reading every page'],
        ['Numbers', 'Rate, term, totals and dates'],
-       ['Options', 'What is added and what is optional'],
+       ['Options', 'What&rsquo;s added, and what&rsquo;s optional'],
        ['Against what you were told', 'Comparing it with your record']]
       .map(function (r, n) {
         return '<div class="grun" data-n="' + n + '"><span class="gspin"></span>' +
@@ -1613,7 +1633,7 @@ function signResult() {
   if (!d) return;
   ST.screen = 'signresult';
   var worst = d.flags.filter(function (f) { return f[0] === 'bad'; }).length;
-  head('Know before you sign', d.flags.length + ' things worth asking');
+  head('Reading it with you', d.flags.length + ' things worth asking');
 
   put('reviewed', 'Document read', d.t + ' · ' + d.flags.length + ' questions', 'doc',
       worst ? worst + ' of them do not match what you were told' : '');
@@ -1633,9 +1653,8 @@ function signResult() {
         '<span class="gask">Ask: ' + f[4] + '</span></div>';
     }).join('') +
 
-    note('These are the parts of the document worth a question. Whether to sign is your ' +
-         'decision, and if you need it read as a legal matter that is a lawyer’s job, not ' +
-         'mine.') +
+    note('These are the parts worth a question. Whether to sign is yours to decide, and if it '
+         + 'needs reading as a legal matter that&rsquo;s a lawyer&rsquo;s job, not mine.') +
 
     '<button class="gcta wide" data-act="record">Keep this with my record &#8594;</button>' +
     '<button class="opt ghost" data-act="sign"><span class="ptxt"><b>Read another document</b>' +
@@ -2059,6 +2078,545 @@ function discDone() {
       rows.length + ' ANSWERS · BEFORE A PROFESSIONAL EXISTS', 'gold');
 }
 
+
+/* ============================================================
+   THE CONVERSATION
+
+   This replaces a menu. The old opening screen offered four
+   cards called "Know before you send", "Know before you look"
+   and "Know before you sign", which is a filing system, not a
+   thing a person says. Nobody arrives thinking "I would like to
+   know before I look."
+
+   People arrive mid-sentence. "I'm renewing." "They want the
+   money today." "I don't understand what I signed." So the
+   phone opens by asking, and then it actually talks: it reacts
+   to what was said, tells the person something they did not
+   know, and asks the next question because of their answer
+   rather than because it was next on a list.
+
+   THREE RULES THIS FILE OBEYS
+
+   1. Every reaction must be worth reading. Never "Got it." A
+      person who has just typed something private deserves a
+      sentence back that makes them feel understood and slightly
+      better informed than they were.
+
+   2. Every question exists because of the answer before it. A
+      renewal is not asked about a down payment.
+
+   3. Suggested replies are shortcuts, never the only way in.
+      The input is always live, and typing something unexpected
+      is a first class answer.
+
+   The facts inside the reactions are the survey findings in
+   MORTGAGE-DISCOVERY.md. They are what make the conversation
+   feel like it knows something, rather than like a form that
+   learned to say hello.
+   ============================================================ */
+
+var NODE = {};
+
+/* ---------------------------------------------------------------------
+
+   TURN ECONOMY
+
+   Every turn has to move something. The previous version opened with
+   "Is now a bad time?" and gated the money questions behind "Would it
+   be unreasonable to ask?" Both are good negotiation technique and both
+   were wrong here: two turns that delivered nothing.
+
+   Intercom's own guidance for Fin is answer first and skip the
+   qualification gatekeeping, because people prefer help to being
+   screened. Current chat UX research says the same: most people decide
+   within five seconds, so front-load the usefulness and never open with
+   a long welcome.
+
+   So no-orientation moved out of the questions and into the places it
+   costs nothing:
+
+     - the reply labels, where "No, show me" is one tap either way
+     - the close, where "Anything I've got wrong?" beats "Is that right?"
+     - a way out visible on every screen, rather than asked for up front
+
+   And the accusation audit moved inside the question line. "Nosy one:"
+   is three words and does the same work as a whole turn asking
+   permission.
+
+   Reactions are two bubbles maximum. Three is a lecture.
+   --------------------------------------------------------------------- */
+
+NODE.open = {
+  ask: '<p>Hello, {who}. Tell me what&rsquo;s going on and I&rsquo;ll tell you what to watch '
+     + 'for.</p>'
+     + '<p class="gm">However it comes out. None of this goes to anyone.</p>',
+  replies: [
+    ['renew', 'Renewing my mortgage'],
+    ['buy',   'Buying a home'],
+    ['money', 'Someone wants money from me'],
+    ['doc',   'I don&rsquo;t understand a document']
+  ],
+  store: ['doing', 'What&rsquo;s going on'],
+  react: {
+    renew: ['<p>Renewing. Good, you&rsquo;re early.</p>',
+            '<p>Most people open the letter three weeks out and sign it. You&rsquo;ve got room '
+            + 'to look.</p>'],
+    buy:   ['<p>Buying. Best time to talk, before there&rsquo;s a house you&rsquo;ve fallen '
+            + 'for.</p>'],
+    money: ['<p>Then nothing moves till we&rsquo;ve looked at it.</p>',
+            '<p>Most of what goes wrong here goes wrong because someone felt rushed.</p>'],
+    doc:   ['<p>Send it over, we&rsquo;ll read it together.</p>',
+            '<p>Right order. Much harder to unpick after you&rsquo;ve signed.</p>']
+  },
+  go: { renew: 'r_when', buy: 'b_when', money: '@send', doc: '@sign' }
+};
+
+/* The read-back's own replies. "That's right" is the target response, and
+   "Not quite" has to be as easy to reach as agreeing with us. */
+NODE.readback = {
+  ask: '',
+  replies: [['right', 'That&rsquo;s right'], ['wrong', 'Not quite']],
+  go: { right: '@ready', wrong: '@redo' },
+  react: {
+    right: ['<p>Good. That&rsquo;s the bit most people never get written down.</p>'],
+    /* Say what actually happens. It starts over rather than editing one
+       answer, and pretending otherwise is a small lie the person catches
+       one second later. */
+    wrong: ['<p>Then let&rsquo;s go again. It&rsquo;s quick.</p>']
+  }
+};
+
+/* ------------------------------------------------------------- renewal */
+NODE.r_when = {
+  ask: '<p>When&rsquo;s your term up?</p>',
+  replies: [['soon', 'Within three months'], ['mid', 'Three to six months'],
+            ['late', 'Later than that'], ['dunno', 'I&rsquo;d have to check']],
+  store: ['term', 'Term up'],
+  react: {
+    soon:  ['<p>That&rsquo;s the sweet spot.</p>',
+            '<p>Lenders hold a rate up to 120 days, so you can shop without a deadline on '
+            + 'you.</p>'],
+    mid:   ['<p>Plenty of time. Rates you&rsquo;re quoted now will still mean something when '
+            + 'you sign.</p>'],
+    late:  ['<p>Early. Nothing has to be decided today, which is the best way to think.</p>'],
+    dunno: ['<p>Sounds like nobody&rsquo;s put that where you&rsquo;d find it.</p>',
+            '<p>It&rsquo;s on the renewal letter. Adding it to your list.</p>']
+  },
+  next: 'r_rate'
+};
+
+NODE.r_rate = {
+  ask: '<p>Do you know the rate they&rsquo;ve offered?</p>',
+  replies: [['have', 'Yes, it&rsquo;s in the letter'], ['none', 'Nothing&rsquo;s come yet'],
+            ['dunno', 'I&rsquo;d have to look']],
+  store: ['offer', 'The offer'],
+  react: {
+    have:  ['<p>Then you&rsquo;ve got something to compare against. That&rsquo;s the starting '
+            + 'point.</p>'],
+    none:  ['<p>They land four to six months out. If you&rsquo;re inside that, ring and '
+            + 'ask.</p>'],
+    dunno: ['<p>Sounds like nobody&rsquo;s made that easy to find.</p>',
+            '<p>59% of Canadians couldn&rsquo;t name their own rate. You&rsquo;re in the '
+            + 'majority. It&rsquo;s on the letter.</p>']
+  },
+  next: 'r_changed'
+};
+
+NODE.r_changed = {
+  ask: '<p>Anything changed since you last signed?</p>' +
+       '<p class="gm">Income, work, someone moving in or out.</p>',
+  replies: [['same', 'Nothing&rsquo;s changed'], ['income', 'My income changed'],
+            ['work', 'My work changed'], ['life', 'Something at home changed'],
+            ['dunno', 'Not sure what counts']],
+  store: ['changed', 'Since you signed'],
+  react: {
+    same:   ['<p>Simpler, then. A straight renewal with the same lender usually doesn&rsquo;t '
+             + 're-check your income.</p>'],
+    income: ['<p>Good to know.</p>',
+             '<p>Stay put and nobody looks again. Move lenders and they check today&rsquo;s '
+             + 'income, not the old one.</p>'],
+    work:   ['<p>Worth raising now, not in week three.</p>',
+             '<p>Self employed, commission, contract. All fine, just different paperwork.</p>'],
+    life:   ['<p>Counts. Who&rsquo;s on the mortgage and who lives there are two questions.</p>',
+             '<p>Either one moving changes your options.</p>'],
+    dunno:  ['<p>Fair question. Anything that changed what comes in, what goes out, or whose '
+             + 'name&rsquo;s on it.</p>']
+  },
+  next: 'r_shock'
+};
+
+/* The accusation audit lives in the question, not in a turn of its own.
+   "Nosy one" does the same work as asking permission, and costs nothing. */
+NODE.r_shock = {
+  ask: '<p>Nosy one. If the payment went up $375 a month, what happens?</p>' +
+       '<p class="gm">That&rsquo;s what Canadians actually saw at renewal this year.</p>',
+  replies: [['fine', 'We&rsquo;d be fine'], ['tight', 'It&rsquo;d be tight'],
+            ['bad', 'That would really hurt'], ['skip', 'Rather not say']],
+  store: ['shock', 'If it went up $375'],
+  react: {
+    fine:  ['<p>That gives you room. Worth saying, so nobody assumes otherwise.</p>'],
+    tight: ['<p>Sounds like the payment is the part that actually worries you.</p>',
+            '<p>Say it in those words. Not &ldquo;I want a good rate&rdquo;, but '
+            + '&ldquo;an increase that size would hurt&rdquo;.</p>'],
+    bad:   ['<p>Sounds like that wasn&rsquo;t easy to say.</p>',
+            '<p>59% of Canadians said the same. It&rsquo;s also the thing that most changes '
+            + 'what should be put in front of you.</p>'],
+    skip:  ['<p>Understood. Skipping it.</p>']
+  },
+  next: 'r_matters'
+};
+
+NODE.r_matters = {
+  ask: '<p>Last one. What matters most?</p>',
+  replies: [['payment', 'Lowest monthly payment'], ['total', 'Lowest total cost'],
+            ['certain', 'The payment can&rsquo;t move'], ['flex', 'Paying it off early'],
+            ['dunno', 'What&rsquo;s the trade?']],
+  store: ['matters', 'What matters most'],
+  react: {
+    payment: ['<p>Cash flow now. Fair, and common.</p>',
+              '<p>Watch the term. Longer term, smaller payment, bigger total. Ask for both in '
+              + 'dollars.</p>'],
+    total:   ['<p>That&rsquo;s the number almost nobody asks for.</p>',
+              '<p>Total cost of borrowing, full term, in dollars. Only fair way to compare two '
+              + 'offers.</p>'],
+    certain: ['<p>Seven in ten Canadians land there too.</p>',
+              '<p>Ask what it costs to break early. Certainty going in can cost you coming '
+              + 'out.</p>'],
+    flex:    ['<p>Then prepayment terms matter more to you than the rate.</p>',
+              '<p>People who broke early last year and paid a penalty paid $6,732 on '
+              + 'average.</p>'],
+    dunno:   ['<p>Seems like nobody&rsquo;s laid the trade out for you.</p>',
+              '<p>Lower payment costs more overall. Certainty costs more than gambling. '
+              + 'Flexibility costs more than being locked in.</p>']
+  },
+  next: '@done'
+};
+
+/* -------------------------------------------------------------- buying */
+NODE.b_when = {
+  ask: '<p>How far along are you?</p>',
+  replies: [['looking', 'Looking at places'], ['soon', 'A few months off'],
+            ['early', 'Working out if we can'], ['offer', 'There&rsquo;s an offer in']],
+  store: ['stage', 'How far along'],
+  react: {
+    looking: ['<p>Then know your number before you fall for a house, not after.</p>'],
+    soon:    ['<p>Good window. This is where getting organised changes what you end up '
+              + 'with.</p>'],
+    early:   ['<p>Sounds like the hardest question to ask out loud.</p>',
+              '<p>It&rsquo;s the right one to start with. Nothing here commits you.</p>'],
+    offer:   ['<p>Right, let&rsquo;s be quick.</p>',
+              '<p>Tell me what you&rsquo;ve got and I&rsquo;ll tell you what&rsquo;s '
+              + 'missing.</p>']
+  },
+  next: 'b_work'
+};
+
+NODE.b_work = {
+  ask: '<p>How do you work?</p>',
+  replies: [['ft', 'Full time, salaried'], ['self', 'Self employed'],
+            ['comm', 'Commission or bonus'], ['contract', 'Contract or probation'],
+            ['multi', 'More than one job']],
+  store: ['work', 'How you work'],
+  react: {
+    ft:       ['<p>Easiest to prove. A letter and two pay stubs and that part&rsquo;s '
+               + 'done.</p>'],
+    self:     ['<p>Provable, just proved differently.</p>',
+               '<p>Two years of notices of assessment instead of pay stubs, and they work from '
+               + 'the figure after expenses.</p>'],
+    comm:     ['<p>Usually averaged over two years.</p>',
+               '<p>If this year beat last, raise it early. There are ways to have it counted '
+               + 'properly.</p>'],
+    contract: ['<p>Good to say up front. Not a blocker.</p>',
+               '<p>It changes which lenders are comfortable. A matching question, not a '
+               + 'qualifying one.</p>'],
+    multi:    ['<p>All of it can count.</p>',
+               '<p>Needs a longer history than one job would. Start gathering it now.</p>']
+  },
+  next: 'b_down'
+};
+
+NODE.b_down = {
+  ask: '<p>Nosy one. Where&rsquo;s the down payment coming from?</p>',
+  replies: [['saved', 'Saved it'], ['gift', 'A gift from family'],
+            ['sale', 'Selling where we live'], ['reg', 'RRSP or FHSA'],
+            ['none', 'Haven&rsquo;t got it yet']],
+  store: ['down', 'Down payment'],
+  react: {
+    saved: ['<p>That took doing. Also the simplest to show.</p>',
+            '<p>They want to see it sit still about three months, so try not to move it between '
+            + 'accounts.</p>'],
+    gift:  ['<p>Almost a quarter of Canadian buyers had help. Median $30,000. Ordinary, not '
+            + 'unusual.</p>',
+            '<p>Ask for the gift letter this week. A missing one holds up more closings than '
+            + 'anything else on this list.</p>'],
+    sale:  ['<p>Then the two dates have to line up. Far easier to plan before either is '
+            + 'fixed.</p>'],
+    reg:   ['<p>Sensible. It&rsquo;s what they&rsquo;re for.</p>',
+            '<p>Both have withdrawal rules and timing. Check before you count on the money '
+            + 'landing on a day.</p>'],
+    none:  ['<p>Sounds like that&rsquo;s the bit actually holding things up.</p>',
+            '<p>Canadians take about four and a half years to save one. You&rsquo;re not '
+            + 'behind.</p>']
+  },
+  next: 'b_owed'
+};
+
+NODE.b_owed = {
+  ask: '<p>What else goes out every month?</p>',
+  replies: [['none', 'Nothing'], ['car', 'A car payment'],
+            ['cards', 'Cards or a line of credit'], ['student', 'A student loan'],
+            ['several', 'A few of those']],
+  store: ['owed', 'Going out monthly'],
+  react: {
+    none:    ['<p>That helps you more than almost anything else on this list.</p>'],
+    car:     ['<p>That&rsquo;s the one that surprises people.</p>',
+              '<p>It comes off what you can borrow, and it moves the house price more than the '
+              + 'payment makes it look.</p>'],
+    cards:   ['<p>Get the exact balances rather than guessing.</p>',
+              '<p>A line of credit is often counted at a payment well above what you actually '
+              + 'pay.</p>'],
+    student: ['<p>Counted, but more gently than people fear. Have the monthly figure '
+              + 'handy.</p>'],
+    several: ['<p>Then their total sets your budget before the house price does.</p>',
+              '<p>Worth adding up properly one evening.</p>']
+  },
+  next: 'b_shock'
+};
+
+NODE.b_shock = {
+  ask: '<p>Last one. Once you&rsquo;re in, if the payment went up $375 a month, what '
+     + 'happens?</p>'
+     + '<p class="gm">That&rsquo;s what Canadians renewing actually saw this year.</p>',
+  replies: NODE.r_shock.replies,
+  store: NODE.r_shock.store,
+  react: {
+    fine:  ['<p>That gives you room. Worth saying, so nobody assumes otherwise.</p>'],
+    tight: ['<p>Sounds like you already know their number will be bigger than yours.</p>',
+            '<p>Approved for and comfortable with are two numbers. Only one is yours.</p>'],
+    bad:   ['<p>Sounds like that wasn&rsquo;t easy to put into words.</p>',
+            '<p>It points at buying well under what you&rsquo;re approved for. Say it in those '
+            + 'words to whoever advises you.</p>'],
+    skip:  ['<p>Understood. Skipping it.</p>']
+  },
+  next: 'r_matters'
+};
+
+/* ============================================================
+   Running it
+   ============================================================ */
+
+function rchips(list) {
+  return '<div class="gchips">' + list.map(function (c) {
+    /* The value is escaped. The label is not, because we author it and it
+       carries typographic entities like a proper apostrophe. */
+    return '<button class="gchip" data-reply="' + esc(c[0]) + '">' + c[1] + '</button>';
+  }).join('') + '</div>';
+}
+
+function fill(h) {
+  return String(h).replace(/\{who\}/g, I().who);
+}
+
+/* Play a node: whatever it has to say, then the question, then the replies. */
+/* Every conversation gets a number. Anything queued by an older one is dropped
+   when it comes due, so restarting, switching decision or arriving from the
+   landing can never leave a half-finished thought from the previous
+   conversation landing in the middle of this one. */
+var GEN = 0;
+function turn(gen, fn) {
+  return function () { if (gen === GEN) fn(); };
+}
+
+function runNode(key) {
+  var n = NODE[key];
+  if (!n) { convoDone(); return; }
+  var g = GEN;
+  ST.node = key;
+  ST.screen = 'talk';
+  head('4ormIQ', I().sub);
+  thread();
+
+  var t = 0;
+  (n.say || []).forEach(function (row) {
+    var ms = row[1] || 900;
+    setTimeout(turn(g, function () { think(fill(row[0]), null, ms); }), t);
+    t += ms + 320;
+  });
+  setTimeout(turn(g, function () {
+    think(fill(n.ask), null, 820);
+    setTimeout(turn(g, function () {
+      if (n.replies) {
+        var th = $('#gthread');
+        if (th && th.lastChild) {
+          th.lastChild.innerHTML += rchips(n.replies);
+          toBottom();
+        }
+      }
+      focusAsk();
+    }), 860);
+  }), t);
+}
+
+/* An answer arrives, by tap or typed. React to it, then move on. */
+function reply(v, typedLabel) {
+  var n = NODE[ST.node];
+  if (!n) return;
+
+  var ours = !typedLabel;
+  var lbl = typedLabel ||
+    (n.replies.filter(function (r) { return r[0] === v; })[0] || [, v])[1];
+
+  var th = $('#gthread');
+  if (th) $$('.gchips', th).forEach(function (c) { c.remove(); });
+  /* A label we wrote already carries its own typography. Text the person typed
+     is escaped, because it is theirs and could be anything. */
+  if (ours) { push('me', lbl); } else { me(lbl); }
+
+  if (n.store) {
+    var unsure = /dunno|none$/.test(v) && v !== 'none';
+    put(n.store[0], n.store[1], lbl, unsure ? 'needs' : 'told');
+    evt(n.store[1] + ' recorded', unsure ? 'SAID PLAINLY THEY DO NOT KNOW YET'
+                                         : 'IN THEIR OWN WORDS', unsure ? 'amber' : 'blue');
+  }
+
+  var react = (n.react && n.react[v]) || null;
+  var g = GEN, t = 0;
+  if (react) {
+    react.forEach(function (h) {
+      var ms = Math.min(2000, 700 + h.length * 3);
+      setTimeout(turn(g, function () { think(fill(h), null, ms); }), t);
+      t += ms + 340;
+    });
+  }
+
+  var dest = (n.go && n.go[v]) || n.next || '@done';
+  setTimeout(turn(g, function () {
+    /* Handing off to a screen ends this conversation. Bumping the number stops
+       anything it still had queued from repainting over the screen. */
+    if (dest === '@ready') { GEN++; go('prepare'); return; }
+    if (dest === '@redo')  { GEN++; boot(ST.ind); return; }
+    if (dest === '@send') { GEN++; ST.mode = 'send'; go('send'); return; }
+    if (dest === '@sign') { GEN++; ST.mode = 'sign'; go('sign'); return; }
+    if (dest === '@done') { convoDone(); return; }
+    runNode(dest);
+  }), t + 520);
+}
+
+/* Typed text, matched against what this question is actually asking. */
+var TYPED = {
+  doing:   [[/renew|renewal|term.*end|coming up/i, 'renew'],
+            [/buy|buying|purchas|first home|house|condo/i, 'buy'],
+            [/send|money|wire|transfer|invest|scam|suspicious|asking me/i, 'money'],
+            [/document|contract|paper|sign|read|commitment|bill of sale/i, 'doc']],
+  term:    [[/week|month|soon|now|[1-3] month/i, 'soon'], [/four|five|six|4|5|6/i, 'mid'],
+            [/year|later|next/i, 'late']],
+  offer:   [[/yes|have|got|letter|received/i, 'have'], [/not|no|haven|nothing/i, 'none']],
+  changed: [[/noth|no |same|nope/i, 'same'], [/income|earn|salary|raise|less|more/i, 'income'],
+            [/job|work|quit|laid|self|contract/i, 'work'],
+            [/baby|child|partner|married|separat|divorc|moved/i, 'life']],
+  shock:   [[/fine|ok|fine|no problem|manage/i, 'fine'], [/tight|hard|difficult|squeeze/i, 'tight'],
+            [/serious|cannot|can't|couldn|lose|no way|disaster/i, 'bad']],
+  matters: [[/payment|monthly|afford/i, 'payment'], [/total|overall|cost|cheapest/i, 'total'],
+            [/certain|fixed|not move|stable|safe/i, 'certain'],
+            [/flex|early|pay.*off|lump/i, 'flex']],
+  work:    [[/self|own business|incorporat|freelanc/i, 'self'],
+            [/commission|bonus|tips/i, 'comm'], [/contract|probation|temp/i, 'contract'],
+            [/two job|second job|multiple/i, 'multi'], [/salary|full time|salaried|steady/i, 'ft']],
+  down:    [[/gift|parent|mom|dad|family|help/i, 'gift'], [/sav|own money/i, 'saved'],
+            [/sell|selling|current home/i, 'sale'], [/rrsp|fhsa|first home savings/i, 'reg'],
+            [/not|none|do not have|dont have/i, 'none']],
+  owed:    [[/noth|none|no debt/i, 'none'], [/car|truck|vehicle|lease/i, 'car'],
+            [/card|credit|line of credit|loc/i, 'cards'], [/student|osap|loan/i, 'student'],
+            [/several|few|couple|all of/i, 'several']],
+  stage:   [[/look|view|see/i, 'looking'], [/offer|bid|accepted/i, 'offer'],
+            [/month|soon/i, 'soon'], [/if we can|afford|early|think/i, 'early']]
+};
+
+/* Read a typed answer against the question that was actually asked. */
+function readTyped(text) {
+  var n = NODE[ST.node];
+  if (!n || !n.store) return null;
+  var pats = TYPED[n.store[0]];
+  if (!pats) return null;
+  for (var i = 0; i < pats.length; i++) {
+    if (pats[i][0].test(text)) return pats[i][1];
+  }
+  return null;
+}
+
+/* The read-back. Not a summary: what it means, and what to do next. */
+function convoDone() {
+  ST.screen = 'convodone';
+  var g = GEN;
+  var D = ST.pass;
+  var got = function (k) { return D[k] && D[k].value; };
+  head('Where that leaves you', 'Nothing has left this phone');
+  thread();
+
+  var acts = [];
+  if (got('down') && /gift/i.test(got('down'))) {
+    acts.push('Ask for the gift letter this week. One page, says it&rsquo;s a gift and not a '
+            + 'loan.');
+  }
+  if (got('offer') && /look|check/i.test(got('offer'))) {
+    acts.push('Find your current rate and the offer. Both on the letter, or one phone call '
+            + 'away.');
+  }
+  if (got('shock') && /tight|serious|not worked/i.test(got('shock'))) {
+    acts.push('Tell whoever advises you what a $375 increase would do, in the words you used '
+            + 'here. It changes what they should recommend.');
+  }
+  if (got('owed') && !/nothing/i.test(got('owed'))) {
+    acts.push('Add up everything else going out each month, to the dollar.');
+  }
+  if (got('matters')) {
+    acts.push('On every option, ask for the total cost over the full term in dollars. Not just '
+            + 'the payment.');
+  }
+  if (!acts.length) {
+    acts.push('Nothing&rsquo;s blocking you. Next useful step is talking to someone with this '
+            + 'in front of them.');
+  }
+
+  var rows = Object.keys(D).filter(function (k) { return D[k].label; });
+
+  /* The buttons wait for the last thing said, rather than racing it. A fixed
+     delay put them on a typing indicator that was then removed. */
+  var after = thinkSeq([
+    ['<p>Let me make sure I&rsquo;ve got this right.</p>', null, 720],
+    ['<div class="gsec">What you told me</div><div class="drecap">' +
+      rows.map(function (k) {
+        return '<div class="drow' + (D[k].status === 'needs' ? ' un' : '') + '">' +
+          '<span class="drk">' + D[k].label + '</span>' +
+          '<span class="drv">' + D[k].value + '</span></div>';
+      }).join('') + '</div>', null, 1000],
+    ['<div class="gsec">What I&rsquo;d do next</div><ol class="gdo">' +
+      acts.map(function (a) { return '<li>' + a + '</li>'; }).join('') + '</ol>' +
+     '<p class="gm">None of this tells you which mortgage to take. It&rsquo;s your situation in '
+     + 'your words, written down while it&rsquo;s fresh, so whoever advises you starts from you '
+     + 'and not from a blank form.</p>'
+     + '<p>Anything I&rsquo;ve got wrong?</p>', null, 1200]
+  ]);
+
+  setTimeout(turn(g, function () {
+    var th = $('#gthread');
+    if (th && th.lastChild) {
+      th.lastChild.innerHTML +=
+        rchips([['right', 'That&rsquo;s right'], ['wrong', 'Not quite']]) +
+        '<div class="gacts">' +
+        '<button class="gcta wide" data-act="prepare">No, show me what I&rsquo;ll be asked for ' +
+        '&#8594;</button>' +
+        '<button class="gchip" data-act="invite">A professional has invited me</button>' +
+        '</div>';
+      toBottom();
+    }
+  }), after + 260);
+
+  ST.node = 'readback';
+  evt('Discovery finished by the person', rows.length + ' ANSWERS · NO PROFESSIONAL INVOLVED YET',
+      'gold');
+}
+
 /* ============================================================
    Routing
    ============================================================ */
@@ -2106,6 +2664,7 @@ var ACT = {
 
   /* The four things, and the way back to them. */
   modes: function () { ST.mode = ''; go('modes'); },
+  restart: function () { boot(ST.ind); },
   mode: function (arg) {
     ST.mode = arg;
     if (arg === 'look') { go('look'); return; }
@@ -2230,13 +2789,51 @@ function focusAsk() {
    Wiring
    ============================================================ */
 function boot(ind, screen) {
+  GEN++;
   ST = fresh(ind);
+
+  /* 4ormIQ on the landing can hand over an intent as well as a decision.
+     "Send an investment" is money about to leave, so it opens the check on
+     that case rather than the four things. The person already told us which
+     door they wanted; making them pick it again would be rude. */
+  var intent = '';
+  try { intent = sessionStorage.getItem('4orm.intent') || ''; } catch (e) {}
+  /* Whatever the phone opens on, the pill outside it has to agree. */
+  if (intent) { markInd(ind); }
+  if (!screen && intent === 'invest') {
+    try { sessionStorage.removeItem('4orm.intent'); } catch (e) {}
+    ST.mode = 'send';
+    sendRun('invest');
+    return;
+  }
+  if (!screen && intent === 'decide') {
+    try { sessionStorage.removeItem('4orm.intent'); } catch (e) {}
+    var said = '';
+    try { said = sessionStorage.getItem('4orm.said') || ''; } catch (e) {}
+    ST.thread = [];
+    ST.opened = true;
+    /* They already said what they are doing on the landing. Asking again would
+       be the rudest possible opening, so the phone skips its own first
+       question and reacts to what they said out there. */
+    if (said && NODE.open.go[said]) {
+      ST.node = 'open';
+      setTimeout(function () {
+        reply(said, (NODE.open.replies.filter(function (r) {
+          return r[0] === said; })[0] || [, ''])[1]);
+      }, 260);
+      thread();
+      head('4ormIQ', I().sub);
+      return;
+    }
+    go('open');
+    return;
+  }
   go(screen || 'open');
 }
 
 /* `screen` is what "Know before you look" passes, so picking a decision inside
    the phone lands on the goal screen rather than back at the four things. */
-function switchTo(ind, screen) {
+function markInd(ind) {
   $$('[data-ind]').forEach(function (b) {
     b.classList.toggle('on', b.getAttribute('data-ind') === ind);
   });
@@ -2245,6 +2842,10 @@ function switchTo(ind, screen) {
     pip.style.width = on.offsetWidth + 'px';
     pip.style.transform = 'translateX(' + (on.offsetLeft - 5) + 'px)';
   }
+}
+
+function switchTo(ind, screen) {
+  markInd(ind);
   boot(ind, screen);
 }
 
@@ -2256,6 +2857,9 @@ document.addEventListener('click', function (e) {
     switchTo(pick.getAttribute('data-ind'));
     return;
   }
+  var rep = e.target.closest('[data-reply]');
+  if (rep) { reply(rep.getAttribute('data-reply')); return; }
+
   var chipEl = e.target.closest('[data-ask]');
   if (chipEl) {
     var q = chipEl.getAttribute('data-ask');
@@ -2301,13 +2905,26 @@ document.addEventListener('submit', function (e) {
 if (document.getElementById('phBody')) {
   boot('mortgage');
 
-  /* The name may arrive after this file has already painted a screen, because
-     4ormIQ asks for it on the landing. Re-open with it the first time the
-     phone is actually picked up. */
+  /* The name and the intent both arrive after this file has already painted a
+     screen, because 4ormIQ asks for them on the landing. Re-open with them the
+     first time the phone is actually picked up.
+
+     The intent has to be checked here rather than relying on the industry
+     button being pressed, because picking "Buy a home" leaves the industry
+     exactly where it already was and no button ever moves. */
   (function adoptName(){
     var applied = '';
     function refresh(){
+      var intent = '';
+      try { intent = sessionStorage.getItem('4orm.intent') || ''; } catch (e) {}
       var given = (window.FourmWho && window.FourmWho.name && window.FourmWho.name()) || '';
+      if (intent) {
+        applied = given;
+        var want = '';
+        try { want = sessionStorage.getItem('4orm.ind') || ''; } catch (e) {}
+        boot(want || (ST && ST.ind) || 'mortgage');
+        return;
+      }
       if (!given || given === applied) return;
       applied = given;
       if (ST) boot(ST.ind);
