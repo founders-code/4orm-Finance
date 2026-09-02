@@ -583,3 +583,16 @@ product, which is what the button is for.
 
 The facts on the reading cards are different in kind. They are general,
 they are sourced, and none of them is about anybody in particular.
+
+
+## Y. The enterprise row — 2026-09-02
+
+| # | Item | Result |
+|---|---|---|
+| Y1 | The kicker names the product | **DONE** "4orm Enterprise Experience" replaces "Professional" |
+| Y2 | It wears the mark, not a typed 4 | **DONE** `assets/mark.png` carries the glyph, with `alt="4"` so the line still reads as the full name |
+| Y3 | The wordmark is not case-mangled | **FIXED** the kicker style uppercases, which turned "orm" into "ORM". The lockup drops out of the mono uppercase and is set in the sans, because a brand name is not something a text-transform gets to decide |
+| Y4 | The call to action | **DONE** "Try it" became "Learn more", pointing at 4ormex.com, new tab, `rel="noopener noreferrer"` |
+| Y5 | The demonstration is still reachable | **PASS** the dashboard itself is still a button and still opens the firm view, so the row now offers both: read about it, or operate it |
+| Y6 | Checked at both widths | **PASS** 1280 and 390, no overflow, no defect |
+| Y7 | Regression | **PASS** links resolve, gate 0/0, stutters 0, no AI language, nothing confidential, no defects at 1440 or 390 |
