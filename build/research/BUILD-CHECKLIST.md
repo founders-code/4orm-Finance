@@ -415,3 +415,40 @@ Researched what the best assistants do in 2026 and rebuilt against it.
 | T9 | The meter stopped counting unknowns as progress | **FIXED** an all-unknown discovery read 98%. It now reads 10%, which is the truth, and the truth is the product |
 | T10 | Measured | **DONE** 96 spoken lines, average 11.0 words, longest 22, 65 contractions |
 | T11 | Full regression | **PASS** renewal, buying, declining the money questions, money to Checking it, document to Reading it with you, both landing handoffs, put-away to home, links all resolve, gate 0/0, stutters 0, no AI language, nothing confidential, no defects at 1440 or 390 |
+
+
+## U. Auto, real estate and insurance — 2026-09-02
+
+Three more decisions given their own discovery, each traced to its own
+regulator. Sources and every question's derivation are in
+`build/research/AUTO-RE-INSURANCE-DISCOVERY.md`.
+
+**Where the questions came from**
+
+| Decision | Regulator | The finding that shaped the order |
+|---|---|---|
+| Auto | OMVIC, plus FCAC on loan terms | Ontario has no cooling-off period, so the opener catches somebody standing at the desk. The trade-in question comes before the payment question, because a payment quoted over a rolled-in shortfall is a number that means nothing |
+| Real estate | RECO, under TRESA | The representation agreement is signed before a single property has been seen, so "have you signed anything yet" is the second question, not a footnote |
+| Insurance | FSRA | The three questions are the three things FSRA found agents failing to do, turned round so the person can check for them: the needs analysis, the reason-why letter, and which companies the agent can sell from |
+
+**What was built**
+
+| # | Item | Result |
+|---|---|---|
+| U1 | Three opening nodes, one per decision | **DONE** each opens with its own first line. Auto and real estate ask where the person is, because both have a point of no return they may already be past |
+| U2 | Five turns each, same shape as mortgage | **DONE** opener, two facts, the nosy one, what matters most, read-back |
+| U3 | The accusation audit stays inside the question | **DONE** "Nosy one." in all three, and "Rather not say" is on the money question rather than a gate in front of it |
+| U4 | Read-back actions per decision | **DONE** auto ends on the payout figure and the itemised bill of sale, real estate on the holdover and the public register, insurance on the range of products and the reason in writing |
+| U5 | The closing line names the right decision | **FIXED** it said "which mortgage to take" at the end of every conversation, including the insurance one |
+| U6 | Prepare steps for real estate and insurance | **DONE** five each, and "still to ask for" is recorded as a real answer rather than left blank |
+| U7 | Typed answers read per decision | **DONE** "what matters most" has four different answer sets, so the patterns are keyed by decision and looked up first |
+| U8 | Landing chat carries the new doors | **DONE** selling a home added, and selling is matched before buying so "selling my home" stops being read as a mortgage |
+| U9 | Switching decision starts clean | **FIXED** the thread element was reused, so the previous conversation's lines sat above the new opening line |
+| U10 | A refresh no longer opens twice | **FIXED** the pause inside a spoken line was not generation-guarded, so a line already being said when the conversation restarted still landed. The pause now carries the generation the sentence started in |
+| U11 | "Know before you look" opens the conversation for all four | **DONE** the card flow it used to open was written for mortgage only |
+| U12 | Measured | **DONE** 222 spoken lines, average 10.9 words, longest 24, 5 over 20, 116 contractions, 0 reactions past two bubbles, 0 questions starting "why" |
+| U13 | Full regression | **PASS** all three new paths end to end plus mortgage, decision switching, the landing handoffs, money to Checking it, document to Reading it with you, put-away to home, links all resolve, gate 0/0, stutters 0, no AI language, nothing confidential, no defects at 1440 or 390 |
+
+**Still open.** Investing, banking and lending open the goal screen. Each
+needs the same treatment: CSA and CIRO know-your-client for investing,
+FCAC for banking, and the cost-of-borrowing disclosure rules for lending.

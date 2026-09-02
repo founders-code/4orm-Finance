@@ -98,11 +98,12 @@ function seq(turns) {
    entry, because a person about to wire funds today should not be handed a ten
    question interview. */
 var GOALS = [
-  ['mortgage:renew', 'Renewing my mortgage'],
-  ['mortgage:buy',   'Buying a home'],
-  ['auto:buy',       'Buying a car'],
-  ['insurance:buy',  'Buying insurance'],
-  ['send:invest',    'Sending an investment']
+  ['mortgage:renew',  'Renewing my mortgage'],
+  ['mortgage:buy',    'Buying a home'],
+  ['realestate:sell', 'Selling my home'],
+  ['auto:buy',        'Buying a car'],
+  ['insurance:buy',   'Buying insurance'],
+  ['send:invest',     'Sending an investment']
 ];
 
 function open(){
@@ -218,7 +219,10 @@ bar.addEventListener('submit', function (e) {
   /* Anything typed before Assist has been answered is a goal in the visitor's
      own words. Match it against what 4orm covers, and open there. */
   var t = v.toLowerCase(), ind = '';
-  if (/home|house|mortgage|condo|renew|refinan/.test(t)) ind = 'mortgage';
+  /* Selling is checked before buying, because "selling my home" contains the
+     word that would otherwise send it to the mortgage. */
+  if (/sell|listing|list my|realtor|real estate agent|representation/.test(t)) ind = 'realestate';
+  else if (/home|house|mortgage|condo|renew|refinan/.test(t)) ind = 'mortgage';
   else if (/car|vehicle|truck|auto|lease/.test(t)) ind = 'auto';
   else if (/insur|policy|cover/.test(t)) ind = 'insurance';
   else if (/invest|portfolio|advis/.test(t)) ind = 'investing';

@@ -377,8 +377,18 @@ var SCREEN = {};
 SCREEN.open = function () {
   ST.thread = [];
   ST.opened = true;
-  runNode('open');
+  wipeThread();
+  runNode(openNode());
 };
+
+/* Emptying ST.thread is not enough on its own. thread() reuses whatever
+   element is already on screen, so starting a new conversation used to leave
+   the previous one's bubbles sitting above the new opening line. Dropping the
+   element makes the next paint start from nothing. */
+function wipeThread() {
+  var old = $('#gthread');
+  if (old && old.parentNode) old.parentNode.removeChild(old);
+}
 
 /* The goal screen. This is where "Know before you look" arrives, once the
    person has said which decision they are thinking about. */
@@ -449,8 +459,14 @@ function think(html, chipList, ms) {
   /* Long answers take longer to arrive, the way they would from a person
      who was actually reading the question. */
   var wait = ms || Math.min(1900, 620 + String(html).length * 3.1);
+  /* The pause is part of the sentence, so it carries the same generation the
+     sentence was started in. A line that was already being said when the
+     conversation restarted has to be dropped here, not just at the point it
+     was queued, or it lands in the middle of the new one. */
+  var g = GEN;
   setTimeout(function () {
     if (dots.parentNode) dots.parentNode.removeChild(dots);
+    if (g !== GEN) return;
     push('g', html + (chipList && chipList.length ? chips(chipList) : ''));
   }, wait);
   return wait;
@@ -520,7 +536,7 @@ function ask(q) {
    five open, take one turn, and say plainly that they are not
    built yet rather than pretending.
    ============================================================ */
-var DEEP = { mortgage: true, auto: true };
+var DEEP = { mortgage: true, auto: true, realestate: true, insurance: true };
 
 /* Read the situation back, then ask the three things that actually
    change the answer. This is the moment the phone stops feeling like
@@ -760,6 +776,29 @@ var PREP = {
     ['financing', 'Financing',       'financing'],
     ['credit',    'Credit permission','credit'],
     ['addons',    'Add-ons',         'addons']
+  ],
+  /* Real estate. The agreement is first because it is signed first, before a
+     single property has been seen, and it is the only one of these that binds
+     you after it has ended. */
+  realestate: [
+    ['identity',  'Identity',            'ident'],
+    ['signed',    'The agreement',       'repagr'],
+    ['term',      'Length and holdover', 'holdover'],
+    ['both',      'Who represents whom', 'sides'],
+    ['matters',   'What you want out of it', 'wantre'],
+    ['costs',     'Deposit and closing costs', 'closing'],
+    ['docs',      'Documents',           'docs']
+  ],
+  /* Insurance. The order is the order a file is supposed to be built in, which
+     is also the order a regulator found agents skipping. */
+  insurance: [
+    ['identity',  'Identity',              'ident'],
+    ['who',       'Who depends on you',    'depend'],
+    ['have',      'What you already have', 'cover'],
+    ['runway',    'How long it would last','runway'],
+    ['range',     'What they can sell',    'range'],
+    ['reason',    'The reason in writing', 'reasonwhy'],
+    ['docs',      'Documents',             'docs']
   ]
 };
 
@@ -949,6 +988,118 @@ SCREEN.addons = function () {
     '<p>These are financed into the loan, so you pay interest on them for the whole term. They may ' +
     'be worth having. They are a separate decision from the vehicle.</p></div>' +
     opt('add-set', 'Use the deal sheet', 'Warranty, protection package, fees') +
+    opt('prepare', 'Not now', ''));
+};
+
+/* --- real estate ------------------------------------------
+
+   These are the four things TRESA gives a person the right to have in
+   writing, turned into four places to put what they were given. None of
+   them tells anybody whether to sign.
+   ----------------------------------------------------------- */
+SCREEN.repagr = function () {
+  head('The agreement', 'What you were actually given');
+  paint('<div class="ghead sm"><h3>The representation agreement</h3>' +
+    '<p>Everything now has to be in writing, in plain language, signed, and a copy handed back ' +
+    'to you. If you do not have your copy, that is the first thing to ask for.</p></div>' +
+    opt('rep-set', 'I have my copy', 'Signed and returned to me') +
+    opt('rep-ask', 'I need to ask for it', 'Adds it to your list') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.holdover = function () {
+  head('Length and holdover', 'The two negotiable numbers');
+  paint('<div class="ghead sm"><h3>How long it runs, and what happens after</h3>' +
+    '<p>A holdover keeps commission owing after the agreement has ended, commonly thirty days ' +
+    'and sometimes far longer. Nothing requires it. The length, the commission and the holdover ' +
+    'are all negotiable.</p></div>' +
+    opt('hold-set', 'I know both numbers', 'Written into the agreement') +
+    opt('hold-ask', 'I need to ask', 'Before signing, not after') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.sides = function () {
+  head('Who represents whom', 'Before it comes up');
+  paint('<div class="ghead sm"><h3>If the same brokerage ends up on both sides</h3>' +
+    '<p>Two different things can happen. A second salesperson can be designated to you, each ' +
+    'owing their duty to their own client. Or one salesperson acts for both, which needs written ' +
+    'consent from everybody first.</p>' +
+    '<p>There is also a third position. A self-represented party is owed no duty of care at ' +
+    'all.</p></div>' +
+    opt('sides-set', 'It was explained to me', 'And I know which applies') +
+    opt('sides-ask', 'I need to ask', 'Before offer night') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.wantre = function () {
+  head('What you want out of it', 'In your words');
+  paint('<div class="ghead sm"><h3>What you actually want out of this</h3>' +
+    '<p>Price, speed, a deal that closes, or not being tied up. These pull against each other, ' +
+    'and the agreement is supposed to be shaped around whichever one is yours.</p></div>' +
+    opt('want-set', 'Use what I said', 'From the conversation') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.closing = function () {
+  head('Deposit and closing costs', 'The money that is not the price');
+  paint('<div class="ghead sm"><h3>The money that is not the price</h3>' +
+    '<p>Deposit, land transfer tax, legal fees, title insurance, adjustments. They arrive ' +
+    'together and they arrive late.</p></div>' +
+    opt('close-set', 'Put my numbers in', 'Whatever you know so far') +
+    opt('prepare', 'Not now', ''));
+};
+
+/* --- insurance -------------------------------------------- */
+SCREEN.depend = function () {
+  head('Who depends on you', 'Where the amount comes from');
+  paint('<div class="ghead sm"><h3>Who would be affected</h3>' +
+    '<p>The amount is supposed to come from what the people around you would need, worked out ' +
+    'before any product is named. A regulator examining files found this step missing more often ' +
+    'than almost anything else.</p></div>' +
+    opt('dep-set', 'Use what I said', 'From the conversation') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.cover = function () {
+  head('What you already have', 'Before anything is added');
+  paint('<div class="ghead sm"><h3>What is already in place</h3>' +
+    '<p>Group cover through work usually ends when the job does, and is often a multiple of ' +
+    'salary rather than a number anybody chose. Anything new should be measured against what you ' +
+    'hold, not sold beside it.</p></div>' +
+    opt('cov-set', 'Put in what I have', 'Work, own policy, or both') +
+    opt('cov-ask', 'I need to look it up', 'Adds it to your list') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.runway = function () {
+  head('How long it would last', 'The number in months');
+  paint('<div class="ghead sm"><h3>How long the household could manage</h3>' +
+    '<p>An amount of cover is hard to judge. A number of months is not. This is the same figure ' +
+    'in the form anybody can actually weigh.</p></div>' +
+    opt('run-set', 'Use what I said', 'From the conversation') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.range = function () {
+  head('What they can sell', 'Eight words, asked once');
+  paint('<div class="ghead sm"><h3>Which companies they can sell from</h3>' +
+    '<p>Agents are expected to tell you the range of products they can offer. It was the single ' +
+    'most repeated omission across two years of regulatory examinations.</p>' +
+    '<p>One company is a perfectly good answer, as long as you have it.</p></div>' +
+    opt('range-set', 'They told me', 'Recorded here') +
+    opt('range-ask', 'I need to ask', 'Before anything is signed') +
+    opt('prepare', 'Not now', ''));
+};
+
+SCREEN.reasonwhy = function () {
+  head('The reason in writing', 'Why this one');
+  paint('<div class="ghead sm"><h3>Why this one, in writing</h3>' +
+    '<p>A short letter setting out what was recommended and why. You are entitled to ask for it, ' +
+    'and asking is what turns a recommendation into something you can weigh later.</p>' +
+    '<p>If you are being moved off a policy you already hold, ask for the comparison too. That ' +
+    'one cannot be undone.</p></div>' +
+    opt('why-set', 'I have it', 'Recorded here') +
+    opt('why-ask', 'I need to ask for it', 'Adds it to your list') +
     opt('prepare', 'Not now', ''));
 };
 
@@ -2401,6 +2552,360 @@ NODE.b_shock = {
   next: 'r_matters'
 };
 
+/* ====================================================================
+   AUTO
+
+   Sourced in build/research/AUTO-RE-INSURANCE-DISCOVERY.md. The order
+   is deliberate: the trade-in question comes before the payment
+   question, because a payment quoted over a rolled-in shortfall is a
+   number that means nothing, and asking about it first would make us
+   complicit in the same trick.
+
+   Ontario has no cooling-off period on a vehicle purchase, so the
+   opener has to catch the person who is standing at the desk right
+   now, and it has to catch them without alarming somebody who is only
+   browsing.
+   ==================================================================== */
+NODE.a_open = {
+  ask: '<p>Hello, {who}. Tell me where you are with this and I&rsquo;ll tell you what to watch '
+     + 'for.</p>'
+     + '<p class="gm">However it comes out. None of this goes to anyone.</p>',
+  replies: [
+    ['buy',   'Looking at a vehicle'],
+    ['desk',  'I&rsquo;m at the dealership now'],
+    ['signed','I&rsquo;ve already signed something'],
+    ['doc',   'I don&rsquo;t understand a document']
+  ],
+  store: ['doing', 'What&rsquo;s going on'],
+  react: {
+    buy:    ['<p>Good time to talk. Nothing&rsquo;s been decided.</p>'],
+    desk:   ['<p>Then let&rsquo;s be quick.</p>',
+             '<p>Ontario has no cooling-off period on a vehicle. Signing is the end of it.</p>'],
+    signed: ['<p>Right, that changes what&rsquo;s useful here.</p>',
+             '<p>We&rsquo;ll read what you signed and find what&rsquo;s still open.</p>'],
+    doc:    ['<p>Send it over, we&rsquo;ll read it together.</p>',
+             '<p>Right order. Much harder to unpick after you&rsquo;ve signed.</p>']
+  },
+  go: { buy: 'a_stage', desk: 'a_stage', signed: '@sign', doc: '@sign' }
+};
+
+NODE.a_stage = {
+  ask: '<p>Is there a vehicle you&rsquo;re trading in?</p>',
+  replies: [['owe', 'Yes, and I still owe on it'], ['clear', 'Yes, it&rsquo;s paid off'],
+            ['no', 'No trade'], ['dunno', 'I&rsquo;d have to check what&rsquo;s owing']],
+  store: ['trade', 'Trading in'],
+  react: {
+    owe:   ['<p>Then there are two numbers, and the desk will show you one.</p>',
+            '<p>What they give you, and what you still owe. If the second is bigger, the gap '
+            + 'gets added to the new loan.</p>'],
+    clear: ['<p>Simpler. Its value is yours to put against the price or keep.</p>'],
+    no:    ['<p>Cleaner. One price, one loan, nothing folded in.</p>'],
+    dunno: ['<p>Sounds like nobody&rsquo;s put that in front of you.</p>',
+            '<p>Your lender will say it in one call. 30% of people trading in owe more than the '
+            + 'car&rsquo;s worth. Adding it to your list.</p>']
+  },
+  next: 'a_pay'
+};
+
+NODE.a_pay = {
+  ask: '<p>How&rsquo;s it being paid for?</p>',
+  replies: [['dealer', 'Their financing'], ['bank', 'My own bank'],
+            ['cash', 'Cash'], ['lease', 'A lease'], ['dunno', 'Haven&rsquo;t got there yet']],
+  store: ['paying', 'Paying for it'],
+  react: {
+    dealer: ['<p>Common, and often fine.</p>',
+             '<p>Ask what rate they submitted you at, and what came back. Those can be two '
+             + 'different numbers.</p>'],
+    bank:   ['<p>Then you walk in knowing your rate. Strongest position there is.</p>'],
+    cash:   ['<p>Then the only argument left is the price, which is the one worth having.</p>'],
+    lease:  ['<p>Different animal. You&rsquo;re buying use, not the vehicle.</p>',
+             '<p>Watch the kilometre limit and what wear costs at the end.</p>'],
+    dunno:  ['<p>No rush. Worth knowing your own bank&rsquo;s rate before you hear theirs.</p>']
+  },
+  next: 'a_shock'
+};
+
+/* The audit is in the line, and the term is asked in the same breath as
+   the payment, because splitting them is how the payment becomes the
+   only number anybody discusses. */
+NODE.a_shock = {
+  ask: '<p>Nosy one. What would you be comfortable paying a month, and for how long?</p>' +
+       '<p class="gm">Average new-car loan right now is $915 a month for 72 months.</p>',
+  replies: [['both', 'I know both numbers'], ['payment', 'I know the payment, not the term'],
+            ['neither', 'Neither, really'], ['skip', 'Rather not say']],
+  store: ['comfort', 'What&rsquo;s comfortable'],
+  react: {
+    both:    ['<p>That puts you ahead of most of the room.</p>',
+              '<p>Say the term out loud first. They&rsquo;ll work in payments, and a payment can '
+              + 'be made to fit anything by stretching it.</p>'],
+    payment: ['<p>Sounds like the payment is what they asked you first.</p>',
+              '<p>It usually is. Any payment is achievable over enough months. Set the term '
+              + 'yourself.</p>'],
+    neither: ['<p>Fair. Most people work it out at the desk, which is the worst place to.</p>',
+              '<p>Pick a number of months you&rsquo;d still be happy in. That&rsquo;s the one '
+              + 'that protects you.</p>'],
+    skip:    ['<p>Understood. Skipping it.</p>']
+  },
+  next: 'a_matters'
+};
+
+NODE.a_matters = {
+  ask: '<p>Last one. What matters most?</p>',
+  replies: [['payment', 'Lowest monthly payment'], ['total', 'Lowest total cost'],
+            ['own', 'Owning it outright'], ['change', 'Being able to change in a few years'],
+            ['dunno', 'What&rsquo;s the trade?']],
+  store: ['matters', 'What matters most'],
+  react: {
+    payment: ['<p>Cash flow now. Fair, and common.</p>',
+              '<p>Longer term, smaller payment, more interest, and longer underwater. Ask for '
+              + 'the total in dollars.</p>'],
+    total:   ['<p>That&rsquo;s the number the desk doesn&rsquo;t lead with.</p>',
+              '<p>Total amount financed, rate, term. Everything else is arrangement.</p>'],
+    own:     ['<p>Then the term is the whole decision for you.</p>',
+              '<p>Shortest term you can carry. You own it sooner and pay less to get there.</p>'],
+    change:  ['<p>Then watch the first few years closely.</p>',
+              '<p>A car loses 15% to 25% in year one. On a long term you can owe more than '
+              + 'it&rsquo;s worth when you want out.</p>'],
+    dunno:   ['<p>Seems like nobody&rsquo;s laid the trade out for you.</p>',
+              '<p>Lower payment costs more overall and keeps you underwater longer. Shorter term '
+              + 'costs more monthly and less in total.</p>']
+  },
+  next: '@done'
+};
+
+/* ====================================================================
+   REAL ESTATE
+
+   TRESA, since December 2023. The one fact that reorders everything is
+   that the representation agreement is signed before a single property
+   has been seen, so "have you signed anything yet" is the second
+   question and not a footnote.
+   ==================================================================== */
+NODE.e_open = {
+  ask: '<p>Hello, {who}. Tell me where you are with this and I&rsquo;ll tell you what to watch '
+     + 'for.</p>'
+     + '<p class="gm">However it comes out. None of this goes to anyone.</p>',
+  replies: [
+    ['sell',  'Selling my home'],
+    ['buy2',  'Buying a home'],
+    ['rep',   'About to sign with an agent'],
+    ['doc',   'I don&rsquo;t understand a document']
+  ],
+  store: ['doing', 'What&rsquo;s going on'],
+  react: {
+    sell:  ['<p>Selling. Then the agreement comes before the listing.</p>',
+            '<p>It&rsquo;s the document that decides who owes you what, and for how long.</p>'],
+    buy2:  ['<p>Buying. Good, we&rsquo;re early.</p>',
+            '<p>You&rsquo;re asked to sign before you&rsquo;ve seen a single place.</p>'],
+    rep:   ['<p>Then we&rsquo;re exactly on time.</p>',
+            '<p>That one page is more binding than most people expect.</p>'],
+    doc:   ['<p>Send it over, we&rsquo;ll read it together.</p>',
+            '<p>Right order. Much harder to unpick after you&rsquo;ve signed.</p>']
+  },
+  go: { sell: 'e_signed', buy2: 'e_signed', rep: 'e_signed', doc: '@sign' }
+};
+
+NODE.e_signed = {
+  ask: '<p>Have you signed anything yet?</p>',
+  replies: [['not', 'Not yet'], ['yes', 'Yes, I&rsquo;ve signed'],
+            ['guide', 'Only the information guide'], ['dunno', 'I&rsquo;m not sure what I signed']],
+  store: ['signed', 'Signed anything yet'],
+  react: {
+    not:   ['<p>Best possible answer. Everything is still negotiable.</p>'],
+    yes:   ['<p>Then let&rsquo;s find out what it actually says.</p>',
+            '<p>You&rsquo;re entitled to a copy. Ask for it today, not at the offer.</p>'],
+    guide: ['<p>That&rsquo;s the RECO guide, and it isn&rsquo;t an agreement.</p>',
+            '<p>Being given it before anyone works for you is the law working properly.</p>'],
+    dunno: ['<p>Sounds like it went by quickly.</p>',
+            '<p>Everything now has to be in writing and a copy given back to you. Ask for '
+            + 'yours.</p>']
+  },
+  next: 'e_term'
+};
+
+NODE.e_term = {
+  ask: '<p>Do you know how long it runs, and what happens after it ends?</p>',
+  replies: [['both', 'Yes, both'], ['length', 'The length, not the rest'],
+            ['neither', 'Neither'], ['dunno', 'Nobody went through it']],
+  store: ['term', 'Length and holdover'],
+  react: {
+    both:    ['<p>Then you know more than most people signing this week.</p>'],
+    length:  ['<p>The rest is the holdover, and it&rsquo;s the part that catches people.</p>',
+              '<p>It can keep commission owing after the agreement has ended, often 30 days, '
+              + 'sometimes much longer.</p>'],
+    neither: ['<p>Both are negotiable, and almost nobody negotiates them.</p>',
+              '<p>Length, commission and holdover. Ask for all three in writing before you '
+              + 'sign.</p>'],
+    dunno:   ['<p>Sounds like it was handed over rather than explained.</p>',
+              '<p>That&rsquo;s the most common complaint there is. Adding it to your list.</p>']
+  },
+  next: 'e_both'
+};
+
+/* The audit is in the line. This is the question people are most
+   embarrassed not to have asked, so it is asked for them. */
+NODE.e_both = {
+  ask: '<p>Nosy one. Has anyone told you what happens if the same brokerage ends up on both '
+     + 'sides?</p>',
+  replies: [['yes', 'Yes, it was explained'], ['mention', 'It was mentioned'],
+            ['no', 'No'], ['skip', 'Rather not say']],
+  store: ['both', 'Both sides explained'],
+  react: {
+    yes:     ['<p>Good. Then you know which of the two you&rsquo;d be in.</p>'],
+    mention: ['<p>Mentioned isn&rsquo;t explained.</p>',
+              '<p>Two different things. A second agent designated to you, or one agent for both '
+              + 'sides, which needs everyone&rsquo;s written consent.</p>'],
+    no:      ['<p>Sounds like nobody&rsquo;s raised it with you.</p>',
+              '<p>Ask before you sign, not on offer night. It has to be in writing and signed by '
+              + 'everyone.</p>'],
+    skip:    ['<p>Understood. Skipping it.</p>']
+  },
+  next: 'e_matters'
+};
+
+NODE.e_matters = {
+  ask: '<p>Last one. What matters most?</p>',
+  replies: [['price', 'The price'], ['speed', 'Getting it done quickly'],
+            ['certain', 'A deal that actually closes'], ['free', 'Not being tied up'],
+            ['dunno', 'What&rsquo;s the trade?']],
+  store: ['matters', 'What matters most'],
+  react: {
+    price:   ['<p>Then ask what the plan is if it doesn&rsquo;t come.</p>',
+              '<p>Price and time pull against each other. Have that conversation before the '
+              + 'listing, not after.</p>'],
+    speed:   ['<p>Then say so out loud and in the agreement.</p>',
+              '<p>Speed is a strategy, not a mood. It should change what gets recommended.</p>'],
+    certain: ['<p>Sounds like a deal falling apart is the part that worries you.</p>',
+              '<p>Say it in those words. It changes which offer you&rsquo;re told to take.</p>'],
+    free:    ['<p>Then the term and the holdover are your whole negotiation.</p>',
+              '<p>Ask for a shorter term. Ask for the holdover cut or removed. Both are '
+              + 'allowed.</p>'],
+    dunno:   ['<p>Seems like nobody&rsquo;s laid the trade out for you.</p>',
+              '<p>Holding out costs time. Moving fast costs price. A long agreement costs you '
+              + 'the option to leave.</p>']
+  },
+  next: '@done'
+};
+
+/* ====================================================================
+   INSURANCE
+
+   The three questions here are the three things FSRA found agents
+   failing to do, turned around so the person can check for them:
+   the needs analysis, the reason-why letter, and disclosure of which
+   companies the agent can actually sell from.
+   ==================================================================== */
+NODE.i_open = {
+  ask: '<p>Hello, {who}. Tell me what&rsquo;s going on and I&rsquo;ll tell you what to watch '
+     + 'for.</p>'
+     + '<p class="gm">However it comes out. None of this goes to anyone.</p>',
+  replies: [
+    ['buy',     'Buying insurance'],
+    ['replace', 'Replacing a policy I have'],
+    ['review',  'Reviewing what I have'],
+    ['doc',     'I don&rsquo;t understand a document']
+  ],
+  store: ['doing', 'What&rsquo;s going on'],
+  react: {
+    buy:     ['<p>Then the question is what you actually need.</p>',
+              '<p>Worth settling that before anyone names a product.</p>'],
+    replace: ['<p>Stop there a moment. That&rsquo;s the one that can&rsquo;t be undone.</p>',
+              '<p>The old policy was priced on your health back then. It doesn&rsquo;t come '
+              + 'back.</p>'],
+    review:  ['<p>Best way round. Start from what you hold, not from what&rsquo;s offered.</p>'],
+    doc:     ['<p>Send it over, we&rsquo;ll read it together.</p>',
+              '<p>Right order. Much harder to unpick after you&rsquo;ve signed.</p>']
+  },
+  go: { buy: 'i_who', replace: 'i_who', review: 'i_who', doc: '@sign' }
+};
+
+NODE.i_who = {
+  ask: '<p>Who&rsquo;d be affected if something happened to you?</p>',
+  replies: [['family', 'Partner and children'], ['partner', 'A partner'],
+            ['parents', 'Parents or family I help'], ['nobody', 'Nobody depends on me'],
+            ['dunno', 'I&rsquo;ve not thought it through']],
+  store: ['who', 'Who&rsquo;d be affected'],
+  react: {
+    family:  ['<p>Then the amount comes from what they&rsquo;d need, not from a product.</p>'],
+    partner: ['<p>Right. Their income and yours, and what one of them covers alone.</p>'],
+    parents: ['<p>That gets missed constantly, and it counts the same.</p>'],
+    nobody:  ['<p>Then say that plainly to whoever&rsquo;s recommending.</p>',
+              '<p>It&rsquo;s a real answer, and it should shrink what gets put in front of '
+              + 'you.</p>'],
+    dunno:   ['<p>Fair. That&rsquo;s the question that&rsquo;s supposed to come first.</p>',
+              '<p>It was missing from a good share of the files a regulator examined. Adding it '
+              + 'to your list.</p>']
+  },
+  next: 'i_have'
+};
+
+NODE.i_have = {
+  ask: '<p>What have you got already?</p>',
+  replies: [['work', 'Something through work'], ['own', 'A policy of my own'],
+            ['both', 'Both'], ['none', 'Nothing'], ['dunno', 'I&rsquo;d have to check']],
+  store: ['have', 'Already in place'],
+  react: {
+    work:  ['<p>Worth knowing it usually ends when the job does.</p>',
+            '<p>Find the amount. It&rsquo;s often a multiple of salary and smaller than people '
+            + 'assume.</p>'],
+    own:   ['<p>Then anything new should be measured against it, not sold beside it.</p>'],
+    both:  ['<p>Good. Then the real question is the gap, not the products.</p>'],
+    none:  ['<p>Clean slate. Start from the need and work down.</p>'],
+    dunno: ['<p>Sounds like nobody&rsquo;s put that where you&rsquo;d find it.</p>',
+            '<p>Your HR portal and your own file will both say. Adding it to your list.</p>']
+  },
+  next: 'i_shock'
+};
+
+/* Turns an abstract sum into months, which is the only unit anybody can
+   actually judge. The audit is in the line. */
+NODE.i_shock = {
+  ask: '<p>Nosy one. If your income stopped tomorrow, how long could the household manage on '
+     + 'what&rsquo;s already there?</p>',
+  replies: [['long', 'A year or more'], ['months', 'A few months'],
+            ['weeks', 'Not long at all'], ['skip', 'Rather not say']],
+  store: ['runway', 'How long it&rsquo;d last'],
+  react: {
+    long:   ['<p>That gives you room, and it should reduce what you need to buy.</p>'],
+    months: ['<p>Then the number you need is the gap after those months, not a round figure.</p>'],
+    weeks:  ['<p>Sounds like that wasn&rsquo;t easy to say.</p>',
+             '<p>It&rsquo;s also the single thing that most changes what should be recommended '
+             + 'to you. Say it in those words.</p>'],
+    skip:   ['<p>Understood. Skipping it.</p>']
+  },
+  next: 'i_range'
+};
+
+NODE.i_range = {
+  ask: '<p>Last one. Did they say which companies they can sell from?</p>',
+  replies: [['told', 'Yes, they told me'], ['one', 'Just the one company'],
+            ['no', 'No'], ['dunno', 'I didn&rsquo;t think to ask']],
+  store: ['range', 'Range of products'],
+  react: {
+    told: ['<p>Good. Then you can weigh the recommendation properly.</p>'],
+    one:  ['<p>Fine, as long as you know it.</p>',
+           '<p>One company means the best of theirs, which isn&rsquo;t the same as the best '
+           + 'available.</p>'],
+    no:   ['<p>Sounds like nobody volunteered it.</p>',
+           '<p>It&rsquo;s the most common thing missing from files a regulator examined. Eight '
+           + 'words: which companies can you sell from?</p>'],
+    dunno:['<p>Most people don&rsquo;t. It&rsquo;s not on you to know to ask.</p>',
+           '<p>Ask it before anything is signed, and ask for the reason in writing.</p>']
+  },
+  next: '@done'
+};
+
+/* Which conversation opens, by decision. Everything else in the graph is
+   reached from one of these. */
+var OPEN = {
+  mortgage:   'open',
+  auto:       'a_open',
+  realestate: 'e_open',
+  insurance:  'i_open'
+};
+
+function openNode() { return OPEN[ST.ind] || 'open'; }
+
 /* ============================================================
    Running it
    ============================================================ */
@@ -2529,19 +3034,95 @@ var TYPED = {
             [/card|credit|line of credit|loc/i, 'cards'], [/student|osap|loan/i, 'student'],
             [/several|few|couple|all of/i, 'several']],
   stage:   [[/look|view|see/i, 'looking'], [/offer|bid|accepted/i, 'offer'],
-            [/month|soon/i, 'soon'], [/if we can|afford|early|think/i, 'early']]
+            [/month|soon/i, 'soon'], [/if we can|afford|early|think/i, 'early']],
+
+  /* The three later decisions ask some of the same things by name and mean
+     different things by them, so their patterns are keyed by decision and
+     looked up first. "What matters most" is the clearest case: four answers
+     under mortgage, four different ones under auto. */
+  'auto:doing': [[/dealer|showroom|desk|there now|sitting/i, 'desk'],
+            [/signed|bought|took delivery|too late/i, 'signed'],
+            [/look|shopping|thinking|test dri/i, 'buy'],
+            [/document|contract|bill of sale|paper|read/i, 'doc']],
+  'auto:trade': [[/owe|owing|still pay|balance|loan on/i, 'owe'],
+            [/paid off|clear|own it|no loan|outright/i, 'clear'],
+            [/no trade|not trading|nothing to trade|don.t have/i, 'no']],
+  'auto:paying': [[/dealer|their financ|in house|at the desk/i, 'dealer'],
+            [/bank|credit union|my own|pre.?approv/i, 'bank'],
+            [/cash|outright|paying in full/i, 'cash'], [/lease|leasing/i, 'lease']],
+  'auto:comfort': [[/both|payment and|and .*month|term and/i, 'both'],
+            [/payment|a month|monthly/i, 'payment'],
+            [/neither|no idea|not sure|haven.t/i, 'neither']],
+
+  /* Real estate */
+  'realestate:doing': [[/sell|listing|list my|our house/i, 'sell'],
+            [/sign|agreement|agent|represent/i, 'rep'],
+            [/buy|buying|purchas|looking for a/i, 'buy2'],
+            [/document|contract|paper|read/i, 'doc']],
+  'realestate:signed': [[/not yet|haven|no |nothing yet|nope/i, 'not'],
+            [/guide|information guide|reco/i, 'guide'],
+            [/yes|signed|did sign|already/i, 'yes']],
+  'realestate:term': [[/both|yes.*both|know both/i, 'both'],
+            [/length|how long|the term|days|months/i, 'length'],
+            [/neither|no |nothing|don.t know/i, 'neither'],
+            [/nobody|no one|never went|wasn.t explained/i, 'dunno']],
+  'realestate:both': [[/explain|went through|yes/i, 'yes'],
+            [/mention|brought up|touched on|briefly/i, 'mention'],
+            [/no |nobody|never|not at all/i, 'no']],
+
+  /* Insurance */
+  'insurance:doing': [[/replac|switch|swap|cancel.*new|move.*policy/i, 'replace'],
+            [/recommend|sold|suggest|pitch|quote/i, 'buy'],
+            [/work out|figure|how much|what i need|review/i, 'review'],
+            [/document|policy document|contract|paper|read/i, 'doc']],
+  'insurance:who': [[/child|kid|son|daughter|family|wife|husband.*child/i, 'family'],
+            [/partner|spouse|wife|husband|fianc/i, 'partner'],
+            [/parent|mother|father|mum|mom|dad|sibling|brother|sister/i, 'parents'],
+            [/nobody|no one|just me|on my own|single/i, 'nobody']],
+  'insurance:have': [[/both/i, 'both'], [/work|employer|group|through my job/i, 'work'],
+            [/own policy|my own|individual|term policy|bought/i, 'own'],
+            [/nothing|none|no cover|don.t have/i, 'none']],
+  'insurance:runway': [[/year|long time|ages|plenty/i, 'long'],
+            [/few month|couple of month|some month|three month|six month/i, 'months'],
+            [/not long|weeks|days|barely|immediately|straight away/i, 'weeks']],
+  'insurance:range': [[/told|yes|they said|went through/i, 'told'],
+            [/one company|just one|only one|single|captive/i, 'one'],
+            [/no |never|didn.t say|nothing/i, 'no'],
+            [/didn.t think|never occurred|not ask/i, 'dunno']],
+
+  /* Same question, four different sets of answers. */
+  'auto:matters': [[/payment|monthly|a month|afford/i, 'payment'],
+            [/total|overall|cost|cheapest|interest/i, 'total'],
+            [/own|outright|paid off|mine|keep it/i, 'own'],
+            [/change|trade|swap|few years|new one/i, 'change']],
+  'realestate:matters': [[/price|most money|top dollar|highest/i, 'price'],
+            [/quick|fast|speed|soon|done with/i, 'speed'],
+            [/close|certain|actually|fall through|firm/i, 'certain'],
+            [/tied|locked|free|stuck|leave|out of it/i, 'free']]
 };
 
 /* Read a typed answer against the question that was actually asked. */
 function readTyped(text) {
   var n = NODE[ST.node];
   if (!n || !n.store) return null;
-  var pats = TYPED[n.store[0]];
+  /* A decision's own patterns win over the general ones. "What matters most"
+     is asked in all four and answered differently in each. */
+  var pats = TYPED[ST.ind + ':' + n.store[0]] || TYPED[n.store[0]];
   if (!pats) return null;
   for (var i = 0; i < pats.length; i++) {
     if (pats[i][0].test(text)) return pats[i][1];
   }
   return null;
+}
+
+/* The sentence that keeps this on the right side of the line. It has to name
+   the decision, because "which mortgage to take" said at the end of an
+   insurance conversation is both wrong and a tell that nobody was listening. */
+function NOTADVICE() {
+  return { mortgage:   'mortgage to take',
+           auto:       'vehicle to buy or how to finance it',
+           realestate: 'agent to sign with',
+           insurance:  'policy to take' }[ST.ind] || 'option to take';
 }
 
 /* The read-back. Not a summary: what it means, and what to do next. */
@@ -2554,6 +3135,64 @@ function convoDone() {
   thread();
 
   var acts = [];
+
+  /* ---- auto ---- */
+  if (ST.ind === 'auto') {
+    if (got('trade') && /owe|check/i.test(got('trade'))) {
+      acts.push('Ring your lender for the payout figure on the vehicle you&rsquo;re trading. '
+              + 'One call, and it decides whether the new payment means anything.');
+    }
+    if (got('paying') && /their financing/i.test(got('paying'))) {
+      acts.push('Ask your own bank for a rate before you accept theirs. It costs nothing and it '
+              + 'is the only way to know what theirs is worth.');
+    }
+    if (got('comfort') && /payment|neither/i.test(got('comfort'))) {
+      acts.push('Decide the number of months before you walk in, and say that number first. Any '
+              + 'payment can be made to fit by stretching the term.');
+    }
+    acts.push('Ask for the bill of sale with every fee itemised, and check it against the '
+            + 'advertised price. In Ontario the advertised price has to include every fee the '
+            + 'dealer intends to collect, except tax and licensing.');
+    acts.push('Ask for the total amount financed, the rate and the term in writing. Everything '
+            + 'else is arrangement.');
+  }
+
+  /* ---- real estate ---- */
+  if (ST.ind === 'realestate') {
+    if (got('signed') && /yes|not sure/i.test(got('signed'))) {
+      acts.push('Ask for your signed copy today. Everything now has to be in writing and a copy '
+              + 'given back to you.');
+    }
+    if (got('term') && /length|neither|nobody/i.test(got('term'))) {
+      acts.push('Get the term and the holdover in writing before you sign. Both are negotiable, '
+              + 'and a holdover can be shortened or removed.');
+    }
+    if (got('both') && /mention|^no$/i.test(got('both'))) {
+      acts.push('Ask what happens if the same brokerage ends up on both sides, and get the '
+              + 'answer in writing before there is an offer on the table.');
+    }
+    acts.push('Look the salesperson up on the public register. It shows the licence and the '
+            + 'discipline history, and it takes a minute.');
+  }
+
+  /* ---- insurance ---- */
+  if (ST.ind === 'insurance') {
+    if (got('have') && /work|check/i.test(got('have'))) {
+      acts.push('Find the actual amount of any cover you have through work, and whether it ends '
+              + 'when the job does.');
+    }
+    if (got('range') && /^no$|didn/i.test(got('range'))) {
+      acts.push('Ask which companies they can sell from. Eight words, and it was the most '
+              + 'repeated omission across two years of regulatory examinations.');
+    }
+    acts.push('Ask for the reason for the recommendation in writing, before anything is signed.');
+    if (got('doing') && /replace/i.test(got('doing'))) {
+      acts.push('If you are being moved off a policy you already hold, ask for the two side by '
+              + 'side, and do not cancel the old one until the new one is in force.');
+    }
+  }
+
+  /* ---- mortgage ---- */
   if (got('down') && /gift/i.test(got('down'))) {
     acts.push('Ask for the gift letter this week. One page, says it&rsquo;s a gift and not a '
             + 'loan.');
@@ -2569,7 +3208,9 @@ function convoDone() {
   if (got('owed') && !/nothing/i.test(got('owed'))) {
     acts.push('Add up everything else going out each month, to the dollar.');
   }
-  if (got('matters')) {
+  /* Every decision asks what matters most, so this one has to be told which
+     conversation it is in. */
+  if (ST.ind === 'mortgage' && got('matters')) {
     acts.push('On every option, ask for the total cost over the full term in dollars. Not just '
             + 'the payment.');
   }
@@ -2592,9 +3233,9 @@ function convoDone() {
       }).join('') + '</div>', null, 1000],
     ['<div class="gsec">What I&rsquo;d do next</div><ol class="gdo">' +
       acts.map(function (a) { return '<li>' + a + '</li>'; }).join('') + '</ol>' +
-     '<p class="gm">None of this tells you which mortgage to take. It&rsquo;s your situation in '
-     + 'your words, written down while it&rsquo;s fresh, so whoever advises you starts from you '
-     + 'and not from a blank form.</p>'
+     '<p class="gm">None of this tells you which ' + NOTADVICE() + '. It&rsquo;s your situation '
+     + 'in your words, written down while it&rsquo;s fresh, so whoever advises you starts from '
+     + 'you and not from a blank form.</p>'
      + '<p>Anything I&rsquo;ve got wrong?</p>', null, 1200]
   ]);
 
@@ -2624,6 +3265,19 @@ function go(s) {
   ST.screen = s;
   if (SCREEN[s]) SCREEN[s]();
   drawRail();
+}
+
+/* A prepare step that records one fact and goes back to the list. Recording
+   that something still has to be asked for is a real answer and is kept as
+   one, because a record that only holds the tidy answers is worth nothing. */
+function step(key, label, value, status, event) {
+  return function () {
+    put(key, label, value, status);
+    evt(event, status === 'needs' ? 'SAID PLAINLY THEY DO NOT HAVE IT YET'
+                                  : 'RECORDED BY THE PERSON',
+        status === 'needs' ? 'amber' : 'blue');
+    go('prepare');
+  };
 }
 
 var ACT = {
@@ -2674,10 +3328,11 @@ var ACT = {
     /* Picking the decision here is the same act as picking it on the rail
        outside the phone, so it goes through the same door.
 
-       Mortgage runs the real discovery. The others still open the goal screen
-       until their question sets are written, because a half-built discovery is
-       worse than none. */
-    switchTo(arg, arg === 'mortgage' ? 'discover' : 'goals');
+       Mortgage, auto, real estate and insurance each have a question set
+       traced to their own regulator, so all four open the conversation. The
+       rest still open the goal screen, because a half-built discovery is worse
+       than none. */
+    switchTo(arg, DEEP[arg] ? 'open' : 'goals');
   },
   discover: function () { go('discover'); },
   dpick:   function (arg) { discPick(arg); },
@@ -2713,7 +3368,54 @@ var ACT = {
   trade: function () { go('trade'); },
   financing: function () { go('financing'); },
   addons: function () { go('addons'); },
+  repagr: function () { go('repagr'); },
+  holdover: function () { go('holdover'); },
+  sides: function () { go('sides'); },
+  wantre: function () { go('wantre'); },
+  closing: function () { go('closing'); },
+  depend: function () { go('depend'); },
+  cover: function () { go('cover'); },
+  runway: function () { go('runway'); },
+  range: function () { go('range'); },
+  reasonwhy: function () { go('reasonwhy'); },
   back: function () { go('prepare'); },
+
+  /* The prepare steps for real estate and insurance. Each one either records
+     what the person already has, or records that they still have to ask for
+     it. Both are real answers, and the second is the one that becomes a line
+     on their list. */
+  'rep-set':   step('signed', 'The agreement', 'Copy in hand', 'doc',
+                    'Agreement copy recorded'),
+  'rep-ask':   step('signed', 'The agreement', 'Still to ask for', 'needs',
+                    'Asked to be sent their own agreement'),
+  'hold-set':  step('term', 'Length and holdover', 'Both known', 'told',
+                    'Length and holdover recorded'),
+  'hold-ask':  step('term', 'Length and holdover', 'Still to ask', 'needs',
+                    'Length and holdover still to be asked for'),
+  'sides-set': step('both', 'Who represents whom', 'Explained to me', 'told',
+                    'Representation explained'),
+  'sides-ask': step('both', 'Who represents whom', 'Still to ask', 'needs',
+                    'Representation still to be explained'),
+  'want-set':  step('matters', 'What you want out of it', 'In their own words', 'told',
+                    'What they want recorded'),
+  'close-set': step('costs', 'Deposit and closing costs', 'Being worked out', 'told',
+                    'Closing costs started'),
+  'dep-set':   step('who', 'Who depends on you', 'In their own words', 'told',
+                    'Who depends on them recorded'),
+  'cov-set':   step('have', 'What you already have', 'Recorded', 'told',
+                    'Existing cover recorded'),
+  'cov-ask':   step('have', 'What you already have', 'Still to look up', 'needs',
+                    'Existing cover still to be looked up'),
+  'run-set':   step('runway', 'How long it would last', 'In months', 'told',
+                    'Runway recorded'),
+  'range-set': step('range', 'What they can sell', 'They told me', 'told',
+                    'Range of products disclosed'),
+  'range-ask': step('range', 'What they can sell', 'Still to ask', 'needs',
+                    'Range of products not yet disclosed'),
+  'why-set':   step('reason', 'The reason in writing', 'I have it', 'doc',
+                    'Reason for the recommendation held in writing'),
+  'why-ask':   step('reason', 'The reason in writing', 'Still to ask for', 'needs',
+                    'Reason for the recommendation still to be asked for'),
 
   runident: runIdent,
   incdoc: incomeDoc,
@@ -2812,13 +3514,18 @@ function boot(ind, screen) {
     try { said = sessionStorage.getItem('4orm.said') || ''; } catch (e) {}
     ST.thread = [];
     ST.opened = true;
+    /* This path never runs the opening node, so it has to clear the screen
+       itself. Without this the decision the phone opened on by default left
+       its first line sitting above the answer the person gave outside. */
+    wipeThread();
     /* They already said what they are doing on the landing. Asking again would
        be the rudest possible opening, so the phone skips its own first
        question and reacts to what they said out there. */
-    if (said && NODE.open.go[said]) {
-      ST.node = 'open';
+    var on = NODE[openNode()];
+    if (said && on.go[said]) {
+      ST.node = openNode();
       setTimeout(function () {
-        reply(said, (NODE.open.replies.filter(function (r) {
+        reply(said, (on.replies.filter(function (r) {
           return r[0] === said; })[0] || [, ''])[1]);
       }, 260);
       thread();
