@@ -261,3 +261,22 @@ what was refused, is in `MASTERS-RECONCILIATION.md`.
 | M4 | /personal leads with what 4ormIQ does, not what it costs | **REWRITTEN** the four questions people arrive with, and what comes back |
 | M5 | The /home screen is about who carries the cost, not what it costs | **REWRITTEN** the person and the firm, side by side, with no number between them |
 | M6 | Full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow, no AI language, nothing confidential |
+
+
+## N. The mortgage discovery is real — 2026-09-02
+
+Built on published research rather than invented. Sources and the reason for
+every question are in `MORTGAGE-DISCOVERY.md`.
+
+| # | Item | Result |
+|---|---|---|
+| N1 | Question set is the FSRA suitability list, in plain words | **DONE** employment stability, income type, objectives, risk tolerance, timeline, experience, and what is already owed |
+| N2 | Answer options come from what Canadians actually chose | **DONE** MPC 2025 goal categories, CMHC 2026 down-payment and renewal figures |
+| N3 | One question per screen, every answer a tap | **DONE** 58px minimum targets, verified at 390px |
+| N4 | Branches | **DONE** renewal collapses from 10 questions to 8, skipping goal and down payment |
+| N5 | "I am not sure" on every question | **DONE** stored as an answer with needs status, marked NOT YET KNOWN on the read-back |
+| N6 | An unknown must not read as progress | **FIXED** the meter counted every stored key, so answering "I do not know" ten times showed 98% ready. It now counts only what is actually known: the same path shows 10% |
+| N7 | "Why are you asking?" on every question | **DONE** collapsed by default, the reason in one line |
+| N8 | Back preserves the answer | **DONE** verified |
+| N9 | The read-back says what it means | **DONE** gift needs a letter, variable income is proved differently, existing payments move the number, lowest payment is not lowest cost |
+| N10 | Full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow, no AI language, nothing confidential |

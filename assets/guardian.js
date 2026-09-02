@@ -52,7 +52,10 @@ function fresh(ind) {
     mode: '',
     check: null,
     doc: null,
-    grant: null
+    grant: null,
+    disc: {},
+    di: 0,
+    dwhy: false
   };
 }
 
@@ -1153,8 +1156,17 @@ function drawRail() {
   var r = $('#rail');
   if (!r) return;
   var i = I();
-  var done = Object.keys(ST.pass).length;
-  var total = prepList().length + 3;
+
+  /* An answer of "I am not sure" is recorded, but it is NOT progress. Counting
+     it as progress would let a person who answered every question with "I do
+     not know" watch the bar fill to nearly full, which is the exact dishonesty
+     this product exists to remove. Only what is actually known counts. */
+  var keys = Object.keys(ST.pass);
+  var done = keys.filter(function (k) {
+    var st = ST.pass[k].status;
+    return st && st !== 'needs' && st !== 'none';
+  }).length;
+  var total = Math.max(prepList().length + 3, keys.length);
   var pct = Math.min(98, Math.round((done / total) * 100));
   r.innerHTML =
     '<div class="bezel"><div class="core">' +
@@ -1768,6 +1780,285 @@ function invJoin() {
   );
 }
 
+
+/* ============================================================
+   MORTGAGE DISCOVERY
+
+   The question set is not invented. It is the list a mortgage
+   brokerage in Ontario is required to establish and document,
+   asked in the words a person actually uses, before a broker
+   exists.
+
+   FSRA, Mortgage Product Suitability Assessment guidance:
+   employment status and stability, income type and stability,
+   the property and what is already secured against it, financial
+   knowledge and mortgage experience, short and long term
+   financing objectives, risk tolerance, the housing timeline,
+   anything that makes a person vulnerable, and prior insolvency.
+   The file has to let a third party who was never involved
+   re-perform the assessment.
+
+   So this is deliberately NOT generated. A suitability record
+   that a stranger has to be able to re-perform cannot come out
+   of something that answers differently the second time. The
+   model belongs on the explaining, the reading and the checking.
+   This part stays fixed, ordered and auditable.
+
+   THE ANSWERS PEOPLE GIVE, AND WHY THESE OPTIONS
+
+   The goals are the categories Canadians actually chose in the
+   2025 Mortgage Professionals Canada consumer survey: more space
+   for a growing family (31%), a nicer home (25%), the current
+   home no longer suits (24%), somewhere less expensive (10%),
+   closer to friends and family (10%). Rental income sits with
+   them because 72% of first time buyers called it very important.
+
+   Every question carries "I am not sure", because it is the
+   honest answer far more often than the industry admits. In a
+   2026 survey of 1,000 Canadians, 68% could not say what their
+   payment would be at 5%, and 58% could not recall their own
+   monthly payment without looking it up. Not knowing is not a
+   failure to be hidden. It is the thing a professional most
+   needs to be told.
+   ============================================================ */
+
+var DISC = [
+  { k: 'situation', q: 'What are you doing?',
+    why: 'Everything after this changes depending on the answer.',
+    a: [['buy', 'Buying a home', 'First one, or moving'],
+        ['renew', 'Renewing', 'The term is ending'],
+        ['refi', 'Refinancing', 'Taking equity out, or changing the mortgage'],
+        ['unsure', 'I am not sure yet', 'Working out whether it is even possible']] },
+
+  { k: 'goal', q: 'Why now?',
+    why: 'A professional is required to record what you were trying to achieve, not just what '
+       + 'you bought. This is that, in your words.',
+    a: [['space', 'We need more space', 'A growing family'],
+        ['nicer', 'A better home', 'Somewhere we would rather live'],
+        ['unsuit', 'This one no longer suits us', 'It stopped working for how we live'],
+        ['cheaper', 'Somewhere less expensive', 'Lowering what we spend'],
+        ['family', 'Closer to family', 'Or closer to work'],
+        ['income', 'Rental income', 'Part of it would be rented out'],
+        ['unsure', 'I am not sure', 'Still working that out']],
+    skip: function (s) { return s.situation === 'renew'; } },
+
+  { k: 'when', q: 'When does this happen?',
+    why: 'Your timeline decides what can be arranged and what has to be rushed.',
+    a: [['now', 'I am looking now', 'Offers could happen any week'],
+        ['soon', 'Within three months', ''],
+        ['later', 'Six months or more', ''],
+        ['fixed', 'A date is already fixed', 'A renewal or a closing date'],
+        ['unsure', 'I am not sure', '']] },
+
+  { k: 'work', q: 'How do you work?',
+    why: 'A lender treats these very differently, and it is one of the first things you will be '
+       + 'asked. Nothing here is a wrong answer.',
+    a: [['ft', 'Full time, salaried', ''],
+        ['hourly', 'Hourly', ''],
+        ['self', 'Self employed', 'Or incorporated'],
+        ['comm', 'Commission', 'Or base plus commission'],
+        ['contract', 'Contract or probation', ''],
+        ['multi', 'More than one job', ''],
+        ['unsure', 'It is complicated', 'More than one of these']] },
+
+  { k: 'incstable', q: 'Does what you earn change month to month?',
+    why: 'Steady and variable income are proved in different ways. Knowing which you have now '
+       + 'saves you being asked for the wrong documents later.',
+    a: [['steady', 'No, it is the same', ''],
+        ['varies', 'Yes, it moves', 'Bonus, commission, tips or overtime'],
+        ['seasonal', 'It is seasonal', ''],
+        ['unsure', 'I am not sure', '']] },
+
+  { k: 'down', q: 'Where is the down payment coming from?',
+    why: 'Nearly a quarter of Canadian buyers use a gift, and a gift needs a letter. Better to '
+       + 'know that now than three days before closing.',
+    a: [['saved', 'My own savings', ''],
+        ['gift', 'A gift from family', 'Needs a letter, and we will tell you what it says'],
+        ['sale', 'Selling my current home', ''],
+        ['reg', 'RRSP or first home savings account', ''],
+        ['mix', 'More than one of these', ''],
+        ['unsure', 'I do not have it yet', 'That is still worth knowing']],
+    skip: function (s) { return s.situation === 'renew'; } },
+
+  { k: 'owed', q: 'What else are you paying every month?',
+    why: 'This is the number that changes what you can borrow, more than almost anything else, '
+       + 'and it usually lands lower than people expect.',
+    a: [['none', 'Nothing else', ''],
+        ['car', 'A vehicle payment', ''],
+        ['cards', 'Credit cards or a line of credit', ''],
+        ['student', 'A student loan', ''],
+        ['other', 'Another property', ''],
+        ['several', 'Several of these', ''],
+        ['unsure', 'I would have to check', '']] },
+
+  { k: 'matters', q: 'Which of these matters most to you?',
+    why: 'This is the question that decides which mortgage actually suits you, and it is the one '
+       + 'least often asked. There is no right answer, only yours.',
+    a: [['payment', 'The lowest monthly payment', 'Cash flow now'],
+        ['total', 'The lowest total cost', 'Even if the payment is higher'],
+        ['certain', 'Certainty', 'The payment must not move'],
+        ['flex', 'Flexibility', 'Paying it off faster, without a penalty'],
+        ['move', 'Being able to move it', 'If we sell or move house'],
+        ['unsure', 'I am not sure', 'Explain the trade-off to me']] },
+
+  { k: 'risk', q: 'If your payment went up $375 a month, what happens?',
+    why: 'That is the real average increase Canadians saw at renewal in 2026. It is a better '
+       + 'question than asking you to rate your risk tolerance out of ten.',
+    a: [['fine', 'We would be fine', ''],
+        ['tight', 'It would be tight', 'We would cut other things'],
+        ['serious', 'That would be a serious problem', ''],
+        ['unsure', 'I do not know', 'I have not worked that out']] },
+
+  { k: 'before', q: 'Have you done this before?',
+    why: 'A professional is required to take your experience into account. It changes how much '
+       + 'should be explained, and how.',
+    a: [['first', 'This is the first time', ''],
+        ['once', 'Once or twice', ''],
+        ['many', 'Several times', 'I know how this works']] },
+];
+
+var DLABEL = {};   /* value -> the words the person actually chose */
+DISC.forEach(function (d) { d.a.forEach(function (o) { DLABEL[d.k + ':' + o[0]] = o[1]; }); });
+
+/* Which questions apply, given what has been answered so far. */
+function discSteps() {
+  return DISC.filter(function (d) { return !(d.skip && d.skip(ST.disc)); });
+}
+
+SCREEN.discover = function () {
+  var steps = discSteps();
+  var n = Math.min(ST.di, steps.length - 1);
+  var d = steps[n];
+  if (ST.di >= steps.length) { discDone(); return; }
+
+  head('Getting to know you', 'Question ' + (n + 1) + ' of ' + steps.length);
+  paint(
+    '<div class="dprog" aria-hidden="true">' +
+      steps.map(function (s, i) {
+        return '<i class="' + (i < n ? 'done' : i === n ? 'on' : '') + '"></i>';
+      }).join('') +
+    '</div>' +
+    '<div class="ghead"><h3>' + d.q + '</h3></div>' +
+    '<div class="dopts">' +
+      d.a.map(function (o) {
+        var on = ST.disc[d.k] === o[0];
+        return '<button class="dopt' + (on ? ' on' : '') + '" data-act="dpick" ' +
+          'data-arg="' + o[0] + '"><span class="ptxt"><b>' + o[1] + '</b>' +
+          (o[2] ? '<i>' + o[2] + '</i>' : '') + '</span></button>';
+      }).join('') +
+    '</div>' +
+    '<button class="dwhy" data-act="dwhy" type="button">Why are you asking? ' +
+      '<span class="dwc">' + (ST.dwhy ? '&minus;' : '+') + '</span></button>' +
+    (ST.dwhy ? '<div class="dwhyb">' + d.why + '</div>' : '') +
+    (n > 0 ? '<button class="opt ghost" data-act="dback"><span class="ptxt">' +
+             '<b>Back</b></span><span class="ch">&#8249;</span></button>' : '')
+  );
+};
+
+function discPick(v) {
+  var steps = discSteps();
+  var d = steps[Math.min(ST.di, steps.length - 1)];
+  ST.disc[d.k] = v;
+
+  /* "I am not sure" is a real answer and it is recorded as one. A record that
+     shows what the person did not know is more useful to the professional than
+     a record that quietly filled the gap. */
+  var unsure = v === 'unsure';
+  put(d.k, d.q.replace(/\?$/, ''), DLABEL[d.k + ':' + v],
+      unsure ? 'needs' : 'told', unsure ? 'Said so plainly' : '');
+  if (unsure) {
+    evt('Said what they did not know', 'RECORDED AS UNKNOWN, NOT GUESSED', 'amber');
+  }
+
+  ST.di++;
+  ST.dwhy = false;
+  go('discover');
+}
+
+/* What the answers mean, read back before anybody is asked for a document. */
+function discDone() {
+  var D = ST.disc;
+  var i = I();
+  ST.screen = 'discdone';
+  head('Here is what you told me', 'Nothing has left this phone');
+
+  var unsure = Object.keys(D).filter(function (k) { return D[k] === 'unsure'; });
+
+  /* The one or two things that will actually change the answer for this person. */
+  var flags = [];
+  if (D.down === 'gift') {
+    flags.push(['A gift needs a letter',
+      'The person giving it signs a short letter saying it is a gift and not a loan. Ask for it '
+      + 'now rather than in the last week.']);
+  }
+  if (D.work === 'self' || D.work === 'comm' || D.incstable === 'varies'
+      || D.incstable === 'seasonal') {
+    flags.push(['Your income will be proved differently',
+      'Variable and self employed income is usually averaged over two years. Expect to be asked '
+      + 'for notices of assessment rather than pay stubs.']);
+  }
+  if (D.owed === 'car' || D.owed === 'several' || D.owed === 'cards') {
+    flags.push(['What you already pay will move the number',
+      'Existing payments come off what you can borrow before anything else does. It is worth '
+      + 'knowing the exact figures before you are asked for them.']);
+  }
+  if (D.matters === 'certain' && D.risk !== 'fine') {
+    flags.push(['Certainty is worth naming out loud',
+      'You said the payment must not move and that an increase would hurt. Those two together '
+      + 'point somewhere specific, and a professional should be told both.']);
+  }
+  if (D.matters === 'payment') {
+    flags.push(['The lowest payment is not the lowest cost',
+      'A longer term lowers the monthly payment and raises the total. Ask for both numbers, in '
+      + 'dollars, on every option you are shown.']);
+  }
+  if (D.risk === 'serious' || D.risk === 'unsure') {
+    flags.push(['Say this to the professional in these words',
+      'How a payment increase would land on you is part of what suitability is judged against. '
+      + 'It belongs on the record, from you.']);
+  }
+  if (!flags.length) {
+    flags.push(['Nothing here needs fixing first',
+      'What you have told me is enough to have a useful first conversation.']);
+  }
+
+  var rows = Object.keys(ST.pass).filter(function (k) {
+    return DISC.some(function (d) { return d.k === k; });
+  });
+
+  paint(
+    '<div class="glevel ok"><span class="glv">' + rows.length + ' answers</span>' +
+      '<span class="gls">' + (unsure.length
+        ? unsure.length + ' of them recorded as something you do not know yet, which is the '
+          + 'honest answer'
+        : 'Enough to start a real conversation') + '</span></div>' +
+
+    '<div class="gsec">What you told me</div>' +
+    '<div class="drecap">' + rows.map(function (k) {
+      var p = ST.pass[k];
+      return '<div class="drow' + (p.status === 'needs' ? ' un' : '') + '">' +
+        '<span class="drk">' + p.label + '</span>' +
+        '<span class="drv">' + p.value + '</span></div>';
+    }).join('') + '</div>' +
+
+    '<div class="gsec">What this means for you</div>' +
+    flags.map(function (f) {
+      return '<div class="gfind"><b>' + f[0] + '</b><p>' + f[1] + '</p></div>';
+    }).join('') +
+
+    note('This is not advice about which mortgage to take. It is what you said, written down '
+       + 'while it is fresh, so the person advising you starts from your situation rather than '
+       + 'from a blank form.') +
+
+    '<button class="gcta wide" data-act="prepare">Show me what to have ready &#8594;</button>' +
+    '<button class="opt ghost" data-act="dredo"><span class="ptxt"><b>Change an answer</b>' +
+    '</span><span class="ch">&#8250;</span></button>'
+  );
+
+  evt('Discovery completed by the person',
+      rows.length + ' ANSWERS · BEFORE A PROFESSIONAL EXISTS', 'gold');
+}
+
 /* ============================================================
    Routing
    ============================================================ */
@@ -1822,9 +2113,18 @@ var ACT = {
   },
   lookpick: function (arg) {
     /* Picking the decision here is the same act as picking it on the rail
-       outside the phone, so it goes through the same door. */
-    switchTo(arg, 'goals');
+       outside the phone, so it goes through the same door.
+
+       Mortgage runs the real discovery. The others still open the goal screen
+       until their question sets are written, because a half-built discovery is
+       worse than none. */
+    switchTo(arg, arg === 'mortgage' ? 'discover' : 'goals');
   },
+  discover: function () { go('discover'); },
+  dpick:   function (arg) { discPick(arg); },
+  dwhy:    function () { ST.dwhy = !ST.dwhy; go('discover'); },
+  dback:   function () { if (ST.di > 0) { ST.di--; ST.dwhy = false; } go('discover'); },
+  dredo:   function () { ST.di = 0; ST.dwhy = false; go('discover'); },
   sendrun:  function (arg) { sendRun(arg); },
   send:     function () { go('send'); },
   sign:     function () { go('sign'); },

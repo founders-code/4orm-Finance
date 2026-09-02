@@ -3250,3 +3250,61 @@ body.go .dashmini{opacity:1;transform:none;transition-delay:.2s}
 .tmbigi{display:inline-flex;align-items:center;justify-content:center;
   background:var(--blue-50);color:var(--blue-dp);font-family:var(--mono);font-size:32px;
   font-weight:800;letter-spacing:.04em}
+
+/* ============================================================
+   DISCOVERY
+
+   One question per screen, and every answer is a tap. Nobody
+   types on a phone if they can help it, and a person working
+   out whether they can afford a house is not in the mood to.
+
+   Targets are 56px and up, because this gets used one handed,
+   often standing in a kitchen, often at night.
+   ============================================================ */
+.dprog{display:flex;gap:5px;margin:0 0 20px}
+.dprog i{flex:1;height:3px;border-radius:2px;background:var(--border);display:block;
+  transition:background .45s var(--ease)}
+.dprog i.done{background:var(--blue-100)}
+.dprog i.on{background:var(--blue)}
+
+.dopts{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.dopt{width:100%;min-height:58px;text-align:left;padding:14px 17px;border-radius:15px;
+  background:#fff;border:1.5px solid var(--border);font-family:var(--sans);cursor:pointer;
+  display:flex;align-items:center;box-shadow:var(--sh-sm);
+  transition:transform .45s var(--spring),border-color .26s var(--ease),
+    background .26s var(--ease),box-shadow .35s var(--ease)}
+.dopt b{display:block;font-size:15px;font-weight:640;letter-spacing:-.018em;color:var(--tx);
+  line-height:1.28}
+.dopt i{display:block;font-style:normal;font-size:12.4px;color:var(--tx-3);margin-top:3px;
+  line-height:1.4}
+.dopt:hover{border-color:var(--blue-100);transform:translateY(-1px);
+  box-shadow:0 10px 24px rgba(16,32,64,.09)}
+.dopt:active{transform:scale(.988)}
+.dopt.on{border-color:var(--blue);background:#F7FAFF}
+.dopt.on b{color:var(--blue-dp)}
+
+/* "Why are you asking?" is always available and never in the way. A person
+   who wants the reason gets it. A person who does not is not made to read it. */
+.dwhy{display:flex;align-items:center;justify-content:space-between;width:100%;
+  margin-top:16px;padding:11px 15px;border-radius:12px;background:none;
+  border:1px dashed var(--border);cursor:pointer;font-family:var(--sans);
+  font-size:12.8px;font-weight:600;color:var(--tx-3);
+  transition:color .24s var(--ease),border-color .24s var(--ease)}
+.dwhy:hover{color:var(--blue-dp);border-color:var(--blue-100)}
+.dwc{font-family:var(--mono);font-size:14px;font-weight:800;line-height:1}
+.dwhyb{margin-top:8px;padding:13px 15px;border-radius:12px;background:var(--bg-2);
+  border:1px solid var(--border);font-size:12.8px;line-height:1.55;color:var(--tx-2);
+  animation:dwin .34s var(--pop) both}
+@keyframes dwin{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+
+/* The read-back. What they said, in their words, with the unknowns marked. */
+.drecap{border-top:1px solid var(--border)}
+.drow{display:flex;align-items:baseline;gap:12px;padding:11px 0;
+  border-bottom:1px solid var(--border)}
+.drk{flex:0 0 42%;font-size:12.2px;color:var(--tx-3);line-height:1.38}
+.drv{flex:1;font-size:13.4px;font-weight:620;color:var(--tx);line-height:1.38}
+.drow.un .drv{color:#8A6412}
+.drow.un .drv::after{content:'NOT YET KNOWN';display:block;margin-top:3px;
+  font-family:var(--mono);font-size:7.5px;font-weight:800;letter-spacing:.14em;color:#B08A32}
+
+@media (prefers-reduced-motion:reduce){ .dopt,.dwhyb{transition:none;animation:none} }
