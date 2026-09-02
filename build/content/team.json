@@ -14,7 +14,8 @@
    "Those experiences pointed at a narrower challenge than the one he set out to solve. A firm that holds money belonging to other people can be asked, sometimes years later, to prove what it did on a single day. The money is usually fine. The record of it is not. It sits across bank statements, a ledger, a spreadsheet, an inbox and a filing cabinet, and it gets reassembled by hand under deadline.",
    "Today Chad applies the same systems thinking, operational discipline and risk management developed in mission-critical industries to 4orm Finance. The company builds the evidence behind regulated decisions: the check the rule asks for, run on the schedule the rule sets, kept with the wording of the rule as it stood, and produced when a regulator names a date."
   ],
-  "link": "https://www.linkedin.com/in/chadrjohnstonglobal/"
+  "link": "https://www.linkedin.com/in/chadrjohnstonglobal/",
+  "group": "founders"
  },
  {
   "img": "/assets/team/team-kevin.jpg",
@@ -29,7 +30,8 @@
    "Through his agency Evolve One Digital, where he serves as Chief Growth Strategist, Kevin has spent the past seven years advising entrepreneurs and leadership teams in increasingly competitive markets. He combines time-tested principles with current marketing strategy to help founders refine their message and reach the customers actively looking for what they offer. He works alongside founders as a strategic partner, bringing fresh perspective grounded in decades of execution.",
    "From 2019 through 2025 Kevin served as Senior Brand Strategist and Marketing Advisor at Carbeeza, a Canadian SaaS platform transforming the automotive buying experience. There, he helped reposition marketing away from transactional messaging toward empowerment-driven narratives centered on consumer choice, personalization, and trust. His ability to merge creativity with analytical rigour has enabled brands to stand out in mature industries ready for reinvention."
   ],
-  "link": "https://www.linkedin.com/in/therealkevinwong/"
+  "link": "https://www.linkedin.com/in/therealkevinwong/",
+  "group": "founders"
  },
  {
   "img": "/assets/team/team-zed.jpg",
@@ -45,7 +47,8 @@
    "At UBC, Zed worked within Enterprise Architecture to align Workday integration with university-wide capabilities, value streams, governance models, and data architectures. More recently, he has established and matured business architecture practices at Capilano University, BC Housing, and TransLink, and currently consults independently on identity management, digital asset management, and business transformation roadmaps.",
    "At 4orm Finance, Zed is the Senior Enterprise Architect for the build. He owns target-state systems architecture, the control framework, and the traceability and audit requirements a regulated record has to meet. His view of the work is direct: the hard part is not storing a number, it is proving what the number was on a given day and who stood behind it."
   ],
-  "link": "https://www.linkedin.com/in/zedzworld/"
+  "link": "https://www.linkedin.com/in/zedzworld/",
+  "group": "building"
  },
  {
   "img": "/assets/team/team-mike.jpg",
@@ -58,7 +61,8 @@
    "Information technology law Partner in the Vancouver office of Fasken. A recognized leader in the British Columbia technology ecosystem, Mike represents companies through every stage of development, with a focus on early-stage entrepreneurs, start-ups, and emerging growth companies.",
    "An experienced M&A and securities lawyer, Mike counsels founders, executives, and company boards on corporate strategy, fundraising, board governance, and strategic transactions, from foundation through to IPO or exit. At 4orm Finance, he advises on the corporate and securities framework underneath the company's compliance and evidence work."
   ],
-  "link": "https://www.linkedin.com/in/michael-stephens-lawyer/"
+  "link": "https://www.linkedin.com/in/michael-stephens-lawyer/",
+  "group": "advisors"
  },
  {
   "img": "/assets/team/team-dean-mccall.jpg",
@@ -72,7 +76,8 @@
    "He specializes in crafting go-to-market strategies, structuring fundraising approaches, and identifying strategic opportunities at the intersection of technology and business objectives. His global expertise in revenue optimization and strategic business development helps early-stage companies navigate critical growth transitions and achieve sustainable profitability.",
    "At 4orm Finance, Dean advises on growth strategy, go-to-market, and the technology leadership the 4orm Finance build requires, drawing on his network across founders, family offices, and venture funds."
   ],
-  "link": "https://www.linkedin.com/in/deanmccall/"
+  "link": "https://www.linkedin.com/in/deanmccall/",
+  "group": "advisors"
  },
  {
   "img": "/assets/team/team-bruce.jpg",
@@ -89,7 +94,8 @@
    "Bruce currently serves as an independent Director of Golden Sky Minerals and Thunderbird Minerals Corp. His prior board roles include Searchlight Resources Inc., Maple Leaf Energy Income Partnerships, Maple Leaf Flow-Through Limited Partnerships, Nation Wide Self Storage Trust I, Richfield Ventures Corp, Orsa Ventures, Cliffmont Resources, and Maple Leaf Resource Corp.",
    "At 4orm Finance, Bruce advises on capital formation, investor positioning and institutional market access as the company builds its compliance evidence software. Bruce holds an Honours degree in Political Science and English from the University of Saskatchewan."
   ],
-  "link": "https://www.linkedin.com/in/bruce-fair/"
+  "link": "https://www.linkedin.com/in/bruce-fair/",
+  "group": "advisors"
  },
  {
   "img": "/assets/team/team-james.jpg",
@@ -105,7 +111,8 @@
    "He is also a member of the BCSC Corporate Finance Stakeholder Forum, an advisory group of industry professionals that provides the British Columbia Securities Commission's Corporate Finance division with insights on market trends, policy development, and emerging issues affecting issuers and investors.",
    "At 4orm Finance, James advises on corporate organization, founder and governance structuring, financing architecture, securities law matters and exempt market strategy as the company develops institutional-focused digital finance and capital markets infrastructure initiatives."
   ],
-  "link": "https://www.linkedin.com/in/james-atherton-8055a93/"
+  "link": "https://www.linkedin.com/in/james-atherton-8055a93/",
+  "group": "advisors"
  },
  {
   "img": "/assets/team/team-miika.jpg",
@@ -121,7 +128,8 @@
    "His earlier career includes Vice President, Corporate Finance at CANUS Capital Corp., where he led private placements of debt and equity, refinancings, and M&A for Canadian and U.S. public and private companies; institutional research at PI Financial Corp.; portfolio analytics at Ethical Funds; and a global equity start at Russell Investment Group. He currently serves as Vice President of Corporate Development at Collective Technologies Inc. and Vice President of Finance at Network Immunology.",
    "At 4orm Finance, Miika advises on capital raise architecture, securities compliance and registered-account eligibility, and on how the company positions itself with the regulators whose rules its software is built to serve."
   ],
-  "link": "https://www.linkedin.com/in/miika-makela-cfa-24aa056/"
+  "link": "https://www.linkedin.com/in/miika-makela-cfa-24aa056/",
+  "group": "advisors"
  },
  {
   "img": "/assets/team/team-don.jpg",
@@ -133,6 +141,35 @@
   "paras": [
    "Don is the founding cheque and an independent sounding board. A seasoned operator with more than 17 years of executive leadership, he has been Founder and President of a large development company since 2009, with a reputation built on disciplined project execution and construction management.",
    "He is not an employee or officer of 4orm Finance. His contribution is perspective, testing strategy against decades of hands-on operating experience."
+  ],
+  "link": "",
+  "group": "advisors"
+ },
+ {
+  "img": "",
+  "ini": "?",
+  "kick": "OPEN, AND THE ROUND FUNDS IT",
+  "name": "Engineering lead",
+  "role": "Negotiations underway",
+  "group": "open",
+  "short": "Owns the architecture and every component only a senior hand may touch: the evidence store, the two dates, and the submission binders.",
+  "paras": [
+   "This is the seat that makes the engineering permanent and internal.",
+   "Nothing is built before this seat and the regulatory lead are both filled."
+  ],
+  "link": ""
+ },
+ {
+  "img": "",
+  "ini": "?",
+  "kick": "OPEN, FRACTIONAL TO START",
+  "name": "Regulatory lead",
+  "role": "Search in progress",
+  "group": "open",
+  "short": "Authors and signs every rule release before it ships, and cannot deploy code.",
+  "paras": [
+   "One per rule maker, once the second regulator is live.",
+   "The separation between the person who writes a rule and the person who ships code is cheap to design in now and close to impossible to retrofit. It is the reason this is a seat rather than a duty picked up alongside another job."
   ],
   "link": ""
  }

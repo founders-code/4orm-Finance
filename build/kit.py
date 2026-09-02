@@ -98,6 +98,29 @@ BANNED += [
     (r"(?i)\bgame[- ]changer\b", "a game changer"),
 ]
 
+# ----------------------------------------------------------------------------
+# The build partner, and everything about it, stays off the public site.
+#
+# It is a supplier under a statement of work. It is not a partner, it is not a
+# seat at this company, and its people are not ours to put on a page. This is a
+# HARD rule rather than a note, because the material that names them lives in
+# documents marked not for distribution and the only reliable place to catch a
+# copy-paste is at the gate.
+# ----------------------------------------------------------------------------
+BANNED += [
+    (r"(?i)\bspeer\b", "the build partner named"),
+    (r"(?i)Mathew Mozaffari", "the build partner's chief executive"),
+    (r"(?i)Diego Castro|Karan Agrawal|Sid Bounadji|Jad El Kassar|Harley Lovitos"
+     r"|Mike Glover|Doug Sutherland|Ahmed Nassri", "the build partner's bench"),
+    # Confidential figures from the September 2026 masters. None of these may
+    # ever appear on a page a stranger can open.
+    (r"\$?71\.1\s?M", "the 2031 revenue base case"),
+    (r"\$?3\.55\s?M", "the seed size"),
+    (r"\b29,450\b", "the price card"),
+    (r"(?i)\bcap table\b|\bvesting schedule\b|\btranche schedule\b", "capital structure"),
+    (r"(?i)\bpre[- ]seed\b|\binvestor returns\b|\badoption curve", "raise material"),
+]
+
 ADVISORY = [(r"(?i)\bsomebody\b(?! else)", 'the universal "somebody"')]
 
 

@@ -231,3 +231,21 @@ reads from what they return, so replacing a body changes nothing else.
 | K5 | No AI or model language on any screen or in any script | **PASS** scanned all six scripts and all 22 pages |
 | K6 | No real person or firm called a scammer | **PASS** concern levels only, every finding cited to a register or to the message itself |
 | K7 | Full gate after the build | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow at 1440 or 390 |
+
+
+## L. Reconciled against the September 2026 masters — 2026-09-02
+
+Ten confidential documents became the source of record. What they changed, and
+what was refused, is in `MASTERS-RECONCILIATION.md`.
+
+| # | Item | Result |
+|---|---|---|
+| L1 | 4ormIQ named as the free consumer product | **DONE** the phone opens as 4ormIQ, and /personal leads with it |
+| L2 | Transaction Integrity named as the commercial platform | **DONE** on /professional, with the four boundaries: never holds money, never decides, never monitors communications, never replaces the workflow |
+| L3 | Who pays, stated plainly | **DONE** new screen on /home. $0 to the consumer in every scenario, the regulated business pays, no consumer information sold |
+| L4 | Seven new sourced figures on /research | **DONE** RECO 2,878 up 88% and $15.7M, FSRA $1.2M across 100 actions, OMVIC 2,332 charges and $1.9M, CSA and CIRO 105 firms, life and health 45%, FCA £9.1bn across 12.1m agreements |
+| L5 | Where the duty lands, as a table | **DONE** firms, professionals and transactions a year for mortgage brokering, real estate, automotive, life and health |
+| L6 | Team rebuilt to the masters | **DONE** founders, building it, the bench, and the two open seats the round funds |
+| L7 | Nothing confidential published | **PASS** and now enforced at the gate rather than by memory |
+| L8 | The build partner off the site entirely | **PASS** name, chief executive and bench all blocked in `kit.py`. The build fails if any of them returns |
+| L9 | Full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow at 1440 or 390, no AI or model language |

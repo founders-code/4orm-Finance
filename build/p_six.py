@@ -52,6 +52,20 @@ def steps(items):
 def personal():
     S = []
 
+    S.append(sec("4ormIQ", "Free, and it stays free.",
+        bignums([
+            ("$0", "blue", "What a consumer pays. In every scenario, permanently."),
+            ("Yours", "blue", "The copy of the record you keep, whatever happens to the firm."),
+            ("$704M+", "gold", "Reported to the Canadian Anti-Fraud Centre as lost to fraud in "
+                               "2025, and government partners estimate only five to ten per cent "
+                               "of incidents are reported at all."),
+        ]) +
+        note("b", "<b>Who pays for this.</b> The regulated business pays for 4orm. You are not "
+                  "charged, your information is not sold, and there is no version of this where "
+                  "that changes."),
+        p="4ormIQ is the free part. Ask it what you are looking at, check who is asking, have a "
+          "document read before you sign it, and keep what came back."))
+
     S.append(sec("What you can do", "Four things, before anybody is selling.",
         verbs([
             ("Understand", "Ask the questions you do not yet know how to ask, in your own words, "
@@ -254,6 +268,26 @@ def professional():
         '</div>',
         p="This one is not negotiable, and it is written into the Standard a participating firm "
           "adopts."))
+
+    S.append(sec("Transaction Integrity", "Built from the systems you already run.",
+        softs([
+            ("Never", "It never holds or moves client money",
+             "No trust account, no payment rail, no custody. Your bank relationship does not "
+             "change, and no treasury review is required to buy it.", "blue"),
+            ("Never", "It never decides or advises",
+             "The recommendation belongs to the professional. The record holds the reason they "
+             "gave, not a reason the software invented.", "blue"),
+            ("Never", "It never monitors communications",
+             "Messages are contributed by the consumer or the professional. What is drawn out of "
+             "them stays linked to its source and is reviewed before use.", "blue"),
+            ("Never", "It never replaces the workflow",
+             "Your customer, origination and dealer systems keep their jobs. 4orm reads from them "
+             "and writes the record beside them.", "gold"),
+        ], cols=2),
+        p="Transaction Integrity is the commercial platform, and 4ormIQ is the free consumer "
+          "product in front of it. A product that claims to remove the duty is selling the wrong "
+          "thing. The duty stays with the firm. What goes away is the part that is clerical, "
+          "fragile and impossible to reconstruct under pressure.", alt=True))
 
     S.append(cta("Four minutes, and you will know whether this fits.",
         "See the professional experience end to end, with synthetic data, in about four minutes.",

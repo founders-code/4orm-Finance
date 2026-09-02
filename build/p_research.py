@@ -32,6 +32,38 @@ DATA = [
      "ongoing", "Government partner estimate", "Canadian Anti-Fraud Centre",
      "https://antifraudcentre-centreantifraude.ca/", "fraud"),
 
+    ("2,878", "complaints opened at the Real Estate Council of Ontario in one year, up 88 "
+              "per cent on the year before.",
+     "2025", "Complaints opened at RECO, Ontario only", "Real Estate Council of Ontario",
+     "https://www.reco.on.ca/", "realestate"),
+
+    ("$15.7M", "paid out on errors and omissions claims in Ontario real estate in a single year.",
+     "2025", "Ontario real estate errors and omissions payments",
+     "Real Estate Council of Ontario", "https://www.reco.on.ca/", "realestate"),
+
+    ("$1.2M", "in penalties across 100 enforcement actions in one financial year.",
+     "2024 to 2025", "FSRA enforcement, all sectors it regulates",
+     "Financial Services Regulatory Authority of Ontario", "https://www.fsrao.ca/", "mortgage"),
+
+    ("2,332", "charges laid in one year, carrying $1.9 million in fines.",
+     "2025", "OMVIC enforcement, Ontario motor vehicle sales",
+     "Ontario Motor Vehicle Industry Council", "https://www.omvic.ca/", "auto"),
+
+    ("105 firms", "reviewed where suitability determinations were recorded without the basis "
+                  "for them.",
+     "2025", "A joint review of registered firms", "Canadian Securities Administrators and CIRO",
+     "https://www.securities-administrators.ca/", "investing"),
+
+    ("45%", "of examined life and health agents failed to meet the needs-based sales practices "
+            "expected of them.",
+     "2025", "FSRA examination of Ontario life and health agents",
+     "Financial Services Regulatory Authority of Ontario", "https://www.fsrao.ca/", "insurance"),
+
+    ("&pound;9.1bn", "set aside for redress in United Kingdom motor finance, across 12.1 million "
+                     "agreements. What it costs when the record cannot answer the question.",
+     "2026", "UK motor finance, not Canada. Shown because the shape is the same.",
+     "Financial Conduct Authority PS26/3", "https://www.fca.org.uk/", "auto"),
+
     ("100%", "of files reviewed had no documented suitability assessment.",
      "2024 to 2025", "FSRA private-mortgage supervision sample. Not all Ontario mortgages.",
      "Financial Services Regulatory Authority of Ontario", "https://www.fsrao.ca/", "mortgage"),
@@ -96,8 +128,22 @@ DATA = [
      "lending"),
 ]
 
-TAGS = [("all", "Everything"), ("mortgage", "Mortgage"), ("auto", "Auto"), ("fraud", "Fraud"),
+TAGS = [("all", "Everything"), ("mortgage", "Mortgage"), ("auto", "Auto"),
+        ("realestate", "Real estate"), ("insurance", "Insurance"), ("fraud", "Fraud"),
         ("investing", "Investing"), ("banking", "Banking"), ("lending", "Lending")]
+
+# Firms hold the licence and the budget. Professionals create the records.
+# Transactions set the ceiling on how often any of this happens.
+SECTORS = [
+    ("Mortgage brokering", "Ontario", "1,162", "14,585", "270,000",
+     "No documented suitability in 100% of reviewed files"),
+    ("Real estate", "Ontario", "3,738", "111,332", "470,314 national",
+     "Complaints up 88 per cent in one year"),
+    ("Automotive", "Ontario", "8,000", "30,000", "1,897,055 national",
+     "Guidance on undisclosed lender compensation"),
+    ("Life and health", "Ontario", "6,680", "61,070", "not published",
+     "45% of examined agents failed needs-based sales"),
+]
 
 
 def build():
@@ -123,8 +169,23 @@ def build():
              note("b", "<b>How to read these.</b> A supervision sample is not a national rate. "
                        "Where a figure covers one regulator's review of one set of files, the "
                        "scope line says so, and quoting it as anything wider would be wrong."),
-             p="Sixteen figures the rest of this site draws on. Each one shows its year, the "
+             p="Every figure the rest of this site draws on. Each one shows its year, the "
                "population it actually covers, and a link to the body that published it.")]
+
+    S.append(sec("Where the duty lands", "Four markets, and the same shape in each one.",
+        '<div class="secwrap"><table class="sectbl">'
+        '<thead><tr><th>Market</th><th>Firms</th><th>Professionals</th>'
+        '<th>Transactions a year</th><th>What the regulator found</th></tr></thead><tbody>' +
+        "".join('<tr><td><b>%s</b><span>%s</span></td><td class="n">%s</td><td class="n">%s</td>'
+                '<td class="n">%s</td><td class="w">%s</td></tr>' % r for r in SECTORS) +
+        '</tbody></table></div>' +
+        note("b", "<b>How to read this.</b> Firms hold the licence and the budget. Professionals "
+                  "create the records. Transactions set the ceiling on how often any of this "
+                  "happens. Counts are the published sector figures for the province named."),
+        p="The duty is the same in all four: establish what the person needs, consider the "
+          "options, recommend with a reason, disclose what matters, obtain informed consent, and "
+          "keep a record another qualified person could re-perform.",
+        alt=True))
 
     S.append(sec("What is deliberately absent", "Three things we will not put on a page.",
         '<div class="dgrid">'
@@ -145,6 +206,6 @@ def build():
                 "Every figure this site uses, in one place, with the year it covers, the "
                 "population it actually describes, and a link to the primary source.") + "".join(S)
     yield kit.write("research", "/research", "The state of financial trust in Canada.",
-                    "Sixteen sourced figures on mortgage, auto, fraud, investing, banking and "
+                    "Sourced figures on mortgage, auto, real estate, insurance, fraud, investing, "
                     "lending, each with its year, scope and primary source.", body,
                     extra='\n<script src="/assets/research.js?v=%s" defer></script>' % kit.V)

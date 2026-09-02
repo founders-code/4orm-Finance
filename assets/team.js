@@ -31,9 +31,12 @@ function open(i) {
   var m = TEAM[i];
   if (!m) return;
   lastFocus = document.activeElement;
+  var face = m.i
+    ? '<img class="tmbig" src="' + m.i + '" alt="' + esc(m.n) + '" width="150" height="150" />'
+    : '<span class="tmbig tmbigi" aria-hidden="true">' +
+      esc(m.n.split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 2)) + '</span>';
   body.innerHTML =
-    '<div class="tmhead">' +
-      '<img class="tmbig" src="' + m.i + '" alt="' + esc(m.n) + '" width="150" height="150" />' +
+    '<div class="tmhead">' + face +
       '<div>' +
         '<span class="tmk">' + esc(m.k) + '</span>' +
         '<h2 class="tmbn">' + esc(m.n) + '</h2>' +

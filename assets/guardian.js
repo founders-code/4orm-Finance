@@ -1209,7 +1209,7 @@ var MODES = [
 
 SCREEN.modes = function () {
   var i = I();
-  head(i.who + '&rsquo;s 4orm', 'Nothing here reaches anybody until you say so');
+  head('4ormIQ', 'Free, always. Nothing here reaches anybody until you say so');
   paint(
     '<div class="ghead"><h3>Good afternoon, ' + i.who + '.</h3>' +
     '<p>Four things, each one before the part you cannot take back.</p></div>' +
@@ -1330,8 +1330,8 @@ SCREEN.send = function () {
         'placeholder="Paste the message, the email or the link"></textarea>' +
       '<button class="gcta wide" type="submit">Run the check &#8594;</button>' +
     '</form>' +
-    note('The check reads what is published and what the message does. It does not conclude ' +
-         'that anybody has committed a crime.')
+    note('4ormIQ reads what is published and what the message does. It does not conclude that ' +
+         'anybody has committed a crime, and it costs you nothing.')
   );
 };
 

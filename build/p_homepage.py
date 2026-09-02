@@ -301,6 +301,34 @@ NOT = """
 """
 
 
+# ------------------------------------------------- 10b who pays for this
+WHOPAYS = """
+<section class="hs hs-pays">
+  <div class="hwrap">
+    <h2 class="hh rv">The person who needs it most<br />is the one who never pays.</h2>
+    <div class="paysrow rv d1">
+      <div class="paysc">
+        <span class="hk">4ormIQ</span>
+        <p class="paysn">$0</p>
+        <p class="paysb">The free consumer product. Ask what you are looking at, check who is
+          asking, have a document read before you sign it, and keep what came back. In every
+          scenario, permanently.</p>
+      </div>
+      <span class="hsplit" aria-hidden="true"></span>
+      <div class="paysc">
+        <span class="hk">Transaction Integrity</span>
+        <p class="paysn">The firm</p>
+        <p class="paysb">The commercial platform behind it. The regulated business carries the
+          duty and the liability, and it is the regulated business that pays.</p>
+      </div>
+    </div>
+    <p class="hfine mid rv d2">No consumer is charged and no consumer information is sold. That is
+      not an introductory position, it is the shape of the business.</p>
+  </div>
+</section>
+"""
+
+
 # ------------------------------------------------------------- 11 privacy
 PRIVACY = """
 <section class="hs hs-priv dark">
@@ -390,7 +418,7 @@ CLOSE = """
 
 def build():
     body = (THESIS + PAIN + DATA + LINE + CONSUMER + PRO + EXEC + REVEAL +
-            REGS + NOT + PRIVACY + BREADTH + INTEG + CLOSE)
+            REGS + NOT + WHOPAYS + PRIVACY + BREADTH + INTEG + CLOSE)
     yield kit.write(
         "homepage", "/home",
         "Better financial decisions start with better relationships.",

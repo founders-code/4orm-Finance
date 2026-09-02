@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 """4orm Family: the people building this, and why each of them is here.
 
-Nine full biographies on one page would run seven screens and be read by
-nobody. So the page shows nine faces, and a face opens the person. The long
-version is one click away and takes up no room until it is asked for.
+Grouped, because a founder, an advisor and an unfilled seat are three
+different things and a flat grid says they are the same. Every biography
+opens over the page rather than sitting on it.
+
+HARD RULE. The build partner is never named on this page, and neither is
+anybody who works there. It is a supplier under a statement of work, not a
+seat at this company. `python3 build.py` will not let it through.
 """
 import io, json, os
 import kit
@@ -24,20 +28,35 @@ def _load():
 
 
 def card(i, m):
-    """A face, a name, and what the person is here to do."""
+    """A face, a name, and what the person is here to do.
+
+    Two seats have no photograph because nobody is in them yet, and one has
+    none because we do not hold one. The initials tile is the honest answer to
+    both, rather than a stock face standing in for a person.
+    """
     link = ('<a class="tmli" href="%s" target="_blank" rel="noopener" '
             'aria-label="%s on LinkedIn" onclick="event.stopPropagation()">%s</a>'
             % (m["link"], m["name"], LI)) if m.get("link") else ""
-    return ('<button class="tmc rv" type="button" data-who="%d" aria-expanded="false">'
-            '<span class="tmph"><span class="tmini" aria-hidden="true">%s</span>'
-            '<img src="%s" alt="%s" loading="lazy" width="420" height="420" /></span>'
+    photo = ('<img src="%s" alt="%s" loading="lazy" width="420" height="420" />'
+             % (m["img"], m["name"])) if m.get("img") else ""
+    return ('<button class="tmc rv%s" type="button" data-who="%d" aria-expanded="false">'
+            '<span class="tmph"><span class="tmini" aria-hidden="true">%s</span>%s</span>'
             '<span class="tmk">%s</span>'
             '<span class="tmn">%s</span>'
             '<span class="tmr">%s</span>'
             '<span class="tmb">%s</span>'
             '<span class="tmmore">Read more <b>%s</b></span>%s'
-            '</button>' % (i, m["ini"], m["img"], m["name"], m["kick"], m["name"],
-                           m["role"], m["short"], A, link))
+            '</button>' % (" nophoto" if not m.get("img") else "", i, m["ini"], photo,
+                           m["kick"], m["name"], m["role"], m["short"], A, link))
+
+
+GROUPS = [
+    ("founders", "The founders", "Two, and they own different halves of it."),
+    ("building", "Building it", "Target state architecture and the control framework."),
+    ("advisors", "The bench", "Six advisors, each owning one named thing."),
+    ("open", "Open, and the round funds them",
+     "Nothing is built before both of these seats are filled."),
+]
 
 
 def build():
@@ -45,15 +64,26 @@ def build():
 
     S = []
 
-    S.append(sec("4orm Family", "Nine people, and each one is here for a reason.",
-        '<div class="tmgrid">' + "".join(card(i, m) for i, m in enumerate(TEAM)) + '</div>',
-        p="Operations, architecture, securities law, capital markets and growth. Click a face to "
-          "read what that person has actually done."))
+    first = True
+    for key, kick, lede in GROUPS:
+        rows = [(i, m) for i, m in enumerate(TEAM) if m.get("group") == key]
+        if not rows:
+            continue
+        S.append(sec(kick, lede,
+            '<div class="tmgrid">' + "".join(card(i, m) for i, m in rows) + '</div>',
+            p=("Operations, architecture, securities law, capital markets and growth. "
+               "Click a face to read what that person has actually done." if first else None),
+            alt=not first and key in ("advisors",)))
+        first = False
 
     S.append(sec("Why this group", "Three things every one of them has seen up close.",
         '<div class="tmwhy">' + "".join(
             '<div class="tw rv"><span class="twk">%s</span><h3>%s</h3><p>%s</p></div>' % r
             for r in [
+                ("Life safety", "Controls that either hold or do not exist",
+                 "For two of this bench, controls used to mean life safety. Oil and gas rescue on "
+                 "one side, WorkSafe BC on the other. A control either holds under load or it is "
+                 "not a control."),
                 ("Regulated work", "A record that has to hold up later",
                  "Banking, insurance, securities and public sector systems, where a regulator can "
                  "ask years afterwards what was decided on a given day and who stood behind it."),
@@ -63,10 +93,13 @@ def build():
                 ("Canada", "The rules that actually apply here",
                  "Canadian securities law, Canadian privacy law, Canadian registers and Canadian "
                  "deadlines. This is built for the country it operates in."),
-            ]) + '</div>', alt=True))
+            ]) + '</div>',
+        p="A developer must never make a regulatory decision. That is why the regulatory lead is "
+          "its own seat, and why the person who writes a rule is not the person who ships the "
+          "code that enforces it.", alt=True))
 
     S.append(cta("Talk to one of us.",
-        "There are nine of us. A first message reaches a person, and a person answers it.",
+        "A first message reaches a person, and a person answers it.",
         primary=("Experience 4orm", "/#personal"), secondary=("Talk to the team", "/contact")))
 
     # The long biographies travel with the page as data, so nothing loads on
@@ -89,6 +122,6 @@ def build():
             '\n<script id="tmdata" type="application/json">%s</script>' % payload)
 
     yield kit.write("team", "/team", "4orm Family.",
-                    "The nine people building 4orm Finance, and what each of them has done "
-                    "before this.", body,
+                    "The founders, the bench and the two open seats at 4orm Finance, and what "
+                    "each of them has done before this.", body,
                     extra='\n<script src="/assets/team.js?v=%s" defer></script>' % kit.V)
