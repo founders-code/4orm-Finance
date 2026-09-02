@@ -2813,7 +2813,7 @@ body.greeting .nav-bare,body.greeting .lland > *:not(.ask4){opacity:0}
 .a4load[hidden]{display:none}
 
 /* ============================================================
-   4orm Assist on the landing
+   4ormIQ on the landing
 
    It waits rather than interrupts. The headline is readable from
    the first paint; Assist offers a way forward from the corner.
@@ -2853,7 +2853,7 @@ body.greeting .nav-bare,body.greeting .lland > *:not(.ask4){opacity:0}
 .lways.in,body.go .lways{opacity:1;transform:none}
 
 /* ============================================================
-   4orm Assist: the chat that wakes up on the landing
+   4ormIQ: the chat that wakes up on the landing
    ============================================================ */
 /* Wide and short. The conversation is one question at a time, so it never
    needs the depth of a messaging app, and the width lets the three ways in
@@ -2873,6 +2873,9 @@ body.greeting .nav-bare,body.greeting .lland > *:not(.ask4){opacity:0}
   border-radius:50%;background:var(--blue-50);color:var(--blue);flex:none;
   animation:a4nod 5s ease-in-out infinite}
 @keyframes a4nod{0%,90%,100%{transform:rotate(0)}94%{transform:rotate(-7deg)}97%{transform:rotate(7deg)}}
+/* The mark, not a drawn face. It is our own logo doing the talking. */
+.a4face img{width:66%;height:auto;display:block}
+.a4phone .a4face{background:rgba(255,255,255,.1)}
 .a4name{font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--tx)}
 .a4stat{margin-left:auto;display:inline-flex;align-items:center;gap:7px;
   font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.14em;
@@ -2917,12 +2920,12 @@ body.greeting .nav-bare,body.greeting .lland > *:not(.ask4){opacity:0}
   background:var(--blue);color:#fff;display:inline-flex;align-items:center;
   justify-content:center;transition:background .24s var(--ease)}
 .a4bar button:hover{background:var(--blue-dp)}
-@media (prefers-reduced-motion:reduce){ .a4face,.a4stat i{animation:none} }
+@media (prefers-reduced-motion:reduce){ .a4stat i{animation:none} }
 
 /* ============================================================
    THE LANDING
 
-   Two demonstrations and a door. Row one is the live 4orm Assist
+   Two demonstrations and a door. Row one is the live 4ormIQ
    phone with Personal beside it. Row two is the firm dashboard
    with Professional beside it. Why 4orm sits under both.
 
@@ -3235,8 +3238,8 @@ body.go .dashmini{opacity:1;transform:none;transition-delay:.2s}
   .paysrow{grid-template-columns:1fr;gap:34px}
   .paysrow .hsplit{display:none}
 }
-.paysn{margin:12px 0 0;font-size:clamp(34px,4.4vw,54px);font-weight:780;letter-spacing:-.045em;
-  line-height:1;color:var(--blue-dp)}
+.paysh{margin:12px 0 0;font-size:clamp(24px,2.6vw,32px);font-weight:760;letter-spacing:-.036em;
+  line-height:1.06;color:var(--blue-dp)}
 .paysb{margin:14px 0 0;font-size:14.6px;line-height:1.62;color:var(--tx-2);max-width:38ch}
 
 /* A seat with nobody in it, and a person we hold no photograph of. The

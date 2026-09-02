@@ -1,5 +1,5 @@
 /* ============================================================
-   4orm Assist, on the landing.
+   4ormIQ, on the landing.
 
    The phone on the landing is not a picture of the product. It is
    the product, asking the one question worth asking: what can I
@@ -101,7 +101,7 @@ var GOALS = [
 
 function open(){
   return seq([
-    ['<p>Hello. I am 4orm Assist.</p>', null, 800],
+    ['<p>Hello. I am 4ormIQ.</p>', null, 800],
     ['<p>What can I help you with?</p>', GOALS.map(function (g) {
       return ['goal:' + g[0] + ':' + g[1], g[1]];
     }), 1000]

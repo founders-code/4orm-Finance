@@ -42,8 +42,8 @@ def why():
     S.append(sec("What makes us different", "Five things, and each one is a choice.",
         flow([
             ("We start with the person, not the compliance department",
-             "The first useful minute of 4orm happens before any firm is involved, because that is "
-             "the only moment understanding is free."),
+             "The first useful minute of 4orm happens before any firm is involved, because that "
+             "is the only moment understanding still costs the person nothing but time."),
             ("The professional stays the professional",
              "4orm supports the relationship. It does not replace the expertise, and it does not "
              "make the regulated recommendation."),
@@ -109,8 +109,7 @@ def why():
                 "should be able to demonstrate how it took care of the "
                 "relationship.") + "".join(S)
     return kit.write("why", "/why-4orm", "Why 4orm.",
-                     "Why we are building this, what we believe, and the nine people building "
-                     "it.", body)
+                     "Why we are building this, what we believe, and who is building it.", body)
 
 
 def standard():

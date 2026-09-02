@@ -249,3 +249,15 @@ what was refused, is in `MASTERS-RECONCILIATION.md`.
 | L7 | Nothing confidential published | **PASS** and now enforced at the gate rather than by memory |
 | L8 | The build partner off the site entirely | **PASS** name, chief executive and bench all blocked in `kit.py`. The build fails if any of them returns |
 | L9 | Full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow at 1440 or 390, no AI or model language |
+
+
+## M. 4ormIQ, and the price goes unannounced — 2026-09-02
+
+| # | Item | Result |
+|---|---|---|
+| M1 | 4orm Assist renamed 4ormIQ everywhere | **DONE** the landing phone, the chat copy, the phone header and every comment. Zero occurrences of the old name remain |
+| M2 | The 4orm mark replaces the drawn head | **DONE** `/assets/mark.png` in the chat header, on the light landing and on the dark phone |
+| M3 | Nothing announces a price | **DONE** no "free", no "$0", no "costs you nothing", no "never charged" in visible copy on any of the 22 pages |
+| M4 | /personal leads with what 4ormIQ does, not what it costs | **REWRITTEN** the four questions people arrive with, and what comes back |
+| M5 | The /home screen is about who carries the cost, not what it costs | **REWRITTEN** the person and the firm, side by side, with no number between them |
+| M6 | Full gate | **PASS** gate 0/0, stutters 0, links resolve, no console errors, no overflow, no AI language, nothing confidential |

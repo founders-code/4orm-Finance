@@ -60,7 +60,7 @@ window.addEventListener('hashchange', fromHash);
 if (location.hash) setTimeout(fromHash, 60);
 
 /* ------------------------------------------------------------------
-   4orm Assist opens the landing.
+   4ormIQ opens the landing.
 
    The headline and the lede are there the moment the page paints.
    Assist waits in the corner and offers to help; taking it up brings

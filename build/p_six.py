@@ -52,24 +52,24 @@ def steps(items):
 def personal():
     S = []
 
-    S.append(sec("4ormIQ", "Free, and it stays free.",
-        bignums([
-            ("$0", "blue", "What a consumer pays. In every scenario, permanently."),
-            ("Yours", "blue", "The copy of the record you keep, whatever happens to the firm."),
-            ("$704M+", "gold", "Reported to the Canadian Anti-Fraud Centre as lost to fraud in "
-                               "2025, and government partners estimate only five to ten per cent "
-                               "of incidents are reported at all."),
-        ]) +
-        note("b", "<b>Who pays for this.</b> The regulated business pays for 4orm. You are not "
-                  "charged, your information is not sold, and there is no version of this where "
-                  "that changes."),
-        p="4ormIQ is the free part. Ask it what you are looking at, check who is asking, have a "
-          "document read before you sign it, and keep what came back."))
+    S.append(sec("4ormIQ", "Ask it before you act on anything.",
+        '<div class="qs">' + "".join('<span class="q">%s</span>' % q for q in [
+            "Should I send this money?",
+            "Who am I actually dealing with?",
+            "What does this document mean?",
+            "Does this offer make sense?",
+        ]) + '</div>' +
+        note("b", "<b>What comes back.</b> What was found and where it came from, what could not "
+                  "be verified said plainly, the trade-offs and the missing information, and what "
+                  "to check next before you decide. Missing information is not proof that anybody "
+                  "did anything wrong, and it never says it is."),
+        p="Four questions people actually arrive with, usually about money that is about to "
+          "leave. Paste what came in, add the document, or describe what happened."))
 
     S.append(sec("What you can do", "Four things, before anybody is selling.",
         verbs([
             ("Understand", "Ask the questions you do not yet know how to ask, in your own words, "
-                           "while asking them still costs you nothing."),
+                           "while asking them still changes nothing."),
             ("Prepare", "Know what you will be asked for before a professional asks for it, and "
                         "turn up with it ready."),
             ("Check", "Verify the information that matters, and check who you are dealing with "
@@ -284,8 +284,8 @@ def professional():
              "Your customer, origination and dealer systems keep their jobs. 4orm reads from them "
              "and writes the record beside them.", "gold"),
         ], cols=2),
-        p="Transaction Integrity is the commercial platform, and 4ormIQ is the free consumer "
-          "product in front of it. A product that claims to remove the duty is selling the wrong "
+        p="Transaction Integrity is the commercial platform, and 4ormIQ is the consumer product "
+          "in front of it. A product that claims to remove the duty is selling the wrong "
           "thing. The duty stays with the firm. What goes away is the part that is clerical, "
           "fragile and impossible to reconstruct under pressure.", alt=True))
 

@@ -162,7 +162,7 @@ var IND = {
 
 function I() {
   var i = IND[ST.ind];
-  /* If the visitor told 4orm Assist their name on the way in, the whole
+  /* If the visitor told 4ormIQ their name on the way in, the whole
      experience uses it. It never left their browser to get here. */
   var given = (window.FourmWho && window.FourmWho.name && window.FourmWho.name()) || '';
   if (given) {
@@ -1209,7 +1209,7 @@ var MODES = [
 
 SCREEN.modes = function () {
   var i = I();
-  head('4ormIQ', 'Free, always. Nothing here reaches anybody until you say so');
+  head('4ormIQ', 'Nothing here reaches anybody until you say so');
   paint(
     '<div class="ghead"><h3>Good afternoon, ' + i.who + '.</h3>' +
     '<p>Four things, each one before the part you cannot take back.</p></div>' +
@@ -1331,7 +1331,7 @@ SCREEN.send = function () {
       '<button class="gcta wide" type="submit">Run the check &#8594;</button>' +
     '</form>' +
     note('4ormIQ reads what is published and what the message does. It does not conclude that ' +
-         'anybody has committed a crime, and it costs you nothing.')
+         'anybody has committed a crime.')
   );
 };
 
@@ -1457,8 +1457,8 @@ SCREEN.look = function () {
     '<p>Pick the one closest to it. I will ask you a few things, and none of it goes ' +
     'anywhere.</p></div>' +
     LOOKS.map(function (l) { return opt('lookpick', l[1], l[2], l[0]); }).join('') +
-    note('Asking me costs you nothing and commits you to nothing. No professional can see ' +
-         'any of this unless you send it to one.')
+    note('Asking me commits you to nothing. No professional can see any of this unless you ' +
+         'send it to one.')
   );
 };
 
@@ -1686,7 +1686,7 @@ SCREEN.invite = function () {
     '<button class="gcta wide" data-act="invreview">See what they are asking for &#8594;</button>' +
     '<button class="opt ghost" data-act="modes"><span class="ptxt"><b>Not now</b>' +
     '<i>The invitation stays open for seven days</i></span><span class="ch">&#8250;</span></button>' +
-    note('Declining costs you nothing and is not reported to anybody.')
+    note('Declining changes nothing and is not reported to anybody.')
   );
 };
 
@@ -2002,7 +2002,7 @@ if (document.getElementById('phBody')) {
   boot('mortgage');
 
   /* The name may arrive after this file has already painted a screen, because
-     4orm Assist asks for it on the landing. Re-open with it the first time the
+     4ormIQ asks for it on the landing. Re-open with it the first time the
      phone is actually picked up. */
   (function adoptName(){
     var applied = '';
