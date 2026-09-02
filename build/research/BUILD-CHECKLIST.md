@@ -488,3 +488,62 @@ A `.gitignore` now covers `__pycache__`, `.pyc`, `.DS_Store`, `.vercel` and
 down from 1.0M. The build kit and the research stay in the repository,
 because they are how the site is produced and why it says what it says,
 but they are not part of a deployment.
+
+
+## W. Investing, banking, lending, and the change nobody told them — 2026-09-02
+
+All seven decisions now have their own discovery. Sources and every
+derivation are in `build/research/INVESTING-BANKING-LENDING-DISCOVERY.md`.
+
+### The last three question sets
+
+| Decision | Regulator | The finding that shaped it |
+|---|---|---|
+| Investing | CSA and CIRO, Client Focused Reforms | Across 105 firms reviewed, the most common deficiency was treating risk as one thing. It is two: what a person is willing to lose and what they can afford to lose, and the profile is meant to follow the lower of the two |
+| Banking | FCAC, and the Financial Consumer Protection Framework | A premium card was recommended without anybody asking about income 80% of the time. 16% asked about spending. One in five cross-sold products did not suit the buyer |
+| Lending | Criminal Code rate cap, cost of borrowing disclosure, FCAC | 43% of payday borrowers understood their loan cost more than the alternatives open to them. So the useful move is not a warning, it is the comparison they were never shown |
+
+| # | Item | Result |
+|---|---|---|
+| W1 | The two-factor risk question | **DONE** asked as two numbers and one comparison. "Which of the two is smaller?" Nobody is ever asked this, and it is the answer meant to constrain everything recommended |
+| W2 | Banking checks the obligation from the other side | **DONE** "Did they ask what you needed it for, before naming a product?" Four seconds to answer, and it is the appropriateness duty in a sentence |
+| W3 | Lending names the reason without flinching | **DONE** "Bills I'm behind on" is a door, and the reply says four in ten are covering rent or a utility bill. Ordinary, and nobody says so |
+| W4 | Repeat borrowing asked, and skippable | **DONE** "Is this the first one this year?" It is the difference between a gap and a treadmill, and around a quarter of people are on the second |
+| W5 | The rate cap stated as law, never as an accusation | **PASS** "Above 35% APR is a criminal rate in Canada for most consumer lending." No firm is named or implied |
+| W6 | Prepare steps for all three | **DONE** the know-your-client elements for investing, consent and cost for banking, the written statement and the add-ons for lending |
+
+### What changed, and nobody told them
+
+Every conversation now ends by asking whether anybody has mentioned a real
+rule change that affects what the person just described, then telling them,
+with the regulator's own page to read. It is the only turn in the product
+that sends a person somewhere other than 4orm.
+
+| Decision | The change | Source linked |
+|---|---|---|
+| Mortgage | Since 21 November 2024 a straight switch at renewal no longer has to requalify at the stress-test rate | OSFI |
+| Auto | The EV Affordability Program opened 16 February 2026. Up to $5,000, on vehicles to $50,000 | Transport Canada |
+| Real estate | Since 3 January 2024 a publicly marketed home must reach MLS within three days, and keeping it off has to be the seller's written decision | CREA |
+| Insurance | From 1 July 2026 only medical, rehabilitation and attendant care stay mandatory in Ontario accident benefits | FSRA |
+| Investing | From 1 January 2026 fund costs are reported in dollars, not only as a percentage. First report covers this year | CSA |
+| Banking | Since 1 November 2024 every bank answers to the same ombudsman. They used to pick between two | FCAC |
+| Lending | Since 1 January 2025 the maximum lawful rate is 35% APR, down from about 48% | Canada Gazette |
+
+| # | Item | Result |
+|---|---|---|
+| W7 | Asked as a no-oriented question | **DONE** "Has anyone told you what changed?" with "No, what changed?" as the answer that lets us be useful. One tap either way |
+| W8 | Every link verified live and primary | **PASS** all seven fetched and confirmed. Every one goes to a regulator or the government, never to a company that profits from the change |
+| W9 | Links open safely | **DONE** new tab, `rel="noopener noreferrer"`, and a visible focus ring |
+| W10 | The adjacent one admits it is adjacent | **FIXED** the insurance change is a different corner of insurance from the conversation that precedes it, so it opens by saying so instead of pretending to follow |
+| W11 | Not recorded | **FIXED** it was landing in the read-back as "Knew what changed". The record is the person's situation, and whether they had heard a piece of news is not part of it |
+| W12 | Rules written down for anything added later | **DONE** a real change with a date, it must affect what the person just said they are doing, and the link never goes to a company that profits from it |
+
+### Reviewed across all seven
+
+| # | Item | Result |
+|---|---|---|
+| W13 | Measured | 315 spoken lines, average 10.8 words, longest 24, 7 over 20, 173 contractions, 0 reactions past two bubbles |
+| W14 | House rules | **PASS** no dashes, no question starting "why", nothing from the banned list, no manufactured urgency |
+| W15 | Shape consistent | **PASS** five turns each, opener, two facts, the nosy one, what matters most, then the change and the read-back |
+| W16 | Every prepare step renders | **PASS** all seven decisions swept step by step |
+| W17 | Full regression | **PASS** all seven paths end to end, no old screen reachable from any entry, both landing handoffs, money to Checking it, document to Reading it with you, put-away to home, links resolve, gate 0/0, stutters 0, no AI language, nothing confidential, no defects at 1440 or 390 |
