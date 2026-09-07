@@ -685,3 +685,30 @@ row-density profile of the hero gives an ascender top at 192, an x-height
 top at 207 and a baseline at 247.5, so a 55.5px cap height. On a face with
 Inter's proportions that is a 76px type size, which the landing now matches
 at the same viewport width.
+
+
+## AC. The homepage thumbnail — 2026-09-07
+
+| # | Item | Result |
+|---|---|---|
+| AC1 | The real page, not a wireframe | **DONE** the homepage section's visual was an abstract skeleton of grey bars. It now carries a screenshot of the homepage itself, inside the same browser frame |
+| AC2 | Weight | **DONE** cropped below the two calls to action, resized to 764px wide and saved as a progressive JPEG. 25K, against 107K for the same image as a PNG |
+| AC3 | Loading | **DONE** `loading="lazy"`, `decoding="async"`, and explicit width and height so nothing shifts as it arrives |
+| AC4 | Described | **DONE** real alternative text rather than a decorative empty string, because the thumbnail is the only thing in that section carrying the page's proposition |
+| AC5 | The wireframe styles removed | **DONE** the dozen rules that drew the fake nav, headline bars and cards are gone rather than left orphaned |
+| AC6 | Checked | **PASS** loads at 1440 and 390, no 4xx, no overflow, still links to /home, and a focus ring for the keyboard |
+
+
+## AD. The homepage thumbnail, sharpened — 2026-09-07
+
+| # | Item | Result |
+|---|---|---|
+| AD1 | The blur | **FIXED** the first version was a supplied screenshot scaled down from 1915px to 764px, which is where the small type turned to mush. It is now shot from the built `/home` page at a 3x device pixel ratio and delivered at 1020px, so it is sharp on a 3x display and oversampled on anything less |
+| AD2 | A rectangle, not a square | **DONE** cropped to the hero through both calls to action, which lands at 16:9 |
+| AD3 | It stays in sync | **DONE** because it is now generated from the page rather than pasted in, `/tmp/shoothome.js` reshoots it whenever the homepage changes |
+| AD4 | Weight | 78K, against 25K for the blurry one. Worth it, and still lazy-loaded with explicit dimensions |
+| AD5 | Checked | **PASS** loads at 1440 and 390, no 4xx, no overflow, still links to /home |
+
+**Still outstanding.** The 4ormIQ and enterprise visuals are still the live
+phone and the live dashboard, not matching framed screenshots. Packaged at
+this point on instruction.
