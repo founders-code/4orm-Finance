@@ -42,6 +42,7 @@ var PRIMARY = [
 
 var page = document.body.getAttribute('data-page') || '';
 var ARROW = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
+var BACK = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 19l-7-7 7-7"/></svg>';
 var CHEV = '<svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
 
 function el(t, c, h) { var n = document.createElement(t); if (c) n.className = c;
@@ -79,8 +80,8 @@ function buildMenuHeader() {
             (i.slug === page ? ' aria-current="page"' : '') + '>' + i.label + '</a>';
         }).join('') +
       '</nav>' +
-      '<button class="nav-cta" type="button" data-closemenu>Close ' +
-        '<span class="cir">' + ARROW + '</span></button>' +
+      '<button class="nav-cta navback" type="button" data-closemenu>' +
+        '<span class="cir">' + BACK + '</span> Back</button>' +
     '</div>';
   return h;
 }
@@ -92,14 +93,15 @@ function buildBareNav() {
   var h = el('header', 'nav nav-bare');
   /* The mark and the one control, top right, in the blue pill the rest of the
      site uses. Nothing else competes with the three ways in. */
-  /* One control on the landing, and it goes to the home page. The white menu
-     lives on the other side of that door, where there is somewhere to go. */
+  /* One control on the landing, and it opens the menu over the top rather than
+     navigating away, so the way back is a button and not the browser. */
   h.innerHTML =
     '<div class="nav-in">' +
       '<span></span>' +
       '<div class="bare-right">' +
-        '<a class="bare-menu" href="/home">4orm my experience ' +
-          '<span class="cir" aria-hidden="true">' + ARROW + '</span></a>' +
+        '<button class="bare-menu" id="bare-open" type="button" aria-expanded="false" ' +
+          'aria-controls="omenu">4orm my experience ' +
+          '<span class="cir" aria-hidden="true">' + ARROW + '</span></button>' +
       '</div>' +
     '</div>';
   wrap.appendChild(h);
@@ -122,7 +124,9 @@ function buildMenu() {
           return '<span class="oitem soon" data-k="' + k + '">' + i.label +
                  '<em>Coming soon</em></span>';
         }
-        return '<a class="oitem" href="' + i.href + '" data-k="' + k + '"' +
+        return '<a class="oitem' + (i.wide ? ' owide' : '') +
+               (i.narrow ? ' onarrow' : '') + '" href="' + i.href +
+               '" data-k="' + k + '"' +
                (i.slug === page ? ' aria-current="page"' : '') + '>' + i.label + '</a>';
       }).join('') + '</div>';
   }
@@ -133,13 +137,19 @@ function buildMenu() {
          sitemap; a menu that names the three kinds of visitor is navigation. */
       '<div class="omenu-in six">' +
         col('Go', PRIMARY) +
-        col('Industries', INDUSTRIES) +
+        col('Industries', INDUSTRIES.map(function (i) {
+          /* Every industry is a door on a wide screen. On a phone they are
+             seven taps that all lead to the same kind of page, so they fold
+             into the one below. */
+          var c = {}; for (var key in i) c[key] = i[key]; c.wide = true; return c;
+        }).concat([{ label: 'All industries', href: '/industries',
+                     slug: 'industries', narrow: true, k: 'sectors who for' }])) +
         col('More', [
           { label: 'Why 4orm',   href: '/why-4orm',    slug: 'why',       k: 'company belief values story who' },
-          { label: 'Research',   href: '/research',    slug: 'research',  k: 'data numbers sources trust canada' },
-          { label: 'The Standard', href: '/the-standard', slug: 'standard', k: 'principles operating' },
+          { label: 'Research',   href: '/research',    slug: 'research',  k: 'data numbers sources trust canada', wide: true },
+          { label: 'The Standard', href: '/the-standard', slug: 'standard', k: 'principles operating', wide: true },
           { label: 'Check a firm', href: '/check-a-firm', slug: 'check',  k: 'licence register verify' },
-          { label: 'Privacy and security', href: '/privacy', slug: 'privacy', k: 'my 4orm information' },
+          { label: 'Privacy and security', href: '/privacy', slug: 'privacy', k: 'my 4orm information', wide: true },
           { label: 'Contact',    href: '/contact',     slug: 'contact',   k: 'talk support walkthrough' }
         ]) +
         '<div class="ocol ofoot"><a class="obig" href="/contact">Talk to us</a></div>' +
@@ -230,7 +240,8 @@ function buildFooter() {
 function initNav() {
   var m = document.getElementById('omenu');
   var controls = [document.getElementById('burger'), document.getElementById('burger-m'),
-                  document.getElementById('burger-s')].filter(Boolean);
+                  document.getElementById('burger-s'),
+                  document.getElementById('bare-open')].filter(Boolean);
   var bu = controls[0];
   if (m) {
     var openMenu = function (on) {

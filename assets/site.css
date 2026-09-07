@@ -1370,6 +1370,10 @@ body.infocus .lure{opacity:0 !important;visibility:hidden}
   opacity:0;transform:translateY(8px);
   transition:color .24s var(--ease),opacity .5s var(--ease),transform .5s var(--spring)}
 .omenu.open .oitem{opacity:1;transform:none}
+/* The one door that exists only on a phone. It needs to outrank .oitem's own
+   display, which is declared after it in this file. */
+.oitem.onarrow{display:none}
+@media (max-width:900px){ .oitem.onarrow{display:flex} }
 .oitem:hover{color:var(--blue)}
 .oitem[aria-current="page"]{color:var(--blue-dp)}
 .oitem.soon{color:var(--tx-3);cursor:default}
@@ -1420,13 +1424,24 @@ body.infocus .lure{opacity:0 !important;visibility:hidden}
 .lland{min-height:100dvh;display:flex;flex-direction:column;align-items:center;
   justify-content:center;padding:clamp(96px,12vh,124px) 40px clamp(44px,6vh,64px);text-align:center}
 .lmark{display:block;margin:0 auto clamp(22px,3.4vh,38px);opacity:0;transform:translateY(10px)}
+/* The ladder. The headline lands on "understanding" and this carries it the
+   rest of the way to "relationships", so the argument is one line long and
+   readable at a glance rather than a paragraph to be waded through. */
+.lchain{margin:0 auto clamp(14px,1.8vh,20px);max-width:52ch;
+  font-size:clamp(17px,1.62vw,22px);line-height:1.42;letter-spacing:-.022em;
+  font-weight:640;color:var(--tx-2);text-wrap:balance;
+  opacity:0;transform:translateY(12px)}
+.lchain b{font-weight:750;color:var(--blue)}
+body.go .lchain{opacity:1;transform:none;transition:opacity .9s var(--ease) .2s,
+  transform .9s var(--spring) .2s}
+
 .lmark img{display:block;height:clamp(63px,5.9vw,81px);width:auto;margin:0 auto}
 .lh1{margin:0 auto clamp(18px,2.4vh,26px);max-width:22ch;font-size:clamp(30px,3.7vw,52px);line-height:1.06;
   letter-spacing:-.04em;font-weight:750;color:var(--tx);text-wrap:balance;
   opacity:0;transform:translateY(14px)}
 /* three ways in, divided by hairlines and nothing else */
-.llede{margin:0 auto clamp(38px,5.4vh,62px);max-width:60ch;font-size:clamp(16px,1.45vw,20px);
-  line-height:1.6;letter-spacing:-.012em;color:var(--tx-2);text-wrap:pretty;
+.llede{margin:0 auto clamp(38px,5.4vh,62px);max-width:58ch;font-size:clamp(14.5px,1.16vw,16.5px);
+  line-height:1.62;letter-spacing:-.008em;color:var(--tx-3);text-wrap:pretty;
   opacity:0;transform:translateY(12px)}
 body.go .llede{opacity:1;transform:none;transition:opacity .9s var(--ease) .26s,
   transform .9s var(--spring) .26s}
@@ -2764,6 +2779,62 @@ body.menu-open .nav-bare{opacity:0;pointer-events:none;transition:opacity .3s va
 /* The six-column menu. */
 .omenu-in.six{grid-template-columns:repeat(3,minmax(0,1fr)) minmax(150px,.6fr)}
 
+/* The narrow menu.
+
+   The four-column rule above outranked the mobile rule further up the file, so
+   four columns were being forced into a phone: headings collided, items sat on
+   top of each other, and the tail of the list fell off the bottom with nothing
+   to scroll. This is the whole fix, and it has to live after that rule to win.
+
+   The menu also has to scroll on a short screen. It is a full-height overlay
+   with more in it than fits, which is the one case where hiding the overflow
+   is the same as deleting the content.  */
+@media (max-width:900px){
+  /* Block, not flex. A flex container whose child overflows in the block
+     direction does not reliably grow its own scrollHeight, so the tail of the
+     list was unreachable rather than merely below the fold. */
+  .omenu{display:block;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    padding:96px 22px 48px;
+    /* The waterline is a desktop idea. On a phone the menu is a full sheet
+       that scrolls, and a backdrop measured as a percentage of the viewport
+       leaves the bottom of the list floating over the page behind it. The
+       colour goes on the scrolling box itself so it paints the whole run. */
+    background:linear-gradient(180deg,
+      rgba(233,241,254,.98) 0%,
+      rgba(229,239,254,.97) 52%,
+      rgba(223,235,253,.96) 100%);
+    backdrop-filter:saturate(150%) blur(20px);
+    -webkit-backdrop-filter:saturate(150%) blur(20px)}
+  .omenu::before,.owave{display:none}
+  /* The phone menu carries the five pages, one door to the industries, and the
+     three things somebody actually looks for. The rest is a sitemap, and a
+     sitemap on a phone is a wall. Everything hidden here is still one tap
+     away in the footer. */
+  .oitem.owide{display:none}
+  .omenu-shell{margin:0 auto}
+  .omenu.withhead{padding-top:132px}
+  .omenu-shell{padding-bottom:24px}
+  .omenu-in.six{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 22px;padding-top:28px}
+  .omenu-in.six .ofoot{grid-column:1 / -1;padding-top:4px}
+  /* Put the two real lists beside each other. Industries is one door on a
+     phone, so it drops underneath rather than stranding half a row. */
+  .omenu-in.six .ocol:nth-child(2){order:3}
+  .omenu-in.six .ocol:nth-child(3){order:2}
+  .omenu-in.six .ofoot{order:4}
+  .och{margin-bottom:10px}
+  .oitem{font-size:16px;padding:7px 0}
+  .obig{font-size:18px}
+}
+@media (max-width:900px) and (max-height:720px){
+  .omenu{padding-top:88px}
+  .omenu.withhead{padding-top:112px}
+}
+/* Two columns hold down to a small phone. Below that they stop being two
+   columns and start being two cramped ones. */
+@media (max-width:339px){
+  .omenu-in.six{grid-template-columns:1fr;gap:22px 0}
+}
+
 /* ============================================================
    Research: a figure, what it means, and what it covers
    ============================================================ */
@@ -2968,6 +3039,42 @@ body[data-page="home"] .llede{margin-bottom:clamp(52px,6vh,82px)}
   gap:clamp(36px,4.4vw,72px);align-items:center}
 
 .lvis{display:flex;justify-content:center}
+
+/* The line the user asked for, between reading about 4orm and operating it. */
+.lsep{border:0;border-top:1px solid var(--border);margin:0;width:100%}
+
+/* The homepage section's visual. A page, at the size a page is when you are
+   deciding whether to open it. Nothing in it is readable, and that is the
+   point: it is a shape you recognise, not a screenshot to squint at. */
+.pagemini{display:block;width:min(340px,100%);text-decoration:none;
+  border:1px solid var(--border);border-radius:15px;background:#fff;overflow:hidden;
+  box-shadow:0 24px 54px -30px rgba(16,32,64,.28);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.pagemini:hover{transform:translateY(-3px);
+  box-shadow:0 32px 66px -30px rgba(16,32,64,.34)}
+.pmtop{display:flex;align-items:center;gap:5px;padding:9px 13px;background:var(--bg-2);
+  border-bottom:1px solid var(--border)}
+.pmtop i{width:6px;height:6px;border-radius:50%;background:var(--border);flex:none}
+.pmtop em{margin-left:9px;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--tx-3);font-style:normal}
+.pmbody{display:block;padding:13px}
+.pmnav{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.pmnav b{width:22px;height:7px;border-radius:2px;background:var(--blue);flex:none}
+.pmnav s{height:5px;border-radius:2px;background:var(--bg-3);text-decoration:none;flex:none}
+.pmnav s:nth-child(2){width:26px}.pmnav s:nth-child(3){width:20px}
+.pmnav s:nth-child(4){width:30px}.pmnav s:nth-child(5){width:18px;margin-left:auto}
+.pmhero{display:block;margin-bottom:18px}
+.pmh{display:block;height:11px;border-radius:3px;background:var(--tx);opacity:.86;
+  margin-bottom:6px}
+.pmh.sh{width:62%}
+.pmp{display:block;height:6px;border-radius:2px;background:var(--bg-3);margin-top:9px}
+.pmp.sh{width:48%}
+.pmcards{display:flex;gap:8px}
+.pmcards i{flex:1;height:42px;border-radius:8px;background:var(--bg-2);
+  border:1px solid var(--border)}
+.pmcards i:first-child{background:var(--blue-50);border-color:var(--blue-100)}
+@media (max-width:700px){.pagemini{width:min(300px,100%)}}
+
 .ltxt{display:flex;flex-direction:column;align-items:flex-start}
 .ltxt .lwh{margin:0 0 14px;font-weight:750;color:var(--tx);text-wrap:balance}
 .ltxt .lws{max-width:44ch;margin-bottom:26px}
@@ -2996,29 +3103,30 @@ body[data-page="home"] .llede{margin-bottom:clamp(52px,6vh,82px)}
 .lwhy:hover .lwe b{transform:translateX(4px);background:var(--blue);color:#fff}
 
 /* ---------- the phone ---------- */
-.a4phone{position:relative;width:min(340px,100%);display:flex;flex-direction:column;
-  background:#0D1526;border-radius:38px;padding:34px 12px 14px;cursor:pointer;
+.a4phone{position:relative;width:min(296px,100%);display:flex;flex-direction:column;
+  background:#0D1526;border-radius:34px;padding:30px 10px 12px;cursor:pointer;
   border:1px solid rgba(255,255,255,.09);
   box-shadow:0 40px 90px -34px rgba(12,24,48,.6),0 0 0 9px #F3F5F9;
   opacity:0;transform:translateY(20px) scale(.985);
   transition:opacity .8s var(--ease),transform .8s var(--spring),box-shadow .4s var(--ease)}
 .a4phone.awake{opacity:1;transform:none}
 .a4phone:hover{box-shadow:0 48px 100px -34px rgba(12,24,48,.66),0 0 0 9px #EDF1F8}
-.a4pn{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:92px;height:19px;
+.a4pn{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:80px;height:17px;
   border-radius:0 0 14px 14px;background:#0D1526;border:1px solid rgba(255,255,255,.07);
   border-top:0}
 
-.a4phone .a4top{display:flex;align-items:center;gap:9px;padding:8px 12px 12px;
+.a4phone .a4top{display:flex;align-items:center;gap:8px;padding:6px 10px 10px;
   border-bottom:1px solid rgba(255,255,255,.08);background:none}
-.a4phone .a4face{width:28px;height:28px;background:rgba(46,107,242,.2);color:#6FA0FF}
-.a4phone .a4name{font-size:13.4px;color:#fff}
+.a4phone .a4face{width:25px;height:25px;background:rgba(46,107,242,.2);color:#6FA0FF}
+.a4phone .a4name{font-size:12.6px;color:#fff}
 .a4phone .a4stat{font-size:8px;color:#4FD1A0}
 .a4phone .a4stat i{background:#4FD1A0}
 
-.a4phone .a4thread{display:flex;flex-direction:column;gap:9px;padding:16px 10px;
-  min-height:238px;max-height:238px;overflow-y:auto;text-align:left}
-.a4phone .a4b{max-width:92%;font-size:13.6px;line-height:1.48;padding:11px 14px;
-  border-radius:16px}
+/* Three doors need far less room than six decisions did. */
+.a4phone .a4thread{display:flex;flex-direction:column;gap:8px;padding:13px 9px;
+  min-height:214px;max-height:214px;overflow-y:auto;text-align:left}
+.a4phone .a4b{max-width:93%;font-size:13px;line-height:1.45;padding:10px 13px;
+  border-radius:15px}
 .a4phone .a4b.a4{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);
   color:rgba(255,255,255,.9);border-bottom-left-radius:5px}
 .a4phone .a4b.me{background:var(--blue);color:#fff;border-bottom-right-radius:5px}
@@ -3026,16 +3134,16 @@ body[data-page="home"] .llede{margin-bottom:clamp(52px,6vh,82px)}
 .a4phone .a4b.typing i{background:rgba(255,255,255,.55)}
 .a4phone .a4chips{gap:6px;margin-top:10px}
 .a4phone .a4chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);
-  color:#fff;font-size:12.4px;padding:7px 13px}
+  color:#fff;font-size:11.9px;padding:6px 11px}
 .a4phone .a4chip:hover{background:#fff;border-color:#fff;color:var(--tx)}
 
-.a4phone .a4bar{padding:10px 8px 4px;border-top:1px solid rgba(255,255,255,.08);
+.a4phone .a4bar{padding:9px 7px 3px;border-top:1px solid rgba(255,255,255,.08);
   background:none;gap:8px}
 .a4phone .a4bar input{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);
   color:#fff;font-size:13px;padding:10px 15px}
 .a4phone .a4bar input::placeholder{color:rgba(255,255,255,.4)}
 .a4phone .a4bar input:focus{border-color:rgba(111,160,255,.6)}
-.a4phone .a4bar button{width:34px;height:34px}
+.a4phone .a4bar button{width:31px;height:31px}
 
 /* ---------- the dashboard ---------- */
 .dashmini{display:block;width:min(440px,100%);text-align:left;cursor:pointer;
@@ -3489,3 +3597,13 @@ body.go .dashmini{opacity:1;transform:none;transition-delay:.2s}
   .iqtile{flex:1}
   .iqh{font-size:24px}
 }
+
+/* The way back out of the menu. The circle leads, because the arrow points at
+   where the person came from rather than where they are going.
+
+   Named navback, not back: a bare .back already exists as a fixed control on
+   the experience screens, and inheriting position:fixed from it dropped this
+   button on top of the logo. */
+.nav-cta.navback{padding:9px 20px 9px 9px}
+.nav-cta.navback .cir{margin-right:1px}
+.nav-cta.navback:hover .cir{transform:translate(-3px,-1px) scale(1.06)}

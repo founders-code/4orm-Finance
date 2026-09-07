@@ -1569,6 +1569,11 @@ SCREEN.send = function () {
   paint(
     '<div class="ghead"><h3>What came in?</h3>' +
     '<p>Paste it below. Or open one of these and I&rsquo;ll run the same check.</p></div>' +
+    /* The console reads a name against the registers. It is the other half of
+       this screen, and it is how somebody with a company name rather than a
+       message gets checked. */
+    opt('iq', 'Check a company or a website', 'A name is enough to start') +
+    '<div class="gor">or read a message</div>' +
     SENDS.map(function (s) {
       return opt('sendrun', s.t, esc(s.p.slice(0, 74)) + '&hellip;', s.k);
     }).join('') +

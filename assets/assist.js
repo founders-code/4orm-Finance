@@ -90,58 +90,37 @@ function seq(turns) {
    One question, and the answers are the things a person actually
    came here to do. Naming them is the fastest way to say what the
    product is: nobody reads "financial decision infrastructure",
-   everybody understands "buy a home".
+   everybody understands "buying a home".
    --------------------------------------------------------- */
-/* Four of these are decisions with time in front of them, and they open the
-   discovery. The fifth is money about to leave, which is a different kind of
+/* Five of these are decisions with time in front of them, and they open the
+   discovery. The last is money about to leave, which is a different kind of
    moment and opens the check instead. Same architecture underneath, different
    entry, because a person about to wire funds today should not be handed a ten
    question interview. */
+/* Four, not six. These are a sampler, not a menu: the phone is small now and
+   a person who scrolls to read the greeting has already been failed. Anything
+   else can be typed, and all seven decisions are on the pills inside. */
 var GOALS = [
   ['mortgage:renew',  'Renewing my mortgage'],
   ['mortgage:buy',    'Buying a home'],
-  ['realestate:sell', 'Selling my home'],
   ['auto:buy',        'Buying a car'],
-  ['insurance:buy',   'Buying insurance'],
   ['send:invest',     'Sending an investment']
 ];
 
 function open(){
   return seq([
-    ['<p>Hello. I am 4ormIQ.</p>', null, 800],
-    ['<p>What can I help you with?</p>', GOALS.map(function (g) {
-      return ['goal:' + g[0] + ':' + g[1], g[1]];
-    }), 1000]
+    ['<p>Hello. I am 4ormIQ. What can I help you with?</p>',
+     GOALS.map(function (g) { return ['goal:' + g[0] + ':' + g[1], g[1]]; }), 950]
   ]);
 }
 
-function askName(kind) {
-  WAIT = kind;
-  if (kind === 'you') {
-    say('<p>Good. What is your first name?</p>' +
-        '<p class="a4m">Everything you see from here on will use it, so it reads as yours ' +
-        'rather than ours. It stays in this browser and goes when you close the tab.</p>',
-        null, 900);
-  } else {
-    say('<p>What is your firm called?</p>' +
-        '<p class="a4m">The dashboard will carry it instead of our example name. It stays in ' +
-        'this browser and goes when you close the tab.</p>', null, 900);
-  }
-  setTimeout(function () { input.focus(); }, 1000);
-}
-
-function takeName(kind, value) {
-  var clean = value.replace(/[^\w\s'&.-]/g, '').trim().slice(0, 40);
-  if (!clean) { enter(kind); return; }
-
-  if (kind === 'you') {
-    remember('name', clean);
-    say('<p>Thank you, ' + esc(clean) + '. Picking up the phone now.</p>', null, 750);
-  } else {
-    remember('firm', clean);
-    say('<p>Thank you. Opening the reading for ' + esc(clean) + '.</p>', null, 750);
-  }
-  setTimeout(function () { enter(kind); }, 1500);
+function askName() {
+  WAIT = 'name';
+  say('<p>Good. And your first name?</p>' +
+      '<p class="a4m">Everything you see from here on will use it. It stays in this browser ' +
+      'and goes when you close the tab.</p>',
+      [['skip', 'Skip this']], 780);
+  setTimeout(function () { input.focus(); }, 900);
 }
 
 /* Hand over to the experience the visitor asked for.
@@ -162,9 +141,7 @@ function enter(kind, ind) {
     sessionStorage.setItem('4orm.said', said);
   } catch (e) {}
   /* The phone reads the decision and the intent out of the browser itself and
-     opens on the right screen. Clicking the industry button from here as well
-     used to re-open the phone a second time and land the person back on the
-     menu they had already answered. */
+     opens on the right screen. */
   location.hash = kind === 'firm' ? '#professional' : '#personal';
 }
 
@@ -186,16 +163,10 @@ thread.addEventListener('click', function (e) {
      reads as theirs, and then it opens on that decision. */
   if (k.indexOf('goal:') === 0) {
     GOAL = k.slice(5).replace(/:[^:]*$/, '');
-    WAIT = 'goal';
-    say('<p>Good. And your first name?</p>' +
-        '<p class="a4m">Everything you see from here on will use it. It stays in this browser ' +
-        'and goes when you close the tab.</p>',
-        [['skip', 'Skip this']], 780);
-    setTimeout(function () { input.focus(); }, 900);
+    askName();
     return;
   }
   if (k === 'skip') { WAIT = null; enter('you', GOAL); return; }
-  askName(k);
 });
 
 bar.addEventListener('click', function (e) { e.stopPropagation(); });
@@ -207,7 +178,8 @@ bar.addEventListener('submit', function (e) {
   if (!v) return;
   input.value = '';
   me(v);
-  if (WAIT === 'goal') {
+
+  if (WAIT === 'name') {
     WAIT = null;
     var clean = v.replace(/[^\w\s'&.-]/g, '').trim().slice(0, 40);
     if (clean) remember('name', clean);
@@ -215,22 +187,17 @@ bar.addEventListener('submit', function (e) {
     setTimeout(function () { enter('you', GOAL); }, 1300);
     return;
   }
-  if (WAIT) { var k = WAIT; WAIT = null; takeName(k, v); return; }
-  /* Anything typed before Assist has been answered is a goal in the visitor's
-     own words. Match it against what 4orm covers, and open there. */
+
+  /* Anything typed before a goal has been chosen is a decision in the
+     visitor's own words. Match it against what 4orm covers, and open there. */
   var t = v.toLowerCase(), ind = '';
-  /* Selling is checked before buying, because "selling my home" contains the
-     word that would otherwise send it to the mortgage. */
-  if (/sell|listing|list my|realtor|real estate agent|representation/.test(t)) ind = 'realestate';
+  if (/sell|listing|realtor|real estate/.test(t)) ind = 'realestate';
   else if (/home|house|mortgage|condo|renew|refinan/.test(t)) ind = 'mortgage';
   else if (/car|vehicle|truck|auto|lease/.test(t)) ind = 'auto';
   else if (/insur|policy|cover/.test(t)) ind = 'insurance';
-  else if (/invest|portfolio|advis/.test(t)) ind = 'investing';
-  else if (/firm|client|broker|dealer|my business/.test(t)) {
-    say('<p>Then let me open the firm view.</p>', null, 650);
-    setTimeout(function () { enter('firm'); }, 1250);
-    return;
-  }
+  else if (/invest|portfolio|advis|send|wire/.test(t)) ind = 'investing';
+  else if (/bank|account|chequing|savings/.test(t)) ind = 'banking';
+  else if (/loan|borrow|lend|payday/.test(t)) ind = 'lending';
   say('<p>Opening 4orm so you can ask it properly.</p>', null, 650);
   setTimeout(function () { enter('you', ind); }, 1250);
 });
