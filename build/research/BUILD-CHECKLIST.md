@@ -596,3 +596,92 @@ they are sourced, and none of them is about anybody in particular.
 | Y5 | The demonstration is still reachable | **PASS** the dashboard itself is still a button and still opens the firm view, so the row now offers both: read about it, or operate it |
 | Y6 | Checked at both widths | **PASS** 1280 and 390, no overflow, no defect |
 | Y7 | Regression | **PASS** links resolve, gate 0/0, stutters 0, no AI language, nothing confidential, no defects at 1440 or 390 |
+
+
+## Z. The landing chat became a front door — 2026-09-02
+
+The chat used to ask "What can I help you with?" and offer six decisions.
+It now asks where the person wants to go and offers three doors, and the
+phone that carries it came down a size.
+
+| # | Item | Result |
+|---|---|---|
+| Z1 | Three doors | **DONE** "Go to the homepage", "4ormIQ user experience", "Enterprise experience" |
+| Z2 | Homepage | **DONE** goes to `/home` |
+| Z3 | The user experience | **DONE** one short beat for a first name, skippable, then the phone opens carrying it |
+| Z4 | The enterprise experience | **DONE** opens 4ormex.com in a new tab, so the landing is still there behind it |
+| Z5 | The chat is smaller | **DONE** the phone went 340px to 296px and the thread 238px to 196px. Three doors need far less room than six decisions did |
+| Z6 | One turn, not two | **DONE** the greeting and the question arrive together |
+| Z7 | Typing still works | **DONE** anything typed is read as the door it means, and a decision named in the person's own words still opens the phone on it |
+| Z8 | "Buying a home" no longer lands on the homepage | **FIXED** the homepage matcher was claiming the word "home". It now needs an explicit ask: homepage, main site, who are you |
+| Z9 | The 4ormIQ console kept an entry | **FIXED** it was reached only by the landing's investment chip, which this change removed. It now sits on the check screen as "Check a company or a website", which reaches it from every decision |
+| Z10 | Regression | **PASS** all three doors, typed and tapped, the console end to end, links resolve, gate 0/0, stutters 0, no AI language, nothing confidential, no defects at 1440 or 390 |
+
+
+## AA. The landing rebuilt as three sections — 2026-09-07
+
+### The sections
+
+The chat briefly became a three-door menu. That was a misreading: the three
+doors are sections of the page, and the phone is one of them.
+
+| # | Item | Result |
+|---|---|---|
+| AA1 | The homepage section | **DONE** new, first, with a page preview on the left and "Visit the homepage" |
+| AA2 | 4ormIQ User Experience | **DONE** the phone, smaller, still live |
+| AA3 | 4orm Enterprise Experience | **DONE** the dashboard, "Learn more" to 4ormex.com |
+| AA4 | A line between each | **DONE** two separators, so three sections read as three |
+| AA5 | The menu came back out of the phone | **DONE** it asks "What can I help you with?" again |
+| AA6 | Chips trimmed six to four | **DONE** at the smaller size six pushed the greeting off the top, so the phone opened with its own hello already scrolled away |
+| AA7 | The homepage copy stopped duplicating Why 4orm | **FIXED** the first draft was word for word the door at the bottom of the same page |
+
+### The hero
+
+| # | Item | Result |
+|---|---|---|
+| AA8 | The ladder | **DONE** the headline lands on understanding, and a second line carries it to relationships with two words picked out, so the argument reads at a glance |
+| AA9 | Agreement | **FIXED** "better experiences builds" |
+| AA10 | The explanatory line kept, quieter | **DONE** one plain sentence still says what the company does |
+
+### 4orm my experience opens the menu
+
+| # | Item | Result |
+|---|---|---|
+| AA11 | The pill opens the menu instead of navigating | **DONE** and it joins the same controls the rest of the site toggles with |
+| AA12 | A way back | **DONE** the header control reads "Back" with the arrow on the left |
+| AA13 | The Back button landed on the logo | **FIXED** it was classed `back`, which already exists as a fixed corner control on the experience screens. It inherited position:fixed. Renamed `navback` |
+
+### The phone menu, which had never been reachable before
+
+Adding a menu control to the landing exposed three faults that had always
+been there, because until now no phone could open this menu at all.
+
+| # | Item | Result |
+|---|---|---|
+| AA14 | Four columns forced at 390 | **FIXED** a mobile rule collapsing the grid existed, but `.omenu-in.six` outranked it and won at every width. Headings collided and items sat on top of each other |
+| AA15 | The tail was unreachable, not merely below the fold | **FIXED** a flex child overflowing downward does not reliably grow its parent's scrollHeight. The overlay is a block with overflow-y auto on mobile |
+| AA16 | The backdrop stopped partway down | **FIXED** the waterline is drawn as a percentage of the viewport, so the bottom of the list floated over the page. On mobile the colour goes on the scrolling box and the waterline is off |
+| AA17 | Trimmed to what a phone needs | **DONE** five pages, one All industries door, and Why 4orm, Check a firm, Contact, plus Talk to us. Ten items, all visible without scrolling at 390 and at 360x640. Desktop keeps all nineteen |
+| AA18 | Columns balanced | **DONE** the two real lists sit side by side rather than stranding half a row beside a single link |
+| AA19 | Swept | **PASS** the menu opened on all fourteen pages at 1440 and 390, checked for overlapping elements and unreachable tails. None |
+| AA20 | Regression | **PASS** links resolve, gate 0/0, stutters 0, no AI language, nothing confidential, no defects at 1440 or 390 |
+
+
+## AB. The landing, spaced out — 2026-09-07
+
+| # | Item | Result |
+|---|---|---|
+| AB1 | The mark, ten per cent up | **DONE** 81px to 89px at full width, and it sits further off the headline |
+| AB2 | The headline matched to 4ormIQ | **DONE** measured off 4ormIQ's own hero: a 55.5px cap height at a 1728px viewport, which is a 76px type size on this face. Ours was capped at 52px, so it was the smaller of the two and came up. `clamp(34px,4.4vw,76px)` lands on 76px at 1728 and holds |
+| AB3 | Everything comes down | **DONE** the page's top padding went 124 to 148 minimum, and 168 to 196 at the top end |
+| AB4 | Air between the hero and the sections | **DONE** the explanatory line's bottom margin went 52 to 76 minimum, 82 to 116 at the top end |
+| AB5 | Air between the sections | **DONE** the row gap went 56 to 74 minimum, 88 to 118 at the top end |
+| AB6 | Air at the bottom | **DONE** the page's bottom padding went 64 to 96 minimum, 92 to 136, and the last door gained padding under it |
+| AB7 | The first two edits went to the wrong layer | **FIXED** a `body[data-page="home"]` block overrides the base `.lland` and `.llede` rules, so the numbers changed in the file and nothing moved on the screen. That block is now commented as the one that decides |
+
+**How the comparison was made.** 4ormIQ's stylesheet is not readable from
+here, so the headline was measured off a screenshot of the live site: the
+row-density profile of the hero gives an ascender top at 192, an x-height
+top at 207 and a baseline at 247.5, so a 55.5px cap height. On a face with
+Inter's proportions that is a 76px type size, which the landing now matches
+at the same viewport width.
