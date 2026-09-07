@@ -3052,36 +3052,21 @@ body[data-page="home"] .llede{margin-bottom:clamp(76px,9.5vh,116px)}
 .lsep{border:0;border-top:1px solid var(--border);margin:0;width:100%;
   align-self:stretch}
 
-/* The homepage section's visual. A page, at the size a page is when you are
-   deciding whether to open it. Nothing in it is readable, and that is the
-   point: it is a shape you recognise, not a screenshot to squint at. */
+/* The homepage section's visual. A browser frame with the page itself inside
+   it, so the thing being offered is the thing being shown. */
 .pagemini{display:block;width:min(340px,100%);text-decoration:none;
   border:1px solid var(--border);border-radius:15px;background:#fff;overflow:hidden;
   box-shadow:0 24px 54px -30px rgba(16,32,64,.28);
   transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
 .pagemini:hover{transform:translateY(-3px);
   box-shadow:0 32px 66px -30px rgba(16,32,64,.34)}
+.pagemini:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .pmtop{display:flex;align-items:center;gap:5px;padding:9px 13px;background:var(--bg-2);
   border-bottom:1px solid var(--border)}
 .pmtop i{width:6px;height:6px;border-radius:50%;background:var(--border);flex:none}
 .pmtop em{margin-left:9px;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--tx-3);font-style:normal}
-.pmbody{display:block;padding:13px}
-.pmnav{display:flex;align-items:center;gap:8px;margin-bottom:20px}
-.pmnav b{width:22px;height:7px;border-radius:2px;background:var(--blue);flex:none}
-.pmnav s{height:5px;border-radius:2px;background:var(--bg-3);text-decoration:none;flex:none}
-.pmnav s:nth-child(2){width:26px}.pmnav s:nth-child(3){width:20px}
-.pmnav s:nth-child(4){width:30px}.pmnav s:nth-child(5){width:18px;margin-left:auto}
-.pmhero{display:block;margin-bottom:18px}
-.pmh{display:block;height:11px;border-radius:3px;background:var(--tx);opacity:.86;
-  margin-bottom:6px}
-.pmh.sh{width:62%}
-.pmp{display:block;height:6px;border-radius:2px;background:var(--bg-3);margin-top:9px}
-.pmp.sh{width:48%}
-.pmcards{display:flex;gap:8px}
-.pmcards i{flex:1;height:42px;border-radius:8px;background:var(--bg-2);
-  border:1px solid var(--border)}
-.pmcards i:first-child{background:var(--blue-50);border-color:var(--blue-100)}
+.pmshot{display:block;width:100%;height:auto}
 @media (max-width:700px){.pagemini{width:min(300px,100%)}}
 
 .ltxt{display:flex;flex-direction:column;align-items:flex-start}
