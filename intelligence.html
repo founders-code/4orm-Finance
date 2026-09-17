@@ -1,0 +1,1550 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>An intelligence layer that holds your situation, not just your request. | 4orm Intelligence</title>
+<meta name="description" content="4ormIQ is being built as a personal intelligence layer that holds a person’s situation, permissions and decisions. Seven stages, four layers, and what runs today." />
+<meta name="robots" content="index,follow" />
+<meta property="og:title" content="An intelligence layer that holds your situation, not just your request. | 4orm Intelligence" />
+<meta property="og:description" content="4ormIQ is being built as a personal intelligence layer that holds a person’s situation, permissions and decisions. Seven stages, four layers, and what runs today." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://www.4ormfinance.com/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://www.4ormfinance.com/intelligence" />
+<meta property="og:site_name" content="4orm Finance" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://www.4ormfinance.com/intelligence" />
+<link rel="icon" href="/assets/favicon.ico?v=20260909" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=20260909" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png?v=20260909" />
+<meta name="theme-color" content="#FFFFFF" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750;800&amp;family=JetBrains+Mono:wght@400;500;700;800&amp;display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   4orm Intelligence.
+
+   The page is a zoom out. It opens on one person in one moment,
+   the smallest possible frame, and pulls back one layer at a
+   time until the whole shape is visible. Nothing is described
+   before it can be operated.
+
+   Futuristic on a white ground, because the house never goes
+   dark. Depth comes from light, blur and long shadow rather
+   than from a black canvas. Warmth comes from a low chroma
+   sunlight wash that never carries meaning and never paints
+   text or a status.
+   ============================================================ */
+
+:root{
+  --bg:#FFFFFF; --bg-2:#F7F9FC; --bg-3:#EFF3F9;
+  --surface:#FFFFFF; --surface-2:#F4F7FB; --surface-3:#EAEFF6;
+  --border:#E6EBF3; --border-strong:#CCD6E4;
+
+  --tx:#142036; --tx-2:#46556E; --tx-3:#5E6E88;
+
+  --blue:#2E6BF2; --blue-lt:#5B8CFF; --blue-dp:#1B4ABE;
+  --blue-50:#EAF1FE; --blue-100:#CFE0FD;
+  --acc:#2E6BF2; --acc-dp:#1B4ABE; --acc-50:#EAF1FE;
+  --caution:#8A5200; --caution-bg:#FFF6E5; --caution-br:#F2C879;
+  --ok:#0E8A5F; --ok-bg:#E3F6EE; --ok-br:#9CCFBB;
+  --bad:#D6334E; --bad-bg:#FCE6EA; --bad-br:#EBB6C0;
+
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+
+  --r-sm:12px; --r:18px; --r-lg:26px; --r-xl:36px;
+  --sh-sm:0 1px 2px rgba(16,32,64,.05);
+  --sh:0 10px 34px rgba(16,32,64,.08);
+  --sh-lg:0 28px 70px rgba(16,32,64,.14);
+  --sh-xl:0 46px 110px rgba(16,32,64,.19);
+
+  --spring:cubic-bezier(.32,.72,0,1);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --pop:cubic-bezier(.34,1.42,.5,1);
+
+  /* Ambient only. These two never paint text, a border that means
+     something, or a status. They exist so a white room can feel
+     like it has a window in it. Gold was retired from consumer
+     screens as an annotation colour and this is not one. */
+  --lit-warm:#FFEFE0;
+  --lit-cool:#DCE8FF;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+  font-size:15px;line-height:1.6;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit;margin:0}
+
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+
+.wrap{max-width:1220px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
+    clip-path:inset(50%);white-space:nowrap}
+
+/* ------------------------------------------------------------
+   The room
+
+   A fixed field of slow light behind everything. It drifts, it
+   never flashes, and it stops entirely for anyone who has asked
+   motion to stop.
+   ------------------------------------------------------------ */
+.field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.9}
+.orb.a{width:62vw;height:62vw;left:-16vw;top:-22vw;
+  background:radial-gradient(circle at 50% 50%,var(--lit-cool) 0%,rgba(220,232,255,0) 70%);
+  animation:drift1 34s var(--ease) infinite alternate}
+.orb.b{width:54vw;height:54vw;right:-14vw;top:6vh;
+  background:radial-gradient(circle at 50% 50%,var(--lit-warm) 0%,rgba(255,239,224,0) 70%);
+  animation:drift2 41s var(--ease) infinite alternate}
+.orb.c{width:70vw;height:70vw;left:12vw;bottom:-32vw;
+  background:radial-gradient(circle at 50% 50%,var(--blue-50) 0%,rgba(234,241,254,0) 68%);
+  animation:drift3 47s var(--ease) infinite alternate}
+@keyframes drift1{to{transform:translate3d(7vw,5vh,0) scale(1.14)}}
+@keyframes drift2{to{transform:translate3d(-6vw,9vh,0) scale(1.1)}}
+@keyframes drift3{to{transform:translate3d(5vw,-7vh,0) scale(1.08)}}
+
+/* A faint hairline grid, so the white has a floor under it. */
+.grid{position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:74px 74px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 62% at 50% 34%,#000 0%,transparent 74%);
+          mask-image:radial-gradient(ellipse 90% 62% at 50% 34%,#000 0%,transparent 74%)}
+
+/* ------------------------------------------------------------
+   Nav
+   ------------------------------------------------------------ */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;
+  display:flex;align-items:center;gap:10px;
+  padding:8px 8px 8px 16px;border-radius:999px;
+  background:rgba(20,32,54,.88);backdrop-filter:saturate(150%) blur(16px);
+  -webkit-backdrop-filter:saturate(150%) blur(16px);
+  box-shadow:var(--sh-lg);max-width:calc(100vw - 32px)}
+.nav .brand{display:flex;align-items:center;gap:7px;color:#fff;
+  font-weight:750;font-size:14.5px;letter-spacing:-.02em;white-space:nowrap}
+.nav .brand img{width:17px;height:17px}
+.nav .tag{font-family:var(--mono);font-size:9.5px;font-weight:800;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--blue-100);
+  padding-left:10px;margin-left:2px;border-left:1px solid rgba(255,255,255,.22);
+  white-space:nowrap}
+.nav .go{margin-left:6px;display:inline-flex;align-items:center;gap:8px;
+  min-height:36px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
+  background:var(--blue);color:#fff;font-weight:650;font-size:13.5px;
+  text-decoration:none;white-space:nowrap;
+  transition:background .3s var(--ease),transform .3s var(--pop)}
+.nav .go:hover{background:var(--blue-lt);transform:translateY(-1px)}
+
+/* ------------------------------------------------------------
+   Shared section furniture
+   ------------------------------------------------------------ */
+.sec{padding:118px 0;position:relative;z-index:1}
+.sec.tight{padding-top:0}
+.kick{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);
+  font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue-dp);margin-bottom:20px}
+.kick::before{content:"";width:20px;height:1px;background:var(--blue-100)}
+h2.st{font-size:clamp(29px,3.3vw,50px);line-height:1.07;letter-spacing:-.038em;
+  font-weight:750;max-width:25ch}
+.lede{margin-top:20px;max-width:60ch;font-size:clamp(15.5px,1.25vw,18px);
+  line-height:1.6;color:var(--tx-2)}
+h3.sub{font-size:19px;line-height:1.3;letter-spacing:-.02em;font-weight:700}
+
+.tagx{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);
+  font-size:9.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;white-space:nowrap}
+.tagx.now{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-br)}
+.tagx.plan{background:var(--surface-3);color:var(--tx-3);border:1px solid var(--border-strong)}
+.tagx i{width:5px;height:5px;border-radius:50%;background:currentColor;
+  display:inline-block;flex:none}
+
+/* ------------------------------------------------------------
+   Hero
+   ------------------------------------------------------------ */
+.hero{padding:186px 0 30px;text-align:center}
+/* Two sentences, and the measure is set so it lands in three lines rather
+   than five. A headline that needs five lines is a headline that is too
+   long, not a headline that needs a smaller size. */
+.h1{font-size:clamp(33px,4.3vw,70px);line-height:1.03;letter-spacing:-.044em;
+  font-weight:750;max-width:26ch;margin:0 auto}
+.h1 .dim{color:var(--tx-3)}
+.hlede{margin:26px auto 0;max-width:58ch;font-size:clamp(16px,1.3vw,19px);
+  line-height:1.58;color:var(--tx-2)}
+
+/* The connection panel. This is the first thing on the page and it
+   is a thing you use, not a picture of one. */
+.conn{margin:52px auto 0;max-width:920px;position:relative}
+.connbox{position:relative;border-radius:var(--r-xl);border:1px solid var(--border);
+  background:rgba(255,255,255,.72);backdrop-filter:saturate(150%) blur(22px);
+  -webkit-backdrop-filter:saturate(150%) blur(22px);
+  box-shadow:var(--sh-lg);overflow:hidden;text-align:left}
+.connbox::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 100% at 50% 0%,var(--blue-50) 0%,transparent 62%)}
+.connhd{position:relative;display:flex;align-items:center;gap:10px;
+  padding:16px 22px;border-bottom:1px solid var(--border)}
+.connhd .dotrow{display:flex;gap:5px}
+.connhd .dotrow i{width:7px;height:7px;border-radius:50%;background:var(--border-strong)}
+.connhd .lab{font-family:var(--mono);font-size:9.5px;font-weight:800;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--tx-3)}
+.connbd{position:relative;padding:32px 30px 30px;min-height:320px}
+
+.ask{font-size:clamp(19px,2vw,26px);line-height:1.3;letter-spacing:-.026em;
+  font-weight:700;max-width:26ch}
+.askm{margin-top:10px;color:var(--tx-3);font-size:14px;max-width:52ch}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chip{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;
+  border-radius:999px;border:1px solid var(--border-strong);background:var(--surface);
+  color:var(--tx);font-size:14.5px;font-weight:600;cursor:pointer;
+  box-shadow:var(--sh-sm);
+  transition:border-color .3s var(--ease),transform .3s var(--pop),
+             box-shadow .3s var(--ease),background .3s var(--ease)}
+.chip:hover{border-color:var(--blue);color:var(--blue-dp);transform:translateY(-2px);
+  box-shadow:var(--sh)}
+.chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* What comes back. Facts assemble one at a time, because a person
+   watching a thing gather understands that it gathered. */
+.gather{margin-top:30px}
+.gathhd{display:flex;flex-wrap:wrap;align-items:center;gap:12px;
+  padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:18px}
+.gathhd .t{font-family:var(--mono);font-size:10px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--tx-3)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fact{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;
+  border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface);
+  box-shadow:var(--sh-sm);opacity:0;transform:translateY(10px) scale(.985)}
+.fact.in{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--spring)}
+.fact .ic{width:26px;height:26px;flex:none;border-radius:8px;display:grid;
+  place-items:center;background:var(--blue-50);color:var(--blue-dp)}
+.fact .ic svg{width:14px;height:14px}
+.fact .k{font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--tx-3);display:block;margin-bottom:3px}
+.fact .v{font-size:14px;line-height:1.45;color:var(--tx);font-weight:550}
+.connnote{margin-top:20px;padding:13px 16px;border-radius:var(--r-sm);
+  background:var(--surface-2);border:1px solid var(--border);
+  color:var(--tx-2);font-size:13px;line-height:1.55}
+.connnote b{color:var(--tx);font-weight:650}
+
+.hcue{margin:38px auto 0;display:flex;align-items:center;justify-content:center;
+  gap:9px;font-family:var(--mono);font-size:9.5px;font-weight:800;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--tx-3)}
+.hcue i{width:1px;height:26px;background:linear-gradient(var(--border-strong),transparent);
+  animation:cue 2.6s var(--ease) infinite}
+@keyframes cue{0%,100%{opacity:.35;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ------------------------------------------------------------
+   Three changes
+   ------------------------------------------------------------ */
+.chg{margin-top:52px;display:grid;grid-template-columns:300px minmax(0,1fr);gap:30px;
+  align-items:start}
+.chgrail{display:flex;flex-direction:column;gap:10px}
+.chgb{display:block;width:100%;text-align:left;padding:18px 20px;cursor:pointer;
+  border-radius:var(--r);border:1px solid var(--border);background:var(--surface);
+  box-shadow:var(--sh-sm);
+  transition:border-color .35s var(--ease),box-shadow .35s var(--ease),
+             transform .35s var(--spring),background .35s var(--ease)}
+.chgb:hover{transform:translateX(3px);border-color:var(--border-strong)}
+.chgb[aria-selected="true"]{border-color:var(--blue);box-shadow:var(--sh);
+  background:linear-gradient(180deg,var(--blue-50),var(--surface))}
+.chgb .n{font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.16em;
+  color:var(--tx-3);display:block;margin-bottom:7px}
+.chgb[aria-selected="true"] .n{color:var(--blue-dp)}
+.chgb .h{font-size:15.5px;line-height:1.35;letter-spacing:-.015em;font-weight:700}
+
+.chgstage{border-radius:var(--r-lg);border:1px solid var(--border);
+  background:rgba(255,255,255,.74);backdrop-filter:saturate(150%) blur(20px);
+  -webkit-backdrop-filter:saturate(150%) blur(20px);
+  box-shadow:var(--sh);padding:34px;min-height:392px}
+.chgart{height:210px;position:relative;margin-bottom:26px;
+  border-radius:var(--r);background:var(--surface-2);border:1px solid var(--border);
+  overflow:hidden}
+.chgtxt{max-width:56ch;font-size:15.5px;line-height:1.62;color:var(--tx-2)}
+.chgtxt b{color:var(--tx);font-weight:650}
+
+/* Art 1: a wall of surfaces collapsing into one line of intent. */
+.tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);
+  grid-template-rows:repeat(3,1fr);gap:9px;padding:22px}
+.tiles i{border-radius:9px;background:var(--surface-3);border:1px solid var(--border);
+  animation:tfade 5.2s var(--ease) infinite}
+@keyframes tfade{0%,42%{opacity:1;transform:scale(1)}
+  68%,100%{opacity:0;transform:scale(.86)}}
+.intent{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(76%,340px);padding:14px 18px;border-radius:999px;background:var(--surface);
+  border:1px solid var(--blue);box-shadow:var(--sh);font-size:14px;color:var(--tx);
+  opacity:0;animation:ifade 5.2s var(--ease) infinite}
+@keyframes ifade{0%,52%{opacity:0;transform:translate(-50%,-50%) scale(.92)}
+  74%,100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.intent .cur{display:inline-block;width:2px;height:14px;vertical-align:-2px;
+  background:var(--blue);margin-left:2px;animation:blink 1.1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* Art 2: one prompt against a ring that keeps what it learns. */
+.ring2{position:absolute;inset:0;display:grid;place-items:center}
+.ring2 .core{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;
+  background:var(--surface);border:1px solid var(--blue);box-shadow:var(--sh);
+  font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.1em;
+  color:var(--blue-dp);text-align:center;z-index:2}
+.ring2 .halo{position:absolute;border-radius:50%;border:1px dashed var(--border-strong)}
+.ring2 .halo.r1{width:148px;height:148px;animation:spin 26s linear infinite}
+.ring2 .halo.r2{width:206px;height:206px;animation:spin 38s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring2 .pt{position:absolute;padding:5px 11px;border-radius:999px;background:var(--surface);
+  border:1px solid var(--border);box-shadow:var(--sh-sm);font-family:var(--mono);
+  font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tx-2);white-space:nowrap;opacity:0;animation:pop 6s var(--ease) infinite}
+@keyframes pop{0%,8%{opacity:0;transform:scale(.8)}18%,88%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(.8)}}
+
+/* Art 3: one node reaching out to four, and back. */
+.web3{position:absolute;inset:0}
+.web3 svg{width:100%;height:100%}
+.web3 .ln{stroke:var(--blue-100);stroke-width:1.5;fill:none;
+  stroke-dasharray:5 6;animation:flow 3.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-22}}
+.web3 .nd{fill:var(--surface);stroke:var(--border-strong);stroke-width:1.5}
+.web3 .hub{fill:var(--blue);stroke:none}
+.web3 text{font-family:var(--mono);font-size:8.5px;font-weight:800;
+  letter-spacing:.09em;fill:var(--tx-3);text-transform:uppercase}
+
+/* ------------------------------------------------------------
+   The ladder of seven stages
+   ------------------------------------------------------------ */
+.lad{margin-top:54px}
+.ladrail{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;
+  position:relative;padding-top:30px}
+.ladrail::before{content:"";position:absolute;left:6%;right:6%;top:36px;height:2px;
+  background:var(--border);border-radius:2px}
+.ladfill{position:absolute;left:6%;top:36px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--blue-lt),var(--blue-dp));width:0;
+  transition:width .7s var(--spring)}
+.lb{position:relative;background:none;border:0;cursor:pointer;padding:0 2px 4px;
+  display:flex;flex-direction:column;align-items:center;gap:11px;min-height:44px}
+.lb .dot{width:15px;height:15px;border-radius:50%;background:var(--surface);
+  border:2px solid var(--border-strong);z-index:1;
+  transition:transform .45s var(--pop),border-color .35s var(--ease),
+             background .35s var(--ease),box-shadow .35s var(--ease)}
+.lb:hover .dot{border-color:var(--blue-lt)}
+.lb.done .dot{background:var(--blue-100);border-color:var(--blue-lt)}
+.lb[aria-selected="true"] .dot{background:var(--blue);border-color:var(--blue);
+  transform:scale(1.45);box-shadow:0 0 0 6px var(--blue-50)}
+.lb .cap{font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--tx-3);line-height:1.3;text-align:center;
+  transition:color .3s var(--ease)}
+.lb[aria-selected="true"] .cap{color:var(--blue-dp)}
+
+.ladpan{margin-top:36px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:0;border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;
+  background:var(--surface);box-shadow:var(--sh-lg);min-height:280px}
+.ladL{padding:36px 34px;display:flex;flex-direction:column;gap:16px}
+.ladno{font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.18em;
+  color:var(--blue-dp)}
+.ladnm{font-size:clamp(23px,2.3vw,32px);line-height:1.1;letter-spacing:-.03em;
+  font-weight:750}
+.ladcap{font-size:15.5px;line-height:1.6;color:var(--tx-2);max-width:44ch}
+.ladR{padding:36px 34px;display:flex;flex-direction:column;justify-content:center;gap:14px;
+  background:linear-gradient(150deg,var(--blue-50),var(--surface-2));
+  border-left:1px solid var(--border);position:relative;overflow:hidden}
+.ladR::after{content:"";position:absolute;right:-70px;bottom:-70px;width:220px;height:220px;
+  border-radius:50%;background:radial-gradient(circle,var(--lit-warm) 0%,transparent 70%)}
+.ladqk{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--tx-3);position:relative}
+.ladq{font-size:clamp(19px,1.9vw,26px);line-height:1.28;letter-spacing:-.025em;
+  font-weight:650;color:var(--tx);position:relative}
+.ladswap{opacity:0;transform:translateY(8px)}
+.ladswap.in{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--spring)}
+
+.arc{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.arc span{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--tx-3);padding:6px 12px;border-radius:999px;
+  border:1px solid var(--border);background:var(--surface);
+  transition:all .4s var(--ease)}
+.arc span.on{color:#fff;background:var(--blue-dp);border-color:var(--blue-dp)}
+.arc em{font-style:normal;color:var(--border-strong);font-size:12px}
+
+/* ------------------------------------------------------------
+   The contrast
+   ------------------------------------------------------------ */
+.cmp{margin-top:48px;border-radius:var(--r-lg);border:1px solid var(--border);
+  background:rgba(255,255,255,.76);backdrop-filter:saturate(150%) blur(20px);
+  -webkit-backdrop-filter:saturate(150%) blur(20px);box-shadow:var(--sh-lg);
+  overflow:hidden}
+.cmphd{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+  padding:18px 26px;border-bottom:1px solid var(--border);background:var(--surface-2)}
+.seg{display:inline-flex;padding:4px;border-radius:999px;background:var(--surface-3);
+  border:1px solid var(--border)}
+.seg button{border:0;background:none;cursor:pointer;min-height:36px;padding:0 16px;
+  border-radius:999px;font-size:13.5px;font-weight:650;color:var(--tx-2);
+  transition:background .35s var(--ease),color .35s var(--ease),box-shadow .35s var(--ease)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--tx);
+  box-shadow:var(--sh-sm)}
+.cmpbd{padding:34px 30px 30px;min-height:250px}
+.cmpq{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--tx-3);margin-bottom:16px}
+.ansline{font-size:clamp(18px,1.75vw,25px);line-height:1.42;letter-spacing:-.022em;
+  font-weight:600;color:var(--tx);max-width:44ch}
+.clause{display:block;margin-bottom:9px;opacity:0;transform:translateY(9px)}
+.clause.in{opacity:1;transform:none;
+  transition:opacity .55s var(--ease),transform .55s var(--spring)}
+.clause .src{display:inline-flex;align-items:center;gap:5px;vertical-align:middle;
+  margin-left:9px;font-family:var(--mono);font-size:8.5px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--blue-dp);
+  background:var(--blue-50);border:1px solid var(--blue-100);
+  padding:3px 8px;border-radius:999px;white-space:nowrap}
+.thin{color:var(--tx-3)}
+.nextup{margin-top:30px;padding-top:24px;border-top:1px solid var(--border)}
+.nextup .t{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--tx-3);margin-bottom:14px}
+.acts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:0;padding:0;
+  list-style:none}
+.acts li{padding:12px 13px;border-radius:var(--r-sm);border:1px solid var(--border);
+  background:var(--surface);font-size:13px;line-height:1.45;color:var(--tx-2);
+  box-shadow:var(--sh-sm)}
+.acts li b{display:block;font-family:var(--mono);font-size:8.5px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--tx-3);margin-bottom:5px}
+/* The remark about the answer must not compete with the answer. It is
+   an aside in the margin, set quieter and marked as commentary. */
+.cmpline{margin-top:30px;padding-left:16px;border-left:2px solid var(--blue-100);
+  font-size:15.5px;line-height:1.58;font-weight:500;color:var(--tx-2);max-width:52ch}
+
+/* ------------------------------------------------------------
+   The zoom out
+   ------------------------------------------------------------ */
+.zoomsec{position:relative}
+.zoomtrack{position:relative;height:420vh}
+.zoomstick{position:sticky;top:0;height:100vh;min-height:640px;display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;padding:82px 0 30px;overflow:hidden}
+.zoomtop{text-align:center;padding:0 28px}
+.zoomtop h2{font-size:clamp(22px,2.3vw,34px);line-height:1.1;letter-spacing:-.032em;
+  font-weight:750;max-width:38ch;margin:0 auto}
+
+.stagewrap{position:relative;display:grid;place-items:center;min-height:0}
+.rings{position:relative;width:960px;height:600px;transform-origin:50% 50%;
+  transition:transform 1s var(--spring);will-change:transform}
+.ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  border-radius:var(--r-xl);border:1px solid var(--border);
+  background:rgba(255,255,255,.5);backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  opacity:0;transition:opacity .8s var(--ease),border-color .6s var(--ease),
+                       box-shadow .6s var(--ease)}
+.ring.vis{opacity:1}
+.ring.hot{border-color:var(--blue);box-shadow:0 0 0 5px var(--blue-50),var(--sh-lg)}
+/* --k is the inverse of the scale each ring is read at, so a label in
+   the outermost band lands at the same size on screen as one in the
+   innermost. Without it the last layer is the one nobody can read. */
+.ring.r1{width:300px;height:186px;background:var(--surface);box-shadow:var(--sh);opacity:1}
+.ring.r2{width:496px;height:322px;--k:.78}
+.ring.r3{width:716px;height:462px;--k:1.06}
+.ring.r4{width:958px;height:598px;--k:1.42}
+
+.rband{position:absolute;left:7%;right:7%;bottom:calc(9px * var(--k));display:flex;
+  flex-wrap:wrap;justify-content:center;gap:calc(6px * var(--k))}
+.rchip{font-family:var(--mono);font-size:calc(11px * var(--k));font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3);white-space:nowrap;
+  padding:calc(4px * var(--k)) calc(10px * var(--k));border-radius:999px;
+  background:var(--surface);border:1px solid var(--border)}
+.ring.hot .rchip{color:var(--blue-dp);border-color:var(--blue-100);background:var(--blue-50)}
+.rlab{position:absolute;left:18px;top:-11px;padding:3px 11px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--border);font-family:var(--mono);
+  font-size:9px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--tx-3);white-space:nowrap}
+.ring.hot .rlab{background:var(--blue-dp);border-color:var(--blue-dp);color:#fff}
+.rnum{position:absolute;right:16px;top:-11px;padding:3px 9px;border-radius:999px;
+  background:var(--surface-3);border:1px solid var(--border);font-family:var(--mono);
+  font-size:9px;font-weight:800;letter-spacing:.12em;color:var(--tx-3)}
+
+.core{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  gap:7px;padding:20px 22px}
+.core .who{font-size:15px;font-weight:700;letter-spacing:-.02em}
+.core .row{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;
+  color:var(--tx-2);font-family:var(--mono);letter-spacing:.02em}
+.core .row b{color:var(--tx);font-weight:700}
+.pulse{position:absolute;left:50%;top:50%;width:300px;height:186px;
+  transform:translate(-50%,-50%);border-radius:var(--r-xl);border:1px solid var(--blue-lt);
+  animation:pulse 4.4s var(--ease) infinite;pointer-events:none}
+@keyframes pulse{0%{opacity:.5;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
+
+.zoomread{padding:0 28px;max-width:1220px;margin:0 auto;width:100%}
+.zoominner{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+/* The rings carry three labels each. The full list lives here, at a size
+   a person can actually read, and swaps with the layer. */
+.zoomlist{margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:7px;
+  min-height:34px}
+.zoomlist span{font-size:13px;line-height:1.3;padding:6px 12px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--border);color:var(--tx-2);
+  box-shadow:var(--sh-sm)}
+.zb{text-align:left;background:var(--surface);border:1px solid var(--border);cursor:pointer;
+  border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh-sm);min-height:44px;
+  transition:border-color .35s var(--ease),box-shadow .35s var(--ease),
+             transform .35s var(--spring)}
+.zb:hover{transform:translateY(-2px);border-color:var(--border-strong)}
+.zb[aria-selected="true"]{border-color:var(--blue);box-shadow:var(--sh);
+  background:linear-gradient(180deg,var(--blue-50),var(--surface))}
+.zb .n{font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.14em;
+  color:var(--tx-3);display:block;margin-bottom:5px}
+.zb[aria-selected="true"] .n{color:var(--blue-dp)}
+.zb .h{font-size:14px;font-weight:700;letter-spacing:-.015em;line-height:1.25;
+  display:block;margin-bottom:4px}
+.zb .d{font-size:12.5px;line-height:1.45;color:var(--tx-2)}
+
+/* The stacked fallback, used below 1080px and whenever motion is off. */
+.zoomflat{display:none;margin-top:44px;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.zfc{border-radius:var(--r-lg);border:1px solid var(--border);background:var(--surface);
+  box-shadow:var(--sh-sm);padding:24px 22px}
+.zfc .n{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.15em;
+  color:var(--blue-dp);display:block;margin-bottom:8px}
+.zfc h3{margin-bottom:8px}
+.zfc p{font-size:14px;line-height:1.55;color:var(--tx-2)}
+.zfc ul{margin:14px 0 0;padding-left:18px;font-size:13px;line-height:1.6;color:var(--tx-2)}
+
+.tests{margin-top:16px;display:flex;flex-wrap:wrap;gap:7px}
+.tests span{font-size:12.5px;padding:6px 11px;border-radius:999px;background:var(--surface-2);
+  border:1px solid var(--border);color:var(--tx-2)}
+
+/* ------------------------------------------------------------
+   What is actually defensible
+   ------------------------------------------------------------ */
+.moat{margin-top:46px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mc{padding:20px 20px 22px;border-radius:var(--r);border:1px solid var(--border);
+  background:var(--surface);box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.mc .n{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.14em;
+  color:var(--blue-100);position:absolute;right:16px;top:14px}
+.mc .h{font-size:14.5px;font-weight:700;letter-spacing:-.015em;line-height:1.3;
+  margin-bottom:6px;padding-right:34px}
+.mc .d{font-size:13px;line-height:1.5;color:var(--tx-2)}
+.claimbox{margin-top:34px;padding:30px 32px;border-radius:var(--r-lg);
+  border:1px solid var(--blue-100);background:linear-gradient(140deg,var(--blue-50),var(--surface));
+  box-shadow:var(--sh)}
+.claimbox p{font-size:clamp(17px,1.5vw,22px);line-height:1.42;letter-spacing:-.024em;
+  font-weight:650;max-width:52ch}
+.claimbox .m{margin-top:14px;font-size:14.5px;line-height:1.6;color:var(--tx-2);
+  font-weight:400;max-width:62ch}
+
+/* ------------------------------------------------------------
+   Positioning, now and later
+   ------------------------------------------------------------ */
+.pos{margin-top:46px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pc{padding:30px 30px 32px;border-radius:var(--r-lg);border:1px solid var(--border);
+  background:var(--surface);box-shadow:var(--sh-sm);display:flex;flex-direction:column;gap:14px}
+.pc.later{background:linear-gradient(160deg,var(--surface-2),var(--surface))}
+.pc .q{font-size:clamp(16.5px,1.4vw,20px);line-height:1.45;letter-spacing:-.02em;
+  font-weight:600;color:var(--tx)}
+.pc .m{font-size:14px;line-height:1.6;color:var(--tx-2)}
+.thesis{margin-top:16px;padding:28px 30px;border-radius:var(--r-lg);
+  border:1px solid var(--border);background:var(--surface);box-shadow:var(--sh-sm)}
+.thesis .k{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--tx-3);margin-bottom:12px}
+.thesis p{font-size:clamp(16px,1.4vw,20px);line-height:1.5;letter-spacing:-.02em;
+  font-weight:600;max-width:64ch}
+
+/* ------------------------------------------------------------
+   Boundary and close
+   ------------------------------------------------------------ */
+.bound{margin-top:46px;padding:26px 28px;border-radius:var(--r-lg);
+  border:1px solid var(--border-strong);background:var(--surface-2)}
+.bound .k{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--tx-2);margin-bottom:12px}
+.bound ul{margin:0;padding-left:20px;font-size:14px;line-height:1.68;color:var(--tx-2);
+  max-width:96ch}
+.bound li+li{margin-top:7px}
+.bound b{color:var(--tx);font-weight:650}
+
+.close{padding:104px 0 118px;text-align:center}
+.close h2{font-size:clamp(28px,3.1vw,48px);line-height:1.07;letter-spacing:-.038em;
+  font-weight:750;max-width:26ch;margin:0 auto}
+.close p{margin:20px auto 0;max-width:54ch;font-size:16px;line-height:1.6;color:var(--tx-2)}
+.cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:9px;min-height:52px;padding:0 26px;
+  border-radius:999px;text-decoration:none;font-size:15px;font-weight:650;border:1px solid;
+  cursor:pointer;transition:transform .35s var(--pop),box-shadow .35s var(--ease),
+                            background .35s var(--ease),border-color .35s var(--ease)}
+.btn.p{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:var(--sh)}
+.btn.p:hover{background:var(--blue-dp);border-color:var(--blue-dp);transform:translateY(-2px);
+  box-shadow:var(--sh-lg)}
+.btn.s{background:var(--surface);border-color:var(--border-strong);color:var(--tx)}
+.btn.s:hover{border-color:var(--blue);color:var(--blue-dp);transform:translateY(-2px)}
+
+.foot{border-top:1px solid var(--border);padding:30px 0 46px;
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;
+  font-size:13px;color:var(--tx-3)}
+/* The 24px floor applies to a footer link exactly as it does to a
+   primary button, and a 15px line box is the usual way that gets
+   missed. */
+.foot a{color:var(--tx-2);text-decoration:none;display:inline-flex;align-items:center;
+  min-height:26px;padding:0 2px}
+.foot a:hover{color:var(--blue-dp);text-decoration:underline}
+.foot .brand{display:flex;align-items:center;gap:7px;font-weight:700;color:var(--tx)}
+.foot .brand img{width:16px;height:16px}
+
+/* ------------------------------------------------------------
+   Reveal
+   ------------------------------------------------------------ */
+.rv{opacity:0;transform:translateY(20px)}
+.rv.in{opacity:1;transform:none;
+  transition:opacity .82s var(--ease),transform .82s var(--spring)}
+.rv.d1.in{transition-delay:.09s}
+.rv.d2.in{transition-delay:.18s}
+.rv.d3.in{transition-delay:.27s}
+
+/* ------------------------------------------------------------
+   Narrower screens
+   ------------------------------------------------------------ */
+@media (max-width:1080px){
+  .zoomtrack{height:auto}
+  .zoomstick{position:static;height:auto;min-height:0;padding:0;display:block}
+  .stagewrap,.zoomread,.zoomtop{display:none}
+  .zoomflat{display:grid}
+}
+@media (max-width:900px){
+  .wrap{padding:0 20px}
+  .sec{padding:84px 0}
+  .hero{padding:150px 0 20px}
+  .connbd{padding:24px 20px}
+  .facts{grid-template-columns:minmax(0,1fr)}
+  .chg{grid-template-columns:minmax(0,1fr);gap:20px}
+  .chgrail{flex-direction:row;overflow-x:auto;padding-bottom:6px;
+    scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+  .chgb{min-width:230px}
+  .chgstage{padding:24px 20px;min-height:0}
+  .ladpan{grid-template-columns:minmax(0,1fr)}
+  .ladR{border-left:0;border-top:1px solid var(--border)}
+  .ladL,.ladR{padding:26px 22px}
+  .ladrail{grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
+  .lb .cap{font-size:0;letter-spacing:0}
+  .lb .cap::after{content:attr(data-n);font-size:10px;letter-spacing:.1em}
+  .acts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .zoomflat{grid-template-columns:minmax(0,1fr)}
+  .moat{grid-template-columns:minmax(0,1fr)}
+  .pos{grid-template-columns:minmax(0,1fr)}
+  .cmpbd{padding:24px 20px}
+  .nav{top:10px;padding:6px 6px 6px 13px;gap:7px}
+  .nav .tag{display:none}
+  .close{padding:76px 0 90px}
+}
+@media (max-width:420px){
+  .nav .go{padding:0 13px;font-size:13px}
+  .btn{width:100%;justify-content:center}
+}
+
+/* ------------------------------------------------------------
+   Motion off
+
+   Everything above that moves has to stop here, including the
+   ambient light nobody remembers writing.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important}
+  .rv{opacity:1;transform:none}
+  .fact,.clause,.ladswap{opacity:1;transform:none}
+  .zoomtrack{height:auto}
+  .zoomstick{position:static;height:auto;min-height:0;padding:0;display:block}
+  .stagewrap,.zoomread,.zoomtop{display:none}
+  .zoomflat{display:grid}
+  .intent{opacity:1}
+  .tiles i{opacity:1}
+}
+
+</style>
+</head>
+<body>
+<div class="field" aria-hidden="true">
+  <span class="orb a"></span><span class="orb b"></span><span class="orb c"></span>
+  <span class="grid"></span>
+</div>
+
+<nav class="nav" aria-label="4orm">
+  <span class="brand"><img src="data:image/png;base64,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" alt="" width="17" height="17" />orm</span>
+  <span class="tag">Intelligence</span>
+  <a class="go" href="https://www.4ormiq.com" target="_blank" rel="noopener noreferrer">Open 4ormIQ</a>
+</nav>
+
+<main id="top">
+
+<!-- ============================================================
+     Hero. The first thing on the page is a thing you use.
+     ============================================================ -->
+<header class="hero">
+  <div class="wrap">
+    <p class="kick rv">Personal intelligence layer</p>
+    <h1 class="h1 rv d1">Software knows your request. <span class="dim">Almost nothing knows
+      your situation.</span></h1>
+    <p class="hlede rv d2">4ormIQ is being built as a personal intelligence layer: something that
+      holds your situation, your history, your permissions and what you actually decided, and
+      stays with you while the decision is still open.</p>
+
+    <div class="conn rv d3">
+      <div class="connbox">
+        <div class="connhd">
+          <span class="dotrow" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="lab">Connecting</span>
+        </div>
+        <div class="connbd">
+          <h2 class="ask" id="askq">What are you trying to work out?</h2>
+          <p class="askm">Pick one and watch what a layer like this would need to hold before it
+            could be useful to you.</p>
+
+          <div class="chips" role="group" aria-labelledby="askq" id="chips">
+            <button class="chip" type="button" data-k="renew" aria-pressed="false">Renewing my mortgage</button>
+            <button class="chip" type="button" data-k="car" aria-pressed="false">Buying a car</button>
+            <button class="chip" type="button" data-k="send" aria-pressed="false">Sending money to an advisor</button>
+            <button class="chip" type="button" data-k="cover" aria-pressed="false">Changing my coverage</button>
+          </div>
+
+          <div class="gather" id="gather" hidden>
+            <div class="gathhd">
+              <span class="t" id="gathT">What it would need to hold</span>
+              <span class="tagx plan"><i></i>Illustration, not your record</span>
+            </div>
+            <div class="facts" id="facts" role="list"></div>
+            <p class="connnote"><b>Nothing here is about you.</b> These are invented facts, shown to
+              make the shape visible. This page stores nothing and asks for nothing. The live
+              product is at 4ormiq.com.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="hcue rv d3"><i></i>Keep going<i></i></p>
+  </div>
+</header>
+
+<!-- ============================================================
+     Three changes
+     ============================================================ -->
+<section class="sec" aria-labelledby="chgT">
+  <div class="wrap">
+    <p class="kick rv">What is changing</p>
+    <h2 class="st rv d1" id="chgT">Three things are changing at the same time, and only the third
+      one is hard.</h2>
+    <p class="lede rv d2">Each of these is already visible somewhere. Together they change what a
+      person has to do to make a financial decision, and what has to be true before anyone lets
+      software act on their behalf.</p>
+
+    <div class="chg rv d2">
+      <div class="chgrail" role="tablist" aria-label="Three changes">
+        <button class="chgb" type="button" role="tab" id="chgb1" aria-controls="chgp1" aria-selected="true">
+          <span class="n">01</span>
+          <span class="h">Applications disappear behind intent.</span>
+        </button>
+        <button class="chgb" type="button" role="tab" id="chgb2" aria-controls="chgp1" aria-selected="false">
+          <span class="n">02</span>
+          <span class="h">The assistant becomes persistent.</span>
+        </button>
+        <button class="chgb" type="button" role="tab" id="chgb3" aria-controls="chgp1" aria-selected="false">
+          <span class="n">03</span>
+          <span class="h">The assistant coordinates other systems.</span>
+        </button>
+      </div>
+
+      <div class="chgstage" id="chgp1" role="tabpanel" aria-live="polite" tabindex="0"
+           aria-labelledby="chgb1">
+        <div class="chgart" id="chgart" aria-hidden="true"></div>
+        <p class="chgtxt" id="chgtxt"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     The seven stages
+     ============================================================ -->
+<section class="sec tight" aria-labelledby="ladT">
+  <div class="wrap">
+    <p class="kick rv">The build order</p>
+    <h2 class="st rv d1" id="ladT">Understanding comes first. Authority comes last, and only where
+      it was given.</h2>
+    <p class="lede rv d2">Seven stages, in the order they have to arrive. A layer that acts before
+      it understands is worse than no layer at all, so each stage earns the next one. Stage one is
+      what 4ormIQ does today. Everything after it is the plan, not current behaviour.</p>
+
+    <div class="lad rv d2">
+      <div class="ladrail" role="tablist" aria-label="Seven stages" id="ladrail">
+        <span class="ladfill" id="ladfill" aria-hidden="true"></span>
+      </div>
+
+      <div class="ladpan" id="ladpan" role="tabpanel" aria-live="polite" tabindex="0">
+        <div class="ladL">
+          <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+            <span class="ladno" id="ladno">Stage 01</span>
+            <span id="ladtag"></span>
+          </div>
+          <h3 class="ladnm ladswap" id="ladnm"></h3>
+          <p class="ladcap ladswap" id="ladcap"></p>
+          <div class="arc" id="arc" aria-label="Where this stage sits"></div>
+        </div>
+        <div class="ladR">
+          <p class="ladqk">What changes for the person</p>
+          <p class="ladq ladswap" id="ladq"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     The contrast
+     ============================================================ -->
+<section class="sec" aria-labelledby="cmpT">
+  <div class="wrap">
+    <p class="kick rv">The difference</p>
+    <h2 class="st rv d1" id="cmpT">The gap is not the answer. It is everything the answer leaves
+      out.</h2>
+    <p class="lede rv d2">The same person, the same question, the same mortgage. One reply is
+      correct and almost useless. The other is what a layer that knows the person is being built
+      to say. Press the second one and watch where each clause comes from.</p>
+
+    <div class="cmp rv d2">
+      <div class="cmphd">
+        <div class="seg" role="group" aria-label="Which reply to show">
+          <button type="button" id="segA" aria-pressed="true">A general assistant</button>
+          <button type="button" id="segB" aria-pressed="false">4ormIQ, once mature</button>
+        </div>
+        <span id="cmptag"></span>
+      </div>
+      <div class="cmpbd">
+        <p class="cmpq">You asked: can I afford this mortgage?</p>
+        <div class="ansline" id="ans" aria-live="polite"></div>
+        <div class="nextup" id="nextup" hidden>
+          <p class="t">And then, with permission, it would</p>
+          <ul class="acts" id="acts"></ul>
+        </div>
+        <p class="cmpline" id="cmpline"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     The zoom out
+     ============================================================ -->
+<section class="sec tight zoomsec" aria-labelledby="zT">
+  <div class="wrap">
+    <p class="kick rv">How it fits together</p>
+    <h2 class="st rv d1" id="zT">Four layers, and each one only works because of the one inside
+      it.</h2>
+    <p class="lede rv d2">Start at the smallest frame, one person in one moment, and pull back.
+      Nothing in an outer layer is safe until the layer inside it is right.</p>
+  </div>
+
+  <div class="zoomtrack" id="zoomtrack">
+    <div class="zoomstick">
+      <div class="zoomtop">
+        <h2 id="zoomh">Personal understanding. One person, and what is actually true for them.</h2>
+      </div>
+
+      <div class="stagewrap" id="zoomstage" role="tabpanel" aria-label="The four layers, zooming out">
+        <div class="rings" id="rings">
+          <div class="ring r4" id="ring4">
+            <span class="rlab">Coordinated action</span><span class="rnum">04</span>
+            <span class="rband" aria-hidden="true"><span class="rchip">Compare proposals</span>
+              <span class="rchip">Preserve evidence</span>
+              <span class="rchip">Keep monitoring</span></span>
+          </div>
+          <div class="ring r3" id="ring3">
+            <span class="rlab">Integrity intelligence</span><span class="rnum">03</span>
+            <span class="rband" aria-hidden="true"><span class="rchip">What changed?</span>
+              <span class="rchip">What conflicts?</span>
+              <span class="rchip">What is missing?</span></span>
+          </div>
+          <div class="ring r2" id="ring2">
+            <span class="rlab">Transaction intelligence</span><span class="rnum">02</span>
+            <span class="rband" aria-hidden="true"><span class="rchip">Terms and rates</span>
+              <span class="rchip">Parties and roles</span>
+              <span class="rchip">What was accepted</span></span>
+          </div>
+          <div class="ring r1 hot" id="ring1">
+            <span class="rlab">Personal understanding</span><span class="rnum">01</span>
+            <div class="core">
+              <span class="who">One person, one open decision</span>
+              <span class="row">Goal <b>Renew without moving</b></span>
+              <span class="row">Reserve <b>7 weeks</b></span>
+              <span class="row">Income changed <b>4 months ago</b></span>
+              <span class="row">Said matters <b>Stability</b></span>
+            </div>
+          </div>
+          <span class="pulse" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="zoomread">
+        <div class="zoominner" role="tablist" aria-label="Four layers" id="zoomtabs"></div>
+        <p class="zoomlist" id="zoomlist" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="zoomflat" id="zoomflat"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     What is actually defensible
+     ============================================================ -->
+<section class="sec" aria-labelledby="moatT">
+  <div class="wrap">
+    <p class="kick rv">Why this is the hard part</p>
+    <h2 class="st rv d1" id="moatT">The race will not be won by whoever has the most agents.</h2>
+    <p class="lede rv d2">Capability is arriving everywhere at once and it will keep getting
+      cheaper. What stays scarce is everything an agent has to be given before it is allowed to
+      speak for a person.</p>
+
+    <div class="moat rv d2" id="moat"></div>
+
+    <div class="claimbox rv d2">
+      <p>This is why the record comes first. The Transaction Integrity Graph is the memory and the
+        reasoning ground, not an audit feature bolted on after the decision was made.</p>
+      <p class="m">Evidence that is assembled afterwards can only describe what somebody
+        remembers. A record written as the decision happens can be reasoned over while the
+        decision is still open, which is the only moment it can change anything.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Positioning
+     ============================================================ -->
+<section class="sec tight" aria-labelledby="posT">
+  <div class="wrap">
+    <p class="kick rv">Where this stands</p>
+    <h2 class="st rv d1" id="posT">One sentence for what runs today, and one for where it goes.</h2>
+
+    <div class="pos rv d2">
+      <div class="pc">
+        <span class="tagx now"><i></i>Today</span>
+        <p class="q">4orm helps people and businesses make informed, suitable financial decisions
+          and preserve the evidence behind them.</p>
+        <p class="m">Not another thing to do. We map the client process, plug into the tools a
+          business already runs, and become an intelligence layer for the client experience.</p>
+      </div>
+      <div class="pc later">
+        <span class="tagx plan"><i></i>Where this goes</span>
+        <p class="q">4orm becomes the intelligence layer through which people understand, navigate
+          and authorize important financial transactions.</p>
+        <p class="m">That position is earned one stage at a time, and it is earned by being right
+          about the person before ever acting for them.</p>
+      </div>
+    </div>
+
+    <div class="thesis rv d2">
+      <p class="k">The thesis</p>
+      <p>Businesses are building intelligence to represent themselves. 4orm is building the
+        intelligence that represents the person, and the shared transaction record that allows
+        both sides to work together.</p>
+    </div>
+
+    <div class="bound rv d2">
+      <p class="k">What this page is, and is not</p>
+      <ul>
+        <li><b>Stage one is running.</b> 4ormIQ asks structured questions and explains what matters
+          before a decision. You can use it now at 4ormiq.com.</li>
+        <li><b>Stages two through seven are the plan.</b> They are shown here as the build order,
+          not as behaviour available today, and every screen on this page that shows them says so.</li>
+        <li><b>Every name, figure and reply on this page is invented.</b> Nothing here is a finding
+          about any real person or company, and nothing typed or clicked here is stored.</li>
+        <li><b>Permissioned action means asked for and granted.</b> No stage above describes 4orm
+          acting for a person without an explicit, recorded authority for that action.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Close
+     ============================================================ -->
+<section class="close" aria-labelledby="closeT">
+  <div class="wrap">
+    <h2 class="rv" id="closeT">The useful version of this starts with one question you can
+      actually ask.</h2>
+    <p class="rv d1">Stage one is live. Ask it something you are weighing up right now, and see
+      what it wants to know before it answers.</p>
+    <div class="cta rv d2">
+      <a class="btn p" href="https://www.4ormiq.com" target="_blank" rel="noopener noreferrer">
+        Open 4ormIQ <span aria-hidden="true">&#8594;</span></a>
+      <a class="btn s" href="/personal">See the consumer experience</a>
+      <a class="btn s" href="/contact">Talk to us about a design partnership</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer class="foot">
+    <span class="brand"><img src="data:image/png;base64,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" alt="" width="16" height="16" />orm</span>
+    <span>4orm Intelligence. Prepared 9 September 2026.</span>
+    <span><a href="/home">4orm Finance</a> &nbsp;&middot;&nbsp; <a href="/privacy">Privacy</a></span>
+  </footer>
+</div>
+
+</main>
+
+<script>
+/* ============================================================
+   4orm Intelligence, page behaviour.
+
+   Nothing on this page is a picture of a thing. Every control
+   here does the thing it names, and every screen that describes
+   planned behaviour says so on the screen rather than in a
+   footnote. Nothing typed or clicked is stored anywhere.
+   ============================================================ */
+(function () {
+'use strict';
+
+var $  = function (s, r) { return (r || document).querySelector(s); };
+var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ------------------------------------------------------------
+   Reveal on scroll
+
+   An observer alone loses content on a fast fling, so a rAF
+   sweep runs behind it and catches anything already past.
+   ------------------------------------------------------------ */
+(function reveal() {
+  var io = null;
+
+  /* Sections built by script arrive after this ran, so the list is
+     re-collected on demand rather than snapshotted once. A card that is
+     never observed is a card that stays invisible forever. */
+  function collect() {
+    var items = $$('.rv');
+    if (REDUCED) { items.forEach(function (e) { e.classList.add('in'); }); return items; }
+    if (!io) {
+      io = new IntersectionObserver(function (rows) {
+        rows.forEach(function (r) {
+          if (r.isIntersecting) { r.target.classList.add('in'); io.unobserve(r.target); }
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: .06 });
+    }
+    items.forEach(function (e) {
+      if (!e.dataset.rvSeen) { e.dataset.rvSeen = '1'; io.observe(e); }
+    });
+    return items;
+  }
+
+  var tick = 0;
+  function sweep() {
+    var h = window.innerHeight;
+    collect().forEach(function (e) {
+      if (e.classList.contains('in')) return;
+      if (e.getBoundingClientRect().top < h * .92) e.classList.add('in');
+    });
+    tick = 0;
+  }
+  addEventListener('scroll', function () {
+    if (!tick) tick = requestAnimationFrame(sweep);
+  }, { passive: true });
+  document.addEventListener('rvscan', sweep);
+  sweep();
+})();
+
+/* ------------------------------------------------------------
+   The connection panel
+
+   Picking a decision assembles the things a persistent layer
+   would have to hold before it could be useful. The facts are
+   invented and the panel says so beside them, not underneath.
+   ------------------------------------------------------------ */
+(function connect() {
+  var wrapEl = $('#gather'), grid = $('#facts'), head = $('#gathT');
+  if (!wrapEl || !grid) return;
+
+  var IC = {
+    goal:  'M12 3a9 9 0 100 18 9 9 0 000-18zM12 9a3 3 0 100 6 3 3 0 000-6z',
+    said:  'M6 3h12v18l-6-4-6 4z',
+    hold:  'M12 3l9 5-9 5-9-5zM3 14l9 5 9-5',
+    moved: 'M12 3a9 9 0 100 18 9 9 0 000-18zM12 7v5l3 2',
+    may:   'M4 11h16v9H4zM8 11V7a4 4 0 018 0v4',
+    open:  'M12 3a9 9 0 100 18 9 9 0 000-18zM9.3 9.3A3 3 0 0115 10.5c0 2-3 2.2-3 4M12 17.2v.1'
+  };
+  var LAB = {
+    goal: 'Goal', said: 'What matters, in their words', hold: 'Facts it would hold',
+    moved: 'What changed', may: 'Permission, as granted', open: 'Question nobody answered'
+  };
+
+  var SET = {
+    renew: ['Renewing my mortgage', [
+      ['goal',  'Renew without moving lenders, unless moving is clearly better'],
+      ['said',  'Payment stability, said in those words, not scored as a number'],
+      ['hold',  'Balance, rate, term, maturity date and any penalty to leave'],
+      ['moved', 'Income changed four months ago'],
+      ['may',   'May contact the current lender. May not sign anything.'],
+      ['open',  'Nobody has explained what a straight switch would actually cost']
+    ]],
+    car: ['Buying a car', [
+      ['goal',  'A vehicle that fits the family and the budget for five years'],
+      ['said',  'Total cost matters more than the monthly payment'],
+      ['hold',  'Trade-in value, deposit, and the balance still owing'],
+      ['moved', 'The commute halved in March'],
+      ['may',   'May request out the door pricing. May not place a deposit.'],
+      ['open',  'The term quoted is 84 months and nobody said why']
+    ]],
+    send: ['Sending money to an advisor', [
+      ['goal',  'Move funds to an advisor without losing them'],
+      ['said',  'Being sure who this is matters more than being quick'],
+      ['hold',  'Amount, destination, and the name on the receiving account'],
+      ['moved', 'First contact was eleven days ago'],
+      ['may',   'May check official listings. May not move money.'],
+      ['open',  'The registration shown does not match the name given']
+    ]],
+    cover: ['Changing my coverage', [
+      ['goal',  'Keep the same protection for less, or learn why that is not possible'],
+      ['said',  'Being covered when it counts matters more than the premium'],
+      ['hold',  'Current policy, limits, deductibles and the renewal date'],
+      ['moved', 'A driver was added in June'],
+      ['may',   'May request quotes. May not cancel the existing policy.'],
+      ['open',  'Nobody has said which coverage would be given up']
+    ]]
+  };
+
+  var timers = [];
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+
+  function show(key) {
+    var set = SET[key];
+    if (!set) return;
+    clearTimers();
+    head.textContent = set[0] + ': what it would need to hold';
+    grid.innerHTML = set[1].map(function (f) {
+      return '<div class="fact" role="listitem">'
+           + '<span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" '
+           + 'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" '
+           + 'stroke-linejoin="round"><path d="' + IC[f[0]] + '"/></svg></span>'
+           + '<span><span class="k">' + LAB[f[0]] + '</span>'
+           + '<span class="v">' + f[1] + '</span></span></div>';
+    }).join('');
+    wrapEl.hidden = false;
+
+    var cards = $$('.fact', grid);
+    if (REDUCED) { cards.forEach(function (c) { c.classList.add('in'); }); return; }
+    cards.forEach(function (c, i) {
+      timers.push(setTimeout(function () { c.classList.add('in'); }, 90 + i * 130));
+    });
+  }
+
+  $$('#chips .chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      $$('#chips .chip').forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true');
+      show(b.getAttribute('data-k'));
+    });
+  });
+})();
+
+/* ------------------------------------------------------------
+   Three changes
+   ------------------------------------------------------------ */
+(function changes() {
+  var art = $('#chgart'), txt = $('#chgtxt'), pan = $('#chgp1');
+  if (!art || !txt) return;
+
+  var TILES = (function () {
+    var s = '<span class="tiles" aria-hidden="true">';
+    for (var i = 0; i < 15; i++) s += '<i style="animation-delay:' + (i * 46) + 'ms"></i>';
+    return s + '</span><span class="intent">I want to renew without paying to leave'
+             + '<span class="cur"></span></span>';
+  })();
+
+  var RING = (function () {
+    var pts = ['Goal', 'Reserve', 'Timing', 'Permission', 'What changed', 'Said matters'];
+    var s = '<span class="ring2" aria-hidden="true"><span class="halo r1"></span>'
+          + '<span class="halo r2"></span><span class="core">HOLDS<br/>CONTEXT</span>';
+    pts.forEach(function (p, i) {
+      var a = (i / pts.length) * Math.PI * 2 - Math.PI / 2;
+      var x = 50 + Math.cos(a) * 31, y = 50 + Math.sin(a) * 36;
+      s += '<span class="pt" style="left:' + x.toFixed(1) + '%;top:' + y.toFixed(1)
+        +  '%;transform:translate(-50%,-50%);animation-delay:' + (i * 480) + 'ms">' + p + '</span>';
+    });
+    return s + '</span>';
+  })();
+
+  var WEB = '<span class="web3" aria-hidden="true"><svg viewBox="0 0 420 210" '
+    + 'preserveAspectRatio="xMidYMid meet">'
+    + '<path class="ln" d="M210 105 L78 46"/><path class="ln" d="M210 105 L78 164"/>'
+    + '<path class="ln" d="M210 105 L342 46"/><path class="ln" d="M210 105 L342 164"/>'
+    + '<circle class="hub" cx="210" cy="105" r="17"/>'
+    + '<circle class="nd" cx="78" cy="46" r="12"/><circle class="nd" cx="78" cy="164" r="12"/>'
+    + '<circle class="nd" cx="342" cy="46" r="12"/><circle class="nd" cx="342" cy="164" r="12"/>'
+    + '<text x="78" y="24" text-anchor="middle">Lender</text>'
+    + '<text x="78" y="196" text-anchor="middle">Broker</text>'
+    + '<text x="342" y="24" text-anchor="middle">Insurer</text>'
+    + '<text x="342" y="196" text-anchor="middle">Records</text>'
+    + '<text x="210" y="141" text-anchor="middle">On your behalf</text>'
+    + '</svg></span>';
+
+  var C = [
+    [TILES, 'A person stops choosing which system to open and starts describing what they are '
+          + 'trying to accomplish. The tools do not disappear. They stop being the thing the '
+          + 'person has to navigate. <b>This part is already ordinary.</b> The change is not the '
+          + 'interface. It is that the request now arrives as a goal instead of a sequence of '
+          + 'clicks, which means something has to be capable of understanding a goal.'],
+    [RING,  'It understands the person: their history, their priorities, their permissions and '
+          + 'their circumstances right now, rather than only the sentence in front of it. '
+          + '<b>Persistence is what makes advice possible at all.</b> Something that starts from '
+          + 'nothing every time can answer a question accurately and still never notice that the '
+          + 'answer stopped being right four months ago.'],
+    [WEB,   'It gathers information, asks questions, compares alternatives, communicates with '
+          + 'businesses and carries out actions it was authorized to carry out. <b>This is the '
+          + 'hard one</b>, because it is the point where being wrong stops being an '
+          + 'inconvenience. Everything further down this page exists to make this stage safe '
+          + 'enough to reach.']
+  ];
+
+  var btns = $$('.chgb');
+  function pick(i) {
+    btns.forEach(function (b, j) { b.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+    art.innerHTML = C[i][0];
+    txt.innerHTML = C[i][1];
+    pan.setAttribute('aria-labelledby', 'chgb' + (i + 1));
+  }
+  btns.forEach(function (b, i) {
+    b.addEventListener('click', function () { pick(i); });
+    b.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1
+            : e.key === 'ArrowLeft'  || e.key === 'ArrowUp'   ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = (i + d + btns.length) % btns.length;
+      btns[n].focus(); pick(n);
+    });
+  });
+  pick(0);
+})();
+
+/* ------------------------------------------------------------
+   The seven stages
+
+   Stage one is what runs. The other six are the build order and
+   each one carries that on its own panel, because a roadmap read
+   as a capability is the single easiest way to mislead someone.
+   ------------------------------------------------------------ */
+(function ladder() {
+  var rail = $('#ladrail'), fill = $('#ladfill'), pan = $('#ladpan');
+  if (!rail) return;
+
+  var PHASE = ['Conversation', 'Understanding', 'Judgment support',
+               'Authorized action', 'Continuous representation'];
+
+  var S = [
+    ['Guided discovery', 'Asks structured questions and explains the considerations that matter '
+      + 'before a decision is made.', 'Help me understand whether this makes sense.', 1, 0],
+    ['Contextual intelligence', 'Connects goals, finances, documents, communications and the '
+      + 'facts of the transaction into one picture.', 'Understand my complete situation.', 0, 1],
+    ['Decision intelligence', 'Tests affordability, suitability, risk, conflicts and the '
+      + 'alternatives that were not offered.', 'Show me what I may be missing.', 0, 2],
+    ['Transaction companion', 'Stays present as rates, terms, products and personal circumstances '
+      + 'change during the transaction.', 'Stay with me throughout the decision.', 0, 2],
+    ['Permissioned action', 'Collects documents, requests information, compares options and '
+      + 'communicates with businesses, within a granted authority.',
+      'Do the approved work for me.', 0, 3],
+    ['Multi-party coordination', 'Coordinates the person, the professional, company systems and '
+      + 'third parties around one set of facts.', 'Help everyone work from the same facts.', 0, 3],
+    ['Personal financial intelligence', 'Learns across mortgage, auto, insurance, lending and '
+      + 'investments rather than one transaction at a time.',
+      'Protect my long-term interests across transactions.', 0, 4]
+  ];
+
+  S.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'lb';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    b.setAttribute('aria-controls', 'ladpan');
+    b.innerHTML = '<span class="dot" aria-hidden="true"></span>'
+                + '<span class="cap" data-n="' + (i + 1) + '">' + s[0] + '</span>'
+                + '<span class="sr">Stage ' + (i + 1) + '. ' + s[0] + '</span>';
+    rail.appendChild(b);
+  });
+
+  var btns = $$('.lb', rail);
+  var swaps = ['#ladnm', '#ladcap', '#ladq'];
+
+  function pick(i) {
+    var s = S[i];
+    btns.forEach(function (b, j) {
+      b.setAttribute('aria-selected', j === i ? 'true' : 'false');
+      b.classList.toggle('done', j < i);
+    });
+    fill.style.width = (i / (S.length - 1)) * 88 + '%';
+
+    swaps.forEach(function (sel) { $(sel).classList.remove('in'); });
+    $('#ladno').textContent = 'Stage 0' + (i + 1);
+    $('#ladtag').innerHTML = s[3]
+      ? '<span class="tagx now"><i></i>Running today</span>'
+      : '<span class="tagx plan"><i></i>Planned, not available today</span>';
+    $('#ladnm').textContent = s[0];
+    $('#ladcap').textContent = s[1];
+    $('#ladq').textContent = '“' + s[2] + '”';
+    $('#arc').innerHTML = PHASE.map(function (p, j) {
+      return (j ? '<em aria-hidden="true">&#8594;</em>' : '')
+           + '<span class="' + (j === s[4] ? 'on' : '') + '">' + p + '</span>';
+    }).join('');
+    requestAnimationFrame(function () {
+      swaps.forEach(function (sel) { $(sel).classList.add('in'); });
+    });
+    pan.setAttribute('aria-label', 'Stage ' + (i + 1) + ', ' + s[0]);
+  }
+
+  btns.forEach(function (b, i) {
+    b.addEventListener('click', function () { pick(i); });
+    b.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1
+            : e.key === 'ArrowLeft'  || e.key === 'ArrowUp'   ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = (i + d + btns.length) % btns.length;
+      btns[n].focus(); pick(n);
+    });
+  });
+  pick(0);
+})();
+
+/* ------------------------------------------------------------
+   The contrast
+
+   The thin answer is correct. That is the whole point of showing
+   it. The full answer writes itself out clause by clause so the
+   reader can see which layer produced each one.
+   ------------------------------------------------------------ */
+(function contrast() {
+  var ans = $('#ans'), nx = $('#nextup'), line = $('#cmpline'), tag = $('#cmptag');
+  if (!ans) return;
+
+  var THIN = [['You appear eligible for this mortgage.', '']];
+  var FULL = [
+    ['You appear eligible,', 'Transaction'],
+    ['but the payment would reduce your emergency reserve to seven weeks,', 'Personal'],
+    ['your income changed four months ago,', 'Integrity'],
+    ['and the proposed variable-rate structure conflicts with the stability you told us was '
+      + 'important.', 'Integrity'],
+    ['Here are the alternatives, what each one changes, and the questions that should be resolved '
+      + 'before you proceed.', 'Coordinated']
+  ];
+  var ACTS = [
+    ['Permission', 'Ask permission to request a different structure from the broker.'],
+    ['Preserve',   'Keep the original recommendation exactly as it stood.'],
+    ['Record',     'Record which facts were known at that point.'],
+    ['Compare',    'Compare the revised offer against the first one.'],
+    ['Explain',    'Explain what changed, and why it changed.'],
+    ['Confirm',    'Record what the person understood and accepted.'],
+    ['Evidence',   'Give the company evidence of how the decision was reached.'],
+    ['Monitor',    'Keep watching the unresolved conditions until completion.']
+  ];
+
+  var timers = [];
+  function write(rows) {
+    timers.forEach(clearTimeout); timers = [];
+    ans.innerHTML = rows.map(function (r) {
+      return '<span class="clause' + (r[1] ? '' : ' thin') + '">' + r[0]
+           + (r[1] ? '<span class="src">' + r[1] + '</span>' : '') + '</span>';
+    }).join('');
+    var cl = $$('.clause', ans);
+    if (REDUCED) { cl.forEach(function (c) { c.classList.add('in'); }); return; }
+    cl.forEach(function (c, i) {
+      timers.push(setTimeout(function () { c.classList.add('in'); }, 60 + i * 460));
+    });
+  }
+
+  function pick(full) {
+    $('#segA').setAttribute('aria-pressed', full ? 'false' : 'true');
+    $('#segB').setAttribute('aria-pressed', full ? 'true' : 'false');
+    tag.innerHTML = full
+      ? '<span class="tagx plan"><i></i>Planned behaviour, not today</span>'
+      : '<span class="tagx plan"><i></i>Illustration</span>';
+    write(full ? FULL : THIN);
+    nx.hidden = !full;
+    if (full && !$('#acts').children.length) {
+      $('#acts').innerHTML = ACTS.map(function (a) {
+        return '<li><b>' + a[0] + '</b>' + a[1] + '</li>';
+      }).join('');
+    }
+    line.textContent = full
+      ? 'That is not a chatbot and it is not merely an agent. It is a decision and transaction '
+        + 'integrity system.'
+      : 'Correct, and almost useless. It answers the question that was asked and none of the ones '
+        + 'the person did not know to ask.';
+  }
+
+  $('#segA').addEventListener('click', function () { pick(false); });
+  $('#segB').addEventListener('click', function () { pick(true); });
+  pick(false);
+})();
+
+/* ------------------------------------------------------------
+   The zoom out
+
+   Scroll pulls the frame back one layer at a time. The tabs do
+   the same thing by moving the page, so there is one source of
+   truth and a keyboard user is not shown a different sequence.
+   ------------------------------------------------------------ */
+(function zoom() {
+  var track = $('#zoomtrack'), rings = $('#rings'), tabs = $('#zoomtabs'),
+      flat = $('#zoomflat'), h = $('#zoomh'), list = $('#zoomlist');
+  if (!track || !rings) return;
+
+  var L = [
+    ['Personal understanding',
+     'Who this person is, what they are trying to do, what they have said matters to them, and '
+     + 'what is actually true for them right now.',
+     'Personal understanding. One person, and what is actually true for them.',
+     ['Goals, in the person’s own words', 'Finances as they stand today',
+      'Documents and communications', 'Stated priorities and constraints',
+      'Permissions granted, and their limits']],
+    ['Transaction intelligence',
+     'The facts of this particular transaction held as structured facts rather than as a folder '
+     + 'of documents: terms, rates, dates, parties and what each document actually says.',
+     'Transaction intelligence. The facts of this deal, structured instead of scattered.',
+     ['Terms, rates and dates', 'Parties and their roles', 'What each document states',
+      'What was recommended, and when', 'What the person accepted']],
+    ['Integrity intelligence',
+     'Eight questions asked of every decision, continuously, while the decision is still open. '
+     + 'This is the layer that produces the sentence a person did not know to ask for.',
+     'Integrity intelligence. The eight questions asked of every decision.',
+     ['What is missing?', 'What changed?', 'What conflicts?', 'What appears unsuitable?',
+      'What has not been explained?', 'What requires human judgment?',
+      'What cannot be verified?', 'What permissions apply?']],
+    ['Coordinated action',
+     'Nine things the layer may do on a person’s behalf. Each one runs only against an '
+     + 'authority that was asked for, granted, and recorded with its limits.',
+     'Coordinated action. Nine things it may do, each only where authority was given.',
+     ['Retrieve information', 'Prepare questions', 'Request corrections', 'Compare proposals',
+      'Notify participants', 'Generate disclosures', 'Escalate concerns', 'Preserve evidence',
+      'Monitor unresolved conditions']]
+  ];
+  var TAG = ['Running today, in part', 'Planned', 'Planned', 'Planned'];
+
+  /* The readable stack. It is the whole section below 1080px and
+     whenever motion is switched off, so it carries every word. */
+  flat.innerHTML = L.map(function (l, i) {
+    return '<div class="zfc rv"><span class="n">Layer 0' + (i + 1) + '</span>'
+         + '<div style="margin-bottom:10px">' + (i
+             ? '<span class="tagx plan"><i></i>' + TAG[i] + '</span>'
+             : '<span class="tagx now"><i></i>' + TAG[i] + '</span>') + '</div>'
+         + '<h3 class="sub">' + l[0] + '</h3><p>' + l[1] + '</p>'
+         + '<div class="tests">' + l[3].map(function (t) {
+             return '<span>' + t + '</span>'; }).join('') + '</div></div>';
+  }).join('');
+  document.dispatchEvent(new Event('rvscan'));
+
+  tabs.innerHTML = L.map(function (l, i) {
+    return '<button class="zb" type="button" role="tab" aria-selected="' + (i === 0) + '" '
+         + 'aria-controls="zoomstage"><span class="n">Layer 0' + (i + 1) + '</span>'
+         + '<span class="h">' + l[0] + '</span><span class="d">' + l[3][0]
+         + (l[3].length > 1 ? ', and ' + (l[3].length - 1) + ' more' : '') + '</span></button>';
+  }).join('');
+
+  var rEls = [$('#ring1'), $('#ring2'), $('#ring3'), $('#ring4')];
+  var zbs = $$('.zb', tabs);
+  var SCALE = [2.02, 1.30, 0.94, 0.70];
+  var cur = -1, queued = 0;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(t) { return t * t * (3 - 2 * t); }
+
+  function apply(t) {
+    var i = Math.max(0, Math.min(2, Math.floor(t)));
+    var f = smooth(Math.max(0, Math.min(1, t - i)));
+    rings.style.transform = 'scale(' + lerp(SCALE[i], SCALE[i + 1], f).toFixed(3) + ')';
+
+    var step = Math.max(0, Math.min(3, Math.round(t)));
+    rEls.forEach(function (e, j) {
+      e.classList.toggle('vis', t + .55 >= j);
+      e.classList.toggle('hot', j === step);
+    });
+    if (step !== cur) {
+      cur = step;
+      h.textContent = L[step][2];
+      list.innerHTML = L[step][3].map(function (x) { return '<span>' + x + '</span>'; }).join('');
+      zbs.forEach(function (b, j) { b.setAttribute('aria-selected', j === step ? 'true' : 'false'); });
+    }
+  }
+
+  function measure() {
+    var r = track.getBoundingClientRect();
+    var span = track.offsetHeight - window.innerHeight;
+    if (span <= 0) return;
+    var p = Math.max(0, Math.min(1, -r.top / span));
+    apply(p * 3);
+  }
+
+  function onScroll() {
+    if (queued) return;
+    queued = requestAnimationFrame(function () { queued = 0; measure(); });
+  }
+
+  zbs.forEach(function (b, i) {
+    b.addEventListener('click', function () {
+      var span = track.offsetHeight - window.innerHeight;
+      var top = track.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: top + span * (i / 3), behavior: REDUCED ? 'auto' : 'smooth' });
+    });
+    b.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = (i + d + zbs.length) % zbs.length;
+      zbs[n].focus(); zbs[n].click();
+    });
+  });
+
+  /* Below 1080px and with motion off the stage is not on the screen
+     at all, so the scroll maths is not run either. */
+  function live() { return !REDUCED && window.innerWidth > 1080; }
+  if (live()) {
+    rings.style.transition = 'none';
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+    measure();
+  }
+})();
+
+/* ------------------------------------------------------------
+   What is actually defensible
+   ------------------------------------------------------------ */
+(function moat() {
+  var el = $('#moat');
+  if (!el) return;
+  var M = [
+    ['Personal context, given willingly',
+     'A person has to choose to hand it over, and they only do that once.'],
+    ['A permission history',
+     'What was allowed, by whom, when, and what its limits were.'],
+    ['Structured transaction facts',
+     'Facts that can be reasoned over, rather than documents in a folder.'],
+    ['The relationships between things',
+     'How facts, goals, recommendations and outcomes actually connect.'],
+    ['Time-stamped evidence',
+     'What was known at each point, recorded as it was known.'],
+    ['Decision rules for one industry',
+     'A mortgage renewal and an insurance change do not share a rulebook.'],
+    ['Human accountability',
+     'A named person who is answerable for the judgment.'],
+    ['Access to real workflows',
+     'The professional systems and company tools where the work happens.'],
+    ['Permission to represent',
+     'A person willing to let the system speak on their behalf.']
+  ];
+  el.innerHTML = M.map(function (m, i) {
+    return '<div class="mc"><span class="n">0' + (i + 1) + '</span>'
+         + '<p class="h">' + m[0] + '</p><p class="d">' + m[1] + '</p></div>';
+  }).join('');
+})();
+
+})();
+
+</script>
+</body>
+</html>
