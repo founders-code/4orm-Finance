@@ -34,7 +34,8 @@ function back(onward){
   setTimeout(function(){ el.classList.remove('on'); el.scrollTop = 0; }, 700);
   if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll:true });
   if (history.replaceState) history.replaceState(null, '', location.pathname);
-  if (onward) setTimeout(function(){ location.href = '/home'; }, 620);
+  /* The experiences live on the front door itself, so putting one away
+     leaves the visitor on the page they opened it from. */
 }
 
 document.querySelectorAll('[data-go]').forEach(function(a){

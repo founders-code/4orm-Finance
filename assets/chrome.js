@@ -33,9 +33,9 @@ var INDUSTRIES = [
    wants it later. Repeating it in the header made the row six wide and made
    the one door that is already on the first screen look like an afterthought. */
 var PRIMARY = [
-  { label: 'Home',         href: '/home',      slug: 'homepage' },
-  { label: 'Personal',     href: '/personal',  slug: 'personal' },
-  { label: 'Professional', href: '/professional', slug: 'professional' },
+  { label: 'Home',         href: '/',          slug: 'front' },
+  { label: 'For consumers', href: '/personal', slug: 'personal' },
+  { label: 'For businesses', href: '/professional', slug: 'professional' },
   { label: 'How it works', href: '/how-it-works', slug: 'howitworks' },
   { label: 'Family',       href: '/team',      slug: 'team' }
 ];
