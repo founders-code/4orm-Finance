@@ -214,3 +214,83 @@ $$('[data-seg]').forEach(function (seg) {
 })();
 
 })();
+
+/* ============================================================
+   The screens.
+
+   Seven images from the product concept. The rail is a real
+   tablist, the stage is its panel, and every screen carries its
+   own description so the picture is never the only thing said.
+   ============================================================ */
+(function screens() {
+  var rail = document.getElementById('shwRail');
+  if (!rail) return;
+  var V = '?v=20260923';
+  var S = [
+    ['biz-file-review', 'For businesses', 'File review',
+     'Run the review. See what needs attention.',
+     'Every finding is linked to the document it came from, with an owner and a next action, so a review starts from evidence rather than from a search.',
+     'A file review screen listing 24 mortgage files: 18 ready for review, 4 missing evidence and 2 needing clarification, with each finding linked to its source document.'],
+    ['biz-action-queue', 'For businesses', 'Action queue',
+     'Know which files need you next.',
+     'File completeness and follow-up, not a financial risk score. Missing items carry a clear owner and a due date, and the screen says so on its face.',
+     'A client file health screen: 24 active files, 6 needing attention, 3 overdue actions and 2 reviews due soon, with an action queue naming the owner and due date for each.'],
+    ['biz-historical', 'For businesses', 'Historical review',
+     'Two years later, the context is still here.',
+     'Set the record to the date the decision was made and see what was known then. A note added afterwards is shown separately and never rewrites the original.',
+     'A historical decision review dated 18 September 2026 showing the record as it stood on 18 September 2024: the client goal, the options discussed, the recorded rationale and the evidence available at the time.'],
+    ['biz-reporting', 'For businesses', 'Reporting package',
+     'Reporting season starts with the record.',
+     'The evidence index, the exception register and the follow-up log assemble from the work already done. Unresolved items stay visible in the package rather than being tidied away.',
+     'A draft internal compliance reporting package for Q3 2026: 24 files in scope, 18 ready for review, 6 open exceptions, a package contents list and a reviewer checklist.'],
+    ['con-private-space', 'For consumers', 'Your private space',
+     'Start with your life. Understand your choices.',
+     'A private account to work out what you are trying to achieve, at your own pace, before any professional is involved and before anything is shared.',
+     'Three phone screens: a private 4ormIQ account for a mortgage, a conversation asking what might change over the next three years, and a summary of goals, changes and questions to ask.'],
+    ['con-share', 'For consumers', 'Before you share',
+     'Review. Choose. Approve.',
+     'Nothing leaves the private space until it is approved. A personal detail can be left out of the shared copy, and the original stays unchanged.',
+     'Two phone screens: a document excerpt with a personal family detail highlighted and removed from the shared copy, then a sharing screen where goals, a decision summary and selected documents are ticked and the personal detail is excluded.'],
+    ['both-sides', 'Both sides', 'One decision, two views',
+     'A private space for consumers. A connected workspace for professionals.',
+     'The same decision from both sides: what the consumer chose to share, and the goals, evidence and decision summary the professional receives with permission.',
+     'A phone showing a consumer summary of goals and possible changes beside a professional workspace showing the same client, the shared goals and priorities, the linked evidence and a decision summary.']
+  ];
+
+  var img = document.getElementById('shwImg');
+  var K = document.getElementById('shwK'), T = document.getElementById('shwT'),
+      D = document.getElementById('shwD'), cap = document.getElementById('shwCap');
+
+  rail.innerHTML = S.map(function (s, i) {
+    return '<button class="shwb" type="button" role="tab" id="shwtab' + i + '" ' +
+      'aria-controls="shwCap" aria-selected="' + (i === 0) + '" tabindex="' + (i ? '-1' : '0') + '">' +
+      '<img src="/assets/showcase/' + s[0] + '-t.jpg' + V + '" alt="" width="360" height="203" ' +
+      'loading="lazy" decoding="async" />' +
+      '<span><b>' + s[2] + '</b><i>' + s[1] + '</i></span></button>';
+  }).join('');
+
+  var tabs = Array.prototype.slice.call(rail.querySelectorAll('[role="tab"]'));
+  function pick(i, focus) {
+    var s = S[i];
+    tabs.forEach(function (t, j) {
+      t.setAttribute('aria-selected', j === i ? 'true' : 'false');
+      t.setAttribute('tabindex', j === i ? '0' : '-1');
+    });
+    img.src = '/assets/showcase/' + s[0] + '.jpg' + V;
+    img.alt = s[5];
+    K.textContent = s[1]; T.textContent = s[3]; D.textContent = s[4];
+    cap.setAttribute('aria-labelledby', 'shwtab' + i);
+    if (focus) tabs[i].focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(i, false); });
+    t.addEventListener('keydown', function (e) {
+      var d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0;
+      if (e.key === 'Home') { e.preventDefault(); pick(0, true); return; }
+      if (e.key === 'End') { e.preventDefault(); pick(tabs.length - 1, true); return; }
+      if (!d) return;
+      e.preventDefault();
+      pick((i + d + tabs.length) % tabs.length, true);
+    });
+  });
+})();

@@ -3670,7 +3670,6 @@ body.go .dashmini{opacity:1;transform:none;transition-delay:.2s}
 .nav-cta.navback .cir{margin-right:1px}
 .nav-cta.navback:hover .cir{transform:translate(-3px,-1px) scale(1.06)}
 
-
 /* ==================================================================
    THE FRONT DOOR, September 2026
 
@@ -3924,3 +3923,46 @@ body[data-page="front"] .glow{display:none}
   .audpane.on,.reclog li{animation:none}
   .rsteps li{transition:none}
 }
+
+/* ==================================================================
+   The screens
+
+   A picker, not a carousel: nothing moves until somebody chooses,
+   and the choice is a real tab so a keyboard reaches all seven.
+   ================================================================== */
+.shw{margin-top:46px;display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:18px;
+  align-items:start}
+.shwrail{display:flex;flex-direction:column;gap:8px;max-height:640px;overflow:auto;
+  padding-right:4px;scrollbar-width:thin}
+.shwb{display:grid;grid-template-columns:78px minmax(0,1fr);gap:12px;align-items:center;
+  padding:8px;border-radius:14px;border:1px solid var(--border);background:#fff;text-align:left;
+  cursor:pointer;transition:border-color .35s var(--ease),background .35s var(--ease),
+    transform .4s var(--spring)}
+.shwb:hover{transform:translateX(2px);border-color:var(--border-strong)}
+.shwb[aria-selected="true"]{border-color:var(--blue);background:var(--blue-50)}
+.shwb img{width:78px;height:44px;object-fit:cover;border-radius:7px;display:block;
+  border:1px solid var(--border)}
+.shwb b{display:block;font-size:13.4px;line-height:1.25;letter-spacing:-.015em;color:var(--tx)}
+.shwb i{display:block;margin-top:3px;font-style:normal;font-family:var(--mono);font-size:9.5px;
+  font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
+.shwb[aria-selected="true"] i{color:var(--blue-dp)}
+
+.shwstage{margin:0;padding:9px;border-radius:28px;background:var(--surface-2);
+  border:1px solid var(--border)}
+.shwimg{border-radius:20px;overflow:hidden;border:1px solid var(--border);background:#fff;
+  box-shadow:var(--sh)}
+.shwimg img{display:block;width:100%;height:auto;animation:in .5s var(--ease) both}
+.shwstage figcaption{padding:18px 20px 12px;display:flex;flex-direction:column;gap:7px}
+.shwk{font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--blue-dp)}
+.shwstage figcaption b{font-size:clamp(17px,1.6vw,21px);letter-spacing:-.025em;line-height:1.25;
+  color:var(--tx)}
+.shwstage figcaption span:last-child{font-size:14.4px;line-height:1.6;color:var(--tx-2);
+  max-width:74ch}
+@media (max-width:900px){
+  .shw{grid-template-columns:minmax(0,1fr)}
+  .shwrail{flex-direction:row;max-height:none;overflow-x:auto;padding-bottom:6px}
+  .shwb{grid-template-columns:minmax(0,1fr);min-width:148px;gap:8px}
+  .shwb img{width:100%;height:76px}
+}
+@media (prefers-reduced-motion:reduce){.shwimg img{animation:none}.shwb{transition:none}}
