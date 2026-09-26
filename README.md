@@ -1,318 +1,81 @@
-# 4ormfinance.com
+# 4orm Finance website
 
-The whole site, rebuilt in the language of the first demo. Seventeen pages, no
-build step required to deploy. Unzip into the repo root.
+Static site. No build step is required to deploy: `deploy/` is what ships.
 
-    index.html            the experience: three views, four industries
-    passport.html         the consumer product
-    mortgage.html         payments.html         real-estate.html
-    insurance.html        law-firms.html        credit-unions.html
-    check-a-firm.html     the red flag check
-    who-it-is-for.html    the-rules.html        the-problem.html
-    what-we-do.html       team.html             contact.html
-    privacy.html          terms.html
-    robots.txt            sitemap.xml           vercel.json
-    assets/               build/
+    deploy/            what goes on the server, exactly as it is
+    source/            the hand-edited source for the front door
+    verify/            the checks, so the next change can be proved as well
+    docs/              what changed in this rebuild, and what is still open
 
-`vercel.json` carries all 39 redirects forward untouched.
+**Prepared 26 September 2026.**
 
-## The design philosophy changed, not just the paint
+---
 
-The old site was: marketing page, explanation, card, table, another explanation.
-This one is: product, interaction, discovery, transformation, explanation.
+## Deploying
 
-The clearest example is the four-column province comparison on the industry
-pages. It used to be a table nobody reads across. It is now a segmented control
-you operate: pick Alberta, and you see Alberta. Ten of those across the site.
+Upload the contents of `deploy/` to the host. It is a Vercel project:
+`vercel.json` carries `cleanUrls`, the redirect table and the cache headers, so
+`/personal` serves `personal.html` and `/assets/*` is cached for a year.
 
-Every page is white, airy, Inter and JetBrains Mono, with the soft blue and gold
-wash. The nav is a floating dark pill, which is how the first demo carried the
-logo, so your existing white wordmark reads with no new asset. **No brand asset
-was generated, traced, recoloured or placeheld.**
+Because assets are cached hard, **every asset URL carries `?v=YYYYMMDD`**. If you
+edit anything in `assets/`, bump that stamp in the files that reference it or the
+change will not reach anyone who has visited before.
 
-## The landing
+## The pages
 
-White. Apple-clean. One screen, no scrolling.
+| Path | What it is |
+|---|---|
+| `/` | The front door. The business story, with the 4ormIQ phone and the firm dashboard inside it. |
+| `/personal` | Know more. Decide better. The consumer side. |
+| `/professional` | Build the evidence while the decision is happening. The firm side. |
+| `/how-it-works` | One relationship, one line. |
+| `/why-4orm` | Why the company exists, the research, and who is building it. |
+| `/the-standard` | Suitability, the eight steps, the ten principles, what regulators ask for. |
+| `/industries/*` | Seven sectors, same relationship, different decision. |
+| `/check-a-firm`, `/research`, `/team`, `/contact` | Secondary pages. |
+| `/intelligence` | 4orm Intelligence. Self-contained: it carries its own CSS and JS. |
+| `/privacy`, `/terms`, `/website-privacy` | Legal. |
 
-    Better financial decisions start with better relationships.
-    4orm helps you understand a financial decision before you make it, and helps
-    the firm serving you keep the record of how it was made.
+`/home` was retired in this rebuild and redirects to `/`.
 
-Then three ways in, side by side, divided by hairlines and nothing else. Each one
-says who it is for, what it does, and what the click opens:
+## How the front door is assembled
 
-    PERSONAL       If you are about to borrow, buy or invest
-                   Understand it before you sign it.          Pick up the phone
-    PROFESSIONAL   If you run or work at a firm
-                   Show your work, without more work.         See my dashboard
-    EXPLORE 4ORM   If you want to know what this is first
-                   See what 4orm is, and why it exists.       Read the company
+`index.html` is generated, not hand-edited. Two source files build it:
 
-They stay side by side down to 800px and stack only on a phone.
+    source/front.html      the page body, with @@ROWS@@ where the phone and
+                           dashboard rows are spliced in
+    source/front.css       the front-door styles, appended to assets/site.css
 
-**Everyone gets their own 4orm Guardian.** That is the consumer product, and the
-landing says so in plain words rather than in brand language.
+`source/build.py` does the assembly. Run it from `source/`:
 
-**Only the phone goes black.** Picking it up takes the screen to #000000 with the
-phone the one lit object and a single control top right: Put phone away. The
-firm's reading and Explore stay white.
+    python3 build.py
 
-## The menu
+It rewrites `deploy/index.html` and the tail of `deploy/assets/site.css`, keeping
+the live phone and dashboard markup that the rest of the site's scripts drive.
+Everything else in `deploy/` is edited directly.
 
-One overlay, on every page and every screen size. It replaced two separate
-systems: a small dropdown on desktop and a phone drawer that was also firing on
-desktop, which is what made the menu look wrong.
+## The scripts
 
-Auto, Investing and Banking are marked **Coming soon** rather than looking
-selectable.
+| File | What it runs |
+|---|---|
+| `chrome.js` | Nav, menu, footer, scroll reveals, segmented controls, counters. On every page. |
+| `atmos.js` | The ambient light behind the page. On every page. |
+| `front.js` | The front door: the record demo, the screens picker, the B.C. countdown. |
+| `assist.js` | The 4ormIQ phone on the front door. |
+| `guardian.js` | The full consumer experience behind `#personal`. |
+| `firm.js` | The firm dashboard behind `#professional`. |
+| `landing.js` | Opens and closes those two experiences from the hash. |
+| `check.js`, `research.js`, `team.js` | One page each. |
 
-## Audit
+## Verifying a change
 
-Run across all seventeen pages: no links without a destination, no in-page
-anchors pointing at nothing, no duplicate ids, no console errors, no horizontal
-overflow at 1440 or 390, and every internal link resolves.
+`verify/` holds the Playwright checks used on this rebuild. They need
+`playwright` and a local Chromium; each one serves `deploy/` on a port and
+reports pass or fail.
 
-The written-word gate caught one live defect during this build: the figure
-**754 days** had reached the firm dashboard, and that string is banned by the
-canonical facts. Changed.
+    node verify/all.js       every page: the brand line, overflow, status codes
+    node verify/t.js         the front door at 1440, 390 and with motion off
+    node verify/s.js         the screens picker: all seven, alt text, keyboard
+    node verify/full.js      whole-site link check and full-page screenshots
 
-## The master specification build
-
-`4orm_Master_Website_UX_Relationship_Integrity_Rebuild` is now the source of
-truth. Phases 1, 2 and 8 of its build sequence are in, plus the positioning
-change that runs through everything.
-
-**The thesis changed.** The company headline is now *Better financial
-decisions start with better relationships.* YOUR FIRM changed from "Prove
-what happened after" to **Protect the relationship. Prove the work.**
-
-**The regulator left the consumer experience.** Not in the nav, not in the
-hero, not in the phone, not in the rings. It survives as institutional proof
-on the pages where the FSRA and FCAC language does the work. This is the
-doc's rule and it reverses an earlier decision.
-
-**The first screen strips down.** Two corners: the wordmark left, "4orm your
-experience" right. No navigation bar. The mark, the headline, the split, and
-the phone below it. Every other page keeps the dark pill.
-
-**Product Mode is true black.** Picking up the phone takes the site to
-#000000, not a grey overlay. One control above it: Put phone away. Keyboard
-focus is trapped and returned. The page comes back exactly as it was.
-
-**Atmosphere.** Three enormous lights drift on 66 to 94 second loops, and a
-deterministic dust field drifts behind everything. On white it is the
-faintest grey; inside Product Mode it becomes starlight. The relationship
-line carries one slow pulse of blue.
-
-**The proof strip** carries four numbers, each linked to its primary source
-and each verified against that source before it went on the page.
-
-### Verified, not transcribed
-
-    $704M / 112,000 reports   Canadian Anti-Fraud Centre, 2025      confirmed
-    47% uncertain             CMHC 2026 Mortgage Consumer Survey    confirmed
-    100% no suitability doc   FSRA supervision plan 2025 to 2026    confirmed
-    73% / 65% disclosure      FSRA, same sample                     confirmed
-    4.4 years to save         CMHC 2026                             confirmed
-
-Two corrections to the source document. The 47% is **down** from 62% the year
-before, so it cannot be framed as rising, and the page says so. The 16%
-figure about model tooling in mortgage research cannot appear on this site at
-all: no screen mentions that technology.
-
-### Still to build
-
-Phases 3 to 7 and 9 to 10 of the master sequence: the human-sentence first
-screen inside the phone, the Relationship Integrity view for firms, the
-4orm Standard, the evidence gap systems map, State of Financial Trust,
-Integrations, Security and Privacy, How 4orm works, and Company.
-
-## The hero and the focus mode
-
-The hero is the split headline, raised and enlarged, with the brand verb
-under each side:
-
-    You                            Your firm
-    Know before you decide.        Prove what happened after.
-    4orm your discovery.           4orm your evidence.
-
-The "One transaction, three views" eyebrow is gone. The four promises that
-used to sit under it now sit **below** the phone, numbered, because they
-happen in that order: ask, check, understand, connect.
-
-4orm is a verb now. The nav call to action matches: **4orm your experience.**
-
-**Tap the phone and the room steps back.** It translates to the centre of
-the viewport, a cool grey scrim fades up, and two halos breathe behind it on
-an 8.5 second loop. Escape or a tap outside leaves. There is no hint label
-and no close button.
-
-Above the phone, one line with a bobbing arrow pointing down at it:
-**4orm your curiosity.** It opens focus mode itself, and it disappears once
-the visitor is inside or has tapped anything. The invitation is spent once
-it works.
-
-The lights come back up at the handoff. The moment the consumer shares with
-a professional, focus releases, because somebody else is involved now and
-the professional panel beside the phone has to have somewhere to land. Focus
-is a narrative device, not a mode you sit in.
-
-Below 900px the phone does not translate. The page scrolls it to centre
-first, then locks.
-
-## index.html, the experience
-
-Two levels of navigation, exactly the hierarchy you described.
-
-    Who are you?              PERSONAL   PROFESSIONAL   REGULATOR
-    What transaction?         Mortgage   Auto   Insurance   Lending
-
-Both switch the same object. The industry changes the conversation, the
-professional, the fields on the application and the transaction ID. The view
-changes who is looking at it.
-
-The path a visitor takes:
-
-1. **Personal.** Tap a goal, pick a timing, say yes, then tap the four readiness
-   items. The panel beside the phone builds while they do: readiness climbs from
-   12 per cent, identity and income flip to verified, the evidence list fills,
-   and thin blue lines draw in behind the phone. Those lines are the evidence
-   graph forming.
-2. **Share.** The view switches itself to Professional. The file arrives prepared.
-3. **The moment.** Press "Change the income figure". $118,000 animates to
-   $136,000, an evidence exception opens on the professional side, and the phone
-   lights up on the consumer side a second later. One event, two people, one
-   record.
-4. **Regulator.** The phone drops away, the transaction becomes a timeline, and
-   "Reconstruct the transaction" assembles the package.
-
-## check-a-firm.html, the red flag check
-
-Type a company, a brokerage or a person. The page routes the name into the public
-registers Canadian authorities publish themselves, tells you what a hit in each
-one would mean, and records that you looked.
-
-**It holds no list of its own and it publishes no finding about any company.**
-That is the design, not a limitation. A search that told a visitor a named firm
-was dangerous, on 4orm's say so, would be a private accusation: worth little to
-the visitor and a defamation exposure for you. So the page does the more useful
-thing. It routes, it explains, and it keeps the dated record.
-
-Ten registers, filtered by what the visitor is dealing with:
-
-    Registration   National Registration Search            CSA
-                   Registry of payment service providers   Bank of Canada
-    Licence        Licensed mortgage brokerages, agents    FSRA Ontario
-                   Licensed insurance agents               FSRA Ontario
-                   Broker search                           RIBO Ontario
-    Discipline     The Disciplined List                    CSA
-                   Advisor Report                          CIRO
-    Warnings       Investor alerts                         CSA
-    Penalties      Public notice of monetary penalties     FINTRAC
-    Fraud          Canadian Anti-Fraud Centre              RCMP, OPP, Competition Bureau
-
-Opening a register marks it read. Read them all and the check becomes a dated
-line on the transaction, which is the tie back into the rest of the product: what
-you checked, when, and what was published at the time.
-
-Three worked examples run on **invented** firms, one clean, one carrying a
-published penalty, one absent from everything. Each one says on its face that the
-firm does not exist. The third is the important one, because absence is the
-finding most people miss.
-
-The homepage carries the same box at `#redflag` and submits through to the page
-with the name in the query string.
-
-**Before this goes live**, have counsel read `assets/check.js`. Nothing in it
-asserts anything about a real company, but the register list and the "what a hit
-means" lines are the part worth a second pair of eyes.
-
-## Where the three meet
-
-Three concentric rings, in the three party colours, closing on one shared
-centre with the word "Trust" at the middle. Apple Watch activity rings,
-reinterpreted for evidence.
-
-Each ring draws itself on a stagger, led by a travelling head dot, finishing
-with a halo pulse and a slow sheen that runs forever once closed. Each party
-closes their own loop; all three enclose the same centre.
-
-This replaced a three-circle venn diagram. Four directions were built and
-compared: the rings, a particle convergence field, one record re-annotated
-three ways, and a three-strand braid. The rings won on life and legibility.
-The record-read-three-ways version is worth revisiting for a different slot,
-because it makes the argument literally rather than by metaphor.
-
-## The Apple pass
-
-Three defects the design scan turned up and fixed:
-
-- **Measure.** Running text was reaching 143 characters a line on the wider
-  research pages. Everything is now capped between 66 and 78.
-- **Capitalisation.** Six carried headlines were Title Case while every
-  authored page was sentence case. Converted at build time by an explicit
-  map in `build/build.py`, so the content modules stay untouched.
-- **Air.** Sections went from a flat 110px to
-  `clamp(96px, 9.4vw, 150px)`, and the stage around the phone opened up on
-  both sides.
-
-## assets/
-
-    site.css          one stylesheet, the whole design system
-    chrome.js         nav and footer injected once, plus scroll reveal,
-                      the segmented controls, the animated scales,
-                      the readiness meter and the document check
-    experience.js     the homepage state machine
-    check.js          the red flag check: the register list and the check sheet
-    logo.png          your existing lockup, untouched
-    favicon*, og-image, team/   your existing files, untouched
-
-## build/
-
-Pages are generated so the copy lives in one place and the design in another.
-`python3 build/build.py` regenerates all seventeen.
-
-    kit.py       page shell, head, and the written-word gate
-    pkit.py      the product-led emitters
-    shim.py      adapter for the carried content modules
-    p_*.py       one module per page
-
-`shim.py` maps the old content vocabulary onto the new emitters, which is why
-`p_payments.py`, `p_real_estate.py`, `p_insurance.py`, `p_law_firms.py`,
-`p_credit_unions.py` and `p_hub.py` were **not edited**. Their research, every
-cited section and every source link, carried across untouched and came out in
-the new language.
-
-## The written-word gate
-
-The brand system governs the words. `kit.gate()` runs over the visible copy of
-every page at build time and fails on: em dashes, en dashes, "problem" in any
-form, "754 days", "three-year lookback", "224 firms", any claim that 4orm
-performs or signs the independent review, any claim the reviewer must be
-external, any published first-review date, any reference to AI or model tooling,
-British spellings, and the full banned-word list from section 10 of the house
-standard.
-
-**Currently zero.**
-
-Fifteen style notes are reported and not changed: uses of "somebody" as the
-universal person, all in copy written before the gate existed. Listed on every
-build so you can decide.
-
-## Verified before packaging
-
-All seventeen pages: nav and footer inject, every internal link resolves, no
-console errors, no encoding artifacts, every scroll reveal fires, and no
-horizontal overflow at 1440 or 390. Every segmented control on the site was
-clicked through.
-
-## Caching
-
-Assets carry `?v=YYYYMMDD` from the build date. A returning visitor cannot be
-served a stale file from the one-year immutable cache on `/assets/*`.
-
-## Still open
-
-- Insurance and Lending on the homepage run the same engine with their own data.
-  They are honest demonstrations of the model, not built products.
-- Every name, figure, document and decision in the experience is invented.
+Run all four before shipping. The last full run was clean.
