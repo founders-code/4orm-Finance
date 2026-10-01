@@ -202,7 +202,7 @@ function render() {
           '<span class="ck-rd">Counterparty check on ' + esc(S.firm) + '. ' + l.length +
           ' registers read by the consumer.</span>' +
         '</div>' +
-        '<a class="btn btn-p" href="/#stage">Form your experience <span class="cir">' + ARROW + '</span></a>' +
+        '<a class="btn btn-p" href="/#stage">4orm your experience <span class="cir">' + ARROW + '</span></a>' +
       '</div>';
   }
 
