@@ -7,7 +7,7 @@ Static site. No build step is required to deploy: `deploy/` is what ships.
     verify/            the checks, so the next change can be proved as well
     docs/              what changed in this rebuild, and what is still open
 
-**Prepared 26 September 2026.**
+**Prepared 29 September 2026.**
 
 ---
 

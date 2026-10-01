@@ -16,10 +16,19 @@ for (const [w,h,lab,red] of [[1440,900,'desk',false],[390,844,'mob',false],[1440
   p.on('console',m=>{if(m.type()==='error'&&!ign(m.text()))errs.push(m.text())}); p.on('pageerror',e=>errs.push('PE '+e.message));
   await p.goto('http://localhost:9301/',{waitUntil:'domcontentloaded'}); await p.waitForTimeout(1500);
   if(lab==='desk') await p.screenshot({path:'./hero.png'});
-  // sector seg
-  for (const k of ['ins','inv','work','mtg']){ await p.click(`[data-seg="ch"] button[data-key="${k}"]`); await p.waitForTimeout(150);
-    const on=await p.evaluate(k=>document.querySelector(`[data-swap="ch"][data-key="${k}"]`).classList.contains('on'),k);
-    if(!on) fail.push(lab+': sector '+k+' did not show'); }
+  // every figure on the page carries a source, and the six sectors are all there
+  const ev=await p.evaluate(()=>({six:document.querySelectorAll('.sixc').length,
+    nosrc:[...document.querySelectorAll('.sixc')].filter(c=>!c.querySelector('.sixs')).length,
+    wn:document.querySelectorAll('.wn').length,
+    wnNoSrc:[...document.querySelectorAll('.wn')].filter(c=>!c.querySelector('.wns')).length,
+    tables:document.querySelectorAll('table.btab,table.ptab').length,
+    quotes:[...document.querySelectorAll('.vq')].filter(q=>!q.querySelector('footer')).length,
+    bars:[...document.querySelectorAll('.crbars,.pbbars')].filter(b=>!b.getAttribute('aria-label')).length}));
+  if(ev.six!==6) fail.push(lab+': sector cards '+ev.six);
+  if(ev.nosrc||ev.wnNoSrc) fail.push(lab+': a figure with no source line');
+  if(ev.tables!==4) fail.push(lab+': tables '+ev.tables);
+  if(ev.quotes) fail.push(lab+': a quotation with no attribution');
+  if(ev.bars) fail.push(lab+': a chart with no text equivalent');
   // record
   await p.click('#recChange'); const pre=await p.textContent('#recK');
   await p.click('#recWalk'); await p.waitForTimeout(red?300:7600);

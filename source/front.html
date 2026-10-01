@@ -1,25 +1,32 @@
 <div class="front">
 
 <!-- ============================================================
-     Hero. The company line, then a choice of reader.
+     Hero. Five things and nothing else.
 
-     The page is written for the business: it is the business that
-     buys, and the brand standard says the website leads with the
-     human decision and the shared outcome, which this does. The
-     consumer tab re-voices the hero for the other side of the same
-     decision and hands them to 4ormIQ. Both sides, always together.
+     The wordmark stands in for the digit in 4orming: the digit is
+     still in the text, painted transparent, with the mark pulled
+     over it by a negative margin equal to its own width. See the
+     comment on .wmk in the stylesheet before touching it.
+
+     No audience switch lives here. The nav already carries both
+     readers, and a control that repeats the navigation costs a
+     decision for nothing.
      ============================================================ -->
 <section class="fhero">
   <div class="wrap">
-    <h1 class="fh1 rv"><span class="wmk"><img src="/assets/mark-glyph.png?v=20260922" alt=""
-      aria-hidden="true" width="198" height="275" />4</span>orming trust into financial
-      decisions.</h1>
+    <p class="fbrand rv"><img src="/assets/logo-light.png?v=20260929" alt="" aria-hidden="true"
+      width="217" height="87" /></p>
 
-    <p class="fkick rv d1">People &nbsp;&middot;&nbsp; Trust &nbsp;&middot;&nbsp; Clear outcomes</p>
+    <p class="feye rv d1">Major financial decisions</p>
 
-    <p class="fline rv d2">Better client understanding. Less work for your team.</p>
+    <h1 class="fh1 rv d1">Easier to understand.<br />Easier to explain.</h1>
 
-    <div class="fcta rv d2">
+    <p class="fsub rv d2">Software that connects client understanding with the firm&rsquo;s
+      recommendation and the evidence behind it.</p>
+
+    <p class="fkick rv d2">People &nbsp;&middot;&nbsp; Trust &nbsp;&middot;&nbsp; Clear outcomes</p>
+
+    <div class="fcta rv d3">
       <a class="btn btn-p" href="#how">See how 4orm works <span class="cir">&#8594;</span></a>
       <a class="btn btn-g" href="/contact">Become a design partner</a>
     </div>
@@ -27,8 +34,7 @@
 </section>
 
 <!-- ============================================================
-     The human moment. Straight from the deck, and first, because the
-     brand's proof order starts with the consumer's challenge.
+     The human moment. The stake comes before the argument.
      ============================================================ -->
 <section class="sec fmoment">
   <div class="wrap">
@@ -41,9 +47,9 @@
 </section>
 
 <!-- ============================================================
-     What we do, in Chad's words, straight after the human moment.
-     The plainest statement on the site, and it goes high because a
-     visitor who reads nothing else should still know what 4orm is.
+     What we do. The plainest statement on the site, high up,
+     because a visitor who reads nothing else should still know
+     what 4orm is.
      ============================================================ -->
 <section class="sec wedo" aria-labelledby="wdT">
   <div class="wrap">
@@ -87,7 +93,7 @@
     <div class="wdind rv">
       <span class="wdnow">Starting with mortgages</span>
       <span class="wdar" aria-hidden="true">&#8594;</span>
-      <span class="wdnext">Auto finance</span><span class="wdnext">Insurance</span><span class="wdnext">Investing</span><span class="wdnext">Lending</span>
+      <span class="wdnext">Automotive</span><span class="wdnext">Insurance</span><span class="wdnext">Real estate</span><span class="wdnext">Investing</span>
       <span class="wdvis">Where the vision goes next</span>
     </div>
 
@@ -97,99 +103,12 @@
 </section>
 
 <!-- ============================================================
-     The challenge. A comparison table becomes a control: pick a
-     sector, see that sector's published findings.
+     Where the cost sits. The business pays twice, deck page 2.
      ============================================================ -->
-<section class="sec alt" aria-labelledby="chT">
+<section class="sec alt" aria-labelledby="twT">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="kick">The challenge</span>
-      <h2 id="chT">Regulators are asking firms to prove suitability. Most files cannot.</h2>
-      <p>New federal and provincial supervision is raising the cost of proof, while nearly half of
-        consumers making a large financial decision still feel uncertain. The findings below are
-        the regulators&rsquo; own, from the files they opened.</p>
-    </div>
-
-    <div class="seg-w rv" style="margin-top:44px">
-      <div class="seg" data-seg="ch" role="group" aria-label="Choose a sector">
-        <span class="pip" aria-hidden="true"></span>
-        <button type="button" class="on" data-key="mtg" aria-pressed="true">Mortgage</button>
-        <button type="button" data-key="ins" aria-pressed="false">Insurance</button>
-        <button type="button" data-key="inv" aria-pressed="false">Investing</button>
-        <button type="button" data-key="work" aria-pressed="false">The manual work</button>
-      </div>
-    </div>
-
-    <div class="panel rv">
-      <div class="panel-in">
-        <div class="swap on" data-swap="ch" data-key="mtg">
-          <div class="panel-h"><span class="pl">FSRA &middot; Ontario private mortgage files</span>
-            <span class="fsrc">Supervision Plan 2025-26</span></div>
-          <div class="fnums">
-            <div class="fn1"><b>100%</b><span>had no documented suitability assessment.
-              <i>Up from 85% the year before.</i></span></div>
-            <div class="fn1"><b>73%</b><span>were missing material risk disclosure.
-              <i>Up from 48%.</i></span></div>
-            <div class="fn1"><b>65%</b><span>were missing conflict of interest disclosure.
-              <i>Up from 35%.</i></span></div>
-          </div>
-          <p class="fbound">A risk-focused examination sample of private mortgage files. It is not a rate
-            for every mortgage in Ontario.</p>
-        </div>
-
-        <div class="swap" data-swap="ch" data-key="ins">
-          <div class="panel-h"><span class="pl">FSRA &middot; Ontario life and health agents</span>
-            <span class="fsrc">Supervision Report 2024-25</span></div>
-          <div class="fnums two">
-            <div class="fn1"><b>45%</b><span>of the 92 agents reviewed failed needs analysis or
-              sales practice requirements.</span></div>
-            <div class="fn1"><b>32%</b><span>kept client meeting notes too thin to support the
-              recommendation that was made.</span></div>
-          </div>
-          <p class="fbound">92 agents selected for review, not a sample of the whole sector.</p>
-        </div>
-
-        <div class="swap" data-swap="ch" data-key="inv">
-          <div class="panel-h"><span class="pl">CSA and CIRO &middot; investment registrants</span>
-            <span class="fsrc">Staff Notice 31-368, December 2025</span></div>
-          <div class="fnums one">
-            <div class="fn1"><b>105</b><span>firms reviewed for know-your-client, know-your-product
-              and suitability. &ldquo;Many firms lacked sufficient documentation to evidence the
-              KYP assessments performed.&rdquo;</span></div>
-          </div>
-          <p class="fbound">Keeping the product documents was not enough. The regulators asked for
-            the firm&rsquo;s own reasoning, and deficiencies led to corrective action.</p>
-        </div>
-
-        <div class="swap" data-swap="ch" data-key="work">
-          <div class="panel-h"><span class="pl">What the manual work costs</span>
-            <span class="fsrc">Vendor-published baselines</span></div>
-          <div class="fnums">
-            <div class="fn1"><b>90 min</b><span>for a manual quality review of one advice case.
-              <i>Key Group, Aveni case study.</i></span></div>
-            <div class="fn1"><b>2 hrs</b><span>of post-meeting admin for one advice meeting.
-              <i>Prosser Knowles, Aveni case study.</i></span></div>
-            <div class="fn1"><b>5-10%</b><span>of cases checked when compliance relies on manual
-              sampling. <i>Aveni, 10 September 2026.</i></span></div>
-          </div>
-          <p class="fbound">Starting points reported by another vendor&rsquo;s customers in the UK.
-            They describe the work, not a 4orm result.</p>
-        </div>
-      </div>
-    </div>
-
-    <p class="fside rv"><b>47%</b> of recent Canadian homebuyers felt uncertain or concerned during
-      the process. <span>CMHC 2026 Mortgage Consumer Survey.</span></p>
-  </div>
-</section>
-
-<!-- ============================================================
-     The business pays twice.
-     ============================================================ -->
-<section class="sec" aria-labelledby="twT">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kick">Where the cost sits</span>
       <h2 id="twT">The business pays twice. Once to guide the consumer, again to rebuild the
         record.</h2>
       <p>The file already exists. It is spread across the systems the firm already runs, and when
@@ -200,18 +119,18 @@
     <div class="twice rv">
       <div class="tw1">
         <span class="twn">1</span>
-        <span class="twk">Pay now</span>
+        <span class="twk">During the decision</span>
         <h3>Guide an uncertain consumer</h3>
-        <p>Repeated explanations, follow-up and handoffs on every file, because the consumer
-          arrives with pieces of the picture from a dozen places.</p>
+        <p>Ask for information. Explain the options. Resolve questions across calls, emails and
+          documents.</p>
       </div>
       <span class="twarrow" aria-hidden="true">&#8594;</span>
       <div class="tw1 later">
         <span class="twn">2</span>
-        <span class="twk">Pay again later</span>
+        <span class="twk">When the decision is reviewed</span>
         <h3>Rebuild the record and defend suitability</h3>
-        <p>More labour, longer reviews, disputes, regulatory exposure and a relationship put at
-          risk, months or years after the decision was made.</p>
+        <p>Find the same information again and reconstruct why the recommendation fit, months or
+          years after it was made.</p>
       </div>
     </div>
 
@@ -247,10 +166,10 @@
     <div class="measures rv">
       <p class="mh">What a 4orm pilot measures</p>
       <ol>
-        <li><b>Time to assemble</b> a complete file</li>
-        <li><b>Review time</b> per case</li>
+        <li><b>Review minutes</b> per case</li>
+        <li><b>Retrieval time</b> for a file</li>
         <li><b>Rework</b> and follow-up</li>
-        <li><b>Cost to answer</b> a challenge</li>
+        <li><b>Consumer understanding</b> and material gaps</li>
       </ol>
       <p class="fbound">These are the measures a paid pilot is built to test on the firm&rsquo;s own
         files. They are not results yet.</p>
@@ -259,70 +178,253 @@
 </section>
 
 <!-- ============================================================
-     The standard of proof is changing. Layers, oldest at the
-     bottom, because each one stays in force as the next arrives.
+     Who this impacts. Deck page 3: six sectors, six regulators,
+     one challenge. Each card carries its own source.
      ============================================================ -->
-<section class="sec alt" aria-labelledby="shT">
+<section class="sec" aria-labelledby="sixT">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kick">Why now</span>
-      <h2 id="shT">The standard of proof is changing. Signed forms are giving way to evidence.</h2>
-      <p>Each layer stays in force as the next one is added. The firm now has to show what the
-        consumer needed, what they understood, why the recommendation fit, and what evidence
-        existed at the time.</p>
+      <span class="kick">Who this impacts</span>
+      <h2 id="sixT">Many industries now face the same challenge.</h2>
+      <p>Consumers need to understand the decision. Businesses need to explain why it fits. These
+        are the regulators&rsquo; own findings, from the files and firms they opened.</p>
     </div>
 
-    <div class="layers rv">
-      <div class="ly now">
-        <span class="lyd">2025-26</span>
-        <div><b>Supervision expands.</b> Retail Payment Activities Act supervision began on
-          8 September 2025. Bill C-12 received Royal Assent on 26 March 2026, raising maximum
-          anti-money-laundering penalties as much as 40 times, to $20M or 3% of global revenue.
-          British Columbia&rsquo;s Mortgage Services Act comes into force on
-          <b class="bcdate">13 October 2026</b><span class="bcin" id="bcin"></span>.</div>
+    <div class="sixg rv">
+      <div class="sixc">
+        <span class="sixk">Mortgage</span>
+        <b>100%</b>
+        <p>of examined files with no documented suitability assessment.</p>
+        <span class="sixs">FSRA</span>
       </div>
-      <div class="ly">
-        <span class="lyd">2025</span>
-        <div><b>Compliance tested.</b> The CSA and CIRO review 105 investment firms. Deficiencies
-          trigger corrective action, and sometimes further regulatory action.</div>
+      <div class="sixc">
+        <span class="sixk">Insurance</span>
+        <b>45%</b>
+        <p>of life agents failing needs analysis. CCIR reports weak insurer oversight of
+          distribution.</p>
+        <span class="sixs">FSRA &middot; CCIR</span>
       </div>
-      <div class="ly">
-        <span class="lyd">2023</span>
-        <div><b>Proof expected.</b> FSRA reviews 101 private mortgage files and finds documentation
-          gaps in about 65% of them. CIRO is formed and unifies investment oversight.</div>
+      <div class="sixc">
+        <span class="sixk">Investments</span>
+        <b>105</b>
+        <p>firms reviewed. Many could not evidence know-your-product work. C$59.4M restitution,
+          C$20.7M fines.</p>
+        <span class="sixs">CSA &middot; CIRO</span>
       </div>
-      <div class="ly">
-        <span class="lyd">2019-21</span>
-        <div><b>Rules change.</b> The Client Focused Reforms add enhanced know-your-client,
-          know-your-product and suitability requirements, in force 31 December 2021.</div>
+      <div class="sixc">
+        <span class="sixk">Auto finance</span>
+        <b>2,332</b>
+        <p>charges and C$1.9M in fines. 32% turnover among finance and insurance managers.</p>
+        <span class="sixs">OMVIC &middot; CADA and MNP</span>
+      </div>
+      <div class="sixc">
+        <span class="sixk">Banking</span>
+        <b>745K</b>
+        <p>accounts reimbursed more than C$38M. The appropriateness duty sits with the bank.</p>
+        <span class="sixs">FCAC</span>
+      </div>
+      <div class="sixc">
+        <span class="sixk">Payments and MSBs</span>
+        <b>C$197.8M</b>
+        <p>in fines in 2025, up from C$6.9M in 2024. 56% lacked policies.</p>
+        <span class="sixs">FINTRAC</span>
       </div>
     </div>
 
-    <div class="fintrac rv">
-      <div class="ftn"><b>8</b><span>2021</span></div>
-      <span class="ftar" aria-hidden="true">&#8594;</span>
-      <div class="ftn big"><b>30</b><span>2025</span></div>
-      <p>FINTRAC administrative penalties issued, across every sector.
-        <span>Torys, FINTRAC penalties review, Q1 2026.</span></p>
-    </div>
-    <p class="fsrcline rv">Sources: CSA; FSRA; CIRO; Bank of Canada; BCFSA; McCarthy T&eacute;trault.
-      Verified at the source, September 2026.</p>
+    <p class="fbound mid rv">Selected findings from separate reviews and periods. Percentages refer
+      to the files or firms examined, not to every firm in the sector.</p>
   </div>
 </section>
 
 <!-- ============================================================
-     What suitability means.
+     Why now. Deck pages 4 to 9. The single biggest change in this
+     rewrite: complexity, cost, staff time, penalty ceilings and
+     the mortgage sector's own AML duties, each with its source.
+     ============================================================ -->
+<section class="sec alt" aria-labelledby="wnT">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">Why now</span>
+      <h2 id="wnT">Compliance is getting harder to manage, and more expensive to staff.</h2>
+      <p>Requirements keep arriving, and each one stays in force as the next is added. The cost
+        shows up first in systems and data, then in people, then in the size of the penalty for
+        getting it wrong.</p>
+    </div>
+
+    <div class="wng rv">
+      <div class="wn">
+        <b>94%</b>
+        <p>of Canadian respondents said requirements had become more complex over three years.</p>
+        <span class="wns">PwC 2025 Global Compliance Survey</span>
+      </div>
+      <div class="wn">
+        <b>92%</b>
+        <p>reported a negative effect on implementing and maintaining systems and data.</p>
+        <span class="wns">PwC 2025 Global Compliance Survey</span>
+      </div>
+      <div class="wn">
+        <b>86%</b>
+        <p>reported a negative effect on senior management&rsquo;s attention and focus.</p>
+        <span class="wns">PwC 2025 Global Compliance Survey</span>
+      </div>
+    </div>
+    <p class="fbound rv">Canadian survey responses across sectors. It does not measure mortgage firms
+      alone.</p>
+
+    <div class="costrise rv">
+      <div class="crbars" role="img"
+           aria-label="Reported annual compliance costs across 24 surveyed Canadian P and C insurers rose from 416 million Canadian dollars in 2022 to 753 million in 2024.">
+        <div class="crb"><span class="crv">C$416M</span><i style="height:55%"></i><span class="cry">2022</span></div>
+        <div class="crb"><span class="crv">C$753M</span><i style="height:100%"></i><span class="cry">2024</span></div>
+      </div>
+      <div class="crtxt">
+        <b>Compliance costs rose 81% in two years.</b>
+        <p>C$337M more annual compliance spending across the survey group. A 26% increase in the
+          full-time employees required for compliance, with nearly three quarters of reported
+          spending coming from internal labour.</p>
+        <span class="wns">Insurance Bureau of Canada: 24 surveyed P&amp;C insurers, 61% of the
+          Canadian market. Reported costs for the surveyed group, not a national total.</span>
+      </div>
+    </div>
+
+    <div class="ptabw rv">
+      <p class="ptabh">FINTRAC&rsquo;s penalty ceilings are now up to 40 times higher</p>
+      <table class="ptab">
+        <caption class="sr-only">Maximum administrative monetary penalty by violation
+          classification</caption>
+        <thead>
+          <tr><th scope="col">Violation classification</th><th scope="col">Maximum amount</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Minor</th><td>C$40,000</td></tr>
+          <tr><th scope="row">Serious</th><td>C$4,000,000</td></tr>
+          <tr><th scope="row">Very serious</th><td>C$20,000,000</td></tr>
+        </tbody>
+      </table>
+      <p class="fbound">Maximum amounts, subject to the Act&rsquo;s limits. The framework applies to
+        violations on or after 26 March 2026. Entity cumulative cap per notice: the greater of
+        C$20M or 3% of prior-year gross global revenue. In fiscal 2024-25 FINTRAC issued 23 notices
+        of violation totalling more than C$25M, an amount issued rather than collected.</p>
+    </div>
+
+    <div class="amlw rv">
+      <div class="sec-head" style="margin-bottom:26px">
+        <h3>Mortgage firms now carry ongoing anti-money-laundering duties.</h3>
+        <p>Mortgage brokers, administrators and lenders entered the federal regime on 11 October
+          2024. The first documented effectiveness review is due before
+          <b class="bcdate">11 October 2026</b><span class="bcin" id="bcin"></span>.</p>
+      </div>
+      <table class="btab">
+        <thead>
+          <tr><th scope="col">Work the business must perform</th><th scope="col">Evidence that must
+            be available</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Operate a compliance program</th><td>Written policies, risk assessment
+            and training</td></tr>
+          <tr><th scope="row">Apply client checks and ongoing monitoring</th><td>Information and
+            records required for the activity</td></tr>
+          <tr><th scope="row">Report transactions when required</th><td>Required reports and
+            supporting records</td></tr>
+          <tr><th scope="row">Review program effectiveness</th><td>A documented review at least
+            every two years</td></tr>
+        </tbody>
+      </table>
+      <p class="fbound">Exact duties depend on the activity. Separately, British Columbia&rsquo;s
+        Mortgage Services Act comes into force on 13 October 2026.</p>
+    </div>
+
+    <p class="fsrcline rv">Sources: PwC Canada; Insurance Bureau of Canada; FINTRAC; Justice Canada;
+      BCFSA. Research checked 28 September 2026.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     Industry voices. Published practitioner quotations, named, with
+     the publication and date, and the limit stated beside them.
+     ============================================================ -->
+<section class="sec" aria-labelledby="voT">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">Industry voices</span>
+      <h2 id="voT">Mortgage leaders describe the pressure.</h2>
+    </div>
+    <blockquote class="vq rv">
+      <p>&ldquo;The new FINTRAC requirements have definitely been a challenge for
+        brokerages.&rdquo;</p>
+      <footer>Terry Kilakos, President, North East Real Estate and Mortgage Agency.
+        <span>Canadian Mortgage Professional, January 2026.</span></footer>
+    </blockquote>
+    <blockquote class="vq rv blue">
+      <p>&ldquo;We realized very early on that compliance would be a greater burden on the agents
+        without a technology solution.&rdquo;</p>
+      <footer>Dave Teixeira, EVP Operations, Dominion Lending Centres Group.
+        <span>Canadian Mortgage Trends, October 2024.</span></footer>
+    </blockquote>
+    <p class="fbound mid rv">Published practitioner quotations. They describe market pressure, not
+      endorsements of 4orm.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     The consumer's side of the same challenge. Deck pages 13, 14,
+     11 and 15.
+     ============================================================ -->
+<section class="sec alt" aria-labelledby="coT">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">The consumer</span>
+      <h2 id="coT">Access to information does not ensure understanding.</h2>
+      <p>The same decision looks different from the other side. People are not short of documents.
+        They are short of a way to check what a choice means for them before they agree to it.</p>
+    </div>
+
+    <div class="dyk rv">
+      <div class="dk1"><b>47%</b><p>of recent homebuyers felt uncertain or concerned during the
+        process.</p><span>CMHC 2026 Mortgage Consumer Survey.</span></div>
+      <div class="dk1"><b>52%</b><p>of homebuyers paid the most they could afford.</p>
+        <span>CMHC 2026 Mortgage Consumer Survey.</span></div>
+      <div class="dk1"><b>44%</b><p>answered fewer than half of seven investment knowledge questions
+        correctly.</p><span>CSA 2024 Investor Index, 5,000 Canadians.</span></div>
+      <div class="dk1"><b>39%</b><p>correctly recognised the survey&rsquo;s high-return, low-risk
+        investment fraud warning sign.</p><span>CSA 2024 Investor Index.</span></div>
+    </div>
+    <p class="fbound rv">These measures use different questions and groups. They are specific
+      question results, not a diagnosis of any person&rsquo;s financial ability.</p>
+
+    <blockquote class="vq rv wide">
+      <p>&ldquo;Communicating in ways people understand means using comprehension or understanding
+        as the measure of success.&rdquo;</p>
+      <footer>Financial Consumer Agency of Canada, National Financial Literacy Strategy 2021-2026.
+        <span>It encourages testing communication with real consumers. It is not a 4orm
+        endorsement.</span></footer>
+    </blockquote>
+
+    <p class="fside rv"><b>47%</b> of industry participants told the Canada Revenue Agency that a
+      yes-or-no income confirmation would not meet their needs. They asked for detailed income
+      records, digital responses and borrower authorization.
+      <span>CRA consultation, July 2025. 1,637 submissions, 61% from mortgage brokers.</span></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     What suitability means. Deck page 12, then the eight steps.
      ============================================================ -->
 <section class="sec" aria-labelledby="suT">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kick">What suitability means</span>
-      <h2 id="suT">Suitability is the documented path from the client&rsquo;s needs to the
-        recommendation.</h2>
-      <p>It means the recommendation fits the consumer, not just the product. It asks one question:
-        did this decision make sense for this consumer? A file has to be able to show all eight of
-        these, in order.</p>
+      <span class="kick">Suitability</span>
+      <h2 id="suT">Businesses need to show why a recommendation fits.</h2>
+      <p>Canadian requirements already connect customer information with product appropriateness.
+        The Financial Consumer Agency of Canada expects banks to understand the consumer, assess
+        product fit and retain records of their implemented policies. The Canadian Securities
+        Administrators and CIRO reviewed 105 firms in 2025 and found process gaps that required
+        action.</p>
     </div>
+
+    <p class="surole rv">4orm&rsquo;s proposed role: connect client context, the review and its
+      supporting record.</p>
+
     <div class="flow two rv" style="margin-top:44px">
       <div class="fstep"><span class="fn">01</span><div><h4>Know the consumer</h4><p>Who they are, what they are trying to achieve, and what they said matters.</p></div></div>
       <div class="fstep"><span class="fn">02</span><div><h4>Gather current facts</h4><p>Their circumstances as they stand now, not when the file was opened.</p></div></div>
@@ -333,8 +435,9 @@
       <div class="fstep"><span class="fn">07</span><div><h4>Confirm understanding</h4><p>What the consumer actually took in, recorded as understood and accepted.</p></div></div>
       <div class="fstep"><span class="fn">08</span><div><h4>Preserve the record</h4><p>What was known, explained, permissioned, changed and agreed, kept as it stood.</p></div></div>
     </div>
-    <p class="fsrcline rv">Sources: CSA Client Focused Reforms; Ontario Regulation 188/08, s. 24;
-      FSRA.</p>
+    <p class="fsrcline rv">Sources: FCAC Appropriate Products and Services guideline; CSA and CIRO
+      Client Focused Reforms review, December 2025; Ontario Regulation 188/08, s. 24. Different
+      sector rules apply, and 105 is the review population, not the number of firms that failed.</p>
   </div>
 </section>
 
@@ -347,12 +450,31 @@
   <div class="wrap">
     <div class="sec-head rv">
       <span class="kick">The solution</span>
-      <h2 id="soT">4orm connects the systems you already use into one record both sides can stand
-        behind.</h2>
-      <p>Proof of the decision, and proof the consumer understood it. The record connects the
-        consumer&rsquo;s goals, the firm&rsquo;s reasoning, the options considered, what changed
-        and what was decided, without replacing the firm&rsquo;s existing workflow.</p>
+      <h2 id="soT">One shared record connects both sides.</h2>
+      <p>4orm connects the tools a business already uses with the consumer&rsquo;s goals, questions
+        and understanding, and brings that information together in one shared decision record,
+        without replacing the firm&rsquo;s existing workflow.</p>
     </div>
+
+    <div class="threecol rv">
+      <div class="thc">
+        <span class="fsk">The consumer</span>
+        <ul><li>Goals and questions</li><li>Changing circumstances</li><li>Information chosen to
+          share</li></ul>
+      </div>
+      <div class="thc">
+        <span class="fsk">The professional</span>
+        <ul><li>Relevant client information</li><li>Options considered</li><li>Recommendation and
+          reasoning</li></ul>
+      </div>
+      <div class="thc">
+        <span class="fsk">The record</span>
+        <ul><li>Sources and versions</li><li>Questions and responses</li><li>A history ready for
+          review</li></ul>
+      </div>
+    </div>
+    <p class="fpunch rv">What was considered. What the client confirmed.
+      <span>Why the recommendation was made.</span></p>
 
     <div class="recx rv" id="rec">
       <div class="rech">
@@ -387,21 +509,63 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="sides rv">
-      <div class="side">
-        <span class="fsk">What the firm knew</span>
-        <ul><li>Facts and identity</li><li>Options and exclusions</li><li>The recommendation, and
-          why</li></ul>
-        <p>The existing workflow stays in place.</p>
+<!-- ============================================================
+     What each side gains. Deck pages 19 to 22.
+     ============================================================ -->
+<section class="sec" aria-labelledby="gaT">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">What each side gains</span>
+      <h2 id="gaT">The consumer prepares. The professional keeps the judgment.</h2>
+      <p>The consumer arrives having explored the decision. The business receives that context
+        alongside the file, and a record of the reasoning behind its recommendation.</p>
+    </div>
+
+    <div class="gains rv">
+      <div class="gcard">
+        <span class="fsk">A place to prepare</span>
+        <h3>What the consumer gains</h3>
+        <ul>
+          <li>Explore goals and changing circumstances.</li>
+          <li>Ask questions before choosing a product.</li>
+          <li>See what a scenario assumes and leaves out.</li>
+          <li>Choose the information shared with a professional.</li>
+          <li>Keep a record to return to later.</li>
+        </ul>
       </div>
-      <div class="side">
-        <span class="fsk">What the consumer understood</span>
-        <ul><li>Goals and risk</li><li>What to expect</li><li>Permissions and changes</li></ul>
-        <p>The consumer controls what is shared.</p>
+      <div class="gcard pro">
+        <span class="fsk">Context and evidence</span>
+        <h3>What the business gains</h3>
+        <ul>
+          <li>Less repeated intake.</li>
+          <li>Questions visible sooner.</li>
+          <li>Reasoning linked to sources.</li>
+          <li>A retrievable review history.</li>
+          <li>Goals and concerns alongside the file.</li>
+        </ul>
       </div>
     </div>
-    <p class="fpunch rv">Others record the outcome. <span>4orm records the reasoning.</span></p>
+
+    <div class="prep rv">
+      <div class="prepc">
+        <span class="fsk">When consumers prepare first</span>
+        <h3>Technology handles the preparation.</h3>
+        <p>Education, questions, preparation, updates and reminders, and basic scenario
+          exploration.</p>
+      </div>
+      <div class="prepc pro">
+        <span class="fsk">So the professional can do the part only they can</span>
+        <h3>The professional handles the judgment.</h3>
+        <p>The relationship, the recommendation and its suitability, complex questions and product
+          selection.</p>
+      </div>
+    </div>
+
+    <p class="fbound mid rv">Product concept. Intended workflow benefits, not achieved savings.
+      Professionals remain responsible for advice, recommendations and compliance.</p>
   </div>
 </section>
 
@@ -409,7 +573,7 @@
      The screens. Seven from the product concept, picked rather
      than scrolled, so the visitor chooses the side they care about.
      ============================================================ -->
-<section class="sec" id="screens" aria-labelledby="scT">
+<section class="sec alt" id="screens" aria-labelledby="scT">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="kick">The screens</span>
@@ -422,7 +586,7 @@
       <div class="shwrail" role="tablist" aria-label="Choose a screen" id="shwRail"></div>
       <figure class="shwstage">
         <div class="shwimg">
-          <img id="shwImg" src="/assets/showcase/biz-file-review.jpg?v=20260923"
+          <img id="shwImg" src="/assets/showcase/biz-file-review.jpg?v=20260929"
                width="1440" height="810" decoding="async"
                alt="A file review screen listing 24 mortgage files: 18 ready for review, 4 missing evidence, 2 needing clarification, with each finding linked to its source document." />
         </div>
@@ -441,52 +605,107 @@
 </section>
 
 <!-- ============================================================
-     Who it changes things for, and what 4orm will not do.
+     Evidence. Deck page 23: what better workflows have been
+     reported to do elsewhere, and what that does and does not
+     establish about 4orm.
      ============================================================ -->
-<section class="sec" aria-labelledby="whT">
+<section class="sec" aria-labelledby="evT">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kick">Who it serves</span>
-      <h2 id="whT">One shared record changes what each side gets.</h2>
-    </div>
-    <div class="three rv">
-      <div class="tcard"><div class="ti"><span class="tw">THE CONSUMER</span>
-        <h3>Clearer choices</h3>
-        <p>Better questions, the full picture before signing, and a record of the decision that
-          stays theirs.</p></div></div>
-      <div class="tcard"><div class="ti"><span class="tw">THE BUSINESS</span>
-        <h3>A record it can stand behind</h3>
-        <p>A consistent, time-stamped, reviewable record. Less manual rebuilding, stronger review
-          readiness and a better client relationship.</p></div></div>
-      <div class="tcard"><div class="ti"><span class="tw">THE REVIEWER</span>
-        <h3>The decision as it happened</h3>
-        <p>What was known, explained, permissioned, considered and agreed, and why it made sense,
-          rather than a file assembled afterwards.</p></div></div>
+      <span class="kick">Evidence</span>
+      <h2 id="evT">Better workflows can reduce time and cost.</h2>
+      <p>Supplier-reported customer outcomes from related tools. Each row measures a different
+        activity, in a different country, under a different definition of the work.</p>
     </div>
 
-    <div class="prep rv">
-      <div class="prepc">
-        <span class="fsk">When consumers prepare first</span>
-        <h3>Technology handles the preparation.</h3>
-        <p>Education, questions, preparation, updates and reminders, and basic scenario
-          exploration.</p>
+    <table class="btab rv">
+      <thead>
+        <tr><th scope="col">Customer and country</th><th scope="col">Work measured</th>
+          <th scope="col">Published result</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Key Group, United Kingdom</th><td>Quality-assurance review</td>
+          <td>90 minutes to 15 minutes</td></tr>
+        <tr><th scope="row">Connective, Australia</th><td>SOC 2 audit cycle</td>
+          <td>4 to 5 months to 5 weeks</td></tr>
+        <tr><th scope="row">Perforce, United States</th><td>Team time on compliance</td>
+          <td>60% to 15%</td></tr>
+        <tr><th scope="row">KBH, Canada</th><td>Tax-season administration</td>
+          <td>1 hour per employee per day saved</td></tr>
+        <tr><th scope="row">Attivo, United Kingdom</th><td>Advice-file review cost</td>
+          <td>40% reduction</td></tr>
+      </tbody>
+    </table>
+    <p class="fbound rv">These results establish useful benchmarks. They do not predict 4orm savings
+      and they do not independently prove causality. 4orm must test its own effect on review time
+      and review cost with paying customers.</p>
+
+    <div class="pwcben rv">
+      <p class="pbh">Canadian firms report benefits from compliance technology</p>
+      <div class="pbbars" role="img"
+           aria-label="Share of Canadian respondents citing each benefit: risk visibility 75 percent, decision making 56 percent, productivity and cost 56 percent.">
+        <div class="pbb"><span class="pbv">75%</span><i style="height:100%"></i><span class="pby">Risk visibility</span></div>
+        <div class="pbb"><span class="pbv">56%</span><i style="height:75%"></i><span class="pby">Decision making</span></div>
+        <div class="pbb"><span class="pbv">56%</span><i style="height:75%"></i><span class="pby">Productivity and cost</span></div>
       </div>
-      <div class="prepc pro">
-        <span class="fsk">So the professional can do the part only they can</span>
-        <h3>The professional handles the judgment.</h3>
-        <p>The relationship, the recommendation and its suitability, complex questions and product
-          selection.</p>
-      </div>
+      <p class="fbound">PwC 2025 survey, Canadian respondents. This is the share reporting a
+        benefit. It does not mean their costs fell by 56%. Responses overlap and must not be
+        added.</p>
     </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     The markets. Deck page 17. Mortgage first, and what the same
+     relationship looks like in each of the others.
+     ============================================================ -->
+<section class="sec alt" aria-labelledby="mkT">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">Markets</span>
+      <h2 id="mkT">Start with mortgages, then expand into other major financial decisions.</h2>
+      <p>We start with mortgages. Other major financial decisions also need clear explanations and
+        a record of the reasons.</p>
+    </div>
+
+    <table class="btab rv">
+      <thead>
+        <tr><th scope="col">Market</th><th scope="col">Consumer</th><th scope="col">Business</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Mortgage</th><td>People buying or refinancing a home</td>
+          <td>Brokers, lenders and credit unions</td></tr>
+        <tr><th scope="row">Automotive</th><td>People buying or financing a vehicle</td>
+          <td>Dealers and finance providers</td></tr>
+        <tr><th scope="row">Insurance</th><td>People choosing coverage</td>
+          <td>Brokers, agents and insurers</td></tr>
+        <tr><th scope="row">Real estate</th><td>People buying or selling property</td>
+          <td>Agents and brokerages</td></tr>
+        <tr><th scope="row">Investing</th><td>People planning and investing savings</td>
+          <td>Advisers and investment firms</td></tr>
+      </tbody>
+    </table>
+    <p class="fbound rv">Mortgage is the first planned business workflow. Each new market needs
+      customer testing and a review of its requirements. Later dates and market order remain
+      provisional.</p>
 
     <div class="integ rv">
       <p class="ih">4orm works with the systems the business already uses and brings them together
         in one interoperable suitability record.</p>
       <p class="ichain"><span>Integration</span><i>&#8594;</i><span>Interoperability</span><i>&#8594;</i><span>Suitability</span></p>
     </div>
+  </div>
+</section>
 
-    <p class="hk mid rv" style="margin-top:54px">What we do not do &nbsp;&middot;&nbsp; the duty stays
-      with the firm</p>
+<!-- ============================================================
+     What we will not do. The duty stays with the firm.
+     ============================================================ -->
+<section class="sec" aria-labelledby="nvT">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">Boundaries</span>
+      <h2 id="nvT">The duty stays with the firm.</h2>
+    </div>
     <div class="nevers rv">
       <div class="nev"><span class="nevk">Never</span><p>Holds or moves money</p></div>
       <div class="nev"><span class="nevk">Never</span><p>Decides or advises</p></div>
@@ -499,34 +718,9 @@
 </section>
 
 <!-- ============================================================
-     Did you know. Only figures that are verified at their source
-     go on this page; the rest of the series is held until it is.
+     See both sides. The live consumer phone and the firm dashboard.
      ============================================================ -->
-<section class="sec alt" aria-labelledby="dkT">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kick">Did you know?</span>
-      <h2 id="dkT">Trust has a business case. Most consumers still arrive unsure.</h2>
-    </div>
-    <div class="dyk rv">
-      <div class="dk1"><b>93%</b><p>of executives say building and maintaining trust improves the
-        bottom line.</p><span>PwC 2024 Trust Survey, United States.</span></div>
-      <div class="dk1"><b>88%</b><p>say trust is an important consideration when choosing a
-        brand.</p><span>Edelman 2026 Trust Barometer Special Report.</span></div>
-      <div class="dk1"><b>20%</b><p>of mortgage holders did not compare lenders at renewal, and 13%
-        did not know rates could be negotiated.</p><span>FCAC, mortgage renewal research, June
-        2026.</span></div>
-      <div class="dk1"><b>52%</b><p>of recent homebuyers paid the most they could afford.</p>
-        <span>CMHC 2026 Mortgage Consumer Survey.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     See both sides. The live consumer phone and the firm dashboard,
-     carried over from the old front door and working as before.
-     ============================================================ -->
-<section class="sec bothsides" aria-labelledby="bsT">
+<section class="sec alt bothsides" aria-labelledby="bsT">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="kick">See both sides</span>
@@ -539,14 +733,16 @@
 </section>
 
 <!-- ============================================================
-     Close.
+     Close. Deck page 41.
      ============================================================ -->
 <section class="sec fclose">
   <div class="wrap">
-    <h2 class="rv">Check 4orm. <span>Know more. Decide better.</span></h2>
-    <p class="rv d1">For a mortgage brokerage, an insurer, a lender or a dealer network: see how 4orm
-      fits beside the systems you run, and what a paid operating pilot would measure on your own
-      files.</p>
+    <h2 class="rv"><span class="wmk"><img src="/assets/mark-glyph.png?v=20260929" alt=""
+      aria-hidden="true" width="198" height="275" />4</span>orming trust into
+      <span>financial decisions.</span></h2>
+    <p class="rv d1">Help people understand the decision. Help the business show why it was made.
+      For a mortgage brokerage, an insurer, a lender or a dealer network: see how 4orm fits beside
+      the systems you run, and what a measured paid pilot would test on your own files.</p>
     <div class="fcta rv d2">
       <a class="btn btn-p" href="/contact">Explore a paid operating pilot <span class="cir">&#8594;</span></a>
       <a class="btn btn-g" href="/how-it-works">See how 4orm works with your systems</a>

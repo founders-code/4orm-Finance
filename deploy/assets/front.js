@@ -1,9 +1,9 @@
 /* ============================================================
    The front door.
 
-   Three things run here, and each does what it says:
-   the reader choice in the hero, the record a visitor can walk
-   and then change, and the days left before the B.C. deadline.
+   Three things run here, and each does what it says: the record a
+   visitor can walk and then change, the seven product screens, and
+   the days left before the first FINTRAC effectiveness review.
    Nothing is stored and nothing leaves the browser.
    ============================================================ */
 (function () {
@@ -13,30 +13,21 @@ var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* Every other segmented control on the page says which option is pressed,
-   not just which one is coloured. */
-$$('[data-seg]').forEach(function (seg) {
-  seg.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('button');
-    if (!b) return;
-    $$('button', seg).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-  });
-});
-
 /* ------------------------------------------------------------
-   B.C. Mortgage Services Act, 13 October 2026
+   The first FINTRAC effectiveness review, due before 11 October
+   2026 for mortgage firms in scope since commencement.
+   Source: FINTRAC mortgage sector training video, June 2026.
    ------------------------------------------------------------ */
-(function bc() {
+(function amlReview() {
   var el = $('#bcin');
   if (!el) return;
   var now = new Date();
   var today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
-  var days = Math.round((Date.UTC(2026, 9, 13) - today) / 86400000);
+  var days = Math.round((Date.UTC(2026, 9, 11) - today) / 86400000);
   el.textContent = days > 1 ? ', ' + days + ' days from today'
                  : days === 1 ? ', tomorrow'
                  : days === 0 ? ', today'
-                 : ', and has been in force since';
-  if (days < 0) el.textContent = '';
+                 : '';
 })();
 
 /* ------------------------------------------------------------
@@ -179,7 +170,7 @@ $$('[data-seg]').forEach(function (seg) {
 (function screens() {
   var rail = document.getElementById('shwRail');
   if (!rail) return;
-  var V = '?v=20260923';
+  var V = '?v=20260929';
   var S = [
     ['biz-file-review', 'For businesses', 'File review',
      'Run the review. See what needs attention.',

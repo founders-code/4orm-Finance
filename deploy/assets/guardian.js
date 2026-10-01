@@ -1305,7 +1305,7 @@ function proResolves() {
       '<div class="ghead sm"><h3>' + f + ' corrected it.</h3>' +
       '<p>The ' + (auto ? 'submission' : 'application') + ' now reads ' + mine + ', matching the ' +
       'letter you provided. Both the difference and the correction are in your record.</p></div>' +
-      '<div class="gnote gold">This is the whole point. The problem was caught while it could still ' +
+      '<div class="gnote gold">This is the whole point. The challenge was caught while it could still ' +
       'be fixed, by the person whose job it is to fix it.</div>' +
       opt('record', 'See my record', 'Everything, in order') +
       opt('passport', 'See my 4orm', '')

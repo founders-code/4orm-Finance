@@ -15,7 +15,11 @@ import pathlib
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
+# In the package the site sits in deploy/ beside this folder. In the
+# working tree the source folder sits inside the site itself.
 DEPLOY = HERE.parent / 'deploy'
+if not DEPLOY.is_dir():
+    DEPLOY = HERE.parent
 INDEX = DEPLOY / 'index.html'
 CSS = DEPLOY / 'assets' / 'site.css'
 
