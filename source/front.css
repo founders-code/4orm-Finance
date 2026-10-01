@@ -26,24 +26,25 @@ body[data-page="front"] .glow{display:none}
    a bigger one; if it needs to be larger, the artwork does. It is
    decorative here, because the nav above it already carries the
    named logo, and a screen reader should not say the company twice. */
-.fbrand{margin:0 0 clamp(22px,2.6vh,32px)}
-.fbrand img{display:inline-block;height:46px;width:auto}
+.fbrand{margin:0 0 clamp(26px,3vh,38px)}
+.fbrand img{display:inline-block;height:92px;width:auto}
 
-.feye{margin:0;font-size:clamp(20px,2.4vw,34px);font-weight:750;
-  letter-spacing:-.03em;line-height:1.2;color:var(--blue);text-wrap:balance}
-
-.fh1{margin:clamp(18px,2.2vh,28px) auto 0;max-width:20ch;
-  font-size:clamp(42px,6.2vw,98px);line-height:1.02;
-  letter-spacing:-.046em;font-weight:760}
-.fsub{margin:clamp(26px,3vh,38px) auto 0;max-width:54ch;
-  font-size:clamp(17px,1.6vw,22px);line-height:1.58;color:var(--tx-2);text-wrap:balance}
+.fh1{margin:0 auto;max-width:21ch;
+  font-size:clamp(34px,5.05vw,79px);line-height:1.05;
+  letter-spacing:-.045em;font-weight:760}
+.fh1 .b{color:var(--blue)}
+.fsub{margin:clamp(34px,4vh,52px) auto 0;max-width:62ch;
+  font-size:clamp(16.5px,1.5vw,20.5px);line-height:1.66;color:var(--tx-2)}
 
 /* The framework line is read, not whispered: it is the line under the
    company's own statement of itself and the last line in every footer,
-   so it carries a real size rather than a caption size. */
-.fkick{margin:clamp(28px,3.4vh,42px) 0 0;font-family:var(--mono);
+   so it carries a real size rather than a caption size. The rule above
+   it is the one the deck cover draws. */
+.fkick{margin:clamp(34px,4vh,50px) 0 0;font-family:var(--mono);
   font-size:clamp(13px,1.3vw,18px);font-weight:800;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--blue-dp);line-height:1.3}
+  text-transform:uppercase;color:var(--blue);line-height:1.3}
+.fkick i{display:block;width:92px;height:3px;border-radius:2px;background:var(--blue);
+  margin:0 auto clamp(20px,2.4vh,28px)}
 .fcta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;
   margin-top:clamp(30px,3.6vh,42px)}
 /* On a phone the clamp minimum is wider than the column, so the
@@ -51,10 +52,10 @@ body[data-page="front"] .glow{display:none}
 @media (max-width:560px){
   .fhero{padding-top:clamp(124px,16vh,160px)}
   .fkick{font-size:11.5px;letter-spacing:.16em}
-  .fbrand img{height:38px}
-  .feye{font-size:clamp(17px,4.8vw,22px)}
-  .fh1{font-size:clamp(33px,9vw,44px);letter-spacing:-.04em;max-width:none}
-  .fsub{font-size:16px}
+  .fkick i{width:64px}
+  .fbrand img{height:72px}
+  .fh1{font-size:clamp(26px,7.1vw,36px);letter-spacing:-.036em;max-width:none}
+  .fsub{font-size:16px;text-align:left}
   .fcta .btn{width:100%;justify-content:center}
 }
 
@@ -446,8 +447,8 @@ body[data-page="front"] .glow{display:none}
 .btab tbody tr:nth-child(even){background:var(--bg-2)}
 .ptabw .fbound{padding:14px 0 0;max-width:78ch}
 .amlw{margin-top:54px}
-.amlw .sec-head h3{margin:0 0 10px;font-size:clamp(21px,2.1vw,29px);letter-spacing:-.03em;
-  max-width:24ch}
+.amlw .sec-head h3{margin:0 0 10px;font-size:clamp(20px,1.9vw,26px);letter-spacing:-.03em;
+  max-width:32ch}
 .amlw .sec-head p{font-size:15.4px;line-height:1.6;color:var(--tx-2);max-width:62ch}
 .amlw .fbound{padding:14px 0 0}
 @media (max-width:640px){
@@ -483,3 +484,198 @@ body[data-page="front"] .glow{display:none}
 .gcard h3{margin:10px 0 16px;font-size:clamp(19px,1.9vw,25px);letter-spacing:-.03em}
 .gcard ul{margin:0;padding-left:19px;font-size:15.2px;line-height:1.85;color:var(--tx)}
 @media (max-width:760px){.gains{grid-template-columns:minmax(0,1fr)}}
+
+/* ==================================================================
+   The October additions: the investor deck's callouts
+
+   Everything here is a figure, and every figure carries its publisher
+   and its limit in the markup beside it. If you add a number here
+   without a source line under it, it does not ship.
+   ================================================================== */
+
+/* The gap: two single-series bar charts and the conclusion between
+   them. Never one chart with two scales. Each bar is direct-labelled
+   and each list carries its own text equivalent, because a reader who
+   cannot see the bars still has to get the same conclusion. */
+.gapx{margin-top:clamp(48px,5vw,72px);display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,258px) minmax(0,1fr);
+  gap:clamp(24px,3vw,44px);align-items:center}
+.gaph{margin:0 0 22px;font-size:11px;font-family:var(--mono);font-weight:800;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--blue-dp)}
+.gaph span{display:block;margin-top:7px;font-family:var(--sans);font-size:16px;
+  font-weight:700;letter-spacing:-.022em;text-transform:none;color:var(--tx)}
+.hbars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.hbars li{display:grid;grid-template-columns:minmax(0,1fr) 46%  auto;gap:12px;align-items:center}
+.hbl{font-size:14px;line-height:1.35;color:var(--tx-2);text-align:right}
+.hbars i{display:block;height:13px;border-radius:4px;background:var(--surface-3);
+  position:relative;overflow:hidden}
+.hbars i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);
+  border-radius:4px;background:var(--blue)}
+.hbars.warn i::after{background:var(--bad)}
+.hbars b{font-family:var(--mono);font-size:14.5px;font-weight:800;color:var(--blue-dp);
+  font-variant-numeric:tabular-nums;min-width:4ch;text-align:right}
+.hbars.warn b{color:var(--bad)}
+.gapmid{text-align:center;padding:26px 22px;border-radius:24px;background:var(--bad-bg);
+  border:1px solid var(--bad-br)}
+.gapsym{display:block;font-size:40px;line-height:1;font-weight:700;color:var(--bad);
+  margin-bottom:14px}
+.gapmid p{margin:0;font-size:15px;line-height:1.5;font-weight:650;color:var(--tx)}
+@media (max-width:940px){
+  .gapx{grid-template-columns:minmax(0,1fr)}
+  .gapmid{order:3}
+  .hbars li{grid-template-columns:minmax(0,1fr) 40% auto}
+}
+@media (max-width:560px){
+  .hbars li{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px}
+  .hbars i{grid-column:1 / -1;order:3}
+  .hbl{text-align:left}
+}
+
+/* what the consumer gains */
+.wcg{margin-top:clamp(40px,4vw,60px);padding:30px 32px;border-radius:26px;
+  background:var(--blue-50);border:1px solid var(--blue-100)}
+.wcgh{margin:0 0 20px;font-family:var(--mono);font-size:11px;font-weight:800;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--blue-dp)}
+.wcg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.wcg3 b{display:block;font-size:17px;letter-spacing:-.024em;color:var(--tx);margin-bottom:6px}
+.wcg3 span{font-size:14.6px;line-height:1.55;color:var(--tx-2)}
+@media (max-width:760px){.wcg3{grid-template-columns:minmax(0,1fr);gap:20px}}
+
+/* the five consumer steps */
+.steps5{list-style:none;margin:clamp(44px,4.6vw,66px) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:none}
+.steps5 li{padding:24px 22px 22px;border-radius:22px;background:#fff;
+  border:1px solid var(--border);box-shadow:var(--sh-sm);display:flex;flex-direction:column;
+  gap:8px;position:relative}
+.s5n{font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.15em;
+  color:var(--blue)}
+.steps5 b{font-size:17px;letter-spacing:-.025em;color:var(--tx)}
+.s5d{font-size:13.8px;line-height:1.55;color:var(--tx-2)}
+@media (max-width:1020px){.steps5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.steps5{grid-template-columns:minmax(0,1fr)}}
+
+/* a strip of four figures */
+.strip{margin-top:clamp(40px,4vw,58px);display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stripc{padding:24px 22px 20px;border-radius:22px;background:#fff;
+  border:1px solid var(--border);display:flex;flex-direction:column;gap:9px}
+.strip.alt4 .stripc{background:var(--bg-2);box-shadow:none}
+.stripc b{font-family:var(--mono);font-size:clamp(25px,2.9vw,35px);font-weight:800;
+  letter-spacing:-.045em;line-height:1;color:var(--blue-dp);font-variant-numeric:tabular-nums}
+.stripc span{font-size:14.2px;line-height:1.5;color:var(--tx)}
+.stripc i{margin-top:auto;padding-top:6px;font-style:normal;font-family:var(--mono);
+  font-size:10px;line-height:1.5;letter-spacing:.06em;color:var(--tx-3)}
+@media (max-width:900px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.strip{grid-template-columns:minmax(0,1fr)}}
+
+/* before and after */
+.beforeafter{margin-top:clamp(44px,4.6vw,64px);display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ba{padding:26px 24px 22px;border-radius:24px;background:var(--bg-2);
+  border:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
+.bav{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:9px;
+  font-family:var(--mono);font-weight:800;letter-spacing:-.04em;line-height:1;
+  font-variant-numeric:tabular-nums}
+.bav span{font-size:clamp(18px,1.9vw,23px);color:var(--tx-3);text-decoration:line-through;
+  text-decoration-thickness:1.5px}
+.bav i{font-style:normal;font-size:17px;color:var(--border-strong)}
+.bav em{font-style:normal;font-size:clamp(26px,3vw,37px);color:var(--blue-dp)}
+.ba b{font-size:15.4px;line-height:1.35;letter-spacing:-.02em;color:var(--tx)}
+.bas{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.06em;color:var(--tx-3)}
+@media (max-width:900px){.beforeafter{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.beforeafter{grid-template-columns:minmax(0,1fr)}}
+
+/* what improves for the business */
+.six2{margin-top:clamp(40px,4vw,58px);display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.s2c{padding:26px 26px 24px;border-radius:24px;background:var(--bg-2);
+  border:1px solid var(--border)}
+.s2c b{display:block;font-size:17.5px;letter-spacing:-.025em;color:var(--tx);margin-bottom:9px}
+.s2c p{margin:0;font-size:14.6px;line-height:1.58;color:var(--tx-2)}
+@media (max-width:900px){.six2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.six2{grid-template-columns:minmax(0,1fr)}}
+
+/* the category comparables */
+.cat4{margin-top:clamp(44px,4.6vw,64px);display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2vw,30px)}
+.catc{padding-top:18px;border-top:2px solid var(--blue);display:flex;flex-direction:column;
+  gap:10px}
+.catn{font-size:16px;font-weight:700;letter-spacing:-.022em;color:var(--tx)}
+.catc b{font-family:var(--mono);font-size:clamp(26px,2.9vw,36px);font-weight:800;
+  letter-spacing:-.045em;line-height:1;color:var(--blue);font-variant-numeric:tabular-nums}
+.catc p{margin:0;font-size:14.2px;line-height:1.55;color:var(--tx-2)}
+.caty{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:10px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
+@media (max-width:900px){.cat4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.cat4{grid-template-columns:minmax(0,1fr)}}
+
+/* the counted market */
+.cnt5{margin-top:clamp(44px,4.6vw,64px);display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.cntc{padding:24px 20px 20px;border-radius:22px;background:var(--bg-2);
+  border:1px solid var(--border)}
+.cntc b{display:block;font-family:var(--mono);font-size:clamp(25px,2.7vw,33px);font-weight:800;
+  letter-spacing:-.045em;line-height:1;color:var(--blue);font-variant-numeric:tabular-nums;
+  margin-bottom:10px}
+.cntc span{font-size:13.8px;line-height:1.5;color:var(--tx-2)}
+@media (max-width:980px){.cnt5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.cnt5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cnttx{margin-top:clamp(36px,3.6vw,52px);padding:32px 34px 28px;border-radius:26px;
+  background:var(--tx)}
+.cnth{margin:0;font-size:clamp(20px,2.2vw,28px);font-weight:720;letter-spacing:-.03em;
+  line-height:1.25;color:#fff;max-width:28ch}
+.cnth b{color:var(--blue-lt);font-family:var(--mono);letter-spacing:-.04em}
+.cntb{margin:16px 0 0;font-size:15.4px;line-height:1.62;color:rgba(255,255,255,.76);
+  max-width:66ch}
+.cnttx .fbound{padding:18px 0 0;color:rgba(255,255,255,.54);max-width:76ch}
+
+/* the roadmap */
+.rmap{list-style:none;margin:clamp(44px,4.6vw,64px) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.rmap li{padding:26px 24px 24px;border-radius:24px;background:#fff;
+  border:1px solid var(--border);box-shadow:var(--sh-sm);display:flex;flex-direction:column;
+  gap:9px;position:relative}
+.rmap li::before{content:"";position:absolute;left:24px;top:-1px;width:44px;height:3px;
+  border-radius:0 0 3px 3px;background:var(--blue)}
+.rmw{font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--blue-dp)}
+.rmap b{font-size:18px;letter-spacing:-.026em;color:var(--tx)}
+.rmd{font-size:14px;line-height:1.55;color:var(--tx-2)}
+@media (max-width:900px){.rmap{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.rmap{grid-template-columns:minmax(0,1fr)}}
+
+/* ==================================================================
+   Breathing room, October 2026
+
+   The page gained a lot of evidence this round, and dense evidence
+   needs more air around it, not less. These are the last rules in the
+   stylesheet, so they settle the section rhythm for every page.
+   ================================================================== */
+.sec{padding:clamp(96px,8.6vw,142px) 0}
+.sec-head h2{max-width:21ch}
+.sec-head p{margin-top:26px;line-height:1.68}
+.fmoment{padding:clamp(108px,10vw,164px) 0}
+.fclose{padding:clamp(112px,10.4vw,172px) 0}
+.fhero{padding-bottom:clamp(84px,9vh,124px)}
+
+/* A section that follows a related one keeps its own top edge rather
+   than doubling the gap; these two are continuations, not new starts. */
+.sec + .sec:not(.alt):not(#screens){padding-top:clamp(84px,7.4vw,124px)}
+
+/* A conclusion-led heading is two lines, not four: 21ch was tuned for
+   the short ones and strands the long ones. */
+.sec-head h2{max-width:26ch}
+/* A boundary line directly inside a section is not inside a panel, so
+   it does not carry the panel's side padding. */
+.sec > .wrap > .fbound{padding-left:0;padding-right:0}
+
+/* Section headings step down with the hero, ten per cent, so the page
+   keeps one type scale rather than two. */
+.sec-head h2,.fclose h2{font-size:clamp(26px,3.8vw,45px)}
+.fclose h2{font-size:clamp(27px,3.8vw,50px)}
+
+/* The deck sets the blue line as two sentences on two lines. On a
+   phone the natural break lands mid-sentence, so it gets its own. */
+.mbr{display:none}
+@media (max-width:560px){.mbr{display:inline}}

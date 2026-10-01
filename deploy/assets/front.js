@@ -170,7 +170,7 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
 (function screens() {
   var rail = document.getElementById('shwRail');
   if (!rail) return;
-  var V = '?v=20260929';
+  var V = '?v=20261001';
   var S = [
     ['biz-file-review', 'For businesses', 'File review',
      'Run the review. See what needs attention.',

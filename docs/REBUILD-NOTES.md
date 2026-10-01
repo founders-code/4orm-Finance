@@ -1,6 +1,6 @@
 # The September 2026 rebuild
 
-What changed, why, and what is still open. **29 September 2026.**
+What changed, why, and what is still open. **1 October 2026.**
 
 The source for this round is the **Full Opportunity Deck, 4orm, September 2026**,
 research checked 28 September. It supersedes the earlier decks for every figure
@@ -10,41 +10,62 @@ and every headline on this site.
 
 ## 1. The hero
 
-It is the deck cover, in the deck's order.
+It is deck page 01, word for word, and nothing else.
 
 | | Line |
 |---|---|
 | Lockup | The 4orm Finance logo, centred |
-| Eyebrow | **Major financial decisions**, at heading size |
-| Headline | **Easier to understand. Easier to explain.** |
-| What it is | Software that connects client understanding with the firm's recommendation and the evidence behind it. |
-| Brand framework | **People &middot; Trust &middot; Clear outcomes** |
+| Headline | **Major financial decisions.** then **Easier to understand. Easier to explain.** in blue |
+| Paragraph | 4orm intelligence helps people think through major financial decisions... |
+| Rule, then | **People &middot; Trust &middot; Clear outcomes** |
 | Actions | See how 4orm works &nbsp;/&nbsp; Become a design partner |
 
-The framework line carries a real size, 13-18px rather than a 10.5px caption,
-and sits under the statement of what 4orm is, bridging into the two actions.
-Below 560px the headline gets its own scale, because the clamp minimum was wider
-than a phone column and a headline is never hyphenated or shrunk to fit.
+The two buttons are the only thing on the hero that is not on the deck page.
+A homepage hero with no action is a dead end, and these are the two actions you
+named. Say the word and they come off.
 
 **The lockup is the supplied light-ground asset**, `logo-light.png`, drawn at
 46px tall. That is its native resolution at 2x, and a brand asset is never
-regenerated, traced, recoloured or inverted to make a bigger one. If the logo
-should be larger than this on the hero, the artwork needs a higher-resolution
-export first. It is marked decorative, because the nav directly above it already
-carries the named logo and a screen reader should not say the company twice.
+regenerated, traced, recoloured or inverted to make a bigger one. If it should
+be larger, the artwork needs a higher-resolution export first. It is marked
+decorative, because the nav directly above it already carries the named logo.
 
-**The For businesses / For consumers switch is gone**, and stays gone. The nav
+**The For businesses / For consumers pills are gone**, and stay gone. The nav
 carries both readers already.
 
-**The company line moved to the close.** *4orming trust into financial decisions*
-now ends the page rather than opening it, which keeps the wordmark treatment and
-stops the framework line appearing three times on one page. The mark still stands
-in for the digit: the digit is in the text with `color:transparent` and the mark
-is pulled over it by a negative margin equal to its own width. Verified this
-round in the accessibility tree, which reads `h1 "Easier to understand. Easier to
-explain."` and `h2 "4orming trust into financial decisions."` One guard was
-needed: `.fclose h2 span` paints blue, so `.wmk` inside it is pinned back to
-transparent or a blue 4 prints through the artwork.
+**The company line lives in the close.** *4orming trust into financial decisions*
+ends the page with the wordmark treatment: the digit sits in the text with
+`color:transparent` and the mark is pulled over it by a negative margin equal to
+its own width. The accessibility tree reads `h1 "Major financial decisions.
+Easier to understand. Easier to explain."` and `h2 "4orming trust into financial
+decisions."`
+
+## 1a. What the October deck added
+
+The *Investor Deck, 4orm, September 2026* supplied eight new blocks:
+
+| Block | Deck | What it is |
+|---|---|---|
+| The pressure strip | 04, 06 | 8 to 30 penalties, 40x limits, 2.71x non-compliance cost, C$500K B.C. |
+| The gap | 11 | Two bar charts, side by side: how consumers search against how certain they end up |
+| What the consumer gains | 11 | Learns privately, models outcomes, controls sharing |
+| Your space, your decision | 10 | The five consumer steps: private, explore, understand, review, share |
+| Before and after | 12 | 90 min to 15 min, 4-5 months to 5 weeks, 60% less admin, 50% less call review |
+| What improves for the business | 14 | Six cards, plus 75%, 3 roles, 2,000+ hrs and 20% from named customers |
+| The category | 18 | Vanta, Drata, Nasdaq Verafin and Flinks at category scale |
+| Who is counted | 17 | 31,709 firms, and 3.70M major decisions a year |
+| The roadmap | 22 | Now, 2027, 2028, 2029+ |
+
+**The white space went up.** Sections run 96 to 142px rather than 72 to 108, the
+hero and the close have their own deeper rhythm, and a section that continues
+the one above it keeps a shorter top edge instead of doubling the gap. Headings
+wrap at 26ch rather than 21ch, so a long conclusion-led headline lands in two
+lines instead of four.
+
+**The two charts are two charts.** Search activity and uncertainty are separate
+questions asked of separate groups, so they are never one chart with two scales
+and never added together. Each bar is direct-labelled, each list carries a text
+equivalent, and the check now fails if either loses one.
 
 ## 2. The front door, section by section
 

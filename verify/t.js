@@ -23,7 +23,13 @@ for (const [w,h,lab,red] of [[1440,900,'desk',false],[390,844,'mob',false],[1440
     wnNoSrc:[...document.querySelectorAll('.wn')].filter(c=>!c.querySelector('.wns')).length,
     tables:document.querySelectorAll('table.btab,table.ptab').length,
     quotes:[...document.querySelectorAll('.vq')].filter(q=>!q.querySelector('footer')).length,
-    bars:[...document.querySelectorAll('.crbars,.pbbars')].filter(b=>!b.getAttribute('aria-label')).length}));
+    bars:[...document.querySelectorAll('.crbars,.pbbars,.hbars')].filter(b=>!b.getAttribute('aria-label')).length,
+    strips:[...document.querySelectorAll('.stripc,.ba,.catc')].filter(c=>!c.querySelector('i,.bas,.caty')).length,
+    hb:document.querySelectorAll('.hbars li').length,
+    hbNoLabel:[...document.querySelectorAll('.hbars li')].filter(l=>!l.querySelector('b')||!l.querySelector('.hbl')).length}));
+  if(ev.strips) fail.push(lab+': a figure card with no source line');
+  if(ev.hb!==11) fail.push(lab+': bars '+ev.hb);
+  if(ev.hbNoLabel) fail.push(lab+': a bar with no label or value');
   if(ev.six!==6) fail.push(lab+': sector cards '+ev.six);
   if(ev.nosrc||ev.wnNoSrc) fail.push(lab+': a figure with no source line');
   if(ev.tables!==4) fail.push(lab+': tables '+ev.tables);
