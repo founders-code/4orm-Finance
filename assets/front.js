@@ -1,9 +1,9 @@
 /* ============================================================
    The front door.
 
-   Three things run here, and each does what it says:
-   the reader choice in the hero, the record a visitor can walk
-   and then change, and the days left before the B.C. deadline.
+   Three things run here, and each does what it says: the record a
+   visitor can walk and then change, the seven product screens, and
+   the days left before the first FINTRAC effectiveness review.
    Nothing is stored and nothing leaves the browser.
    ============================================================ */
 (function () {
@@ -14,75 +14,20 @@ var $$ = function (s, r) { return Array.prototype.slice.call((r || document).que
 var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ------------------------------------------------------------
-   For businesses / For consumers
+   The first FINTRAC effectiveness review, due before 11 October
+   2026 for mortgage firms in scope since commencement.
+   Source: FINTRAC mortgage sector training video, June 2026.
    ------------------------------------------------------------ */
-(function audience() {
-  var seg = $('.audseg');
-  if (!seg) return;
-  var pip = $('.pip', seg);
-  var tabs = $$('[role="tab"]', seg);
-
-  function move() {
-    var on = $('[aria-selected="true"]', seg);
-    if (on && pip) {
-      pip.style.width = on.offsetWidth + 'px';
-      pip.style.transform = 'translateX(' + (on.offsetLeft - 5) + 'px)';
-    }
-  }
-  function pick(tab, focus) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.setAttribute('tabindex', on ? '0' : '-1');
-      t.classList.toggle('on', on);
-      var pane = document.getElementById(t.getAttribute('aria-controls'));
-      if (pane) { pane.hidden = !on; pane.classList.toggle('on', on); }
-    });
-    if (focus) tab.focus();
-    move();
-  }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { pick(t, false); });
-    t.addEventListener('keydown', function (e) {
-      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-      if (e.key === 'Home') { e.preventDefault(); pick(tabs[0], true); return; }
-      if (e.key === 'End') { e.preventDefault(); pick(tabs[tabs.length - 1], true); return; }
-      if (!d) return;
-      e.preventDefault();
-      pick(tabs[(i + d + tabs.length) % tabs.length], true);
-    });
-  });
-  /* A link from elsewhere can open on the consumer side. */
-  if (/^#for-consumers$/.test(location.hash)) pick($('#tab-con'), false);
-  requestAnimationFrame(move);
-  window.addEventListener('resize', move);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(move);
-})();
-
-/* Every other segmented control on the page says which option is pressed,
-   not just which one is coloured. */
-$$('[data-seg]').forEach(function (seg) {
-  seg.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('button');
-    if (!b) return;
-    $$('button', seg).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-  });
-});
-
-/* ------------------------------------------------------------
-   B.C. Mortgage Services Act, 13 October 2026
-   ------------------------------------------------------------ */
-(function bc() {
+(function amlReview() {
   var el = $('#bcin');
   if (!el) return;
   var now = new Date();
   var today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
-  var days = Math.round((Date.UTC(2026, 9, 13) - today) / 86400000);
+  var days = Math.round((Date.UTC(2026, 9, 11) - today) / 86400000);
   el.textContent = days > 1 ? ', ' + days + ' days from today'
                  : days === 1 ? ', tomorrow'
                  : days === 0 ? ', today'
-                 : ', and has been in force since';
-  if (days < 0) el.textContent = '';
+                 : '';
 })();
 
 /* ------------------------------------------------------------
@@ -225,7 +170,7 @@ $$('[data-seg]').forEach(function (seg) {
 (function screens() {
   var rail = document.getElementById('shwRail');
   if (!rail) return;
-  var V = '?v=20260923';
+  var V = '?v=20261001';
   var S = [
     ['biz-file-review', 'For businesses', 'File review',
      'Run the review. See what needs attention.',

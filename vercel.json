@@ -124,12 +124,22 @@
     },
     {
       "source": "/explore",
-      "destination": "/home",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/explore.html",
-      "destination": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/family",
+      "destination": "/team",
+      "permanent": true
+    },
+    {
+      "source": "/family.html",
+      "destination": "/team",
       "permanent": true
     },
     {
@@ -150,6 +160,16 @@
     {
       "source": "/form.html",
       "destination": "/how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home.html",
+      "destination": "/",
       "permanent": true
     },
     {
@@ -178,11 +198,6 @@
       "permanent": true
     },
     {
-      "source": "/insurance.html",
-      "destination": "/industries/insurance",
-      "permanent": true
-    },
-    {
       "source": "/insurance-agencies",
       "destination": "/industries/insurance",
       "permanent": true
@@ -203,6 +218,11 @@
       "permanent": true
     },
     {
+      "source": "/insurance.html",
+      "destination": "/industries/insurance",
+      "permanent": true
+    },
+    {
       "source": "/investing",
       "destination": "/industries/investing",
       "permanent": true
@@ -218,17 +238,17 @@
       "permanent": true
     },
     {
-      "source": "/law.html",
-      "destination": "/why-4orm",
-      "permanent": true
-    },
-    {
       "source": "/law-firms",
       "destination": "/why-4orm",
       "permanent": true
     },
     {
       "source": "/law-firms.html",
+      "destination": "/why-4orm",
+      "permanent": true
+    },
+    {
+      "source": "/law.html",
       "destination": "/why-4orm",
       "permanent": true
     },
@@ -358,17 +378,17 @@
       "permanent": true
     },
     {
-      "source": "/real-estate.html",
-      "destination": "/industries/real-estate",
-      "permanent": true
-    },
-    {
       "source": "/real-estate-brokerages",
       "destination": "/industries/real-estate",
       "permanent": true
     },
     {
       "source": "/real-estate-brokerages.html",
+      "destination": "/industries/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate.html",
       "destination": "/industries/real-estate",
       "permanent": true
     },
@@ -400,16 +420,6 @@
     {
       "source": "/security.html",
       "destination": "/privacy",
-      "permanent": true
-    },
-    {
-      "source": "/family",
-      "destination": "/team",
-      "permanent": true
-    },
-    {
-      "source": "/family.html",
-      "destination": "/team",
       "permanent": true
     },
     {
@@ -468,11 +478,6 @@
       "permanent": true
     },
     {
-      "source": "/who.html",
-      "destination": "/the-standard",
-      "permanent": true
-    },
-    {
       "source": "/who-for",
       "destination": "/industries",
       "permanent": true
@@ -520,6 +525,11 @@
     {
       "source": "/who-we-serve.html",
       "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/who.html",
+      "destination": "/the-standard",
       "permanent": true
     }
   ],

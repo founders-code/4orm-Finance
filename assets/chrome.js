@@ -210,6 +210,8 @@ function buildFooter() {
   f.innerHTML =
     '<div class="wrap"><div class="fgrid">' +
       '<div><span class="flogo-chip"><img class="flogo" src="/assets/logo-light.png" alt="4orm Finance" /></span>' +
+        /* The brand framework, on every page, the way the decks carry it. */
+        '<p class="ftri">People &middot; Trust &middot; Clear outcomes</p>' +
         '<p class="fab">The intelligence and evidence layer for major financial decisions. ' +
         'An Alberta company. Pre-revenue, and the product is under development.</p></div>' +
       '<div><div class="fh">Go</div>' +
