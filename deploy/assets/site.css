@@ -2486,6 +2486,14 @@ body[data-page="homepage"]{background:#fff}
   gap:clamp(30px,3.4vw,52px);margin-top:clamp(40px,4vw,60px)}
 @media (max-width:900px){ .tmgrid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:560px){ .tmgrid{grid-template-columns:1fr} }
+/* Five faces, not two and then three and then one. The band wraps as a flex row
+   so a trailing pair sits under the middle of the row above it rather than
+   hanging off the left edge, which is what made the old page read as three
+   separate groups of people. */
+.tmgrid.tm5{display:flex;flex-wrap:wrap;justify-content:center}
+.tmgrid.tm5 > *{flex:0 1 calc((100% - 2 * clamp(30px,3.4vw,52px)) / 3)}
+@media (max-width:900px){ .tmgrid.tm5 > *{flex:0 1 calc((100% - clamp(30px,3.4vw,52px)) / 2)} }
+@media (max-width:560px){ .tmgrid.tm5 > *{flex:0 1 100%} }
 /* `.tm` was already the dashboard tile's meta line. The team card is `.tmc`,
    because two different things wearing one class name is how a layout ends up
    sideways on a page nobody was looking at. */
@@ -4361,3 +4369,14 @@ body[data-page="front"] .glow{display:none}
   .fh1.stack span + span{margin-top:.26em}
   .fh1.stack span:nth-child(2){margin-top:.40em}
 }
+
+/* What we do, in Chad's own words. Two paragraphs, one per side of the
+   decision, set large enough to be the statement of the company rather
+   than supporting text under a heading. */
+.wdsay{margin:clamp(34px,3.6vw,50px) 0 0;max-width:60ch;display:flex;
+  flex-direction:column;gap:clamp(20px,2.2vw,28px)}
+.wdp{margin:0;font-size:clamp(17px,1.65vw,22px);line-height:1.62;color:var(--tx-2)}
+.wdp:first-child{color:var(--tx);font-weight:620;letter-spacing:-.012em}
+@media (max-width:560px){.wdp{font-size:16.4px}}
+/* The hero carries two paragraphs now, not one. */
+.fsub2{margin-top:clamp(16px,1.8vh,22px)}
