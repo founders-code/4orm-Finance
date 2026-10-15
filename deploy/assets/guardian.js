@@ -1325,8 +1325,8 @@ function submissions() {
   paint(
     '<div class="ghead sm"><h3>Where your application went</h3>' +
     '<p>Each submission as it happened. This history is yours.</p></div>' +
-    '<div class="subs">' + rows.map(function (r, n) {
-      return '<div class="sub' + (r[2] ? ' rep' : '') + '" style="--d:' + (n * .3) + 's">' +
+    '<div class="subrows">' + rows.map(function (r, n) {
+      return '<div class="subrow' + (r[2] ? ' rep' : '') + '" style="--d:' + (n * .3) + 's">' +
         '<b>' + r[0] + '</b><span>Submitted ' + r[1] + '</span>' +
         (r[2] ? '<em>appears again</em>' : '') + '</div>';
     }).join('') + '</div>' +

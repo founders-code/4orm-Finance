@@ -2094,13 +2094,17 @@ body[data-page="home"] .glow{display:none}
 .dwas{font-size:12.6px;color:var(--tx-3);text-decoration:line-through}
 .darr{color:var(--tx-3);font-size:12px}
 .dnow{font-size:13.4px;font-weight:700;color:#7A5709}
-.subs{display:flex;flex-direction:column;gap:7px}
-.sub{display:flex;align-items:baseline;gap:9px;padding:11px 13px;border-radius:12px;background:#fff;
+/* One submission to one lender. This was called `.sub` until October
+   2026, which is also the hero subtitle on all 21 pages, so every hero
+   on the site inherited this border, this white fill and this padding.
+   Two different things must never wear one class name. */
+.subrows{display:flex;flex-direction:column;gap:7px}
+.subrow{display:flex;align-items:baseline;gap:9px;padding:11px 13px;border-radius:12px;background:#fff;
   border:1px solid var(--border);animation:gin .5s var(--pop) both;animation-delay:var(--d)}
-.sub b{font-size:13.4px;font-weight:650}
-.sub span{font-size:11.6px;color:var(--tx-3);margin-left:auto}
-.sub.rep{border-color:rgba(196,154,58,.45);background:rgba(196,154,58,.06)}
-.sub em{font-style:normal;font-family:var(--mono);font-size:8px;font-weight:800;letter-spacing:.12em;
+.subrow b{font-size:13.4px;font-weight:650}
+.subrow span{font-size:11.6px;color:var(--tx-3);margin-left:auto}
+.subrow.rep{border-color:rgba(196,154,58,.45);background:rgba(196,154,58,.06)}
+.subrow em{font-style:normal;font-family:var(--mono);font-size:8px;font-weight:800;letter-spacing:.12em;
   text-transform:uppercase;color:#7A5709;margin-left:8px}
 
 /* permissions and the record */
@@ -3678,6 +3682,62 @@ body.go .dashmini{opacity:1;transform:none;transition-delay:.2s}
 .nav-cta.navback .cir{margin-right:1px}
 .nav-cta.navback:hover .cir{transform:translate(-3px,-1px) scale(1.06)}
 
+
+/* ==================================================================
+   INTERIOR PAGES, October 2026
+
+   Every page under the front door used to open centred inside a 900px
+   column and then drop into sections left-aligned inside a 1220px one,
+   so the eye went centre, then hard left. The content under those
+   headings stopped at 640 to 780px, which left the right third of the
+   page empty on every screen.
+
+   One left spine now runs from the nav to the footer and nothing
+   shifts. The claim sits left, the sentence that qualifies it sits
+   right, so both columns carry weight.
+   ================================================================== */
+
+.phero{text-align:left;padding:206px 0 0}
+.phero .wrap{max-width:1220px;display:grid;
+  grid-template-columns:1.12fr .88fr;
+  column-gap:clamp(40px,5.4vw,104px);align-items:end}
+.phero h1{grid-column:1;margin:26px 0 0;max-width:15ch;
+  font-size:clamp(42px,5.4vw,70px);letter-spacing:-.04em;line-height:1.03}
+.phero .sub{grid-column:2;margin:0 0 .5em;max-width:46ch;
+  font-size:clamp(16.5px,1.42vw,18.5px);line-height:1.68}
+
+/* One kicker language. The hero wore a floating pill while every
+   section below it wore a dash and mono caps: two treatments, one job. */
+.phero .eyebrow{grid-column:1/-1;padding:0;border:0;background:none;
+  box-shadow:none;font-family:var(--mono);font-size:10.5px;font-weight:800;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--tx-3)}
+.phero .eyebrow i{width:16px;height:2px;border-radius:2px;
+  background:var(--blue-dp);animation:none;box-shadow:none}
+
+/* Section heads read the same way as the hero. */
+.sec-head{max-width:none;display:grid;
+  grid-template-columns:1.12fr .88fr;
+  column-gap:clamp(40px,5.4vw,104px);align-items:end;
+  margin-bottom:clamp(18px,2.2vw,34px)}
+.sec-head .kick{grid-column:1/-1}
+.sec-head h2{grid-column:1;max-width:17ch;margin:0}
+.sec-head p{grid-column:2;margin:0 0 .35em;max-width:46ch;font-size:16.6px}
+
+/* Content fills the grid instead of stopping at 55% of it. */
+.qs{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:none}
+.q{border-bottom-left-radius:16px}
+.note{max-width:none}
+
+/* Below 900 the two columns become one, in reading order. */
+@media (max-width:900px){
+  .phero .wrap,.sec-head{display:block}
+  .phero{padding-top:168px}
+  .phero h1,.sec-head h2{max-width:18ch}
+  .phero .sub{margin:24px 0 0;max-width:none}
+  .sec-head p{margin:22px 0 0;max-width:none}
+  .qs{grid-template-columns:1fr}
+}
+
 /* ==================================================================
    THE FRONT DOOR, September 2026
 
@@ -4378,5 +4438,10 @@ body[data-page="front"] .glow{display:none}
 .wdp{margin:0;font-size:clamp(17px,1.65vw,22px);line-height:1.62;color:var(--tx-2)}
 .wdp:first-child{color:var(--tx);font-weight:620;letter-spacing:-.012em}
 @media (max-width:560px){.wdp{font-size:16.4px}}
-/* The hero carries two paragraphs now, not one. */
-.fsub2{margin-top:clamp(16px,1.8vh,22px)}
+/* The hero carries four paragraphs now. The first is the statement and keeps
+   the lead size; the three that explain it step down once and run to a wider
+   measure, so the block gains a hierarchy instead of reading as one wall of
+   type at a single weight. */
+.fsub2{margin-top:clamp(15px,1.7vh,20px);
+  font-size:clamp(15.4px,1.33vw,18.2px);line-height:1.7;max-width:68ch}
+.flead{color:var(--tx);font-weight:560;letter-spacing:-.008em}
