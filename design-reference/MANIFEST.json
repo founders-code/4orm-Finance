@@ -1,0 +1,442 @@
+{
+  "package": "4orm Finance website",
+  "built": "2026-10-19",
+  "deploy_root": "deploy",
+  "note": "Cursor does not rebuild these pages. It copies them. If every sha256 below matches after the merge, the deployed site is byte-identical to the design that was approved, and no visual interpretation is involved.",
+  "file_count": 70,
+  "total_bytes": 2704361,
+  "files": [
+    {
+      "path": "deploy/assets/apple-touch-icon.png",
+      "bytes": 16237,
+      "sha256": "37f75d8af863317a56527cb09cf410f44d446f4c3d2111cd6a56ba52d985f0e7"
+    },
+    {
+      "path": "deploy/assets/assist.js",
+      "bytes": 8129,
+      "sha256": "4238f104bd7d66024e26dfa4c60642b74f5fb712c33fe3ea7c72edba50ea38da"
+    },
+    {
+      "path": "deploy/assets/atmos.js",
+      "bytes": 3268,
+      "sha256": "823f177eb38838d2a9d0c98aeb08d12ddff7b008cf97651079d2f373c96b4e42"
+    },
+    {
+      "path": "deploy/assets/check.js",
+      "bytes": 15246,
+      "sha256": "6d089ffee5a517a1264995de4e5ab44c2b59c11141d79011956756b2aa7f06be"
+    },
+    {
+      "path": "deploy/assets/chrome.js",
+      "bytes": 22782,
+      "sha256": "01fecabf7c84912cd939d2a5eaf7e965736de7ee008f6c27a8c06f2fb3241de9"
+    },
+    {
+      "path": "deploy/assets/favicon-16.png",
+      "bytes": 643,
+      "sha256": "b3a82d8ed599b8ffb5190f0809d7aaae5fca5af4301b4ca1ca128529243a0b08"
+    },
+    {
+      "path": "deploy/assets/favicon-192.png",
+      "bytes": 18002,
+      "sha256": "03afca8ea9d1b9b955dc7e874abc976c72354f380849c61060de4b8ec2fbcdb0"
+    },
+    {
+      "path": "deploy/assets/favicon-32.png",
+      "bytes": 1503,
+      "sha256": "ea67fe02652a0dba394404cfa9b2ead793e6e636dbb9ef9485bf72c0175693b4"
+    },
+    {
+      "path": "deploy/assets/favicon.ico",
+      "bytes": 4634,
+      "sha256": "1b423411928f6bbd07e2b40328948799e0e6272e5fef98e6fb251bee46f1a487"
+    },
+    {
+      "path": "deploy/assets/firm.js",
+      "bytes": 12116,
+      "sha256": "5cea9d761d4eaa323dc7a4c52d7353b6c808134acf885509eada53ad4b3cf29d"
+    },
+    {
+      "path": "deploy/assets/front.js",
+      "bytes": 13516,
+      "sha256": "cae7867056e2974ed5dcf404912e8928d2cac461b137d64a65c08a3efda6a308"
+    },
+    {
+      "path": "deploy/assets/guardian.js",
+      "bytes": 225648,
+      "sha256": "06122c2ab4e27716bec5a85471c13cfe6d10e120d327059abea6c407ce9c3f76"
+    },
+    {
+      "path": "deploy/assets/landing.js",
+      "bytes": 4273,
+      "sha256": "8fa20f0123eeaa0d020ccebe923a0e224e94f5a6b688d9e5f8c06fc032980f1b"
+    },
+    {
+      "path": "deploy/assets/logo-light.png",
+      "bytes": 12379,
+      "sha256": "0355e83c9265106d6e805e58e5844c7edb7af9734a6575219255e9ef963ff17a"
+    },
+    {
+      "path": "deploy/assets/logo.png",
+      "bytes": 103627,
+      "sha256": "dfa82aec5f2a15e5d5e48f260daa2e3adb1a173cc3241234e217f6fc1bc8574a"
+    },
+    {
+      "path": "deploy/assets/mark-glyph.png",
+      "bytes": 31518,
+      "sha256": "4a24a0394dd892f86826006b20de6212264db4a4ac22f5dbfb1e1b31bd00a811"
+    },
+    {
+      "path": "deploy/assets/mark.png",
+      "bytes": 34365,
+      "sha256": "e2b654a761d82ee0e3d7d3f991c3c47e80d29a0ab892a06cf4b71d723e7115f5"
+    },
+    {
+      "path": "deploy/assets/og-image.png",
+      "bytes": 80497,
+      "sha256": "455dea692a4f3cd46a93b74c8aa542b8e6b7ca003f86acbd4f1581ae1b656116"
+    },
+    {
+      "path": "deploy/assets/research.js",
+      "bytes": 841,
+      "sha256": "011b734bf0a793ca703837b40a837028525da8d832dacdf5ac79895d73c27dcb"
+    },
+    {
+      "path": "deploy/assets/showcase/biz-action-queue-t.jpg",
+      "bytes": 14744,
+      "sha256": "21b0fe5faeed01e5d4e4cf1fe2d36c6ba9fe8319882f219daac24f63e98e5424"
+    },
+    {
+      "path": "deploy/assets/showcase/biz-action-queue.jpg",
+      "bytes": 145542,
+      "sha256": "80070bde0fedba41a7cb3ceedb81166a75ab6ee03accba498c8c57f7fe9b2802"
+    },
+    {
+      "path": "deploy/assets/showcase/biz-file-review-t.jpg",
+      "bytes": 15095,
+      "sha256": "ff6a882431af722056af9f2198a70a01ec7c69284f77912d369cbb6e447245e6"
+    },
+    {
+      "path": "deploy/assets/showcase/biz-file-review.jpg",
+      "bytes": 147469,
+      "sha256": "c43266fe98cd66aa32d9c0fc94fd9395ad8660123ac0dbd111fb691584d7d49d"
+    },
+    {
+      "path": "deploy/assets/showcase/biz-historical-t.jpg",
+      "bytes": 15852,
+      "sha256": "b5c2114a6e474feb349e766ef232740550c5054ffe99ef5cd381a2fc816adfd3"
+    },
+    {
+      "path": "deploy/assets/showcase/biz-historical.jpg",
+      "bytes": 159181,
+      "sha256": "e77a106b43a3df16daade34d89a66b03dc318af46af5d2d7d58adc9f780a6796"
+    },
+    {
+      "path": "deploy/assets/showcase/biz-reporting-t.jpg",
+      "bytes": 15693,
+      "sha256": "e6d7d0f95dc3c40a8c71abe8d6cbed5a1db8117f428c384158b97d7981fc461d"
+    },
+    {
+      "path": "deploy/assets/showcase/biz-reporting.jpg",
+      "bytes": 150813,
+      "sha256": "2746fe0066c458816180f05f170f67d95a4545cd68fc1a38bb69a495be444db5"
+    },
+    {
+      "path": "deploy/assets/showcase/both-sides-t.jpg",
+      "bytes": 14605,
+      "sha256": "8e38c05ee34135964649ef0f0a70d1b771fec4c679d753b86cb3d5626f18c2b6"
+    },
+    {
+      "path": "deploy/assets/showcase/both-sides.jpg",
+      "bytes": 135356,
+      "sha256": "70bec1475328a98df10f01f052edda220879c2c2060f49fe84cbb502de7eae04"
+    },
+    {
+      "path": "deploy/assets/showcase/con-private-space-t.jpg",
+      "bytes": 16479,
+      "sha256": "e6cea62920e2f19367a9c8157b304ed6b9756f75df5cb43998d79e024cf76919"
+    },
+    {
+      "path": "deploy/assets/showcase/con-private-space.jpg",
+      "bytes": 149716,
+      "sha256": "bb7a95cce17b4e109e4dc1ef4c97ed1212a41fe1950361e5d9628d099af863f4"
+    },
+    {
+      "path": "deploy/assets/showcase/con-share-t.jpg",
+      "bytes": 16809,
+      "sha256": "1f78db19e6fc69cdbde47770d306da559397859c4659cf17b42a6840a831e389"
+    },
+    {
+      "path": "deploy/assets/showcase/con-share.jpg",
+      "bytes": 150864,
+      "sha256": "15c6235d01f51d184b7b1c7ec36ec6ade26c9f7abe4f2b040ab4afd721358e23"
+    },
+    {
+      "path": "deploy/assets/site.css",
+      "bytes": 259603,
+      "sha256": "646d61ffa5ce65c257c7173e0c0dc32bca7e2e3beca48d54c3df1c6687d8eb83"
+    },
+    {
+      "path": "deploy/assets/team/team-bruce.jpg",
+      "bytes": 24663,
+      "sha256": "cab6b7f8a04d2960061b59f067490d5971a935da869b27d86d2609f670cd0f46"
+    },
+    {
+      "path": "deploy/assets/team/team-chad.jpg",
+      "bytes": 28029,
+      "sha256": "6d79a36f8bb4b1a2a4f364d61baa882037d01be7c18c09ecbbaff5120f44da9f"
+    },
+    {
+      "path": "deploy/assets/team/team-dean-mccall.jpg",
+      "bytes": 28261,
+      "sha256": "3c564f9c62866ceebc6f140213f77d9f66aae0d484185c15844a99a35b207deb"
+    },
+    {
+      "path": "deploy/assets/team/team-don.jpg",
+      "bytes": 27943,
+      "sha256": "2e8e612b689af2ff7ad72430b4041d74d56b3607d7861a9926fd924a85d08b90"
+    },
+    {
+      "path": "deploy/assets/team/team-james.jpg",
+      "bytes": 23947,
+      "sha256": "3e162beba74fa90ee0acf92356bdcd95e7d026a1cd947d346f6f3d5e74ffcf86"
+    },
+    {
+      "path": "deploy/assets/team/team-kevin.jpg",
+      "bytes": 30040,
+      "sha256": "eb828d56cef2ffd918c47f7d7fa2fc11b8f210e2dcc16b52ef03f1c38013e886"
+    },
+    {
+      "path": "deploy/assets/team/team-matt.jpg",
+      "bytes": 25443,
+      "sha256": "2ba926259cbd158a08eaeac72987b239beeb800ca41fee49f03cf04cfe575ed0"
+    },
+    {
+      "path": "deploy/assets/team/team-miika.jpg",
+      "bytes": 28885,
+      "sha256": "17bed7f74aaed54aff39558f36584f5af2e7fdb9fa558eb25015dad3ad1d93d8"
+    },
+    {
+      "path": "deploy/assets/team/team-mike.jpg",
+      "bytes": 25521,
+      "sha256": "5a27fd7a379894a2a47af3305fd6a4f6040ecac2bf582e664bae900ad4f5ea1a"
+    },
+    {
+      "path": "deploy/assets/team/team-zed.jpg",
+      "bytes": 34119,
+      "sha256": "c9509242a93ebfe8a19f6c9de48bc369724c1baba40e4d1bd56c0e15242f718e"
+    },
+    {
+      "path": "deploy/assets/team.js",
+      "bytes": 3140,
+      "sha256": "6654233170156bb9fc6302198e8ef87a705133fd4417b7a1d12298e9859f40a6"
+    },
+    {
+      "path": "deploy/check-a-firm.html",
+      "bytes": 8815,
+      "sha256": "4934cee37fe8f058b89394fe3c9f7b0cd2837d15d3513d33527bcaaa5082be8a"
+    },
+    {
+      "path": "deploy/contact.html",
+      "bytes": 4116,
+      "sha256": "987878984bbc04c742366111ebaab4193172ee9ac6612e4cbca71ee63dc2940f"
+    },
+    {
+      "path": "deploy/how-it-works.html",
+      "bytes": 9791,
+      "sha256": "e94fff8963d80ff846ad88fde92e0e7a2c4ef68016c1355dd95f86e0d4cebafb"
+    },
+    {
+      "path": "deploy/index.html",
+      "bytes": 73718,
+      "sha256": "c0778e578105c2a1348af03c22eadd9c3fe48a18118d422b129e9608c5d17d2b"
+    },
+    {
+      "path": "deploy/industries/auto.html",
+      "bytes": 7928,
+      "sha256": "549f960e90068add31f7f44e85c860e3e0aff88834dd3cc4f36159a30cdcfc33"
+    },
+    {
+      "path": "deploy/industries/banking.html",
+      "bytes": 7932,
+      "sha256": "14bc6bc100214bd32284adcca2a32f9baae69e4b33657e93f4316b0653f13bcb"
+    },
+    {
+      "path": "deploy/industries/index.html",
+      "bytes": 6839,
+      "sha256": "d7bf3abca750734123a57ad1b4dcc656895c44189ecb442571650069dcb8b4ae"
+    },
+    {
+      "path": "deploy/industries/insurance.html",
+      "bytes": 7576,
+      "sha256": "38e0cc85f3082cb5976428e3bf650868e622c5feca4b92ea38e35eca752eb606"
+    },
+    {
+      "path": "deploy/industries/investing.html",
+      "bytes": 8149,
+      "sha256": "c1564572af192f8a7b2123cb5365a2ee5e6009787ec5667ba4133f0eeaa5dead"
+    },
+    {
+      "path": "deploy/industries/lending.html",
+      "bytes": 7926,
+      "sha256": "6f9ceefd1c7b9f8ef7c9ff5943ad157131409923f59295c673854de3610e9d5f"
+    },
+    {
+      "path": "deploy/industries/mortgage.html",
+      "bytes": 7822,
+      "sha256": "d80ce10c74d79a6898d9614f464ced1ea1cb41dbf549e99fd1b90b9a9b050f6d"
+    },
+    {
+      "path": "deploy/industries/real-estate.html",
+      "bytes": 7519,
+      "sha256": "470a4be1e53b267d26ac4c9b5cd97eaa055584df512e8fb2d39a9702e25c17c3"
+    },
+    {
+      "path": "deploy/intelligence.html",
+      "bytes": 95711,
+      "sha256": "f1fc435181a162078f874e1de591ddbbc6323ea9a0651dc651abc0d676b02bc1"
+    },
+    {
+      "path": "deploy/personal.html",
+      "bytes": 11643,
+      "sha256": "ab455ebc14261454e10ee0a80dbc3c2ac53afe2317c08c57015d62d0f2690f37"
+    },
+    {
+      "path": "deploy/privacy.html",
+      "bytes": 11053,
+      "sha256": "27c329166ad17f8541817881bfb80277be3a56db01e8cda90bbcc0c620588a40"
+    },
+    {
+      "path": "deploy/professional.html",
+      "bytes": 12714,
+      "sha256": "e364c59a482b0307b46b857892e3d51520c7d7dcfd11c3d8434b822c9bb61855"
+    },
+    {
+      "path": "deploy/research.html",
+      "bytes": 34846,
+      "sha256": "4482de64a9fb567a5bf564c8ec24b21c3ee7d6ab482831b69bb2f9fc5391f10d"
+    },
+    {
+      "path": "deploy/robots.txt",
+      "bytes": 73,
+      "sha256": "fd9ca16207dc0bb8c36215edba769667812f1a921b1796d3bd226c849b3297fd"
+    },
+    {
+      "path": "deploy/sitemap.xml",
+      "bytes": 2588,
+      "sha256": "84e107a40bcd495f637e88e487a07e3edb5ab68d1d00a7f55c9d5a38c2faf495"
+    },
+    {
+      "path": "deploy/team.html",
+      "bytes": 35288,
+      "sha256": "fbe375f42a210e65779fc122c1d15f10ba8675b4848ad005437aaca605fca642"
+    },
+    {
+      "path": "deploy/terms.html",
+      "bytes": 5116,
+      "sha256": "9668a12880683976c5cad8c38246e7cb769c4b20a6b445eb118f7d8dbf982e01"
+    },
+    {
+      "path": "deploy/the-standard.html",
+      "bytes": 12069,
+      "sha256": "495848fc37d96b438419e63cc8a8ff9c7490d23913f0398f29d4fb4e4fc9a490"
+    },
+    {
+      "path": "deploy/vercel.json",
+      "bytes": 12454,
+      "sha256": "147660a66d47d96ccd623cd4ce0b56bab9fe66ee10dbefbb4d3bd3d76fb59e51"
+    },
+    {
+      "path": "deploy/website-privacy.html",
+      "bytes": 5283,
+      "sha256": "3999d6eccee962549036e71c57927e9252350e2da3f934163f15148359d6b6b1"
+    },
+    {
+      "path": "deploy/why-4orm.html",
+      "bytes": 10356,
+      "sha256": "cf23873672db191ab73086233564f4daeb4b1199adf8c5e5520988e50d8d8428"
+    }
+  ],
+  "screens": [
+    {
+      "name": "front-hero",
+      "route": "/",
+      "selector": ".fhero",
+      "reference": "design-reference/screens/front-hero.png",
+      "shows": "The hero: logo, headline, three paragraphs, the North Star over People Trust Clear outcomes, two buttons."
+    },
+    {
+      "name": "front-challenge",
+      "route": "/",
+      "selector": "[aria-labelledby=\"twT\"]",
+      "reference": "design-reference/screens/front-challenge.png",
+      "shows": "The challenge: split head, the suitability question in blue with a left rule, the two cost cards."
+    },
+    {
+      "name": "front-believe",
+      "route": "/",
+      "selector": "[aria-labelledby=\"belT\"]",
+      "reference": "design-reference/screens/front-believe.png",
+      "shows": "What we believe: split head, three cards (Protection, Autonomy, Safety), five principle rows."
+    },
+    {
+      "name": "front-commitments",
+      "route": "/",
+      "selector": "[aria-labelledby=\"nvT\"]",
+      "reference": "design-reference/screens/front-commitments.png",
+      "shows": "Commitments: two cards (build in with green +, will not do with red x), the sovereignty line, four Never chips."
+    },
+    {
+      "name": "front-markets",
+      "route": "/",
+      "selector": "[aria-labelledby=\"mkT\"]",
+      "reference": "design-reference/screens/front-markets.png",
+      "shows": "Markets: split head, the market table, the roadmap, the integration line."
+    },
+    {
+      "name": "personal-hero",
+      "route": "/personal",
+      "selector": ".phero",
+      "reference": "design-reference/screens/personal-hero.png",
+      "shows": "For consumers hero: left kicker, headline left, subtitle in the right column, no box around it."
+    },
+    {
+      "name": "personal-first",
+      "route": "/personal",
+      "selector": ".phero + .sec",
+      "reference": "design-reference/screens/personal-first.png",
+      "shows": "First section: split head, four question pills in a 2x2 grid using the full width."
+    },
+    {
+      "name": "professional-hero",
+      "route": "/professional",
+      "selector": ".phero",
+      "reference": "design-reference/screens/professional-hero.png",
+      "shows": "For businesses hero, same left spine as the sections below it."
+    },
+    {
+      "name": "professional-first",
+      "route": "/professional",
+      "selector": ".phero + .sec",
+      "reference": "design-reference/screens/professional-first.png",
+      "shows": "Where the evidence lives now: split head, then the duty rows."
+    },
+    {
+      "name": "team-top",
+      "route": "/team",
+      "selector": ".phero + .sec",
+      "reference": "design-reference/screens/team-top.png",
+      "shows": "The team: five principals in one band, trailing pair centred."
+    }
+  ],
+  "capture": {
+    "viewport": "1440x900",
+    "deviceScaleFactor": 1,
+    "reducedMotion": "reduce",
+    "before_shot": [
+      "hide #nav-mount",
+      "add class \"in\" to every .rv",
+      "disable animation and transition"
+    ]
+  }
+}

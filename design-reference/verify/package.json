@@ -1,0 +1,8 @@
+{
+  "name": "4orm-visual-check",
+  "private": true,
+  "type": "module",
+  "description": "Compares the built 4orm site against the approved design reference images.",
+  "scripts": { "visual-check": "node visual-check.mjs" },
+  "dependencies": { "playwright": "^1.47.0", "pixelmatch": "^6.0.0", "pngjs": "^7.0.0" }
+}

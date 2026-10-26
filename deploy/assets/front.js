@@ -24,10 +24,13 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
   var now = new Date();
   var today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
   var days = Math.round((Date.UTC(2026, 9, 11) - today) / 86400000);
+  /* The date is fixed and the page outlives it, so the line has to keep
+     making sense on the other side of it rather than going quiet. */
   el.textContent = days > 1 ? ', ' + days + ' days from today'
                  : days === 1 ? ', tomorrow'
                  : days === 0 ? ', today'
-                 : '';
+                 : days > -32 ? ', ' + Math.abs(days) + ' days ago'
+                 : ', a deadline that has now passed';
 })();
 
 /* ------------------------------------------------------------
